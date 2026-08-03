@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore comprehensive medical services at Gimbie Adventist General Hospital. From emergency care to specialized clinics, we provide quality healthcare.">
+    <meta name="keywords" content="medical services, emergency care, surgery, maternity, diagnostic services, pharmacy, rehabilitation, gimbie hospital">
+    <meta name="author" content="Gimbie Adventist General Hospital">
+    <title>Our Services | Gimbie Adventist General Hospital</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/services.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+</head>
+<body>
+    
+    <!-- ============================================================
+    1. LOADING SCREEN
+    ============================================================ -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>Gimbie Adventist</span>
+            </div>
+            <div class="loader-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="loader-text">
+                <p id="loadingText">Loading Our Services...</p>
+                <span class="loader-percentage" id="loaderPercentage">0%</span>
+            </div>
+            <div class="loader-medical-animation">
+                <i class="fas fa-stethoscope"></i>
+                <i class="fas fa-ambulance"></i>
+                <i class="fas fa-scalpel"></i>
+                <i class="fas fa-pills"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    2. TOP HEADER
+    ============================================================ -->
+    <header class="top-header" id="topHeader">
+        <div class="container">
+            <div class="header-left">
+                <div class="hospital-logo">
+                    <a href="index.html">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </a>
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="header-contact">
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <strong>Emergency</strong>
+                            <a href="tel:+251577710083">+251 57 771 0083</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email</strong>
+                            <a href="mailto:gimbieadventisthosp@gmail.com">gimbieadventisthosp@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="language-switcher">
+                    <button class="lang-btn" id="langToggle">
+                        <i class="fas fa-globe"></i> EN <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="lang-dropdown">
+                        <li><a href="#" data-lang="en">English</a></li>
+                        <li><a href="#" data-lang="am">አማርኛ</a></li>
+                        <li><a href="#" data-lang="or">Afaan Oromoo</a></li>
+                    </ul>
+                </div>
+                <div class="theme-toggle">
+                    <button id="themeToggle"><i class="fas fa-moon"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    3. NAVIGATION BAR
+    ============================================================ -->
+    <nav class="main-nav" id="mainNav">
+        <div class="container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="assets/logo-small.png" alt="Logo" class="nav-logo-img">
+                </a>
+            </div>
+            <button class="nav-toggle" id="navToggle">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="departments.html"><i class="fas fa-building"></i> Departments</a></li>
+                <li><a href="doctors.html"><i class="fas fa-user-md"></i> Doctors</a></li>
+                <li><a href="services.html" class="active"><i class="fas fa-concierge-bell"></i> Services</a></li>
+                <li><a href="appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a></li>
+                <li><a href="contact.html"><i class="fas fa-phone-alt"></i> Contact</a></li>
+                <li class="nav-dropdown">
+                    <a href="#"><i class="fas fa-sign-in-alt"></i> Login <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="patient/login.html"><i class="fas fa-user"></i> Patient Login</a></li>
+                        <li><a href="staff/login.html"><i class="fas fa-user-md"></i> Staff Login</a></li>
+                        <li><a href="admin/login.html"><i class="fas fa-user-shield"></i> Admin Login</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+    4. HERO BANNER
+    ============================================================ -->
+    <section class="page-hero" id="pageHero" style="background-image: url('assets/services-hero.jpg');">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="page-hero-content" data-aos="fade-up">
+                <span class="hero-badge"><i class="fas fa-concierge-bell"></i> Our Services</span>
+                <h1>Comprehensive Medical Services</h1>
+                <p>Quality healthcare services for every stage of life</p>
+                <nav class="breadcrumb">
+                    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                    <span><i class="fas fa-chevron-right"></i></span>
+                    <a href="services.html" class="active">Services</a>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    5. SERVICE SEARCH
+    ============================================================ -->
+    <section class="service-search" id="serviceSearch">
+        <div class="container">
+            <div class="search-wrapper" data-aos="fade-up">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="serviceSearchInput" placeholder="Search for a service...">
+                    <button class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+                </div>
+                <div class="search-filters">
+                    <div class="filter-group">
+                        <label><i class="fas fa-building"></i> Department</label>
+                        <select id="filterDept">
+                            <option value="all">All Departments</option>
+                            <option value="emergency">Emergency</option>
+                            <option value="surgery">Surgery</option>
+                            <option value="maternity">Maternity</option>
+                            <option value="pediatrics">Pediatrics</option>
+                            <option value="cardiology">Cardiology</option>
+                            <option value="orthopedics">Orthopedics</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label><i class="fas fa-tag"></i> Category</label>
+                        <select id="filterCategory">
+                            <option value="all">All Categories</option>
+                            <option value="emergency">Emergency</option>
+                            <option value="outpatient">Outpatient</option>
+                            <option value="inpatient">Inpatient</option>
+                            <option value="surgical">Surgical</option>
+                            <option value="diagnostic">Diagnostic</option>
+                            <option value="maternal">Maternal & Child</option>
+                            <option value="pharmacy">Pharmacy</option>
+                            <option value="rehabilitation">Rehabilitation</option>
+                            <option value="specialized">Specialized Clinics</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="quick-search">
+                    <span>Quick Links:</span>
+                    <button class="quick-btn" data-filter="emergency"><i class="fas fa-ambulance"></i> Emergency</button>
+                    <button class="quick-btn" data-filter="surgery"><i class="fas fa-scalpel"></i> Surgery</button>
+                    <button class="quick-btn" data-filter="maternity"><i class="fas fa-baby"></i> Maternity</button>
+                    <button class="quick-btn" data-filter="diagnostic"><i class="fas fa-flask"></i> Diagnostic</button>
+                    <button class="quick-btn" data-filter="pharmacy"><i class="fas fa-prescription-bottle"></i> Pharmacy</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    6. SERVICE STATISTICS
+    ============================================================ -->
+    <section class="service-stats" id="serviceStats">
+        <div class="container">
+            <div class="stats-grid" data-aos="fade-up">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-concierge-bell"></i></div>
+                    <div class="stat-number" data-count="50">0</div>
+                    <div class="stat-label">Total Services</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-user-md"></i></div>
+                    <div class="stat-number" data-count="150">0</div>
+                    <div class="stat-label">Doctors</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-building"></i></div>
+                    <div class="stat-number" data-count="60">0</div>
+                    <div class="stat-label">Departments</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-hospital-user"></i></div>
+                    <div class="stat-number" data-count="50000">0</div>
+                    <div class="stat-label">Patients Served Annually</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-ambulance"></i></div>
+                    <div class="stat-number" data-count="24">0</div>
+                    <div class="stat-label">Emergency Services (7/24)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="stat-number" data-count="98">0</div>
+                    <div class="stat-label">Success Rate (%)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    7. EMERGENCY SERVICES
+    ============================================================ -->
+    <section class="service-category" id="emergencyServices">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Emergency</span>
+                <h2>Emergency <span>Services</span></h2>
+                <p>24/7 emergency care when you need it most.</p>
+            </div>
+            
+            <div class="services-grid" data-aos="fade-up">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-ambulance"></i></div>
+                    <h4>24/7 Emergency Care</h4>
+                    <p>Round-the-clock emergency medical services with rapid response team and life-saving equipment.</p>
+                    <a href="department.html?dept=emergency" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-heartbeat"></i></div>
+                    <h4>Trauma Care</h4>
+                    <p>Specialized trauma care for accident victims and severe injuries.</p>
+                    <a href="department.html?dept=emergency" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-truck"></i></div>
+                    <h4>Ambulance Service</h4>
+                    <p>Emergency ambulance services for safe and rapid patient transport.</p>
+                    <a href="emergency.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-scalpel"></i></div>
+                    <h4>Emergency Surgery</h4>
+                    <p>Life-saving surgical procedures for emergency conditions.</p>
+                    <a href="department.html?dept=surgery" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-hospital"></i></div>
+                    <h4>ICU Support</h4>
+                    <p>Critical care support for patients in life-threatening conditions.</p>
+                    <a href="department.html?dept=icu" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    8. OUTPATIENT SERVICES
+    ============================================================ -->
+    <section class="service-category" id="outpatientServices">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Outpatient</span>
+                <h2>Outpatient <span>Services</span></h2>
+                <p>Convenient care for non-emergency medical needs.</p>
+            </div>
+            
+            <div class="services-grid" data-aos="fade-up">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-stethoscope"></i></div>
+                    <h4>General Consultation</h4>
+                    <p>Comprehensive medical consultations for general health concerns.</p>
+                    <a href="appointments.html" class="service-link">Book Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-user-md"></i></div>
+                    <h4>Specialist Consultation</h4>
+                    <p>Expert consultations with specialists across all medical departments.</p>
+                    <a href="appointments.html" class="service-link">Book Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-clipboard-check"></i></div>
+                    <h4>Health Checkups</h4>
+                    <p>Comprehensive health checkup packages for all ages.</p>
+                    <a href="appointments.html" class="service-link">Book Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-undo-alt"></i></div>
+                    <h4>Follow-up Visits</h4>
+                    <p>Regular follow-up appointments for ongoing medical care.</p>
+                    <a href="appointments.html" class="service-link">Book Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    9. INPATIENT SERVICES
+    ============================================================ -->
+    <section class="service-category" id="inpatientServices">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Inpatient</span>
+                <h2>Inpatient <span>Services</span></h2>
+                <p>Comfortable and compassionate care for admitted patients.</p>
+            </div>
+            
+            <div class="services-grid" data-aos="fade-up">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-bed"></i></div>
+                    <h4>General Wards</h4>
+                    <p>Comfortable general wards with professional nursing care.</p>
+                    <a href="departments.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-door-open"></i></div>
+                    <h4>Private Rooms</h4>
+                    <p>Private and semi-private rooms for patient comfort and privacy.</p>
+                    <a href="departments.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-heartbeat"></i></div>
+                    <h4>ICU</h4>
+                    <p>Advanced intensive care unit for critical patients.</p>
+                    <a href="department.html?dept=icu" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-baby"></i></div>
+                    <h4>NICU</h4>
+                    <p>Specialized neonatal intensive care for newborns.</p>
+                    <a href="department.html?dept=nicu" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-clock"></i></div>
+                    <h4>Recovery Rooms</h4>
+                    <p>Comfortable recovery rooms for post-surgery and post-treatment care.</p>
+                    <a href="departments.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    10. SURGICAL SERVICES
+    ============================================================ -->
+    <section class="service-category" id="surgicalServices">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Surgery</span>
+                <h2>Surgical <span>Services</span></h2>
+                <p>Expert surgical care with modern operating theatres.</p>
+            </div>
+            
+            <div class="services-grid" data-aos="fade-up">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-scalpel"></i></div>
+                    <h4>General Surgery</h4>
+                    <p>Comprehensive general surgical procedures including gastrointestinal and abdominal surgery.</p>
+                    <a href="department.html?dept=surgery" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-bone"></i></div>
+                    <h4>Orthopedic Surgery</h4>
+                    <p>Specialized surgical care for bone, joint, and spine conditions.</p>
+                    <a href="department.html?dept=orthopedic" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-baby"></i></div>
+                    <h4>Obstetric Surgery</h4>
+                    <p>Safe surgical care for childbirth and gynecological conditions.</p>
+                    <a href="department.html?dept=obgyn" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-cut"></i></div>
+                    <h4>Minor Surgery</h4>
+                    <p>Minor surgical procedures with quick recovery.</p>
+                    <a href="department.html?dept=surgery" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-microscope"></i></div>
+                    <h4>Major Surgery</h4>
+                    <p>Advanced major surgical procedures with comprehensive care.</p>
+                    <a href="department.html?dept=surgery" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-hospital"></i></div>
+                    <h4>Operating Theatre</h4>
+                    <p>Modern operating theatres with state-of-the-art equipment.</p>
+                    <a href="departments.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    11. MATERNAL & CHILD HEALTH
+    ============================================================ -->
+    <section class="service-category" id="maternalServices">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Maternal & Child</span>
+                <h2>Maternal & Child <span>Health</span></h2>
+                <p>Comprehensive care for mothers and children.</p>
+            </div>
+            
+            <div class="services-grid" data-aos="fade-up">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-baby"></i></div>
+                    <h4>Antenatal Care</h4>
+                    <p>Comprehensive care for pregnant women throughout pregnancy.</p>
+                    <a href="appointments.html" class="service-link">Book Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                    <h4>Delivery Services</h4>
+                    <p>Safe delivery services with skilled midwives and doctors.</p>
+                    <a href="appointments.html" class="service-link">Book Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-heart"></i></div>
+                    <h4>Postnatal Care</h4>
+                    <p>Care and support for mothers after delivery.</p>
+                    <a href="appointments.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-child"></i></div>
+                    <h4>Newborn Care</h4>
+                    <p>Specialized care for newborns including NICU services.</p>
+                    <a href="department.html?dept=pediatrics" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-family"></i></div>
+                    <h4>Family Planning</h4>
+                    <p>Comprehensive family planning and reproductive health services.</p>
+                    <a href="appointments.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    12. DIAGNOSTIC SERVICES
+    ============================================================ -->
+    <section class="service-category" id="diagnosticServices">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Diagnostic</span>
+                <h2>Diagnostic <span>Services</span></h2>
+                <p>Accurate diagnosis with advanced medical technology.</p>
+            </div>
+            
+            <div class="services-grid" data-aos="fade-up">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-flask"></i></div>
+                    <h4>Laboratory Tests</h4>
+                    <p>Comprehensive clinical laboratory services for accurate diagnosis.</p>
+                    <a href="laboratory.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-droplet"></i></div>
+                    <h4>Blood Bank</h4>
+                    <p>Safe and reliable blood bank services for patients in need.</p>
+                    <a href="blood-bank.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-x-ray"></i></div>
+                    <h4>Radiology & Imaging</h4>
+                    <p>Advanced imaging services for accurate diagnosis.</p>
+                    <a href="department.html?dept=radiology" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-bone"></i></div>
+                    <h4>X-Ray</h4>
+                    <p>Digital X-ray services for bone and chest imaging.</p>
+                    <a href="department.html?dept=radiology" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-heart"></i></div>
+                    <h4>Ultrasound</h4>
+                    <p>Comprehensive ultrasound services for various medical conditions.</p>
+                    <a href="department.html?dept=radiology" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-brain"></i></div>
+                    <h4>CT Scan</h4>
+                    <p>Advanced CT scan for detailed diagnostic imaging.</p>
+                    <a href="department.html?dept=radiology" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    13. PHARMACY SERVICES
+    ============================================================ -->
+    <section class="service-category" id="pharmacyServices">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Pharmacy</span>
+                <h2>Pharmacy <span>Services</span></h2>
+                <p>Quality medications and professional pharmaceutical care.</p>
+            </div>
+            
+            <div class="services-grid" data-aos="fade-up">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-prescription-bottle"></i></div>
+                    <h4>Prescription Medicines</h4>
+                    <p>Quality prescription medications from trusted pharmaceutical suppliers.</p>
+                    <a href="pharmacy.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-boxes"></i></div>
+                    <h4>Medicine Inventory</h4>
+                    <p>Comprehensive inventory of medicines including chronic disease medications.</p>
+                    <a href="pharmacy.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-comment-medical"></i></div>
+                    <h4>Patient Counseling</h4>
+                    <p>Professional medication counseling and information services.</p>
+                    <a href="pharmacy.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-info-circle"></i></div>
+                    <h4>Drug Information</h4>
+                    <p>Reliable drug information and medication management support.</p>
+                    <a href="pharmacy.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    14. REHABILITATION SERVICES
+    ============================================================ -->
+    <section class="service-category" id="rehabilitationServices">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Rehabilitation</span>
+                <h2>Rehabilitation <span>Services</span></h2>
+                <p>Recovery and rehabilitation support for patients.</p>
+            </div>
+            
+            <div class="services-grid" data-aos="fade-up">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-people-arrows"></i></div>
+                    <h4>Physiotherapy</h4>
+                    <p>Comprehensive physiotherapy for injury recovery and mobility improvement.</p>
+                    <a href="department.html?dept=physiotherapy" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-hand-holding"></i></div>
+                    <h4>Occupational Therapy</h4>
+                    <p>Support for patients to perform daily activities and improve quality of life.</p>
+                    <a href="department.html?dept=physiotherapy" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-utensils"></i></div>
+                    <h4>Nutrition Counseling</h4>
+                    <p>Expert nutrition advice for healthy living and disease management.</p>
+                    <a href="department.html?dept=nutrition" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    15. SPECIALIZED CLINICS
+    ============================================================ -->
+    <section class="service-category" id="specializedClinics">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Specialized Clinics</span>
+                <h2>Specialized <span>Clinics</span></h2>
+                <p>Expert care for specific health conditions.</p>
+            </div>
+            
+            <div class="clinics-grid" data-aos="fade-up">
+                <div class="clinic-card">
+                    <i class="fas fa-droplet"></i>
+                    <h4>Diabetes Clinic</h4>
+                    <p>Comprehensive diabetes management and care.</p>
+                    <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                </div>
+                <div class="clinic-card">
+                    <i class="fas fa-heart"></i>
+                    <h4>Hypertension Clinic</h4>
+                    <p>Specialized care for high blood pressure patients.</p>
+                    <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                </div>
+                <div class="clinic-card">
+                    <i class="fas fa-lungs"></i>
+                    <h4>TB Clinic</h4>
+                    <p>Tuberculosis diagnosis and treatment services.</p>
+                    <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                </div>
+                <div class="clinic-card">
+                    <i class="fas fa-shield-virus"></i>
+                    <h4>HIV Care</h4>
+                    <p>Comprehensive HIV/AIDS care and treatment services.</p>
+                    <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                </div>
+                <div class="clinic-card">
+                    <i class="fas fa-heartbeat"></i>
+                    <h4>Cardiology Clinic</h4>
+                    <p>Expert heart care and cardiac services.</p>
+                    <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                </div>
+                <div class="clinic-card">
+                    <i class="fas fa-tooth"></i>
+                    <h4>Dental Clinic</h4>
+                    <p>Complete dental care services.</p>
+                    <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                </div>
+                <div class="clinic-card">
+                    <i class="fas fa-eye"></i>
+                    <h4>Eye Clinic</h4>
+                    <p>Comprehensive eye care and treatment.</p>
+                    <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                </div>
+                <div class="clinic-card">
+                    <i class="fas fa-ear"></i>
+                    <h4>ENT Clinic</h4>
+                    <p>Ear, nose, and throat specialist care.</p>
+                    <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    16. TELEMEDICINE
+    ============================================================ -->
+    <section class="telemedicine" id="telemedicine">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Telemedicine</span>
+                <h2>Telemedicine <span>Services</span></h2>
+                <p>Convenient healthcare from the comfort of your home.</p>
+            </div>
+            
+            <div class="telemedicine-grid" data-aos="fade-up">
+                <div class="tele-card">
+                    <i class="fas fa-laptop-medical"></i>
+                    <h4>Online Consultation</h4>
+                    <p>Consult with our doctors remotely through secure video calls.</p>
+                    <a href="appointments.html" class="btn btn-primary-sm">Get Started</a>
+                </div>
+                <div class="tele-card">
+                    <i class="fas fa-video"></i>
+                    <h4>Video Appointments</h4>
+                    <p>Schedule and attend appointments from anywhere.</p>
+                    <a href="appointments.html" class="btn btn-primary-sm">Get Started</a>
+                </div>
+                <div class="tele-card">
+                    <i class="fas fa-undo-alt"></i>
+                    <h4>Online Follow-up</h4>
+                    <p>Convenient online follow-up visits and care.</p>
+                    <a href="appointments.html" class="btn btn-primary-sm">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    17. HEALTH PACKAGES
+    ============================================================ -->
+    <section class="health-packages" id="healthPackages">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Packages</span>
+                <h2>Health <span>Packages</span></h2>
+                <p>Comprehensive health checkup packages for every need.</p>
+            </div>
+            
+            <div class="packages-grid" data-aos="fade-up">
+                <div class="package-card">
+                    <div class="package-icon"><i class="fas fa-stethoscope"></i></div>
+                    <h4>General Checkup</h4>
+                    <p>Complete physical examination and basic health tests.</p>
+                    <div class="package-price">ETB 500</div>
+                    <a href="appointments.html" class="btn btn-primary-sm">Book Now</a>
+                </div>
+                <div class="package-card featured">
+                    <div class="package-badge">Popular</div>
+                    <div class="package-icon"><i class="fas fa-female"></i></div>
+                    <h4>Women's Health</h4>
+                    <p>Comprehensive health checkup for women.</p>
+                    <div class="package-price">ETB 800</div>
+                    <a href="appointments.html" class="btn btn-primary-sm">Book Now</a>
+                </div>
+                <div class="package-card">
+                    <div class="package-icon"><i class="fas fa-male"></i></div>
+                    <h4>Men's Health</h4>
+                    <p>Comprehensive health checkup for men.</p>
+                    <div class="package-price">ETB 800</div>
+                    <a href="appointments.html" class="btn btn-primary-sm">Book Now</a>
+                </div>
+                <div class="package-card">
+                    <div class="package-icon"><i class="fas fa-child"></i></div>
+                    <h4>Children's Health</h4>
+                    <p>Complete health checkup for children.</p>
+                    <div class="package-price">ETB 400</div>
+                    <a href="appointments.html" class="btn btn-primary-sm">Book Now</a>
+                </div>
+                <div class="package-card">
+                    <div class="package-icon"><i class="fas fa-crown"></i></div>
+                    <h4>Executive Checkup</h4>
+                    <p>Premium health checkup with comprehensive tests.</p>
+                    <div class="package-price">ETB 1,500</div>
+                    <a href="appointments.html" class="btn btn-primary-sm">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    18. SERVICE GALLERY
+    ============================================================ -->
+    <section class="service-gallery" id="serviceGallery">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Gallery</span>
+                <h2>Service <span>Gallery</span></h2>
+                <p>See our medical services in action.</p>
+            </div>
+            
+            <div class="gallery-grid" data-aos="fade-up">
+                <div class="gallery-item">
+                    <img src="assets/gallery/service-1.jpg" alt="Medical Service">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search"></i>
+                        <span>Patient Care</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/gallery/service-2.jpg" alt="Surgery">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search"></i>
+                        <span>Surgery</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/gallery/service-3.jpg" alt="Laboratory">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search"></i>
+                        <span>Laboratory</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/gallery/service-4.jpg" alt="Pharmacy">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search"></i>
+                        <span>Pharmacy</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/gallery/service-5.jpg" alt="Maternity">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search"></i>
+                        <span>Maternity Care</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/gallery/service-6.jpg" alt="Rehabilitation">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search"></i>
+                        <span>Rehabilitation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    19. WHY CHOOSE OUR SERVICES
+    ============================================================ -->
+    <section class="why-choose-services" id="whyChooseServices">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Why Choose Us</span>
+                <h2>Why Choose <span>Our Services</span></h2>
+                <p>Quality healthcare services with patient-centered care.</p>
+            </div>
+            
+            <div class="choose-grid" data-aos="fade-up">
+                <div class="choose-card">
+                    <i class="fas fa-user-md"></i>
+                    <h4>Experienced Doctors</h4>
+                    <p>150+ highly qualified doctors with years of expertise.</p>
+                </div>
+                <div class="choose-card">
+                    <i class="fas fa-microscope"></i>
+                    <h4>Modern Equipment</h4>
+                    <p>State-of-the-art medical equipment and technology.</p>
+                </div>
+                <div class="choose-card">
+                    <i class="fas fa-credit-card"></i>
+                    <h4>Affordable Care</h4>
+                    <p>Quality healthcare at affordable prices.</p>
+                </div>
+                <div class="choose-card">
+                    <i class="fas fa-file-medical-alt"></i>
+                    <h4>Digital Records</h4>
+                    <p>Secure electronic medical records for efficient care.</p>
+                </div>
+                <div class="choose-card">
+                    <i class="fas fa-clock"></i>
+                    <h4>24/7 Support</h4>
+                    <p>Round-the-clock support and emergency services.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    20. BOOK APPOINTMENT
+    ============================================================ -->
+    <section class="book-appointment" id="bookAppointment">
+        <div class="container">
+            <div class="appointment-wrapper" data-aos="fade-up">
+                <div class="appointment-header">
+                    <h2>Book an <span>Appointment</span></h2>
+                    <p>Schedule your appointment for any of our services.</p>
+                </div>
+                <form class="appointment-form" id="serviceAppointmentForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <select required>
+                                <option value="">Select Service</option>
+                                <option>Emergency Care</option>
+                                <option>General Consultation</option>
+                                <option>Specialist Consultation</option>
+                                <option>Surgery</option>
+                                <option>Maternity Care</option>
+                                <option>Diagnostic Tests</option>
+                            </select>
+                            <i class="fas fa-concierge-bell"></i>
+                        </div>
+                        <div class="form-group">
+                            <select required>
+                                <option value="">Select Doctor</option>
+                                <option>Dr. Samuel Bekele</option>
+                                <option>Dr. Hana Alemu</option>
+                                <option>Dr. Dawit Tadesse</option>
+                                <option>Dr. Ruth Assefa</option>
+                            </select>
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="date" required>
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                        <div class="form-group">
+                            <input type="time" required>
+                            <i class="fas fa-clock"></i>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" placeholder="Full Name" required>
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Email Address" required>
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="Phone Number" required>
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Brief description of your health concern..."></textarea>
+                        <i class="fas fa-comment"></i>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    21. FREQUENTLY ASKED QUESTIONS
+    ============================================================ -->
+    <section class="faq-services" id="faqServices">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">FAQ</span>
+                <h2>Frequently Asked <span>Questions</span></h2>
+                <p>Common questions about our services.</p>
+            </div>
+            
+            <div class="faq-grid" data-aos="fade-up">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What services does Gimbie Adventist Hospital offer?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We offer a comprehensive range of services including emergency care, outpatient services, inpatient care, surgical services, maternity care, diagnostic services, pharmacy, rehabilitation, and specialized clinics.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How do I access emergency services?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Our emergency department is open 24/7. You can call our emergency hotline at +251 57 771 0083 or come directly to the hospital for immediate care.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What diagnostic services are available?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We offer comprehensive diagnostic services including laboratory tests, blood bank, X-ray, ultrasound, CT scan, and other imaging services.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Do you offer telemedicine services?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, we offer telemedicine services including online consultations, video appointments, and online follow-up visits for your convenience.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    22. AI SERVICE ASSISTANT
+    ============================================================ -->
+    <div class="ai-assistant" id="aiAssistant">
+        <button class="ai-toggle" id="aiToggle">
+            <i class="fas fa-robot"></i>
+        </button>
+        <div class="ai-chat-window" id="aiChatWindow">
+            <div class="ai-header">
+                <div class="ai-header-info">
+                    <i class="fas fa-robot"></i>
+                    <div>
+                        <h4>AI Service Assistant</h4>
+                        <span>Online</span>
+                    </div>
+                </div>
+                <button class="ai-close" id="aiClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="ai-body" id="aiBody">
+                <div class="ai-message ai-bot">
+                    <div class="ai-avatar"><i class="fas fa-robot"></i></div>
+                    <div class="ai-bubble">
+                        <p>👋 Hello! I can help you find the right service for your needs.</p>
+                        <p>Try:</p>
+                        <ul>
+                            <li>Tell me your symptoms</li>
+                            <li>Ask about a specific service</li>
+                            <li>Get doctor recommendations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="ai-footer">
+                <div class="ai-input-group">
+                    <input type="text" id="aiInput" placeholder="What service are you looking for?">
+                    <button id="aiSend"><i class="fas fa-paper-plane"></i></button>
+                </div>
+                <div class="ai-voice">
+                    <button id="aiVoiceBtn"><i class="fas fa-microphone"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    FLOATING BUTTONS
+    ============================================================ -->
+    <div class="floating-buttons">
+        <a href="emergency.html" class="float-btn emergency" data-tooltip="Emergency">
+            <i class="fas fa-ambulance"></i>
+        </a>
+        <a href="appointments.html" class="float-btn appointment" data-tooltip="Book Appointment">
+            <i class="fas fa-calendar-check"></i>
+        </a>
+        <button class="float-btn chat" id="floatingChat" data-tooltip="Chat with AI">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+        <button class="float-btn scroll-top" id="scrollTop" data-tooltip="Scroll to Top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- ============================================================
+    23. GOOGLE MAP
+    ============================================================ -->
+    <section class="map-section" id="mapSection">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Location</span>
+                <h2>Our <span>Location</span></h2>
+                <p>Visit Gimbie Adventist General Hospital.</p>
+            </div>
+            
+            <div class="map-container" data-aos="fade-up">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31882.29455801249!2d35.834!3d9.123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z5Ymn5bqn5YyX6ZqA5Y2a5Li76a2U5Yeg5b2T!5e0!3m2!1sen!2s!4v1700000000000" 
+                    width="100%" 
+                    height="400" 
+                    style="border:0;" 
+                    allowfullscreen="">
+                </iframe>
+                <div class="map-actions">
+                    <a href="https://maps.google.com/maps?daddr=Gimbie+Town+West+Wollega+Zone+Oromia+Region+Ethiopia" 
+                       target="_blank" 
+                       class="btn btn-primary">
+                        <i class="fas fa-directions"></i> Get Directions
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    24. CONTACT INFORMATION
+    ============================================================ -->
+    <section class="contact-services" id="contactServices">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-card" data-aos="fade-up">
+                    <i class="fas fa-phone-alt"></i>
+                    <h4>Phone</h4>
+                    <p><a href="tel:+251577710083">+251 57 771 0083</a></p>
+                    <p><a href="tel:+251777100051">+251 77 710 0051</a></p>
+                </div>
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-envelope"></i>
+                    <h4>Email</h4>
+                    <p><a href="mailto:gimbieadventisthosp@gmail.com">gimbieadventisthosp@gmail.com</a></p>
+                </div>
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h4>Address</h4>
+                    <p>P.O. Box 228, Gimbie Town<br>West Wollega Zone, Oromia</p>
+                </div>
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-clock"></i>
+                    <h4>Working Hours</h4>
+                    <p>Monday - Friday: 8:00 AM - 6:00 PM</p>
+                    <p>Emergency: 24/7</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    25. EMERGENCY CALL BANNER
+    ============================================================ -->
+    <section class="emergency-banner" id="emergencyBanner">
+        <div class="container">
+            <div class="emergency-card" data-aos="zoom-in">
+                <div class="emergency-icon"><i class="fas fa-ambulance"></i></div>
+                <div class="emergency-info">
+                    <h3>Emergency? Call Us Now</h3>
+                    <p>Immediate medical assistance is just a phone call away.</p>
+                    <div class="emergency-number-large">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>+251 57 771 0083</span>
+                    </div>
+                </div>
+                <a href="emergency.html" class="btn btn-danger">
+                    <i class="fas fa-ambulance"></i> Call Emergency
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    26. FOOTER
+    ============================================================ -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </div>
+                    <p class="footer-about">
+                        Providing quality healthcare services since 1948. Committed to compassionate care and medical excellence.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About</a></li>
+                        <li><a href="departments.html"><i class="fas fa-chevron-right"></i> Departments</a></li>
+                        <li><a href="doctors.html"><i class="fas fa-chevron-right"></i> Doctors</a></li>
+                        <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Departments</h4>
+                    <ul>
+                        <li><a href="department.html?dept=emergency"><i class="fas fa-chevron-right"></i> Emergency</a></li>
+                        <li><a href="department.html?dept=surgery"><i class="fas fa-chevron-right"></i> Surgery</a></li>
+                        <li><a href="department.html?dept=pediatrics"><i class="fas fa-chevron-right"></i> Pediatrics</a></li>
+                        <li><a href="department.html?dept=cardiology"><i class="fas fa-chevron-right"></i> Cardiology</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> P.O. Box 228, Gimbie</li>
+                        <li><i class="fas fa-phone-alt"></i> +251 57 771 0083</li>
+                        <li><i class="fas fa-envelope"></i> gimbieadventisthosp@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 <strong>Gimbie Adventist General Hospital</strong>. All Rights Reserved.</p>
+                    <div class="footer-links">
+                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="terms.html">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/ai-assistant.js"></script>
+</body>
+  </html>
