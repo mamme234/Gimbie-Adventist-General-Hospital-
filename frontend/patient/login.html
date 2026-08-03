@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Patient Login - Gimbie Adventist General Hospital. Access your patient portal to manage appointments, view medical records, and more.">
+    <meta name="keywords" content="patient login, patient portal, hospital login, medical records, appointments, gimbie hospital">
+    <meta name="author" content="Gimbie Adventist General Hospital">
+    <title>Patient Login | Gimbie Adventist General Hospital</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/patient-login.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+</head>
+<body>
+    
+    <!-- ============================================================
+    1. LOADING SCREEN
+    ============================================================ -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>Gimbie Adventist</span>
+            </div>
+            <div class="loader-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="loader-text">
+                <p id="loadingText">Loading Patient Portal...</p>
+                <span class="loader-percentage" id="loaderPercentage">0%</span>
+            </div>
+            <div class="loader-medical-bg">
+                <i class="fas fa-user"></i>
+                <i class="fas fa-lock"></i>
+                <i class="fas fa-hospital"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    2. TOP HEADER
+    ============================================================ -->
+    <header class="top-header" id="topHeader">
+        <div class="container">
+            <div class="header-left">
+                <div class="hospital-logo">
+                    <a href="../index.html">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </a>
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="header-contact">
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <strong>Emergency</strong>
+                            <a href="tel:+251577710083">+251 57 771 0083</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="language-switcher">
+                    <button class="lang-btn" id="langToggle">
+                        <i class="fas fa-globe"></i> EN <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="lang-dropdown">
+                        <li><a href="#" data-lang="en">English</a></li>
+                        <li><a href="#" data-lang="am">አማርኛ</a></li>
+                        <li><a href="#" data-lang="or">Afaan Oromoo</a></li>
+                    </ul>
+                </div>
+                <div class="theme-toggle">
+                    <button id="themeToggle"><i class="fas fa-moon"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    3. NAVIGATION BAR
+    ============================================================ -->
+    <nav class="main-nav" id="mainNav">
+        <div class="container">
+            <div class="nav-logo">
+                <a href="../index.html">
+                    <img src="../assets/logo-small.png" alt="Logo" class="nav-logo-img">
+                </a>
+            </div>
+            <button class="nav-toggle" id="navToggle">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="../about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="../departments.html"><i class="fas fa-building"></i> Departments</a></li>
+                <li><a href="../doctors.html"><i class="fas fa-user-md"></i> Doctors</a></li>
+                <li><a href="login.html" class="active"><i class="fas fa-sign-in-alt"></i> Patient Login</a></li>
+                <li><a href="../contact.html"><i class="fas fa-phone-alt"></i> Contact</a></li>
+                <li class="nav-dropdown">
+                    <a href="#"><i class="fas fa-user"></i> Login <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="login.html"><i class="fas fa-user"></i> Patient Login</a></li>
+                        <li><a href="../staff/login.html"><i class="fas fa-user-md"></i> Staff Login</a></li>
+                        <li><a href="../admin/login.html"><i class="fas fa-user-shield"></i> Admin Login</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+    4. HERO SECTION
+    ============================================================ -->
+    <section class="login-hero" id="loginHero" style="background-image: url('../assets/patient-login-hero.jpg');">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="login-hero-content" data-aos="fade-up">
+                <span class="hero-badge"><i class="fas fa-user"></i> Patient Portal</span>
+                <h1>Welcome Back, Patient</h1>
+                <p>Secure access to your medical records, appointments, and health information</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    5. LOGIN CARD
+    ============================================================ -->
+    <section class="login-section" id="loginSection">
+        <div class="container">
+            <div class="login-wrapper" data-aos="fade-up">
+                <div class="login-card">
+                    <div class="login-header">
+                        <div class="login-logo">
+                            <i class="fas fa-heartbeat"></i>
+                            <span>Gimbie Adventist</span>
+                        </div>
+                        <h2>Patient Login</h2>
+                        <p>Welcome back! Please login to your account.</p>
+                    </div>
+
+                    <!-- ============================================================
+                    6. LOGIN FORM
+                    ============================================================ -->
+                    <form class="login-form" id="loginForm">
+                        <div class="form-group">
+                            <label><i class="fas fa-id-card"></i> Patient ID / Email / Phone</label>
+                            <input type="text" placeholder="Enter Patient ID, Email, or Phone Number" required>
+                        </div>
+                        <div class="form-group password-group">
+                            <label><i class="fas fa-lock"></i> Password</label>
+                            <input type="password" id="password" placeholder="Enter your password" required>
+                            <button type="button" class="toggle-password" id="togglePassword">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="form-options">
+                            <div class="remember-me">
+                                <input type="checkbox" id="rememberMe">
+                                <label for="rememberMe">Remember Me</label>
+                            </div>
+                            <a href="#forgotPassword" class="forgot-link">Forgot Password?</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </button>
+                    </form>
+
+                    <!-- ============================================================
+                    7. QUICK LOGIN
+                    ============================================================ -->
+                    <div class="quick-login">
+                        <div class="divider">
+                            <span>or login with</span>
+                        </div>
+                        <div class="quick-login-options">
+                            <button class="quick-btn qr" title="QR Code Login">
+                                <i class="fas fa-qrcode"></i>
+                                <span>QR Code</span>
+                            </button>
+                            <button class="quick-btn fingerprint" title="Fingerprint Login">
+                                <i class="fas fa-fingerprint"></i>
+                                <span>Fingerprint</span>
+                            </button>
+                            <button class="quick-btn faceid" title="Face ID Login">
+                                <i class="fas fa-face-smile"></i>
+                                <span>Face ID</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ============================================================
+                    8. FORGOT PASSWORD
+                    ============================================================ -->
+                    <div class="forgot-password" id="forgotPassword">
+                        <h4><i class="fas fa-key"></i> Reset Password</h4>
+                        <p>Enter your email or phone number to receive reset instructions.</p>
+                        <div class="recover-options">
+                            <button class="recover-btn email">
+                                <i class="fas fa-envelope"></i> Recover via Email
+                            </button>
+                            <button class="recover-btn sms">
+                                <i class="fas fa-sms"></i> Recover via SMS
+                            </button>
+                        </div>
+                        <a href="#loginSection" class="back-to-login"><i class="fas fa-arrow-left"></i> Back to Login</a>
+                    </div>
+
+                    <!-- ============================================================
+                    9. CREATE PATIENT ACCOUNT
+                    ============================================================ -->
+                    <div class="create-account">
+                        <p>Don't have an account?</p>
+                        <a href="register.html" class="btn btn-outline btn-block">
+                            <i class="fas fa-user-plus"></i> Create Patient Account
+                        </a>
+                        <a href="register.html" class="online-registration">
+                            <i class="fas fa-globe"></i> Online Registration
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ============================================================
+                10. PATIENT BENEFITS
+                ============================================================ -->
+                <div class="login-benefits" data-aos="fade-left">
+                    <h3><i class="fas fa-star"></i> Patient Portal Benefits</h3>
+                    <ul>
+                        <li><i class="fas fa-calendar-check"></i> Book Appointments</li>
+                        <li><i class="fas fa-file-medical"></i> View Medical Records</li>
+                        <li><i class="fas fa-flask"></i> Laboratory Results</li>
+                        <li><i class="fas fa-x-ray"></i> Radiology Reports</li>
+                        <li><i class="fas fa-prescription-bottle"></i> Prescriptions</li>
+                        <li><i class="fas fa-coins"></i> Bills & Payments</li>
+                        <li><i class="fas fa-bell"></i> Notifications</li>
+                        <li><i class="fas fa-history"></i> Health History</li>
+                    </ul>
+                    <div class="security-badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>SSL Encrypted Connection</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    11. SECURITY FEATURES
+    ============================================================ -->
+    <section class="security-features" id="securityFeatures">
+        <div class="container">
+            <div class="security-grid" data-aos="fade-up">
+                <div class="security-card">
+                    <i class="fas fa-lock"></i>
+                    <h4>SSL Encryption</h4>
+                    <p>All data is encrypted using 256-bit SSL technology.</p>
+                </div>
+                <div class="security-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h4>Two-Factor Authentication</h4>
+                    <p>Additional security layer for your account.</p>
+                </div>
+                <div class="security-card">
+                    <i class="fas fa-shield-virus"></i>
+                    <h4>Secure Login</h4>
+                    <p>Protected against unauthorized access attempts.</p>
+                </div>
+                <div class="security-card">
+                    <i class="fas fa-user-secret"></i>
+                    <h4>Privacy Protection</h4>
+                    <p>Your data is protected by strict privacy policies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    12. HELP CENTER
+    ============================================================ -->
+    <section class="help-center" id="helpCenter">
+        <div class="container">
+            <div class="help-wrapper" data-aos="fade-up">
+                <h3><i class="fas fa-life-ring"></i> Need Help?</h3>
+                <div class="help-grid">
+                    <a href="../faq.html" class="help-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span>FAQ</span>
+                    </a>
+                    <a href="#loginGuide" class="help-item">
+                        <i class="fas fa-book"></i>
+                        <span>Login Guide</span>
+                    </a>
+                    <a href="../contact.html" class="help-item">
+                        <i class="fas fa-headset"></i>
+                        <span>Technical Support</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    13. EMERGENCY SECTION
+    ============================================================ -->
+    <section class="emergency-section" id="emergencySection">
+        <div class="container">
+            <div class="emergency-card" data-aos="zoom-in">
+                <div class="emergency-icon"><i class="fas fa-ambulance"></i></div>
+                <div class="emergency-info">
+                    <h3>Medical Emergency?</h3>
+                    <p>Call our emergency hotline for immediate medical assistance.</p>
+                    <div class="emergency-number-large">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>+251 57 771 0083</span>
+                    </div>
+                </div>
+                <a href="../emergency.html" class="btn btn-danger">
+                    <i class="fas fa-ambulance"></i> Call Ambulance
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    14. AI PATIENT ASSISTANT
+    ============================================================ -->
+    <div class="ai-assistant" id="aiAssistant">
+        <button class="ai-toggle patient-ai-toggle" id="aiToggle">
+            <i class="fas fa-robot"></i>
+        </button>
+        <div class="ai-chat-window" id="aiChatWindow">
+            <div class="ai-header patient-ai-header">
+                <div class="ai-header-info">
+                    <i class="fas fa-robot"></i>
+                    <div>
+                        <h4>AI Patient Assistant</h4>
+                        <span>Online</span>
+                    </div>
+                </div>
+                <button class="ai-close" id="aiClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="ai-body" id="aiBody">
+                <div class="ai-message ai-bot">
+                    <div class="ai-avatar"><i class="fas fa-robot"></i></div>
+                    <div class="ai-bubble patient-ai-bubble">
+                        <p>👋 Hello! I'm your Patient Assistant. I can help you:</p>
+                        <ul>
+                            <li>Log in to your account</li>
+                            <li>Reset your password</li>
+                            <li>Book appointments</li>
+                            <li>Access medical records</li>
+                        </ul>
+                        <p>How can I help you today?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="ai-footer">
+                <div class="ai-input-group">
+                    <input type="text" id="aiInput" placeholder="Ask for help...">
+                    <button id="aiSend"><i class="fas fa-paper-plane"></i></button>
+                </div>
+                <div class="ai-voice">
+                    <button id="aiVoiceBtn"><i class="fas fa-microphone"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    FLOATING BUTTONS
+    ============================================================ -->
+    <div class="floating-buttons">
+        <a href="../emergency.html" class="float-btn emergency" data-tooltip="Emergency">
+            <i class="fas fa-ambulance"></i>
+        </a>
+        <button class="float-btn chat" id="floatingChat" data-tooltip="AI Assistant">
+            <i class="fas fa-robot"></i>
+        </button>
+        <button class="float-btn scroll-top" id="scrollTop" data-tooltip="Scroll to Top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- ============================================================
+    15. FOOTER
+    ============================================================ -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </div>
+                    <p class="footer-about">
+                        Providing quality healthcare services since 1948. Committed to compassionate care and medical excellence.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="../about.html"><i class="fas fa-chevron-right"></i> About</a></li>
+                        <li><a href="../departments.html"><i class="fas fa-chevron-right"></i> Departments</a></li>
+                        <li><a href="../doctors.html"><i class="fas fa-chevron-right"></i> Doctors</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="../privacy.html"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+                        <li><a href="../terms.html"><i class="fas fa-chevron-right"></i> Terms of Service</a></li>
+                        <li><a href="../sitemap.html"><i class="fas fa-chevron-right"></i> Sitemap</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> P.O. Box 228, Gimbie</li>
+                        <li><i class="fas fa-phone-alt"></i> +251 57 771 0083</li>
+                        <li><i class="fas fa-envelope"></i> gimbieadventisthosp@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 <strong>Gimbie Adventist General Hospital</strong>. All Rights Reserved.</p>
+                    <div class="footer-links">
+                        <a href="../privacy.html">Privacy Policy</a>
+                        <a href="../terms.html">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+    <script src="../js/patient-login.js"></script>
+    <script src="../js/ai-assistant.js"></script>
+</body>
+                      </html>
