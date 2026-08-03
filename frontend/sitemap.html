@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sitemap of Gimbie Adventist General Hospital website. Find all pages, patient portal, staff portal, and admin portal links.">
+    <meta name="keywords" content="sitemap, website map, navigation, pages, gimbie hospital">
+    <meta name="author" content="Gimbie Adventist General Hospital">
+    <title>Sitemap | Gimbie Adventist General Hospital</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sitemap.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+</head>
+<body>
+    
+    <!-- ============================================================
+    1. LOADING SCREEN
+    ============================================================ -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>Gimbie Adventist</span>
+            </div>
+            <div class="loader-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="loader-text">
+                <p id="loadingText">Loading Sitemap...</p>
+                <span class="loader-percentage" id="loaderPercentage">0%</span>
+            </div>
+            <div class="loader-sitemap-animation">
+                <i class="fas fa-sitemap"></i>
+                <i class="fas fa-link"></i>
+                <i class="fas fa-network-wired"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    2. TOP HEADER
+    ============================================================ -->
+    <header class="top-header" id="topHeader">
+        <div class="container">
+            <div class="header-left">
+                <div class="hospital-logo">
+                    <a href="index.html">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </a>
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="header-contact">
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <strong>Emergency</strong>
+                            <a href="tel:+251577710083">+251 57 771 0083</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email</strong>
+                            <a href="mailto:gimbieadventisthosp@gmail.com">gimbieadventisthosp@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="language-switcher">
+                    <button class="lang-btn" id="langToggle">
+                        <i class="fas fa-globe"></i> EN <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="lang-dropdown">
+                        <li><a href="#" data-lang="en">English</a></li>
+                        <li><a href="#" data-lang="am">አማርኛ</a></li>
+                        <li><a href="#" data-lang="or">Afaan Oromoo</a></li>
+                    </ul>
+                </div>
+                <div class="theme-toggle">
+                    <button id="themeToggle"><i class="fas fa-moon"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    3. NAVIGATION BAR
+    ============================================================ -->
+    <nav class="main-nav" id="mainNav">
+        <div class="container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="assets/logo-small.png" alt="Logo" class="nav-logo-img">
+                </a>
+            </div>
+            <button class="nav-toggle" id="navToggle">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="departments.html"><i class="fas fa-building"></i> Departments</a></li>
+                <li><a href="doctors.html"><i class="fas fa-user-md"></i> Doctors</a></li>
+                <li><a href="sitemap.html" class="active"><i class="fas fa-sitemap"></i> Sitemap</a></li>
+                <li><a href="contact.html"><i class="fas fa-phone-alt"></i> Contact</a></li>
+                <li class="nav-dropdown">
+                    <a href="#"><i class="fas fa-sign-in-alt"></i> Login <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="patient/login.html"><i class="fas fa-user"></i> Patient Login</a></li>
+                        <li><a href="staff/login.html"><i class="fas fa-user-md"></i> Staff Login</a></li>
+                        <li><a href="admin/login.html"><i class="fas fa-user-shield"></i> Admin Login</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+    4. HERO BANNER
+    ============================================================ -->
+    <section class="page-hero sitemap-hero" id="pageHero" style="background-image: url('assets/sitemap-hero.jpg');">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="page-hero-content" data-aos="fade-up">
+                <span class="hero-badge"><i class="fas fa-sitemap"></i> Sitemap</span>
+                <h1>Website Sitemap</h1>
+                <p>Find your way around our website with this complete page directory</p>
+                <nav class="breadcrumb">
+                    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                    <span><i class="fas fa-chevron-right"></i></span>
+                    <a href="sitemap.html" class="active">Sitemap</a>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    5. MAIN WEBSITE PAGES
+    ============================================================ -->
+    <section class="sitemap-section" id="mainPages">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Main</span>
+                <h2>Main <span>Website Pages</span></h2>
+                <p>Explore all public pages of our website.</p>
+            </div>
+            
+            <div class="pages-grid" data-aos="fade-up">
+                <div class="page-card">
+                    <i class="fas fa-home"></i>
+                    <h4><a href="index.html">Home</a></h4>
+                    <p>Welcome to Gimbie Adventist General Hospital</p>
+                </div>
+                <div class="page-card">
+                    <i class="fas fa-info-circle"></i>
+                    <h4><a href="about.html">About</a></h4>
+                    <p>Learn about our hospital, mission, vision, and values</p>
+                </div>
+                <div class="page-card">
+                    <i class="fas fa-building"></i>
+                    <h4><a href="departments.html">Departments</a></h4>
+                    <p>Explore our 60+ medical departments</p>
+                </div>
+                <div class="page-card">
+                    <i class="fas fa-building"></i>
+                    <h4><a href="department.html">Department Details</a></h4>
+                    <p>Detailed information about each department</p>
+                </div>
+                <div class="page-card">
+                    <i class="fas fa-user-md"></i>
+                    <h4><a href="doctors.html">Doctors</a></h4>
+                    <p>Meet our team of expert doctors</p>
+                </div>
+                <div class="page-card">
+                    <i class="fas fa-user-md"></i>
+                    <h4><a href="doctor.html">Doctor Profile</a></h4>
+                    <p>Detailed profile of each doctor</p>
+                </div>
+                <div class="page-card">
+                    <i class="fas fa-concierge-bell"></i>
+                    <h4><a href="services.html">Services</a></h4>
+                    <p>Explore our medical services</p>
+                </div>
+                <div class="page-card">
+                    <i class="fas fa-concierge-bell"></i>
+                    <h4><a href="service.html">Service Details</a></h4>
+                    <p>Detailed information about each service</p>
+                </div>
+                <div class="page-card">
+                    <i class="fas fa-calendar-check"></i>
+                    <h4><a href="appointments.html">Appointments</a></h4>
+                    <p>Book and manage appointments</p>
+                </div>
+                <div class="page-card">
+                    <i class="fas fa-ambulance"></i>
+                    <h4><a href="emergency.html">Emergency</a></h4>
+                    <p>24/7 emergency care services</p>
+                </div>
+                <div class="page-card">
+                    <i class="fas fa-prescription-bottle"></i>
+                    <h4><a href="pharmacy.html">Pharmacy</a></h4>
+                    <p>Pharmacy services and medicines</p>
+                </div>
+                <div class="page-card">
+                    <i class="fas fa-flask"></i>
+                    <h4><a href="laboratory.html">Laboratory</a></h4>
+                    <p>Laboratory and diagnostic services</p>
+                </div>
+                <div class="page-card">
+                    <i class="fas fa-x-ray"></i>
+                    <h4><a href="radiology.html">Radiology</a></h4>
+                    <p>Radiology and medical imaging</p>
+                </div>
+                <div class="page-card">
+                    <i class="fas fa-images"></i>
+                    <h4><a href="gallery.html">Gallery</a></h4>
+                    <p>Photo and video gallery</p>
+                </div>
+                <div class="page-card">
+                    <i class="fas fa-newspaper"></i>
+                    <h4><a href="news.html">News</a></h4>
+                    <p>Latest hospital news and updates</p>
+                </div>
+                <div class="page-card">
+                    <i class="fas fa-article"></i>
+                    <h4><a href="article.html">Article</a></h4>
+                    <p>Detailed health articles</p>
+                </div>
+                <div class="page-card">
+                    <i class="fas fa-briefcase"></i>
+                    <h4><a href="careers.html">Careers</a></h4>
+                    <p>Job opportunities and careers</p>
+                </div>
+                <div class="page-card">
+                    <i class="fas fa-phone-alt"></i>
+                    <h4><a href="contact.html">Contact</a></h4>
+                    <p>Contact and location information</p>
+                </div>
+                <div class="page-card">
+                    <i class="fas fa-question-circle"></i>
+                    <h4><a href="faq.html">FAQ</a></h4>
+                    <p>Frequently asked questions</p>
+                </div>
+                <div class="page-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h4><a href="privacy.html">Privacy Policy</a></h4>
+                    <p>Privacy policy and data protection</p>
+                </div>
+                <div class="page-card">
+                    <i class="fas fa-file-contract"></i>
+                    <h4><a href="terms.html">Terms of Service</a></h4>
+                    <p>Terms and conditions</p>
+                </div>
+                <div class="page-card">
+                    <i class="fas fa-sitemap"></i>
+                    <h4><a href="sitemap.html">Sitemap</a></h4>
+                    <p>Complete website sitemap</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    6. PATIENT PORTAL
+    ============================================================ -->
+    <section class="sitemap-section" id="patientPortal">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Portal</span>
+                <h2>Patient <span>Portal</span></h2>
+                <p>Access patient portal pages.</p>
+            </div>
+            
+            <div class="portal-grid" data-aos="fade-up">
+                <div class="portal-card patient">
+                    <div class="portal-header">
+                        <i class="fas fa-user"></i>
+                        <h4>Patient Portal</h4>
+                    </div>
+                    <ul class="portal-links">
+                        <li><a href="patient/login.html"><i class="fas fa-sign-in-alt"></i> Patient Login</a></li>
+                        <li><a href="patient/dashboard.html"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+                        <li><a href="patient/appointments.html"><i class="fas fa-calendar-check"></i> My Appointments</a></li>
+                        <li><a href="patient/records.html"><i class="fas fa-file-medical"></i> Medical Records</a></li>
+                        <li><a href="patient/prescriptions.html"><i class="fas fa-prescription-bottle"></i> Prescriptions</a></li>
+                        <li><a href="patient/lab-results.html"><i class="fas fa-flask"></i> Laboratory Results</a></li>
+                        <li><a href="patient/radiology-reports.html"><i class="fas fa-x-ray"></i> Radiology Reports</a></li>
+                        <li><a href="patient/bills.html"><i class="fas fa-coins"></i> Bills & Payments</a></li>
+                        <li><a href="patient/notifications.html"><i class="fas fa-bell"></i> Notifications</a></li>
+                        <li><a href="patient/profile.html"><i class="fas fa-user-edit"></i> Profile</a></li>
+                        <li><a href="patient/settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    7. STAFF PORTAL
+    ============================================================ -->
+    <section class="sitemap-section" id="staffPortal">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Staff</span>
+                <h2>Staff <span>Portal</span></h2>
+                <p>Access staff portal pages.</p>
+            </div>
+            
+            <div class="portal-grid" data-aos="fade-up">
+                <div class="portal-card staff">
+                    <div class="portal-header">
+                        <i class="fas fa-user-md"></i>
+                        <h4>Staff Portal</h4>
+                    </div>
+                    <ul class="portal-links">
+                        <li><a href="staff/login.html"><i class="fas fa-sign-in-alt"></i> Staff Login</a></li>
+                        <li><a href="staff/dashboard.html"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+                        <li><a href="staff/doctor-dashboard.html"><i class="fas fa-user-md"></i> Doctor Dashboard</a></li>
+                        <li><a href="staff/nurse-dashboard.html"><i class="fas fa-user-nurse"></i> Nurse Dashboard</a></li>
+                        <li><a href="staff/pharmacist-dashboard.html"><i class="fas fa-prescription-bottle"></i> Pharmacist Dashboard</a></li>
+                        <li><a href="staff/laboratory-dashboard.html"><i class="fas fa-flask"></i> Laboratory Dashboard</a></li>
+                        <li><a href="staff/radiology-dashboard.html"><i class="fas fa-x-ray"></i> Radiology Dashboard</a></li>
+                        <li><a href="staff/reception-dashboard.html"><i class="fas fa-phone-alt"></i> Reception Dashboard</a></li>
+                        <li><a href="staff/hr-dashboard.html"><i class="fas fa-user-tie"></i> HR Dashboard</a></li>
+                        <li><a href="staff/finance-dashboard.html"><i class="fas fa-coins"></i> Finance Dashboard</a></li>
+                        <li><a href="staff/ambulance-dashboard.html"><i class="fas fa-ambulance"></i> Ambulance Dashboard</a></li>
+                        <li><a href="staff/records.html"><i class="fas fa-file-medical"></i> Medical Records</a></li>
+                        <li><a href="staff/notifications.html"><i class="fas fa-bell"></i> Notifications</a></li>
+                        <li><a href="staff/profile.html"><i class="fas fa-user-edit"></i> Profile</a></li>
+                        <li><a href="staff/settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    8. ADMIN PORTAL
+    ============================================================ -->
+    <section class="sitemap-section" id="adminPortal">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Admin</span>
+                <h2>Admin <span>Portal</span></h2>
+                <p>Access admin portal pages.</p>
+            </div>
+            
+            <div class="portal-grid" data-aos="fade-up">
+                <div class="portal-card admin">
+                    <div class="portal-header">
+                        <i class="fas fa-user-shield"></i>
+                        <h4>Admin Portal</h4>
+                    </div>
+                    <ul class="portal-links">
+                        <li><a href="admin/login.html"><i class="fas fa-sign-in-alt"></i> Admin Login</a></li>
+                        <li><a href="admin/dashboard.html"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+                        <li><a href="admin/users.html"><i class="fas fa-users"></i> User Management</a></li>
+                        <li><a href="admin/staff.html"><i class="fas fa-user-tie"></i> Staff Management</a></li>
+                        <li><a href="admin/patients.html"><i class="fas fa-hospital-user"></i> Patient Management</a></li>
+                        <li><a href="admin/departments.html"><i class="fas fa-building"></i> Department Management</a></li>
+                        <li><a href="admin/appointments.html"><i class="fas fa-calendar-check"></i> Appointment Management</a></li>
+                        <li><a href="admin/pharmacy.html"><i class="fas fa-prescription-bottle"></i> Pharmacy Management</a></li>
+                        <li><a href="admin/laboratory.html"><i class="fas fa-flask"></i> Laboratory Management</a></li>
+                        <li><a href="admin/radiology.html"><i class="fas fa-x-ray"></i> Radiology Management</a></li>
+                        <li><a href="admin/inventory.html"><i class="fas fa-boxes"></i> Inventory Management</a></li>
+                        <li><a href="admin/finance.html"><i class="fas fa-coins"></i> Finance</a></li>
+                        <li><a href="admin/reports.html"><i class="fas fa-file-alt"></i> Reports</a></li>
+                        <li><a href="admin/analytics.html"><i class="fas fa-chart-line"></i> Analytics</a></li>
+                        <li><a href="admin/cms.html"><i class="fas fa-edit"></i> Website CMS</a></li>
+                        <li><a href="admin/gallery.html"><i class="fas fa-images"></i> Gallery Manager</a></li>
+                        <li><a href="admin/news.html"><i class="fas fa-newspaper"></i> News Manager</a></li>
+                        <li><a href="admin/settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    9. QUICK LINKS
+    ============================================================ -->
+    <section class="sitemap-section" id="quickLinks">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Quick</span>
+                <h2>Quick <span>Links</span></h2>
+                <p>Most visited pages for quick access.</p>
+            </div>
+            
+            <div class="quick-grid" data-aos="fade-up">
+                <a href="appointments.html" class="quick-card">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Book Appointment</span>
+                </a>
+                <a href="doctors.html" class="quick-card">
+                    <i class="fas fa-user-md"></i>
+                    <span>Find Doctor</span>
+                </a>
+                <a href="emergency.html" class="quick-card">
+                    <i class="fas fa-ambulance"></i>
+                    <span>Emergency Services</span>
+                </a>
+                <a href="careers.html" class="quick-card">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Careers</span>
+                </a>
+                <a href="contact.html#feedbackSection" class="quick-card">
+                    <i class="fas fa-star"></i>
+                    <span>Feedback</span>
+                </a>
+                <a href="contact.html" class="quick-card">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>Contact Us</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    10. SEARCH WEBSITE
+    ============================================================ -->
+    <section class="sitemap-section" id="searchWebsite">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Search</span>
+                <h2>Search <span>Website</span></h2>
+                <p>Search for pages, doctors, departments, and services.</p>
+            </div>
+            
+            <div class="search-wrapper" data-aos="fade-up">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search all pages, doctors, departments, or services...">
+                    <button class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+                </div>
+                <div class="search-filters">
+                    <button class="filter-btn active">All Pages</button>
+                    <button class="filter-btn">Doctors</button>
+                    <button class="filter-btn">Departments</button>
+                    <button class="filter-btn">Services</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    11. AI NAVIGATION ASSISTANT
+    ============================================================ -->
+    <div class="ai-assistant" id="aiAssistant">
+        <button class="ai-toggle sitemap-ai-toggle" id="aiToggle">
+            <i class="fas fa-robot"></i>
+        </button>
+        <div class="ai-chat-window" id="aiChatWindow">
+            <div class="ai-header sitemap-ai-header">
+                <div class="ai-header-info">
+                    <i class="fas fa-robot"></i>
+                    <div>
+                        <h4>AI Navigation Assistant</h4>
+                        <span>Online</span>
+                    </div>
+                </div>
+                <button class="ai-close" id="aiClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="ai-body" id="aiBody">
+                <div class="ai-message ai-bot">
+                    <div class="ai-avatar"><i class="fas fa-robot"></i></div>
+                    <div class="ai-bubble sitemap-ai-bubble">
+                        <p>🗺️ Hello! I'm your Navigation Assistant. I can help you:</p>
+                        <ul>
+                            <li>Find any page on our website</li>
+                            <li>Search for doctors and departments</li>
+                            <li>Navigate to the right section</li>
+                            <li>Suggest pages you might need</li>
+                        </ul>
+                        <p>Where would you like to go?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="ai-footer">
+                <div class="ai-input-group">
+                    <input type="text" id="aiInput" placeholder="What are you looking for?">
+                    <button id="aiSend"><i class="fas fa-paper-plane"></i></button>
+                </div>
+                <div class="ai-voice">
+                    <button id="aiVoiceBtn"><i class="fas fa-microphone"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    FLOATING BUTTONS
+    ============================================================ -->
+    <div class="floating-buttons">
+        <a href="emergency.html" class="float-btn emergency" data-tooltip="Emergency">
+            <i class="fas fa-ambulance"></i>
+        </a>
+        <button class="float-btn chat" id="floatingChat" data-tooltip="AI Assistant">
+            <i class="fas fa-robot"></i>
+        </button>
+        <button class="float-btn scroll-top" id="scrollTop" data-tooltip="Scroll to Top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- ============================================================
+    12. FOOTER
+    ============================================================ -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </div>
+                    <p class="footer-about">
+                        Providing quality healthcare services since 1948. Committed to compassionate care and medical excellence.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About</a></li>
+                        <li><a href="departments.html"><i class="fas fa-chevron-right"></i> Departments</a></li>
+                        <li><a href="doctors.html"><i class="fas fa-chevron-right"></i> Doctors</a></li>
+                        <li><a href="sitemap.html"><i class="fas fa-chevron-right"></i> Sitemap</a></li>
+                        <li><a href="careers.html"><i class="fas fa-chevron-right"></i> Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="privacy.html"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+                        <li><a href="terms.html"><i class="fas fa-chevron-right"></i> Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> P.O. Box 228, Gimbie</li>
+                        <li><i class="fas fa-phone-alt"></i> +251 57 771 0083</li>
+                        <li><i class="fas fa-phone-alt"></i> +251 77 710 0051</li>
+                        <li><i class="fas fa-envelope"></i> gimbieadventisthosp@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 8:00 AM - 6:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 <strong>Gimbie Adventist General Hospital</strong>. All Rights Reserved.</p>
+                    <div class="footer-links">
+                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="terms.html">Terms of Service</a>
+                        <a href="sitemap.html">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/sitemap.js"></script>
+    <script src="js/ai-assistant.js"></script>
+</body>
+  </html>
