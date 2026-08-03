@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About Gimbie Adventist General Hospital - Learn about our history, mission, vision, values, leadership, and commitment to quality healthcare since 1948.">
+    <meta name="keywords" content="about, gimbie hospital, adventist hospital, history, mission, vision, healthcare ethiopia">
+    <meta name="author" content="Gimbie Adventist General Hospital">
+    <title>About Us | Gimbie Adventist General Hospital</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/about.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+</head>
+<body>
+    
+    <!-- ============================================================
+    1. LOADING SCREEN
+    ============================================================ -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>Gimbie Adventist</span>
+            </div>
+            <div class="loader-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="loader-text">
+                <p id="loadingText">Loading About Page...</p>
+                <span class="loader-percentage" id="loaderPercentage">0%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    2. TOP HEADER
+    ============================================================ -->
+    <header class="top-header" id="topHeader">
+        <div class="container">
+            <div class="header-left">
+                <div class="hospital-logo">
+                    <a href="index.html">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </a>
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="header-contact">
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <strong>Emergency</strong>
+                            <a href="tel:+251577710083">+251 57 771 0083</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email</strong>
+                            <a href="mailto:gimbieadventisthosp@gmail.com">gimbieadventisthosp@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="language-switcher">
+                    <button class="lang-btn" id="langToggle">
+                        <i class="fas fa-globe"></i> EN <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="lang-dropdown">
+                        <li><a href="#" data-lang="en">English</a></li>
+                        <li><a href="#" data-lang="am">አማርኛ</a></li>
+                        <li><a href="#" data-lang="or">Afaan Oromoo</a></li>
+                    </ul>
+                </div>
+                <div class="theme-toggle">
+                    <button id="themeToggle" aria-label="Toggle Dark/Light Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    3. NAVIGATION BAR
+    ============================================================ -->
+    <nav class="main-nav" id="mainNav">
+        <div class="container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="assets/logo-small.png" alt="Gimbie Adventist Hospital Logo" class="nav-logo-img">
+                </a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="about.html" class="active"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="departments.html"><i class="fas fa-building"></i> Departments</a></li>
+                <li><a href="doctors.html"><i class="fas fa-user-md"></i> Doctors</a></li>
+                <li><a href="services.html"><i class="fas fa-concierge-bell"></i> Services</a></li>
+                <li><a href="appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a></li>
+                <li><a href="contact.html"><i class="fas fa-phone-alt"></i> Contact</a></li>
+                <li class="nav-dropdown">
+                    <a href="#"><i class="fas fa-sign-in-alt"></i> Login <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="patient/login.html"><i class="fas fa-user"></i> Patient Login</a></li>
+                        <li><a href="staff/login.html"><i class="fas fa-user-md"></i> Staff Login</a></li>
+                        <li><a href="admin/login.html"><i class="fas fa-user-shield"></i> Admin Login</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+    4. HERO BANNER
+    ============================================================ -->
+    <section class="page-hero" id="pageHero" style="background-image: url('assets/about-hero.jpg');">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="page-hero-content" data-aos="fade-up" data-aos-duration="1000">
+                <h1>About Gimbie Adventist General Hospital</h1>
+                <p>Dedicated to compassionate healthcare excellence since 1948</p>
+                <nav class="breadcrumb">
+                    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                    <span><i class="fas fa-chevron-right"></i></span>
+                    <a href="about.html" class="active">About Us</a>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    5. HOSPITAL INTRODUCTION
+    ============================================================ -->
+    <section class="hospital-introduction" id="introduction">
+        <div class="container">
+            <div class="intro-grid">
+                <div class="intro-content" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="section-badge">Welcome</div>
+                    <h2>A Legacy of <span>Healing & Hope</span></h2>
+                    <p class="intro-text">
+                        <strong>Gimbie Adventist General Hospital</strong> has been a pillar of healthcare excellence 
+                        in the West Wollega Zone since its establishment in <strong>1948</strong> by the 
+                        Seventh-day Adventist Church.
+                    </p>
+                    <p>
+                        Located in Gimbie Town, approximately 441 km west of Addis Ababa, our hospital has grown 
+                        from a small clinic to a comprehensive general hospital serving the Oromia Region 
+                        and beyond.
+                    </p>
+                    <div class="intro-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div>
+                                <span class="highlight-number">77+</span>
+                                <span class="highlight-label">Years of Service</span>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-users"></i>
+                            <div>
+                                <span class="highlight-number">500+</span>
+                                <span class="highlight-label">Dedicated Staff</span>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-building"></i>
+                            <div>
+                                <span class="highlight-number">60+</span>
+                                <span class="highlight-label">Departments</span>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-hospital-user"></i>
+                            <div>
+                                <span class="highlight-number">50,000+</span>
+                                <span class="highlight-label">Patients Served Annually</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="intro-image" data-aos="fade-left" data-aos-duration="1000">
+                    <img src="assets/hospital-building.jpg" alt="Gimbie Adventist General Hospital Building">
+                    <div class="intro-badge">
+                        <i class="fas fa-award"></i>
+                        <span>Excellence in Healthcare</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    6. MISSION
+    ============================================================ -->
+    <section class="mission-section" id="mission">
+        <div class="container">
+            <div class="mission-wrapper" data-aos="fade-up" data-aos-duration="1000">
+                <div class="mission-icon">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <span class="section-badge">Our Mission</span>
+                <h2>Our <span>Mission</span></h2>
+                <div class="mission-content">
+                    <blockquote>
+                        "To provide compassionate, quality healthcare services to all people, 
+                        regardless of their ability to pay, in the name of Jesus Christ."
+                    </blockquote>
+                    <div class="mission-pillars">
+                        <div class="pillar">
+                            <i class="fas fa-heart"></i>
+                            <h4>Compassion</h4>
+                            <p>Treating every patient with kindness and empathy</p>
+                        </div>
+                        <div class="pillar">
+                            <i class="fas fa-star"></i>
+                            <h4>Quality</h4>
+                            <p>Delivering excellence in every aspect of care</p>
+                        </div>
+                        <div class="pillar">
+                            <i class="fas fa-hand-holding-heart"></i>
+                            <h4>Service</h4>
+                            <p>Serving all people regardless of background</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    7. VISION
+    ============================================================ -->
+    <section class="vision-section" id="vision">
+        <div class="container">
+            <div class="vision-wrapper" data-aos="fade-up" data-aos-duration="1000">
+                <div class="vision-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <span class="section-badge">Our Vision</span>
+                <h2>Our <span>Vision</span></h2>
+                <div class="vision-content">
+                    <blockquote>
+                        "To be a center of excellence in healthcare delivery, training, 
+                        and research in Ethiopia and beyond."
+                    </blockquote>
+                    <div class="vision-goals">
+                        <div class="goal">
+                            <div class="goal-number">01</div>
+                            <div class="goal-text">
+                                <h4>Excellence in Care</h4>
+                                <p>Setting the standard for quality healthcare in Ethiopia</p>
+                            </div>
+                        </div>
+                        <div class="goal">
+                            <div class="goal-number">02</div>
+                            <div class="goal-text">
+                                <h4>Medical Education</h4>
+                                <p>Training the next generation of healthcare professionals</p>
+                            </div>
+                        </div>
+                        <div class="goal">
+                            <div class="goal-number">03</div>
+                            <div class="goal-text">
+                                <h4>Research Innovation</h4>
+                                <p>Pioneering medical research to improve patient outcomes</p>
+                            </div>
+                        </div>
+                        <div class="goal">
+                            <div class="goal-number">04</div>
+                            <div class="goal-text">
+                                <h4>Community Impact</h4>
+                                <p>Transforming community health through outreach and education</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    8. CORE VALUES
+    ============================================================ -->
+    <section class="core-values" id="coreValues">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Core Values</span>
+                <h2>Our <span>Core Values</span></h2>
+                <p>Guiding principles that define our commitment to healthcare excellence.</p>
+            </div>
+            
+            <div class="values-grid">
+                <div class="value-card" data-aos="flip-up" data-aos-delay="0">
+                    <div class="value-icon"><i class="fas fa-heart"></i></div>
+                    <h4>Compassion</h4>
+                    <p>We treat every patient with kindness, empathy, and dignity, recognizing their inherent worth.</p>
+                </div>
+                <div class="value-card" data-aos="flip-up" data-aos-delay="100">
+                    <div class="value-icon"><i class="fas fa-handshake"></i></div>
+                    <h4>Integrity</h4>
+                    <p>We uphold the highest ethical standards, transparency, and honesty in all we do.</p>
+                </div>
+                <div class="value-card" data-aos="flip-up" data-aos-delay="200">
+                    <div class="value-icon"><i class="fas fa-medal"></i></div>
+                    <h4>Excellence</h4>
+                    <p>We strive for excellence in patient care, medical practice, and service delivery.</p>
+                </div>
+                <div class="value-card" data-aos="flip-up" data-aos-delay="300">
+                    <div class="value-icon"><i class="fas fa-users"></i></div>
+                    <h4>Respect</h4>
+                    <p>We respect the rights, beliefs, and dignity of every patient and staff member.</p>
+                </div>
+                <div class="value-card" data-aos="flip-up" data-aos-delay="400">
+                    <div class="value-icon"><i class="fas fa-hands-helping"></i></div>
+                    <h4>Teamwork</h4>
+                    <p>We work collaboratively across departments to provide comprehensive patient care.</p>
+                </div>
+                <div class="value-card" data-aos="flip-up" data-aos-delay="500">
+                    <div class="value-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h4>Innovation</h4>
+                    <p>We embrace innovation and continuous improvement in healthcare delivery.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    9. HOSPITAL TIMELINE
+    ============================================================ -->
+    <section class="timeline-section" id="timeline">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Our History</span>
+                <h2>Hospital <span>Timeline</span></h2>
+                <p>Journey of excellence spanning over seven decades.</p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-line"></div>
+                
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="0">
+                    <div class="timeline-dot"><i class="fas fa-calendar-alt"></i></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">1948</div>
+                        <h4>Foundation of the Hospital</h4>
+                        <p>Gimbie Adventist Hospital was established by the Seventh-day Adventist Church to serve the community of Gimbie Town and surrounding areas.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="timeline-dot"><i class="fas fa-expand"></i></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">1960</div>
+                        <h4>First Major Expansion</h4>
+                        <p>Expanded facilities to include more patient beds and additional medical departments to meet growing healthcare needs.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="timeline-dot"><i class="fas fa-stethoscope"></i></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">1980</div>
+                        <h4>Modernization of Services</h4>
+                        <p>Introduced modern medical equipment, new departments, and enhanced training programs for medical staff.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="timeline-dot"><i class="fas fa-hospital"></i></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2000</div>
+                        <h4>Designation as General Hospital</h4>
+                        <p>Recognized as a General Hospital with expanded services including specialist departments and advanced medical care.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="timeline-dot"><i class="fas fa-microscope"></i></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2010</div>
+                        <h4>Advanced Technology Integration</h4>
+                        <p>Integrated state-of-the-art medical technology including CT scan, MRI, digital X-ray, and electronic medical records.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="500">
+                    <div class="timeline-dot"><i class="fas fa-award"></i></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2020</div>
+                        <h4>COVID-19 Response & Resilience</h4>
+                        <p>Played a critical role in the COVID-19 response, providing care, testing, and vaccination services to the community.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="600">
+                    <div class="timeline-dot"><i class="fas fa-rocket"></i></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2024</div>
+                        <h4>Digital Transformation</h4>
+                        <p>Launched comprehensive digital health services including telemedicine, online appointments, and AI-powered healthcare tools.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    10. HOSPITAL LEADERSHIP
+    ============================================================ -->
+    <section class="leadership" id="leadership">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Leadership</span>
+                <h2>Hospital <span>Leadership</span></h2>
+                <p>Meet our dedicated leadership team committed to healthcare excellence.</p>
+            </div>
+            
+            <div class="leadership-grid">
+                <div class="leader-card" data-aos="flip-left" data-aos-delay="0">
+                    <div class="leader-image">
+                        <img src="assets/leaders/medical-director.jpg" alt="Medical Director">
+                        <div class="leader-badge">Medical Director</div>
+                    </div>
+                    <div class="leader-info">
+                        <h4>Dr. Samuel Bekele</h4>
+                        <span class="leader-title">Medical Director</span>
+                        <p>MD, FACC - 20+ years of experience in cardiology and healthcare leadership.</p>
+                        <div class="leader-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="leader-card" data-aos="flip-left" data-aos-delay="100">
+                    <div class="leader-image">
+                        <img src="assets/leaders/ceo.jpg" alt="CEO">
+                        <div class="leader-badge">Chief Executive Officer</div>
+                    </div>
+                    <div class="leader-info">
+                        <h4>Daniel Bekele</h4>
+                        <span class="leader-title">Chief Executive Officer</span>
+                        <p>MBA, MPH - 15+ years of experience in healthcare administration and management.</p>
+                        <div class="leader-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="leader-card" data-aos="flip-left" data-aos-delay="200">
+                    <div class="leader-image">
+                        <img src="assets/leaders/hospital-administrator.jpg" alt="Hospital Administrator">
+                        <div class="leader-badge">Hospital Administrator</div>
+                    </div>
+                    <div class="leader-info">
+                        <h4>Hana Tesfaye</h4>
+                        <span class="leader-title">Hospital Administrator</span>
+                        <p>MHA, RN - 12+ years of experience in hospital operations and patient care.</p>
+                        <div class="leader-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="leader-card" data-aos="flip-left" data-aos-delay="300">
+                    <div class="leader-image">
+                        <img src="assets/leaders/nursing-director.jpg" alt="Nursing Director">
+                        <div class="leader-badge">Nursing Director</div>
+                    </div>
+                    <div class="leader-info">
+                        <h4>Sara Alemayehu</h4>
+                        <span class="leader-title">Director of Nursing Services</span>
+                        <p>MSN, RN - 18+ years of experience in nursing leadership and patient care.</p>
+                        <div class="leader-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dept-heads" data-aos="fade-up">
+                <h3>Department Heads</h3>
+                <div class="dept-heads-grid">
+                    <div class="dept-head">
+                        <span class="dept-head-icon"><i class="fas fa-stethoscope"></i></span>
+                        <div>
+                            <h5>Dr. Hana Alemu</h5>
+                            <p>Head of Pediatrics</p>
+                        </div>
+                    </div>
+                    <div class="dept-head">
+                        <span class="dept-head-icon"><i class="fas fa-scalpel"></i></span>
+                        <div>
+                            <h5>Dr. Dawit Tadesse</h5>
+                            <p>Head of General Surgery</p>
+                        </div>
+                    </div>
+                    <div class="dept-head">
+                        <span class="dept-head-icon"><i class="fas fa-baby"></i></span>
+                        <div>
+                            <h5>Dr. Ruth Assefa</h5>
+                            <p>Head of Obstetrics & Gynecology</p>
+                        </div>
+                    </div>
+                    <div class="dept-head">
+                        <span class="dept-head-icon"><i class="fas fa-heartbeat"></i></span>
+                        <div>
+                            <h5>Dr. Abel Girma</h5>
+                            <p>Head of Cardiology</p>
+                        </div>
+                    </div>
+                    <div class="dept-head">
+                        <span class="dept-head-icon"><i class="fas fa-brain"></i></span>
+                        <div>
+                            <h5>Dr. Meron Desta</h5>
+                            <p>Head of Neurology</p>
+                        </div>
+                    </div>
+                    <div class="dept-head">
+                        <span class="dept-head-icon"><i class="fas fa-flask"></i></span>
+                        <div>
+                            <h5>Samuel Fikre</h5>
+                            <p>Head of Clinical Laboratory</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    11. HOSPITAL STATISTICS
+    ============================================================ -->
+    <section class="about-statistics" id="aboutStatistics">
+        <div class="container">
+            <div class="stat-wrapper" data-aos="zoom-in" data-aos-duration="1000">
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="150">0</div>
+                        <div class="stat-label">Doctors</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="300">0</div>
+                        <div class="stat-label">Nurses</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="500">0</div>
+                        <div class="stat-label">Total Staff</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="60">0</div>
+                        <div class="stat-label">Departments</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="250">0</div>
+                        <div class="stat-label">Patient Beds</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="50000">0</div>
+                        <div class="stat-label">Patients Served Annually</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    12. AWARDS & RECOGNITION
+    ============================================================ -->
+    <section class="awards" id="awards">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Awards & Recognition</span>
+                <h2>Our <span>Accolades</span></h2>
+                <p>Recognition of our commitment to healthcare excellence and community service.</p>
+            </div>
+            
+            <div class="awards-grid">
+                <div class="award-card" data-aos="flip-up" data-aos-delay="0">
+                    <i class="fas fa-award"></i>
+                    <h4>Excellence in Healthcare</h4>
+                    <p>Recognized for outstanding healthcare services in the Oromia Region.</p>
+                </div>
+                <div class="award-card" data-aos="flip-up" data-aos-delay="100">
+                    <i class="fas fa-trophy"></i>
+                    <h4>Community Service Award</h4>
+                    <p>Honored for dedication to community health and outreach programs.</p>
+                </div>
+                <div class="award-card" data-aos="flip-up" data-aos-delay="200">
+                    <i class="fas fa-certificate"></i>
+                    <h4>Quality Certification</h4>
+                    <p>Accredited for meeting high standards of patient safety and care quality.</p>
+                </div>
+                <div class="award-card" data-aos="flip-up" data-aos-delay="300">
+                    <i class="fas fa-shield-alt"></i>
+                    <h4>Patient Safety Award</h4>
+                    <p>Recognized for excellence in patient safety and infection prevention.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    13. OUR FACILITIES
+    ============================================================ -->
+    <section class="facilities" id="facilities">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Our Facilities</span>
+                <h2>State-of-the-Art <span>Facilities</span></h2>
+                <p>Modern medical facilities designed for patient comfort and care excellence.</p>
+            </div>
+            
+            <div class="facilities-grid">
+                <div class="facility-card" data-aos="flip-left" data-aos-delay="0">
+                    <div class="facility-icon"><i class="fas fa-ambulance"></i></div>
+                    <h4>Emergency Unit</h4>
+                    <p>24/7 emergency department with rapid response and critical care.</p>
+                </div>
+                <div class="facility-card" data-aos="flip-left" data-aos-delay="100">
+                    <div class="facility-icon"><i class="fas fa-heartbeat"></i></div>
+                    <h4>ICU & NICU</h4>
+                    <p>Advanced intensive care for adults and newborns with 24/7 monitoring.</p>
+                </div>
+                <div class="facility-card" data-aos="flip-left" data-aos-delay="200">
+                    <div class="facility-icon"><i class="fas fa-scalpel"></i></div>
+                    <h4>Operating Theatre</h4>
+                    <p>Modern surgical suites with advanced equipment and skilled surgeons.</p>
+                </div>
+                <div class="facility-card" data-aos="flip-left" data-aos-delay="300">
+                    <div class="facility-icon"><i class="fas fa-prescription-bottle"></i></div>
+                    <h4>Pharmacy</h4>
+                    <p>Full-service pharmacy with quality medications and expert consultation.</p>
+                </div>
+                <div class="facility-card" data-aos="flip-left" data-aos-delay="400">
+                    <div class="facility-icon"><i class="fas fa-flask"></i></div>
+                    <h4>Clinical Laboratory</h4>
+                    <p>Comprehensive diagnostic services with modern equipment.</p>
+                </div>
+                <div class="facility-card" data-aos="flip-left" data-aos-delay="500">
+                    <div class="facility-icon"><i class="fas fa-x-ray"></i></div>
+                    <h4>Radiology & Imaging</h4>
+                    <p>Advanced imaging including X-ray, CT scan, MRI, and ultrasound.</p>
+                </div>
+                <div class="facility-card" data-aos="flip-left" data-aos-delay="600">
+                    <div class="facility-icon"><i class="fas fa-baby"></i></div>
+                    <h4>Maternity Ward</h4>
+                    <p>Comprehensive maternity care in a comfortable, supportive environment.</p>
+                </div>
+                <div class="facility-card" data-aos="flip-left" data-aos-delay="700">
+                    <div class="facility-icon"><i class="fas fa-truck"></i></div>
+                    <h4>Ambulance Services</h4>
+                    <p>Emergency ambulance services for safe and rapid patient transport.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    14. WHY CHOOSE US
+    ============================================================ -->
+    <section class="why-choose-about" id="whyChooseAbout">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Why Choose Us</span>
+                <h2>Why <span>Choose Us</span></h2>
+                <p>Reasons why thousands of patients trust Gimbie Adventist General Hospital.</p>
+            </div>
+            
+            <div class="choose-grid">
+                <div class="choose-card" data-aos="fade-right" data-aos-delay="0">
+                    <i class="fas fa-user-md"></i>
+                    <h4>Experienced Doctors</h4>
+                    <p>150+ highly qualified doctors with years of experience in their specialties.</p>
+                </div>
+                <div class="choose-card" data-aos="fade-right" data-aos-delay="100">
+                    <i class="fas fa-microscope"></i>
+                    <h4>Modern Equipment</h4>
+                    <p>State-of-the-art medical equipment for accurate diagnosis and treatment.</p>
+                </div>
+                <div class="choose-card" data-aos="fade-right" data-aos-delay="200">
+                    <i class="fas fa-file-medical-alt"></i>
+                    <h4>Digital Medical Records</h4>
+                    <p>Secure electronic health records for efficient patient care management.</p>
+                </div>
+                <div class="choose-card" data-aos="fade-right" data-aos-delay="300">
+                    <i class="fas fa-clock"></i>
+                    <h4>24/7 Emergency Services</h4>
+                    <p>Round-the-clock emergency care with dedicated staff and ambulance services.</p>
+                </div>
+                <div class="choose-card" data-aos="fade-right" data-aos-delay="400">
+                    <i class="fas fa-credit-card"></i>
+                    <h4>Affordable Healthcare</h4>
+                    <p>Quality care at affordable prices with flexible payment options.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    15. HOSPITAL GALLERY
+    ============================================================ -->
+    <section class="about-gallery" id="aboutGallery">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Gallery</span>
+                <h2>Hospital <span>Gallery</span></h2>
+                <p>Explore our facilities, departments, and dedicated healthcare team.</p>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="0">
+                    <img src="assets/gallery/hospital-exterior.jpg" alt="Hospital Exterior">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search"></i>
+                        <span>Hospital Building</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="assets/gallery/emergency-department.jpg" alt="Emergency Department">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search"></i>
+                        <span>Emergency Department</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="assets/gallery/icu-ward.jpg" alt="ICU Ward">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search"></i>
+                        <span>ICU Ward</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
+                    <img src="assets/gallery/surgery-room.jpg" alt="Surgery Room">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search"></i>
+                        <span>Operating Theatre</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400">
+                    <img src="assets/gallery/medical-staff.jpg" alt="Medical Staff">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search"></i>
+                        <span>Medical Team</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="500">
+                    <img src="assets/gallery/laboratory.jpg" alt="Laboratory">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search"></i>
+                        <span>Clinical Laboratory</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    16. FREQUENTLY ASKED QUESTIONS
+    ============================================================ -->
+    <section class="faq-section" id="faqSection">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">FAQ</span>
+                <h2>Frequently Asked <span>Questions</span></h2>
+                <p>Find answers to common questions about our hospital and services.</p>
+            </div>
+            
+            <div class="faq-grid" data-aos="fade-up" data-aos-duration="1000">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What are the visiting hours at the hospital?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Visiting hours are from 10:00 AM to 6:00 PM daily. For ICU and special care units, visiting hours are limited and require prior approval from the medical staff.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How do I book an appointment?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>You can book an appointment online through our website, call our appointment hotline at +251 57 771 0083, or visit the hospital's registration desk.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Does the hospital accept insurance?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, we accept various health insurance plans. Please contact our insurance office at +251 57 771 0083 for specific coverage details.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What emergency services are available?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We provide 24/7 emergency services including ambulance transport, trauma care, critical care, and emergency surgery. Call +251 57 771 0083 for immediate assistance.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How can I get my medical records?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>You can request your medical records from the Medical Records Department. Please bring a valid ID and complete the request form. There may be a processing time of 2-3 business days.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What are the hospital's visiting policies?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We maintain a safe and welcoming environment. Visitors are required to follow safety protocols including wearing masks in clinical areas, hand hygiene, and limiting visitors per patient to two at a time.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    17. GOOGLE MAP
+    ============================================================ -->
+    <section class="map-section" id="mapSection">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Find Us</span>
+                <h2>Our <span>Location</span></h2>
+                <p>Visit us at Gimbie Town, West Wollega Zone, Oromia Region, Ethiopia.</p>
+            </div>
+            
+            <div class="map-container" data-aos="fade-up">
+                <div id="googleMap">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31882.29455801249!2d35.834!3d9.123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z5Ymn5bqn5YyX6ZqA5Y2a5Li76a2U5Yeg5b2T!5e0!3m2!1sen!2s!4v1700000000000" 
+                        width="100%" 
+                        height="400" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                <div class="map-actions">
+                    <a href="https://maps.google.com/maps?daddr=Gimbie+Town+West+Wollega+Zone+Oromia+Region+Ethiopia" 
+                       target="_blank" 
+                       class="btn btn-primary">
+                        <i class="fas fa-directions"></i> Get Directions
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    18. CONTACT INFORMATION
+    ============================================================ -->
+    <section class="contact-about" id="contactAbout">
+        <div class="container">
+            <div class="contact-grid-about">
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="0">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h4>Address</h4>
+                    <p>P.O. Box 228<br>Gimbie Town<br>West Wollega Zone<br>Oromia Region, Ethiopia</p>
+                </div>
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-phone-alt"></i>
+                    <h4>Phone Numbers</h4>
+                    <p><a href="tel:+251577710083">+251 57 771 0083</a></p>
+                    <p><a href="tel:+251777100051">+251 77 710 0051</a></p>
+                </div>
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-envelope"></i>
+                    <h4>Email</h4>
+                    <p><a href="mailto:gimbieadventisthosp@gmail.com">gimbieadventisthosp@gmail.com</a></p>
+                </div>
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-clock"></i>
+                    <h4>Working Hours</h4>
+                    <p>Monday - Friday: 8:00 AM - 6:00 PM</p>
+                    <p>Emergency: 24/7</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    19. FOOTER
+    ============================================================ -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </div>
+                    <p class="footer-about">
+                        Providing quality healthcare services since 1948. Committed to compassionate care 
+                        and medical excellence in Gimbie Town and the West Wollega Zone.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="departments.html"><i class="fas fa-chevron-right"></i> Departments</a></li>
+                        <li><a href="doctors.html"><i class="fas fa-chevron-right"></i> Doctors</a></li>
+                        <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+                        <li><a href="appointments.html"><i class="fas fa-chevron-right"></i> Appointments</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Top Departments</h4>
+                    <ul>
+                        <li><a href="department.html?dept=emergency"><i class="fas fa-chevron-right"></i> Emergency</a></li>
+                        <li><a href="department.html?dept=internal"><i class="fas fa-chevron-right"></i> Internal Medicine</a></li>
+                        <li><a href="department.html?dept=surgery"><i class="fas fa-chevron-right"></i> Surgery</a></li>
+                        <li><a href="department.html?dept=obgyn"><i class="fas fa-chevron-right"></i> OB/GYN</a></li>
+                        <li><a href="department.html?dept=pediatrics"><i class="fas fa-chevron-right"></i> Pediatrics</a></li>
+                        <li><a href="department.html?dept=icu"><i class="fas fa-chevron-right"></i> ICU</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>P.O. Box 228, Gimbie Town<br>West Wollega Zone, Oromia</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+251 57 771 0083</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>gimbieadventisthosp@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 <strong>Gimbie Adventist General Hospital</strong>. All Rights Reserved.</p>
+                    <div class="footer-links">
+                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="terms.html">Terms of Service</a>
+                        <a href="sitemap.html">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/faq.js"></script>
+</body>
+                      </html>
