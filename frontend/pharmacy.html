@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pharmacy services at Gimbie Adventist General Hospital. Quality medicines, prescription services, and pharmaceutical care.">
+    <meta name="keywords" content="pharmacy, medicines, prescriptions, drugs, pharmaceutical, gimbie hospital">
+    <meta name="author" content="Gimbie Adventist General Hospital">
+    <title>Pharmacy | Gimbie Adventist General Hospital</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pharmacy.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+</head>
+<body>
+    
+    <!-- ============================================================
+    1. LOADING SCREEN
+    ============================================================ -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>Gimbie Adventist</span>
+            </div>
+            <div class="loader-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="loader-text">
+                <p id="loadingText">Loading Pharmacy...</p>
+                <span class="loader-percentage" id="loaderPercentage">0%</span>
+            </div>
+            <div class="loader-medicine-animation">
+                <i class="fas fa-prescription-bottle"></i>
+                <i class="fas fa-pills"></i>
+                <i class="fas fa-syringe"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    2. TOP HEADER
+    ============================================================ -->
+    <header class="top-header" id="topHeader">
+        <div class="container">
+            <div class="header-left">
+                <div class="hospital-logo">
+                    <a href="index.html">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </a>
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="header-contact">
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <strong>Emergency</strong>
+                            <a href="tel:+251577710083">+251 57 771 0083</a>
+                        </div>
+                    </div>
+                    <div class="contact-item pharmacy-contact">
+                        <i class="fas fa-prescription-bottle"></i>
+                        <div>
+                            <strong>Pharmacy</strong>
+                            <a href="tel:+251577710083">+251 57 771 0083</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email</strong>
+                            <a href="mailto:gimbieadventisthosp@gmail.com">gimbieadventisthosp@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="language-switcher">
+                    <button class="lang-btn" id="langToggle">
+                        <i class="fas fa-globe"></i> EN <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="lang-dropdown">
+                        <li><a href="#" data-lang="en">English</a></li>
+                        <li><a href="#" data-lang="am">አማርኛ</a></li>
+                        <li><a href="#" data-lang="or">Afaan Oromoo</a></li>
+                    </ul>
+                </div>
+                <div class="theme-toggle">
+                    <button id="themeToggle"><i class="fas fa-moon"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    3. NAVIGATION BAR
+    ============================================================ -->
+    <nav class="main-nav" id="mainNav">
+        <div class="container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="assets/logo-small.png" alt="Logo" class="nav-logo-img">
+                </a>
+            </div>
+            <button class="nav-toggle" id="navToggle">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="departments.html"><i class="fas fa-building"></i> Departments</a></li>
+                <li><a href="doctors.html"><i class="fas fa-user-md"></i> Doctors</a></li>
+                <li><a href="pharmacy.html" class="active"><i class="fas fa-prescription-bottle"></i> Pharmacy</a></li>
+                <li><a href="appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a></li>
+                <li><a href="contact.html"><i class="fas fa-phone-alt"></i> Contact</a></li>
+                <li class="nav-dropdown">
+                    <a href="#"><i class="fas fa-sign-in-alt"></i> Login <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="patient/login.html"><i class="fas fa-user"></i> Patient Login</a></li>
+                        <li><a href="staff/login.html"><i class="fas fa-user-md"></i> Staff Login</a></li>
+                        <li><a href="admin/login.html"><i class="fas fa-user-shield"></i> Admin Login</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+    4. HERO BANNER
+    ============================================================ -->
+    <section class="page-hero pharmacy-hero" id="pageHero" style="background-image: url('assets/pharmacy-hero.jpg');">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="page-hero-content" data-aos="fade-up">
+                <span class="hero-badge"><i class="fas fa-prescription-bottle"></i> Pharmacy</span>
+                <h1>Gimbie Adventist Hospital Pharmacy</h1>
+                <p>Quality medicines, professional care, and pharmaceutical excellence</p>
+                <nav class="breadcrumb">
+                    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                    <span><i class="fas fa-chevron-right"></i></span>
+                    <a href="pharmacy.html" class="active">Pharmacy</a>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    5. PHARMACY OVERVIEW
+    ============================================================ -->
+    <section class="pharmacy-overview" id="pharmacyOverview">
+        <div class="container">
+            <div class="overview-wrapper" data-aos="fade-up">
+                <div class="overview-content">
+                    <div class="section-badge">Overview</div>
+                    <h2>Hospital <span>Pharmacy</span></h2>
+                    <p>The Gimbie Adventist Hospital Pharmacy is committed to providing safe, effective, and high-quality pharmaceutical care to all patients. Our pharmacy team ensures that every patient receives the right medication with proper counseling and support.</p>
+                    <div class="overview-grid">
+                        <div class="overview-item">
+                            <i class="fas fa-bullseye"></i>
+                            <div>
+                                <h4>Our Mission</h4>
+                                <p>To provide accessible, quality pharmaceutical services that promote health and wellness.</p>
+                            </div>
+                        </div>
+                        <div class="overview-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>Working Hours</h4>
+                                <p>Monday - Friday: 8:00 AM - 6:00 PM<br>Emergency: 24/7</p>
+                            </div>
+                        </div>
+                        <div class="overview-item">
+                            <i class="fas fa-ambulance"></i>
+                            <div>
+                                <h4>Emergency Pharmacy</h4>
+                                <p>24/7 pharmacy services for emergency patients.</p>
+                            </div>
+                        </div>
+                        <div class="overview-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>24/7 Services</h4>
+                                <p>Emergency medications available around the clock.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="overview-image">
+                    <img src="assets/pharmacy-overview.jpg" alt="Pharmacy Overview">
+                    <div class="overview-badge">
+                        <i class="fas fa-prescription-bottle"></i>
+                        <span>Quality Medicines</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    6. PHARMACY STATISTICS
+    ============================================================ -->
+    <section class="pharmacy-stats" id="pharmacyStats">
+        <div class="container">
+            <div class="stats-grid" data-aos="fade-up">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-pills"></i></div>
+                    <div class="stat-number" data-count="2500">0</div>
+                    <div class="stat-label">Total Medicines</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                    <div class="stat-number" data-count="2200">0</div>
+                    <div class="stat-label">Medicines Available</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-user-md"></i></div>
+                    <div class="stat-number" data-count="3">0</div>
+                    <div class="stat-label">Pharmacists</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-prescription"></i></div>
+                    <div class="stat-number" data-count="150">0</div>
+                    <div class="stat-label">Daily Prescriptions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-truck"></i></div>
+                    <div class="stat-number" data-count="12">0</div>
+                    <div class="stat-label">Suppliers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-boxes"></i></div>
+                    <div class="stat-number" data-count="92">0</div>
+                    <div class="stat-label">Inventory Status (%)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    7. MEDICINE SEARCH
+    ============================================================ -->
+    <section class="medicine-search" id="medicineSearch">
+        <div class="container">
+            <div class="search-wrapper" data-aos="fade-up">
+                <div class="search-header">
+                    <h3><i class="fas fa-search"></i> Find Your Medicine</h3>
+                    <p>Search our comprehensive medicine inventory.</p>
+                </div>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search by medicine name, generic name, or category...">
+                    <button class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+                </div>
+                <div class="search-filters">
+                    <div class="filter-group">
+                        <label><i class="fas fa-tag"></i> Category</label>
+                        <select>
+                            <option value="all">All Categories</option>
+                            <option>Tablets</option>
+                            <option>Capsules</option>
+                            <option>Syrups</option>
+                            <option>Injections</option>
+                            <option>IV Fluids</option>
+                            <option>Creams</option>
+                            <option>Ointments</option>
+                            <option>Eye Drops</option>
+                            <option>Ear Drops</option>
+                            <option>Vaccines</option>
+                            <option>Medical Supplies</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label><i class="fas fa-barcode"></i> Search By</label>
+                        <select>
+                            <option value="name">Medicine Name</option>
+                            <option value="generic">Generic Name</option>
+                            <option value="manufacturer">Manufacturer</option>
+                            <option value="barcode">Barcode</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label><i class="fas fa-prescription"></i> Prescription</label>
+                        <select>
+                            <option value="all">All</option>
+                            <option value="required">Prescription Required</option>
+                            <option value="otc">Over The Counter</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    8. MEDICINE CATEGORIES
+    ============================================================ -->
+    <section class="medicine-categories" id="medicineCategories">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Categories</span>
+                <h2>Medicine <span>Categories</span></h2>
+                <p>Browse our medicines by category.</p>
+            </div>
+            
+            <div class="categories-grid" data-aos="fade-up">
+                <div class="category-card">
+                    <i class="fas fa-tablets"></i>
+                    <h4>Tablets</h4>
+                    <span>450+ Items</span>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-capsules"></i>
+                    <h4>Capsules</h4>
+                    <span>320+ Items</span>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-flask"></i>
+                    <h4>Syrups</h4>
+                    <span>180+ Items</span>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-syringe"></i>
+                    <h4>Injections</h4>
+                    <span>150+ Items</span>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-water"></i>
+                    <h4>IV Fluids</h4>
+                    <span>80+ Items</span>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-hand-cream"></i>
+                    <h4>Creams</h4>
+                    <span>120+ Items</span>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-jar"></i>
+                    <h4>Ointments</h4>
+                    <span>95+ Items</span>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-eye"></i>
+                    <h4>Eye Drops</h4>
+                    <span>60+ Items</span>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-ear"></i>
+                    <h4>Ear Drops</h4>
+                    <span>40+ Items</span>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-shield-virus"></i>
+                    <h4>Vaccines</h4>
+                    <span>25+ Items</span>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-briefcase-medical"></i>
+                    <h4>Medical Supplies</h4>
+                    <span>200+ Items</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    9. FEATURED MEDICINES
+    ============================================================ -->
+    <section class="featured-medicines" id="featuredMedicines">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Featured</span>
+                <h2>Featured <span>Medicines</span></h2>
+                <p>Most commonly prescribed medicines available at our pharmacy.</p>
+            </div>
+            
+            <div class="medicines-grid" data-aos="fade-up">
+                <div class="medicine-card">
+                    <div class="medicine-image">
+                        <img src="assets/medicines/paracetamol.jpg" alt="Paracetamol">
+                        <div class="medicine-badge">In Stock</div>
+                    </div>
+                    <div class="medicine-info">
+                        <h4>Paracetamol</h4>
+                        <span class="medicine-generic">Acetaminophen</span>
+                        <div class="medicine-details">
+                            <span><i class="fas fa-tag"></i> Tablets</span>
+                            <span><i class="fas fa-weight"></i> 500mg</span>
+                        </div>
+                        <span class="medicine-manufacturer">Ethiopian Pharmaceutical</span>
+                        <div class="medicine-prescription">
+                            <i class="fas fa-prescription"></i> Prescription Required
+                        </div>
+                        <a href="#" class="btn btn-outline-sm">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="medicine-card">
+                    <div class="medicine-image">
+                        <img src="assets/medicines/amoxicillin.jpg" alt="Amoxicillin">
+                        <div class="medicine-badge">In Stock</div>
+                    </div>
+                    <div class="medicine-info">
+                        <h4>Amoxicillin</h4>
+                        <span class="medicine-generic">Amoxicillin Trihydrate</span>
+                        <div class="medicine-details">
+                            <span><i class="fas fa-tag"></i> Capsules</span>
+                            <span><i class="fas fa-weight"></i> 500mg</span>
+                        </div>
+                        <span class="medicine-manufacturer">Ethiopian Pharmaceutical</span>
+                        <div class="medicine-prescription">
+                            <i class="fas fa-prescription"></i> Prescription Required
+                        </div>
+                        <a href="#" class="btn btn-outline-sm">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="medicine-card">
+                    <div class="medicine-image">
+                        <img src="assets/medicines/ibuprofen.jpg" alt="Ibuprofen">
+                        <div class="medicine-badge">In Stock</div>
+                    </div>
+                    <div class="medicine-info">
+                        <h4>Ibuprofen</h4>
+                        <span class="medicine-generic">Ibuprofen</span>
+                        <div class="medicine-details">
+                            <span><i class="fas fa-tag"></i> Tablets</span>
+                            <span><i class="fas fa-weight"></i> 400mg</span>
+                        </div>
+                        <span class="medicine-manufacturer">Ethiopian Pharmaceutical</span>
+                        <div class="medicine-prescription otc">
+                            <i class="fas fa-check-circle"></i> OTC Available
+                        </div>
+                        <a href="#" class="btn btn-outline-sm">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="medicine-card">
+                    <div class="medicine-image">
+                        <img src="assets/medicines/insulin.jpg" alt="Insulin">
+                        <div class="medicine-badge low-stock">Low Stock</div>
+                    </div>
+                    <div class="medicine-info">
+                        <h4>Insulin</h4>
+                        <span class="medicine-generic">Human Insulin</span>
+                        <div class="medicine-details">
+                            <span><i class="fas fa-tag"></i> Injection</span>
+                            <span><i class="fas fa-weight"></i> 100IU/ml</span>
+                        </div>
+                        <span class="medicine-manufacturer">Novo Nordisk</span>
+                        <div class="medicine-prescription">
+                            <i class="fas fa-prescription"></i> Prescription Required
+                        </div>
+                        <a href="#" class="btn btn-outline-sm">View Details</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center" data-aos="fade-up">
+                <a href="#" class="btn btn-primary">View All Medicines <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    10. ONLINE PRESCRIPTION
+    ============================================================ -->
+    <section class="online-prescription" id="onlinePrescription">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Prescription</span>
+                <h2>Online <span>Prescription</span></h2>
+                <p>Submit your prescription online for faster service.</p>
+            </div>
+            
+            <div class="prescription-wrapper" data-aos="fade-up">
+                <form class="prescription-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Patient ID</label>
+                            <input type="text" placeholder="Enter Patient ID">
+                            <i class="fas fa-id-card"></i>
+                        </div>
+                        <div class="form-group">
+                            <label>Doctor ID</label>
+                            <input type="text" placeholder="Enter Doctor ID">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Prescription Number</label>
+                        <input type="text" placeholder="Enter Prescription Number">
+                        <i class="fas fa-prescription"></i>
+                    </div>
+                    <div class="form-group">
+                        <label>Upload Prescription <span class="required">*</span></label>
+                        <div class="file-upload">
+                            <input type="file" accept="image/*,.pdf" required>
+                            <i class="fas fa-upload"></i>
+                            <span>Click to upload prescription (image or PDF)</span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-paper-plane"></i> Submit Prescription
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    11. MEDICINE REQUEST
+    ============================================================ -->
+    <section class="medicine-request" id="medicineRequest">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Request</span>
+                <h2>Medicine <span>Request</span></h2>
+                <p>Request your medicines for pickup or delivery.</p>
+            </div>
+            
+            <div class="request-wrapper" data-aos="fade-up">
+                <form class="request-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Patient Name <span class="required">*</span></label>
+                            <input type="text" placeholder="Enter full name" required>
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number <span class="required">*</span></label>
+                            <input type="tel" placeholder="Enter phone number" required>
+                            <i class="fas fa-phone"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Medicine Name <span class="required">*</span></label>
+                        <input type="text" placeholder="Enter medicine name" required>
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Quantity <span class="required">*</span></label>
+                            <input type="number" placeholder="Enter quantity" required>
+                            <i class="fas fa-sort-numeric-up"></i>
+                        </div>
+                        <div class="form-group">
+                            <label>Collection Date</label>
+                            <input type="date">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Delivery Option</label>
+                        <select>
+                            <option value="pickup">Pickup from Pharmacy</option>
+                            <option value="delivery">Home Delivery</option>
+                        </select>
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-check-circle"></i> Submit Request
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    12. PHARMACY SERVICES
+    ============================================================ -->
+    <section class="pharmacy-services" id="pharmacyServices">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Services</span>
+                <h2>Pharmacy <span>Services</span></h2>
+                <p>Comprehensive pharmaceutical care services.</p>
+            </div>
+            
+            <div class="services-grid" data-aos="fade-up">
+                <div class="service-card">
+                    <i class="fas fa-prescription"></i>
+                    <h4>Dispensing Medicines</h4>
+                    <p>Accurate dispensing of prescribed medications with quality assurance.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-check-double"></i>
+                    <h4>Prescription Review</h4>
+                    <p>Thorough review of prescriptions for safety and accuracy.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-comment-medical"></i>
+                    <h4>Drug Counseling</h4>
+                    <p>Professional counseling on medication use and side effects.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-heart"></i>
+                    <h4>Medication Therapy</h4>
+                    <p>Personalized medication therapy management services.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-shield-virus"></i>
+                    <h4>Vaccination Services</h4>
+                    <p>Vaccination and immunization services available.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h4>Patient Education</h4>
+                    <p>Educational resources and counseling for patients.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    13. PHARMACY TEAM
+    ============================================================ -->
+    <section class="pharmacy-team" id="pharmacyTeam">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Team</span>
+                <h2>Pharmacy <span>Team</span></h2>
+                <p>Our dedicated pharmacy professionals.</p>
+            </div>
+            
+            <div class="team-grid" data-aos="fade-up">
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="assets/pharmacy/daniel-worku.jpg" alt="Daniel Worku">
+                    </div>
+                    <div class="team-info">
+                        <h4>Daniel Worku</h4>
+                        <span class="team-id">PHA-000001</span>
+                        <span class="team-position">Senior Pharmacist</span>
+                        <div class="team-meta">
+                            <span><i class="fas fa-graduation-cap"></i> B.Pharm, M.Pharm</span>
+                            <span><i class="fas fa-briefcase"></i> 15 Years</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="assets/pharmacy/ephrem-bekele.jpg" alt="Ephrem Bekele">
+                    </div>
+                    <div class="team-info">
+                        <h4>Ephrem Bekele</h4>
+                        <span class="team-id">PHA-000002</span>
+                        <span class="team-position">Pharmacist</span>
+                        <div class="team-meta">
+                            <span><i class="fas fa-graduation-cap"></i> B.Pharm</span>
+                            <span><i class="fas fa-briefcase"></i> 8 Years</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="assets/pharmacy/helen-getachew.jpg" alt="Helen Getachew">
+                    </div>
+                    <div class="team-info">
+                        <h4>Helen Getachew</h4>
+                        <span class="team-id">PHA-000003</span>
+                        <span class="team-position">Pharmacist</span>
+                        <div class="team-meta">
+                            <span><i class="fas fa-graduation-cap"></i> B.Pharm</span>
+                            <span><i class="fas fa-briefcase"></i> 6 Years</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    14. INVENTORY OVERVIEW
+    ============================================================ -->
+    <section class="inventory-overview" id="inventoryOverview">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Inventory</span>
+                <h2>Inventory <span>Overview</span></h2>
+                <p>Current pharmacy inventory status.</p>
+            </div>
+            
+            <div class="inventory-grid" data-aos="fade-up">
+                <div class="inventory-card in-stock">
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <h4>In Stock</h4>
+                        <span class="inventory-number">2,200</span>
+                        <span class="inventory-label">Medicines</span>
+                    </div>
+                </div>
+                <div class="inventory-card low-stock">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div>
+                        <h4>Low Stock</h4>
+                        <span class="inventory-number">48</span>
+                        <span class="inventory-label">Medicines</span>
+                    </div>
+                </div>
+                <div class="inventory-card out-of-stock">
+                    <i class="fas fa-times-circle"></i>
+                    <div>
+                        <h4>Out of Stock</h4>
+                        <span class="inventory-number">12</span>
+                        <span class="inventory-label">Medicines</span>
+                    </div>
+                </div>
+                <div class="inventory-card expiring">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h4>Expiring Soon</h4>
+                        <span class="inventory-number">25</span>
+                        <span class="inventory-label">Medicines</span>
+                    </div>
+                </div>
+                <div class="inventory-card expired">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <div>
+                        <h4>Expired</h4>
+                        <span class="inventory-number">5</span>
+                        <span class="inventory-label">Medicines</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    15. SUPPLIERS
+    ============================================================ -->
+    <section class="suppliers" id="suppliers">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Suppliers</span>
+                <h2>Our <span>Suppliers</span></h2>
+                <p>Trusted pharmaceutical suppliers and partners.</p>
+            </div>
+            
+            <div class="suppliers-grid" data-aos="fade-up">
+                <div class="supplier-card">
+                    <i class="fas fa-industry"></i>
+                    <h4>Ethiopian Pharmaceutical</h4>
+                    <p>Local pharmaceutical manufacturer</p>
+                    <span class="supplier-badge">Trusted Partner</span>
+                </div>
+                <div class="supplier-card">
+                    <i class="fas fa-globe"></i>
+                    <h4>Novo Nordisk</h4>
+                    <p>International pharmaceutical supplier</p>
+                    <span class="supplier-badge">Quality Assured</span>
+                </div>
+                <div class="supplier-card">
+                    <i class="fas fa-syringe"></i>
+                    <h4>MediTech Solutions</h4>
+                    <p>Medical equipment supplier</p>
+                    <span class="supplier-badge">Certified</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    16. FREQUENTLY ASKED QUESTIONS
+    ============================================================ -->
+    <section class="faq-pharmacy" id="faqPharmacy">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">FAQ</span>
+                <h2>Frequently Asked <span>Questions</span></h2>
+                <p>Common questions about our pharmacy services.</p>
+            </div>
+            
+            <div class="faq-grid" data-aos="fade-up">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What are the pharmacy working hours?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Our pharmacy is open Monday to Friday from 8:00 AM to 6:00 PM. Emergency pharmacy services are available 24/7 for urgent medication needs.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Do I need a prescription for all medicines?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Some medicines require a prescription while others are available over the counter (OTC). Our pharmacists can help you determine which medications require a prescription.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can I submit my prescription online?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, you can submit your prescription online through our prescription upload feature. You can also bring your prescription directly to the pharmacy.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Does the pharmacy offer home delivery?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, we offer home delivery services for medicines. Please contact our pharmacy team for more information about delivery options.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    17. AI PHARMACY ASSISTANT
+    ============================================================ -->
+    <div class="ai-assistant" id="aiAssistant">
+        <button class="ai-toggle pharmacy-ai-toggle" id="aiToggle">
+            <i class="fas fa-robot"></i>
+        </button>
+        <div class="ai-chat-window" id="aiChatWindow">
+            <div class="ai-header pharmacy-ai-header">
+                <div class="ai-header-info">
+                    <i class="fas fa-robot"></i>
+                    <div>
+                        <h4>AI Pharmacy Assistant</h4>
+                        <span>Online</span>
+                    </div>
+                </div>
+                <button class="ai-close" id="aiClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="ai-body" id="aiBody">
+                <div class="ai-message ai-bot">
+                    <div class="ai-avatar"><i class="fas fa-robot"></i></div>
+                    <div class="ai-bubble pharmacy-ai-bubble">
+                        <p>💊 Hello! I'm your Pharmacy Assistant. I can help you with:</p>
+                        <ul>
+                            <li>Medicine search and information</li>
+                            <li>Drug dosage guidance</li>
+                            <li>Prescription help</li>
+                            <li>Medication availability</li>
+                        </ul>
+                        <p>How can I help you today?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="ai-footer">
+                <div class="ai-input-group">
+                    <input type="text" id="aiInput" placeholder="Ask about medicines...">
+                    <button id="aiSend"><i class="fas fa-paper-plane"></i></button>
+                </div>
+                <div class="ai-voice">
+                    <button id="aiVoiceBtn"><i class="fas fa-microphone"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    FLOATING BUTTONS
+    ============================================================ -->
+    <div class="floating-buttons">
+        <a href="tel:+251577710083" class="float-btn emergency" data-tooltip="Emergency">
+            <i class="fas fa-ambulance"></i>
+        </a>
+        <button class="float-btn pharmacy-float" id="floatingChat" data-tooltip="Pharmacy Chat">
+            <i class="fas fa-prescription-bottle"></i>
+        </button>
+        <button class="float-btn chat" data-tooltip="AI Assistant">
+            <i class="fas fa-robot"></i>
+        </button>
+        <button class="float-btn scroll-top" id="scrollTop" data-tooltip="Scroll to Top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- ============================================================
+    18. GOOGLE MAP
+    ============================================================ -->
+    <section class="map-section" id="mapSection">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Location</span>
+                <h2>Pharmacy <span>Location</span></h2>
+                <p>Visit our pharmacy at Gimbie Adventist General Hospital.</p>
+            </div>
+            
+            <div class="map-container" data-aos="fade-up">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31882.29455801249!2d35.834!3d9.123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z5Ymn5bqn5YyX6ZqA5Y2a5Li76a2U5Yeg5b2T!5e0!3m2!1sen!2s!4v1700000000000" 
+                    width="100%" 
+                    height="400" 
+                    style="border:0;" 
+                    allowfullscreen="">
+                </iframe>
+                <div class="map-actions">
+                    <a href="https://maps.google.com/maps?daddr=Gimbie+Town+West+Wollega+Zone+Oromia+Region+Ethiopia" 
+                       target="_blank" 
+                       class="btn btn-primary">
+                        <i class="fas fa-directions"></i> Get Directions
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    19. CONTACT INFORMATION
+    ============================================================ -->
+    <section class="contact-pharmacy" id="contactPharmacy">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-card pharmacy-contact-card" data-aos="fade-up">
+                    <i class="fas fa-phone-alt"></i>
+                    <h4>Pharmacy Phone</h4>
+                    <p><a href="tel:+251577710083">+251 57 771 0083</a></p>
+                </div>
+                <div class="contact-card emergency-pharmacy-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-ambulance"></i>
+                    <h4>Emergency Pharmacy</h4>
+                    <p>+251 57 771 0083</p>
+                    <span>24/7 Available</span>
+                </div>
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-envelope"></i>
+                    <h4>Email</h4>
+                    <p><a href="mailto:gimbieadventisthosp@gmail.com">gimbieadventisthosp@gmail.com</a></p>
+                </div>
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-clock"></i>
+                    <h4>Working Hours</h4>
+                    <p>Monday - Friday: 8:00 AM - 6:00 PM</p>
+                    <p>Emergency: 24/7</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    20. FOOTER
+    ============================================================ -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </div>
+                    <p class="footer-about">
+                        Providing quality healthcare services since 1948. Committed to compassionate care and medical excellence.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About</a></li>
+                        <li><a href="departments.html"><i class="fas fa-chevron-right"></i> Departments</a></li>
+                        <li><a href="doctors.html"><i class="fas fa-chevron-right"></i> Doctors</a></li>
+                        <li><a href="pharmacy.html"><i class="fas fa-chevron-right"></i> Pharmacy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Departments</h4>
+                    <ul>
+                        <li><a href="department.html?dept=emergency"><i class="fas fa-chevron-right"></i> Emergency</a></li>
+                        <li><a href="department.html?dept=surgery"><i class="fas fa-chevron-right"></i> Surgery</a></li>
+                        <li><a href="department.html?dept=pediatrics"><i class="fas fa-chevron-right"></i> Pediatrics</a></li>
+                        <li><a href="department.html?dept=cardiology"><i class="fas fa-chevron-right"></i> Cardiology</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> P.O. Box 228, Gimbie</li>
+                        <li><i class="fas fa-phone-alt"></i> +251 57 771 0083</li>
+                        <li><i class="fas fa-envelope"></i> gimbieadventisthosp@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 <strong>Gimbie Adventist General Hospital</strong>. All Rights Reserved.</p>
+                    <div class="footer-links">
+                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="terms.html">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/pharmacy.js"></script>
+    <script src="js/ai-assistant.js"></script>
+</body>
+  </html>
