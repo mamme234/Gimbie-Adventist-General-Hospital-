@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore all departments at Gimbie Adventist General Hospital. Find specialized medical care across 60+ departments including Emergency, Surgery, Pediatrics, and more.">
+    <meta name="keywords" content="departments, medical departments, hospital departments, emergency, surgery, pediatrics, cardiology, neurology, gimbie hospital">
+    <meta name="author" content="Gimbie Adventist General Hospital">
+    <title>Departments | Gimbie Adventist General Hospital</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/departments.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+</head>
+<body>
+    
+    <!-- ============================================================
+    1. LOADING SCREEN
+    ============================================================ -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>Gimbie Adventist</span>
+            </div>
+            <div class="loader-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="loader-text">
+                <p id="loadingText">Loading Departments...</p>
+                <span class="loader-percentage" id="loaderPercentage">0%</span>
+            </div>
+            <div class="loader-medical-animation">
+                <i class="fas fa-stethoscope"></i>
+                <i class="fas fa-heartbeat"></i>
+                <i class="fas fa-scalpel"></i>
+                <i class="fas fa-microscope"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    2. TOP HEADER
+    ============================================================ -->
+    <header class="top-header" id="topHeader">
+        <div class="container">
+            <div class="header-left">
+                <div class="hospital-logo">
+                    <a href="index.html">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </a>
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="header-contact">
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <strong>Emergency</strong>
+                            <a href="tel:+251577710083">+251 57 771 0083</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email</strong>
+                            <a href="mailto:gimbieadventisthosp@gmail.com">gimbieadventisthosp@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="language-switcher">
+                    <button class="lang-btn" id="langToggle">
+                        <i class="fas fa-globe"></i> EN <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="lang-dropdown">
+                        <li><a href="#" data-lang="en">English</a></li>
+                        <li><a href="#" data-lang="am">አማርኛ</a></li>
+                        <li><a href="#" data-lang="or">Afaan Oromoo</a></li>
+                    </ul>
+                </div>
+                <div class="theme-toggle">
+                    <button id="themeToggle" aria-label="Toggle Dark/Light Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    3. NAVIGATION BAR
+    ============================================================ -->
+    <nav class="main-nav" id="mainNav">
+        <div class="container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="assets/logo-small.png" alt="Gimbie Adventist Hospital Logo" class="nav-logo-img">
+                </a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="departments.html" class="active"><i class="fas fa-building"></i> Departments</a></li>
+                <li><a href="doctors.html"><i class="fas fa-user-md"></i> Doctors</a></li>
+                <li><a href="services.html"><i class="fas fa-concierge-bell"></i> Services</a></li>
+                <li><a href="appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a></li>
+                <li><a href="contact.html"><i class="fas fa-phone-alt"></i> Contact</a></li>
+                <li class="nav-dropdown">
+                    <a href="#"><i class="fas fa-sign-in-alt"></i> Login <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="patient/login.html"><i class="fas fa-user"></i> Patient Login</a></li>
+                        <li><a href="staff/login.html"><i class="fas fa-user-md"></i> Staff Login</a></li>
+                        <li><a href="admin/login.html"><i class="fas fa-user-shield"></i> Admin Login</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+    4. HERO BANNER
+    ============================================================ -->
+    <section class="page-hero" id="pageHero" style="background-image: url('assets/departments-hero.jpg');">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="page-hero-content" data-aos="fade-up" data-aos-duration="1000">
+                <h1>Our Medical Departments</h1>
+                <p>Explore our comprehensive healthcare departments</p>
+                <nav class="breadcrumb">
+                    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                    <span><i class="fas fa-chevron-right"></i></span>
+                    <a href="departments.html" class="active">Departments</a>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    5. DEPARTMENT SEARCH
+    ============================================================ -->
+    <section class="department-search" id="departmentSearch">
+        <div class="container">
+            <div class="search-wrapper" data-aos="fade-up" data-aos-duration="1000">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="deptSearch" placeholder="Search departments by name, specialty, or keyword...">
+                    <button class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+                </div>
+                <div class="search-filters">
+                    <div class="filter-group">
+                        <label><i class="fas fa-filter"></i> Category</label>
+                        <select id="deptCategory">
+                            <option value="all">All Departments</option>
+                            <option value="emergency">Emergency & Critical Care</option>
+                            <option value="surgery">Surgical</option>
+                            <option value="medicine">Internal Medicine</option>
+                            <option value="women">Women & Children</option>
+                            <option value="diagnostic">Diagnostic</option>
+                            <option value="specialist">Specialist Care</option>
+                            <option value="support">Support Services</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label><i class="fas fa-sort-alpha-down"></i> Sort By</label>
+                        <select id="deptSort">
+                            <option value="name">A - Z</option>
+                            <option value="name-desc">Z - A</option>
+                            <option value="doctors">Most Doctors</option>
+                            <option value="popular">Most Popular</option>
+                        </select>
+                    </div>
+                    <div class="filter-group quick-search">
+                        <span>Quick Search:</span>
+                        <button class="quick-btn" data-filter="emergency"><i class="fas fa-ambulance"></i> Emergency</button>
+                        <button class="quick-btn" data-filter="surgery"><i class="fas fa-scalpel"></i> Surgery</button>
+                        <button class="quick-btn" data-filter="pediatrics"><i class="fas fa-child"></i> Pediatrics</button>
+                        <button class="quick-btn" data-filter="cardiology"><i class="fas fa-heart"></i> Cardiology</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    6. DEPARTMENT STATISTICS
+    ============================================================ -->
+    <section class="dept-statistics" id="deptStatistics">
+        <div class="container">
+            <div class="dept-stat-grid" data-aos="fade-up" data-aos-duration="1000">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-building"></i></div>
+                    <div class="stat-number" data-count="60">0</div>
+                    <div class="stat-label">Total Departments</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-user-md"></i></div>
+                    <div class="stat-number" data-count="150">0</div>
+                    <div class="stat-label">Total Doctors</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-user-nurse"></i></div>
+                    <div class="stat-number" data-count="300">0</div>
+                    <div class="stat-label">Total Nurses</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-bed"></i></div>
+                    <div class="stat-number" data-count="250">0</div>
+                    <div class="stat-label">Total Beds</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-hospital-user"></i></div>
+                    <div class="stat-number" data-count="500">0</div>
+                    <div class="stat-label">Daily Patients</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    7. DEPARTMENT CARDS
+    ============================================================ -->
+    <section class="departments-grid" id="departmentsGrid">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Our Departments</span>
+                <h2>Comprehensive <span>Medical Departments</span></h2>
+                <p>Explore our 60+ specialized departments providing world-class healthcare services.</p>
+            </div>
+            
+            <div class="dept-card-grid" id="deptCardGrid">
+                
+                <!-- Department 1: Emergency Medicine -->
+                <div class="dept-card" data-aos="fade-up" data-aos-delay="0" data-category="emergency">
+                    <div class="dept-card-image">
+                        <img src="assets/departments/emergency.jpg" alt="Emergency Medicine">
+                        <div class="dept-badge">24/7</div>
+                        <div class="dept-icon"><i class="fas fa-ambulance"></i></div>
+                    </div>
+                    <div class="dept-card-content">
+                        <h4>Emergency Medicine</h4>
+                        <p>Round-the-clock emergency care with rapid response team, trauma services, and life-saving equipment.</p>
+                        <div class="dept-staff">
+                            <span><i class="fas fa-user-md"></i> 12 Doctors</span>
+                            <span><i class="fas fa-user-nurse"></i> 25 Nurses</span>
+                        </div>
+                        <div class="dept-card-actions">
+                            <a href="department.html?dept=emergency" class="btn btn-primary-sm">View Details <i class="fas fa-arrow-right"></i></a>
+                            <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Department 2: Internal Medicine -->
+                <div class="dept-card" data-aos="fade-up" data-aos-delay="100" data-category="medicine">
+                    <div class="dept-card-image">
+                        <img src="assets/departments/internal-medicine.jpg" alt="Internal Medicine">
+                        <div class="dept-icon"><i class="fas fa-stethoscope"></i></div>
+                    </div>
+                    <div class="dept-card-content">
+                        <h4>Internal Medicine</h4>
+                        <p>Comprehensive diagnosis, treatment, and management of adult diseases and chronic conditions.</p>
+                        <div class="dept-staff">
+                            <span><i class="fas fa-user-md"></i> 15 Doctors</span>
+                            <span><i class="fas fa-user-nurse"></i> 30 Nurses</span>
+                        </div>
+                        <div class="dept-card-actions">
+                            <a href="department.html?dept=internal-medicine" class="btn btn-primary-sm">View Details <i class="fas fa-arrow-right"></i></a>
+                            <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Department 3: General Surgery -->
+                <div class="dept-card" data-aos="fade-up" data-aos-delay="200" data-category="surgery">
+                    <div class="dept-card-image">
+                        <img src="assets/departments/surgery.jpg" alt="General Surgery">
+                        <div class="dept-icon"><i class="fas fa-scalpel"></i></div>
+                    </div>
+                    <div class="dept-card-content">
+                        <h4>General Surgery</h4>
+                        <p>Advanced surgical procedures including laparoscopic, gastrointestinal, and emergency surgery.</p>
+                        <div class="dept-staff">
+                            <span><i class="fas fa-user-md"></i> 10 Doctors</span>
+                            <span><i class="fas fa-user-nurse"></i> 20 Nurses</span>
+                        </div>
+                        <div class="dept-card-actions">
+                            <a href="department.html?dept=surgery" class="btn btn-primary-sm">View Details <i class="fas fa-arrow-right"></i></a>
+                            <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Department 4: Orthopedic Surgery -->
+                <div class="dept-card" data-aos="fade-up" data-aos-delay="300" data-category="surgery">
+                    <div class="dept-card-image">
+                        <img src="assets/departments/orthopedic.jpg" alt="Orthopedic Surgery">
+                        <div class="dept-icon"><i class="fas fa-bone"></i></div>
+                    </div>
+                    <div class="dept-card-content">
+                        <h4>Orthopedic Surgery</h4>
+                        <p>Specialized care for bone, joint, and spine conditions including fractures, replacements, and sports injuries.</p>
+                        <div class="dept-staff">
+                            <span><i class="fas fa-user-md"></i> 8 Doctors</span>
+                            <span><i class="fas fa-user-nurse"></i> 16 Nurses</span>
+                        </div>
+                        <div class="dept-card-actions">
+                            <a href="department.html?dept=orthopedic" class="btn btn-primary-sm">View Details <i class="fas fa-arrow-right"></i></a>
+                            <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Department 5: Obstetrics & Gynecology -->
+                <div class="dept-card" data-aos="fade-up" data-aos-delay="400" data-category="women">
+                    <div class="dept-card-image">
+                        <img src="assets/departments/obgyn.jpg" alt="Obstetrics & Gynecology">
+                        <div class="dept-icon"><i class="fas fa-baby"></i></div>
+                    </div>
+                    <div class="dept-card-content">
+                        <h4>Obstetrics & Gynecology</h4>
+                        <p>Comprehensive women's health services including prenatal care, delivery, and reproductive health.</p>
+                        <div class="dept-staff">
+                            <span><i class="fas fa-user-md"></i> 9 Doctors</span>
+                            <span><i class="fas fa-user-nurse"></i> 22 Nurses</span>
+                        </div>
+                        <div class="dept-card-actions">
+                            <a href="department.html?dept=obgyn" class="btn btn-primary-sm">View Details <i class="fas fa-arrow-right"></i></a>
+                            <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Department 6: Maternity & Delivery -->
+                <div class="dept-card" data-aos="fade-up" data-aos-delay="500" data-category="women">
+                    <div class="dept-card-image">
+                        <img src="assets/departments/maternity.jpg" alt="Maternity & Delivery">
+                        <div class="dept-badge">Newborn Care</div>
+                        <div class="dept-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                    </div>
+                    <div class="dept-card-content">
+                        <h4>Maternity & Delivery</h4>
+                        <p>Safe and comfortable delivery services with skilled midwives and neonatal care support.</p>
+                        <div class="dept-staff">
+                            <span><i class="fas fa-user-md"></i> 6 Doctors</span>
+                            <span><i class="fas fa-user-nurse"></i> 18 Nurses</span>
+                        </div>
+                        <div class="dept-card-actions">
+                            <a href="department.html?dept=maternity" class="btn btn-primary-sm">View Details <i class="fas fa-arrow-right"></i></a>
+                            <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Department 7: Pediatrics -->
+                <div class="dept-card" data-aos="fade-up" data-aos-delay="600" data-category="women">
+                    <div class="dept-card-image">
+                        <img src="assets/departments/pediatrics.jpg" alt="Pediatrics">
+                        <div class="dept-icon"><i class="fas fa-child"></i></div>
+                    </div>
+                    <div class="dept-card-content">
+                        <h4>Pediatrics (Children)</h4>
+                        <p>Specialized medical care for infants, children, and adolescents with dedicated pediatric units.</p>
+                        <div class="dept-staff">
+                            <span><i class="fas fa-user-md"></i> 11 Doctors</span>
+                            <span><i class="fas fa-user-nurse"></i> 24 Nurses</span>
+                        </div>
+                        <div class="dept-card-actions">
+                            <a href="department.html?dept=pediatrics" class="btn btn-primary-sm">View Details <i class="fas fa-arrow-right"></i></a>
+                            <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Department 8: ICU -->
+                <div class="dept-card" data-aos="fade-up" data-aos-delay="700" data-category="emergency">
+                    <div class="dept-card-image">
+                        <img src="assets/departments/icu.jpg" alt="Intensive Care Unit">
+                        <div class="dept-badge">Critical Care</div>
+                        <div class="dept-icon"><i class="fas fa-heartbeat"></i></div>
+                    </div>
+                    <div class="dept-card-content">
+                        <h4>Intensive Care Unit (ICU)</h4>
+                        <p>Advanced critical care with 24/7 monitoring, ventilators, and specialized medical staff.</p>
+                        <div class="dept-staff">
+                            <span><i class="fas fa-user-md"></i> 7 Doctors</span>
+                            <span><i class="fas fa-user-nurse"></i> 20 Nurses</span>
+                        </div>
+                        <div class="dept-card-actions">
+                            <a href="department.html?dept=icu" class="btn btn-primary-sm">View Details <i class="fas fa-arrow-right"></i></a>
+                            <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Department 9: OPD -->
+                <div class="dept-card" data-aos="fade-up" data-aos-delay="800" data-category="medicine">
+                    <div class="dept-card-image">
+                        <img src="assets/departments/opd.jpg" alt="Outpatient Department">
+                        <div class="dept-icon"><i class="fas fa-clinic-medical"></i></div>
+                    </div>
+                    <div class="dept-card-content">
+                        <h4>Outpatient Department (OPD)</h4>
+                        <p>Convenient outpatient services for consultations, follow-ups, and minor procedures.</p>
+                        <div class="dept-staff">
+                            <span><i class="fas fa-user-md"></i> 14 Doctors</span>
+                            <span><i class="fas fa-user-nurse"></i> 20 Nurses</span>
+                        </div>
+                        <div class="dept-card-actions">
+                            <a href="department.html?dept=opd" class="btn btn-primary-sm">View Details <i class="fas fa-arrow-right"></i></a>
+                            <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Department 10: Pharmacy -->
+                <div class="dept-card" data-aos="fade-up" data-aos-delay="900" data-category="support">
+                    <div class="dept-card-image">
+                        <img src="assets/departments/pharmacy.jpg" alt="Pharmacy">
+                        <div class="dept-icon"><i class="fas fa-prescription-bottle"></i></div>
+                    </div>
+                    <div class="dept-card-content">
+                        <h4>Pharmacy</h4>
+                        <p>Full-service pharmacy with quality medications, patient counseling, and prescription services.</p>
+                        <div class="dept-staff">
+                            <span><i class="fas fa-user-md"></i> 3 Pharmacists</span>
+                            <span><i class="fas fa-user-nurse"></i> 8 Staff</span>
+                        </div>
+                        <div class="dept-card-actions">
+                            <a href="pharmacy.html" class="btn btn-primary-sm">View Details <i class="fas fa-arrow-right"></i></a>
+                            <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Department 11: Laboratory -->
+                <div class="dept-card" data-aos="fade-up" data-aos-delay="100" data-category="diagnostic">
+                    <div class="dept-card-image">
+                        <img src="assets/departments/laboratory.jpg" alt="Clinical Laboratory">
+                        <div class="dept-icon"><i class="fas fa-flask"></i></div>
+                    </div>
+                    <div class="dept-card-content">
+                        <h4>Clinical Laboratory</h4>
+                        <p>Comprehensive diagnostic services including blood tests, microbiology, and pathology.</p>
+                        <div class="dept-staff">
+                            <span><i class="fas fa-user-md"></i> 5 Pathologists</span>
+                            <span><i class="fas fa-user-nurse"></i> 12 Technicians</span>
+                        </div>
+                        <div class="dept-card-actions">
+                            <a href="laboratory.html" class="btn btn-primary-sm">View Details <i class="fas fa-arrow-right"></i></a>
+                            <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Department 12: Radiology -->
+                <div class="dept-card" data-aos="fade-up" data-aos-delay="200" data-category="diagnostic">
+                    <div class="dept-card-image">
+                        <img src="assets/departments/radiology.jpg" alt="Radiology">
+                        <div class="dept-icon"><i class="fas fa-x-ray"></i></div>
+                    </div>
+                    <div class="dept-card-content">
+                        <h4>Radiology & Imaging</h4>
+                        <p>Advanced imaging services including X-ray, CT scan, MRI, ultrasound, and mammography.</p>
+                        <div class="dept-staff">
+                            <span><i class="fas fa-user-md"></i> 4 Radiologists</span>
+                            <span><i class="fas fa-user-nurse"></i> 10 Technicians</span>
+                        </div>
+                        <div class="dept-card-actions">
+                            <a href="department.html?dept=radiology" class="btn btn-primary-sm">View Details <i class="fas fa-arrow-right"></i></a>
+                            <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Department 13: Cardiology -->
+                <div class="dept-card" data-aos="fade-up" data-aos-delay="300" data-category="specialist">
+                    <div class="dept-card-image">
+                        <img src="assets/departments/cardiology.jpg" alt="Cardiology">
+                        <div class="dept-icon"><i class="fas fa-heart"></i></div>
+                    </div>
+                    <div class="dept-card-content">
+                        <h4>Cardiology</h4>
+                        <p>Expert care for heart conditions including cardiac consultations, ECG, and echocardiography.</p>
+                        <div class="dept-staff">
+                            <span><i class="fas fa-user-md"></i> 6 Cardiologists</span>
+                            <span><i class="fas fa-user-nurse"></i> 12 Nurses</span>
+                        </div>
+                        <div class="dept-card-actions">
+                            <a href="department.html?dept=cardiology" class="btn btn-primary-sm">View Details <i class="fas fa-arrow-right"></i></a>
+                            <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Department 14: Neurology -->
+                <div class="dept-card" data-aos="fade-up" data-aos-delay="400" data-category="specialist">
+                    <div class="dept-card-image">
+                        <img src="assets/departments/neurology.jpg" alt="Neurology">
+                        <div class="dept-icon"><i class="fas fa-brain"></i></div>
+                    </div>
+                    <div class="dept-card-content">
+                        <h4>Neurology</h4>
+                        <p>Specialized care for nervous system disorders including stroke, epilepsy, and movement disorders.</p>
+                        <div class="dept-staff">
+                            <span><i class="fas fa-user-md"></i> 5 Neurologists</span>
+                            <span><i class="fas fa-user-nurse"></i> 10 Nurses</span>
+                        </div>
+                        <div class="dept-card-actions">
+                            <a href="department.html?dept=neurology" class="btn btn-primary-sm">View Details <i class="fas fa-arrow-right"></i></a>
+                            <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Department 15: ENT -->
+                <div class="dept-card" data-aos="fade-up" data-aos-delay="500" data-category="specialist">
+                    <div class="dept-card-image">
+                        <img src="assets/departments/ent.jpg" alt="Ear, Nose & Throat">
+                        <div class="dept-icon"><i class="fas fa-ear"></i></div>
+                    </div>
+                    <div class="dept-card-content">
+                        <h4>Ear, Nose & Throat (ENT)</h4>
+                        <p>Comprehensive care for ear, nose, throat, and related conditions with surgical options.</p>
+                        <div class="dept-staff">
+                            <span><i class="fas fa-user-md"></i> 4 ENT Specialists</span>
+                            <span><i class="fas fa-user-nurse"></i> 8 Nurses</span>
+                        </div>
+                        <div class="dept-card-actions">
+                            <a href="department.html?dept=ent" class="btn btn-primary-sm">View Details <i class="fas fa-arrow-right"></i></a>
+                            <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Department 16: Ophthalmology -->
+                <div class="dept-card" data-aos="fade-up" data-aos-delay="600" data-category="specialist">
+                    <div class="dept-card-image">
+                        <img src="assets/departments/ophthalmology.jpg" alt="Ophthalmology">
+                        <div class="dept-icon"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="dept-card-content">
+                        <h4>Ophthalmology (Eye Care)</h4>
+                        <p>Expert eye care including vision tests, eye surgeries, and treatment for eye diseases.</p>
+                        <div class="dept-staff">
+                            <span><i class="fas fa-user-md"></i> 4 Ophthalmologists</span>
+                            <span><i class="fas fa-user-nurse"></i> 8 Nurses</span>
+                        </div>
+                        <div class="dept-card-actions">
+                            <a href="department.html?dept=ophthalmology" class="btn btn-primary-sm">View Details <i class="fas fa-arrow-right"></i></a>
+                            <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Department 17: Dentistry -->
+                <div class="dept-card" data-aos="fade-up" data-aos-delay="700" data-category="specialist">
+                    <div class="dept-card-image">
+                        <img src="assets/departments/dentistry.jpg" alt="Dental Clinic">
+                        <div class="dept-icon"><i class="fas fa-tooth"></i></div>
+                    </div>
+                    <div class="dept-card-content">
+                        <h4>Dental Clinic</h4>
+                        <p>Complete dental care including cleaning, fillings, extractions, and cosmetic dentistry.</p>
+                        <div class="dept-staff">
+                            <span><i class="fas fa-user-md"></i> 3 Dentists</span>
+                            <span><i class="fas fa-user-nurse"></i> 6 Assistants</span>
+                        </div>
+                        <div class="dept-card-actions">
+                            <a href="department.html?dept=dentistry" class="btn btn-primary-sm">View Details <i class="fas fa-arrow-right"></i></a>
+                            <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Department 18: Physiotherapy -->
+                <div class="dept-card" data-aos="fade-up" data-aos-delay="800" data-category="support">
+                    <div class="dept-card-image">
+                        <img src="assets/departments/physiotherapy.jpg" alt="Physiotherapy">
+                        <div class="dept-icon"><i class="fas fa-people-arrows"></i></div>
+                    </div>
+                    <div class="dept-card-content">
+                        <h4>Physiotherapy & Rehabilitation</h4>
+                        <p>Rehabilitation services for injury recovery, mobility improvement, and pain management.</p>
+                        <div class="dept-staff">
+                            <span><i class="fas fa-user-md"></i> 5 Physiotherapists</span>
+                            <span><i class="fas fa-user-nurse"></i> 8 Assistants</span>
+                        </div>
+                        <div class="dept-card-actions">
+                            <a href="department.html?dept=physiotherapy" class="btn btn-primary-sm">View Details <i class="fas fa-arrow-right"></i></a>
+                            <a href="appointments.html" class="btn btn-outline-sm">Book Appointment</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- Load More -->
+            <div class="load-more" data-aos="fade-up">
+                <button class="btn btn-primary" id="loadMoreDepts">
+                    <i class="fas fa-plus-circle"></i> Load More Departments
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    8. DEPARTMENT FEATURES
+    ============================================================ -->
+    <section class="dept-features" id="deptFeatures">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Department Features</span>
+                <h2>What Makes Our <span>Departments Exceptional</span></h2>
+                <p>Every department at Gimbie Adventist Hospital is equipped with the latest technology and expert medical professionals.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card" data-aos="flip-up" data-aos-delay="0">
+                    <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                    <h4>24/7 Service</h4>
+                    <p>Emergency and critical care departments operate 24/7 with dedicated medical staff.</p>
+                </div>
+                <div class="feature-card" data-aos="flip-up" data-aos-delay="100">
+                    <div class="feature-icon"><i class="fas fa-microscope"></i></div>
+                    <h4>Modern Equipment</h4>
+                    <p>State-of-the-art medical technology for accurate diagnosis and treatment.</p>
+                </div>
+                <div class="feature-card" data-aos="flip-up" data-aos-delay="200">
+                    <div class="feature-icon"><i class="fas fa-user-md"></i></div>
+                    <h4>Experienced Specialists</h4>
+                    <p>Highly qualified doctors and specialists with years of expertise in their fields.</p>
+                </div>
+                <div class="feature-card" data-aos="flip-up" data-aos-delay="300">
+                    <div class="feature-icon"><i class="fas fa-file-medical-alt"></i></div>
+                    <h4>Digital Records</h4>
+                    <p>Electronic medical records for efficient, secure, and coordinated patient care.</p>
+                </div>
+                <div class="feature-card" data-aos="flip-up" data-aos-delay="400">
+                    <div class="feature-icon"><i class="fas fa-calendar-check"></i></div>
+                    <h4>Online Booking</h4>
+                    <p>Easy online appointment scheduling with your preferred department and doctor.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    9. MEET DEPARTMENT HEADS
+    ============================================================ -->
+    <section class="dept-heads-section" id="deptHeads">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Department Heads</span>
+                <h2>Meet Our <span>Department Leaders</span></h2>
+                <p>Our departments are led by highly experienced and dedicated medical professionals.</p>
+            </div>
+            
+            <div class="heads-grid">
+                <div class="head-card" data-aos="flip-left" data-aos-delay="0">
+                    <div class="head-image">
+                        <img src="assets/heads/dr-samuel-bekele.jpg" alt="Dr. Samuel Bekele">
+                        <div class="head-badge">Head of Emergency</div>
+                    </div>
+                    <div class="head-info">
+                        <h4>Dr. Samuel Bekele</h4>
+                        <span class="head-position">Head of Emergency Medicine</span>
+                        <div class="head-details">
+                            <span><i class="fas fa-briefcase"></i> 20 Years</span>
+                            <span><i class="fas fa-graduation-cap"></i> MD, FACEP</span>
+                        </div>
+                        <a href="doctor.html?id=DOC-000001" class="btn btn-outline-sm">View Profile</a>
+                    </div>
+                </div>
+                
+                <div class="head-card" data-aos="flip-left" data-aos-delay="100">
+                    <div class="head-image">
+                        <img src="assets/heads/dr-hana-alemu.jpg" alt="Dr. Hana Alemu">
+                        <div class="head-badge">Head of Pediatrics</div>
+                    </div>
+                    <div class="head-info">
+                        <h4>Dr. Hana Alemu</h4>
+                        <span class="head-position">Head of Pediatrics</span>
+                        <div class="head-details">
+                            <span><i class="fas fa-briefcase"></i> 15 Years</span>
+                            <span><i class="fas fa-graduation-cap"></i> MD, FAAP</span>
+                        </div>
+                        <a href="doctor.html?id=DOC-000002" class="btn btn-outline-sm">View Profile</a>
+                    </div>
+                </div>
+                
+                <div class="head-card" data-aos="flip-left" data-aos-delay="200">
+                    <div class="head-image">
+                        <img src="assets/heads/dr-dawit-tadesse.jpg" alt="Dr. Dawit Tadesse">
+                        <div class="head-badge">Head of Surgery</div>
+                    </div>
+                    <div class="head-info">
+                        <h4>Dr. Dawit Tadesse</h4>
+                        <span class="head-position">Head of General Surgery</span>
+                        <div class="head-details">
+                            <span><i class="fas fa-briefcase"></i> 18 Years</span>
+                            <span><i class="fas fa-graduation-cap"></i> MD, FACS</span>
+                        </div>
+                        <a href="doctor.html?id=DOC-000003" class="btn btn-outline-sm">View Profile</a>
+                    </div>
+                </div>
+                
+                <div class="head-card" data-aos="flip-left" data-aos-delay="300">
+                    <div class="head-image">
+                        <img src="assets/heads/dr-ruth-assefa.jpg" alt="Dr. Ruth Assefa">
+                        <div class="head-badge">Head of OB/GYN</div>
+                    </div>
+                    <div class="head-info">
+                        <h4>Dr. Ruth Assefa</h4>
+                        <span class="head-position">Head of Obstetrics & Gynecology</span>
+                        <div class="head-details">
+                            <span><i class="fas fa-briefcase"></i> 12 Years</span>
+                            <span><i class="fas fa-graduation-cap"></i> MD, FACOG</span>
+                        </div>
+                        <a href="doctor.html?id=DOC-000004" class="btn btn-outline-sm">View Profile</a>
+                    </div>
+                </div>
+                
+                <div class="head-card" data-aos="flip-left" data-aos-delay="400">
+                    <div class="head-image">
+                        <img src="assets/heads/dr-abel-girma.jpg" alt="Dr. Abel Girma">
+                        <div class="head-badge">Head of Cardiology</div>
+                    </div>
+                    <div class="head-info">
+                        <h4>Dr. Abel Girma</h4>
+                        <span class="head-position">Head of Cardiology</span>
+                        <div class="head-details">
+                            <span><i class="fas fa-briefcase"></i> 14 Years</span>
+                            <span><i class="fas fa-graduation-cap"></i> MD, FACC</span>
+                        </div>
+                        <a href="doctor.html?id=DOC-000005" class="btn btn-outline-sm">View Profile</a>
+                    </div>
+                </div>
+                
+                <div class="head-card" data-aos="flip-left" data-aos-delay="500">
+                    <div class="head-image">
+                        <img src="assets/heads/dr-meron-desta.jpg" alt="Dr. Meron Desta">
+                        <div class="head-badge">Head of Neurology</div>
+                    </div>
+                    <div class="head-info">
+                        <h4>Dr. Meron Desta</h4>
+                        <span class="head-position">Head of Neurology</span>
+                        <div class="head-details">
+                            <span><i class="fas fa-briefcase"></i> 10 Years</span>
+                            <span><i class="fas fa-graduation-cap"></i> MD, FAAN</span>
+                        </div>
+                        <a href="doctor.html?id=DOC-000006" class="btn btn-outline-sm">View Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    10. DEPARTMENT GALLERY
+    ============================================================ -->
+    <section class="dept-gallery" id="deptGallery">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Gallery</span>
+                <h2>Department <span>Gallery</span></h2>
+                <p>Explore our state-of-the-art facilities and medical equipment.</p>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="0">
+                    <img src="assets/gallery/emergency-room.jpg" alt="Emergency Room">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search"></i>
+                        <span>Emergency Room</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="assets/gallery/operation-theatre.jpg" alt="Operation Theatre">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search"></i>
+                        <span>Operation Theatre</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="assets/gallery/icu-ward.jpg" alt="ICU Ward">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search"></i>
+                        <span>ICU Ward</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
+                    <img src="assets/gallery/maternity-ward.jpg" alt="Maternity Ward">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search"></i>
+                        <span>Maternity Ward</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400">
+                    <img src="assets/gallery/laboratory-equipment.jpg" alt="Laboratory Equipment">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search"></i>
+                        <span>Laboratory Equipment</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="500">
+                    <img src="assets/gallery/ct-scan.jpg" alt="CT Scan Machine">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search"></i>
+                        <span>CT Scan Machine</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="600">
+                    <img src="assets/gallery/pharmacy.jpg" alt="Pharmacy">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search"></i>
+                        <span>Pharmacy</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="700">
+                    <img src="assets/gallery/ambulance.jpg" alt="Ambulance">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search"></i>
+                        <span>Ambulance Service</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    11. APPOINTMENT CTA
+    ============================================================ -->
+    <section class="appointment-cta" id="appointmentCta">
+        <div class="container">
+            <div class="cta-wrapper" data-aos="zoom-in" data-aos-duration="1000">
+                <div class="cta-content">
+                    <h3>Need Medical Care?</h3>
+                    <p>Book an appointment with our expert doctors or call our emergency line for immediate assistance.</p>
+                </div>
+                <div class="cta-actions">
+                    <a href="appointments.html" class="btn btn-primary">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <a href="emergency.html" class="btn btn-danger">
+                        <i class="fas fa-ambulance"></i> Emergency Call
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    12. GOOGLE MAP
+    ============================================================ -->
+    <section class="map-section" id="mapSection">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Location</span>
+                <h2>Find <span>Our Hospital</span></h2>
+                <p>Visit us at Gimbie Town, West Wollega Zone, Oromia Region, Ethiopia.</p>
+            </div>
+            
+            <div class="map-container" data-aos="fade-up">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31882.29455801249!2d35.834!3d9.123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z5Ymn5bqn5YyX6ZqA5Y2a5Li76a2U5Yeg5b2T!5e0!3m2!1sen!2s!4v1700000000000" 
+                    width="100%" 
+                    height="400" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+                <div class="map-actions">
+                    <a href="https://maps.google.com/maps?daddr=Gimbie+Town+West+Wollega+Zone+Oromia+Region+Ethiopia" 
+                       target="_blank" 
+                       class="btn btn-primary">
+                        <i class="fas fa-directions"></i> Get Directions
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    13. CONTACT INFORMATION
+    ============================================================ -->
+    <section class="contact-dept" id="contactDept">
+        <div class="container">
+            <div class="contact-grid-dept">
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="0">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h4>Address</h4>
+                    <p>P.O. Box 228, Gimbie Town<br>West Wollega Zone, Oromia</p>
+                </div>
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-phone-alt"></i>
+                    <h4>Phone</h4>
+                    <p><a href="tel:+251577710083">+251 57 771 0083</a></p>
+                    <p><a href="tel:+251777100051">+251 77 710 0051</a></p>
+                </div>
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-envelope"></i>
+                    <h4>Email</h4>
+                    <p><a href="mailto:gimbieadventisthosp@gmail.com">gimbieadventisthosp@gmail.com</a></p>
+                </div>
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-clock"></i>
+                    <h4>Working Hours</h4>
+                    <p>Mon-Fri: 8:00 AM - 6:00 PM</p>
+                    <p>Emergency: 24/7</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    14. NEWSLETTER
+    ============================================================ -->
+    <section class="newsletter" id="newsletter">
+        <div class="container">
+            <div class="newsletter-wrapper" data-aos="fade-up" data-aos-duration="1000">
+                <div class="newsletter-content">
+                    <h3>Subscribe to Our Newsletter</h3>
+                    <p>Stay updated with the latest health tips, news, and events from our hospital.</p>
+                </div>
+                <form class="newsletter-form" id="newsletterForm">
+                    <div class="form-group">
+                        <input type="email" placeholder="Enter your email address" required>
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Subscribe
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    15. AI HOSPITAL ASSISTANT
+    ============================================================ -->
+    <div class="ai-assistant" id="aiAssistant">
+        <button class="ai-toggle" id="aiToggle">
+            <i class="fas fa-robot"></i>
+        </button>
+        <div class="ai-chat-window" id="aiChatWindow">
+            <div class="ai-header">
+                <div class="ai-header-info">
+                    <i class="fas fa-robot"></i>
+                    <div>
+                        <h4>AI Hospital Assistant</h4>
+                        <span>Online</span>
+                    </div>
+                </div>
+                <button class="ai-close" id="aiClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="ai-body" id="aiBody">
+                <div class="ai-message ai-bot">
+                    <div class="ai-avatar"><i class="fas fa-robot"></i></div>
+                    <div class="ai-bubble">
+                        <p>👋 Hello! I'm your Gimbie Adventist Hospital Assistant. Need help finding a department?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="ai-footer">
+                <div class="ai-input-group">
+                    <input type="text" id="aiInput" placeholder="Ask about departments...">
+                    <button id="aiSend"><i class="fas fa-paper-plane"></i></button>
+                </div>
+                <div class="ai-voice">
+                    <button id="aiVoiceBtn"><i class="fas fa-microphone"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    16. FLOATING BUTTONS
+    ============================================================ -->
+    <div class="floating-buttons">
+        <a href="emergency.html" class="float-btn emergency" data-tooltip="Emergency">
+            <i class="fas fa-ambulance"></i>
+        </a>
+        <a href="appointments.html" class="float-btn appointment" data-tooltip="Book Appointment">
+            <i class="fas fa-calendar-check"></i>
+        </a>
+        <button class="float-btn chat" id="floatingChat" data-tooltip="Chat with AI">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+        <button class="float-btn scroll-top" id="scrollTop" data-tooltip="Scroll to Top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- ============================================================
+    17. FOOTER
+    ============================================================ -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </div>
+                    <p class="footer-about">
+                        Providing quality healthcare services since 1948. Committed to compassionate care 
+                        and medical excellence in Gimbie Town and the West Wollega Zone.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="departments.html"><i class="fas fa-chevron-right"></i> Departments</a></li>
+                        <li><a href="doctors.html"><i class="fas fa-chevron-right"></i> Doctors</a></li>
+                        <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+                        <li><a href="appointments.html"><i class="fas fa-chevron-right"></i> Appointments</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Top Departments</h4>
+                    <ul>
+                        <li><a href="department.html?dept=emergency"><i class="fas fa-chevron-right"></i> Emergency</a></li>
+                        <li><a href="department.html?dept=internal"><i class="fas fa-chevron-right"></i> Internal Medicine</a></li>
+                        <li><a href="department.html?dept=surgery"><i class="fas fa-chevron-right"></i> Surgery</a></li>
+                        <li><a href="department.html?dept=obgyn"><i class="fas fa-chevron-right"></i> OB/GYN</a></li>
+                        <li><a href="department.html?dept=pediatrics"><i class="fas fa-chevron-right"></i> Pediatrics</a></li>
+                        <li><a href="department.html?dept=icu"><i class="fas fa-chevron-right"></i> ICU</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>P.O. Box 228, Gimbie Town<br>West Wollega Zone, Oromia</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+251 57 771 0083</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>gimbieadventisthosp@gmail.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Mon-Fri: 8:00 AM - 6:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 <strong>Gimbie Adventist General Hospital</strong>. All Rights Reserved.</p>
+                    <div class="footer-links">
+                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="terms.html">Terms of Service</a>
+                        <a href="sitemap.html">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/departments.js"></script>
+    <script src="js/ai-assistant.js"></script>
+</body>
+  </html>
