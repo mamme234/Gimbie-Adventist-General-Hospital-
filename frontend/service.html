@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Emergency Care service at Gimbie Adventist General Hospital. 24/7 emergency medical services with experienced doctors and modern equipment.">
+    <meta name="keywords" content="emergency care, emergency services, trauma care, ambulance, emergency department, gimbie hospital">
+    <meta name="author" content="Gimbie Adventist General Hospital">
+    <title>Emergency Care | Gimbie Adventist General Hospital</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/service.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+</head>
+<body>
+    
+    <!-- ============================================================
+    1. LOADING SCREEN
+    ============================================================ -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>Gimbie Adventist</span>
+            </div>
+            <div class="loader-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="loader-text">
+                <p id="loadingText">Loading Service Details...</p>
+                <span class="loader-percentage" id="loaderPercentage">0%</span>
+            </div>
+            <div class="loader-medical-animation">
+                <i class="fas fa-ambulance"></i>
+                <i class="fas fa-stethoscope"></i>
+                <i class="fas fa-heartbeat"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    2. TOP HEADER
+    ============================================================ -->
+    <header class="top-header" id="topHeader">
+        <div class="container">
+            <div class="header-left">
+                <div class="hospital-logo">
+                    <a href="index.html">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </a>
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="header-contact">
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <strong>Emergency</strong>
+                            <a href="tel:+251577710083">+251 57 771 0083</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email</strong>
+                            <a href="mailto:gimbieadventisthosp@gmail.com">gimbieadventisthosp@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="language-switcher">
+                    <button class="lang-btn" id="langToggle">
+                        <i class="fas fa-globe"></i> EN <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="lang-dropdown">
+                        <li><a href="#" data-lang="en">English</a></li>
+                        <li><a href="#" data-lang="am">አማርኛ</a></li>
+                        <li><a href="#" data-lang="or">Afaan Oromoo</a></li>
+                    </ul>
+                </div>
+                <div class="theme-toggle">
+                    <button id="themeToggle"><i class="fas fa-moon"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    3. NAVIGATION BAR
+    ============================================================ -->
+    <nav class="main-nav" id="mainNav">
+        <div class="container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="assets/logo-small.png" alt="Logo" class="nav-logo-img">
+                </a>
+            </div>
+            <button class="nav-toggle" id="navToggle">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="departments.html"><i class="fas fa-building"></i> Departments</a></li>
+                <li><a href="doctors.html"><i class="fas fa-user-md"></i> Doctors</a></li>
+                <li><a href="services.html" class="active"><i class="fas fa-concierge-bell"></i> Services</a></li>
+                <li><a href="appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a></li>
+                <li><a href="contact.html"><i class="fas fa-phone-alt"></i> Contact</a></li>
+                <li class="nav-dropdown">
+                    <a href="#"><i class="fas fa-sign-in-alt"></i> Login <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="patient/login.html"><i class="fas fa-user"></i> Patient Login</a></li>
+                        <li><a href="staff/login.html"><i class="fas fa-user-md"></i> Staff Login</a></li>
+                        <li><a href="admin/login.html"><i class="fas fa-user-shield"></i> Admin Login</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+    4. HERO BANNER
+    ============================================================ -->
+    <section class="page-hero" id="pageHero" style="background-image: url('assets/service-emergency-hero.jpg');">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="page-hero-content" data-aos="fade-up">
+                <span class="hero-badge"><i class="fas fa-ambulance"></i> Service</span>
+                <h1 id="serviceName">Emergency Care</h1>
+                <p id="serviceTagline">24/7 Emergency Medical Services</p>
+                <nav class="breadcrumb">
+                    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                    <span><i class="fas fa-chevron-right"></i></span>
+                    <a href="services.html">Services</a>
+                    <span><i class="fas fa-chevron-right"></i></span>
+                    <a href="#" class="active" id="breadcrumbService">Emergency Care</a>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    5. SERVICE OVERVIEW
+    ============================================================ -->
+    <section class="service-overview" id="serviceOverview">
+        <div class="container">
+            <div class="overview-wrapper" data-aos="fade-up">
+                <div class="overview-image">
+                    <img src="assets/services/emergency-care.jpg" alt="Emergency Care" id="serviceImg">
+                    <div class="overview-badge">
+                        <i class="fas fa-clock"></i>
+                        <span>24/7 Available</span>
+                    </div>
+                </div>
+                <div class="overview-content">
+                    <div class="section-badge">Overview</div>
+                    <h2 id="serviceTitle">Emergency Care</h2>
+                    <p id="serviceDesc">Our Emergency Care service provides round-the-clock medical attention for acute illnesses and injuries. With a dedicated team of emergency physicians, nurses, and support staff, we are equipped to handle all types of medical emergencies from minor injuries to life-threatening conditions.</p>
+                    
+                    <div class="overview-details">
+                        <div class="detail-item">
+                            <i class="fas fa-building"></i>
+                            <div>
+                                <span class="detail-label">Department</span>
+                                <span class="detail-value" id="serviceDept">Emergency Medicine</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <span class="detail-label">Availability</span>
+                                <span class="detail-value" id="serviceAvailability">24 Hours / 7 Days</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-hourglass-half"></i>
+                            <div>
+                                <span class="detail-label">Average Duration</span>
+                                <span class="detail-value" id="serviceDuration">30-60 minutes</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <div>
+                                <span class="detail-label">Starting Price</span>
+                                <span class="detail-value" id="servicePrice">ETB 300</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="overview-actions">
+                        <a href="appointments.html" class="btn btn-primary">
+                            <i class="fas fa-calendar-check"></i> Book Service
+                        </a>
+                        <a href="emergency.html" class="btn btn-danger">
+                            <i class="fas fa-ambulance"></i> Emergency Call
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    6. SERVICE STATISTICS
+    ============================================================ -->
+    <section class="service-stats" id="serviceStats">
+        <div class="container">
+            <div class="stats-grid" data-aos="fade-up">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-hospital-user"></i></div>
+                    <div class="stat-number" data-count="15000">0</div>
+                    <div class="stat-label">Patients Served</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="stat-number" data-count="98">0</div>
+                    <div class="stat-label">Success Rate (%)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-user-md"></i></div>
+                    <div class="stat-number" data-count="12">0</div>
+                    <div class="stat-label">Doctors Available</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                    <div class="stat-number" data-count="15">0</div>
+                    <div class="stat-label">Avg Waiting Time (min)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <div class="stat-number" data-count="77">0</div>
+                    <div class="stat-label">Years of Service</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    7. INCLUDED TREATMENTS
+    ============================================================ -->
+    <section class="included-treatments" id="includedTreatments">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Treatments</span>
+                <h2>Included <span>Treatments</span></h2>
+                <p>Comprehensive emergency care services included in this service.</p>
+            </div>
+            
+            <div class="treatments-grid" data-aos="fade-up">
+                <div class="treatment-card">
+                    <div class="treatment-icon"><i class="fas fa-stethoscope"></i></div>
+                    <h4>Emergency Consultation</h4>
+                    <p>Immediate medical consultation by experienced emergency physicians.</p>
+                </div>
+                <div class="treatment-card">
+                    <div class="treatment-icon"><i class="fas fa-diagnoses"></i></div>
+                    <h4>Diagnosis</h4>
+                    <p>Rapid and accurate diagnosis of acute medical conditions.</p>
+                </div>
+                <div class="treatment-card">
+                    <div class="treatment-icon"><i class="fas fa-flask"></i></div>
+                    <h4>Laboratory Tests</h4>
+                    <p>Emergency laboratory tests for quick diagnosis and treatment.</p>
+                </div>
+                <div class="treatment-card">
+                    <div class="treatment-icon"><i class="fas fa-x-ray"></i></div>
+                    <h4>Radiology</h4>
+                    <p>Emergency X-ray, CT scan, and ultrasound services.</p>
+                </div>
+                <div class="treatment-card">
+                    <div class="treatment-icon"><i class="fas fa-heartbeat"></i></div>
+                    <h4>Treatment</h4>
+                    <p>Comprehensive treatment including medications and procedures.</p>
+                </div>
+                <div class="treatment-card">
+                    <div class="treatment-icon"><i class="fas fa-undo-alt"></i></div>
+                    <h4>Follow-up Care</h4>
+                    <p>Post-emergency follow-up care and recovery support.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    8. MEDICAL SPECIALISTS
+    ============================================================ -->
+    <section class="medical-specialists" id="medicalSpecialists">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Specialists</span>
+                <h2>Medical <span>Specialists</span></h2>
+                <p>Our expert team of emergency care specialists.</p>
+            </div>
+            
+            <div class="specialists-grid" data-aos="fade-up">
+                <div class="specialist-card">
+                    <div class="specialist-image">
+                        <img src="assets/doctors/dr-samuel-bekele.jpg" alt="Dr. Samuel Bekele">
+                        <div class="specialist-status available"><i class="fas fa-circle"></i> Available</div>
+                    </div>
+                    <div class="specialist-info">
+                        <h4>Dr. Samuel Bekele</h4>
+                        <span class="specialist-id">DOC-000001</span>
+                        <span class="specialist-department">Emergency Medicine</span>
+                        <div class="specialist-meta">
+                            <span><i class="fas fa-briefcase"></i> 20 Years</span>
+                            <span><i class="fas fa-star"></i> 4.9 (128)</span>
+                        </div>
+                        <a href="doctor.html?id=DOC-000001" class="btn btn-primary-sm">View Profile</a>
+                        <a href="appointments.html" class="btn btn-outline-sm">Book</a>
+                    </div>
+                </div>
+                
+                <div class="specialist-card">
+                    <div class="specialist-image">
+                        <img src="assets/doctors/dr-abdul-karim.jpg" alt="Dr. Abdul Karim">
+                        <div class="specialist-status busy"><i class="fas fa-circle"></i> On Duty</div>
+                    </div>
+                    <div class="specialist-info">
+                        <h4>Dr. Abdul Karim</h4>
+                        <span class="specialist-id">DOC-000009</span>
+                        <span class="specialist-department">Emergency Medicine</span>
+                        <div class="specialist-meta">
+                            <span><i class="fas fa-briefcase"></i> 12 Years</span>
+                            <span><i class="fas fa-star"></i> 4.7 (86)</span>
+                        </div>
+                        <a href="doctor.html?id=DOC-000009" class="btn btn-primary-sm">View Profile</a>
+                        <a href="appointments.html" class="btn btn-outline-sm">Book</a>
+                    </div>
+                </div>
+                
+                <div class="specialist-card">
+                    <div class="specialist-image">
+                        <img src="assets/doctors/dr-bethel-assefa.jpg" alt="Dr. Bethel Assefa">
+                        <div class="specialist-status available"><i class="fas fa-circle"></i> Available</div>
+                    </div>
+                    <div class="specialist-info">
+                        <h4>Dr. Bethel Assefa</h4>
+                        <span class="specialist-id">DOC-000010</span>
+                        <span class="specialist-department">Emergency Medicine</span>
+                        <div class="specialist-meta">
+                            <span><i class="fas fa-briefcase"></i> 10 Years</span>
+                            <span><i class="fas fa-star"></i> 4.8 (73)</span>
+                        </div>
+                        <a href="doctor.html?id=DOC-000010" class="btn btn-primary-sm">View Profile</a>
+                        <a href="appointments.html" class="btn btn-outline-sm">Book</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    9. EQUIPMENT USED
+    ============================================================ -->
+    <section class="equipment-used" id="equipmentUsed">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Equipment</span>
+                <h2>Equipment <span>Used</span></h2>
+                <p>State-of-the-art equipment for emergency care.</p>
+            </div>
+            
+            <div class="equipment-grid" data-aos="fade-up">
+                <div class="equipment-card">
+                    <img src="assets/equipment/defibrillator.jpg" alt="Defibrillator">
+                    <div class="equipment-info">
+                        <h4>Defibrillator</h4>
+                        <p>Advanced cardiac defibrillator for emergency resuscitation.</p>
+                        <span class="equipment-tech">Technology: Biphasic Defibrillation</span>
+                    </div>
+                </div>
+                <div class="equipment-card">
+                    <img src="assets/equipment/ventilator.jpg" alt="Ventilator">
+                    <div class="equipment-info">
+                        <h4>Ventilator</h4>
+                        <p>Life-support ventilator for critical patients.</p>
+                        <span class="equipment-tech">Technology: Advanced Ventilation</span>
+                    </div>
+                </div>
+                <div class="equipment-card">
+                    <img src="assets/equipment/ecg-machine.jpg" alt="ECG Machine">
+                    <div class="equipment-info">
+                        <h4>ECG Machine</h4>
+                        <p>Digital ECG for rapid cardiac assessment.</p>
+                        <span class="equipment-tech">Technology: 12-Lead ECG</span>
+                    </div>
+                </div>
+                <div class="equipment-card">
+                    <img src="assets/equipment/ultrasound.jpg" alt="Portable Ultrasound">
+                    <div class="equipment-info">
+                        <h4>Portable Ultrasound</h4>
+                        <p>Emergency ultrasound for rapid diagnosis.</p>
+                        <span class="equipment-tech">Technology: Point-of-Care Ultrasound</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    10. TREATMENT PROCESS
+    ============================================================ -->
+    <section class="treatment-process" id="treatmentProcess">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Process</span>
+                <h2>Treatment <span>Process</span></h2>
+                <p>Step-by-step journey through our emergency care service.</p>
+            </div>
+            
+            <div class="process-steps" data-aos="fade-up">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <div class="step-icon"><i class="fas fa-clipboard-list"></i></div>
+                    <div class="step-content">
+                        <h4>Registration</h4>
+                        <p>Quick registration and triage assessment at the emergency desk.</p>
+                    </div>
+                </div>
+                <div class="step-arrow"><i class="fas fa-arrow-down"></i></div>
+                
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <div class="step-icon"><i class="fas fa-stethoscope"></i></div>
+                    <div class="step-content">
+                        <h4>Consultation</h4>
+                        <p>Immediate consultation with emergency physician.</p>
+                    </div>
+                </div>
+                <div class="step-arrow"><i class="fas fa-arrow-down"></i></div>
+                
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <div class="step-icon"><i class="fas fa-diagnoses"></i></div>
+                    <div class="step-content">
+                        <h4>Diagnosis</h4>
+                        <p>Comprehensive diagnosis using available tests and imaging.</p>
+                    </div>
+                </div>
+                <div class="step-arrow"><i class="fas fa-arrow-down"></i></div>
+                
+                <div class="step">
+                    <div class="step-number">04</div>
+                    <div class="step-icon"><i class="fas fa-flask"></i></div>
+                    <div class="step-content">
+                        <h4>Laboratory / Radiology</h4>
+                        <p>Emergency lab tests and imaging if required.</p>
+                    </div>
+                </div>
+                <div class="step-arrow"><i class="fas fa-arrow-down"></i></div>
+                
+                <div class="step">
+                    <div class="step-number">05</div>
+                    <div class="step-icon"><i class="fas fa-heartbeat"></i></div>
+                    <div class="step-content">
+                        <h4>Treatment</h4>
+                        <p>Medical treatment, medications, or procedures as needed.</p>
+                    </div>
+                </div>
+                <div class="step-arrow"><i class="fas fa-arrow-down"></i></div>
+                
+                <div class="step">
+                    <div class="step-number">06</div>
+                    <div class="step-icon"><i class="fas fa-prescription-bottle"></i></div>
+                    <div class="step-content">
+                        <h4>Pharmacy</h4>
+                        <p>Prescription medications from our pharmacy.</p>
+                    </div>
+                </div>
+                <div class="step-arrow"><i class="fas fa-arrow-down"></i></div>
+                
+                <div class="step">
+                    <div class="step-number">07</div>
+                    <div class="step-icon"><i class="fas fa-undo-alt"></i></div>
+                    <div class="step-content">
+                        <h4>Follow-up</h4>
+                        <p>Post-treatment follow-up and recovery guidance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    11. BENEFITS
+    ============================================================ -->
+    <section class="service-benefits" id="serviceBenefits">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Benefits</span>
+                <h2>Service <span>Benefits</span></h2>
+                <p>Why choose our emergency care service.</p>
+            </div>
+            
+            <div class="benefits-grid" data-aos="fade-up">
+                <div class="benefit-card">
+                    <i class="fas fa-user-md"></i>
+                    <h4>Professional Care</h4>
+                    <p>Experienced emergency physicians and nurses providing expert care.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-microscope"></i>
+                    <h4>Modern Equipment</h4>
+                    <p>State-of-the-art medical equipment for accurate diagnosis and treatment.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-star"></i>
+                    <h4>Experienced Specialists</h4>
+                    <p>12+ emergency medicine specialists with years of experience.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-file-medical-alt"></i>
+                    <h4>Digital Medical Records</h4>
+                    <p>Secure electronic health records for efficient care coordination.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-bolt"></i>
+                    <h4>Fast Service</h4>
+                    <p>Rapid response and minimal waiting times for emergency care.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    12. PATIENT PREPARATION
+    ============================================================ -->
+    <section class="patient-preparation" id="patientPreparation">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Preparation</span>
+                <h2>Patient <span>Preparation</span></h2>
+                <p>What to expect and how to prepare for your emergency visit.</p>
+            </div>
+            
+            <div class="preparation-grid" data-aos="fade-up">
+                <div class="prep-card">
+                    <h4><i class="fas fa-clipboard-list"></i> Before Visit</h4>
+                    <ul>
+                        <li>Call our emergency hotline if possible</li>
+                        <li>Bring emergency contacts information</li>
+                        <li>List of current medications</li>
+                        <li>Any known allergies information</li>
+                    </ul>
+                </div>
+                <div class="prep-card">
+                    <h4><i class="fas fa-id-card"></i> Required Documents</h4>
+                    <ul>
+                        <li>Valid ID (National ID, Passport)</li>
+                        <li>Health insurance card (if available)</li>
+                        <li>Medical history records</li>
+                        <li>Previous test results</li>
+                    </ul>
+                </div>
+                <div class="prep-card">
+                    <h4><i class="fas fa-file-medical"></i> Medical History</h4>
+                    <ul>
+                        <li>Chronic conditions information</li>
+                        <li>Previous surgeries and procedures</li>
+                        <li>Allergies and reactions</li>
+                        <li>Family medical history</li>
+                    </ul>
+                </div>
+                <div class="prep-card">
+                    <h4><i class="fas fa-handshake"></i> Insurance Information</h4>
+                    <ul>
+                        <li>Insurance policy details</li>
+                        <li>Member ID and group number</li>
+                        <li>Insurance card copy</li>
+                        <li>Emergency contact numbers</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    13. PATIENT REVIEWS
+    ============================================================ -->
+    <section class="patient-reviews" id="patientReviews">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Reviews</span>
+                <h2>Patient <span>Reviews</span></h2>
+                <p>Real experiences from our emergency care patients.</p>
+            </div>
+            
+            <div class="reviews-grid" data-aos="fade-up">
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="assets/patients/review-1.jpg" alt="Patient">
+                        <div>
+                            <h4>Abebe Demissie</h4>
+                            <div class="rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="review-date">December 15, 2025</span>
+                        </div>
+                    </div>
+                    <p>"The emergency team saved my life. Quick response, professional care, and excellent follow-up. I'm forever grateful."</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="assets/patients/review-2.jpg" alt="Patient">
+                        <div>
+                            <h4>Tigist Bekele</h4>
+                            <div class="rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="review-date">December 10, 2025</span>
+                        </div>
+                    </div>
+                    <p>"Excellent emergency care. The doctors were very knowledgeable and caring. I felt safe and well taken care of."</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="assets/patients/review-3.jpg" alt="Patient">
+                        <div>
+                            <h4>Samuel Abate</h4>
+                            <div class="rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="review-date">December 5, 2025</span>
+                        </div>
+                    </div>
+                    <p>"I had a great experience at the emergency department. The staff was professional and the care was excellent."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    14. FREQUENTLY ASKED QUESTIONS
+    ============================================================ -->
+    <section class="faq-service" id="faqService">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">FAQ</span>
+                <h2>Frequently Asked <span>Questions</span></h2>
+                <p>Common questions about our emergency care service.</p>
+            </div>
+            
+            <div class="faq-grid" data-aos="fade-up">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>When should I go to the emergency department?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Visit the emergency department for life-threatening conditions, severe injuries, chest pain, difficulty breathing, severe bleeding, stroke symptoms, or any medical emergency that requires immediate attention.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What should I bring to the emergency department?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Bring your ID, health insurance card, list of medications you're taking, medical history, and any relevant documents. Also bring emergency contact information.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How long is the wait in the emergency department?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Wait times vary based on the severity of conditions. Critical patients are seen immediately. Non-critical patients are seen on a first-come, first-served basis.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Does the emergency department take walk-in patients?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, our emergency department accepts walk-in patients 24/7. No appointment is needed for emergency care.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    15. RELATED SERVICES
+    ============================================================ -->
+    <section class="related-services" id="relatedServices">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Related</span>
+                <h2>Related <span>Services</span></h2>
+                <p>Other services you may be interested in.</p>
+            </div>
+            
+            <div class="related-grid" data-aos="fade-up">
+                <div class="related-card">
+                    <i class="fas fa-ambulance"></i>
+                    <h4>Emergency Care</h4>
+                    <p>24/7 emergency services</p>
+                    <a href="service.html?service=emergency" class="btn btn-outline-sm">View Service</a>
+                </div>
+                <div class="related-card">
+                    <i class="fas fa-flask"></i>
+                    <h4>Laboratory</h4>
+                    <p>Diagnostic lab services</p>
+                    <a href="service.html?service=laboratory" class="btn btn-outline-sm">View Service</a>
+                </div>
+                <div class="related-card">
+                    <i class="fas fa-prescription-bottle"></i>
+                    <h4>Pharmacy</h4>
+                    <p>Medication services</p>
+                    <a href="service.html?service=pharmacy" class="btn btn-outline-sm">View Service</a>
+                </div>
+                <div class="related-card">
+                    <i class="fas fa-x-ray"></i>
+                    <h4>Radiology</h4>
+                    <p>Imaging services</p>
+                    <a href="service.html?service=radiology" class="btn btn-outline-sm">View Service</a>
+                </div>
+                <div class="related-card">
+                    <i class="fas fa-scalpel"></i>
+                    <h4>Surgery</h4>
+                    <p>Surgical services</p>
+                    <a href="service.html?service=surgery" class="btn btn-outline-sm">View Service</a>
+                </div>
+                <div class="related-card">
+                    <i class="fas fa-baby"></i>
+                    <h4>Maternity</h4>
+                    <p>Maternity care</p>
+                    <a href="service.html?service=maternity" class="btn btn-outline-sm">View Service</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    16. BOOK APPOINTMENT
+    ============================================================ -->
+    <section class="book-appointment" id="bookAppointment">
+        <div class="container">
+            <div class="appointment-wrapper" data-aos="fade-up">
+                <div class="appointment-header">
+                    <h2>Book <span>Appointment</span></h2>
+                    <p>Schedule your emergency care appointment.</p>
+                </div>
+                <form class="appointment-form" id="serviceBookingForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <select required>
+                                <option value="">Select Doctor</option>
+                                <option>Dr. Samuel Bekele</option>
+                                <option>Dr. Abdul Karim</option>
+                                <option>Dr. Bethel Assefa</option>
+                            </select>
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <div class="form-group">
+                            <input type="date" required>
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="time" required>
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="form-group">
+                            <select required>
+                                <option value="">Service Type</option>
+                                <option>Emergency Consultation</option>
+                                <option>Trauma Care</option>
+                                <option>Emergency Surgery</option>
+                            </select>
+                            <i class="fas fa-concierge-bell"></i>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" placeholder="Full Name" required>
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Email Address" required>
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="Phone Number" required>
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Describe your emergency or concern..."></textarea>
+                        <i class="fas fa-comment"></i>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    17. EMERGENCY CONTACT
+    ============================================================ -->
+    <section class="emergency-contact" id="emergencyContact">
+        <div class="container">
+            <div class="emergency-card" data-aos="zoom-in">
+                <div class="emergency-icon"><i class="fas fa-ambulance"></i></div>
+                <div class="emergency-info">
+                    <h3>Emergency? Call Now</h3>
+                    <p>For immediate emergency assistance, contact our hotline.</p>
+                    <div class="emergency-number-large">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>+251 57 771 0083</span>
+                    </div>
+                    <div class="emergency-actions">
+                        <a href="emergency.html" class="btn btn-danger">
+                            <i class="fas fa-ambulance"></i> Call Ambulance
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    18. AI MEDICAL ASSISTANT
+    ============================================================ -->
+    <div class="ai-assistant" id="aiAssistant">
+        <button class="ai-toggle" id="aiToggle">
+            <i class="fas fa-robot"></i>
+        </button>
+        <div class="ai-chat-window" id="aiChatWindow">
+            <div class="ai-header">
+                <div class="ai-header-info">
+                    <i class="fas fa-robot"></i>
+                    <div>
+                        <h4>AI Medical Assistant</h4>
+                        <span>Online</span>
+                    </div>
+                </div>
+                <button class="ai-close" id="aiClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="ai-body" id="aiBody">
+                <div class="ai-message ai-bot">
+                    <div class="ai-avatar"><i class="fas fa-robot"></i></div>
+                    <div class="ai-bubble">
+                        <p>👋 Hello! I can help you with:</p>
+                        <ul>
+                            <li>Information about Emergency Care</li>
+                            <li>What to do in an emergency</li>
+                            <li>Booking an appointment</li>
+                            <li>Finding the right specialist</li>
+                        </ul>
+                        <p>How can I assist you?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="ai-footer">
+                <div class="ai-input-group">
+                    <input type="text" id="aiInput" placeholder="Ask about this service...">
+                    <button id="aiSend"><i class="fas fa-paper-plane"></i></button>
+                </div>
+                <div class="ai-voice">
+                    <button id="aiVoiceBtn"><i class="fas fa-microphone"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    FLOATING BUTTONS
+    ============================================================ -->
+    <div class="floating-buttons">
+        <a href="emergency.html" class="float-btn emergency" data-tooltip="Emergency">
+            <i class="fas fa-ambulance"></i>
+        </a>
+        <a href="appointments.html" class="float-btn appointment" data-tooltip="Book Appointment">
+            <i class="fas fa-calendar-check"></i>
+        </a>
+        <button class="float-btn chat" id="floatingChat" data-tooltip="Chat with AI">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+        <button class="float-btn scroll-top" id="scrollTop" data-tooltip="Scroll to Top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- ============================================================
+    19. GOOGLE MAP
+    ============================================================ -->
+    <section class="map-section" id="mapSection">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Location</span>
+                <h2>Our <span>Location</span></h2>
+                <p>Visit Gimbie Adventist General Hospital.</p>
+            </div>
+            
+            <div class="map-container" data-aos="fade-up">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31882.29455801249!2d35.834!3d9.123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z5Ymn5bqn5YyX6ZqA5Y2a5Li76a2U5Yeg5b2T!5e0!3m2!1sen!2s!4v1700000000000" 
+                    width="100%" 
+                    height="400" 
+                    style="border:0;" 
+                    allowfullscreen="">
+                </iframe>
+                <div class="map-actions">
+                    <a href="https://maps.google.com/maps?daddr=Gimbie+Town+West+Wollega+Zone+Oromia+Region+Ethiopia" 
+                       target="_blank" 
+                       class="btn btn-primary">
+                        <i class="fas fa-directions"></i> Get Directions
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    20. CONTACT INFORMATION
+    ============================================================ -->
+    <section class="contact-service" id="contactService">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-card" data-aos="fade-up">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h4>Address</h4>
+                    <p>P.O. Box 228, Gimbie Town<br>West Wollega Zone, Oromia</p>
+                </div>
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-phone-alt"></i>
+                    <h4>Phone</h4>
+                    <p><a href="tel:+251577710083">+251 57 771 0083</a></p>
+                    <p><a href="tel:+251777100051">+251 77 710 0051</a></p>
+                </div>
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-envelope"></i>
+                    <h4>Email</h4>
+                    <p><a href="mailto:gimbieadventisthosp@gmail.com">gimbieadventisthosp@gmail.com</a></p>
+                </div>
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-clock"></i>
+                    <h4>Working Hours</h4>
+                    <p>Emergency: 24/7</p>
+                    <p>Mon-Fri: 8:00 AM - 6:00 PM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    21. FOOTER
+    ============================================================ -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </div>
+                    <p class="footer-about">
+                        Providing quality healthcare services since 1948. Committed to compassionate care and medical excellence.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About</a></li>
+                        <li><a href="departments.html"><i class="fas fa-chevron-right"></i> Departments</a></li>
+                        <li><a href="doctors.html"><i class="fas fa-chevron-right"></i> Doctors</a></li>
+                        <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Departments</h4>
+                    <ul>
+                        <li><a href="department.html?dept=emergency"><i class="fas fa-chevron-right"></i> Emergency</a></li>
+                        <li><a href="department.html?dept=surgery"><i class="fas fa-chevron-right"></i> Surgery</a></li>
+                        <li><a href="department.html?dept=pediatrics"><i class="fas fa-chevron-right"></i> Pediatrics</a></li>
+                        <li><a href="department.html?dept=cardiology"><i class="fas fa-chevron-right"></i> Cardiology</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> P.O. Box 228, Gimbie</li>
+                        <li><i class="fas fa-phone-alt"></i> +251 57 771 0083</li>
+                        <li><i class="fas fa-envelope"></i> gimbieadventisthosp@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 <strong>Gimbie Adventist General Hospital</strong>. All Rights Reserved.</p>
+                    <div class="footer-links">
+                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="terms.html">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/service.js"></script>
+    <script src="js/ai-assistant.js"></script>
+</body>
+  </html>
