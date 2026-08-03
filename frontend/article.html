@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Read the latest health article from Gimbie Adventist General Hospital. Expert medical insights, health tips, and hospital news.">
+    <meta name="keywords" content="health article, hospital news, medical information, health tips, gimbie hospital">
+    <meta name="author" content="Gimbie Adventist General Hospital">
+    <title>New MRI Center Opens | Gimbie Adventist General Hospital</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Lightbox -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/article.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+</head>
+<body>
+    
+    <!-- ============================================================
+    1. LOADING SCREEN
+    ============================================================ -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>Gimbie Adventist</span>
+            </div>
+            <div class="loader-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="loader-text">
+                <p id="loadingText">Loading Article...</p>
+                <span class="loader-percentage" id="loaderPercentage">0%</span>
+            </div>
+            <div class="loader-reading-animation">
+                <i class="fas fa-book-open"></i>
+                <i class="fas fa-pen-fancy"></i>
+                <i class="fas fa-newspaper"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    2. TOP HEADER
+    ============================================================ -->
+    <header class="top-header" id="topHeader">
+        <div class="container">
+            <div class="header-left">
+                <div class="hospital-logo">
+                    <a href="index.html">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </a>
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="header-contact">
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <strong>Emergency</strong>
+                            <a href="tel:+251577710083">+251 57 771 0083</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email</strong>
+                            <a href="mailto:gimbieadventisthosp@gmail.com">gimbieadventisthosp@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="language-switcher">
+                    <button class="lang-btn" id="langToggle">
+                        <i class="fas fa-globe"></i> EN <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="lang-dropdown">
+                        <li><a href="#" data-lang="en">English</a></li>
+                        <li><a href="#" data-lang="am">አማርኛ</a></li>
+                        <li><a href="#" data-lang="or">Afaan Oromoo</a></li>
+                    </ul>
+                </div>
+                <div class="theme-toggle">
+                    <button id="themeToggle"><i class="fas fa-moon"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    3. NAVIGATION BAR
+    ============================================================ -->
+    <nav class="main-nav" id="mainNav">
+        <div class="container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="assets/logo-small.png" alt="Logo" class="nav-logo-img">
+                </a>
+            </div>
+            <button class="nav-toggle" id="navToggle">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="departments.html"><i class="fas fa-building"></i> Departments</a></li>
+                <li><a href="doctors.html"><i class="fas fa-user-md"></i> Doctors</a></li>
+                <li><a href="news.html"><i class="fas fa-newspaper"></i> News</a></li>
+                <li><a href="contact.html"><i class="fas fa-phone-alt"></i> Contact</a></li>
+                <li class="nav-dropdown">
+                    <a href="#"><i class="fas fa-sign-in-alt"></i> Login <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="patient/login.html"><i class="fas fa-user"></i> Patient Login</a></li>
+                        <li><a href="staff/login.html"><i class="fas fa-user-md"></i> Staff Login</a></li>
+                        <li><a href="admin/login.html"><i class="fas fa-user-shield"></i> Admin Login</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+    4. HERO BANNER
+    ============================================================ -->
+    <section class="article-hero" id="articleHero" style="background-image: url('assets/articles/article-hero.jpg');">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="article-hero-content" data-aos="fade-up">
+                <span class="hero-badge"><i class="fas fa-newspaper"></i> Featured Article</span>
+                <h1 id="articleTitle">New MRI Center Opens at Gimbie Adventist Hospital</h1>
+                <p id="articleSubtitle">Advanced diagnostic imaging now available for patients</p>
+                <nav class="breadcrumb">
+                    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                    <span><i class="fas fa-chevron-right"></i></span>
+                    <a href="news.html">News</a>
+                    <span><i class="fas fa-chevron-right"></i></span>
+                    <a href="#" class="active" id="breadcrumbArticle">New MRI Center Opens</a>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    5. ARTICLE INFORMATION
+    ============================================================ -->
+    <section class="article-header" id="articleHeader">
+        <div class="container">
+            <div class="article-meta-top" data-aos="fade-up">
+                <div class="article-categories">
+                    <span class="category-badge"><i class="fas fa-tag"></i> Hospital News</span>
+                    <span class="category-badge department"><i class="fas fa-building"></i> Radiology</span>
+                </div>
+                <div class="article-stats">
+                    <span><i class="fas fa-calendar"></i> Published: <strong>December 20, 2026</strong></span>
+                    <span><i class="fas fa-clock"></i> Updated: <strong>December 22, 2026</strong></span>
+                    <span><i class="fas fa-clock"></i> Reading Time: <strong>4 min</strong></span>
+                    <span><i class="fas fa-eye"></i> <strong>1,245</strong> views</span>
+                    <span><i class="fas fa-comment"></i> <strong>12</strong> comments</span>
+                </div>
+            </div>
+            
+            <div class="article-author-box" data-aos="fade-up">
+                <div class="author-avatar">
+                    <img src="assets/doctors/dr-samuel-bekele.jpg" alt="Dr. Samuel Bekele">
+                </div>
+                <div class="author-info">
+                    <h4>Dr. Samuel Bekele</h4>
+                    <span>Chief of Cardiology & Medical Director</span>
+                    <div class="author-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="author-articles">
+                    <span><i class="fas fa-pen-fancy"></i> 15 Articles Published</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    6. ARTICLE CONTENT
+    ============================================================ -->
+    <section class="article-content" id="articleContent">
+        <div class="container">
+            <div class="content-wrapper" data-aos="fade-up">
+                <div class="content-main">
+                    <div class="featured-image">
+                        <img src="assets/articles/article-featured.jpg" alt="MRI Center">
+                        <span class="image-caption">The new state-of-the-art MRI center at Gimbie Adventist Hospital</span>
+                    </div>
+                    
+                    <div class="content-body">
+                        <p class="lead">We are proud to announce the opening of our new state-of-the-art MRI center, providing advanced diagnostic imaging services to our patients. This significant milestone marks a new chapter in our commitment to delivering world-class healthcare to the community.</p>
+                        
+                        <h2>Revolutionizing Diagnostic Imaging</h2>
+                        <p>The new MRI center is equipped with the latest 1.5 Tesla MRI machine from Siemens Healthineers, offering high-resolution imaging for accurate diagnosis of a wide range of medical conditions. This advanced technology enables our radiologists to detect and diagnose conditions with unprecedented clarity and precision.</p>
+                        
+                        <div class="content-image">
+                            <a href="assets/articles/mri-machine.jpg" data-lightbox="article-gallery" data-title="1.5 Tesla MRI Machine">
+                                <img src="assets/articles/mri-machine.jpg" alt="MRI Machine">
+                            </a>
+                            <span class="image-caption">The new 1.5 Tesla MRI machine</span>
+                        </div>
+                        
+                        <h3>Benefits of the New MRI Center</h3>
+                        <ul>
+                            <li><strong>High-Resolution Imaging:</strong> Exceptional image quality for accurate diagnosis</li>
+                            <li><strong>Faster Scan Times:</strong> Reduced waiting times for patients</li>
+                            <li><strong>Comfortable Experience:</strong> Patient-friendly design with reduced noise</li>
+                            <li><strong>Advanced Applications:</strong> Neuroimaging, musculoskeletal, and cardiovascular imaging</li>
+                            <li><strong>No Radiation:</strong> Safe imaging without exposure to ionizing radiation</li>
+                        </ul>
+                        
+                        <div class="content-quote">
+                            <i class="fas fa-quote-left"></i>
+                            <blockquote>
+                                "This new MRI center represents our commitment to providing the highest quality healthcare to our patients. Advanced diagnostic imaging is crucial for accurate diagnosis and effective treatment planning."
+                            </blockquote>
+                            <cite>- Dr. Samuel Bekele, Medical Director</cite>
+                        </div>
+                        
+                        <h3>Conditions Diagnosed with MRI</h3>
+                        <p>The new MRI center can help diagnose a wide range of conditions, including:</p>
+                        <div class="condition-grid">
+                            <div class="condition-item">
+                                <i class="fas fa-brain"></i>
+                                <span>Neurological Disorders</span>
+                            </div>
+                            <div class="condition-item">
+                                <i class="fas fa-bone"></i>
+                                <span>Musculoskeletal Conditions</span>
+                            </div>
+                            <div class="condition-item">
+                                <i class="fas fa-heart"></i>
+                                <span>Cardiovascular Disease</span>
+                            </div>
+                            <div class="condition-item">
+                                <i class="fas fa-lungs"></i>
+                                <span>Respiratory Conditions</span>
+                            </div>
+                            <div class="condition-item">
+                                <i class="fas fa-baby"></i>
+                                <span>Maternal and Fetal Imaging</span>
+                            </div>
+                            <div class="condition-item">
+                                <i class="fas fa-tumor"></i>
+                                <span>Oncology and Tumor Detection</span>
+                            </div>
+                        </div>
+                        
+                        <h3>Appointment Information</h3>
+                        <p>Patients can now book MRI appointments through our radiology department. Referrals from physicians are required for MRI scans. For more information or to schedule an appointment, please contact our radiology department.</p>
+                        
+                        <div class="content-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Service</th>
+                                        <th>Availability</th>
+                                        <th>Result Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Brain MRI</td>
+                                        <td>Monday - Friday</td>
+                                        <td>24-48 hours</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Spine MRI</td>
+                                        <td>Monday - Friday</td>
+                                        <td>24-48 hours</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Joint MRI</td>
+                                        <td>Monday - Saturday</td>
+                                        <td>24-48 hours</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Emergency MRI</td>
+                                        <td>24/7</td>
+                                        <td>2-4 hours</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sidebar -->
+                <div class="content-sidebar">
+                    <div class="sidebar-widget health-tips-box">
+                        <h4><i class="fas fa-heartbeat"></i> Health Tips</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Follow preparation instructions for your scan</li>
+                            <li><i class="fas fa-check-circle"></i> Inform your doctor about any implants or devices</li>
+                            <li><i class="fas fa-check-circle"></i> Arrive 30 minutes before your appointment</li>
+                            <li><i class="fas fa-check-circle"></i> Bring your referral and insurance information</li>
+                            <li><i class="fas fa-check-circle"></i> Ask questions if you're unsure about anything</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sidebar-widget download-center">
+                        <h4><i class="fas fa-download"></i> Download Center</h4>
+                        <ul>
+                            <li><a href="#"><i class="fas fa-file-pdf"></i> PDF Version</a></li>
+                            <li><a href="#"><i class="fas fa-file-pdf"></i> Patient Guide</a></li>
+                            <li><a href="#"><i class="fas fa-file-pdf"></i> MRI Information Brochure</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sidebar-widget tags-widget">
+                        <h4><i class="fas fa-tags"></i> Tags</h4>
+                        <div class="tag-list">
+                            <a href="#" class="tag">MRI</a>
+                            <a href="#" class="tag">Radiology</a>
+                            <a href="#" class="tag">Diagnostic Imaging</a>
+                            <a href="#" class="tag">Hospital News</a>
+                            <a href="#" class="tag">Healthcare</a>
+                            <a href="#" class="tag">Medical Technology</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    7. HEALTH TIPS BOX
+    ============================================================ -->
+    <section class="health-tips-box-section" id="healthTipsBox">
+        <div class="container">
+            <div class="tips-box" data-aos="fade-up">
+                <div class="tips-header">
+                    <i class="fas fa-notes-medical"></i>
+                    <h3>Important Health Information</h3>
+                </div>
+                <div class="tips-grid">
+                    <div class="tip-item">
+                        <i class="fas fa-shield-virus"></i>
+                        <div>
+                            <h4>Prevention Tips</h4>
+                            <p>Regular health checkups and screenings are essential for early detection and prevention.</p>
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <i class="fas fa-heart"></i>
+                        <div>
+                            <h4>Healthy Lifestyle</h4>
+                            <p>Maintain a balanced diet, regular exercise, and adequate sleep for optimal health.</p>
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <i class="fas fa-ambulance"></i>
+                        <div>
+                            <h4>Emergency Advice</h4>
+                            <p>In case of emergency, call our hotline immediately at +251 57 771 0083.</p>
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <h4>Important Notes</h4>
+                            <p>Always consult with your healthcare provider before making any medical decisions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    8. IMAGE GALLERY
+    ============================================================ -->
+    <section class="article-gallery" id="articleGallery">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Gallery</span>
+                <h2>Article <span>Gallery</span></h2>
+                <p>Images from the new MRI center opening.</p>
+            </div>
+            
+            <div class="gallery-grid" data-aos="fade-up">
+                <div class="gallery-item">
+                    <a href="assets/articles/gallery-1.jpg" data-lightbox="article-gallery" data-title="MRI Center Opening Ceremony">
+                        <img src="assets/articles/gallery-1.jpg" alt="Opening Ceremony">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </a>
+                    <span class="gallery-caption">MRI Center Opening Ceremony</span>
+                </div>
+                <div class="gallery-item">
+                    <a href="assets/articles/gallery-2.jpg" data-lightbox="article-gallery" data-title="MRI Machine">
+                        <img src="assets/articles/gallery-2.jpg" alt="MRI Machine">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </a>
+                    <span class="gallery-caption">New 1.5 Tesla MRI Machine</span>
+                </div>
+                <div class="gallery-item">
+                    <a href="assets/articles/gallery-3.jpg" data-lightbox="article-gallery" data-title="Control Room">
+                        <img src="assets/articles/gallery-3.jpg" alt="Control Room">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </a>
+                    <span class="gallery-caption">Advanced Control Room</span>
+                </div>
+                <div class="gallery-item">
+                    <a href="assets/articles/gallery-4.jpg" data-lightbox="article-gallery" data-title="Medical Team">
+                        <img src="assets/articles/gallery-4.jpg" alt="Medical Team">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </a>
+                    <span class="gallery-caption">Radiology Medical Team</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    9. DOWNLOAD CENTER
+    ============================================================ -->
+    <section class="download-center-section" id="downloadCenterSection">
+        <div class="container">
+            <div class="download-wrapper" data-aos="fade-up">
+                <div class="download-header">
+                    <i class="fas fa-download"></i>
+                    <h3>Download Related Resources</h3>
+                </div>
+                <div class="download-grid">
+                    <a href="#" class="download-item">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>PDF Article</span>
+                    </a>
+                    <a href="#" class="download-item">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>Patient Health Guide</span>
+                    </a>
+                    <a href="#" class="download-item">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>MRI Information Brochure</span>
+                    </a>
+                    <a href="#" class="download-item">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>Radiology Services Brochure</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    10. SHARE ARTICLE
+    ============================================================ -->
+    <section class="share-article" id="shareArticle">
+        <div class="container">
+            <div class="share-wrapper" data-aos="fade-up">
+                <span class="share-label"><i class="fas fa-share-alt"></i> Share This Article:</span>
+                <div class="share-buttons">
+                    <a href="#" class="share-btn facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="share-btn twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="share-btn telegram"><i class="fab fa-telegram-plane"></i></a>
+                    <a href="#" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="share-btn copy" onclick="copyLink()"><i class="fas fa-link"></i></a>
+                    <a href="#" class="share-btn print" onclick="window.print()"><i class="fas fa-print"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    11. TAGS
+    ============================================================ -->
+    <section class="article-tags" id="articleTags">
+        <div class="container">
+            <div class="tags-wrapper" data-aos="fade-up">
+                <span class="tags-label"><i class="fas fa-tags"></i> Tags:</span>
+                <div class="tags-list">
+                    <a href="#" class="tag">MRI</a>
+                    <a href="#" class="tag">Radiology</a>
+                    <a href="#" class="tag">Diagnostic Imaging</a>
+                    <a href="#" class="tag">Hospital News</a>
+                    <a href="#" class="tag">Healthcare</a>
+                    <a href="#" class="tag">Medical Technology</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    12. AUTHOR PROFILE
+    ============================================================ -->
+    <section class="author-profile" id="authorProfile">
+        <div class="container">
+            <div class="author-wrapper" data-aos="fade-up">
+                <div class="author-avatar-large">
+                    <img src="assets/doctors/dr-samuel-bekele.jpg" alt="Dr. Samuel Bekele">
+                </div>
+                <div class="author-details">
+                    <h3>Dr. Samuel Bekele</h3>
+                    <span class="author-position">Chief of Cardiology & Medical Director</span>
+                    <p>Dr. Samuel Bekele is a highly experienced cardiologist with over 20 years of practice. He leads the cardiology department and serves as the Medical Director at Gimbie Adventist General Hospital.</p>
+                    <div class="author-social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <a href="#" class="btn btn-outline-sm">View All Articles by This Author</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    13. RELATED ARTICLES
+    ============================================================ -->
+    <section class="related-articles" id="relatedArticles">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Related</span>
+                <h2>Related <span>Articles</span></h2>
+                <p>You may also be interested in these articles.</p>
+            </div>
+            
+            <div class="related-grid" data-aos="fade-up">
+                <div class="related-card">
+                    <div class="related-image">
+                        <img src="assets/news/news-2.jpg" alt="Related Article">
+                    </div>
+                    <div class="related-info">
+                        <span class="related-category">Health Tips</span>
+                        <h4>5 Ways to Stay Healthy During Winter</h4>
+                        <p>Expert tips for maintaining health during the cold season.</p>
+                        <a href="article.html?id=2" class="btn btn-outline-sm">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="related-card">
+                    <div class="related-image">
+                        <img src="assets/news/news-3.jpg" alt="Related Article">
+                    </div>
+                    <div class="related-info">
+                        <span class="related-category">Community</span>
+                        <h4>Community Health Outreach Program Expands</h4>
+                        <p>Our outreach program reaches more communities.</p>
+                        <a href="article.html?id=6" class="btn btn-outline-sm">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="related-card">
+                    <div class="related-image">
+                        <img src="assets/news/news-4.jpg" alt="Related Article">
+                    </div>
+                    <div class="related-info">
+                        <span class="related-category">Award</span>
+                        <h4>Hospital Receives Excellence in Healthcare Award</h4>
+                        <p>Recognition for outstanding healthcare delivery.</p>
+                        <a href="article.html?id=7" class="btn btn-outline-sm">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    14. COMMENTS
+    ============================================================ -->
+    <section class="comments-section" id="commentsSection">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Comments</span>
+                <h2>Reader <span>Comments</span></h2>
+                <p>Join the conversation and share your thoughts.</p>
+            </div>
+            
+            <div class="comments-list" data-aos="fade-up">
+                <div class="comment-item">
+                    <div class="comment-avatar">
+                        <img src="assets/patients/review-1.jpg" alt="Abebe Demissie">
+                    </div>
+                    <div class="comment-content">
+                        <div class="comment-header">
+                            <h4>Abebe Demissie</h4>
+                            <span class="comment-date">December 22, 2026</span>
+                        </div>
+                        <p>This is excellent news! The new MRI center will greatly benefit our community. Thank you to everyone involved in making this happen.</p>
+                        <button class="reply-btn"><i class="fas fa-reply"></i> Reply</button>
+                    </div>
+                </div>
+                
+                <div class="comment-item">
+                    <div class="comment-avatar">
+                        <img src="assets/patients/review-2.jpg" alt="Tigist Bekele">
+                    </div>
+                    <div class="comment-content">
+                        <div class="comment-header">
+                            <h4>Tigist Bekele</h4>
+                            <span class="comment-date">December 21, 2026</span>
+                        </div>
+                        <p>I recently had an MRI at the new center and the experience was excellent. The staff was professional and the new machine is amazing!</p>
+                        <button class="reply-btn"><i class="fas fa-reply"></i> Reply</button>
+                    </div>
+                </div>
+                
+                <div class="comment-item reply">
+                    <div class="comment-avatar">
+                        <img src="assets/doctors/dr-samuel-bekele.jpg" alt="Dr. Samuel Bekele">
+                    </div>
+                    <div class="comment-content">
+                        <div class="comment-header">
+                            <h4>Dr. Samuel Bekele <span class="author-badge">Author</span></h4>
+                            <span class="comment-date">December 21, 2026</span>
+                        </div>
+                        <p>Thank you for your kind words, Tigist! We're delighted to hear about your positive experience. Our team is dedicated to providing the best care possible.</p>
+                        <button class="reply-btn"><i class="fas fa-reply"></i> Reply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    15. LEAVE A COMMENT
+    ============================================================ -->
+    <section class="leave-comment" id="leaveComment">
+        <div class="container">
+            <div class="comment-form-wrapper" data-aos="fade-up">
+                <h3>Leave a Comment</h3>
+                <p>Your email address will not be published. Required fields are marked with <span class="required">*</span></p>
+                <form class="comment-form" id="commentForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Full Name <span class="required">*</span></label>
+                            <input type="text" placeholder="Enter your name" required>
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address <span class="required">*</span></label>
+                            <input type="email" placeholder="Enter your email" required>
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Your Comment <span class="required">*</span></label>
+                        <textarea placeholder="Write your comment here..." required></textarea>
+                        <i class="fas fa-comment"></i>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Post Comment
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    16. NEWSLETTER
+    ============================================================ -->
+    <section class="newsletter-section" id="newsletterSection">
+        <div class="container">
+            <div class="newsletter-wrapper" data-aos="fade-up">
+                <div class="newsletter-content">
+                    <h3><i class="fas fa-envelope-open-text"></i> Subscribe to Our Newsletter</h3>
+                    <p>Get the latest health articles and hospital news delivered to your inbox.</p>
+                </div>
+                <form class="newsletter-form" id="articleNewsletterForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email Address" required>
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Subscribe
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    17. AI HEALTH ASSISTANT
+    ============================================================ -->
+    <div class="ai-assistant" id="aiAssistant">
+        <button class="ai-toggle article-ai-toggle" id="aiToggle">
+            <i class="fas fa-robot"></i>
+        </button>
+        <div class="ai-chat-window" id="aiChatWindow">
+            <div class="ai-header article-ai-header">
+                <div class="ai-header-info">
+                    <i class="fas fa-robot"></i>
+                    <div>
+                        <h4>AI Health Assistant</h4>
+                        <span>Online</span>
+                    </div>
+                </div>
+                <button class="ai-close" id="aiClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="ai-body" id="aiBody">
+                <div class="ai-message ai-bot">
+                    <div class="ai-avatar"><i class="fas fa-robot"></i></div>
+                    <div class="ai-bubble article-ai-bubble">
+                        <p>📖 Hello! I can help you with this article:</p>
+                        <ul>
+                            <li>Explain complex medical terms</li>
+                            <li>Summarize the key points</li>
+                            <li>Answer questions about MRI</li>
+                            <li>Find related health information</li>
+                        </ul>
+                        <p>How can I help you understand this article better?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="ai-footer">
+                <div class="ai-input-group">
+                    <input type="text" id="aiInput" placeholder="Ask about this article...">
+                    <button id="aiSend"><i class="fas fa-paper-plane"></i></button>
+                </div>
+                <div class="ai-voice">
+                    <button id="aiVoiceBtn"><i class="fas fa-microphone"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    FLOATING BUTTONS
+    ============================================================ -->
+    <div class="floating-buttons">
+        <a href="emergency.html" class="float-btn emergency" data-tooltip="Emergency">
+            <i class="fas fa-ambulance"></i>
+        </a>
+        <button class="float-btn chat" id="floatingChat" data-tooltip="AI Assistant">
+            <i class="fas fa-robot"></i>
+        </button>
+        <button class="float-btn scroll-top" id="scrollTop" data-tooltip="Scroll to Top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- ============================================================
+    18. GOOGLE MAP
+    ============================================================ -->
+    <section class="map-section" id="mapSection">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Location</span>
+                <h2>Our <span>Location</span></h2>
+                <p>Visit Gimbie Adventist General Hospital.</p>
+            </div>
+            
+            <div class="map-container" data-aos="fade-up">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31882.29455801249!2d35.834!3d9.123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z5Ymn5bqn5YyX6ZqA5Y2a5Li76a2U5Yeg5b2T!5e0!3m2!1sen!2s!4v1700000000000" 
+                    width="100%" 
+                    height="400" 
+                    style="border:0;" 
+                    allowfullscreen="">
+                </iframe>
+                <div class="map-actions">
+                    <a href="https://maps.google.com/maps?daddr=Gimbie+Town+West+Wollega+Zone+Oromia+Region+Ethiopia" 
+                       target="_blank" 
+                       class="btn btn-primary">
+                        <i class="fas fa-directions"></i> Get Directions
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    19. CONTACT INFORMATION
+    ============================================================ -->
+    <section class="contact-article" id="contactArticle">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-card" data-aos="fade-up">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h4>Address</h4>
+                    <p>P.O. Box 228, Gimbie Town<br>West Wollega Zone, Oromia</p>
+                </div>
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-phone-alt"></i>
+                    <h4>Phone</h4>
+                    <p><a href="tel:+251577710083">+251 57 771 0083</a></p>
+                    <p><a href="tel:+251777100051">+251 77 710 0051</a></p>
+                </div>
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-envelope"></i>
+                    <h4>Email</h4>
+                    <p><a href="mailto:gimbieadventisthosp@gmail.com">gimbieadventisthosp@gmail.com</a></p>
+                </div>
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-clock"></i>
+                    <h4>Working Hours</h4>
+                    <p>Monday - Friday: 8:00 AM - 6:00 PM</p>
+                    <p>Emergency: 24/7</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    20. EMERGENCY BANNER
+    ============================================================ -->
+    <section class="emergency-banner" id="emergencyBanner">
+        <div class="container">
+            <div class="emergency-card" data-aos="zoom-in">
+                <div class="emergency-icon"><i class="fas fa-ambulance"></i></div>
+                <div class="emergency-info">
+                    <h3>Medical Emergency?</h3>
+                    <p>Call our emergency hotline for immediate medical assistance.</p>
+                    <div class="emergency-number-large">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>+251 57 771 0083</span>
+                    </div>
+                </div>
+                <div class="emergency-actions">
+                    <a href="emergency.html" class="btn btn-danger">
+                        <i class="fas fa-ambulance"></i> Call Ambulance
+                    </a>
+                    <a href="appointments.html" class="btn btn-primary">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    21. FOOTER
+    ============================================================ -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </div>
+                    <p class="footer-about">
+                        Providing quality healthcare services since 1948. Committed to compassionate care and medical excellence.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About</a></li>
+                        <li><a href="departments.html"><i class="fas fa-chevron-right"></i> Departments</a></li>
+                        <li><a href="doctors.html"><i class="fas fa-chevron-right"></i> Doctors</a></li>
+                        <li><a href="news.html"><i class="fas fa-chevron-right"></i> News</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Departments</h4>
+                    <ul>
+                        <li><a href="department.html?dept=emergency"><i class="fas fa-chevron-right"></i> Emergency</a></li>
+                        <li><a href="department.html?dept=surgery"><i class="fas fa-chevron-right"></i> Surgery</a></li>
+                        <li><a href="department.html?dept=pediatrics"><i class="fas fa-chevron-right"></i> Pediatrics</a></li>
+                        <li><a href="department.html?dept=cardiology"><i class="fas fa-chevron-right"></i> Cardiology</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> P.O. Box 228, Gimbie</li>
+                        <li><i class="fas fa-phone-alt"></i> +251 57 771 0083</li>
+                        <li><i class="fas fa-envelope"></i> gimbieadventisthosp@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 <strong>Gimbie Adventist General Hospital</strong>. All Rights Reserved.</p>
+                    <div class="footer-links">
+                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="terms.html">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox-plus-jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/article.js"></script>
+    <script src="js/ai-assistant.js"></script>
+</body>
+  </html>
