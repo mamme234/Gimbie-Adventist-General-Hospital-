@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pharmacist Dashboard - Gimbie Adventist General Hospital. Manage prescriptions, inventory, and pharmacy operations.">
+    <meta name="keywords" content="pharmacist dashboard, prescriptions, inventory, medicines, pharmacy, gimbie hospital">
+    <meta name="author" content="Gimbie Adventist General Hospital">
+    <title>Pharmacist Dashboard | Gimbie Adventist General Hospital</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pharmacist-dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+</head>
+<body>
+    
+    <!-- ============================================================
+    1. LOADING SCREEN
+    ============================================================ -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>Gimbie Adventist</span>
+            </div>
+            <div class="loader-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="loader-text">
+                <p id="loadingText">Loading Pharmacist Dashboard...</p>
+                <span class="loader-percentage" id="loaderPercentage">0%</span>
+            </div>
+            <div class="loader-pharmacy-animation">
+                <i class="fas fa-prescription-bottle"></i>
+                <i class="fas fa-pills"></i>
+                <i class="fas fa-syringe"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    2. DASHBOARD HEADER
+    ============================================================ -->
+    <header class="dashboard-header" id="dashboardHeader">
+        <div class="container">
+            <div class="header-left">
+                <div class="hospital-logo">
+                    <a href="../index.html">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </a>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="header-center">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search medicines, prescriptions, suppliers...">
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="notifications">
+                    <button class="notif-btn"><i class="fas fa-bell"></i><span class="notif-badge">6</span></button>
+                </div>
+                <div class="messages">
+                    <button class="msg-btn"><i class="fas fa-envelope"></i><span class="msg-badge">4</span></button>
+                </div>
+                <div class="language-switcher">
+                    <button class="lang-btn" id="langToggle">
+                        <i class="fas fa-globe"></i> EN <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="lang-dropdown">
+                        <li><a href="#" data-lang="en">English</a></li>
+                        <li><a href="#" data-lang="am">አማርኛ</a></li>
+                        <li><a href="#" data-lang="or">Afaan Oromoo</a></li>
+                    </ul>
+                </div>
+                <div class="theme-toggle">
+                    <button id="themeToggle"><i class="fas fa-moon"></i></button>
+                </div>
+                <div class="pharmacist-profile">
+                    <img src="../assets/staff/pharmacist-avatar.jpg" alt="Pharmacist Photo" class="profile-img">
+                    <div class="profile-info">
+                        <span class="pharmacist-name">Daniel Worku</span>
+                        <span class="pharmacist-id">PHA-000001</span>
+                        <span class="pharmacist-dept">Pharmacy</span>
+                    </div>
+                    <button class="logout-btn"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    3. LEFT SIDEBAR
+    ============================================================ -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-user">
+            <img src="../assets/staff/pharmacist-avatar.jpg" alt="Pharmacist Photo">
+            <h4>Daniel Worku</h4>
+            <span>PHA-000001</span>
+            <span class="role-badge">Senior Pharmacist</span>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="active"><a href="pharmacist-dashboard.html"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+                <li><a href="prescriptions.html"><i class="fas fa-prescription"></i> Prescriptions</a></li>
+                <li><a href="inventory.html"><i class="fas fa-boxes"></i> Medicine Inventory</a></li>
+                <li><a href="dispense.html"><i class="fas fa-hand-holding-heart"></i> Dispense Medicines</a></li>
+                <li><a href="purchase-orders.html"><i class="fas fa-shopping-cart"></i> Purchase Orders</a></li>
+                <li><a href="suppliers.html"><i class="fas fa-truck"></i> Suppliers</a></li>
+                <li><a href="batch-management.html"><i class="fas fa-layer-group"></i> Batch Management</a></li>
+                <li><a href="expiry-management.html"><i class="fas fa-clock"></i> Expiry Management</a></li>
+                <li><a href="barcode-scanner.html"><i class="fas fa-barcode"></i> Barcode Scanner</a></li>
+                <li><a href="stock-transfers.html"><i class="fas fa-exchange-alt"></i> Stock Transfers</a></li>
+                <li><a href="reports.html"><i class="fas fa-file-alt"></i> Reports</a></li>
+                <li><a href="messages.html"><i class="fas fa-envelope"></i> Messages</a></li>
+                <li><a href="notifications.html"><i class="fas fa-bell"></i> Notifications</a></li>
+                <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- ============================================================
+    MAIN CONTENT
+    ============================================================ -->
+    <main class="dashboard-main" id="dashboardMain">
+        
+        <!-- ============================================================
+        4. DASHBOARD OVERVIEW
+        ============================================================ -->
+        <section class="dashboard-overview" id="dashboardOverview">
+            <div class="container">
+                <div class="welcome-section">
+                    <div>
+                        <h2>Welcome, Pharmacist Daniel! 👋</h2>
+                        <p>Manage prescriptions and inventory efficiently.</p>
+                        <span class="shift-badge"><i class="fas fa-clock"></i> Morning Shift: 8:00 AM - 4:00 PM</span>
+                    </div>
+                    <div class="quick-stats-header">
+                        <span class="stat-badge"><i class="fas fa-prescription"></i> 15 Prescriptions Today</span>
+                        <span class="stat-badge"><i class="fas fa-clock"></i> 5 Pending</span>
+                        <span class="stat-badge warning"><i class="fas fa-exclamation-triangle"></i> 8 Low Stock</span>
+                        <span class="stat-badge danger"><i class="fas fa-clock"></i> 3 Expiring Soon</span>
+                        <span class="stat-badge"><i class="fas fa-boxes"></i> 12 Out of Stock</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        5. STATISTICS CARDS
+        ============================================================ -->
+        <section class="statistics-cards" id="statisticsCards">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-pills"></i></div>
+                        <div>
+                            <span class="stat-number">2,500</span>
+                            <span class="stat-label">Total Medicines</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                        <div>
+                            <span class="stat-number">2,200</span>
+                            <span class="stat-label">Available Medicines</span>
+                        </div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <div>
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Low Stock</span>
+                        </div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">Expiring Soon</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-money-bill-wave"></i></div>
+                        <div>
+                            <span class="stat-number">ETB 45K</span>
+                            <span class="stat-label">Daily Sales</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-clipboard-list"></i></div>
+                        <div>
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Pending Orders</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-truck"></i></div>
+                        <div>
+                            <span class="stat-number">15</span>
+                            <span class="stat-label">Suppliers</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+                        <div>
+                            <span class="stat-number">ETB 1.2M</span>
+                            <span class="stat-label">Monthly Revenue</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        6. PRESCRIPTION MANAGEMENT
+        ============================================================ -->
+        <section class="prescription-management" id="prescriptionManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-prescription"></i> Prescription Management</h3>
+                    <a href="prescriptions.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="prescription-list">
+                    <div class="prescription-item">
+                        <div class="presc-info">
+                            <h4>PRX-2026-001</h4>
+                            <p><strong>Patient:</strong> Abebe Demissie</p>
+                            <p><strong>Doctor:</strong> Dr. Samuel Bekele</p>
+                            <p><strong>Date:</strong> Dec 20, 2026</p>
+                        </div>
+                        <div class="presc-status">
+                            <span class="status-badge pending">Pending</span>
+                        </div>
+                        <div class="presc-actions">
+                            <button class="btn btn-outline-sm">View</button>
+                            <button class="btn btn-primary-sm">Dispense</button>
+                            <button class="btn btn-outline-sm"><i class="fas fa-print"></i></button>
+                        </div>
+                    </div>
+                    <div class="prescription-item">
+                        <div class="presc-info">
+                            <h4>PRX-2026-002</h4>
+                            <p><strong>Patient:</strong> Tigist Bekele</p>
+                            <p><strong>Doctor:</strong> Dr. Hana Alemu</p>
+                            <p><strong>Date:</strong> Dec 20, 2026</p>
+                        </div>
+                        <div class="presc-status">
+                            <span class="status-badge ready">Ready for Pickup</span>
+                        </div>
+                        <div class="presc-actions">
+                            <button class="btn btn-outline-sm">View</button>
+                            <button class="btn btn-outline-sm"><i class="fas fa-print"></i></button>
+                        </div>
+                    </div>
+                    <div class="prescription-item">
+                        <div class="presc-info">
+                            <h4>PRX-2026-003</h4>
+                            <p><strong>Patient:</strong> Samuel Abate</p>
+                            <p><strong>Doctor:</strong> Dr. Dawit Tadesse</p>
+                            <p><strong>Date:</strong> Dec 19, 2026</p>
+                        </div>
+                        <div class="presc-status">
+                            <span class="status-badge dispensed">Dispensed</span>
+                        </div>
+                        <div class="presc-actions">
+                            <button class="btn btn-outline-sm">View</button>
+                            <button class="btn btn-outline-sm"><i class="fas fa-print"></i></button>
+                        </div>
+                    </div>
+                    <div class="prescription-item">
+                        <div class="presc-info">
+                            <h4>PRX-2026-004</h4>
+                            <p><strong>Patient:</strong> Ruth Desta</p>
+                            <p><strong>Doctor:</strong> Dr. Abel Girma</p>
+                            <p><strong>Date:</strong> Dec 20, 2026</p>
+                        </div>
+                        <div class="presc-status">
+                            <span class="status-badge pending">Pending</span>
+                        </div>
+                        <div class="presc-actions">
+                            <button class="btn btn-outline-sm">View</button>
+                            <button class="btn btn-primary-sm">Dispense</button>
+                            <button class="btn btn-outline-sm"><i class="fas fa-print"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        7. MEDICINE INVENTORY
+        ============================================================ -->
+        <section class="medicine-inventory" id="medicineInventory">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-boxes"></i> Medicine Inventory</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Add Medicine</button>
+                </div>
+                
+                <div class="inventory-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Barcode</th>
+                                <th>Medicine Name</th>
+                                <th>Generic Name</th>
+                                <th>Category</th>
+                                <th>Strength</th>
+                                <th>Stock</th>
+                                <th>Min Level</th>
+                                <th>Expiry</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>764-001</td>
+                                <td>Amlodipine</td>
+                                <td>Amlodipine</td>
+                                <td>Tablets</td>
+                                <td>5mg</td>
+                                <td>450</td>
+                                <td>100</td>
+                                <td>Dec 2027</td>
+                                <td><span class="status-badge in-stock">In Stock</span></td>
+                                <td>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-barcode"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>764-002</td>
+                                <td>Metformin</td>
+                                <td>Metformin</td>
+                                <td>Tablets</td>
+                                <td>500mg</td>
+                                <td>320</td>
+                                <td>80</td>
+                                <td>Mar 2027</td>
+                                <td><span class="status-badge in-stock">In Stock</span></td>
+                                <td>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-barcode"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>764-003</td>
+                                <td>Losartan</td>
+                                <td>Losartan</td>
+                                <td>Tablets</td>
+                                <td>50mg</td>
+                                <td>75</td>
+                                <td>100</td>
+                                <td>Jun 2027</td>
+                                <td><span class="status-badge low-stock">Low Stock</span></td>
+                                <td>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-barcode"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>764-004</td>
+                                <td>Insulin</td>
+                                <td>Human Insulin</td>
+                                <td>Injections</td>
+                                <td>100IU/ml</td>
+                                <td>0</td>
+                                <td>50</td>
+                                <td>Feb 2027</td>
+                                <td><span class="status-badge out-of-stock">Out of Stock</span></td>
+                                <td>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-barcode"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>764-005</td>
+                                <td>Paracetamol</td>
+                                <td>Acetaminophen</td>
+                                <td>Tablets</td>
+                                <td>500mg</td>
+                                <td>850</td>
+                                <td>200</td>
+                                <td>Dec 2027</td>
+                                <td><span class="status-badge in-stock">In Stock</span></td>
+                                <td>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-barcode"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        8. BARCODE SCANNER
+        ============================================================ -->
+        <section class="barcode-scanner" id="barcodeScanner">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-barcode"></i> Barcode Scanner</h3>
+                </div>
+                
+                <div class="scanner-wrapper">
+                    <div class="scanner-box">
+                        <div class="scanner-icon">
+                            <i class="fas fa-barcode"></i>
+                        </div>
+                        <p>Scan medicine barcode to verify, dispense, or update inventory</p>
+                        <div class="scanner-input">
+                            <input type="text" placeholder="Scan or enter barcode number...">
+                            <button class="btn btn-primary"><i class="fas fa-search"></i> Scan</button>
+                        </div>
+                        <div class="scanner-actions">
+                            <button class="btn btn-outline-sm"><i class="fas fa-camera"></i> Open Camera</button>
+                            <button class="btn btn-outline-sm"><i class="fas fa-upload"></i> Upload Image</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        9. PURCHASE ORDERS
+        ============================================================ -->
+        <section class="purchase-orders" id="purchaseOrders">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-shopping-cart"></i> Purchase Orders</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Create Order</button>
+                </div>
+                
+                <div class="purchase-list">
+                    <div class="purchase-item">
+                        <div class="purchase-info">
+                            <h4>PO-2026-001</h4>
+                            <p><strong>Supplier:</strong> Ethiopian Pharmaceutical</p>
+                            <p><strong>Items:</strong> 5 medicines</p>
+                            <p><strong>Total:</strong> ETB 45,000</p>
+                        </div>
+                        <div class="purchase-status">
+                            <span class="status-badge pending">Pending</span>
+                        </div>
+                        <div class="purchase-actions">
+                            <button class="btn btn-outline-sm">View</button>
+                            <button class="btn btn-primary-sm">Approve</button>
+                        </div>
+                    </div>
+                    <div class="purchase-item">
+                        <div class="purchase-info">
+                            <h4>PO-2026-002</h4>
+                            <p><strong>Supplier:</strong> MedTech Solutions</p>
+                            <p><strong>Items:</strong> 3 medicines</p>
+                            <p><strong>Total:</strong> ETB 22,500</p>
+                        </div>
+                        <div class="purchase-status">
+                            <span class="status-badge shipped">Shipped</span>
+                        </div>
+                        <div class="purchase-actions">
+                            <button class="btn btn-outline-sm">View</button>
+                            <button class="btn btn-outline-sm">Track</button>
+                        </div>
+                    </div>
+                    <div class="purchase-item">
+                        <div class="purchase-info">
+                            <h4>PO-2026-003</h4>
+                            <p><strong>Supplier:</strong> Novo Nordisk</p>
+                            <p><strong>Items:</strong> 2 medicines</p>
+                            <p><strong>Total:</strong> ETB 78,000</p>
+                        </div>
+                        <div class="purchase-status">
+                            <span class="status-badge delivered">Delivered</span>
+                        </div>
+                        <div class="purchase-actions">
+                            <button class="btn btn-outline-sm">View</button>
+                            <button class="btn btn-outline-sm">Receive</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        10. SUPPLIER MANAGEMENT
+        ============================================================ -->
+        <section class="supplier-management" id="supplierManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-truck"></i> Supplier Management</h3>
+                    <a href="suppliers.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="supplier-grid">
+                    <div class="supplier-card">
+                        <i class="fas fa-industry"></i>
+                        <div>
+                            <h4>Ethiopian Pharmaceutical</h4>
+                            <p>Contact: Abebe Haile</p>
+                            <p>Phone: +251 91 123 4567</p>
+                            <p><span class="supplier-products">25 Products</span></p>
+                        </div>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                    <div class="supplier-card">
+                        <i class="fas fa-globe"></i>
+                        <div>
+                            <h4>Novo Nordisk</h4>
+                            <p>Contact: Maria Smith</p>
+                            <p>Phone: +251 92 234 5678</p>
+                            <p><span class="supplier-products">12 Products</span></p>
+                        </div>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                    <div class="supplier-card">
+                        <i class="fas fa-syringe"></i>
+                        <div>
+                            <h4>MedTech Solutions</h4>
+                            <p>Contact: Dawit Tadesse</p>
+                            <p>Phone: +251 93 345 6789</p>
+                            <p><span class="supplier-products">18 Products</span></p>
+                        </div>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        11. STOCK MANAGEMENT
+        ============================================================ -->
+        <section class="stock-management" id="stockManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-exchange-alt"></i> Stock Management</h3>
+                    <div class="stock-actions">
+                        <button class="btn btn-outline-sm">Stock In</button>
+                        <button class="btn btn-outline-sm">Stock Out</button>
+                        <button class="btn btn-outline-sm">Transfer</button>
+                        <button class="btn btn-outline-sm">Adjust</button>
+                    </div>
+                </div>
+                
+                <div class="stock-grid">
+                    <div class="stock-card">
+                        <i class="fas fa-arrow-down"></i>
+                        <h4>Stock In</h4>
+                        <p>Receive new inventory</p>
+                        <button class="btn btn-primary-sm">Process</button>
+                    </div>
+                    <div class="stock-card">
+                        <i class="fas fa-arrow-up"></i>
+                        <h4>Stock Out</h4>
+                        <p>Dispense or issue stock</p>
+                        <button class="btn btn-primary-sm">Process</button>
+                    </div>
+                    <div class="stock-card">
+                        <i class="fas fa-exchange-alt"></i>
+                        <h4>Stock Transfer</h4>
+                        <p>Transfer between locations</p>
+                        <button class="btn btn-primary-sm">Process</button>
+                    </div>
+                    <div class="stock-card">
+                        <i class="fas fa-balance-scale"></i>
+                        <h4>Stock Adjustment</h4>
+                        <p>Adjust stock levels</p>
+                        <button class="btn btn-primary-sm">Process</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        12. EXPIRY MANAGEMENT
+        ============================================================ -->
+        <section class="expiry-management" id="expiryManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-clock"></i> Expiry Management</h3>
+                    <a href="expiry-management.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="expiry-list">
+                    <div class="expiry-item danger">
+                        <div class="expiry-info">
+                            <h4>Insulin</h4>
+                            <p>Batch: INS-2025-001</p>
+                            <p>Expiry: Feb 15, 2027</p>
+                            <span class="days-left">45 days left</span>
+                        </div>
+                        <div class="expiry-actions">
+                            <button class="btn btn-danger-sm">Dispose</button>
+                            <button class="btn btn-outline-sm">Return</button>
+                        </div>
+                    </div>
+                    <div class="expiry-item warning">
+                        <div class="expiry-info">
+                            <h4>Amlodipine</h4>
+                            <p>Batch: AML-2025-003</p>
+                            <p>Expiry: Mar 10, 2027</p>
+                            <span class="days-left">75 days left</span>
+                        </div>
+                        <div class="expiry-actions">
+                            <button class="btn btn-warning-sm">Mark Expiring</button>
+                            <button class="btn btn-outline-sm">View</button>
+                        </div>
+                    </div>
+                    <div class="expiry-item warning">
+                        <div class="expiry-info">
+                            <h4>Metformin</h4>
+                            <p>Batch: MET-2025-002</p>
+                            <p>Expiry: Apr 20, 2027</p>
+                            <span class="days-left">110 days left</span>
+                        </div>
+                        <div class="expiry-actions">
+                            <button class="btn btn-warning-sm">Mark Expiring</button>
+                            <button class="btn btn-outline-sm">View</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        13. CONTROLLED MEDICINES
+        ============================================================ -->
+        <section class="controlled-medicines" id="controlledMedicines">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-shield-alt"></i> Controlled Medicines</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Log Dispense</button>
+                </div>
+                
+                <div class="controlled-grid">
+                    <div class="controlled-card">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <h4>Morphine</h4>
+                            <p><strong>Stock:</strong> 25 units</p>
+                            <p><strong>Last Dispensed:</strong> Dec 18, 2026</p>
+                            <p><strong>Approval Required:</strong> Yes</p>
+                        </div>
+                        <button class="btn btn-outline-sm">View Log</button>
+                    </div>
+                    <div class="controlled-card">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <h4>Fentanyl</h4>
+                            <p><strong>Stock:</strong> 12 units</p>
+                            <p><strong>Last Dispensed:</strong> Dec 15, 2026</p>
+                            <p><strong>Approval Required:</strong> Yes</p>
+                        </div>
+                        <button class="btn btn-outline-sm">View Log</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        14. REPORTS
+        ============================================================ -->
+        <section class="reports-section" id="reportsSection">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-file-alt"></i> Reports</h3>
+                    <div class="report-actions">
+                        <button class="btn btn-outline-sm"><i class="fas fa-file-pdf"></i> PDF</button>
+                        <button class="btn btn-outline-sm"><i class="fas fa-file-excel"></i> Excel</button>
+                    </div>
+                </div>
+                
+                <div class="reports-grid">
+                    <a href="#" class="report-item">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Daily Sales</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-boxes"></i>
+                        <span>Inventory Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Expiry Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Purchase Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-truck"></i>
+                        <span>Supplier Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-prescription"></i>
+                        <span>Dispensing Report</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        15. MESSAGES
+        ============================================================ -->
+        <section class="messages-section" id="messagesSection">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-envelope"></i> Messages</h3>
+                    <a href="messages.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="messages-list">
+                    <div class="message-item unread">
+                        <img src="../assets/staff/doctor-avatar.jpg" alt="Doctor">
+                        <div>
+                            <h4>Dr. Samuel Bekele</h4>
+                            <p>New prescription for patient Abebe has been sent.</p>
+                            <span class="msg-time">5 min ago</span>
+                        </div>
+                    </div>
+                    <div class="message-item unread">
+                        <img src="../assets/staff/nurse-avatar.jpg" alt="Nurse">
+                        <div>
+                            <h4>Nurse Sara</h4>
+                            <p>Medication for Bed 202 is needed urgently.</p>
+                            <span class="msg-time">15 min ago</span>
+                        </div>
+                    </div>
+                    <div class="message-item">
+                        <img src="../assets/staff/supplier-avatar.jpg" alt="Supplier">
+                        <div>
+                            <h4>Ethiopian Pharmaceutical</h4>
+                            <p>Your purchase order PO-2026-001 has been processed.</p>
+                            <span class="msg-time">1 hour ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        16. AI PHARMACY ASSISTANT
+        ============================================================ -->
+        <div class="ai-assistant" id="aiAssistant">
+            <button class="ai-toggle pharmacy-ai-toggle" id="aiToggle">
+                <i class="fas fa-robot"></i>
+            </button>
+            <div class="ai-chat-window" id="aiChatWindow">
+                <div class="ai-header pharmacy-ai-header">
+                    <div class="ai-header-info">
+                        <i class="fas fa-robot"></i>
+                        <div>
+                            <h4>AI Pharmacy Assistant</h4>
+                            <span>Online</span>
+                        </div>
+                    </div>
+                    <button class="ai-close" id="aiClose"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="ai-body" id="aiBody">
+                    <div class="ai-message ai-bot">
+                        <div class="ai-avatar"><i class="fas fa-robot"></i></div>
+                        <div class="ai-bubble pharmacy-ai-bubble">
+                            <p>💊 Hello! I'm your AI Pharmacy Assistant. I can help you:</p>
+                            <ul>
+                                <li>Check drug interactions</li>
+                                <li>Forecast stock needs</li>
+                                <li>Search medicines</li>
+                                <li>Optimize inventory</li>
+                                <li>Provide dosage guidance</li>
+                            </ul>
+                            <p>How can I assist you today?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ai-footer">
+                    <div class="ai-input-group">
+                        <input type="text" id="aiInput" placeholder="Ask about pharmacy...">
+                        <button id="aiSend"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                    <div class="ai-voice">
+                        <button id="aiVoiceBtn"><i class="fas fa-microphone"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        17. QUICK ACTIONS
+        ============================================================ -->
+        <section class="quick-actions" id="quickActions">
+            <div class="container">
+                <div class="actions-grid">
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Add Medicine</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-barcode"></i>
+                        <span>Scan Barcode</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-prescription"></i>
+                        <span>Dispense Prescription</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Create Purchase Order</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-print"></i>
+                        <span>Print Medicine Label</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Generate Inventory Report</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        FLOATING BUTTONS
+        ============================================================ -->
+        <div class="floating-buttons">
+            <button class="float-btn emergency" id="emergencyFloat" data-tooltip="Emergency">
+                <i class="fas fa-ambulance"></i>
+            </button>
+            <button class="float-btn chat" id="floatingChat" data-tooltip="AI Assistant">
+                <i class="fas fa-robot"></i>
+            </button>
+            <button class="float-btn scroll-top" id="scrollTop" data-tooltip="Scroll to Top">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+        </div>
+
+        <!-- ============================================================
+        18. FOOTER
+        ============================================================ -->
+        <footer class="dashboard-footer" id="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <p>&copy; 2026 <strong>Gimbie Adventist General Hospital</strong>. All Rights Reserved.</p>
+                    <div class="footer-links">
+                        <a href="../privacy.html">Privacy Policy</a>
+                        <a href="../terms.html">Terms of Service</a>
+                        <a href="../contact.html">Hospital Support</a>
+                        <a href="../contact.html">IT Support</a>
+                        <span class="version">v2.4.1</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+    <script src="../js/pharmacist-dashboard.js"></script>
+    <script src="../js/ai-assistant.js"></script>
+</body>
+      </html>
