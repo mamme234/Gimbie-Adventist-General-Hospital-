@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Store Keeper Dashboard - Gimbie Adventist General Hospital. Manage inventory, stock, supplies, and warehouse operations.">
+    <meta name="keywords" content="store keeper, inventory, stock management, warehouse, supplies, gimbie hospital">
+    <meta name="author" content="Gimbie Adventist General Hospital">
+    <title>Store Keeper Dashboard | Gimbie Adventist General Hospital</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/storekeeper-dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+</head>
+<body>
+    
+    <!-- ============================================================
+    1. LOADING SCREEN
+    ============================================================ -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>Gimbie Adventist</span>
+            </div>
+            <div class="loader-status-grid">
+                <div class="loader-status-item">
+                    <span>Database Connection</span>
+                    <div class="status-dot connected"></div>
+                </div>
+                <div class="loader-status-item">
+                    <span>Inventory Data Loading</span>
+                    <div class="status-dot connected"></div>
+                </div>
+            </div>
+            <div class="loader-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="loader-text">
+                <p id="loadingText">Loading Store Keeper Dashboard...</p>
+                <span class="loader-percentage" id="loaderPercentage">0%</span>
+            </div>
+            <div class="loader-storekeeper-animation">
+                <i class="fas fa-boxes"></i>
+                <i class="fas fa-barcode"></i>
+                <i class="fas fa-warehouse"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    2. DASHBOARD HEADER
+    ============================================================ -->
+    <header class="dashboard-header" id="dashboardHeader">
+        <div class="container">
+            <div class="header-left">
+                <div class="hospital-logo">
+                    <a href="../index.html">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </a>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="header-center">
+                <div class="global-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search items, medicines, equipment, suppliers...">
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="notifications">
+                    <button class="notif-btn"><i class="fas fa-bell"></i><span class="notif-badge">8</span></button>
+                </div>
+                <div class="messages">
+                    <button class="msg-btn"><i class="fas fa-envelope"></i><span class="msg-badge">5</span></button>
+                </div>
+                <div class="fullscreen-toggle">
+                    <button id="fullscreenToggle"><i class="fas fa-expand"></i></button>
+                </div>
+                <div class="language-switcher">
+                    <button class="lang-btn" id="langToggle">
+                        <i class="fas fa-globe"></i> EN <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="lang-dropdown">
+                        <li><a href="#" data-lang="en">English</a></li>
+                        <li><a href="#" data-lang="am">አማርኛ</a></li>
+                        <li><a href="#" data-lang="or">Afaan Oromoo</a></li>
+                    </ul>
+                </div>
+                <div class="theme-toggle">
+                    <button id="themeToggle"><i class="fas fa-moon"></i></button>
+                </div>
+                <div class="storekeeper-profile">
+                    <img src="../assets/staff/storekeeper-avatar.jpg" alt="Store Keeper" class="profile-img">
+                    <div class="profile-info">
+                        <span class="storekeeper-name">Getachew Fekadu</span>
+                        <span class="storekeeper-id">STO-000001</span>
+                        <span class="storekeeper-dept">Inventory Department</span>
+                    </div>
+                    <button class="logout-btn"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    3. LEFT SIDEBAR
+    ============================================================ -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-user">
+            <img src="../assets/staff/storekeeper-avatar.jpg" alt="Store Keeper">
+            <h4>Getachew Fekadu</h4>
+            <span>STO-000001</span>
+            <span class="role-badge">Store Keeper</span>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="active"><a href="storekeeper-dashboard.html"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-boxes"></i> Inventory</a></li>
+                <li><a href="#"><i class="fas fa-medkit"></i> Medical Supplies</a></li>
+                <li><a href="#"><i class="fas fa-pills"></i> Medicines</a></li>
+                <li><a href="#"><i class="fas fa-microscope"></i> Equipment</a></li>
+                <li><a href="#"><i class="fas fa-arrow-down"></i> Stock In</a></li>
+                <li><a href="#"><i class="fas fa-arrow-up"></i> Stock Out</a></li>
+                <li><a href="#"><i class="fas fa-shopping-cart"></i> Purchase Orders</a></li>
+                <li><a href="#"><i class="fas fa-truck"></i> Suppliers</a></li>
+                <li><a href="#"><i class="fas fa-warehouse"></i> Warehouse</a></li>
+                <li><a href="#"><i class="fas fa-barcode"></i> Barcode Scanner</a></li>
+                <li><a href="#"><i class="fas fa-qrcode"></i> QR Scanner</a></li>
+                <li><a href="#"><i class="fas fa-layer-group"></i> Batch Tracking</a></li>
+                <li><a href="#"><i class="fas fa-clock"></i> Expiry Management</a></li>
+                <li><a href="#"><i class="fas fa-exchange-alt"></i> Stock Transfers</a></li>
+                <li><a href="#"><i class="fas fa-cubes"></i> Asset Management</a></li>
+                <li><a href="#"><i class="fas fa-file-alt"></i> Reports</a></li>
+                <li><a href="#"><i class="fas fa-clipboard-list"></i> Audit Logs</a></li>
+                <li><a href="#"><i class="fas fa-envelope"></i> Messages</a></li>
+                <li><a href="#"><i class="fas fa-bell"></i> Notifications</a></li>
+                <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- ============================================================
+    MAIN CONTENT
+    ============================================================ -->
+    <main class="dashboard-main" id="dashboardMain">
+        
+        <!-- ============================================================
+        4. DASHBOARD OVERVIEW
+        ============================================================ -->
+        <section class="dashboard-overview" id="dashboardOverview">
+            <div class="container">
+                <div class="welcome-section">
+                    <div>
+                        <h2>Good Morning, Getachew! 📦</h2>
+                        <p>Welcome to your inventory management dashboard.</p>
+                        <span class="shift-badge"><i class="fas fa-clock"></i> Morning Shift: 8:00 AM - 4:00 PM</span>
+                    </div>
+                    <div class="quick-stats-header">
+                        <span class="stat-badge"><i class="fas fa-boxes"></i> 2,500 Items</span>
+                        <span class="stat-badge"><i class="fas fa-check-circle"></i> 2,200 Available</span>
+                        <span class="stat-badge warning"><i class="fas fa-exclamation-triangle"></i> 15 Low Stock</span>
+                        <span class="stat-badge danger"><i class="fas fa-clock"></i> 8 Expiring</span>
+                        <span class="stat-badge"><i class="fas fa-truck"></i> 5 Pending Deliveries</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        5. STATISTICS CARDS
+        ============================================================ -->
+        <section class="statistics-cards" id="statisticsCards">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-boxes"></i></div>
+                        <div>
+                            <span class="stat-number">2,500</span>
+                            <span class="stat-label">Total Products</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-pills"></i></div>
+                        <div>
+                            <span class="stat-number">1,200</span>
+                            <span class="stat-label">Medicines</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-microscope"></i></div>
+                        <div>
+                            <span class="stat-number">85</span>
+                            <span class="stat-label">Medical Equipment</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-medkit"></i></div>
+                        <div>
+                            <span class="stat-number">1,215</span>
+                            <span class="stat-label">Medical Supplies</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-warehouse"></i></div>
+                        <div>
+                            <span class="stat-number">ETB 1.2M</span>
+                            <span class="stat-label">Warehouse Value</span>
+                        </div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <div>
+                            <span class="stat-number">15</span>
+                            <span class="stat-label">Low Stock</span>
+                        </div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Expiring Soon</span>
+                        </div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-icon"><i class="fas fa-times-circle"></i></div>
+                        <div>
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Out of Stock</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-truck"></i></div>
+                        <div>
+                            <span class="stat-number">5</span>
+                            <span class="stat-label">New Deliveries</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-shopping-cart"></i></div>
+                        <div>
+                            <span class="stat-number">ETB 350K</span>
+                            <span class="stat-label">Monthly Purchases</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        6. INVENTORY MANAGEMENT
+        ============================================================ -->
+        <section class="inventory-management" id="inventoryManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-boxes"></i> Inventory Management</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Add New Item</button>
+                </div>
+                
+                <div class="inventory-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Barcode</th>
+                                <th>Item Name</th>
+                                <th>Category</th>
+                                <th>Qty</th>
+                                <th>Min</th>
+                                <th>Location</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>764-001</td>
+                                <td>Amlodipine 5mg</td>
+                                <td>Medicine</td>
+                                <td>450</td>
+                                <td>100</td>
+                                <td>A-2-5</td>
+                                <td><span class="status-badge in-stock">In Stock</span></td>
+                                <td>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-barcode"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>764-002</td>
+                                <td>Metformin 500mg</td>
+                                <td>Medicine</td>
+                                <td>320</td>
+                                <td>80</td>
+                                <td>A-2-6</td>
+                                <td><span class="status-badge in-stock">In Stock</span></td>
+                                <td>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-barcode"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>764-003</td>
+                                <td>Surgical Gloves</td>
+                                <td>Supplies</td>
+                                <td>75</td>
+                                <td>100</td>
+                                <td>B-3-2</td>
+                                <td><span class="status-badge low-stock">Low Stock</span></td>
+                                <td>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-barcode"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>764-004</td>
+                                <td>Insulin</td>
+                                <td>Medicine</td>
+                                <td>0</td>
+                                <td>50</td>
+                                <td>C-1-3</td>
+                                <td><span class="status-badge out-of-stock">Out of Stock</span></td>
+                                <td>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-barcode"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        7. MEDICINE INVENTORY
+        ============================================================ -->
+        <section class="medicine-inventory" id="medicineInventory">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-pills"></i> Medicine Inventory</h3>
+                    <a href="#" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="medicine-grid">
+                    <div class="medicine-card">
+                        <h4>Amlodipine</h4>
+                        <span>Generic: Amlodipine</span>
+                        <p>Batch: AML-2026-001</p>
+                        <p>Expiry: Dec 2027</p>
+                        <p>Qty: 450 | Reorder: 100</p>
+                        <span class="status-badge in-stock">In Stock</span>
+                    </div>
+                    <div class="medicine-card">
+                        <h4>Metformin</h4>
+                        <span>Generic: Metformin</span>
+                        <p>Batch: MET-2026-001</p>
+                        <p>Expiry: Mar 2027</p>
+                        <p>Qty: 320 | Reorder: 80</p>
+                        <span class="status-badge in-stock">In Stock</span>
+                    </div>
+                    <div class="medicine-card">
+                        <h4>Insulin</h4>
+                        <span>Generic: Human Insulin</span>
+                        <p>Batch: INS-2026-001</p>
+                        <p>Expiry: Feb 2027</p>
+                        <p>Qty: 0 | Reorder: 50</p>
+                        <span class="status-badge out-of-stock">Out of Stock</span>
+                    </div>
+                    <div class="medicine-card">
+                        <h4>Paracetamol</h4>
+                        <span>Generic: Acetaminophen</span>
+                        <p>Batch: PAR-2026-001</p>
+                        <p>Expiry: Dec 2027</p>
+                        <p>Qty: 850 | Reorder: 200</p>
+                        <span class="status-badge in-stock">In Stock</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        8. MEDICAL EQUIPMENT
+        ============================================================ -->
+        <section class="medical-equipment" id="medicalEquipment">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-microscope"></i> Medical Equipment</h3>
+                    <a href="#" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="equipment-grid">
+                    <div class="equipment-card">
+                        <i class="fas fa-heartbeat"></i>
+                        <div>
+                            <h4>Defibrillator</h4>
+                            <p>ID: EQ-001</p>
+                            <p>Dept: Emergency</p>
+                            <span class="status-badge operational">Operational</span>
+                        </div>
+                    </div>
+                    <div class="equipment-card">
+                        <i class="fas fa-lungs"></i>
+                        <div>
+                            <h4>Ventilator</h4>
+                            <p>ID: EQ-002</p>
+                            <p>Dept: ICU</p>
+                            <span class="status-badge operational">Operational</span>
+                        </div>
+                    </div>
+                    <div class="equipment-card">
+                        <i class="fas fa-x-ray"></i>
+                        <div>
+                            <h4>X-Ray Machine</h4>
+                            <p>ID: EQ-003</p>
+                            <p>Dept: Radiology</p>
+                            <span class="status-badge maintenance">Maintenance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        9. STOCK MANAGEMENT
+        ============================================================ -->
+        <section class="stock-management" id="stockManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-exchange-alt"></i> Stock Management</h3>
+                    <div class="stock-actions">
+                        <button class="btn btn-outline-sm"><i class="fas fa-arrow-down"></i> Stock In</button>
+                        <button class="btn btn-outline-sm"><i class="fas fa-arrow-up"></i> Stock Out</button>
+                        <button class="btn btn-outline-sm"><i class="fas fa-balance-scale"></i> Adjust</button>
+                        <button class="btn btn-outline-sm"><i class="fas fa-exchange-alt"></i> Transfer</button>
+                    </div>
+                </div>
+                
+                <div class="stock-grid">
+                    <div class="stock-card">
+                        <i class="fas fa-arrow-down"></i>
+                        <h4>Stock In</h4>
+                        <p>Receive new inventory</p>
+                        <span class="stock-count">5 pending</span>
+                        <button class="btn btn-primary-sm">Process</button>
+                    </div>
+                    <div class="stock-card">
+                        <i class="fas fa-arrow-up"></i>
+                        <h4>Stock Out</h4>
+                        <p>Issue items to departments</p>
+                        <span class="stock-count">12 requests</span>
+                        <button class="btn btn-primary-sm">Process</button>
+                    </div>
+                    <div class="stock-card">
+                        <i class="fas fa-balance-scale"></i>
+                        <h4>Adjustment</h4>
+                        <p>Correct inventory counts</p>
+                        <span class="stock-count">3 adjustments</span>
+                        <button class="btn btn-primary-sm">Process</button>
+                    </div>
+                    <div class="stock-card">
+                        <i class="fas fa-exchange-alt"></i>
+                        <h4>Transfer</h4>
+                        <p>Move items between locations</p>
+                        <span class="stock-count">2 transfers</span>
+                        <button class="btn btn-primary-sm">Process</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        10. PURCHASE ORDERS
+        ============================================================ -->
+        <section class="purchase-orders" id="purchaseOrders">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-shopping-cart"></i> Purchase Orders</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Create Order</button>
+                </div>
+                
+                <div class="purchase-grid">
+                    <div class="purchase-card">
+                        <h4>PO-2026-001</h4>
+                        <p><strong>Supplier:</strong> Ethiopian Pharmaceutical</p>
+                        <p><strong>Items:</strong> 5</p>
+                        <p><strong>Amount:</strong> ETB 45,000</p>
+                        <span class="status-badge pending">Pending</span>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                    <div class="purchase-card">
+                        <h4>PO-2026-002</h4>
+                        <p><strong>Supplier:</strong> MedTech Solutions</p>
+                        <p><strong>Items:</strong> 3</p>
+                        <p><strong>Amount:</strong> ETB 22,500</p>
+                        <span class="status-badge shipped">Shipped</span>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                    <div class="purchase-card">
+                        <h4>PO-2026-003</h4>
+                        <p><strong>Supplier:</strong> Novo Nordisk</p>
+                        <p><strong>Items:</strong> 2</p>
+                        <p><strong>Amount:</strong> ETB 78,000</p>
+                        <span class="status-badge delivered">Delivered</span>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        11. SUPPLIER MANAGEMENT
+        ============================================================ -->
+        <section class="supplier-management" id="supplierManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-truck"></i> Supplier Management</h3>
+                    <a href="#" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="supplier-grid">
+                    <div class="supplier-card">
+                        <i class="fas fa-industry"></i>
+                        <div>
+                            <h4>Ethiopian Pharmaceutical</h4>
+                            <p>Contact: Abebe Haile</p>
+                            <p>Phone: +251 91 123 4567</p>
+                            <span class="rating">★★★★★</span>
+                        </div>
+                    </div>
+                    <div class="supplier-card">
+                        <i class="fas fa-globe"></i>
+                        <div>
+                            <h4>Novo Nordisk</h4>
+                            <p>Contact: Maria Smith</p>
+                            <p>Phone: +251 92 234 5678</p>
+                            <span class="rating">★★★★☆</span>
+                        </div>
+                    </div>
+                    <div class="supplier-card">
+                        <i class="fas fa-syringe"></i>
+                        <div>
+                            <h4>MedTech Solutions</h4>
+                            <p>Contact: Dawit Tadesse</p>
+                            <p>Phone: +251 93 345 6789</p>
+                            <span class="rating">★★★★★</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        12. WAREHOUSE MANAGEMENT
+        ============================================================ -->
+        <section class="warehouse-management" id="warehouseManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-warehouse"></i> Warehouse Management</h3>
+                    <a href="#" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="warehouse-grid">
+                    <div class="warehouse-card">
+                        <i class="fas fa-building"></i>
+                        <div>
+                            <h4>Storage Room A</h4>
+                            <p>Capacity: 80%</p>
+                            <p>Shelves: 12</p>
+                            <span class="status-badge available">Available</span>
+                        </div>
+                    </div>
+                    <div class="warehouse-card">
+                        <i class="fas fa-building"></i>
+                        <div>
+                            <h4>Storage Room B</h4>
+                            <p>Capacity: 55%</p>
+                            <p>Shelves: 8</p>
+                            <span class="status-badge available">Available</span>
+                        </div>
+                    </div>
+                    <div class="warehouse-card">
+                        <i class="fas fa-building"></i>
+                        <div>
+                            <h4>Cold Storage</h4>
+                            <p>Capacity: 70%</p>
+                            <p>Temp: 4°C</p>
+                            <span class="status-badge operational">Operational</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        13. BARCODE & QR SYSTEM
+        ============================================================ -->
+        <section class="barcode-qr-system" id="barcodeQrSystem">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-barcode"></i> Barcode & QR System</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-print"></i> Print Labels</button>
+                </div>
+                
+                <div class="barcode-grid">
+                    <div class="barcode-card">
+                        <i class="fas fa-barcode"></i>
+                        <h4>Barcode Generator</h4>
+                        <p>Generate barcode for items</p>
+                        <button class="btn btn-outline-sm">Generate</button>
+                    </div>
+                    <div class="barcode-card">
+                        <i class="fas fa-qrcode"></i>
+                        <h4>QR Generator</h4>
+                        <p>Generate QR codes for items</p>
+                        <button class="btn btn-outline-sm">Generate</button>
+                    </div>
+                    <div class="barcode-card">
+                        <i class="fas fa-camera"></i>
+                        <h4>Barcode Scanner</h4>
+                        <p>Scan barcode to identify item</p>
+                        <button class="btn btn-primary-sm">Scan</button>
+                    </div>
+                    <div class="barcode-card">
+                        <i class="fas fa-camera"></i>
+                        <h4>QR Scanner</h4>
+                        <p>Scan QR code for item details</p>
+                        <button class="btn btn-primary-sm">Scan</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        14. EXPIRY MANAGEMENT
+        ============================================================ -->
+        <section class="expiry-management" id="expiryManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-clock"></i> Expiry Management</h3>
+                    <a href="#" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="expiry-grid">
+                    <div class="expiry-card danger">
+                        <i class="fas fa-times-circle"></i>
+                        <div>
+                            <h4>Expiring Today</h4>
+                            <span>2 items</span>
+                            <button class="btn btn-danger-sm">View</button>
+                        </div>
+                    </div>
+                    <div class="expiry-card warning">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Expiring This Week</h4>
+                            <span>5 items</span>
+                            <button class="btn btn-warning-sm">View</button>
+                        </div>
+                    </div>
+                    <div class="expiry-card warning">
+                        <i class="fas fa-calendar"></i>
+                        <div>
+                            <h4>Expiring This Month</h4>
+                            <span>8 items</span>
+                            <button class="btn btn-warning-sm">View</button>
+                        </div>
+                    </div>
+                    <div class="expiry-card danger">
+                        <i class="fas fa-trash"></i>
+                        <div>
+                            <h4>Expired Items</h4>
+                            <span>3 items</span>
+                            <button class="btn btn-danger-sm">View</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        15. ASSET MANAGEMENT
+        ============================================================ -->
+        <section class="asset-management" id="assetManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-cubes"></i> Asset Management</h3>
+                    <a href="#" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="asset-grid">
+                    <div class="asset-card">
+                        <i class="fas fa-laptop"></i>
+                        <div>
+                            <h4>Medical Laptop</h4>
+                            <p>Dept: Cardiology</p>
+                            <p>Value: ETB 45,000</p>
+                            <span class="status-badge operational">Operational</span>
+                        </div>
+                    </div>
+                    <div class="asset-card">
+                        <i class="fas fa-bed"></i>
+                        <div>
+                            <h4>Hospital Bed</h4>
+                            <p>Dept: General Ward</p>
+                            <p>Value: ETB 15,000</p>
+                            <span class="status-badge operational">Operational</span>
+                        </div>
+                    </div>
+                    <div class="asset-card">
+                        <i class="fas fa-chair"></i>
+                        <div>
+                            <h4>Wheelchair</h4>
+                            <p>Dept: Emergency</p>
+                            <p>Value: ETB 8,000</p>
+                            <span class="status-badge maintenance">Maintenance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        16. REPORTS
+        ============================================================ -->
+        <section class="reports-section" id="reportsSection">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-file-alt"></i> Reports</h3>
+                    <div class="report-actions">
+                        <button class="btn btn-outline-sm"><i class="fas fa-file-pdf"></i> PDF</button>
+                        <button class="btn btn-outline-sm"><i class="fas fa-file-excel"></i> Excel</button>
+                    </div>
+                </div>
+                
+                <div class="reports-grid">
+                    <a href="#" class="report-item">
+                        <i class="fas fa-boxes"></i>
+                        <span>Inventory Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Low Stock Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Expiry Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-truck"></i>
+                        <span>Supplier Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Purchase Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-warehouse"></i>
+                        <span>Warehouse Report</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        17. AUDIT LOGS
+        ============================================================ -->
+        <section class="audit-logs" id="auditLogs">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-clipboard-list"></i> Audit Logs</h3>
+                    <a href="#" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="audit-list">
+                    <div class="audit-item">
+                        <i class="fas fa-exchange-alt"></i>
+                        <div>
+                            <h4>Stock Movement</h4>
+                            <p>Amlodipine - Out: 50 units</p>
+                            <span class="audit-time">10:15 AM</span>
+                        </div>
+                    </div>
+                    <div class="audit-item">
+                        <i class="fas fa-user"></i>
+                        <div>
+                            <h4>User Activity</h4>
+                            <p>Getachew Fekadu logged in</p>
+                            <span class="audit-time">8:00 AM</span>
+                        </div>
+                    </div>
+                    <div class="audit-item">
+                        <i class="fas fa-edit"></i>
+                        <div>
+                            <h4>Inventory Change</h4>
+                            <p>Metformin - Updated: 320</p>
+                            <span class="audit-time">7:45 AM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        18. MESSAGES
+        ============================================================ -->
+        <section class="messages-section" id="messagesSection">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-envelope"></i> Messages</h3>
+                    <a href="messages.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="messages-list">
+                    <div class="message-item unread">
+                        <img src="../assets/staff/pharmacy-avatar.jpg" alt="Pharmacy">
+                        <div>
+                            <h4>Pharmacy</h4>
+                            <p>Requesting stock update for Amlodipine.</p>
+                            <span class="msg-time">5 min ago</span>
+                        </div>
+                    </div>
+                    <div class="message-item unread">
+                        <img src="../assets/staff/finance-avatar.jpg" alt="Finance">
+                        <div>
+                            <h4>Finance</h4>
+                            <p>Purchase order PO-2026-001 approved.</p>
+                            <span class="msg-time">15 min ago</span>
+                        </div>
+                    </div>
+                    <div class="message-item">
+                        <img src="../assets/staff/supplier-avatar.jpg" alt="Supplier">
+                        <div>
+                            <h4>Ethiopian Pharmaceutical</h4>
+                            <p>Delivery scheduled for tomorrow.</p>
+                            <span class="msg-time">30 min ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        19. NOTIFICATIONS
+        ============================================================ -->
+        <section class="notifications-section" id="notificationsSection">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-bell"></i> Notifications</h3>
+                    <a href="notifications.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="notifications-list">
+                    <div class="notification-item warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <h4>Low Stock Alert</h4>
+                            <p>Surgical Gloves below minimum level.</p>
+                            <span class="notif-time">5 min ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item danger">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Expiry Alert</h4>
+                            <p>3 items expiring this week.</p>
+                            <span class="notif-time">10 min ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <i class="fas fa-truck"></i>
+                        <div>
+                            <h4>New Delivery</h4>
+                            <p>Delivery received from Ethiopian Pharmaceutical.</p>
+                            <span class="notif-time">15 min ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <h4>Purchase Approval</h4>
+                            <p>PO-2026-001 approved by Finance.</p>
+                            <span class="notif-time">20 min ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        20. AI INVENTORY ASSISTANT
+        ============================================================ -->
+        <div class="ai-assistant" id="aiAssistant">
+            <button class="ai-toggle storekeeper-ai-toggle" id="aiToggle">
+                <i class="fas fa-robot"></i>
+            </button>
+            <div class="ai-chat-window" id="aiChatWindow">
+                <div class="ai-header storekeeper-ai-header">
+                    <div class="ai-header-info">
+                        <i class="fas fa-robot"></i>
+                        <div>
+                            <h4>AI Inventory Assistant</h4>
+                            <span>Online</span>
+                        </div>
+                    </div>
+                    <button class="ai-close" id="aiClose"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="ai-body" id="aiBody">
+                    <div class="ai-message ai-bot">
+                        <div class="ai-avatar"><i class="fas fa-robot"></i></div>
+                        <div class="ai-bubble storekeeper-ai-bubble">
+                            <p>📦 Hello! I'm your AI Inventory Assistant. I can help you:</p>
+                            <ul>
+                                <li>Forecast stock needs</li>
+                                <li>Recommend purchase orders</li>
+                                <li>Predict expiry dates</li>
+                                <li>Optimize warehouse space</li>
+                                <li>Analyze supplier performance</li>
+                            </ul>
+                            <p>How can I assist you with inventory management today?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ai-footer">
+                    <div class="ai-input-group">
+                        <input type="text" id="aiInput" placeholder="Ask about inventory...">
+                        <button id="aiSend"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                    <div class="ai-voice">
+                        <button id="aiVoiceBtn"><i class="fas fa-microphone"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        21. QUICK ACTIONS
+        ============================================================ -->
+        <section class="quick-actions" id="quickActions">
+            <div class="container">
+                <div class="actions-grid">
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Add New Item</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-barcode"></i>
+                        <span>Scan Barcode</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-truck"></i>
+                        <span>Receive Delivery</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Create Purchase Order</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-print"></i>
+                        <span>Print Labels</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Generate Inventory Report</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Transfer Stock</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        FLOATING BUTTONS
+        ============================================================ -->
+        <div class="floating-buttons">
+            <button class="float-btn emergency" id="emergencyFloat" data-tooltip="Emergency">
+                <i class="fas fa-ambulance"></i>
+            </button>
+            <button class="float-btn chat" id="floatingChat" data-tooltip="AI Assistant">
+                <i class="fas fa-robot"></i>
+            </button>
+            <button class="float-btn scroll-top" id="scrollTop" data-tooltip="Scroll to Top">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+        </div>
+
+        <!-- ============================================================
+        22. FOOTER
+        ============================================================ -->
+        <footer class="dashboard-footer" id="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-left">
+                        <p>&copy; 2026 <strong>Gimbie Adventist General Hospital</strong>. All Rights Reserved.</p>
+                    </div>
+                    <div class="footer-center">
+                        <span class="version">System: v2.4.1</span>
+                        <span class="version">Build: #2026.12.20</span>
+                    </div>
+                    <div class="footer-right">
+                        <a href="../contact.html">Inventory Support</a>
+                        <a href="../contact.html">Hospital Support</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+    <script src="../js/storekeeper-dashboard.js"></script>
+    <script src="../js/ai-assistant.js"></script>
+</body>
+                  </html>
