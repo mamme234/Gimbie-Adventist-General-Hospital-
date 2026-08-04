@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Admin Dashboard - Gimbie Adventist General Hospital. Full hospital management system for administrators.">
+    <meta name="keywords" content="admin dashboard, hospital management, patient management, staff management, gimbie hospital">
+    <meta name="author" content="Gimbie Adventist General Hospital">
+    <title>Admin Dashboard | Gimbie Adventist General Hospital</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin-dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+</head>
+<body>
+    
+    <!-- ============================================================
+    1. LOADING SCREEN
+    ============================================================ -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>Gimbie Adventist</span>
+            </div>
+            <div class="loader-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="loader-text">
+                <p id="loadingText">Loading Admin Dashboard...</p>
+                <span class="loader-percentage" id="loaderPercentage">0%</span>
+                <span class="loader-security"><i class="fas fa-shield-alt"></i> Secure Connection</span>
+            </div>
+            <div class="loader-admin-animation">
+                <i class="fas fa-user-shield"></i>
+                <i class="fas fa-chart-pie"></i>
+                <i class="fas fa-hospital"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    2. DASHBOARD HEADER
+    ============================================================ -->
+    <header class="dashboard-header" id="dashboardHeader">
+        <div class="container">
+            <div class="header-left">
+                <div class="hospital-logo">
+                    <a href="../index.html">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </a>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="header-center">
+                <div class="global-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Global Search... Patients, Staff, Departments, Reports...">
+                    <button class="btn btn-primary-sm"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="notifications">
+                    <button class="notif-btn"><i class="fas fa-bell"></i><span class="notif-badge">12</span></button>
+                </div>
+                <div class="messages">
+                    <button class="msg-btn"><i class="fas fa-envelope"></i><span class="msg-badge">6</span></button>
+                </div>
+                <div class="fullscreen-toggle">
+                    <button id="fullscreenToggle"><i class="fas fa-expand"></i></button>
+                </div>
+                <div class="language-switcher">
+                    <button class="lang-btn" id="langToggle">
+                        <i class="fas fa-globe"></i> EN <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="lang-dropdown">
+                        <li><a href="#" data-lang="en">English</a></li>
+                        <li><a href="#" data-lang="am">አማርኛ</a></li>
+                        <li><a href="#" data-lang="or">Afaan Oromoo</a></li>
+                    </ul>
+                </div>
+                <div class="theme-toggle">
+                    <button id="themeToggle"><i class="fas fa-moon"></i></button>
+                </div>
+                <div class="admin-profile">
+                    <img src="../assets/staff/admin-avatar.jpg" alt="Admin Photo" class="profile-img">
+                    <div class="profile-info">
+                        <span class="admin-name">Michael Johnson</span>
+                        <span class="admin-id">SADM-000001</span>
+                        <span class="admin-role">Super Administrator</span>
+                    </div>
+                    <button class="logout-btn"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    3. LEFT SIDEBAR
+    ============================================================ -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-user">
+            <img src="../assets/staff/admin-avatar.jpg" alt="Admin Photo">
+            <h4>Michael Johnson</h4>
+            <span>SADM-000001</span>
+            <span class="role-badge">Super Admin</span>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="active"><a href="admin-dashboard.html"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-crown"></i> Executive Overview</a></li>
+                <li><a href="#"><i class="fas fa-hospital-user"></i> Patient Management</a></li>
+                <li><a href="#"><i class="fas fa-users"></i> Staff Management</a></li>
+                <li><a href="#"><i class="fas fa-building"></i> Department Management</a></li>
+                <li><a href="#"><i class="fas fa-user-md"></i> Doctor Management</a></li>
+                <li><a href="#"><i class="fas fa-user-nurse"></i> Nurse Management</a></li>
+                <li><a href="#"><i class="fas fa-phone-alt"></i> Reception Management</a></li>
+                <li><a href="#"><i class="fas fa-prescription-bottle"></i> Pharmacy</a></li>
+                <li><a href="#"><i class="fas fa-flask"></i> Laboratory</a></li>
+                <li><a href="#"><i class="fas fa-x-ray"></i> Radiology</a></li>
+                <li><a href="#"><i class="fas fa-ambulance"></i> Ambulance</a></li>
+                <li><a href="#"><i class="fas fa-heartbeat"></i> ICU</a></li>
+                <li><a href="#"><i class="fas fa-scalpel"></i> Operating Theatre</a></li>
+                <li><a href="#"><i class="fas fa-bed"></i> Ward & Bed Management</a></li>
+                <li><a href="#"><i class="fas fa-calendar-check"></i> Appointment Management</a></li>
+                <li><a href="#"><i class="fas fa-coins"></i> Billing & Finance</a></li>
+                <li><a href="#"><i class="fas fa-shield-alt"></i> Insurance</a></li>
+                <li><a href="#"><i class="fas fa-boxes"></i> Inventory</a></li>
+                <li><a href="#"><i class="fas fa-pills"></i> Medicine Inventory</a></li>
+                <li><a href="#"><i class="fas fa-laptop"></i> Assets</a></li>
+                <li><a href="#"><i class="fas fa-file-alt"></i> Reports</a></li>
+                <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
+                <li><a href="#"><i class="fas fa-robot"></i> AI Analytics</a></li>
+                <li><a href="#"><i class="fas fa-globe"></i> Website CMS</a></li>
+                <li><a href="#"><i class="fas fa-newspaper"></i> News Management</a></li>
+                <li><a href="#"><i class="fas fa-images"></i> Gallery Management</a></li>
+                <li><a href="#"><i class="fas fa-calendar"></i> Events</a></li>
+                <li><a href="#"><i class="fas fa-briefcase"></i> Careers</a></li>
+                <li><a href="#"><i class="fas fa-envelope"></i> Messages</a></li>
+                <li><a href="#"><i class="fas fa-bell"></i> Notifications</a></li>
+                <li><a href="#"><i class="fas fa-clipboard-list"></i> Audit Logs</a></li>
+                <li><a href="#"><i class="fas fa-database"></i> Backup & Restore</a></li>
+                <li><a href="#"><i class="fas fa-code"></i> API Management</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> System Settings</a></li>
+                <li><a href="#"><i class="fas fa-shield-alt"></i> Security</a></li>
+                <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- ============================================================
+    MAIN CONTENT
+    ============================================================ -->
+    <main class="dashboard-main" id="dashboardMain">
+        
+        <!-- ============================================================
+        4. EXECUTIVE DASHBOARD
+        ============================================================ -->
+        <section class="executive-dashboard" id="executiveDashboard">
+            <div class="container">
+                <div class="welcome-section">
+                    <div>
+                        <h2>Welcome, Administrator Michael! 👋</h2>
+                        <p>Live Hospital Status - Real-time hospital management overview.</p>
+                        <span class="live-status"><i class="fas fa-circle"></i> System Online</span>
+                        <span class="last-update"><i class="fas fa-clock"></i> Updated: Just Now</span>
+                    </div>
+                    <div class="quick-stats-header">
+                        <span class="stat-badge"><i class="fas fa-coins"></i> ETB 45K Today</span>
+                        <span class="stat-badge"><i class="fas fa-hospital-user"></i> 500 Total Patients</span>
+                        <span class="stat-badge"><i class="fas fa-user-plus"></i> 12 Admissions</span>
+                        <span class="stat-badge"><i class="fas fa-user-minus"></i> 10 Discharges</span>
+                        <span class="stat-badge"><i class="fas fa-calendar-check"></i> 45 Appointments</span>
+                        <span class="stat-badge danger"><i class="fas fa-ambulance"></i> 3 Emergencies</span>
+                        <span class="stat-badge"><i class="fas fa-bed"></i> 50 Beds Available</span>
+                    </div>
+                </div>
+                
+                <div class="executive-cards">
+                    <div class="exec-card">
+                        <i class="fas fa-users"></i>
+                        <div>
+                            <span class="exec-number">500</span>
+                            <span class="exec-label">Total Patients</span>
+                        </div>
+                    </div>
+                    <div class="exec-card">
+                        <i class="fas fa-user-md"></i>
+                        <div>
+                            <span class="exec-number">150</span>
+                            <span class="exec-label">Doctors</span>
+                        </div>
+                    </div>
+                    <div class="exec-card">
+                        <i class="fas fa-user-nurse"></i>
+                        <div>
+                            <span class="exec-number">300</span>
+                            <span class="exec-label">Nurses</span>
+                        </div>
+                    </div>
+                    <div class="exec-card">
+                        <i class="fas fa-bed"></i>
+                        <div>
+                            <span class="exec-number">50</span>
+                            <span class="exec-label">Available Beds</span>
+                        </div>
+                    </div>
+                    <div class="exec-card">
+                        <i class="fas fa-heartbeat"></i>
+                        <div>
+                            <span class="exec-number">12</span>
+                            <span class="exec-label">ICU Beds</span>
+                        </div>
+                    </div>
+                    <div class="exec-card">
+                        <i class="fas fa-ambulance"></i>
+                        <div>
+                            <span class="exec-number">4</span>
+                            <span class="exec-label">Ambulances</span>
+                        </div>
+                    </div>
+                    <div class="exec-card">
+                        <i class="fas fa-coins"></i>
+                        <div>
+                            <span class="exec-number">ETB 1.2M</span>
+                            <span class="exec-label">Monthly Revenue</span>
+                        </div>
+                    </div>
+                    <div class="exec-card">
+                        <i class="fas fa-chart-line"></i>
+                        <div>
+                            <span class="exec-number">92%</span>
+                            <span class="exec-label">Patient Satisfaction</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        5. EXECUTIVE STATISTICS
+        ============================================================ -->
+        <section class="executive-stats" id="executiveStats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-user-md"></i></div>
+                        <div>
+                            <span class="stat-number">150</span>
+                            <span class="stat-label">Total Doctors</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-user-nurse"></i></div>
+                        <div>
+                            <span class="stat-number">300</span>
+                            <span class="stat-label">Total Nurses</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                        <div>
+                            <span class="stat-number">500</span>
+                            <span class="stat-label">Total Staff</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-building"></i></div>
+                        <div>
+                            <span class="stat-number">60</span>
+                            <span class="stat-label">Total Departments</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-hospital-user"></i></div>
+                        <div>
+                            <span class="stat-number">500</span>
+                            <span class="stat-label">Total Patients</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-pills"></i></div>
+                        <div>
+                            <span class="stat-number">2,500</span>
+                            <span class="stat-label">Total Medicines</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-flask"></i></div>
+                        <div>
+                            <span class="stat-number">500</span>
+                            <span class="stat-label">Lab Tests</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-x-ray"></i></div>
+                        <div>
+                            <span class="stat-number">350</span>
+                            <span class="stat-label">Radiology Exams</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-scalpel"></i></div>
+                        <div>
+                            <span class="stat-number">120</span>
+                            <span class="stat-label">Operations</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-coins"></i></div>
+                        <div>
+                            <span class="stat-number">ETB 1.2M</span>
+                            <span class="stat-label">Monthly Revenue</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-money-bill-wave"></i></div>
+                        <div>
+                            <span class="stat-number">ETB 650K</span>
+                            <span class="stat-label">Monthly Expenses</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-star"></i></div>
+                        <div>
+                            <span class="stat-number">92%</span>
+                            <span class="stat-label">Patient Satisfaction</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        6. PATIENT MANAGEMENT
+        ============================================================ -->
+        <section class="patient-management" id="patientManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-hospital-user"></i> Patient Management</h3>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary-sm"><i class="fas fa-user-plus"></i> Register Patient</button>
+                        <button class="btn btn-outline-sm"><i class="fas fa-search"></i> Search</button>
+                    </div>
+                </div>
+                
+                <div class="patient-summary">
+                    <div class="summary-item">
+                        <span>Total Patients</span>
+                        <span class="summary-number">500</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Admissions Today</span>
+                        <span class="summary-number">12</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Discharges Today</span>
+                        <span class="summary-number">10</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Patient Transfers</span>
+                        <span class="summary-number">3</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        7. STAFF MANAGEMENT
+        ============================================================ -->
+        <section class="staff-management" id="staffManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-users"></i> Staff Management</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-user-plus"></i> Add Staff</button>
+                </div>
+                
+                <div class="staff-summary">
+                    <div class="staff-card">
+                        <i class="fas fa-user-md"></i>
+                        <div>
+                            <h4>Doctors</h4>
+                            <span>150</span>
+                        </div>
+                    </div>
+                    <div class="staff-card">
+                        <i class="fas fa-user-nurse"></i>
+                        <div>
+                            <h4>Nurses</h4>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="staff-card">
+                        <i class="fas fa-user-tie"></i>
+                        <div>
+                            <h4>Administrative</h4>
+                            <span>18</span>
+                        </div>
+                    </div>
+                    <div class="staff-card">
+                        <i class="fas fa-user"></i>
+                        <div>
+                            <h4>Support Staff</h4>
+                            <span>32</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        8. DEPARTMENT MANAGEMENT
+        ============================================================ -->
+        <section class="department-management" id="departmentManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-building"></i> Department Management</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Add Department</button>
+                </div>
+                
+                <div class="dept-grid">
+                    <div class="dept-card">
+                        <h4>Cardiology</h4>
+                        <p>Head: Dr. Samuel Bekele</p>
+                        <span>12 Staff</span>
+                    </div>
+                    <div class="dept-card">
+                        <h4>Pediatrics</h4>
+                        <p>Head: Dr. Hana Alemu</p>
+                        <span>8 Staff</span>
+                    </div>
+                    <div class="dept-card">
+                        <h4>Surgery</h4>
+                        <p>Head: Dr. Dawit Tadesse</p>
+                        <span>10 Staff</span>
+                    </div>
+                    <div class="dept-card">
+                        <h4>Emergency</h4>
+                        <p>Head: Dr. Samuel Bekele</p>
+                        <span>15 Staff</span>
+                    </div>
+                    <div class="dept-card">
+                        <h4>Pharmacy</h4>
+                        <p>Head: Daniel Worku</p>
+                        <span>6 Staff</span>
+                    </div>
+                    <div class="dept-card">
+                        <h4>Laboratory</h4>
+                        <p>Head: Samuel Fikre</p>
+                        <span>8 Staff</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        9. APPOINTMENT MANAGEMENT
+        ============================================================ -->
+        <section class="appointment-management" id="appointmentManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-calendar-check"></i> Appointment Management</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Book Appointment</button>
+                </div>
+                
+                <div class="appt-summary">
+                    <div class="appt-item">
+                        <span>Today's Appointments</span>
+                        <span class="appt-number">45</span>
+                    </div>
+                    <div class="appt-item">
+                        <span>Pending</span>
+                        <span class="appt-number">8</span>
+                    </div>
+                    <div class="appt-item">
+                        <span>Approved</span>
+                        <span class="appt-number">30</span>
+                    </div>
+                    <div class="appt-item">
+                        <span>Emergency</span>
+                        <span class="appt-number">3</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        10. FINANCE MANAGEMENT
+        ============================================================ -->
+        <section class="finance-management" id="financeManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-coins"></i> Finance Management</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-file-invoice"></i> View Reports</button>
+                </div>
+                
+                <div class="finance-grid">
+                    <div class="finance-card">
+                        <i class="fas fa-chart-line"></i>
+                        <div>
+                            <h4>Revenue</h4>
+                            <span class="finance-amount">ETB 1.2M</span>
+                            <p>Monthly</p>
+                        </div>
+                    </div>
+                    <div class="finance-card">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <div>
+                            <h4>Expenses</h4>
+                            <span class="finance-amount">ETB 650K</span>
+                            <p>Monthly</p>
+                        </div>
+                    </div>
+                    <div class="finance-card">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <div>
+                            <h4>Profit</h4>
+                            <span class="finance-amount">ETB 550K</span>
+                            <p>Monthly</p>
+                        </div>
+                    </div>
+                    <div class="finance-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <div>
+                            <h4>Insurance Claims</h4>
+                            <span class="finance-amount">5</span>
+                            <p>Pending</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        11. INVENTORY MANAGEMENT
+        ============================================================ -->
+        <section class="inventory-management" id="inventoryManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-boxes"></i> Inventory Management</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Add Item</button>
+                </div>
+                
+                <div class="inventory-grid">
+                    <div class="inv-card">
+                        <i class="fas fa-pills"></i>
+                        <div>
+                            <h4>Medicine Inventory</h4>
+                            <span>2,500 Items</span>
+                            <span class="inv-status in-stock">In Stock</span>
+                        </div>
+                    </div>
+                    <div class="inv-card">
+                        <i class="fas fa-syringe"></i>
+                        <div>
+                            <h4>Medical Supplies</h4>
+                            <span>1,200 Items</span>
+                            <span class="inv-status in-stock">In Stock</span>
+                        </div>
+                    </div>
+                    <div class="inv-card">
+                        <i class="fas fa-microscope"></i>
+                        <div>
+                            <h4>Equipment</h4>
+                            <span>85 Items</span>
+                            <span class="inv-status warning">Low Stock</span>
+                        </div>
+                    </div>
+                    <div class="inv-card">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <h4>Low Stock Alerts</h4>
+                            <span>8 Items</span>
+                            <span class="inv-status danger">Alert</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        12. LABORATORY & RADIOLOGY
+        ============================================================ -->
+        <section class="lab-radiology" id="labRadiology">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-flask"></i> Laboratory & Radiology</h3>
+                    <a href="#" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="lab-radio-grid">
+                    <div class="lab-card">
+                        <i class="fas fa-flask"></i>
+                        <div>
+                            <h4>Laboratory</h4>
+                            <p>Tests Today: 45</p>
+                            <p>Pending Results: 12</p>
+                            <span class="status-badge processing">Processing</span>
+                        </div>
+                    </div>
+                    <div class="lab-card">
+                        <i class="fas fa-x-ray"></i>
+                        <div>
+                            <h4>Radiology</h4>
+                            <p>Scans Today: 18</p>
+                            <p>Pending Reports: 5</p>
+                            <span class="status-badge processing">Processing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        13. AMBULANCE MANAGEMENT
+        ============================================================ -->
+        <section class="ambulance-management" id="ambulanceManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-ambulance"></i> Ambulance Management</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Dispatch</button>
+                </div>
+                
+                <div class="ambulance-grid">
+                    <div class="ambulance-card">
+                        <i class="fas fa-ambulance"></i>
+                        <div>
+                            <h4>Ambulance 01</h4>
+                            <p>Driver: Alemayehu Girma</p>
+                            <span class="status-badge available">Available</span>
+                        </div>
+                    </div>
+                    <div class="ambulance-card">
+                        <i class="fas fa-ambulance"></i>
+                        <div>
+                            <h4>Ambulance 02</h4>
+                            <p>Driver: Bekele Chala</p>
+                            <span class="status-badge on-duty">On Duty</span>
+                        </div>
+                    </div>
+                    <div class="ambulance-card">
+                        <i class="fas fa-ambulance"></i>
+                        <div>
+                            <h4>Ambulance 03</h4>
+                            <p>Driver: Tesfaye Girma</p>
+                            <span class="status-badge maintenance">Maintenance</span>
+                        </div>
+                    </div>
+                    <div class="ambulance-card">
+                        <i class="fas fa-ambulance"></i>
+                        <div>
+                            <h4>Ambulance 04</h4>
+                            <p>Driver: Kedir Abebe</p>
+                            <span class="status-badge available">Available</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        14. ICU & WARD MANAGEMENT
+        ============================================================ -->
+        <section class="icu-ward" id="icuWard">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-heartbeat"></i> ICU & Ward Management</h3>
+                    <a href="#" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="icu-ward-grid">
+                    <div class="ward-card">
+                        <h4>ICU Ward</h4>
+                        <p>Beds: 12/20</p>
+                        <p>Occupancy: 60%</p>
+                        <span class="status-badge available">Available</span>
+                    </div>
+                    <div class="ward-card">
+                        <h4>Cardiology Ward</h4>
+                        <p>Beds: 12/20</p>
+                        <p>Occupancy: 60%</p>
+                        <span class="status-badge available">Available</span>
+                    </div>
+                    <div class="ward-card">
+                        <h4>General Ward</h4>
+                        <p>Beds: 15/25</p>
+                        <p>Occupancy: 60%</p>
+                        <span class="status-badge available">Available</span>
+                    </div>
+                    <div class="ward-card">
+                        <h4>Pediatrics Ward</h4>
+                        <p>Beds: 8/15</p>
+                        <p>Occupancy: 53%</p>
+                        <span class="status-badge available">Available</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        15. OPERATING THEATRE
+        ============================================================ -->
+        <section class="operating-theatre" id="operatingTheatre">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-scalpel"></i> Operating Theatre</h3>
+                    <a href="#" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="theatre-grid">
+                    <div class="theatre-card">
+                        <h4>OT-01</h4>
+                        <p>Status: <span class="status-badge in-use">In Use</span></p>
+                        <p>Surgery: Cardiac Catheterization</p>
+                        <p>Team: Dr. Samuel, Dr. Abel</p>
+                    </div>
+                    <div class="theatre-card">
+                        <h4>OT-02</h4>
+                        <p>Status: <span class="status-badge available">Available</span></p>
+                        <p>Surgery: None</p>
+                        <p>Team: Available</p>
+                    </div>
+                    <div class="theatre-card">
+                        <h4>OT-03</h4>
+                        <p>Status: <span class="status-badge scheduled">Scheduled</span></p>
+                        <p>Surgery: Appendectomy</p>
+                        <p>Team: Dr. Dawit, Dr. Ruth</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        16. WEBSITE CMS
+        ============================================================ -->
+        <section class="website-cms" id="websiteCms">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-globe"></i> Website CMS</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-edit"></i> Edit Content</button>
+                </div>
+                
+                <div class="cms-grid">
+                    <div class="cms-item">
+                        <i class="fas fa-home"></i>
+                        <span>Homepage</span>
+                        <button class="btn btn-outline-sm">Edit</button>
+                    </div>
+                    <div class="cms-item">
+                        <i class="fas fa-info-circle"></i>
+                        <span>About Page</span>
+                        <button class="btn btn-outline-sm">Edit</button>
+                    </div>
+                    <div class="cms-item">
+                        <i class="fas fa-building"></i>
+                        <span>Departments</span>
+                        <button class="btn btn-outline-sm">Edit</button>
+                    </div>
+                    <div class="cms-item">
+                        <i class="fas fa-user-md"></i>
+                        <span>Doctors</span>
+                        <button class="btn btn-outline-sm">Edit</button>
+                    </div>
+                    <div class="cms-item">
+                        <i class="fas fa-images"></i>
+                        <span>Gallery</span>
+                        <button class="btn btn-outline-sm">Edit</button>
+                    </div>
+                    <div class="cms-item">
+                        <i class="fas fa-newspaper"></i>
+                        <span>News</span>
+                        <button class="btn btn-outline-sm">Edit</button>
+                    </div>
+                    <div class="cms-item">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Careers</span>
+                        <button class="btn btn-outline-sm">Edit</button>
+                    </div>
+                    <div class="cms-item">
+                        <i class="fas fa-cog"></i>
+                        <span>SEO Settings</span>
+                        <button class="btn btn-outline-sm">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        17. REPORTS & ANALYTICS
+        ============================================================ -->
+        <section class="reports-analytics" id="reportsAnalytics">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-file-alt"></i> Reports & Analytics</h3>
+                    <div class="report-actions">
+                        <button class="btn btn-outline-sm"><i class="fas fa-file-pdf"></i> PDF</button>
+                        <button class="btn btn-outline-sm"><i class="fas fa-file-excel"></i> Excel</button>
+                    </div>
+                </div>
+                
+                <div class="reports-grid">
+                    <a href="#" class="report-item">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Disease Trends</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-bed"></i>
+                        <span>Occupancy Reports</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-coins"></i>
+                        <span>Financial Reports</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-users"></i>
+                        <span>Staff Reports</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-calendar-day"></i>
+                        <span>Daily Reports</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Monthly Reports</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        18. SECURITY CENTER
+        ============================================================ -->
+        <section class="security-center" id="securityCenter">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-shield-alt"></i> Security Center</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-cog"></i> Settings</button>
+                </div>
+                
+                <div class="security-grid">
+                    <div class="security-card">
+                        <i class="fas fa-user-lock"></i>
+                        <div>
+                            <h4>User Roles</h4>
+                            <p>5 Active Roles</p>
+                            <span class="status-badge active">Active</span>
+                        </div>
+                    </div>
+                    <div class="security-card">
+                        <i class="fas fa-mobile-alt"></i>
+                        <div>
+                            <h4>Two-Factor Authentication</h4>
+                            <p>Enabled</p>
+                            <span class="status-badge active">Active</span>
+                        </div>
+                    </div>
+                    <div class="security-card">
+                        <i class="fas fa-history"></i>
+                        <div>
+                            <h4>Audit Logs</h4>
+                            <p>1,245 Entries</p>
+                            <span class="status-badge active">Active</span>
+                        </div>
+                    </div>
+                    <div class="security-card">
+                        <i class="fas fa-firewall"></i>
+                        <div>
+                            <h4>Firewall Status</h4>
+                            <p>Protected</p>
+                            <span class="status-badge active">Active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        19. AI HOSPITAL MANAGEMENT
+        ============================================================ -->
+        <div class="ai-assistant" id="aiAssistant">
+            <button class="ai-toggle admin-ai-toggle" id="aiToggle">
+                <i class="fas fa-robot"></i>
+            </button>
+            <div class="ai-chat-window" id="aiChatWindow">
+                <div class="ai-header admin-ai-header">
+                    <div class="ai-header-info">
+                        <i class="fas fa-robot"></i>
+                        <div>
+                            <h4>AI Hospital Management</h4>
+                            <span>Online</span>
+                        </div>
+                    </div>
+                    <button class="ai-close" id="aiClose"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="ai-body" id="aiBody">
+                    <div class="ai-message ai-bot">
+                        <div class="ai-avatar"><i class="fas fa-robot"></i></div>
+                        <div class="ai-bubble admin-ai-bubble">
+                            <p>🏥 Hello! I'm your AI Hospital Management Assistant. I can help you:</p>
+                            <ul>
+                                <li>Forecast revenue</li>
+                                <li>Analyze disease trends</li>
+                                <li>Optimize staff scheduling</li>
+                                <li>Predict inventory needs</li>
+                                <li>Analyze patient flow</li>
+                            </ul>
+                            <p>How can I assist you with hospital management?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ai-footer">
+                    <div class="ai-input-group">
+                        <input type="text" id="aiInput" placeholder="Ask about hospital management...">
+                        <button id="aiSend"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                    <div class="ai-voice">
+                        <button id="aiVoiceBtn"><i class="fas fa-microphone"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        20. NOTIFICATIONS CENTER
+        ============================================================ -->
+        <section class="notifications-center" id="notificationsCenter">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-bell"></i> Notifications Center</h3>
+                    <a href="notifications.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="notif-grid">
+                    <div class="notif-item emergency">
+                        <i class="fas fa-ambulance"></i>
+                        <div>
+                            <h4>Emergency Alert</h4>
+                            <p>Trauma patient arriving in 5 minutes</p>
+                            <span class="notif-time">2 min ago</span>
+                        </div>
+                    </div>
+                    <div class="notif-item critical">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <h4>Critical Patient</h4>
+                            <p>Patient in ICU requires immediate attention</p>
+                            <span class="notif-time">5 min ago</span>
+                        </div>
+                    </div>
+                    <div class="notif-item warning">
+                        <i class="fas fa-pills"></i>
+                        <div>
+                            <h4>Low Medicine Stock</h4>
+                            <p>8 medicines below minimum level</p>
+                            <span class="notif-time">10 min ago</span>
+                        </div>
+                    </div>
+                    <div class="notif-item">
+                        <i class="fas fa-sync-alt"></i>
+                        <div>
+                            <h4>System Update</h4>
+                            <p>New system update available</p>
+                            <span class="notif-time">30 min ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        21. QUICK ACTIONS
+        ============================================================ -->
+        <section class="quick-actions" id="quickActions">
+            <div class="container">
+                <div class="actions-grid">
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Register Patient</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Add Employee</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-user-md"></i>
+                        <span>Add Doctor</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Approve Appointment</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Generate Reports</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-database"></i>
+                        <span>Backup Database</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-bullhorn"></i>
+                        <span>Send Announcement</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-broadcast"></i>
+                        <span>Emergency Broadcast</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        FLOATING BUTTONS
+        ============================================================ -->
+        <div class="floating-buttons">
+            <button class="float-btn emergency" id="emergencyFloat" data-tooltip="Emergency">
+                <i class="fas fa-ambulance"></i>
+            </button>
+            <button class="float-btn chat" id="floatingChat" data-tooltip="AI Assistant">
+                <i class="fas fa-robot"></i>
+            </button>
+            <button class="float-btn scroll-top" id="scrollTop" data-tooltip="Scroll to Top">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+        </div>
+
+        <!-- ============================================================
+        22. FOOTER
+        ============================================================ -->
+        <footer class="dashboard-footer" id="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <p>&copy; 2026 <strong>Gimbie Adventist General Hospital</strong>. All Rights Reserved.</p>
+                    <div class="footer-links">
+                        <a href="../privacy.html">Privacy Policy</a>
+                        <a href="../terms.html">Terms of Service</a>
+                        <a href="../contact.html">Hospital Support</a>
+                        <a href="../contact.html">IT Support</a>
+                        <span class="version">v3.0.0 Enterprise</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+    <script src="../js/admin-dashboard.js"></script>
+    <script src="../js/ai-assistant.js"></script>
+</body>
+                  </html>
