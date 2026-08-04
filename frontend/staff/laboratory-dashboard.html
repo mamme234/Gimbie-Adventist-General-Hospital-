@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Laboratory Dashboard - Gimbie Adventist General Hospital. Manage laboratory requests, sample processing, and test results.">
+    <meta name="keywords" content="laboratory dashboard, lab tests, sample processing, blood bank, gimbie hospital">
+    <meta name="author" content="Gimbie Adventist General Hospital">
+    <title>Laboratory Dashboard | Gimbie Adventist General Hospital</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/laboratory-dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+</head>
+<body>
+    
+    <!-- ============================================================
+    1. LOADING SCREEN
+    ============================================================ -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>Gimbie Adventist</span>
+            </div>
+            <div class="loader-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="loader-text">
+                <p id="loadingText">Loading Laboratory Dashboard...</p>
+                <span class="loader-percentage" id="loaderPercentage">0%</span>
+            </div>
+            <div class="loader-lab-animation">
+                <i class="fas fa-flask"></i>
+                <i class="fas fa-microscope"></i>
+                <i class="fas fa-vial"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    2. DASHBOARD HEADER
+    ============================================================ -->
+    <header class="dashboard-header" id="dashboardHeader">
+        <div class="container">
+            <div class="header-left">
+                <div class="hospital-logo">
+                    <a href="../index.html">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </a>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="header-center">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search tests, samples, patients...">
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="notifications">
+                    <button class="notif-btn"><i class="fas fa-bell"></i><span class="notif-badge">7</span></button>
+                </div>
+                <div class="messages">
+                    <button class="msg-btn"><i class="fas fa-envelope"></i><span class="msg-badge">4</span></button>
+                </div>
+                <div class="language-switcher">
+                    <button class="lang-btn" id="langToggle">
+                        <i class="fas fa-globe"></i> EN <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="lang-dropdown">
+                        <li><a href="#" data-lang="en">English</a></li>
+                        <li><a href="#" data-lang="am">አማርኛ</a></li>
+                        <li><a href="#" data-lang="or">Afaan Oromoo</a></li>
+                    </ul>
+                </div>
+                <div class="theme-toggle">
+                    <button id="themeToggle"><i class="fas fa-moon"></i></button>
+                </div>
+                <div class="lab-profile">
+                    <img src="../assets/staff/lab-avatar.jpg" alt="Lab Technician Photo" class="profile-img">
+                    <div class="profile-info">
+                        <span class="lab-name">Samuel Fikre</span>
+                        <span class="lab-id">LAB-000001</span>
+                        <span class="lab-dept">Clinical Laboratory</span>
+                    </div>
+                    <button class="logout-btn"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    3. LEFT SIDEBAR
+    ============================================================ -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-user">
+            <img src="../assets/staff/lab-avatar.jpg" alt="Lab Tech Photo">
+            <h4>Samuel Fikre</h4>
+            <span>LAB-000001</span>
+            <span class="role-badge">Senior Lab Tech</span>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="active"><a href="laboratory-dashboard.html"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+                <li><a href="requests.html"><i class="fas fa-clipboard-list"></i> Laboratory Requests</a></li>
+                <li><a href="sample-collection.html"><i class="fas fa-syringe"></i> Sample Collection</a></li>
+                <li><a href="sample-tracking.html"><i class="fas fa-map-pin"></i> Sample Tracking</a></li>
+                <li><a href="test-processing.html"><i class="fas fa-microscope"></i> Test Processing</a></li>
+                <li><a href="test-results.html"><i class="fas fa-file-medical"></i> Test Results</a></li>
+                <li><a href="quality-control.html"><i class="fas fa-check-double"></i> Quality Control</a></li>
+                <li><a href="equipment.html"><i class="fas fa-microscope"></i> Equipment</a></li>
+                <li><a href="inventory.html"><i class="fas fa-boxes"></i> Inventory</a></li>
+                <li><a href="blood-bank.html"><i class="fas fa-droplet"></i> Blood Bank</a></li>
+                <li><a href="reports.html"><i class="fas fa-file-alt"></i> Reports</a></li>
+                <li><a href="messages.html"><i class="fas fa-envelope"></i> Messages</a></li>
+                <li><a href="notifications.html"><i class="fas fa-bell"></i> Notifications</a></li>
+                <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- ============================================================
+    MAIN CONTENT
+    ============================================================ -->
+    <main class="dashboard-main" id="dashboardMain">
+        
+        <!-- ============================================================
+        4. DASHBOARD OVERVIEW
+        ============================================================ -->
+        <section class="dashboard-overview" id="dashboardOverview">
+            <div class="container">
+                <div class="welcome-section">
+                    <div>
+                        <h2>Good Morning, Samuel! 👋</h2>
+                        <p>Welcome to your laboratory dashboard.</p>
+                        <span class="shift-badge"><i class="fas fa-clock"></i> Morning Shift: 8:00 AM - 4:00 PM</span>
+                    </div>
+                    <div class="quick-stats-header">
+                        <span class="stat-badge"><i class="fas fa-clipboard-list"></i> 25 Requests</span>
+                        <span class="stat-badge"><i class="fas fa-syringe"></i> 18 Samples Received</span>
+                        <span class="stat-badge"><i class="fas fa-check-circle"></i> 15 Tests Completed</span>
+                        <span class="stat-badge warning"><i class="fas fa-clock"></i> 10 Pending</span>
+                        <span class="stat-badge danger"><i class="fas fa-exclamation-triangle"></i> 3 Critical Results</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        5. STATISTICS CARDS
+        ============================================================ -->
+        <section class="statistics-cards" id="statisticsCards">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-clipboard-list"></i></div>
+                        <div>
+                            <span class="stat-number">25</span>
+                            <span class="stat-label">Total Requests</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <span class="stat-number">10</span>
+                            <span class="stat-label">Pending Samples</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-spinner"></i></div>
+                        <div>
+                            <span class="stat-number">5</span>
+                            <span class="stat-label">Processing</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                        <div>
+                            <span class="stat-number">15</span>
+                            <span class="stat-label">Completed Tests</span>
+                        </div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <div>
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">Critical Reports</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-droplet"></i></div>
+                        <div>
+                            <span class="stat-number">45</span>
+                            <span class="stat-label">Blood Units Available</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-microscope"></i></div>
+                        <div>
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Active Equipment</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-chart-bar"></i></div>
+                        <div>
+                            <span class="stat-number">45</span>
+                            <span class="stat-label">Daily Workload</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        6. LABORATORY REQUESTS
+        ============================================================ -->
+        <section class="lab-requests" id="labRequests">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-clipboard-list"></i> Laboratory Requests</h3>
+                    <a href="requests.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="requests-list">
+                    <div class="request-item">
+                        <div class="request-info">
+                            <h4>REQ-2026-001</h4>
+                            <p><strong>Patient:</strong> Abebe Demissie</p>
+                            <p><strong>Doctor:</strong> Dr. Samuel Bekele</p>
+                            <p><strong>Department:</strong> Cardiology</p>
+                            <p><strong>Tests:</strong> CBC, Lipid Profile</p>
+                        </div>
+                        <div class="request-priority">
+                            <span class="priority-badge normal">Normal</span>
+                        </div>
+                        <div class="request-status">
+                            <span class="status-badge pending">Pending</span>
+                        </div>
+                        <div class="request-actions">
+                            <button class="btn btn-outline-sm">View</button>
+                            <button class="btn btn-primary-sm">Process</button>
+                        </div>
+                    </div>
+                    <div class="request-item">
+                        <div class="request-info">
+                            <h4>REQ-2026-002</h4>
+                            <p><strong>Patient:</strong> Tigist Bekele</p>
+                            <p><strong>Doctor:</strong> Dr. Hana Alemu</p>
+                            <p><strong>Department:</strong> Pediatrics</p>
+                            <p><strong>Tests:</strong> Blood Culture, CRP</p>
+                        </div>
+                        <div class="request-priority">
+                            <span class="priority-badge urgent">Urgent</span>
+                        </div>
+                        <div class="request-status">
+                            <span class="status-badge processing">Processing</span>
+                        </div>
+                        <div class="request-actions">
+                            <button class="btn btn-outline-sm">View</button>
+                            <button class="btn btn-outline-sm">Track</button>
+                        </div>
+                    </div>
+                    <div class="request-item">
+                        <div class="request-info">
+                            <h4>REQ-2026-003</h4>
+                            <p><strong>Patient:</strong> Samuel Abate</p>
+                            <p><strong>Doctor:</strong> Dr. Dawit Tadesse</p>
+                            <p><strong>Department:</strong> Surgery</p>
+                            <p><strong>Tests:</strong> Renal Function, Electrolytes</p>
+                        </div>
+                        <div class="request-priority">
+                            <span class="priority-badge emergency">Emergency</span>
+                        </div>
+                        <div class="request-status">
+                            <span class="status-badge completed">Completed</span>
+                        </div>
+                        <div class="request-actions">
+                            <button class="btn btn-outline-sm">View</button>
+                            <button class="btn btn-outline-sm">Print Report</button>
+                        </div>
+                    </div>
+                    <div class="request-item">
+                        <div class="request-info">
+                            <h4>REQ-2026-004</h4>
+                            <p><strong>Patient:</strong> Ruth Desta</p>
+                            <p><strong>Doctor:</strong> Dr. Abel Girma</p>
+                            <p><strong>Department:</strong> Cardiology</p>
+                            <p><strong>Tests:</strong> Cardiac Enzymes</p>
+                        </div>
+                        <div class="request-priority">
+                            <span class="priority-badge urgent">Urgent</span>
+                        </div>
+                        <div class="request-status">
+                            <span class="status-badge pending">Pending</span>
+                        </div>
+                        <div class="request-actions">
+                            <button class="btn btn-outline-sm">View</button>
+                            <button class="btn btn-primary-sm">Process</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        7. SAMPLE COLLECTION
+        ============================================================ -->
+        <section class="sample-collection" id="sampleCollection">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-syringe"></i> Sample Collection</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-barcode"></i> Scan Barcode</button>
+                </div>
+                
+                <div class="collection-wrapper">
+                    <div class="collection-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Sample ID</label>
+                                <input type="text" value="SMP-2026-001" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Patient ID</label>
+                                <input type="text" placeholder="Enter Patient ID">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Sample Type</label>
+                                <select>
+                                    <option>Blood</option>
+                                    <option>Urine</option>
+                                    <option>Stool</option>
+                                    <option>Sputum</option>
+                                    <option>Swab</option>
+                                    <option>Biopsy</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Collection Time</label>
+                                <input type="datetime-local">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Collected By</label>
+                                <input type="text" value="Samuel Fikre" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Patient Verification</label>
+                                <div class="verify-buttons">
+                                    <button class="btn btn-outline-sm"><i class="fas fa-id-card"></i> ID Check</button>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-fingerprint"></i> Biometric</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn btn-primary"><i class="fas fa-save"></i> Register Sample</button>
+                            <button class="btn btn-outline"><i class="fas fa-print"></i> Print Label</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        8. SAMPLE TRACKING
+        ============================================================ -->
+        <section class="sample-tracking" id="sampleTracking">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-map-pin"></i> Sample Tracking</h3>
+                    <a href="sample-tracking.html" class="btn btn-outline-sm">Track All</a>
+                </div>
+                
+                <div class="tracking-timeline">
+                    <div class="tracking-step active">
+                        <div class="step-icon"><i class="fas fa-check-circle"></i></div>
+                        <div>
+                            <h4>Received</h4>
+                            <p>Sample received at laboratory</p>
+                            <span class="step-time">8:15 AM</span>
+                        </div>
+                    </div>
+                    <div class="tracking-step active">
+                        <div class="step-icon"><i class="fas fa-spinner"></i></div>
+                        <div>
+                            <h4>Processing</h4>
+                            <p>Test in progress</p>
+                            <span class="step-time">9:30 AM</span>
+                        </div>
+                    </div>
+                    <div class="tracking-step">
+                        <div class="step-icon"><i class="fas fa-check-double"></i></div>
+                        <div>
+                            <h4>Verification</h4>
+                            <p>Results being verified</p>
+                            <span class="step-time">Pending</span>
+                        </div>
+                    </div>
+                    <div class="tracking-step">
+                        <div class="step-icon"><i class="fas fa-file-medical"></i></div>
+                        <div>
+                            <h4>Completed</h4>
+                            <p>Report ready for delivery</p>
+                            <span class="step-time">Pending</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        9. LABORATORY TEST PROCESSING
+        ============================================================ -->
+        <section class="test-processing" id="testProcessing">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-microscope"></i> Test Processing</h3>
+                    <a href="test-processing.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="processing-categories">
+                    <div class="category-card">
+                        <i class="fas fa-tint"></i>
+                        <h4>Hematology</h4>
+                        <span>12 Tests</span>
+                        <button class="btn btn-outline-sm">Process</button>
+                    </div>
+                    <div class="category-card">
+                        <i class="fas fa-flask"></i>
+                        <h4>Clinical Chemistry</h4>
+                        <span>8 Tests</span>
+                        <button class="btn btn-outline-sm">Process</button>
+                    </div>
+                    <div class="category-card">
+                        <i class="fas fa-bacteria"></i>
+                        <h4>Microbiology</h4>
+                        <span>5 Tests</span>
+                        <button class="btn btn-outline-sm">Process</button>
+                    </div>
+                    <div class="category-card">
+                        <i class="fas fa-shield-virus"></i>
+                        <h4>Serology</h4>
+                        <span>4 Tests</span>
+                        <button class="btn btn-outline-sm">Process</button>
+                    </div>
+                    <div class="category-card">
+                        <i class="fas fa-dna"></i>
+                        <h4>Molecular Diagnostics</h4>
+                        <span>3 Tests</span>
+                        <button class="btn btn-outline-sm">Process</button>
+                    </div>
+                    <div class="category-card">
+                        <i class="fas fa-droplet"></i>
+                        <h4>Blood Bank</h4>
+                        <span>6 Tests</span>
+                        <button class="btn btn-outline-sm">Process</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        10. TEST RESULTS
+        ============================================================ -->
+        <section class="test-results" id="testResults">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-file-medical"></i> Test Results</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Enter Results</button>
+                </div>
+                
+                <div class="results-list">
+                    <div class="result-item">
+                        <div class="result-info">
+                            <h4>CBC - Abebe Demissie</h4>
+                            <p>REQ-2026-001 | Collected: 8:15 AM</p>
+                        </div>
+                        <div class="result-status">
+                            <span class="status-badge pending">Pending Entry</span>
+                        </div>
+                        <div class="result-actions">
+                            <button class="btn btn-primary-sm">Enter Results</button>
+                        </div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-info">
+                            <h4>Lipid Profile - Abebe Demissie</h4>
+                            <p>REQ-2026-001 | Collected: 8:15 AM</p>
+                        </div>
+                        <div class="result-status">
+                            <span class="status-badge processing">Processing</span>
+                        </div>
+                        <div class="result-actions">
+                            <button class="btn btn-outline-sm">Continue</button>
+                        </div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-info">
+                            <h4>Blood Culture - Tigist Bekele</h4>
+                            <p>REQ-2026-002 | Collected: 9:00 AM</p>
+                        </div>
+                        <div class="result-status">
+                            <span class="status-badge ready">Results Ready</span>
+                        </div>
+                        <div class="result-actions">
+                            <button class="btn btn-outline-sm">View</button>
+                            <button class="btn btn-outline-sm">Print</button>
+                        </div>
+                    </div>
+                    <div class="result-item critical">
+                        <div class="result-info">
+                            <h4>Cardiac Enzymes - Ruth Desta</h4>
+                            <p>REQ-2026-004 | Collected: 9:30 AM</p>
+                        </div>
+                        <div class="result-status">
+                            <span class="status-badge critical">Critical!</span>
+                        </div>
+                        <div class="result-actions">
+                            <button class="btn btn-danger-sm">Notify Doctor</button>
+                            <button class="btn btn-outline-sm">View</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        11. BLOOD BANK
+        ============================================================ -->
+        <section class="blood-bank" id="bloodBank">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-droplet"></i> Blood Bank</h3>
+                    <a href="blood-bank.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="blood-grid">
+                    <div class="blood-card">
+                        <div class="blood-type">A+</div>
+                        <div class="blood-stats">
+                            <span><strong>Units:</strong> 12</span>
+                            <span><strong>Status:</strong> Available</span>
+                        </div>
+                        <div class="blood-expiry">
+                            <span>Expiry: Dec 25, 2026</span>
+                        </div>
+                    </div>
+                    <div class="blood-card">
+                        <div class="blood-type">A-</div>
+                        <div class="blood-stats">
+                            <span><strong>Units:</strong> 5</span>
+                            <span><strong>Status:</strong> Low Stock</span>
+                        </div>
+                        <div class="blood-expiry">
+                            <span>Expiry: Dec 28, 2026</span>
+                        </div>
+                    </div>
+                    <div class="blood-card">
+                        <div class="blood-type">B+</div>
+                        <div class="blood-stats">
+                            <span><strong>Units:</strong> 10</span>
+                            <span><strong>Status:</strong> Available</span>
+                        </div>
+                        <div class="blood-expiry">
+                            <span>Expiry: Jan 5, 2027</span>
+                        </div>
+                    </div>
+                    <div class="blood-card">
+                        <div class="blood-type">O+</div>
+                        <div class="blood-stats">
+                            <span><strong>Units:</strong> 18</span>
+                            <span><strong>Status:</strong> Available</span>
+                        </div>
+                        <div class="blood-expiry">
+                            <span>Expiry: Jan 10, 2027</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        12. LABORATORY EQUIPMENT
+        ============================================================ -->
+        <section class="lab-equipment" id="labEquipment">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-microscope"></i> Laboratory Equipment</h3>
+                    <a href="equipment.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="equipment-grid">
+                    <div class="equipment-card">
+                        <i class="fas fa-microscope"></i>
+                        <div>
+                            <h4>Hematology Analyzer</h4>
+                            <p>Status: <span class="status-badge online">Online</span></p>
+                            <p>Calibration: Dec 15, 2026</p>
+                            <p>Next Maintenance: Jan 15, 2027</p>
+                        </div>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                    <div class="equipment-card">
+                        <i class="fas fa-flask"></i>
+                        <div>
+                            <h4>Chemistry Analyzer</h4>
+                            <p>Status: <span class="status-badge online">Online</span></p>
+                            <p>Calibration: Dec 18, 2026</p>
+                            <p>Next Maintenance: Jan 18, 2027</p>
+                        </div>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                    <div class="equipment-card">
+                        <i class="fas fa-biohazard"></i>
+                        <div>
+                            <h4>Centrifuge</h4>
+                            <p>Status: <span class="status-badge maintenance">Maintenance</span></p>
+                            <p>Calibration: Dec 10, 2026</p>
+                            <p>Next Maintenance: Dec 30, 2026</p>
+                        </div>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        13. LABORATORY INVENTORY
+        ============================================================ -->
+        <section class="lab-inventory" id="labInventory">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-boxes"></i> Laboratory Inventory</h3>
+                    <a href="inventory.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="inventory-grid">
+                    <div class="inventory-card">
+                        <div class="inventory-info">
+                            <h4>Reagents</h4>
+                            <p><strong>Stock:</strong> 15 units</p>
+                            <p><strong>Min Level:</strong> 10 units</p>
+                        </div>
+                        <span class="status-badge in-stock">In Stock</span>
+                    </div>
+                    <div class="inventory-card">
+                        <div class="inventory-info">
+                            <h4>Test Kits</h4>
+                            <p><strong>Stock:</strong> 8 units</p>
+                            <p><strong>Min Level:</strong> 15 units</p>
+                        </div>
+                        <span class="status-badge low-stock">Low Stock</span>
+                    </div>
+                    <div class="inventory-card">
+                        <div class="inventory-info">
+                            <h4>Laboratory Supplies</h4>
+                            <p><strong>Stock:</strong> 45 units</p>
+                            <p><strong>Min Level:</strong> 20 units</p>
+                        </div>
+                        <span class="status-badge in-stock">In Stock</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        14. QUALITY CONTROL
+        ============================================================ -->
+        <section class="quality-control" id="qualityControl">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-check-double"></i> Quality Control</h3>
+                    <a href="quality-control.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="quality-grid">
+                    <div class="quality-card">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <h4>Daily QC</h4>
+                            <p>12 tests passed</p>
+                            <p>0 failed</p>
+                            <span class="status-badge passed">Passed</span>
+                        </div>
+                    </div>
+                    <div class="quality-card">
+                        <i class="fas fa-calendar-check"></i>
+                        <div>
+                            <h4>Monthly QC</h4>
+                            <p>98% accuracy</p>
+                            <p>2% deviation</p>
+                            <span class="status-badge passed">Passed</span>
+                        </div>
+                    </div>
+                    <div class="quality-card">
+                        <i class="fas fa-tools"></i>
+                        <div>
+                            <h4>Instrument Validation</h4>
+                            <p>All instruments valid</p>
+                            <p>Next validation: Jan 15, 2027</p>
+                            <span class="status-badge passed">Validated</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        15. CRITICAL RESULTS
+        ============================================================ -->
+        <section class="critical-results" id="criticalResults">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Critical Results</h3>
+                    <a href="critical-results.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="critical-list">
+                    <div class="critical-item">
+                        <div class="critical-info">
+                            <h4>Ruth Desta - Cardiac Enzymes</h4>
+                            <p>REQ-2026-004 | Critical Value Detected</p>
+                        </div>
+                        <div class="critical-actions">
+                            <button class="btn btn-danger-sm">Notify Doctor</button>
+                            <button class="btn btn-outline-sm">View</button>
+                        </div>
+                    </div>
+                    <div class="critical-item">
+                        <div class="critical-info">
+                            <h4>Abebe Demissie - Troponin I</h4>
+                            <p>REQ-2026-005 | Critical Value Detected</p>
+                        </div>
+                        <div class="critical-actions">
+                            <button class="btn btn-danger-sm">Notify Doctor</button>
+                            <button class="btn btn-outline-sm">View</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        16. REPORTS & ANALYTICS
+        ============================================================ -->
+        <section class="reports-analytics" id="reportsAnalytics">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-file-alt"></i> Reports & Analytics</h3>
+                    <div class="report-actions">
+                        <button class="btn btn-outline-sm"><i class="fas fa-file-pdf"></i> PDF</button>
+                        <button class="btn btn-outline-sm"><i class="fas fa-file-excel"></i> Excel</button>
+                    </div>
+                </div>
+                
+                <div class="analytics-grid">
+                    <div class="chart-card">
+                        <h4>Daily Tests</h4>
+                        <canvas id="dailyTestsChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h4>Test Categories</h4>
+                        <canvas id="testCategoriesChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h4>Disease Trends</h4>
+                        <canvas id="diseaseTrendsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        17. MESSAGES
+        ============================================================ -->
+        <section class="messages-section" id="messagesSection">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-envelope"></i> Messages</h3>
+                    <a href="messages.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="messages-list">
+                    <div class="message-item unread">
+                        <img src="../assets/staff/doctor-avatar.jpg" alt="Doctor">
+                        <div>
+                            <h4>Dr. Samuel Bekele</h4>
+                            <p>When will the CBC results for Abebe be ready?</p>
+                            <span class="msg-time">5 min ago</span>
+                        </div>
+                    </div>
+                    <div class="message-item unread">
+                        <img src="../assets/staff/nurse-avatar.jpg" alt="Nurse">
+                        <div>
+                            <h4>Nurse Sara</h4>
+                            <p>Urgent: Need blood cross-matching for Bed 202.</p>
+                            <span class="msg-time">15 min ago</span>
+                        </div>
+                    </div>
+                    <div class="message-item">
+                        <img src="../assets/staff/pharmacy-avatar.jpg" alt="Pharmacy">
+                        <div>
+                            <h4>Pharmacy</h4>
+                            <p>Patient Ruth's lab results needed for medication adjustment.</p>
+                            <span class="msg-time">1 hour ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        18. AI LABORATORY ASSISTANT
+        ============================================================ -->
+        <div class="ai-assistant" id="aiAssistant">
+            <button class="ai-toggle lab-ai-toggle" id="aiToggle">
+                <i class="fas fa-robot"></i>
+            </button>
+            <div class="ai-chat-window" id="aiChatWindow">
+                <div class="ai-header lab-ai-header">
+                    <div class="ai-header-info">
+                        <i class="fas fa-robot"></i>
+                        <div>
+                            <h4>AI Laboratory Assistant</h4>
+                            <span>Online</span>
+                        </div>
+                    </div>
+                    <button class="ai-close" id="aiClose"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="ai-body" id="aiBody">
+                    <div class="ai-message ai-bot">
+                        <div class="ai-avatar"><i class="fas fa-robot"></i></div>
+                        <div class="ai-bubble lab-ai-bubble">
+                            <p>🔬 Hello! I'm your AI Laboratory Assistant. I can help you:</p>
+                            <ul>
+                                <li>Verify test results</li>
+                                <li>Generate report summaries</li>
+                                <li>Track samples</li>
+                                <li>Monitor equipment status</li>
+                            </ul>
+                            <p>How can I assist you with your laboratory work?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ai-footer">
+                    <div class="ai-input-group">
+                        <input type="text" id="aiInput" placeholder="Ask about lab work...">
+                        <button id="aiSend"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                    <div class="ai-voice">
+                        <button id="aiVoiceBtn"><i class="fas fa-microphone"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        19. QUICK ACTIONS
+        ============================================================ -->
+        <section class="quick-actions" id="quickActions">
+            <div class="container">
+                <div class="actions-grid">
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-syringe"></i>
+                        <span>Register Sample</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-barcode"></i>
+                        <span>Scan Barcode</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-file-medical"></i>
+                        <span>Enter Results</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-print"></i>
+                        <span>Print Report</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-bell"></i>
+                        <span>Notify Doctor</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Generate Daily Report</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        FLOATING BUTTONS
+        ============================================================ -->
+        <div class="floating-buttons">
+            <button class="float-btn emergency" id="emergencyFloat" data-tooltip="Emergency">
+                <i class="fas fa-ambulance"></i>
+            </button>
+            <button class="float-btn chat" id="floatingChat" data-tooltip="AI Assistant">
+                <i class="fas fa-robot"></i>
+            </button>
+            <button class="float-btn scroll-top" id="scrollTop" data-tooltip="Scroll to Top">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+        </div>
+
+        <!-- ============================================================
+        20. FOOTER
+        ============================================================ -->
+        <footer class="dashboard-footer" id="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <p>&copy; 2026 <strong>Gimbie Adventist General Hospital</strong>. All Rights Reserved.</p>
+                    <div class="footer-links">
+                        <a href="../privacy.html">Privacy Policy</a>
+                        <a href="../terms.html">Terms of Service</a>
+                        <a href="../contact.html">Hospital Support</a>
+                        <a href="../contact.html">IT Support</a>
+                        <span class="version">v2.4.1</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+    <script src="../js/laboratory-dashboard.js"></script>
+    <script src="../js/ai-assistant.js"></script>
+</body>
+          </html>
