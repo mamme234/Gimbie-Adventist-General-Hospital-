@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HR Dashboard - Gimbie Adventist General Hospital. Manage employees, recruitment, attendance, payroll, and leave management.">
+    <meta name="keywords" content="hr dashboard, employees, recruitment, attendance, payroll, leave management, gimbie hospital">
+    <meta name="author" content="Gimbie Adventist General Hospital">
+    <title>HR Dashboard | Gimbie Adventist General Hospital</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/hr-dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+</head>
+<body>
+    
+    <!-- ============================================================
+    1. LOADING SCREEN
+    ============================================================ -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>Gimbie Adventist</span>
+            </div>
+            <div class="loader-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="loader-text">
+                <p id="loadingText">Loading HR Dashboard...</p>
+                <span class="loader-percentage" id="loaderPercentage">0%</span>
+            </div>
+            <div class="loader-hr-animation">
+                <i class="fas fa-users"></i>
+                <i class="fas fa-user-tie"></i>
+                <i class="fas fa-clipboard-list"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    2. DASHBOARD HEADER
+    ============================================================ -->
+    <header class="dashboard-header" id="dashboardHeader">
+        <div class="container">
+            <div class="header-left">
+                <div class="hospital-logo">
+                    <a href="../index.html">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </a>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="header-center">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search employees, departments, applications...">
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="notifications">
+                    <button class="notif-btn"><i class="fas fa-bell"></i><span class="notif-badge">8</span></button>
+                </div>
+                <div class="messages">
+                    <button class="msg-btn"><i class="fas fa-envelope"></i><span class="msg-badge">5</span></button>
+                </div>
+                <div class="language-switcher">
+                    <button class="lang-btn" id="langToggle">
+                        <i class="fas fa-globe"></i> EN <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="lang-dropdown">
+                        <li><a href="#" data-lang="en">English</a></li>
+                        <li><a href="#" data-lang="am">አማርኛ</a></li>
+                        <li><a href="#" data-lang="or">Afaan Oromoo</a></li>
+                    </ul>
+                </div>
+                <div class="theme-toggle">
+                    <button id="themeToggle"><i class="fas fa-moon"></i></button>
+                </div>
+                <div class="hr-profile">
+                    <img src="../assets/staff/hr-avatar.jpg" alt="HR Officer Photo" class="profile-img">
+                    <div class="profile-info">
+                        <span class="hr-name">Genet Bekele</span>
+                        <span class="hr-id">HR-000001</span>
+                        <span class="hr-dept">Human Resources</span>
+                    </div>
+                    <button class="logout-btn"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    3. LEFT SIDEBAR
+    ============================================================ -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-user">
+            <img src="../assets/staff/hr-avatar.jpg" alt="HR Officer Photo">
+            <h4>Genet Bekele</h4>
+            <span>HR-000001</span>
+            <span class="role-badge">HR Manager</span>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="active"><a href="hr-dashboard.html"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+                <li><a href="employees.html"><i class="fas fa-users"></i> Employees</a></li>
+                <li><a href="recruitment.html"><i class="fas fa-user-plus"></i> Recruitment</a></li>
+                <li><a href="attendance.html"><i class="fas fa-clock"></i> Attendance</a></li>
+                <li><a href="payroll.html"><i class="fas fa-money-bill-wave"></i> Payroll</a></li>
+                <li><a href="leave-management.html"><i class="fas fa-calendar-check"></i> Leave Management</a></li>
+                <li><a href="shift-scheduling.html"><i class="fas fa-calendar-alt"></i> Shift Scheduling</a></li>
+                <li><a href="performance-reviews.html"><i class="fas fa-star"></i> Performance Reviews</a></li>
+                <li><a href="training.html"><i class="fas fa-graduation-cap"></i> Training</a></li>
+                <li><a href="staff-documents.html"><i class="fas fa-folder"></i> Staff Documents</a></li>
+                <li><a href="departments.html"><i class="fas fa-building"></i> Departments</a></li>
+                <li><a href="reports.html"><i class="fas fa-file-alt"></i> Reports</a></li>
+                <li><a href="messages.html"><i class="fas fa-envelope"></i> Messages</a></li>
+                <li><a href="notifications.html"><i class="fas fa-bell"></i> Notifications</a></li>
+                <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- ============================================================
+    MAIN CONTENT
+    ============================================================ -->
+    <main class="dashboard-main" id="dashboardMain">
+        
+        <!-- ============================================================
+        4. DASHBOARD OVERVIEW
+        ============================================================ -->
+        <section class="dashboard-overview" id="dashboardOverview">
+            <div class="container">
+                <div class="welcome-section">
+                    <div>
+                        <h2>Good Morning, Genet! 👋</h2>
+                        <p>Welcome to your HR dashboard.</p>
+                        <span class="shift-badge"><i class="fas fa-clock"></i> Morning Shift: 8:00 AM - 4:00 PM</span>
+                    </div>
+                    <div class="quick-stats-header">
+                        <span class="stat-badge"><i class="fas fa-users"></i> 500 Total Employees</span>
+                        <span class="stat-badge"><i class="fas fa-user-plus"></i> 5 New Employees</span>
+                        <span class="stat-badge"><i class="fas fa-briefcase"></i> 12 Vacant Positions</span>
+                        <span class="stat-badge"><i class="fas fa-calendar"></i> 8 on Leave</span>
+                        <span class="stat-badge"><i class="fas fa-check-circle"></i> 92% Attendance</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        5. STATISTICS CARDS
+        ============================================================ -->
+        <section class="statistics-cards" id="statisticsCards">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-user-md"></i></div>
+                        <div>
+                            <span class="stat-number">150</span>
+                            <span class="stat-label">Doctors</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-user-nurse"></i></div>
+                        <div>
+                            <span class="stat-number">300</span>
+                            <span class="stat-label">Nurses</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-prescription-bottle"></i></div>
+                        <div>
+                            <span class="stat-number">15</span>
+                            <span class="stat-label">Pharmacists</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-flask"></i></div>
+                        <div>
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Laboratory Staff</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-user-tie"></i></div>
+                        <div>
+                            <span class="stat-number">18</span>
+                            <span class="stat-label">Administrative Staff</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                        <div>
+                            <span class="stat-number">480</span>
+                            <span class="stat-label">Active Employees</span>
+                        </div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <span class="stat-number">20</span>
+                            <span class="stat-label">Inactive Employees</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-user-plus"></i></div>
+                        <div>
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Monthly Recruitment</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        6. EMPLOYEE MANAGEMENT
+        ============================================================ -->
+        <section class="employee-management" id="employeeManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-users"></i> Employee Management</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Add Employee</button>
+                </div>
+                
+                <div class="employee-grid">
+                    <div class="employee-card">
+                        <div class="employee-photo">
+                            <img src="../assets/doctors/dr-samuel-bekele.jpg" alt="Doctor">
+                            <span class="status-badge active">Active</span>
+                        </div>
+                        <div class="employee-info">
+                            <h4>Dr. Samuel Bekele</h4>
+                            <span class="emp-id">DOC-000001</span>
+                            <p><strong>Department:</strong> Cardiology</p>
+                            <p><strong>Position:</strong> Chief of Cardiology</p>
+                            <p><i class="fas fa-phone"></i> +251 91 123 4567</p>
+                            <div class="employee-actions">
+                                <button class="btn btn-outline-sm">View</button>
+                                <button class="btn btn-outline-sm">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="employee-card">
+                        <div class="employee-photo">
+                            <img src="../assets/staff/nurse-avatar.jpg" alt="Nurse">
+                            <span class="status-badge active">Active</span>
+                        </div>
+                        <div class="employee-info">
+                            <h4>Sara Alemayehu</h4>
+                            <span class="emp-id">NUR-000001</span>
+                            <p><strong>Department:</strong> Nursing</p>
+                            <p><strong>Position:</strong> Head Nurse</p>
+                            <p><i class="fas fa-phone"></i> +251 92 234 5678</p>
+                            <div class="employee-actions">
+                                <button class="btn btn-outline-sm">View</button>
+                                <button class="btn btn-outline-sm">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="employee-card">
+                        <div class="employee-photo">
+                            <img src="../assets/staff/pharmacist-avatar.jpg" alt="Pharmacist">
+                            <span class="status-badge on-leave">On Leave</span>
+                        </div>
+                        <div class="employee-info">
+                            <h4>Daniel Worku</h4>
+                            <span class="emp-id">PHA-000001</span>
+                            <p><strong>Department:</strong> Pharmacy</p>
+                            <p><strong>Position:</strong> Senior Pharmacist</p>
+                            <p><i class="fas fa-phone"></i> +251 93 345 6789</p>
+                            <div class="employee-actions">
+                                <button class="btn btn-outline-sm">View</button>
+                                <button class="btn btn-outline-sm">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="employee-card">
+                        <div class="employee-photo">
+                            <img src="../assets/staff/lab-avatar.jpg" alt="Lab Tech">
+                            <span class="status-badge active">Active</span>
+                        </div>
+                        <div class="employee-info">
+                            <h4>Samuel Fikre</h4>
+                            <span class="emp-id">LAB-000001</span>
+                            <p><strong>Department:</strong> Laboratory</p>
+                            <p><strong>Position:</strong> Senior Lab Tech</p>
+                            <p><i class="fas fa-phone"></i> +251 94 456 7890</p>
+                            <div class="employee-actions">
+                                <button class="btn btn-outline-sm">View</button>
+                                <button class="btn btn-outline-sm">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        7. RECRUITMENT
+        ============================================================ -->
+        <section class="recruitment" id="recruitment">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-user-plus"></i> Recruitment</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Create Vacancy</button>
+                </div>
+                
+                <div class="recruitment-grid">
+                    <div class="recruitment-card">
+                        <i class="fas fa-briefcase"></i>
+                        <div>
+                            <h4>Senior Cardiologist</h4>
+                            <p><strong>Applications:</strong> 15</p>
+                            <p><strong>Shortlisted:</strong> 6</p>
+                            <p><strong>Status:</strong> Interview Phase</p>
+                        </div>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                    <div class="recruitment-card">
+                        <i class="fas fa-briefcase"></i>
+                        <div>
+                            <h4>Senior Nurse</h4>
+                            <p><strong>Applications:</strong> 28</p>
+                            <p><strong>Shortlisted:</strong> 10</p>
+                            <p><strong>Status:</strong> Shortlisting</p>
+                        </div>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                    <div class="recruitment-card">
+                        <i class="fas fa-briefcase"></i>
+                        <div>
+                            <h4>IT Support Officer</h4>
+                            <p><strong>Applications:</strong> 8</p>
+                            <p><strong>Shortlisted:</strong> 4</p>
+                            <p><strong>Status:</strong> Interview Scheduled</p>
+                        </div>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                    <div class="recruitment-card">
+                        <i class="fas fa-briefcase"></i>
+                        <div>
+                            <h4>Radiologist</h4>
+                            <p><strong>Applications:</strong> 6</p>
+                            <p><strong>Shortlisted:</strong> 3</p>
+                            <p><strong>Status:</strong> Offer Phase</p>
+                        </div>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                </div>
+                
+                <div class="candidate-list">
+                    <h4>Recent Candidates</h4>
+                    <div class="candidate-item">
+                        <img src="../assets/candidates/candidate-1.jpg" alt="Candidate">
+                        <div>
+                            <h5>Abebe Haile</h5>
+                            <span>Cardiology | Interview: Dec 22, 2026</span>
+                        </div>
+                        <span class="status-badge pending">Pending</span>
+                        <button class="btn btn-outline-sm">Review</button>
+                    </div>
+                    <div class="candidate-item">
+                        <img src="../assets/candidates/candidate-2.jpg" alt="Candidate">
+                        <div>
+                            <h5>Tigist Worku</h5>
+                            <span>Nursing | Shortlisted</span>
+                        </div>
+                        <span class="status-badge shortlisted">Shortlisted</span>
+                        <button class="btn btn-outline-sm">Review</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        8. ATTENDANCE MANAGEMENT
+        ============================================================ -->
+        <section class="attendance-management" id="attendanceManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-clock"></i> Attendance Management</h3>
+                    <div class="attendance-actions">
+                        <button class="btn btn-outline-sm"><i class="fas fa-fingerprint"></i> Fingerprint</button>
+                        <button class="btn btn-outline-sm"><i class="fas fa-qrcode"></i> QR</button>
+                        <button class="btn btn-outline-sm"><i class="fas fa-clock"></i> Clock In</button>
+                        <button class="btn btn-outline-sm"><i class="fas fa-clock"></i> Clock Out</button>
+                    </div>
+                </div>
+                
+                <div class="attendance-summary">
+                    <div class="attendance-stat">
+                        <span>Present</span>
+                        <span class="attendance-number">420</span>
+                    </div>
+                    <div class="attendance-stat">
+                        <span>Late</span>
+                        <span class="attendance-number">25</span>
+                    </div>
+                    <div class="attendance-stat">
+                        <span>Absent</span>
+                        <span class="attendance-number">15</span>
+                    </div>
+                    <div class="attendance-stat">
+                        <span>On Leave</span>
+                        <span class="attendance-number">40</span>
+                    </div>
+                    <div class="attendance-stat">
+                        <span>Attendance Rate</span>
+                        <span class="attendance-number">92%</span>
+                    </div>
+                </div>
+                
+                <div class="attendance-chart">
+                    <canvas id="attendanceChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        9. LEAVE MANAGEMENT
+        ============================================================ -->
+        <section class="leave-management" id="leaveManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-calendar-check"></i> Leave Management</h3>
+                    <a href="leave-management.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="leave-grid">
+                    <div class="leave-card">
+                        <h4>Pending Requests</h4>
+                        <span class="leave-count">8</span>
+                        <button class="btn btn-primary-sm">Review</button>
+                    </div>
+                    <div class="leave-card">
+                        <h4>Annual Leave</h4>
+                        <span class="leave-count">15</span>
+                        <span>Employees on leave</span>
+                    </div>
+                    <div class="leave-card">
+                        <h4>Sick Leave</h4>
+                        <span class="leave-count">5</span>
+                        <span>Employees on leave</span>
+                    </div>
+                    <div class="leave-card">
+                        <h4>Maternity Leave</h4>
+                        <span class="leave-count">3</span>
+                        <span>Employees on leave</span>
+                    </div>
+                </div>
+                
+                <div class="leave-requests">
+                    <h4>Recent Leave Requests</h4>
+                    <div class="leave-request-item">
+                        <span><strong>Dr. Hana Alemu</strong> - Sick Leave (Dec 22-24)</span>
+                        <span class="status-badge pending">Pending</span>
+                        <button class="btn btn-outline-sm">Approve</button>
+                    </div>
+                    <div class="leave-request-item">
+                        <span><strong>Sara Alemayehu</strong> - Annual Leave (Dec 25-30)</span>
+                        <span class="status-badge approved">Approved</span>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        10. SHIFT SCHEDULING
+        ============================================================ -->
+        <section class="shift-scheduling" id="shiftScheduling">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-calendar-alt"></i> Shift Scheduling</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Create Schedule</button>
+                </div>
+                
+                <div class="shift-grid">
+                    <div class="shift-card">
+                        <i class="fas fa-sun"></i>
+                        <h4>Morning Shift</h4>
+                        <p>8:00 AM - 4:00 PM</p>
+                        <span>45 Employees</span>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                    <div class="shift-card">
+                        <i class="fas fa-cloud-sun"></i>
+                        <h4>Afternoon Shift</h4>
+                        <p>12:00 PM - 8:00 PM</p>
+                        <span>30 Employees</span>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                    <div class="shift-card">
+                        <i class="fas fa-moon"></i>
+                        <h4>Night Shift</h4>
+                        <p>8:00 PM - 4:00 AM</p>
+                        <span>20 Employees</span>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                    <div class="shift-card">
+                        <i class="fas fa-ambulance"></i>
+                        <h4>Emergency Shift</h4>
+                        <p>24/7 Coverage</p>
+                        <span>15 Employees</span>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        11. PAYROLL
+        ============================================================ -->
+        <section class="payroll-management" id="payrollManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-money-bill-wave"></i> Payroll</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-print"></i> Generate Payslip</button>
+                </div>
+                
+                <div class="payroll-card">
+                    <div class="payroll-summary">
+                        <div class="payroll-item">
+                            <span>Total Salary</span>
+                            <span class="payroll-value">ETB 350,000</span>
+                        </div>
+                        <div class="payroll-item">
+                            <span>Overtime</span>
+                            <span class="payroll-value">ETB 15,000</span>
+                        </div>
+                        <div class="payroll-item">
+                            <span>Bonuses</span>
+                            <span class="payroll-value">ETB 8,000</span>
+                        </div>
+                        <div class="payroll-item">
+                            <span>Deductions</span>
+                            <span class="payroll-value">ETB 12,000</span>
+                        </div>
+                        <div class="payroll-item">
+                            <span>Tax</span>
+                            <span class="payroll-value">ETB 6,000</span>
+                        </div>
+                        <div class="payroll-item total">
+                            <span><strong>Net Payroll</strong></span>
+                            <span class="payroll-value"><strong>ETB 355,000</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        12. PERFORMANCE MANAGEMENT
+        ============================================================ -->
+        <section class="performance-management" id="performanceManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-star"></i> Performance Management</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Review Performance</button>
+                </div>
+                
+                <div class="performance-grid">
+                    <div class="performance-card">
+                        <h4>Dr. Samuel Bekele</h4>
+                        <span>Cardiology</span>
+                        <div class="rating">
+                            <span class="stars">★★★★★</span>
+                            <span>4.8</span>
+                        </div>
+                        <p>Excellent performance</p>
+                    </div>
+                    <div class="performance-card">
+                        <h4>Sara Alemayehu</h4>
+                        <span>Nursing</span>
+                        <div class="rating">
+                            <span class="stars">★★★★★</span>
+                            <span>4.9</span>
+                        </div>
+                        <p>Outstanding leadership</p>
+                    </div>
+                    <div class="performance-card">
+                        <h4>Daniel Worku</h4>
+                        <span>Pharmacy</span>
+                        <div class="rating">
+                            <span class="stars">★★★★☆</span>
+                            <span>4.2</span>
+                        </div>
+                        <p>Good performance</p>
+                    </div>
+                    <div class="performance-card">
+                        <h4>Samuel Fikre</h4>
+                        <span>Laboratory</span>
+                        <div class="rating">
+                            <span class="stars">★★★★☆</span>
+                            <span>4.5</span>
+                        </div>
+                        <p>Very good performance</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        13. STAFF TRAINING
+        ============================================================ -->
+        <section class="staff-training" id="staffTraining">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-graduation-cap"></i> Staff Training</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Add Training</button>
+                </div>
+                
+                <div class="training-grid">
+                    <div class="training-card">
+                        <i class="fas fa-heartbeat"></i>
+                        <div>
+                            <h4>Advanced Cardiac Life Support</h4>
+                            <p><strong>Date:</strong> Jan 15-20, 2027</p>
+                            <p><strong>Attendees:</strong> 25</p>
+                            <span class="status-badge scheduled">Scheduled</span>
+                        </div>
+                    </div>
+                    <div class="training-card">
+                        <i class="fas fa-syringe"></i>
+                        <div>
+                            <h4>Vaccination Training</h4>
+                            <p><strong>Date:</strong> Jan 10-12, 2027</p>
+                            <p><strong>Attendees:</strong> 18</p>
+                            <span class="status-badge scheduled">Scheduled</span>
+                        </div>
+                    </div>
+                    <div class="training-card">
+                        <i class="fas fa-prescription-bottle"></i>
+                        <div>
+                            <h4>Pharmacy Management</h4>
+                            <p><strong>Date:</strong> Jan 5-7, 2027</p>
+                            <p><strong>Attendees:</strong> 12</p>
+                            <span class="status-badge completed">Completed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        14. STAFF DOCUMENTS
+        ============================================================ -->
+        <section class="staff-documents" id="staffDocuments">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-folder"></i> Staff Documents</h3>
+                    <a href="staff-documents.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="documents-grid">
+                    <div class="document-item">
+                        <i class="fas fa-file-contract"></i>
+                        <div>
+                            <h4>Employment Contract</h4>
+                            <p>All employees</p>
+                            <button class="btn btn-outline-sm">Download</button>
+                        </div>
+                    </div>
+                    <div class="document-item">
+                        <i class="fas fa-id-card"></i>
+                        <div>
+                            <h4>Professional License</h4>
+                            <p>Medical staff</p>
+                            <button class="btn btn-outline-sm">Download</button>
+                        </div>
+                    </div>
+                    <div class="document-item">
+                        <i class="fas fa-certificate"></i>
+                        <div>
+                            <h4>Certificates</h4>
+                            <p>Training records</p>
+                            <button class="btn btn-outline-sm">Download</button>
+                        </div>
+                    </div>
+                    <div class="document-item">
+                        <i class="fas fa-file-alt"></i>
+                        <div>
+                            <h4>CV / Resume</h4>
+                            <p>Staff records</p>
+                            <button class="btn btn-outline-sm">Download</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        15. DEPARTMENT MANAGEMENT
+        ============================================================ -->
+        <section class="department-management" id="departmentManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-building"></i> Department Management</h3>
+                    <a href="departments.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="department-grid">
+                    <div class="dept-card">
+                        <h4>Cardiology</h4>
+                        <span>12 Employees</span>
+                        <p>Head: Dr. Samuel Bekele</p>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                    <div class="dept-card">
+                        <h4>Pediatrics</h4>
+                        <span>8 Employees</span>
+                        <p>Head: Dr. Hana Alemu</p>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                    <div class="dept-card">
+                        <h4>Surgery</h4>
+                        <span>10 Employees</span>
+                        <p>Head: Dr. Dawit Tadesse</p>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                    <div class="dept-card">
+                        <h4>Pharmacy</h4>
+                        <span>6 Employees</span>
+                        <p>Head: Daniel Worku</p>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        16. REPORTS
+        ============================================================ -->
+        <section class="reports-section" id="reportsSection">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-file-alt"></i> Reports</h3>
+                    <div class="report-actions">
+                        <button class="btn btn-outline-sm"><i class="fas fa-file-pdf"></i> PDF</button>
+                        <button class="btn btn-outline-sm"><i class="fas fa-file-excel"></i> Excel</button>
+                    </div>
+                </div>
+                
+                <div class="reports-grid">
+                    <a href="#" class="report-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Attendance Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span>Payroll Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Leave Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Recruitment Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-star"></i>
+                        <span>Staff Performance Report</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        17. MESSAGES
+        ============================================================ -->
+        <section class="messages-section" id="messagesSection">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-envelope"></i> Messages</h3>
+                    <a href="messages.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="messages-list">
+                    <div class="message-item unread">
+                        <img src="../assets/staff/admin-avatar.jpg" alt="Admin">
+                        <div>
+                            <h4>Administration</h4>
+                            <p>Staff meeting scheduled for tomorrow at 4:00 PM.</p>
+                            <span class="msg-time">5 min ago</span>
+                        </div>
+                    </div>
+                    <div class="message-item unread">
+                        <img src="../assets/staff/finance-avatar.jpg" alt="Finance">
+                        <div>
+                            <h4>Finance Department</h4>
+                            <p>Payroll for December needs your approval.</p>
+                            <span class="msg-time">15 min ago</span>
+                        </div>
+                    </div>
+                    <div class="message-item">
+                        <img src="../assets/doctors/dr-samuel-bekele.jpg" alt="Doctor">
+                        <div>
+                            <h4>Dr. Samuel Bekele</h4>
+                            <p>Request for additional staff in Cardiology.</p>
+                            <span class="msg-time">45 min ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        18. NOTIFICATIONS
+        ============================================================ -->
+        <section class="notifications-section" id="notificationsSection">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-bell"></i> Notifications</h3>
+                    <a href="notifications.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="notifications-list">
+                    <div class="notification-item">
+                        <i class="fas fa-user-plus"></i>
+                        <div>
+                            <h4>New Application</h4>
+                            <p>New job application received for Senior Nurse position.</p>
+                            <span class="notif-time">10 min ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <i class="fas fa-calendar-check"></i>
+                        <div>
+                            <h4>Leave Request</h4>
+                            <p>Dr. Hana Alemu has requested sick leave.</p>
+                            <span class="notif-time">25 min ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <h4>Contract Expiry</h4>
+                            <p>3 staff contracts expire in 30 days.</p>
+                            <span class="notif-time">1 hour ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <i class="fas fa-birthday-cake"></i>
+                        <div>
+                            <h4>Staff Birthday</h4>
+                            <p>Today is Dr. Abel Girma's birthday!</p>
+                            <span class="notif-time">2 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        19. AI HR ASSISTANT
+        ============================================================ -->
+        <div class="ai-assistant" id="aiAssistant">
+            <button class="ai-toggle hr-ai-toggle" id="aiToggle">
+                <i class="fas fa-robot"></i>
+            </button>
+            <div class="ai-chat-window" id="aiChatWindow">
+                <div class="ai-header hr-ai-header">
+                    <div class="ai-header-info">
+                        <i class="fas fa-robot"></i>
+                        <div>
+                            <h4>AI HR Assistant</h4>
+                            <span>Online</span>
+                        </div>
+                    </div>
+                    <button class="ai-close" id="aiClose"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="ai-body" id="aiBody">
+                    <div class="ai-message ai-bot">
+                        <div class="ai-avatar"><i class="fas fa-robot"></i></div>
+                        <div class="ai-bubble hr-ai-bubble">
+                            <p>👔 Hello! I'm your AI HR Assistant. I can help you:</p>
+                            <ul>
+                                <li>Screen resumes</li>
+                                <li>Manage recruitment</li>
+                                <li>Analyze attendance</li>
+                                <li>Plan shifts</li>
+                                <li>Generate HR insights</li>
+                            </ul>
+                            <p>How can I assist you with HR management?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ai-footer">
+                    <div class="ai-input-group">
+                        <input type="text" id="aiInput" placeholder="Ask about HR...">
+                        <button id="aiSend"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                    <div class="ai-voice">
+                        <button id="aiVoiceBtn"><i class="fas fa-microphone"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        20. QUICK ACTIONS
+        ============================================================ -->
+        <section class="quick-actions" id="quickActions">
+            <div class="container">
+                <div class="actions-grid">
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Add Employee</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Create Job Vacancy</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Approve Leave</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span>Generate Payslip</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Schedule Interview</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Generate HR Report</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        FLOATING BUTTONS
+        ============================================================ -->
+        <div class="floating-buttons">
+            <button class="float-btn emergency" id="emergencyFloat" data-tooltip="Emergency">
+                <i class="fas fa-ambulance"></i>
+            </button>
+            <button class="float-btn chat" id="floatingChat" data-tooltip="AI Assistant">
+                <i class="fas fa-robot"></i>
+            </button>
+            <button class="float-btn scroll-top" id="scrollTop" data-tooltip="Scroll to Top">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+        </div>
+
+        <!-- ============================================================
+        21. FOOTER
+        ============================================================ -->
+        <footer class="dashboard-footer" id="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <p>&copy; 2026 <strong>Gimbie Adventist General Hospital</strong>. All Rights Reserved.</p>
+                    <div class="footer-links">
+                        <a href="../privacy.html">Privacy Policy</a>
+                        <a href="../terms.html">Terms of Service</a>
+                        <a href="../contact.html">Hospital Support</a>
+                        <a href="../contact.html">HR Support</a>
+                        <span class="version">v2.4.1</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+    <script src="../js/hr-dashboard.js"></script>
+    <script src="../js/ai-assistant.js"></script>
+</body>
+  </html>
