@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Accountant Dashboard - Gimbie Adventist General Hospital. Manage finances, billing, invoices, and financial reports.">
+    <meta name="keywords" content="accountant, finance, billing, invoices, payments, financial reports, gimbie hospital">
+    <meta name="author" content="Gimbie Adventist General Hospital">
+    <title>Accountant Dashboard | Gimbie Adventist General Hospital</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/accountant-dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+</head>
+<body>
+    
+    <!-- ============================================================
+    1. LOADING SCREEN
+    ============================================================ -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>Gimbie Adventist</span>
+            </div>
+            <div class="loader-status-grid">
+                <div class="loader-status-item">
+                    <span>Financial Data Loading</span>
+                    <div class="status-dot connected"></div>
+                </div>
+            </div>
+            <div class="loader-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="loader-text">
+                <p id="loadingText">Loading Accountant Dashboard...</p>
+                <span class="loader-percentage" id="loaderPercentage">0%</span>
+            </div>
+            <div class="loader-accountant-animation">
+                <i class="fas fa-calculator"></i>
+                <i class="fas fa-coins"></i>
+                <i class="fas fa-file-invoice"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    2. DASHBOARD HEADER
+    ============================================================ -->
+    <header class="dashboard-header" id="dashboardHeader">
+        <div class="container">
+            <div class="header-left">
+                <div class="hospital-logo">
+                    <a href="../index.html">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </a>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="header-center">
+                <div class="global-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search invoices, patients, transactions...">
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="notifications">
+                    <button class="notif-btn"><i class="fas fa-bell"></i><span class="notif-badge">6</span></button>
+                </div>
+                <div class="messages">
+                    <button class="msg-btn"><i class="fas fa-envelope"></i><span class="msg-badge">4</span></button>
+                </div>
+                <div class="fullscreen-toggle">
+                    <button id="fullscreenToggle"><i class="fas fa-expand"></i></button>
+                </div>
+                <div class="language-switcher">
+                    <button class="lang-btn" id="langToggle">
+                        <i class="fas fa-globe"></i> EN <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="lang-dropdown">
+                        <li><a href="#" data-lang="en">English</a></li>
+                        <li><a href="#" data-lang="am">አማርኛ</a></li>
+                        <li><a href="#" data-lang="or">Afaan Oromoo</a></li>
+                    </ul>
+                </div>
+                <div class="theme-toggle">
+                    <button id="themeToggle"><i class="fas fa-moon"></i></button>
+                </div>
+                <div class="accountant-profile">
+                    <img src="../assets/staff/accountant-avatar.jpg" alt="Accountant" class="profile-img">
+                    <div class="profile-info">
+                        <span class="accountant-name">Meseret Alemu</span>
+                        <span class="accountant-id">ACC-000001</span>
+                        <span class="accountant-dept">Finance Department</span>
+                    </div>
+                    <button class="logout-btn"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    3. LEFT SIDEBAR
+    ============================================================ -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-user">
+            <img src="../assets/staff/accountant-avatar.jpg" alt="Accountant">
+            <h4>Meseret Alemu</h4>
+            <span>ACC-000001</span>
+            <span class="role-badge">Accountant</span>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="active"><a href="accountant-dashboard.html"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-umbrella"></i> Financial Overview</a></li>
+                <li><a href="#"><i class="fas fa-file-invoice"></i> Patient Billing</a></li>
+                <li><a href="#"><i class="fas fa-file-invoice"></i> Invoices</a></li>
+                <li><a href="#"><i class="fas fa-credit-card"></i> Payments</a></li>
+                <li><a href="#"><i class="fas fa-receipt"></i> Receipts</a></li>
+                <li><a href="#"><i class="fas fa-chart-line"></i> Revenue</a></li>
+                <li><a href="#"><i class="fas fa-money-bill-wave"></i> Expenses</a></li>
+                <li><a href="#"><i class="fas fa-book"></i> General Ledger</a></li>
+                <li><a href="#"><i class="fas fa-hand-holding-usd"></i> Accounts Receivable</a></li>
+                <li><a href="#"><i class="fas fa-credit-card"></i> Accounts Payable</a></li>
+                <li><a href="#"><i class="fas fa-calculator"></i> Budget Management</a></li>
+                <li><a href="#"><i class="fas fa-file-tax"></i> Tax Reports</a></li>
+                <li><a href="#"><i class="fas fa-shield-alt"></i> Insurance Claims</a></li>
+                <li><a href="#"><i class="fas fa-users"></i> Payroll</a></li>
+                <li><a href="#"><i class="fas fa-file-alt"></i> Financial Reports</a></li>
+                <li><a href="#"><i class="fas fa-clipboard-list"></i> Audit Logs</a></li>
+                <li><a href="#"><i class="fas fa-envelope"></i> Messages</a></li>
+                <li><a href="#"><i class="fas fa-bell"></i> Notifications</a></li>
+                <li><a href="#"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
+                <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- ============================================================
+    MAIN CONTENT
+    ============================================================ -->
+    <main class="dashboard-main" id="dashboardMain">
+        
+        <!-- ============================================================
+        4. DASHBOARD OVERVIEW
+        ============================================================ -->
+        <section class="dashboard-overview" id="dashboardOverview">
+            <div class="container">
+                <div class="welcome-section">
+                    <div>
+                        <h2>Good Morning, Meseret! 💰</h2>
+                        <p>Welcome to your finance dashboard.</p>
+                        <span class="shift-badge"><i class="fas fa-clock"></i> Morning Shift: 8:00 AM - 4:00 PM</span>
+                    </div>
+                    <div class="quick-stats-header">
+                        <span class="stat-badge"><i class="fas fa-coins"></i> ETB 45K Today</span>
+                        <span class="stat-badge"><i class="fas fa-money-bill-wave"></i> ETB 25K Expenses</span>
+                        <span class="stat-badge"><i class="fas fa-clock"></i> ETB 75K Outstanding</span>
+                        <span class="stat-badge"><i class="fas fa-shield-alt"></i> 5 Pending Claims</span>
+                        <span class="stat-badge"><i class="fas fa-chart-line"></i> ETB 20K Profit</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        5. STATISTICS CARDS
+        ============================================================ -->
+        <section class="statistics-cards" id="statisticsCards">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-money-bill"></i></div>
+                        <div>
+                            <span class="stat-number">ETB 15K</span>
+                            <span class="stat-label">Cash Collected Today</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-university"></i></div>
+                        <div>
+                            <span class="stat-number">ETB 20K</span>
+                            <span class="stat-label">Bank Transactions</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-mobile-alt"></i></div>
+                        <div>
+                            <span class="stat-number">ETB 10K</span>
+                            <span class="stat-label">Online Payments</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Pending Bills</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                        <div>
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Paid Bills</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                        <div>
+                            <span class="stat-number">ETB 75K</span>
+                            <span class="stat-label">Outstanding Balance</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
+                        <div>
+                            <span class="stat-number">ETB 8K</span>
+                            <span class="stat-label">Insurance Payments</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+                        <div>
+                            <span class="stat-number">ETB 20K</span>
+                            <span class="stat-label">Net Profit</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-file-tax"></i></div>
+                        <div>
+                            <span class="stat-number">ETB 5K</span>
+                            <span class="stat-label">Tax Payable</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-calculator"></i></div>
+                        <div>
+                            <span class="stat-number">72%</span>
+                            <span class="stat-label">Budget Utilization</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        6. PATIENT BILLING
+        ============================================================ -->
+        <section class="patient-billing" id="patientBilling">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-file-invoice"></i> Patient Billing</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Generate Invoice</button>
+                </div>
+                
+                <div class="billing-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Patient</th>
+                                <th>Invoice #</th>
+                                <th>Department</th>
+                                <th>Consultation</th>
+                                <th>Lab</th>
+                                <th>Pharmacy</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Abebe Demissie</td>
+                                <td>INV-2026-001</td>
+                                <td>Cardiology</td>
+                                <td>ETB 500</td>
+                                <td>ETB 300</td>
+                                <td>ETB 200</td>
+                                <td>ETB 1,000</td>
+                                <td><span class="status-badge paid">Paid</span></td>
+                                <td>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-print"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tigist Bekele</td>
+                                <td>INV-2026-002</td>
+                                <td>Pediatrics</td>
+                                <td>ETB 500</td>
+                                <td>ETB 450</td>
+                                <td>ETB 150</td>
+                                <td>ETB 1,100</td>
+                                <td><span class="status-badge unpaid">Unpaid</span></td>
+                                <td>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-primary-sm">Pay</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Samuel Abate</td>
+                                <td>INV-2026-003</td>
+                                <td>Surgery</td>
+                                <td>ETB 500</td>
+                                <td>ETB 200</td>
+                                <td>ETB 350</td>
+                                <td>ETB 1,450</td>
+                                <td><span class="status-badge pending">Pending</span></td>
+                                <td>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-primary-sm">Pay</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ruth Desta</td>
+                                <td>INV-2026-004</td>
+                                <td>Cardiology</td>
+                                <td>ETB 500</td>
+                                <td>ETB 600</td>
+                                <td>ETB 250</td>
+                                <td>ETB 1,850</td>
+                                <td><span class="status-badge paid">Paid</span></td>
+                                <td>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-print"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        7. PAYMENT MANAGEMENT
+        ============================================================ -->
+        <section class="payment-management" id="paymentManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-credit-card"></i> Payment Management</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Record Payment</button>
+                </div>
+                
+                <div class="payment-grid">
+                    <div class="payment-card">
+                        <i class="fas fa-money-bill"></i>
+                        <h4>Cash</h4>
+                        <p>ETB 15,000</p>
+                        <span>8 transactions</span>
+                    </div>
+                    <div class="payment-card">
+                        <i class="fas fa-credit-card"></i>
+                        <h4>Card</h4>
+                        <p>ETB 12,000</p>
+                        <span>6 transactions</span>
+                    </div>
+                    <div class="payment-card">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h4>Mobile Money</h4>
+                        <p>ETB 10,000</p>
+                        <span>10 transactions</span>
+                    </div>
+                    <div class="payment-card">
+                        <i class="fas fa-university"></i>
+                        <h4>Bank Transfer</h4>
+                        <p>ETB 8,000</p>
+                        <span>4 transactions</span>
+                    </div>
+                    <div class="payment-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Insurance</h4>
+                        <p>ETB 8,000</p>
+                        <span>3 claims</span>
+                    </div>
+                    <div class="payment-card">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <h4>Installment</h4>
+                        <p>ETB 5,000</p>
+                        <span>2 plans</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        8. INVOICE MANAGEMENT
+        ============================================================ -->
+        <section class="invoice-management" id="invoiceManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-file-invoice"></i> Invoice Management</h3>
+                    <div class="invoice-actions">
+                        <button class="btn btn-outline-sm"><i class="fas fa-print"></i> Print</button>
+                        <button class="btn btn-outline-sm"><i class="fas fa-download"></i> PDF</button>
+                        <button class="btn btn-outline-sm"><i class="fas fa-envelope"></i> Email</button>
+                    </div>
+                </div>
+                
+                <div class="invoice-card">
+                    <div class="invoice-header">
+                        <div class="hospital-info">
+                            <i class="fas fa-heartbeat"></i>
+                            <div>
+                                <h4>Gimbie Adventist General Hospital</h4>
+                                <p>P.O. Box 228, Gimbie Town</p>
+                                <p>Tel: +251 57 771 0083</p>
+                            </div>
+                        </div>
+                        <div class="invoice-meta">
+                            <h4>INVOICE #INV-2026-001</h4>
+                            <p>Date: December 20, 2026</p>
+                            <p>Patient: Abebe Demissie</p>
+                            <p>Patient ID: PAT-2026-001</p>
+                        </div>
+                    </div>
+                    <div class="invoice-body">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Service</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Consultation</td>
+                                    <td>Cardiology Consultation</td>
+                                    <td>ETB 500</td>
+                                </tr>
+                                <tr>
+                                    <td>Laboratory</td>
+                                    <td>CBC & Lipid Profile</td>
+                                    <td>ETB 300</td>
+                                </tr>
+                                <tr>
+                                    <td>Pharmacy</td>
+                                    <td>Medications</td>
+                                    <td>ETB 200</td>
+                                </tr>
+                                <tr class="total">
+                                    <td colspan="2"><strong>Total</strong></td>
+                                    <td><strong>ETB 1,000</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="invoice-footer">
+                        <div class="payment-status">
+                            <span class="status-badge paid">Paid</span>
+                            <span>Payment Date: Dec 20, 2026</span>
+                        </div>
+                        <div class="signature">
+                            <p>Authorized Signature</p>
+                            <div class="signature-line"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        9. REVENUE MANAGEMENT
+        ============================================================ -->
+        <section class="revenue-management" id="revenueManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-chart-line"></i> Revenue Management</h3>
+                    <div class="revenue-views">
+                        <button class="view-btn active">Daily</button>
+                        <button class="view-btn">Weekly</button>
+                        <button class="view-btn">Monthly</button>
+                    </div>
+                </div>
+                
+                <div class="revenue-chart">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        10. EXPENSE MANAGEMENT
+        ============================================================ -->
+        <section class="expense-management" id="expenseManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-money-bill-wave"></i> Expense Management</h3>
+                    <a href="#" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="expense-grid">
+                    <div class="expense-card">
+                        <i class="fas fa-users"></i>
+                        <div>
+                            <h4>Staff Salaries</h4>
+                            <span>ETB 350,000</span>
+                        </div>
+                    </div>
+                    <div class="expense-card">
+                        <i class="fas fa-prescription-bottle"></i>
+                        <div>
+                            <h4>Medicines</h4>
+                            <span>ETB 120,000</span>
+                        </div>
+                    </div>
+                    <div class="expense-card">
+                        <i class="fas fa-microscope"></i>
+                        <div>
+                            <h4>Medical Equipment</h4>
+                            <span>ETB 45,000</span>
+                        </div>
+                    </div>
+                    <div class="expense-card">
+                        <i class="fas fa-bolt"></i>
+                        <div>
+                            <h4>Utilities</h4>
+                            <span>ETB 15,000</span>
+                        </div>
+                    </div>
+                    <div class="expense-card">
+                        <i class="fas fa-tools"></i>
+                        <div>
+                            <h4>Maintenance</h4>
+                            <span>ETB 25,000</span>
+                        </div>
+                    </div>
+                    <div class="expense-card">
+                        <i class="fas fa-boxes"></i>
+                        <div>
+                            <h4>Office Supplies</h4>
+                            <span>ETB 8,000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        11. INSURANCE CLAIMS
+        ============================================================ -->
+        <section class="insurance-claims" id="insuranceClaims">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-shield-alt"></i> Insurance Claims</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Submit Claim</button>
+                </div>
+                
+                <div class="claims-grid">
+                    <div class="claim-card">
+                        <div class="claim-info">
+                            <h4>Claim #CLM-2026-001</h4>
+                            <p><strong>Patient:</strong> Samuel Abate</p>
+                            <p><strong>Provider:</strong> Ethiopian Insurance</p>
+                            <p><strong>Amount:</strong> ETB 15,000</p>
+                        </div>
+                        <div class="claim-status">
+                            <span class="status-badge pending">Pending</span>
+                        </div>
+                    </div>
+                    <div class="claim-card">
+                        <div class="claim-info">
+                            <h4>Claim #CLM-2026-002</h4>
+                            <p><strong>Patient:</strong> Ruth Desta</p>
+                            <p><strong>Provider:</strong> Nyala Insurance</p>
+                            <p><strong>Amount:</strong> ETB 12,000</p>
+                        </div>
+                        <div class="claim-status">
+                            <span class="status-badge approved">Approved</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        12. GENERAL LEDGER
+        ============================================================ -->
+        <section class="general-ledger" id="generalLedger">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-book"></i> General Ledger</h3>
+                    <a href="#" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="ledger-grid">
+                    <div class="ledger-card">
+                        <i class="fas fa-chart-line"></i>
+                        <div>
+                            <h4>Income Entries</h4>
+                            <span>ETB 1.2M</span>
+                        </div>
+                    </div>
+                    <div class="ledger-card">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <div>
+                            <h4>Expense Entries</h4>
+                            <span>ETB 650K</span>
+                        </div>
+                    </div>
+                    <div class="ledger-card">
+                        <i class="fas fa-pen-fancy"></i>
+                        <div>
+                            <h4>Journal Entries</h4>
+                            <span>125 Entries</span>
+                        </div>
+                    </div>
+                    <div class="ledger-card">
+                        <i class="fas fa-balance-scale"></i>
+                        <div>
+                            <h4>Trial Balance</h4>
+                            <span>ETB 550K</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        13. BUDGET MANAGEMENT
+        ============================================================ -->
+        <section class="budget-management" id="budgetManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-calculator"></i> Budget Management</h3>
+                    <a href="#" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="budget-grid">
+                    <div class="budget-card">
+                        <h4>Cardiology</h4>
+                        <div class="budget-bar">
+                            <div class="budget-fill" style="width:75%; background:#28a745;"></div>
+                        </div>
+                        <span>75% - ETB 150K/200K</span>
+                    </div>
+                    <div class="budget-card">
+                        <h4>Pediatrics</h4>
+                        <div class="budget-bar">
+                            <div class="budget-fill" style="width:60%; background:#17a2b8;"></div>
+                        </div>
+                        <span>60% - ETB 120K/200K</span>
+                    </div>
+                    <div class="budget-card">
+                        <h4>Surgery</h4>
+                        <div class="budget-bar">
+                            <div class="budget-fill" style="width:80%; background:#ffc107;"></div>
+                        </div>
+                        <span>80% - ETB 160K/200K</span>
+                    </div>
+                    <div class="budget-card">
+                        <h4>Pharmacy</h4>
+                        <div class="budget-bar">
+                            <div class="budget-fill" style="width:55%; background:#dc3545;"></div>
+                        </div>
+                        <span>55% - ETB 110K/200K</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        14. TAX MANAGEMENT
+        ============================================================ -->
+        <section class="tax-management" id="taxManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-file-tax"></i> Tax Management</h3>
+                    <a href="#" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="tax-grid">
+                    <div class="tax-card">
+                        <h4>VAT Reports</h4>
+                        <p>Amount: ETB 12,000</p>
+                        <span class="status-badge active">Filed</span>
+                    </div>
+                    <div class="tax-card">
+                        <h4>Income Tax</h4>
+                        <p>Amount: ETB 5,000</p>
+                        <span class="status-badge pending">Pending</span>
+                    </div>
+                    <div class="tax-card">
+                        <h4>Tax Payments</h4>
+                        <p>Total: ETB 17,000</p>
+                        <span class="status-badge completed">Completed</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        15. PAYROLL
+        ============================================================ -->
+        <section class="payroll-section" id="payrollSection">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-users"></i> Payroll</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-print"></i> Generate Payslip</button>
+                </div>
+                
+                <div class="payroll-card">
+                    <div class="payroll-summary">
+                        <div class="payroll-item">
+                            <span>Employee Salary</span>
+                            <span class="payroll-value">ETB 350,000</span>
+                        </div>
+                        <div class="payroll-item">
+                            <span>Bonuses</span>
+                            <span class="payroll-value">ETB 8,000</span>
+                        </div>
+                        <div class="payroll-item">
+                            <span>Overtime</span>
+                            <span class="payroll-value">ETB 15,000</span>
+                        </div>
+                        <div class="payroll-item">
+                            <span>Deductions</span>
+                            <span class="payroll-value">ETB 12,000</span>
+                        </div>
+                        <div class="payroll-item total">
+                            <span><strong>Net Payroll</strong></span>
+                            <span class="payroll-value"><strong>ETB 355,000</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        16. FINANCIAL REPORTS
+        ============================================================ -->
+        <section class="financial-reports" id="financialReports">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-file-alt"></i> Financial Reports</h3>
+                    <div class="report-actions">
+                        <button class="btn btn-outline-sm"><i class="fas fa-file-pdf"></i> PDF</button>
+                        <button class="btn btn-outline-sm"><i class="fas fa-file-excel"></i> Excel</button>
+                    </div>
+                </div>
+                
+                <div class="reports-grid">
+                    <a href="#" class="report-item">
+                        <i class="fas fa-calendar-day"></i>
+                        <span>Daily Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-calendar-week"></i>
+                        <span>Weekly Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Monthly Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Annual Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-chart-pie"></i>
+                        <span>Profit & Loss</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Cash Flow</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-balance-scale"></i>
+                        <span>Balance Sheet</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        17. AUDIT LOGS
+        ============================================================ -->
+        <section class="audit-logs" id="auditLogs">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-clipboard-list"></i> Audit Logs</h3>
+                    <a href="#" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="audit-list">
+                    <div class="audit-item">
+                        <i class="fas fa-credit-card"></i>
+                        <div>
+                            <h4>Payment Received</h4>
+                            <p>ETB 1,000 from Abebe Demissie</p>
+                            <span class="audit-time">10:15 AM</span>
+                        </div>
+                    </div>
+                    <div class="audit-item">
+                        <i class="fas fa-file-invoice"></i>
+                        <div>
+                            <h4>Invoice Generated</h4>
+                            <p>INV-2026-005 for Tigist Bekele</p>
+                            <span class="audit-time">9:45 AM</span>
+                        </div>
+                    </div>
+                    <div class="audit-item">
+                        <i class="fas fa-user"></i>
+                        <div>
+                            <h4>User Activity</h4>
+                            <p>Meseret Alemu logged in</p>
+                            <span class="audit-time">8:00 AM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        18. MESSAGES
+        ============================================================ -->
+        <section class="messages-section" id="messagesSection">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-envelope"></i> Messages</h3>
+                    <a href="messages.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="messages-list">
+                    <div class="message-item unread">
+                        <img src="../assets/staff/finance-manager-avatar.jpg" alt="Finance Manager">
+                        <div>
+                            <h4>Finance Manager</h4>
+                            <p>Quarterly financial report required by end of week.</p>
+                            <span class="msg-time">5 min ago</span>
+                        </div>
+                    </div>
+                    <div class="message-item unread">
+                        <img src="../assets/staff/hr-avatar.jpg" alt="HR">
+                        <div>
+                            <h4>HR Department</h4>
+                            <p>Payroll for December needs your review.</p>
+                            <span class="msg-time">15 min ago</span>
+                        </div>
+                    </div>
+                    <div class="message-item">
+                        <img src="../assets/staff/reception-avatar.jpg" alt="Reception">
+                        <div>
+                            <h4>Reception</h4>
+                            <p>Patient billing inquiry for Invoice INV-2026-002.</p>
+                            <span class="msg-time">30 min ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        19. NOTIFICATIONS
+        ============================================================ -->
+        <section class="notifications-section" id="notificationsSection">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-bell"></i> Notifications</h3>
+                    <a href="notifications.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="notifications-list">
+                    <div class="notification-item success">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <h4>New Payment</h4>
+                            <p>Payment of ETB 1,000 received from Abebe Demissie.</p>
+                            <span class="notif-time">5 min ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <h4>Overdue Bills</h4>
+                            <p>2 patient bills are overdue by 15 days.</p>
+                            <span class="notif-time">15 min ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <div>
+                            <h4>Insurance Update</h4>
+                            <p>Claim CLM-2026-002 has been approved.</p>
+                            <span class="notif-time">30 min ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <i class="fas fa-file-tax"></i>
+                        <div>
+                            <h4>Tax Deadline</h4>
+                            <p>VAT payment due in 7 days.</p>
+                            <span class="notif-time">1 hour ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        20. AI ACCOUNTANT ASSISTANT
+        ============================================================ -->
+        <div class="ai-assistant" id="aiAssistant">
+            <button class="ai-toggle accountant-ai-toggle" id="aiToggle">
+                <i class="fas fa-robot"></i>
+            </button>
+            <div class="ai-chat-window" id="aiChatWindow">
+                <div class="ai-header accountant-ai-header">
+                    <div class="ai-header-info">
+                        <i class="fas fa-robot"></i>
+                        <div>
+                            <h4>AI Accountant Assistant</h4>
+                            <span>Online</span>
+                        </div>
+                    </div>
+                    <button class="ai-close" id="aiClose"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="ai-body" id="aiBody">
+                    <div class="ai-message ai-bot">
+                        <div class="ai-avatar"><i class="fas fa-robot"></i></div>
+                        <div class="ai-bubble accountant-ai-bubble">
+                            <p>📊 Hello! I'm your AI Accountant Assistant. I can help you:</p>
+                            <ul>
+                                <li>Forecast revenue</li>
+                                <li>Analyze expenses</li>
+                                <li>Detect fraud anomalies</li>
+                                <li>Generate financial summaries</li>
+                                <li>Optimize budgets</li>
+                            </ul>
+                            <p>How can I assist you with financial management?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ai-footer">
+                    <div class="ai-input-group">
+                        <input type="text" id="aiInput" placeholder="Ask about finances...">
+                        <button id="aiSend"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                    <div class="ai-voice">
+                        <button id="aiVoiceBtn"><i class="fas fa-microphone"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        21. QUICK ACTIONS
+        ============================================================ -->
+        <section class="quick-actions" id="quickActions">
+            <div class="container">
+                <div class="actions-grid">
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-file-invoice"></i>
+                        <span>Generate Invoice</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Receive Payment</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-receipt"></i>
+                        <span>Print Receipt</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Submit Insurance Claim</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-file-export"></i>
+                        <span>Export Financial Report</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span>Record Expense</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-undo-alt"></i>
+                        <span>Approve Refund</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        FLOATING BUTTONS
+        ============================================================ -->
+        <div class="floating-buttons">
+            <button class="float-btn emergency" id="emergencyFloat" data-tooltip="Emergency">
+                <i class="fas fa-ambulance"></i>
+            </button>
+            <button class="float-btn chat" id="floatingChat" data-tooltip="AI Assistant">
+                <i class="fas fa-robot"></i>
+            </button>
+            <button class="float-btn scroll-top" id="scrollTop" data-tooltip="Scroll to Top">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+        </div>
+
+        <!-- ============================================================
+        22. FOOTER
+        ============================================================ -->
+        <footer class="dashboard-footer" id="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-left">
+                        <p>&copy; 2026 <strong>Gimbie Adventist General Hospital</strong>. All Rights Reserved.</p>
+                    </div>
+                    <div class="footer-center">
+                        <span class="version">System: v2.4.1</span>
+                        <span class="version">Build: #2026.12.20</span>
+                    </div>
+                    <div class="footer-right">
+                        <a href="../contact.html">Finance Support</a>
+                        <a href="../contact.html">Hospital Support</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+    <script src="../js/accountant-dashboard.js"></script>
+    <script src="../js/ai-assistant.js"></script>
+</body>
+  </html>
