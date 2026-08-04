@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Procurement Dashboard - Gimbie Adventist General Hospital. Manage purchases, suppliers, contracts, and tenders.">
+    <meta name="keywords" content="procurement, purchasing, suppliers, contracts, tenders, gimbie hospital">
+    <meta name="author" content="Gimbie Adventist General Hospital">
+    <title>Procurement Dashboard | Gimbie Adventist General Hospital</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/procurement-dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+</head>
+<body>
+    
+    <!-- ============================================================
+    1. LOADING SCREEN
+    ============================================================ -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>Gimbie Adventist</span>
+            </div>
+            <div class="loader-status-grid">
+                <div class="loader-status-item">
+                    <span>Supplier Database Connection</span>
+                    <div class="status-dot connected"></div>
+                </div>
+                <div class="loader-status-item">
+                    <span>Procurement Data Loading</span>
+                    <div class="status-dot connected"></div>
+                </div>
+            </div>
+            <div class="loader-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="loader-text">
+                <p id="loadingText">Loading Procurement Dashboard...</p>
+                <span class="loader-percentage" id="loaderPercentage">0%</span>
+            </div>
+            <div class="loader-procurement-animation">
+                <i class="fas fa-shopping-cart"></i>
+                <i class="fas fa-truck"></i>
+                <i class="fas fa-file-signature"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    2. DASHBOARD HEADER
+    ============================================================ -->
+    <header class="dashboard-header" id="dashboardHeader">
+        <div class="container">
+            <div class="header-left">
+                <div class="hospital-logo">
+                    <a href="../index.html">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </a>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="header-center">
+                <div class="global-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search suppliers, purchase orders, contracts...">
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="notifications">
+                    <button class="notif-btn"><i class="fas fa-bell"></i><span class="notif-badge">7</span></button>
+                </div>
+                <div class="messages">
+                    <button class="msg-btn"><i class="fas fa-envelope"></i><span class="msg-badge">4</span></button>
+                </div>
+                <div class="fullscreen-toggle">
+                    <button id="fullscreenToggle"><i class="fas fa-expand"></i></button>
+                </div>
+                <div class="language-switcher">
+                    <button class="lang-btn" id="langToggle">
+                        <i class="fas fa-globe"></i> EN <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="lang-dropdown">
+                        <li><a href="#" data-lang="en">English</a></li>
+                        <li><a href="#" data-lang="am">አማርኛ</a></li>
+                        <li><a href="#" data-lang="or">Afaan Oromoo</a></li>
+                    </ul>
+                </div>
+                <div class="theme-toggle">
+                    <button id="themeToggle"><i class="fas fa-moon"></i></button>
+                </div>
+                <div class="procurement-profile">
+                    <img src="../assets/staff/procurement-avatar.jpg" alt="Procurement Officer" class="profile-img">
+                    <div class="profile-info">
+                        <span class="procurement-name">Dawit Girma</span>
+                        <span class="procurement-id">PRO-000001</span>
+                        <span class="procurement-dept">Procurement Department</span>
+                    </div>
+                    <button class="logout-btn"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    3. LEFT SIDEBAR
+    ============================================================ -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-user">
+            <img src="../assets/staff/procurement-avatar.jpg" alt="Procurement Officer">
+            <h4>Dawit Girma</h4>
+            <span>PRO-000001</span>
+            <span class="role-badge">Procurement Officer</span>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="active"><a href="procurement-dashboard.html"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-clipboard-list"></i> Purchase Requests</a></li>
+                <li><a href="#"><i class="fas fa-shopping-cart"></i> Purchase Orders</a></li>
+                <li><a href="#"><i class="fas fa-truck"></i> Suppliers</a></li>
+                <li><a href="#"><i class="fas fa-file-invoice"></i> Quotations</a></li>
+                <li><a href="#"><i class="fas fa-file-signature"></i> Contracts</a></li>
+                <li><a href="#"><i class="fas fa-gavel"></i> Tenders</a></li>
+                <li><a href="#"><i class="fas fa-truck"></i> Deliveries</a></li>
+                <li><a href="#"><i class="fas fa-boxes"></i> Inventory Requests</a></li>
+                <li><a href="#"><i class="fas fa-chart-line"></i> Vendor Performance</a></li>
+                <li><a href="#"><i class="fas fa-calculator"></i> Budget</a></li>
+                <li><a href="#"><i class="fas fa-file-alt"></i> Reports</a></li>
+                <li><a href="#"><i class="fas fa-clipboard-list"></i> Audit Logs</a></li>
+                <li><a href="#"><i class="fas fa-envelope"></i> Messages</a></li>
+                <li><a href="#"><i class="fas fa-bell"></i> Notifications</a></li>
+                <li><a href="#"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
+                <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- ============================================================
+    MAIN CONTENT
+    ============================================================ -->
+    <main class="dashboard-main" id="dashboardMain">
+        
+        <!-- ============================================================
+        4. DASHBOARD OVERVIEW
+        ============================================================ -->
+        <section class="dashboard-overview" id="dashboardOverview">
+            <div class="container">
+                <div class="welcome-section">
+                    <div>
+                        <h2>Good Morning, Dawit! 🛒</h2>
+                        <p>Welcome to your procurement dashboard.</p>
+                        <span class="shift-badge"><i class="fas fa-clock"></i> Morning Shift: 8:00 AM - 4:00 PM</span>
+                    </div>
+                    <div class="quick-stats-header">
+                        <span class="stat-badge"><i class="fas fa-clipboard-list"></i> 8 Pending Requests</span>
+                        <span class="stat-badge"><i class="fas fa-shopping-cart"></i> 5 Active Orders</span>
+                        <span class="stat-badge"><i class="fas fa-truck"></i> 12 Suppliers</span>
+                        <span class="stat-badge"><i class="fas fa-truck"></i> 3 Deliveries Today</span>
+                        <span class="stat-badge"><i class="fas fa-check-circle"></i> 4 Pending Approvals</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        5. STATISTICS CARDS
+        ============================================================ -->
+        <section class="statistics-cards" id="statisticsCards">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-truck"></i></div>
+                        <div>
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Total Suppliers</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-file-signature"></i></div>
+                        <div>
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Active Contracts</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-clipboard-list"></i></div>
+                        <div>
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Purchase Requests</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                        <div>
+                            <span class="stat-number">5</span>
+                            <span class="stat-label">Approved Orders</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">Pending Orders</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                        <div>
+                            <span class="stat-number">4</span>
+                            <span class="stat-label">Delivered Orders</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-money-bill-wave"></i></div>
+                        <div>
+                            <span class="stat-number">ETB 350K</span>
+                            <span class="stat-label">Monthly Spending</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-calculator"></i></div>
+                        <div>
+                            <span class="stat-number">ETB 150K</span>
+                            <span class="stat-label">Budget Remaining</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <span class="stat-number">3 days</span>
+                            <span class="stat-label">Avg Delivery Time</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-star"></i></div>
+                        <div>
+                            <span class="stat-number">4.6/5</span>
+                            <span class="stat-label">Vendor Rating</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        6. PURCHASE REQUESTS
+        ============================================================ -->
+        <section class="purchase-requests" id="purchaseRequests">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-clipboard-list"></i> Purchase Requests</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Create Request</button>
+                </div>
+                
+                <div class="requests-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Request #</th>
+                                <th>Department</th>
+                                <th>Item</th>
+                                <th>Qty</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>REQ-2026-001</td>
+                                <td>Cardiology</td>
+                                <td>Surgical Gloves</td>
+                                <td>500</td>
+                                <td><span class="priority-badge high">High</span></td>
+                                <td><span class="status-badge pending">Pending</span></td>
+                                <td>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-check"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>REQ-2026-002</td>
+                                <td>Pharmacy</td>
+                                <td>Amlodipine 5mg</td>
+                                <td>1000</td>
+                                <td><span class="priority-badge medium">Medium</span></td>
+                                <td><span class="status-badge approved">Approved</span></td>
+                                <td>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-print"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>REQ-2026-003</td>
+                                <td>Laboratory</td>
+                                <td>Test Kits</td>
+                                <td>200</td>
+                                <td><span class="priority-badge urgent">Urgent</span></td>
+                                <td><span class="status-badge pending">Pending</span></td>
+                                <td>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-check"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>REQ-2026-004</td>
+                                <td>Radiology</td>
+                                <td>X-Ray Film</td>
+                                <td>300</td>
+                                <td><span class="priority-badge high">High</span></td>
+                                <td><span class="status-badge completed">Completed</span></td>
+                                <td>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-outline-sm"><i class="fas fa-print"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        7. PURCHASE ORDERS
+        ============================================================ -->
+        <section class="purchase-orders" id="purchaseOrders">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-shopping-cart"></i> Purchase Orders</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Create Order</button>
+                </div>
+                
+                <div class="orders-grid">
+                    <div class="order-card">
+                        <h4>PO-2026-001</h4>
+                        <p><strong>Supplier:</strong> Ethiopian Pharmaceutical</p>
+                        <p><strong>Items:</strong> 5</p>
+                        <p><strong>Total:</strong> ETB 45,000</p>
+                        <p><strong>Delivery:</strong> Dec 25, 2026</p>
+                        <span class="status-badge shipped">Shipped</span>
+                        <button class="btn btn-outline-sm">Print</button>
+                    </div>
+                    <div class="order-card">
+                        <h4>PO-2026-002</h4>
+                        <p><strong>Supplier:</strong> MedTech Solutions</p>
+                        <p><strong>Items:</strong> 3</p>
+                        <p><strong>Total:</strong> ETB 22,500</p>
+                        <p><strong>Delivery:</strong> Dec 22, 2026</p>
+                        <span class="status-badge delivered">Delivered</span>
+                        <button class="btn btn-outline-sm">Print</button>
+                    </div>
+                    <div class="order-card">
+                        <h4>PO-2026-003</h4>
+                        <p><strong>Supplier:</strong> Novo Nordisk</p>
+                        <p><strong>Items:</strong> 2</p>
+                        <p><strong>Total:</strong> ETB 78,000</p>
+                        <p><strong>Delivery:</strong> Dec 28, 2026</p>
+                        <span class="status-badge pending">Pending</span>
+                        <button class="btn btn-outline-sm">Print</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        8. SUPPLIER MANAGEMENT
+        ============================================================ -->
+        <section class="supplier-management" id="supplierManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-truck"></i> Supplier Management</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Add Supplier</button>
+                </div>
+                
+                <div class="supplier-grid">
+                    <div class="supplier-card">
+                        <i class="fas fa-industry"></i>
+                        <div>
+                            <h4>Ethiopian Pharmaceutical</h4>
+                            <p>Contact: Abebe Haile</p>
+                            <p>Phone: +251 91 123 4567</p>
+                            <span class="supplier-rating">★★★★★</span>
+                            <span class="status-badge active">Active</span>
+                        </div>
+                    </div>
+                    <div class="supplier-card">
+                        <i class="fas fa-globe"></i>
+                        <div>
+                            <h4>Novo Nordisk</h4>
+                            <p>Contact: Maria Smith</p>
+                            <p>Phone: +251 92 234 5678</p>
+                            <span class="supplier-rating">★★★★☆</span>
+                            <span class="status-badge active">Active</span>
+                        </div>
+                    </div>
+                    <div class="supplier-card">
+                        <i class="fas fa-syringe"></i>
+                        <div>
+                            <h4>MedTech Solutions</h4>
+                            <p>Contact: Dawit Tadesse</p>
+                            <p>Phone: +251 93 345 6789</p>
+                            <span class="supplier-rating">★★★★★</span>
+                            <span class="status-badge active">Active</span>
+                        </div>
+                    </div>
+                    <div class="supplier-card">
+                        <i class="fas fa-ambulance"></i>
+                        <div>
+                            <h4>Ambulance Supply Co.</h4>
+                            <p>Contact: Tesfaye Girma</p>
+                            <p>Phone: +251 94 456 7890</p>
+                            <span class="supplier-rating">★★★☆☆</span>
+                            <span class="status-badge inactive">Inactive</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        9. QUOTATIONS
+        ============================================================ -->
+        <section class="quotations" id="quotations">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-file-invoice"></i> Quotations</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Request Quotation</button>
+                </div>
+                
+                <div class="quotation-grid">
+                    <div class="quotation-card">
+                        <h4>RFQ-2026-001</h4>
+                        <p><strong>Item:</strong> Surgical Gloves</p>
+                        <p><strong>Suppliers:</strong> 3 bids</p>
+                        <p><strong>Best Price:</strong> ETB 12,000</p>
+                        <span class="status-badge pending">Pending Review</span>
+                        <div class="quotation-actions">
+                            <button class="btn btn-outline-sm">Compare</button>
+                            <button class="btn btn-primary-sm">Approve</button>
+                        </div>
+                    </div>
+                    <div class="quotation-card">
+                        <h4>RFQ-2026-002</h4>
+                        <p><strong>Item:</strong> X-Ray Film</p>
+                        <p><strong>Suppliers:</strong> 2 bids</p>
+                        <p><strong>Best Price:</strong> ETB 8,500</p>
+                        <span class="status-badge approved">Approved</span>
+                        <div class="quotation-actions">
+                            <button class="btn btn-outline-sm">Compare</button>
+                            <button class="btn btn-outline-sm">View</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        10. CONTRACT MANAGEMENT
+        ============================================================ -->
+        <section class="contract-management" id="contractManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-file-signature"></i> Contract Management</h3>
+                    <a href="#" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="contract-grid">
+                    <div class="contract-card">
+                        <h4>CT-2026-001</h4>
+                        <p><strong>Supplier:</strong> Ethiopian Pharmaceutical</p>
+                        <p><strong>Value:</strong> ETB 2.5M</p>
+                        <p><strong>Start:</strong> Jan 1, 2026</p>
+                        <p><strong>End:</strong> Dec 31, 2026</p>
+                        <span class="status-badge active">Active</span>
+                        <button class="btn btn-outline-sm">Renew</button>
+                    </div>
+                    <div class="contract-card">
+                        <h4>CT-2026-002</h4>
+                        <p><strong>Supplier:</strong> MedTech Solutions</p>
+                        <p><strong>Value:</strong> ETB 1.2M</p>
+                        <p><strong>Start:</strong> Mar 15, 2026</p>
+                        <p><strong>End:</strong> Mar 14, 2027</p>
+                        <span class="status-badge active">Active</span>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                    <div class="contract-card">
+                        <h4>CT-2026-003</h4>
+                        <p><strong>Supplier:</strong> Novo Nordisk</p>
+                        <p><strong>Value:</strong> ETB 850K</p>
+                        <p><strong>Start:</strong> Jun 1, 2026</p>
+                        <p><strong>End:</strong> May 31, 2027</p>
+                        <span class="status-badge expiring">Expiring Soon</span>
+                        <button class="btn btn-outline-sm">Renew</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        11. TENDER MANAGEMENT
+        ============================================================ -->
+        <section class="tender-management" id="tenderManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-gavel"></i> Tender Management</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Publish Tender</button>
+                </div>
+                
+                <div class="tender-grid">
+                    <div class="tender-card">
+                        <h4>TEN-2026-001</h4>
+                        <p><strong>Title:</strong> Medical Equipment Supply</p>
+                        <p><strong>Deadline:</strong> Jan 15, 2027</p>
+                        <p><strong>Applications:</strong> 8</p>
+                        <span class="status-badge open">Open</span>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                    <div class="tender-card">
+                        <h4>TEN-2026-002</h4>
+                        <p><strong>Title:</strong> Pharmacy Supplies</p>
+                        <p><strong>Deadline:</strong> Dec 30, 2026</p>
+                        <p><strong>Applications:</strong> 5</p>
+                        <span class="status-badge closed">Closed</span>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        12. DELIVERY MANAGEMENT
+        ============================================================ -->
+        <section class="delivery-management" id="deliveryManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-truck"></i> Delivery Management</h3>
+                    <a href="#" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="delivery-grid">
+                    <div class="delivery-card">
+                        <i class="fas fa-truck"></i>
+                        <div>
+                            <h4>Delivery #DLV-001</h4>
+                            <p><strong>PO:</strong> PO-2026-002</p>
+                            <p><strong>Supplier:</strong> MedTech Solutions</p>
+                            <p><strong>Items:</strong> 3</p>
+                            <span class="status-badge delivered">Delivered</span>
+                        </div>
+                        <button class="btn btn-outline-sm">GRN</button>
+                    </div>
+                    <div class="delivery-card">
+                        <i class="fas fa-truck"></i>
+                        <div>
+                            <h4>Delivery #DLV-002</h4>
+                            <p><strong>PO:</strong> PO-2026-001</p>
+                            <p><strong>Supplier:</strong> Ethiopian Pharmaceutical</p>
+                            <p><strong>Items:</strong> 5</p>
+                            <span class="status-badge in-transit">In Transit</span>
+                        </div>
+                        <button class="btn btn-outline-sm">Track</button>
+                    </div>
+                    <div class="delivery-card">
+                        <i class="fas fa-truck"></i>
+                        <div>
+                            <h4>Delivery #DLV-003</h4>
+                            <p><strong>PO:</strong> PO-2026-003</p>
+                            <p><strong>Supplier:</strong> Novo Nordisk</p>
+                            <p><strong>Items:</strong> 2</p>
+                            <span class="status-badge pending">Pending</span>
+                        </div>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        13. BUDGET MANAGEMENT
+        ============================================================ -->
+        <section class="budget-management" id="budgetManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-calculator"></i> Budget Management</h3>
+                    <a href="#" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="budget-grid">
+                    <div class="budget-card">
+                        <h4>Cardiology</h4>
+                        <div class="budget-bar">
+                            <div class="budget-fill" style="width:75%; background:#28a745;"></div>
+                        </div>
+                        <span>75% - ETB 150K/200K</span>
+                    </div>
+                    <div class="budget-card">
+                        <h4>Pharmacy</h4>
+                        <div class="budget-bar">
+                            <div class="budget-fill" style="width:60%; background:#17a2b8;"></div>
+                        </div>
+                        <span>60% - ETB 120K/200K</span>
+                    </div>
+                    <div class="budget-card">
+                        <h4>Laboratory</h4>
+                        <div class="budget-bar">
+                            <div class="budget-fill" style="width:80%; background:#ffc107;"></div>
+                        </div>
+                        <span>80% - ETB 160K/200K</span>
+                    </div>
+                    <div class="budget-card">
+                        <h4>Radiology</h4>
+                        <div class="budget-bar">
+                            <div class="budget-fill" style="width:55%; background:#dc3545;"></div>
+                        </div>
+                        <span>55% - ETB 110K/200K</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        14. VENDOR PERFORMANCE
+        ============================================================ -->
+        <section class="vendor-performance" id="vendorPerformance">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-chart-line"></i> Vendor Performance</h3>
+                    <a href="#" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="vendor-performance-grid">
+                    <div class="vendor-perf-card">
+                        <h4>Ethiopian Pharmaceutical</h4>
+                        <div class="perf-metrics">
+                            <span>Delivery: 95%</span>
+                            <span>Quality: 92%</span>
+                            <span>Price: 88%</span>
+                            <span>Reliability: 94%</span>
+                        </div>
+                        <span class="perf-rating">Overall: 4.6/5</span>
+                    </div>
+                    <div class="vendor-perf-card">
+                        <h4>MedTech Solutions</h4>
+                        <div class="perf-metrics">
+                            <span>Delivery: 92%</span>
+                            <span>Quality: 95%</span>
+                            <span>Price: 85%</span>
+                            <span>Reliability: 90%</span>
+                        </div>
+                        <span class="perf-rating">Overall: 4.5/5</span>
+                    </div>
+                    <div class="vendor-perf-card">
+                        <h4>Novo Nordisk</h4>
+                        <div class="perf-metrics">
+                            <span>Delivery: 88%</span>
+                            <span>Quality: 96%</span>
+                            <span>Price: 82%</span>
+                            <span>Reliability: 85%</span>
+                        </div>
+                        <span class="perf-rating">Overall: 4.3/5</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        15. REPORTS
+        ============================================================ -->
+        <section class="reports-section" id="reportsSection">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-file-alt"></i> Reports</h3>
+                    <div class="report-actions">
+                        <button class="btn btn-outline-sm"><i class="fas fa-file-pdf"></i> PDF</button>
+                        <button class="btn btn-outline-sm"><i class="fas fa-file-excel"></i> Excel</button>
+                    </div>
+                </div>
+                
+                <div class="reports-grid">
+                    <a href="#" class="report-item">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Purchase Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-truck"></i>
+                        <span>Supplier Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-calculator"></i>
+                        <span>Budget Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-truck"></i>
+                        <span>Delivery Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-gavel"></i>
+                        <span>Tender Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-file-signature"></i>
+                        <span>Contract Report</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        16. AUDIT LOGS
+        ============================================================ -->
+        <section class="audit-logs" id="auditLogs">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-clipboard-list"></i> Audit Logs</h3>
+                    <a href="#" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="audit-list">
+                    <div class="audit-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <h4>Purchase Approved</h4>
+                            <p>PO-2026-001 approved by Finance</p>
+                            <span class="audit-time">10:15 AM</span>
+                        </div>
+                    </div>
+                    <div class="audit-item">
+                        <i class="fas fa-user"></i>
+                        <div>
+                            <h4>User Activity</h4>
+                            <p>Dawit Girma logged in</p>
+                            <span class="audit-time">8:00 AM</span>
+                        </div>
+                    </div>
+                    <div class="audit-item">
+                        <i class="fas fa-edit"></i>
+                        <div>
+                            <h4>Contract Change</h4>
+                            <p>CT-2026-001 - Updated</p>
+                            <span class="audit-time">7:45 AM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        17. MESSAGES
+        ============================================================ -->
+        <section class="messages-section" id="messagesSection">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-envelope"></i> Messages</h3>
+                    <a href="messages.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="messages-list">
+                    <div class="message-item unread">
+                        <img src="../assets/staff/storekeeper-avatar.jpg" alt="Store Keeper">
+                        <div>
+                            <h4>Store Keeper</h4>
+                            <p>Requesting urgent purchase order for medical supplies.</p>
+                            <span class="msg-time">5 min ago</span>
+                        </div>
+                    </div>
+                    <div class="message-item unread">
+                        <img src="../assets/staff/finance-avatar.jpg" alt="Finance">
+                        <div>
+                            <h4>Finance</h4>
+                            <p>Budget approved for new purchase orders.</p>
+                            <span class="msg-time">15 min ago</span>
+                        </div>
+                    </div>
+                    <div class="message-item">
+                        <img src="../assets/staff/supplier-avatar.jpg" alt="Supplier">
+                        <div>
+                            <h4>Ethiopian Pharmaceutical</h4>
+                            <p>Quotation sent for your review.</p>
+                            <span class="msg-time">30 min ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        18. NOTIFICATIONS
+        ============================================================ -->
+        <section class="notifications-section" id="notificationsSection">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-bell"></i> Notifications</h3>
+                    <a href="notifications.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="notifications-list">
+                    <div class="notification-item">
+                        <i class="fas fa-clipboard-list"></i>
+                        <div>
+                            <h4>New Purchase Request</h4>
+                            <p>Laboratory department submitted a new request.</p>
+                            <span class="notif-time">5 min ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item success">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <h4>Order Approved</h4>
+                            <p>PO-2026-001 has been approved.</p>
+                            <span class="notif-time">10 min ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <h4>Contract Expiring</h4>
+                            <p>CT-2026-003 expires in 30 days.</p>
+                            <span class="notif-time">15 min ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <i class="fas fa-truck"></i>
+                        <div>
+                            <h4>Delivery Arrived</h4>
+                            <p>Delivery from MedTech Solutions received.</p>
+                            <span class="notif-time">20 min ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        19. AI PROCUREMENT ASSISTANT
+        ============================================================ -->
+        <div class="ai-assistant" id="aiAssistant">
+            <button class="ai-toggle procurement-ai-toggle" id="aiToggle">
+                <i class="fas fa-robot"></i>
+            </button>
+            <div class="ai-chat-window" id="aiChatWindow">
+                <div class="ai-header procurement-ai-header">
+                    <div class="ai-header-info">
+                        <i class="fas fa-robot"></i>
+                        <div>
+                            <h4>AI Procurement Assistant</h4>
+                            <span>Online</span>
+                        </div>
+                    </div>
+                    <button class="ai-close" id="aiClose"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="ai-body" id="aiBody">
+                    <div class="ai-message ai-bot">
+                        <div class="ai-avatar"><i class="fas fa-robot"></i></div>
+                        <div class="ai-bubble procurement-ai-bubble">
+                            <p>🛒 Hello! I'm your AI Procurement Assistant. I can help you:</p>
+                            <ul>
+                                <li>Recommend suppliers based on history</li>
+                                <li>Compare prices and quotations</li>
+                                <li>Optimize procurement budgets</li>
+                                <li>Forecast demand</li>
+                                <li>Analyze contracts</li>
+                            </ul>
+                            <p>How can I assist you with procurement today?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ai-footer">
+                    <div class="ai-input-group">
+                        <input type="text" id="aiInput" placeholder="Ask about procurement...">
+                        <button id="aiSend"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                    <div class="ai-voice">
+                        <button id="aiVoiceBtn"><i class="fas fa-microphone"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        20. QUICK ACTIONS
+        ============================================================ -->
+        <section class="quick-actions" id="quickActions">
+            <div class="container">
+                <div class="actions-grid">
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span>Create Purchase Request</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Create Purchase Order</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-truck"></i>
+                        <span>Add Supplier</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-file-invoice"></i>
+                        <span>Approve Quotation</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-truck"></i>
+                        <span>Receive Delivery</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Generate Procurement Report</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-print"></i>
+                        <span>Print Purchase Order</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        FLOATING BUTTONS
+        ============================================================ -->
+        <div class="floating-buttons">
+            <button class="float-btn emergency" id="emergencyFloat" data-tooltip="Emergency">
+                <i class="fas fa-ambulance"></i>
+            </button>
+            <button class="float-btn chat" id="floatingChat" data-tooltip="AI Assistant">
+                <i class="fas fa-robot"></i>
+            </button>
+            <button class="float-btn scroll-top" id="scrollTop" data-tooltip="Scroll to Top">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+        </div>
+
+        <!-- ============================================================
+        21. FOOTER
+        ============================================================ -->
+        <footer class="dashboard-footer" id="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-left">
+                        <p>&copy; 2026 <strong>Gimbie Adventist General Hospital</strong>. All Rights Reserved.</p>
+                    </div>
+                    <div class="footer-center">
+                        <span class="version">System: v2.4.1</span>
+                        <span class="version">Build: #2026.12.20</span>
+                    </div>
+                    <div class="footer-right">
+                        <a href="../contact.html">Procurement Support</a>
+                        <a href="../contact.html">Hospital Support</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+    <script src="../js/procurement-dashboard.js"></script>
+    <script src="../js/ai-assistant.js"></script>
+</body>
+              </html>
