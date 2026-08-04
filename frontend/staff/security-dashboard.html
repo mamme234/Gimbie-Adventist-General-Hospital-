@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Security Dashboard - Gimbie Adventist General Hospital. Monitor CCTV, manage visitors, access control, and emergency response.">
+    <meta name="keywords" content="security dashboard, cctv, visitor management, access control, emergency response, gimbie hospital">
+    <meta name="author" content="Gimbie Adventist General Hospital">
+    <title>Security Dashboard | Gimbie Adventist General Hospital</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/security-dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+</head>
+<body>
+    
+    <!-- ============================================================
+    1. LOADING SCREEN
+    ============================================================ -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>Gimbie Adventist</span>
+            </div>
+            <div class="loader-status-grid">
+                <div class="loader-status-item">
+                    <span>CCTV Connection</span>
+                    <div class="status-dot connected"></div>
+                </div>
+                <div class="loader-status-item">
+                    <span>Access Control Check</span>
+                    <div class="status-dot connected"></div>
+                </div>
+                <div class="loader-status-item">
+                    <span>Security System Initialization</span>
+                    <div class="status-dot connected"></div>
+                </div>
+            </div>
+            <div class="loader-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="loader-text">
+                <p id="loadingText">Loading Security Dashboard...</p>
+                <span class="loader-percentage" id="loaderPercentage">0%</span>
+            </div>
+            <div class="loader-security-animation">
+                <i class="fas fa-shield-alt"></i>
+                <i class="fas fa-video"></i>
+                <i class="fas fa-id-card"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    2. DASHBOARD HEADER
+    ============================================================ -->
+    <header class="dashboard-header" id="dashboardHeader">
+        <div class="container">
+            <div class="header-left">
+                <div class="hospital-logo">
+                    <a href="../index.html">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </a>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="header-center">
+                <div class="global-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search visitors, incidents, cameras...">
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="emergency-alerts">
+                    <button class="emergency-btn"><i class="fas fa-exclamation-triangle"></i><span class="alert-badge">2</span></button>
+                </div>
+                <div class="notifications">
+                    <button class="notif-btn"><i class="fas fa-bell"></i><span class="notif-badge">6</span></button>
+                </div>
+                <div class="messages">
+                    <button class="msg-btn"><i class="fas fa-envelope"></i><span class="msg-badge">4</span></button>
+                </div>
+                <div class="fullscreen-toggle">
+                    <button id="fullscreenToggle"><i class="fas fa-expand"></i></button>
+                </div>
+                <div class="language-switcher">
+                    <button class="lang-btn" id="langToggle">
+                        <i class="fas fa-globe"></i> EN <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="lang-dropdown">
+                        <li><a href="#" data-lang="en">English</a></li>
+                        <li><a href="#" data-lang="am">አማርኛ</a></li>
+                        <li><a href="#" data-lang="or">Afaan Oromoo</a></li>
+                    </ul>
+                </div>
+                <div class="theme-toggle">
+                    <button id="themeToggle"><i class="fas fa-moon"></i></button>
+                </div>
+                <div class="security-profile">
+                    <img src="../assets/staff/security-avatar.jpg" alt="Security Officer" class="profile-img">
+                    <div class="profile-info">
+                        <span class="security-name">Tadesse Gemechu</span>
+                        <span class="security-id">SEC-000001</span>
+                        <span class="security-shift">On Duty</span>
+                    </div>
+                    <button class="logout-btn"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    3. LEFT SIDEBAR
+    ============================================================ -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-user">
+            <img src="../assets/staff/security-avatar.jpg" alt="Security Officer">
+            <h4>Tadesse Gemechu</h4>
+            <span>SEC-000001</span>
+            <span class="role-badge">Security Officer</span>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="active"><a href="security-dashboard.html"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-shield-alt"></i> Security Control Center</a></li>
+                <li><a href="#"><i class="fas fa-video"></i> CCTV Monitoring</a></li>
+                <li><a href="#"><i class="fas fa-users"></i> Visitor Management</a></li>
+                <li><a href="#"><i class="fas fa-door-open"></i> Access Control</a></li>
+                <li><a href="#"><i class="fas fa-user-shield"></i> Security Staff</a></li>
+                <li><a href="#"><i class="fas fa-clipboard-list"></i> Incident Reports</a></li>
+                <li><a href="#"><i class="fas fa-ambulance"></i> Emergency Response</a></li>
+                <li><a href="#"><i class="fas fa-parking"></i> Parking Management</a></li>
+                <li><a href="#"><i class="fas fa-box-open"></i> Lost & Found</a></li>
+                <li><a href="#"><i class="fas fa-route"></i> Patrol Management</a></li>
+                <li><a href="#"><i class="fas fa-ban"></i> Restricted Areas</a></li>
+                <li><a href="#"><i class="fas fa-file-alt"></i> Reports</a></li>
+                <li><a href="#"><i class="fas fa-clipboard-list"></i> Audit Logs</a></li>
+                <li><a href="#"><i class="fas fa-envelope"></i> Messages</a></li>
+                <li><a href="#"><i class="fas fa-bell"></i> Notifications</a></li>
+                <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- ============================================================
+    MAIN CONTENT
+    ============================================================ -->
+    <main class="dashboard-main" id="dashboardMain">
+        
+        <!-- ============================================================
+        4. DASHBOARD OVERVIEW
+        ============================================================ -->
+        <section class="dashboard-overview" id="dashboardOverview">
+            <div class="container">
+                <div class="welcome-section">
+                    <div>
+                        <h2>Good Morning, Tadesse! 🛡️</h2>
+                        <p>Security Status: <span class="security-status secure"><i class="fas fa-circle"></i> Secure</span></p>
+                        <span class="shift-badge"><i class="fas fa-clock"></i> Morning Shift: 8:00 AM - 4:00 PM</span>
+                    </div>
+                    <div class="quick-stats-header">
+                        <span class="stat-badge"><i class="fas fa-user-shield"></i> 8 Officers On Duty</span>
+                        <span class="stat-badge"><i class="fas fa-users"></i> 12 Visitors Today</span>
+                        <span class="stat-badge danger"><i class="fas fa-ambulance"></i> 2 Emergencies</span>
+                        <span class="stat-badge"><i class="fas fa-exclamation-triangle"></i> 1 Active Incident</span>
+                        <span class="stat-badge"><i class="fas fa-video"></i> 12 CCTV Online</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        5. STATISTICS CARDS
+        ============================================================ -->
+        <section class="statistics-cards" id="statisticsCards">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-user-shield"></i></div>
+                        <div>
+                            <span class="stat-number">15</span>
+                            <span class="stat-label">Total Security Staff</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-user-shield"></i></div>
+                        <div>
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Active Guards</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-video"></i></div>
+                        <div>
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">CCTV Cameras Online</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                        <div>
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Visitors Registered</span>
+                        </div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <div>
+                            <span class="stat-number">2</span>
+                            <span class="stat-label">Emergency Alerts</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-clipboard-list"></i></div>
+                        <div>
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">Incident Reports</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-parking"></i></div>
+                        <div>
+                            <span class="stat-number">65%</span>
+                            <span class="stat-label">Parking Occupancy</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-door-open"></i></div>
+                        <div>
+                            <span class="stat-number">5</span>
+                            <span class="stat-label">Access Requests</span>
+                        </div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-icon"><i class="fas fa-ban"></i></div>
+                        <div>
+                            <span class="stat-number">1</span>
+                            <span class="stat-label">Restricted Area Alerts</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-route"></i></div>
+                        <div>
+                            <span class="stat-number">4</span>
+                            <span class="stat-label">Daily Patrols</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        6. CCTV MONITORING
+        ============================================================ -->
+        <section class="cctv-monitoring" id="cctvMonitoring">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-video"></i> CCTV Monitoring</h3>
+                    <button class="btn btn-outline-sm"><i class="fas fa-expand"></i> Full Screen</button>
+                </div>
+                
+                <div class="cctv-grid">
+                    <div class="camera-card">
+                        <div class="camera-feed">
+                            <div class="camera-placeholder">
+                                <i class="fas fa-video"></i>
+                                <span>Camera 01 - Main Entrance</span>
+                                <span class="live-badge"><i class="fas fa-circle"></i> Live</span>
+                            </div>
+                            <div class="camera-controls">
+                                <button class="cam-btn"><i class="fas fa-search-plus"></i></button>
+                                <button class="cam-btn"><i class="fas fa-search-minus"></i></button>
+                                <button class="cam-btn"><i class="fas fa-play"></i></button>
+                                <button class="cam-btn"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="camera-card">
+                        <div class="camera-feed">
+                            <div class="camera-placeholder">
+                                <i class="fas fa-video"></i>
+                                <span>Camera 02 - Emergency Entrance</span>
+                                <span class="live-badge"><i class="fas fa-circle"></i> Live</span>
+                            </div>
+                            <div class="camera-controls">
+                                <button class="cam-btn"><i class="fas fa-search-plus"></i></button>
+                                <button class="cam-btn"><i class="fas fa-search-minus"></i></button>
+                                <button class="cam-btn"><i class="fas fa-play"></i></button>
+                                <button class="cam-btn"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="camera-card">
+                        <div class="camera-feed">
+                            <div class="camera-placeholder">
+                                <i class="fas fa-video"></i>
+                                <span>Camera 03 - Parking Lot</span>
+                                <span class="live-badge"><i class="fas fa-circle"></i> Live</span>
+                            </div>
+                            <div class="camera-controls">
+                                <button class="cam-btn"><i class="fas fa-search-plus"></i></button>
+                                <button class="cam-btn"><i class="fas fa-search-minus"></i></button>
+                                <button class="cam-btn"><i class="fas fa-play"></i></button>
+                                <button class="cam-btn"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="camera-card">
+                        <div class="camera-feed">
+                            <div class="camera-placeholder">
+                                <i class="fas fa-video"></i>
+                                <span>Camera 04 - ICU</span>
+                                <span class="offline-badge"><i class="fas fa-circle"></i> Offline</span>
+                            </div>
+                            <div class="camera-controls">
+                                <button class="cam-btn"><i class="fas fa-search-plus"></i></button>
+                                <button class="cam-btn"><i class="fas fa-search-minus"></i></button>
+                                <button class="cam-btn"><i class="fas fa-play"></i></button>
+                                <button class="cam-btn"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        7. VISITOR MANAGEMENT
+        ============================================================ -->
+        <section class="visitor-management" id="visitorManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-users"></i> Visitor Management</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Register Visitor</button>
+                </div>
+                
+                <div class="visitor-grid">
+                    <div class="visitor-card">
+                        <i class="fas fa-user-circle"></i>
+                        <div>
+                            <h4>Abebe Demissie</h4>
+                            <p>Visitor ID: VIS-2026-001</p>
+                            <p>Visiting: Cardiology Ward</p>
+                            <p>Check-In: 9:30 AM</p>
+                            <span class="status-badge active">Active</span>
+                        </div>
+                        <button class="btn btn-outline-sm">Check-Out</button>
+                    </div>
+                    <div class="visitor-card">
+                        <i class="fas fa-user-circle"></i>
+                        <div>
+                            <h4>Tigist Haile</h4>
+                            <p>Visitor ID: VIS-2026-002</p>
+                            <p>Visiting: Pediatrics</p>
+                            <p>Check-In: 10:15 AM</p>
+                            <span class="status-badge active">Active</span>
+                        </div>
+                        <button class="btn btn-outline-sm">Check-Out</button>
+                    </div>
+                    <div class="visitor-card">
+                        <i class="fas fa-user-circle"></i>
+                        <div>
+                            <h4>Samuel Worku</h4>
+                            <p>Visitor ID: VIS-2026-003</p>
+                            <p>Visiting: General Ward</p>
+                            <p>Check-Out: 11:00 AM</p>
+                            <span class="status-badge completed">Completed</span>
+                        </div>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        8. ACCESS CONTROL
+        ============================================================ -->
+        <section class="access-control" id="accessControl">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-door-open"></i> Access Control</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-id-card"></i> Issue Access Card</button>
+                </div>
+                
+                <div class="access-grid">
+                    <div class="access-card">
+                        <i class="fas fa-id-card"></i>
+                        <div>
+                            <h4>Staff Access Cards</h4>
+                            <span>45 issued</span>
+                            <p>12 pending</p>
+                        </div>
+                    </div>
+                    <div class="access-card">
+                        <i class="fas fa-qrcode"></i>
+                        <div>
+                            <h4>QR Code Access</h4>
+                            <span>Active</span>
+                            <p>15 scans today</p>
+                        </div>
+                    </div>
+                    <div class="access-card">
+                        <i class="fas fa-fingerprint"></i>
+                        <div>
+                            <h4>Fingerprint Access</h4>
+                            <span>Active</span>
+                            <p>8 scans today</p>
+                        </div>
+                    </div>
+                    <div class="access-card">
+                        <i class="fas fa-face-smile"></i>
+                        <div>
+                            <h4>Face Recognition</h4>
+                            <span>Active</span>
+                            <p>12 scans today</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="access-logs">
+                    <h4>Recent Access Logs</h4>
+                    <div class="log-item">
+                        <span>10:15 AM</span>
+                        <span>Dr. Samuel Bekele</span>
+                        <span>→ Cardiology</span>
+                        <span class="status-badge granted">Granted</span>
+                    </div>
+                    <div class="log-item">
+                        <span>9:45 AM</span>
+                        <span>Visitor - Abebe Demissie</span>
+                        <span>→ General Ward</span>
+                        <span class="status-badge granted">Granted</span>
+                    </div>
+                    <div class="log-item">
+                        <span>9:30 AM</span>
+                        <span>Unknown</span>
+                        <span>→ Pharmacy</span>
+                        <span class="status-badge denied">Denied</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        9. EMERGENCY RESPONSE
+        ============================================================ -->
+        <section class="emergency-response" id="emergencyResponse">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-ambulance"></i> Emergency Response</h3>
+                    <button class="btn btn-danger-sm"><i class="fas fa-broadcast"></i> Emergency Broadcast</button>
+                </div>
+                
+                <div class="emergency-grid">
+                    <div class="emergency-card fire">
+                        <i class="fas fa-fire"></i>
+                        <h4>Fire Alarm</h4>
+                        <p>Status: <span class="status-badge active">Active</span></p>
+                        <button class="btn btn-danger-sm">Trigger</button>
+                    </div>
+                    <div class="emergency-card medical">
+                        <i class="fas fa-heartbeat"></i>
+                        <h4>Medical Emergency</h4>
+                        <p>Status: <span class="status-badge ready">Ready</span></p>
+                        <button class="btn btn-danger-sm">Activate</button>
+                    </div>
+                    <div class="emergency-card security">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Security Threat</h4>
+                        <p>Status: <span class="status-badge active">Monitoring</span></p>
+                        <button class="btn btn-danger-sm">Respond</button>
+                    </div>
+                    <div class="emergency-card evacuation">
+                        <i class="fas fa-people-arrows"></i>
+                        <h4>Evacuation Plan</h4>
+                        <p>Status: <span class="status-badge ready">Ready</span></p>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                </div>
+                
+                <div class="emergency-contacts">
+                    <h4>Emergency Contacts</h4>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>Police: 911</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>Ambulance: +251 57 771 0083</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>Fire Department: 112</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        10. INCIDENT MANAGEMENT
+        ============================================================ -->
+        <section class="incident-management" id="incidentManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-clipboard-list"></i> Incident Management</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Report Incident</button>
+                </div>
+                
+                <div class="incident-grid">
+                    <div class="incident-card">
+                        <h4>INC-2026-001</h4>
+                        <p><strong>Type:</strong> Unauthorized Access</p>
+                        <p><strong>Location:</strong> Pharmacy</p>
+                        <p><strong>Reported By:</strong> Officer Tesfaye</p>
+                        <p><strong>Status:</strong> <span class="status-badge investigating">Investigating</span></p>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                    <div class="incident-card">
+                        <h4>INC-2026-002</h4>
+                        <p><strong>Type:</strong> Medical Emergency</p>
+                        <p><strong>Location:</strong> ICU</p>
+                        <p><strong>Reported By:</strong> Dr. Samuel</p>
+                        <p><strong>Status:</strong> <span class="status-badge resolved">Resolved</span></p>
+                        <button class="btn btn-outline-sm">View</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        11. PARKING MANAGEMENT
+        ============================================================ -->
+        <section class="parking-management" id="parkingManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-parking"></i> Parking Management</h3>
+                    <a href="#" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="parking-grid">
+                    <div class="parking-card">
+                        <h4>Staff Parking</h4>
+                        <p>Occupied: 15/25</p>
+                        <span class="status-badge available">Available</span>
+                    </div>
+                    <div class="parking-card">
+                        <h4>Visitor Parking</h4>
+                        <p>Occupied: 10/15</p>
+                        <span class="status-badge available">Available</span>
+                    </div>
+                    <div class="parking-card">
+                        <h4>Ambulance Parking</h4>
+                        <p>Occupied: 2/4</p>
+                        <span class="status-badge available">Available</span>
+                    </div>
+                    <div class="parking-card">
+                        <h4>VIP Parking</h4>
+                        <p>Occupied: 3/5</p>
+                        <span class="status-badge available">Available</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        12. PATROL MANAGEMENT
+        ============================================================ -->
+        <section class="patrol-management" id="patrolManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-route"></i> Patrol Management</h3>
+                    <a href="#" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="patrol-grid">
+                    <div class="patrol-card">
+                        <i class="fas fa-route"></i>
+                        <div>
+                            <h4>Route A - Main Building</h4>
+                            <p>Status: <span class="status-badge in-progress">In Progress</span></p>
+                            <p>Checkpoints: 5/6</p>
+                            <button class="btn btn-outline-sm">View</button>
+                        </div>
+                    </div>
+                    <div class="patrol-card">
+                        <i class="fas fa-route"></i>
+                        <div>
+                            <h4>Route B - Emergency Wing</h4>
+                            <p>Status: <span class="status-badge completed">Completed</span></p>
+                            <p>Checkpoints: 4/4</p>
+                            <button class="btn btn-outline-sm">View</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        13. RESTRICTED AREAS
+        ============================================================ -->
+        <section class="restricted-areas" id="restrictedAreas">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-ban"></i> Restricted Areas</h3>
+                    <a href="#" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="restricted-grid">
+                    <div class="restricted-card">
+                        <i class="fas fa-heartbeat"></i>
+                        <div>
+                            <h4>ICU</h4>
+                            <p>Access: <span class="status-badge restricted">Restricted</span></p>
+                            <span>15 entries today</span>
+                        </div>
+                    </div>
+                    <div class="restricted-card">
+                        <i class="fas fa-prescription-bottle"></i>
+                        <div>
+                            <h4>Pharmacy</h4>
+                            <p>Access: <span class="status-badge restricted">Restricted</span></p>
+                            <span>8 entries today</span>
+                        </div>
+                    </div>
+                    <div class="restricted-card">
+                        <i class="fas fa-flask"></i>
+                        <div>
+                            <h4>Laboratory</h4>
+                            <p>Access: <span class="status-badge restricted">Restricted</span></p>
+                            <span>10 entries today</span>
+                        </div>
+                    </div>
+                    <div class="restricted-card">
+                        <i class="fas fa-server"></i>
+                        <div>
+                            <h4>Server Room</h4>
+                            <p>Access: <span class="status-badge restricted">Restricted</span></p>
+                            <span>3 entries today</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        14. LOST & FOUND
+        ============================================================ -->
+        <section class="lost-found" id="lostFound">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-box-open"></i> Lost & Found</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Register Item</button>
+                </div>
+                
+                <div class="lost-found-grid">
+                    <div class="item-card">
+                        <i class="fas fa-wallet"></i>
+                        <div>
+                            <h4>Wallet</h4>
+                            <p>Found: Dec 20, 2026</p>
+                            <p>Location: Reception</p>
+                            <span class="status-badge unclaimed">Unclaimed</span>
+                        </div>
+                    </div>
+                    <div class="item-card">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>Found: Dec 19, 2026</p>
+                            <p>Location: Cafeteria</p>
+                            <span class="status-badge claimed">Claimed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        15. REPORTS
+        ============================================================ -->
+        <section class="reports-section" id="reportsSection">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-file-alt"></i> Reports</h3>
+                    <div class="report-actions">
+                        <button class="btn btn-outline-sm"><i class="fas fa-file-pdf"></i> PDF</button>
+                        <button class="btn btn-outline-sm"><i class="fas fa-file-excel"></i> Excel</button>
+                    </div>
+                </div>
+                
+                <div class="reports-grid">
+                    <a href="#" class="report-item">
+                        <i class="fas fa-calendar-day"></i>
+                        <span>Daily Security Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span>Incident Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-users"></i>
+                        <span>Visitor Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-video"></i>
+                        <span>CCTV Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-route"></i>
+                        <span>Patrol Report</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        16. AUDIT LOGS
+        ============================================================ -->
+        <section class="audit-logs" id="auditLogs">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-clipboard-list"></i> Audit Logs</h3>
+                    <a href="#" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="audit-list">
+                    <div class="audit-item">
+                        <i class="fas fa-door-open"></i>
+                        <div>
+                            <h4>Access Log</h4>
+                            <p>Dr. Samuel Bekele - Cardiology</p>
+                            <span class="audit-time">10:15 AM</span>
+                        </div>
+                    </div>
+                    <div class="audit-item">
+                        <i class="fas fa-user"></i>
+                        <div>
+                            <h4>Security Activity</h4>
+                            <p>Tadesse Gemechu logged in</p>
+                            <span class="audit-time">8:00 AM</span>
+                        </div>
+                    </div>
+                    <div class="audit-item">
+                        <i class="fas fa-users"></i>
+                        <div>
+                            <h4>Visitor Log</h4>
+                            <p>Abebe Demissie - Check-in</p>
+                            <span class="audit-time">9:30 AM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        17. MESSAGES
+        ============================================================ -->
+        <section class="messages-section" id="messagesSection">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-envelope"></i> Messages</h3>
+                    <a href="messages.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="messages-list">
+                    <div class="message-item unread">
+                        <img src="../assets/staff/admin-avatar.jpg" alt="Admin">
+                        <div>
+                            <h4>Administration</h4>
+                            <p>Security briefing at 4:00 PM.</p>
+                            <span class="msg-time">5 min ago</span>
+                        </div>
+                    </div>
+                    <div class="message-item unread">
+                        <img src="../assets/doctors/dr-samuel-bekele.jpg" alt="Doctor">
+                        <div>
+                            <h4>Dr. Samuel Bekele</h4>
+                            <p>Unauthorized access attempt in Pharmacy.</p>
+                            <span class="msg-time">15 min ago</span>
+                        </div>
+                    </div>
+                    <div class="message-item">
+                        <img src="../assets/staff/reception-avatar.jpg" alt="Reception">
+                        <div>
+                            <h4>Reception</h4>
+                            <p>Visitor registration completed.</p>
+                            <span class="msg-time">30 min ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        18. NOTIFICATIONS
+        ============================================================ -->
+        <section class="notifications-section" id="notificationsSection">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-bell"></i> Notifications</h3>
+                    <a href="notifications.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="notifications-list">
+                    <div class="notification-item emergency">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <h4>Emergency Alert</h4>
+                            <p>Unauthorized access detected in Pharmacy</p>
+                            <span class="notif-time">5 min ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item warning">
+                        <i class="fas fa-video"></i>
+                        <div>
+                            <h4>CCTV Offline</h4>
+                            <p>Camera 04 - ICU is offline</p>
+                            <span class="notif-time">10 min ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <i class="fas fa-user"></i>
+                        <div>
+                            <h4>Visitor Arrived</h4>
+                            <p>Abebe Demissie registered at reception</p>
+                            <span class="notif-time">15 min ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <i class="fas fa-fire"></i>
+                        <div>
+                            <h4>Fire Alarm Test</h4>
+                            <p>Fire alarm test completed</p>
+                            <span class="notif-time">30 min ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        19. AI SECURITY ASSISTANT
+        ============================================================ -->
+        <div class="ai-assistant" id="aiAssistant">
+            <button class="ai-toggle security-ai-toggle" id="aiToggle">
+                <i class="fas fa-robot"></i>
+            </button>
+            <div class="ai-chat-window" id="aiChatWindow">
+                <div class="ai-header security-ai-header">
+                    <div class="ai-header-info">
+                        <i class="fas fa-robot"></i>
+                        <div>
+                            <h4>AI Security Assistant</h4>
+                            <span>Online</span>
+                        </div>
+                    </div>
+                    <button class="ai-close" id="aiClose"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="ai-body" id="aiBody">
+                    <div class="ai-message ai-bot">
+                        <div class="ai-avatar"><i class="fas fa-robot"></i></div>
+                        <div class="ai-bubble security-ai-bubble">
+                            <p>🛡️ Hello! I'm your AI Security Assistant. I can help you:</p>
+                            <ul>
+                                <li>Perform face recognition</li>
+                                <li>Detect intruders</li>
+                                <li>Verify visitors</li>
+                                <li>Detect threats</li>
+                                <li>Optimize patrol routes</li>
+                            </ul>
+                            <p>How can I assist you with security today?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ai-footer">
+                    <div class="ai-input-group">
+                        <input type="text" id="aiInput" placeholder="Ask about security...">
+                        <button id="aiSend"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                    <div class="ai-voice">
+                        <button id="aiVoiceBtn"><i class="fas fa-microphone"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        20. QUICK ACTIONS
+        ============================================================ -->
+        <section class="quick-actions" id="quickActions">
+            <div class="container">
+                <div class="actions-grid">
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Register Visitor</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-video"></i>
+                        <span>View CCTV</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-lock"></i>
+                        <span>Lock Building</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-broadcast"></i>
+                        <span>Emergency Broadcast</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Generate Security Report</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-ambulance"></i>
+                        <span>Call Emergency Team</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-print"></i>
+                        <span>Print Visitor Pass</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        FLOATING BUTTONS
+        ============================================================ -->
+        <div class="floating-buttons">
+            <button class="float-btn emergency" id="emergencyFloat" data-tooltip="Emergency">
+                <i class="fas fa-ambulance"></i>
+            </button>
+            <button class="float-btn chat" id="floatingChat" data-tooltip="AI Assistant">
+                <i class="fas fa-robot"></i>
+            </button>
+            <button class="float-btn scroll-top" id="scrollTop" data-tooltip="Scroll to Top">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+        </div>
+
+        <!-- ============================================================
+        21. FOOTER
+        ============================================================ -->
+        <footer class="dashboard-footer" id="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-left">
+                        <p>&copy; 2026 <strong>Gimbie Adventist General Hospital</strong>. All Rights Reserved.</p>
+                    </div>
+                    <div class="footer-center">
+                        <span class="version">System: v2.4.1</span>
+                        <span class="version">Build: #2026.12.20</span>
+                    </div>
+                    <div class="footer-right">
+                        <a href="../contact.html">Security Support</a>
+                        <a href="../contact.html">Hospital Support</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+    <script src="../js/security-dashboard.js"></script>
+    <script src="../js/ai-assistant.js"></script>
+</body>
+                  </html>
