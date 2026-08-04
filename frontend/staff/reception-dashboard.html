@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Reception Dashboard - Gimbie Adventist General Hospital. Manage patient registration, appointments, queue, and check-ins.">
+    <meta name="keywords" content="reception dashboard, patient registration, appointments, queue management, gimbie hospital">
+    <meta name="author" content="Gimbie Adventist General Hospital">
+    <title>Reception Dashboard | Gimbie Adventist General Hospital</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/reception-dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+</head>
+<body>
+    
+    <!-- ============================================================
+    1. LOADING SCREEN
+    ============================================================ -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>Gimbie Adventist</span>
+            </div>
+            <div class="loader-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="loader-text">
+                <p id="loadingText">Loading Reception Dashboard...</p>
+                <span class="loader-percentage" id="loaderPercentage">0%</span>
+            </div>
+            <div class="loader-reception-animation">
+                <i class="fas fa-phone-alt"></i>
+                <i class="fas fa-clipboard-list"></i>
+                <i class="fas fa-user-check"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    2. DASHBOARD HEADER
+    ============================================================ -->
+    <header class="dashboard-header" id="dashboardHeader">
+        <div class="container">
+            <div class="header-left">
+                <div class="hospital-logo">
+                    <a href="../index.html">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </a>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="header-center">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search patients, appointments...">
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="notifications">
+                    <button class="notif-btn"><i class="fas fa-bell"></i><span class="notif-badge">6</span></button>
+                </div>
+                <div class="messages">
+                    <button class="msg-btn"><i class="fas fa-envelope"></i><span class="msg-badge">4</span></button>
+                </div>
+                <div class="language-switcher">
+                    <button class="lang-btn" id="langToggle">
+                        <i class="fas fa-globe"></i> EN <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="lang-dropdown">
+                        <li><a href="#" data-lang="en">English</a></li>
+                        <li><a href="#" data-lang="am">አማርኛ</a></li>
+                        <li><a href="#" data-lang="or">Afaan Oromoo</a></li>
+                    </ul>
+                </div>
+                <div class="theme-toggle">
+                    <button id="themeToggle"><i class="fas fa-moon"></i></button>
+                </div>
+                <div class="reception-profile">
+                    <img src="../assets/staff/reception-avatar.jpg" alt="Receptionist Photo" class="profile-img">
+                    <div class="profile-info">
+                        <span class="reception-name">Rahel Fikadu</span>
+                        <span class="reception-id">REC-000001</span>
+                        <span class="reception-dept">Reception</span>
+                    </div>
+                    <button class="logout-btn"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    3. LEFT SIDEBAR
+    ============================================================ -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-user">
+            <img src="../assets/staff/reception-avatar.jpg" alt="Receptionist Photo">
+            <h4>Rahel Fikadu</h4>
+            <span>REC-000001</span>
+            <span class="role-badge">Senior Receptionist</span>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="active"><a href="reception-dashboard.html"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+                <li><a href="patient-registration.html"><i class="fas fa-user-plus"></i> Patient Registration</a></li>
+                <li><a href="appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a></li>
+                <li><a href="walkin-patients.html"><i class="fas fa-user"></i> Walk-in Patients</a></li>
+                <li><a href="queue-management.html"><i class="fas fa-user-clock"></i> Queue Management</a></li>
+                <li><a href="checkin.html"><i class="fas fa-check-circle"></i> Patient Check-in</a></li>
+                <li><a href="billing.html"><i class="fas fa-coins"></i> Billing</a></li>
+                <li><a href="visitor-management.html"><i class="fas fa-users"></i> Visitor Management</a></li>
+                <li><a href="departments.html"><i class="fas fa-building"></i> Departments</a></li>
+                <li><a href="doctor-schedule.html"><i class="fas fa-user-md"></i> Doctors Schedule</a></li>
+                <li><a href="messages.html"><i class="fas fa-envelope"></i> Messages</a></li>
+                <li><a href="reports.html"><i class="fas fa-file-alt"></i> Reports</a></li>
+                <li><a href="notifications.html"><i class="fas fa-bell"></i> Notifications</a></li>
+                <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- ============================================================
+    MAIN CONTENT
+    ============================================================ -->
+    <main class="dashboard-main" id="dashboardMain">
+        
+        <!-- ============================================================
+        4. DASHBOARD OVERVIEW
+        ============================================================ -->
+        <section class="dashboard-overview" id="dashboardOverview">
+            <div class="container">
+                <div class="welcome-section">
+                    <div>
+                        <h2>Good Morning, Rahel! 👋</h2>
+                        <p>Welcome to your reception dashboard.</p>
+                        <span class="shift-badge"><i class="fas fa-clock"></i> Morning Shift: 8:00 AM - 4:00 PM</span>
+                    </div>
+                    <div class="quick-stats-header">
+                        <span class="stat-badge"><i class="fas fa-user"></i> 45 Patients Today</span>
+                        <span class="stat-badge"><i class="fas fa-user-plus"></i> 12 Walk-in</span>
+                        <span class="stat-badge"><i class="fas fa-calendar-check"></i> 33 Appointments</span>
+                        <span class="stat-badge"><i class="fas fa-user-clock"></i> 8 Waiting</span>
+                        <span class="stat-badge danger"><i class="fas fa-ambulance"></i> 2 Emergency</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        5. STATISTICS CARDS
+        ============================================================ -->
+        <section class="statistics-cards" id="statisticsCards">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-user"></i></div>
+                        <div>
+                            <span class="stat-number">45</span>
+                            <span class="stat-label">Registered Patients</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+                        <div>
+                            <span class="stat-number">33</span>
+                            <span class="stat-label">Today's Appointments</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-user-plus"></i></div>
+                        <div>
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Walk-in Patients</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-user-clock"></i></div>
+                        <div>
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Waiting Patients</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                        <div>
+                            <span class="stat-number">25</span>
+                            <span class="stat-label">Completed Check-ins</span>
+                        </div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-icon"><i class="fas fa-ambulance"></i></div>
+                        <div>
+                            <span class="stat-number">2</span>
+                            <span class="stat-label">Emergency Cases</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-money-bill-wave"></i></div>
+                        <div>
+                            <span class="stat-number">ETB 12,500</span>
+                            <span class="stat-label">Daily Revenue</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-user-plus"></i></div>
+                        <div>
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">New Registrations</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        6. PATIENT REGISTRATION
+        ============================================================ -->
+        <section class="patient-registration" id="patientRegistration">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-user-plus"></i> Patient Registration</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Register New</button>
+                </div>
+                
+                <div class="registration-card">
+                    <div class="registration-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Full Name <span class="required">*</span></label>
+                                <input type="text" placeholder="Enter full name">
+                            </div>
+                            <div class="form-group">
+                                <label>Phone Number <span class="required">*</span></label>
+                                <input type="tel" placeholder="Enter phone number">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" placeholder="Enter email">
+                            </div>
+                            <div class="form-group">
+                                <label>Date of Birth</label>
+                                <input type="date">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <select>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Address</label>
+                                <input type="text" placeholder="Enter address">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn btn-primary"><i class="fas fa-save"></i> Register</button>
+                            <button class="btn btn-outline"><i class="fas fa-id-card"></i> Generate ID</button>
+                            <button class="btn btn-outline"><i class="fas fa-qrcode"></i> QR Card</button>
+                            <button class="btn btn-outline"><i class="fas fa-print"></i> Print Slip</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        7. APPOINTMENT MANAGEMENT
+        ============================================================ -->
+        <section class="appointment-management" id="appointmentManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-calendar-check"></i> Appointment Management</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Book Appointment</button>
+                </div>
+                
+                <div class="appointment-list">
+                    <div class="appointment-item">
+                        <div class="appt-info">
+                            <h4>Abebe Demissie</h4>
+                            <p><strong>Doctor:</strong> Dr. Samuel Bekele</p>
+                            <p><strong>Department:</strong> Cardiology</p>
+                            <p><strong>Time:</strong> 9:00 AM</p>
+                        </div>
+                        <div class="appt-status">
+                            <span class="status-badge confirmed">Confirmed</span>
+                        </div>
+                        <div class="appt-actions">
+                            <button class="btn btn-outline-sm">Reschedule</button>
+                            <button class="btn btn-outline-sm">Check-in</button>
+                        </div>
+                    </div>
+                    <div class="appointment-item">
+                        <div class="appt-info">
+                            <h4>Tigist Bekele</h4>
+                            <p><strong>Doctor:</strong> Dr. Hana Alemu</p>
+                            <p><strong>Department:</strong> Pediatrics</p>
+                            <p><strong>Time:</strong> 10:30 AM</p>
+                        </div>
+                        <div class="appt-status">
+                            <span class="status-badge checked-in">Checked In</span>
+                        </div>
+                        <div class="appt-actions">
+                            <button class="btn btn-outline-sm">Reschedule</button>
+                            <button class="btn btn-outline-sm">View</button>
+                        </div>
+                    </div>
+                    <div class="appointment-item">
+                        <div class="appt-info">
+                            <h4>Samuel Abate</h4>
+                            <p><strong>Doctor:</strong> Dr. Dawit Tadesse</p>
+                            <p><strong>Department:</strong> Surgery</p>
+                            <p><strong>Time:</strong> 2:00 PM</p>
+                        </div>
+                        <div class="appt-status">
+                            <span class="status-badge pending">Pending</span>
+                        </div>
+                        <div class="appt-actions">
+                            <button class="btn btn-outline-sm">Confirm</button>
+                            <button class="btn btn-outline-sm">Cancel</button>
+                        </div>
+                    </div>
+                    <div class="appointment-item">
+                        <div class="appt-info">
+                            <h4>Ruth Desta</h4>
+                            <p><strong>Doctor:</strong> Dr. Abel Girma</p>
+                            <p><strong>Department:</strong> Cardiology</p>
+                            <p><strong>Time:</strong> 3:30 PM</p>
+                        </div>
+                        <div class="appt-status">
+                            <span class="status-badge confirmed">Confirmed</span>
+                        </div>
+                        <div class="appt-actions">
+                            <button class="btn btn-outline-sm">Reschedule</button>
+                            <button class="btn btn-outline-sm">Check-in</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        8. QUEUE MANAGEMENT
+        ============================================================ -->
+        <section class="queue-management" id="queueManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-user-clock"></i> Queue Management</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Generate Queue Number</button>
+                </div>
+                
+                <div class="queue-grid">
+                    <div class="queue-display">
+                        <div class="current-queue">
+                            <span class="queue-label">Now Serving</span>
+                            <span class="queue-number">#012</span>
+                            <p>Abebe Demissie</p>
+                            <span class="queue-department">Cardiology</span>
+                        </div>
+                        <div class="queue-controls">
+                            <button class="btn btn-primary-sm"><i class="fas fa-phone"></i> Call Next</button>
+                            <button class="btn btn-outline-sm"><i class="fas fa-forward"></i> Skip</button>
+                            <button class="btn btn-danger-sm"><i class="fas fa-ambulance"></i> Emergency Priority</button>
+                        </div>
+                    </div>
+                    
+                    <div class="queue-list">
+                        <h4>Waiting Queue</h4>
+                        <div class="queue-item">
+                            <span class="q-number">#013</span>
+                            <span class="q-name">Tigist Bekele</span>
+                            <span class="q-dept">Pediatrics</span>
+                            <span class="q-status waiting">Waiting</span>
+                        </div>
+                        <div class="queue-item">
+                            <span class="q-number">#014</span>
+                            <span class="q-name">Samuel Abate</span>
+                            <span class="q-dept">Surgery</span>
+                            <span class="q-status waiting">Waiting</span>
+                        </div>
+                        <div class="queue-item">
+                            <span class="q-number">#015</span>
+                            <span class="q-name">Ruth Desta</span>
+                            <span class="q-dept">Cardiology</span>
+                            <span class="q-status waiting">Waiting</span>
+                        </div>
+                        <div class="queue-item emergency">
+                            <span class="q-number">#E-001</span>
+                            <span class="q-name">Emergency Patient</span>
+                            <span class="q-dept">ER</span>
+                            <span class="q-status emergency">Emergency</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        9. PATIENT CHECK-IN
+        ============================================================ -->
+        <section class="patient-checkin" id="patientCheckin">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-check-circle"></i> Patient Check-in</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-qrcode"></i> Scan QR Code</button>
+                </div>
+                
+                <div class="checkin-wrapper">
+                    <div class="checkin-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Patient ID / QR Code</label>
+                                <input type="text" placeholder="Scan or enter Patient ID">
+                            </div>
+                            <div class="form-group">
+                                <label>Appointment ID</label>
+                                <input type="text" placeholder="Enter Appointment ID">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn btn-primary"><i class="fas fa-check-circle"></i> Verify & Check-in</button>
+                            <button class="btn btn-outline"><i class="fas fa-qrcode"></i> Scan QR</button>
+                        </div>
+                    </div>
+                    
+                    <div class="recent-checkins">
+                        <h4>Recent Check-ins</h4>
+                        <div class="checkin-item">
+                            <span class="checkin-time">8:45 AM</span>
+                            <span class="checkin-name">Abebe Demissie</span>
+                            <span class="checkin-status">→ Cardiology</span>
+                        </div>
+                        <div class="checkin-item">
+                            <span class="checkin-time">9:15 AM</span>
+                            <span class="checkin-name">Tigist Bekele</span>
+                            <span class="checkin-status">→ Pediatrics</span>
+                        </div>
+                        <div class="checkin-item">
+                            <span class="checkin-time">9:30 AM</span>
+                            <span class="checkin-name">Kalkidan Haile</span>
+                            <span class="checkin-status">→ General Ward</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        10. VISITOR MANAGEMENT
+        ============================================================ -->
+        <section class="visitor-management" id="visitorManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-users"></i> Visitor Management</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Register Visitor</button>
+                </div>
+                
+                <div class="visitor-grid">
+                    <div class="visitor-card">
+                        <i class="fas fa-user-check"></i>
+                        <div>
+                            <h4>Current Visitors</h4>
+                            <span class="visitor-count">6</span>
+                            <p>Approved visits</p>
+                        </div>
+                    </div>
+                    <div class="visitor-card">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Pending Approvals</h4>
+                            <span class="visitor-count">3</span>
+                            <p>Awaiting approval</p>
+                        </div>
+                    </div>
+                    <div class="visitor-card">
+                        <i class="fas fa-id-card"></i>
+                        <div>
+                            <h4>Visitor Passes</h4>
+                            <span class="visitor-count">9</span>
+                            <p>Active passes</p>
+                        </div>
+                    </div>
+                    <div class="visitor-card">
+                        <i class="fas fa-calendar"></i>
+                        <div>
+                            <h4>Visiting Hours</h4>
+                            <span class="visitor-count">10:00 AM - 6:00 PM</span>
+                            <p>Daily schedule</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="visitor-log">
+                    <h4>Recent Visitor Log</h4>
+                    <div class="log-item">
+                        <span class="log-time">9:30 AM</span>
+                        <span class="log-name">Tigist Haile</span>
+                        <span class="log-patient">→ Visiting Abebe Demissie</span>
+                        <span class="log-status">Approved</span>
+                    </div>
+                    <div class="log-item">
+                        <span class="log-time">9:15 AM</span>
+                        <span class="log-name">Samuel Worku</span>
+                        <span class="log-patient">→ Visiting Samuel Abate</span>
+                        <span class="log-status">Approved</span>
+                    </div>
+                    <div class="log-item">
+                        <span class="log-time">8:45 AM</span>
+                        <span class="log-name">Meron Desta</span>
+                        <span class="log-patient">→ Visiting Ruth Desta</span>
+                        <span class="log-status pending">Pending</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        11. BILLING & PAYMENTS
+        ============================================================ -->
+        <section class="billing-payments" id="billingPayments">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-coins"></i> Billing & Payments</h3>
+                    <a href="billing.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="billing-grid">
+                    <div class="billing-card">
+                        <div class="bill-info">
+                            <h4>Consultation Fee - Abebe Demissie</h4>
+                            <p>Cardiology | Dr. Samuel Bekele</p>
+                            <span class="bill-amount">ETB 500</span>
+                        </div>
+                        <div class="bill-status">
+                            <span class="status-badge paid">Paid</span>
+                        </div>
+                        <div class="bill-actions">
+                            <button class="btn btn-outline-sm">Receipt</button>
+                        </div>
+                    </div>
+                    <div class="billing-card">
+                        <div class="bill-info">
+                            <h4>Registration Fee - Tigist Bekele</h4>
+                            <p>Pediatrics | Dr. Hana Alemu</p>
+                            <span class="bill-amount">ETB 300</span>
+                        </div>
+                        <div class="bill-status">
+                            <span class="status-badge unpaid">Unpaid</span>
+                        </div>
+                        <div class="bill-actions">
+                            <button class="btn btn-primary-sm">Pay</button>
+                            <button class="btn btn-outline-sm">Receipt</button>
+                        </div>
+                    </div>
+                    <div class="billing-card">
+                        <div class="bill-info">
+                            <h4>Consultation Fee - Samuel Abate</h4>
+                            <p>Surgery | Dr. Dawit Tadesse</p>
+                            <span class="bill-amount">ETB 500</span>
+                        </div>
+                        <div class="bill-status">
+                            <span class="status-badge pending">Pending</span>
+                        </div>
+                        <div class="bill-actions">
+                            <button class="btn btn-primary-sm">Pay</button>
+                            <button class="btn btn-outline-sm">Receipt</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        12. DOCTOR SCHEDULE
+        ============================================================ -->
+        <section class="doctor-schedule" id="doctorSchedule">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-user-md"></i> Doctor Schedule</h3>
+                    <a href="doctor-schedule.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="schedule-grid">
+                    <div class="schedule-card">
+                        <img src="../assets/doctors/dr-samuel-bekele.jpg" alt="Dr. Samuel">
+                        <div>
+                            <h4>Dr. Samuel Bekele</h4>
+                            <span>Cardiology</span>
+                            <p><i class="fas fa-clock"></i> 8:00 AM - 4:00 PM</p>
+                            <span class="status-badge available">Available</span>
+                        </div>
+                    </div>
+                    <div class="schedule-card">
+                        <img src="../assets/doctors/dr-hana-alemu.jpg" alt="Dr. Hana">
+                        <div>
+                            <h4>Dr. Hana Alemu</h4>
+                            <span>Pediatrics</span>
+                            <p><i class="fas fa-clock"></i> 8:00 AM - 4:00 PM</p>
+                            <span class="status-badge available">Available</span>
+                        </div>
+                    </div>
+                    <div class="schedule-card">
+                        <img src="../assets/doctors/dr-dawit-tadesse.jpg" alt="Dr. Dawit">
+                        <div>
+                            <h4>Dr. Dawit Tadesse</h4>
+                            <span>Surgery</span>
+                            <p><i class="fas fa-clock"></i> 10:00 AM - 6:00 PM</p>
+                            <span class="status-badge busy">Busy</span>
+                        </div>
+                    </div>
+                    <div class="schedule-card">
+                        <img src="../assets/doctors/dr-abel-girma.jpg" alt="Dr. Abel">
+                        <div>
+                            <h4>Dr. Abel Girma</h4>
+                            <span>Cardiology</span>
+                            <p><i class="fas fa-clock"></i> 8:00 AM - 4:00 PM</p>
+                            <span class="status-badge available">Available</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        13. EMERGENCY REGISTRATION
+        ============================================================ -->
+        <section class="emergency-registration" id="emergencyRegistration">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-ambulance"></i> Emergency Registration</h3>
+                    <button class="btn btn-danger-sm"><i class="fas fa-plus"></i> Register Emergency</button>
+                </div>
+                
+                <div class="emergency-card">
+                    <div class="emergency-info">
+                        <div class="emergency-icon"><i class="fas fa-ambulance"></i></div>
+                        <div>
+                            <h4>Emergency Case in Progress</h4>
+                            <p>Ambulance ETA: 5 min</p>
+                            <p>Trauma Patient - CT Head</p>
+                            <p>Notify: Emergency Department</p>
+                        </div>
+                    </div>
+                    <div class="emergency-actions">
+                        <button class="btn btn-danger-sm"><i class="fas fa-bell"></i> Notify ER</button>
+                        <button class="btn btn-outline-sm"><i class="fas fa-ambulance"></i> Track Ambulance</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        14. MESSAGES
+        ============================================================ -->
+        <section class="messages-section" id="messagesSection">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-envelope"></i> Messages</h3>
+                    <a href="messages.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="messages-list">
+                    <div class="message-item unread">
+                        <img src="../assets/staff/doctor-avatar.jpg" alt="Doctor">
+                        <div>
+                            <h4>Dr. Samuel Bekele</h4>
+                            <p>Please send patient Abebe to room 201.</p>
+                            <span class="msg-time">5 min ago</span>
+                        </div>
+                    </div>
+                    <div class="message-item unread">
+                        <img src="../assets/staff/nurse-avatar.jpg" alt="Nurse">
+                        <div>
+                            <h4>Nurse Sara</h4>
+                            <p>Patient Tigist is ready for examination.</p>
+                            <span class="msg-time">15 min ago</span>
+                        </div>
+                    </div>
+                    <div class="message-item">
+                        <img src="../assets/staff/lab-avatar.jpg" alt="Lab">
+                        <div>
+                            <h4>Laboratory</h4>
+                            <p>Results ready for patient Samuel Abate.</p>
+                            <span class="msg-time">1 hour ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        15. REPORTS
+        ============================================================ -->
+        <section class="reports-section" id="reportsSection">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-file-alt"></i> Reports</h3>
+                    <div class="report-actions">
+                        <button class="btn btn-outline-sm"><i class="fas fa-file-pdf"></i> PDF</button>
+                        <button class="btn btn-outline-sm"><i class="fas fa-file-excel"></i> Excel</button>
+                    </div>
+                </div>
+                
+                <div class="reports-grid">
+                    <a href="#" class="report-item">
+                        <i class="fas fa-user"></i>
+                        <span>Daily Registration Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Appointment Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-user-clock"></i>
+                        <span>Queue Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-coins"></i>
+                        <span>Revenue Report</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        16. NOTIFICATIONS
+        ============================================================ -->
+        <section class="notifications-section" id="notificationsSection">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-bell"></i> Notifications</h3>
+                    <a href="notifications.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="notifications-list">
+                    <div class="notification-item">
+                        <i class="fas fa-calendar-check"></i>
+                        <div>
+                            <h4>Appointment Alert</h4>
+                            <p>New appointment booked for Dr. Samuel at 11:00 AM.</p>
+                            <span class="notif-time">5 min ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item emergency">
+                        <i class="fas fa-ambulance"></i>
+                        <div>
+                            <h4>Emergency Alert</h4>
+                            <p>Ambulance en route with trauma patient.</p>
+                            <span class="notif-time">10 min ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <i class="fas fa-user-check"></i>
+                        <div>
+                            <h4>Patient Arrival</h4>
+                            <p>Patient Ruth Desta has checked in for her appointment.</p>
+                            <span class="notif-time">20 min ago</span>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <i class="fas fa-bullhorn"></i>
+                        <div>
+                            <h4>Hospital Announcement</h4>
+                            <p>Staff meeting tomorrow at 4:00 PM in Conference Room A.</p>
+                            <span class="notif-time">1 hour ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        17. AI RECEPTION ASSISTANT
+        ============================================================ -->
+        <div class="ai-assistant" id="aiAssistant">
+            <button class="ai-toggle reception-ai-toggle" id="aiToggle">
+                <i class="fas fa-robot"></i>
+            </button>
+            <div class="ai-chat-window" id="aiChatWindow">
+                <div class="ai-header reception-ai-header">
+                    <div class="ai-header-info">
+                        <i class="fas fa-robot"></i>
+                        <div>
+                            <h4>AI Reception Assistant</h4>
+                            <span>Online</span>
+                        </div>
+                    </div>
+                    <button class="ai-close" id="aiClose"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="ai-body" id="aiBody">
+                    <div class="ai-message ai-bot">
+                        <div class="ai-avatar"><i class="fas fa-robot"></i></div>
+                        <div class="ai-bubble reception-ai-bubble">
+                            <p>👋 Hello! I'm your AI Reception Assistant. I can help you:</p>
+                            <ul>
+                                <li>Search patient records</li>
+                                <li>Schedule appointments</li>
+                                <li>Recommend departments</li>
+                                <li>Check doctor availability</li>
+                            </ul>
+                            <p>How can I assist you today?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ai-footer">
+                    <div class="ai-input-group">
+                        <input type="text" id="aiInput" placeholder="Ask about patients or appointments...">
+                        <button id="aiSend"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                    <div class="ai-voice">
+                        <button id="aiVoiceBtn"><i class="fas fa-microphone"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        18. QUICK ACTIONS
+        ============================================================ -->
+        <section class="quick-actions" id="quickActions">
+            <div class="container">
+                <div class="actions-grid">
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Register Patient</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-calendar-plus"></i>
+                        <span>Book Appointment</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-id-card"></i>
+                        <span>Print Patient Card</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-receipt"></i>
+                        <span>Generate Receipt</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>Call Next Patient</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-ambulance"></i>
+                        <span>Emergency Registration</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        FLOATING BUTTONS
+        ============================================================ -->
+        <div class="floating-buttons">
+            <button class="float-btn emergency" id="emergencyFloat" data-tooltip="Emergency">
+                <i class="fas fa-ambulance"></i>
+            </button>
+            <button class="float-btn chat" id="floatingChat" data-tooltip="AI Assistant">
+                <i class="fas fa-robot"></i>
+            </button>
+            <button class="float-btn scroll-top" id="scrollTop" data-tooltip="Scroll to Top">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+        </div>
+
+        <!-- ============================================================
+        19. FOOTER
+        ============================================================ -->
+        <footer class="dashboard-footer" id="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <p>&copy; 2026 <strong>Gimbie Adventist General Hospital</strong>. All Rights Reserved.</p>
+                    <div class="footer-links">
+                        <a href="../privacy.html">Privacy Policy</a>
+                        <a href="../terms.html">Terms of Service</a>
+                        <a href="../contact.html">Hospital Support</a>
+                        <a href="../contact.html">IT Support</a>
+                        <span class="version">v2.4.1</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+    <script src="../js/reception-dashboard.js"></script>
+    <script src="../js/ai-assistant.js"></script>
+</body>
+                                                 </html>
