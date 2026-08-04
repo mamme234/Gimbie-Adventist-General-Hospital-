@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nurse Dashboard - Gimbie Adventist General Hospital. Manage patients, vitals, medications, and ward operations.">
+    <meta name="keywords" content="nurse dashboard, patient care, vitals, medication, ward management, gimbie hospital">
+    <meta name="author" content="Gimbie Adventist General Hospital">
+    <title>Nurse Dashboard | Gimbie Adventist General Hospital</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/nurse-dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+</head>
+<body>
+    
+    <!-- ============================================================
+    1. LOADING SCREEN
+    ============================================================ -->
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>Gimbie Adventist</span>
+            </div>
+            <div class="loader-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="loader-text">
+                <p id="loadingText">Loading Nurse Dashboard...</p>
+                <span class="loader-percentage" id="loaderPercentage">0%</span>
+            </div>
+            <div class="loader-nurse-animation">
+                <i class="fas fa-user-nurse"></i>
+                <i class="fas fa-heartbeat"></i>
+                <i class="fas fa-stethoscope"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    2. DASHBOARD HEADER
+    ============================================================ -->
+    <header class="dashboard-header" id="dashboardHeader">
+        <div class="container">
+            <div class="header-left">
+                <div class="hospital-logo">
+                    <a href="../index.html">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Gimbie Adventist</span>
+                    </a>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="header-center">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search patients, beds, medications...">
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="notifications">
+                    <button class="notif-btn"><i class="fas fa-bell"></i><span class="notif-badge">4</span></button>
+                </div>
+                <div class="messages">
+                    <button class="msg-btn"><i class="fas fa-envelope"></i><span class="msg-badge">2</span></button>
+                </div>
+                <div class="language-switcher">
+                    <button class="lang-btn" id="langToggle">
+                        <i class="fas fa-globe"></i> EN <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="lang-dropdown">
+                        <li><a href="#" data-lang="en">English</a></li>
+                        <li><a href="#" data-lang="am">አማርኛ</a></li>
+                        <li><a href="#" data-lang="or">Afaan Oromoo</a></li>
+                    </ul>
+                </div>
+                <div class="theme-toggle">
+                    <button id="themeToggle"><i class="fas fa-moon"></i></button>
+                </div>
+                <div class="nurse-profile">
+                    <img src="../assets/staff/nurse-avatar.jpg" alt="Nurse Photo" class="profile-img">
+                    <div class="profile-info">
+                        <span class="nurse-name">Sara Alemayehu</span>
+                        <span class="nurse-id">NUR-000001</span>
+                        <span class="nurse-dept">Cardiology Ward</span>
+                        <span class="nurse-shift">Morning Shift</span>
+                    </div>
+                    <button class="logout-btn"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    3. LEFT SIDEBAR
+    ============================================================ -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-user">
+            <img src="../assets/staff/nurse-avatar.jpg" alt="Nurse Photo">
+            <h4>Sara Alemayehu</h4>
+            <span>NUR-000001</span>
+            <span class="role-badge">Head Nurse</span>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="active"><a href="nurse-dashboard.html"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+                <li><a href="patients.html"><i class="fas fa-hospital-user"></i> My Patients</a></li>
+                <li><a href="wards.html"><i class="fas fa-building"></i> Wards</a></li>
+                <li><a href="bed-management.html"><i class="fas fa-bed"></i> Bed Management</a></li>
+                <li><a href="monitoring.html"><i class="fas fa-heartbeat"></i> Patient Monitoring</a></li>
+                <li><a href="vitals.html"><i class="fas fa-thermometer-half"></i> Vital Signs</a></li>
+                <li><a href="medication.html"><i class="fas fa-syringe"></i> Medication Administration</a></li>
+                <li><a href="nursing-notes.html"><i class="fas fa-notes-medical"></i> Nursing Notes</a></li>
+                <li><a href="lab-requests.html"><i class="fas fa-flask"></i> Laboratory Requests</a></li>
+                <li><a href="messages.html"><i class="fas fa-envelope"></i> Messages</a></li>
+                <li><a href="reports.html"><i class="fas fa-file-alt"></i> Reports</a></li>
+                <li><a href="calendar.html"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
+                <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- ============================================================
+    MAIN CONTENT
+    ============================================================ -->
+    <main class="dashboard-main" id="dashboardMain">
+        
+        <!-- ============================================================
+        4. DASHBOARD OVERVIEW
+        ============================================================ -->
+        <section class="dashboard-overview" id="dashboardOverview">
+            <div class="container">
+                <div class="welcome-section">
+                    <div>
+                        <h2>Good Morning, Nurse Sara! 👋</h2>
+                        <p>Welcome to your nursing dashboard.</p>
+                        <span class="shift-badge"><i class="fas fa-clock"></i> Morning Shift: 8:00 AM - 4:00 PM</span>
+                        <span class="ward-badge"><i class="fas fa-building"></i> Cardiology Ward</span>
+                    </div>
+                    <div class="quick-stats-header">
+                        <span class="stat-badge"><i class="fas fa-hospital-user"></i> 15 Patients Today</span>
+                        <span class="stat-badge emergency"><i class="fas fa-exclamation-triangle"></i> 3 Critical Patients</span>
+                        <span class="stat-badge"><i class="fas fa-bed"></i> 8 Beds Available</span>
+                        <span class="stat-badge"><i class="fas fa-ambulance"></i> 1 Emergency Alert</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        5. STATISTICS CARDS
+        ============================================================ -->
+        <section class="statistics-cards" id="statisticsCards">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-hospital-user"></i></div>
+                        <div>
+                            <span class="stat-number">15</span>
+                            <span class="stat-label">Total Patients</span>
+                        </div>
+                    </div>
+                    <div class="stat-card critical">
+                        <div class="stat-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <div>
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">Critical Patients</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-bed"></i></div>
+                        <div>
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Beds Occupied</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-bed"></i></div>
+                        <div>
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Beds Available</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-syringe"></i></div>
+                        <div>
+                            <span class="stat-number">24</span>
+                            <span class="stat-label">Medicines Administered</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-tasks"></i></div>
+                        <div>
+                            <span class="stat-number">18</span>
+                            <span class="stat-label">Nursing Tasks</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <span class="stat-number">5</span>
+                            <span class="stat-label">Pending Tasks</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-hourglass-half"></i></div>
+                        <div>
+                            <span class="stat-number">4</span>
+                            <span class="stat-label">Shift Hours Remaining</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        6. WARD MANAGEMENT
+        ============================================================ -->
+        <section class="ward-management" id="wardManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-building"></i> Ward Management</h3>
+                    <a href="wards.html" class="btn btn-outline-sm">View All Wards</a>
+                </div>
+                
+                <div class="ward-grid">
+                    <div class="ward-card">
+                        <h4>Cardiology Ward</h4>
+                        <div class="ward-stats">
+                            <span><i class="fas fa-bed"></i> 12/20 Occupied</span>
+                            <span><i class="fas fa-user"></i> 8 Available</span>
+                        </div>
+                        <div class="bed-status">
+                            <div class="bed occupied"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed available"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed available"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed available"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed available"></div>
+                            <div class="bed available"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed available"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed available"></div>
+                            <div class="bed occupied"></div>
+                        </div>
+                        <div class="ward-actions">
+                            <button class="btn btn-outline-sm">View Details</button>
+                            <button class="btn btn-outline-sm">Transfer Patient</button>
+                        </div>
+                    </div>
+                    
+                    <div class="ward-card">
+                        <h4>ICU Ward</h4>
+                        <div class="ward-stats">
+                            <span><i class="fas fa-bed"></i> 8/10 Occupied</span>
+                            <span><i class="fas fa-user"></i> 2 Available</span>
+                        </div>
+                        <div class="bed-status">
+                            <div class="bed occupied critical"></div>
+                            <div class="bed occupied critical"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed available"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed available"></div>
+                            <div class="bed occupied"></div>
+                        </div>
+                        <div class="ward-actions">
+                            <button class="btn btn-outline-sm">View Details</button>
+                            <button class="btn btn-outline-sm">Transfer Patient</button>
+                        </div>
+                    </div>
+                    
+                    <div class="ward-card">
+                        <h4>General Ward</h4>
+                        <div class="ward-stats">
+                            <span><i class="fas fa-bed"></i> 15/25 Occupied</span>
+                            <span><i class="fas fa-user"></i> 10 Available</span>
+                        </div>
+                        <div class="bed-status">
+                            <div class="bed occupied"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed available"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed available"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed available"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed available"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed available"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed available"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed available"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed occupied"></div>
+                            <div class="bed available"></div>
+                            <div class="bed occupied"></div>
+                        </div>
+                        <div class="ward-actions">
+                            <button class="btn btn-outline-sm">View Details</button>
+                            <button class="btn btn-outline-sm">Transfer Patient</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        7. PATIENT LIST
+        ============================================================ -->
+        <section class="patient-list" id="patientList">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-hospital-user"></i> Patient List</h3>
+                    <a href="patients.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="patients-grid">
+                    <div class="patient-card">
+                        <div class="patient-photo">
+                            <img src="../assets/patients/patient-1.jpg" alt="Patient">
+                            <span class="bed-badge">Bed 201</span>
+                        </div>
+                        <div class="patient-info">
+                            <h4>Abebe Demissie</h4>
+                            <span>PAT-2026-001</span>
+                            <p><strong>Doctor:</strong> Dr. Samuel Bekele</p>
+                            <p><strong>Diagnosis:</strong> Hypertension</p>
+                            <span class="status-badge stable">Stable</span>
+                        </div>
+                        <div class="patient-actions">
+                            <button class="btn btn-outline-sm">View Profile</button>
+                            <button class="btn btn-outline-sm">Vitals</button>
+                        </div>
+                    </div>
+                    
+                    <div class="patient-card">
+                        <div class="patient-photo">
+                            <img src="../assets/patients/patient-2.jpg" alt="Patient">
+                            <span class="bed-badge">Bed 202</span>
+                        </div>
+                        <div class="patient-info">
+                            <h4>Tigist Bekele</h4>
+                            <span>PAT-2026-002</span>
+                            <p><strong>Doctor:</strong> Dr. Hana Alemu</p>
+                            <p><strong>Diagnosis:</strong> Diabetes</p>
+                            <span class="status-badge critical">Critical</span>
+                        </div>
+                        <div class="patient-actions">
+                            <button class="btn btn-outline-sm">View Profile</button>
+                            <button class="btn btn-outline-sm">Vitals</button>
+                        </div>
+                    </div>
+                    
+                    <div class="patient-card">
+                        <div class="patient-photo">
+                            <img src="../assets/patients/patient-3.jpg" alt="Patient">
+                            <span class="bed-badge">Bed 203</span>
+                        </div>
+                        <div class="patient-info">
+                            <h4>Samuel Abate</h4>
+                            <span>PAT-2026-003</span>
+                            <p><strong>Doctor:</strong> Dr. Dawit Tadesse</p>
+                            <p><strong>Diagnosis:</strong> Post-Surgery</p>
+                            <span class="status-badge improving">Improving</span>
+                        </div>
+                        <div class="patient-actions">
+                            <button class="btn btn-outline-sm">View Profile</button>
+                            <button class="btn btn-outline-sm">Vitals</button>
+                        </div>
+                    </div>
+                    
+                    <div class="patient-card">
+                        <div class="patient-photo">
+                            <img src="../assets/patients/patient-4.jpg" alt="Patient">
+                            <span class="bed-badge">Bed 204</span>
+                        </div>
+                        <div class="patient-info">
+                            <h4>Ruth Desta</h4>
+                            <span>PAT-2026-004</span>
+                            <p><strong>Doctor:</strong> Dr. Abel Girma</p>
+                            <p><strong>Diagnosis:</strong> Cardiac Arrhythmia</p>
+                            <span class="status-badge critical">Critical</span>
+                        </div>
+                        <div class="patient-actions">
+                            <button class="btn btn-outline-sm">View Profile</button>
+                            <button class="btn btn-outline-sm">Vitals</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        8. PATIENT MONITORING
+        ============================================================ -->
+        <section class="patient-monitoring" id="patientMonitoring">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-heartbeat"></i> Patient Monitoring</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-edit"></i> Update Vitals</button>
+                </div>
+                
+                <div class="monitoring-grid">
+                    <div class="vital-card">
+                        <h4>Temperature</h4>
+                        <div class="vital-value">36.8°C</div>
+                        <span class="vital-status normal">Normal</span>
+                    </div>
+                    <div class="vital-card">
+                        <h4>Blood Pressure</h4>
+                        <div class="vital-value">120/80</div>
+                        <span class="vital-status normal">Normal</span>
+                    </div>
+                    <div class="vital-card">
+                        <h4>Pulse Rate</h4>
+                        <div class="vital-value">72 bpm</div>
+                        <span class="vital-status normal">Normal</span>
+                    </div>
+                    <div class="vital-card">
+                        <h4>Respiratory Rate</h4>
+                        <div class="vital-value">16/min</div>
+                        <span class="vital-status normal">Normal</span>
+                    </div>
+                    <div class="vital-card">
+                        <h4>Oxygen Saturation</h4>
+                        <div class="vital-value">98%</div>
+                        <span class="vital-status normal">Normal</span>
+                    </div>
+                    <div class="vital-card">
+                        <h4>Pain Score</h4>
+                        <div class="vital-value">3/10</div>
+                        <span class="vital-status normal">Mild</span>
+                    </div>
+                </div>
+                
+                <div class="vital-update-form">
+                    <h4>Update Vital Signs</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Temperature (°C)</label>
+                            <input type="text" placeholder="36.5">
+                        </div>
+                        <div class="form-group">
+                            <label>Blood Pressure</label>
+                            <input type="text" placeholder="120/80">
+                        </div>
+                        <div class="form-group">
+                            <label>Pulse Rate (bpm)</label>
+                            <input type="text" placeholder="72">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Respiratory Rate (/min)</label>
+                            <input type="text" placeholder="16">
+                        </div>
+                        <div class="form-group">
+                            <label>Oxygen Saturation (%)</label>
+                            <input type="text" placeholder="98">
+                        </div>
+                        <div class="form-group">
+                            <label>Pain Score (0-10)</label>
+                            <input type="text" placeholder="3">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary"><i class="fas fa-save"></i> Save Vitals</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        9. MEDICATION ADMINISTRATION
+        ============================================================ -->
+        <section class="medication-admin" id="medicationAdmin">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-syringe"></i> Medication Administration</h3>
+                    <button class="btn btn-outline-sm"><i class="fas fa-barcode"></i> Scan Barcode</button>
+                </div>
+                
+                <div class="medication-list">
+                    <div class="medication-item">
+                        <div class="med-info">
+                            <h4>Amlodipine</h4>
+                            <p>5mg Tablet</p>
+                            <span class="med-time">8:00 AM</span>
+                            <span class="med-route">Oral</span>
+                        </div>
+                        <div class="med-status">
+                            <span class="status-badge administered">Administered</span>
+                        </div>
+                        <div class="med-actions">
+                            <button class="btn btn-outline-sm">View</button>
+                        </div>
+                    </div>
+                    <div class="medication-item pending">
+                        <div class="med-info">
+                            <h4>Metformin</h4>
+                            <p>500mg Tablet</p>
+                            <span class="med-time">12:00 PM</span>
+                            <span class="med-route">Oral</span>
+                        </div>
+                        <div class="med-status">
+                            <span class="status-badge pending">Pending</span>
+                        </div>
+                        <div class="med-actions">
+                            <button class="btn btn-primary-sm">Administer</button>
+                        </div>
+                    </div>
+                    <div class="medication-item pending">
+                        <div class="med-info">
+                            <h4>Insulin</h4>
+                            <p>10 units</p>
+                            <span class="med-time">12:30 PM</span>
+                            <span class="med-route">Subcutaneous</span>
+                        </div>
+                        <div class="med-status">
+                            <span class="status-badge pending">Pending</span>
+                        </div>
+                        <div class="med-actions">
+                            <button class="btn btn-primary-sm">Administer</button>
+                        </div>
+                    </div>
+                    <div class="medication-item">
+                        <div class="med-info">
+                            <h4>Losartan</h4>
+                            <p>50mg Tablet</p>
+                            <span class="med-time">8:00 AM</span>
+                            <span class="med-route">Oral</span>
+                        </div>
+                        <div class="med-status">
+                            <span class="status-badge administered">Administered</span>
+                        </div>
+                        <div class="med-actions">
+                            <button class="btn btn-outline-sm">View</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        10. NURSING NOTES
+        ============================================================ -->
+        <section class="nursing-notes" id="nursingNotes">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-notes-medical"></i> Nursing Notes</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> Add Note</button>
+                </div>
+                
+                <div class="notes-list">
+                    <div class="note-item">
+                        <div class="note-header">
+                            <h4>Daily Progress Note</h4>
+                            <span class="note-date">Dec 20, 2026 - 8:15 AM</span>
+                        </div>
+                        <p>Patient Abebe is stable. Vitals normal. Compliant with medication. Mobilizing with assistance. No new complaints.</p>
+                        <div class="note-footer">
+                            <span class="note-author">Sara Alemayehu, RN</span>
+                            <div class="note-actions">
+                                <button class="btn btn-outline-sm">Edit</button>
+                                <button class="btn btn-outline-sm">Sign</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note-item">
+                        <div class="note-header">
+                            <h4>Patient Observation</h4>
+                            <span class="note-date">Dec 20, 2026 - 6:30 AM</span>
+                        </div>
+                        <p>Patient Tigist is in critical condition. Monitoring closely. BP: 140/90, HR: 95. Notified Dr. Hana. Awaiting review.</p>
+                        <div class="note-footer">
+                            <span class="note-author">Sara Alemayehu, RN</span>
+                            <div class="note-actions">
+                                <button class="btn btn-outline-sm">Edit</button>
+                                <button class="btn btn-outline-sm">Sign</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note-item">
+                        <div class="note-header">
+                            <h4>Medication Record</h4>
+                            <span class="note-date">Dec 20, 2026 - 8:00 AM</span>
+                        </div>
+                        <p>All morning medications administered as prescribed. No adverse reactions reported. Patient education provided.</p>
+                        <div class="note-footer">
+                            <span class="note-author">Sara Alemayehu, RN</span>
+                            <div class="note-actions">
+                                <button class="btn btn-outline-sm">Edit</button>
+                                <button class="btn btn-outline-sm">Sign</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        11. LABORATORY REQUESTS
+        ============================================================ -->
+        <section class="lab-requests" id="labRequests">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-flask"></i> Laboratory</h3>
+                    <button class="btn btn-primary-sm"><i class="fas fa-plus"></i> New Request</button>
+                </div>
+                
+                <div class="lab-grid">
+                    <div class="lab-item">
+                        <div class="lab-info">
+                            <h4>Complete Blood Count (CBC)</h4>
+                            <p>Patient: Tigist Bekele | Bed 202</p>
+                            <span class="lab-date">Requested: Dec 20, 2026</span>
+                        </div>
+                        <div class="lab-status">
+                            <span class="status-badge pending">Pending Collection</span>
+                        </div>
+                        <div class="lab-actions">
+                            <button class="btn btn-primary-sm">Collect Sample</button>
+                        </div>
+                    </div>
+                    <div class="lab-item">
+                        <div class="lab-info">
+                            <h4>Blood Culture</h4>
+                            <p>Patient: Ruth Desta | Bed 204</p>
+                            <span class="lab-date">Requested: Dec 19, 2026</span>
+                        </div>
+                        <div class="lab-status">
+                            <span class="status-badge ready">Results Ready</span>
+                        </div>
+                        <div class="lab-actions">
+                            <button class="btn btn-outline-sm">View Results</button>
+                        </div>
+                    </div>
+                    <div class="lab-item">
+                        <div class="lab-info">
+                            <h4>Urinalysis</h4>
+                            <p>Patient: Samuel Abate | Bed 203</p>
+                            <span class="lab-date">Requested: Dec 20, 2026</span>
+                        </div>
+                        <div class="lab-status">
+                            <span class="status-badge pending">Pending Collection</span>
+                        </div>
+                        <div class="lab-actions">
+                            <button class="btn btn-primary-sm">Collect Sample</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        12. EMERGENCY ALERTS
+        ============================================================ -->
+        <section class="emergency-alerts" id="emergencyAlerts">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Emergency Alerts</h3>
+                    <a href="#" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="alerts-list">
+                    <div class="alert-item code-blue">
+                        <i class="fas fa-heartbeat"></i>
+                        <div>
+                            <h4>Code Blue - ICU</h4>
+                            <p>Cardiac arrest in ICU - Bed 101</p>
+                            <span class="alert-time">2 min ago</span>
+                        </div>
+                        <button class="btn btn-danger-sm">Respond</button>
+                    </div>
+                    <div class="alert-item critical">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <div>
+                            <h4>Critical Patient - Ruth Desta</h4>
+                            <p>BP dropping rapidly. Notify doctor immediately.</p>
+                            <span class="alert-time">10 min ago</span>
+                        </div>
+                        <button class="btn btn-danger-sm">Notify</button>
+                    </div>
+                    <div class="alert-item transfer">
+                        <i class="fas fa-ambulance"></i>
+                        <div>
+                            <h4>ICU Transfer Request</h4>
+                            <p>Patient Samuel Abate needs ICU transfer</p>
+                            <span class="alert-time">25 min ago</span>
+                        </div>
+                        <button class="btn btn-primary-sm">Accept</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        13. SHIFT MANAGEMENT
+        ============================================================ -->
+        <section class="shift-management" id="shiftManagement">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-clock"></i> Shift Management</h3>
+                    <a href="#" class="btn btn-outline-sm">View Schedule</a>
+                </div>
+                
+                <div class="shift-card">
+                    <div class="shift-info">
+                        <h4>Current Shift</h4>
+                        <p><strong>Shift:</strong> Morning (8:00 AM - 4:00 PM)</p>
+                        <p><strong>Time Remaining:</strong> 4 hours</p>
+                        <p><strong>Ward:</strong> Cardiology Ward</p>
+                    </div>
+                    <div class="shift-actions">
+                        <button class="btn btn-outline-sm">Start Break</button>
+                        <button class="btn btn-primary-sm">End Shift</button>
+                    </div>
+                </div>
+                
+                <div class="shift-handover">
+                    <h4>Handover Notes</h4>
+                    <textarea placeholder="Write handover notes for next shift..."></textarea>
+                    <button class="btn btn-primary-sm"><i class="fas fa-save"></i> Save Handover</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        14. MESSAGES
+        ============================================================ -->
+        <section class="messages-section" id="messagesSection">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-envelope"></i> Messages</h3>
+                    <a href="messages.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="messages-list">
+                    <div class="message-item unread">
+                        <img src="../assets/staff/doctor-avatar.jpg" alt="Doctor">
+                        <div>
+                            <h4>Dr. Samuel Bekele</h4>
+                            <p>Please update me on patient Abebe's vitals.</p>
+                            <span class="msg-time">5 min ago</span>
+                        </div>
+                    </div>
+                    <div class="message-item">
+                        <img src="../assets/staff/pharmacy-avatar.jpg" alt="Pharmacy">
+                        <div>
+                            <h4>Pharmacy</h4>
+                            <p>Medications for Bed 202 are ready for pickup.</p>
+                            <span class="msg-time">20 min ago</span>
+                        </div>
+                    </div>
+                    <div class="message-item unread">
+                        <img src="../assets/staff/lab-avatar.jpg" alt="Lab">
+                        <div>
+                            <h4>Laboratory</h4>
+                            <p>Results for Ruth Desta are ready.</p>
+                            <span class="msg-time">35 min ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        15. REPORTS
+        ============================================================ -->
+        <section class="reports-section" id="reportsSection">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-file-alt"></i> Reports</h3>
+                    <a href="reports.html" class="btn btn-outline-sm">View All</a>
+                </div>
+                
+                <div class="reports-grid">
+                    <a href="#" class="report-item">
+                        <i class="fas fa-calendar-day"></i>
+                        <span>Daily Nursing Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-building"></i>
+                        <span>Ward Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-syringe"></i>
+                        <span>Medication Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Patient Monitoring Report</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>Export PDF</span>
+                    </a>
+                    <a href="#" class="report-item">
+                        <i class="fas fa-file-excel"></i>
+                        <span>Export Excel</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        16. CALENDAR
+        ============================================================ -->
+        <section class="calendar-section" id="calendarSection">
+            <div class="container">
+                <div class="section-header">
+                    <h3><i class="fas fa-calendar-alt"></i> Calendar</h3>
+                    <div class="calendar-views">
+                        <button class="view-btn active">Day</button>
+                        <button class="view-btn">Week</button>
+                        <button class="view-btn">Month</button>
+                    </div>
+                </div>
+                
+                <div class="calendar-mini">
+                    <div class="calendar-header">
+                        <button><i class="fas fa-chevron-left"></i></button>
+                        <span>December 2026</span>
+                        <button><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div class="calendar-grid">
+                        <div class="cal-day">Mon</div>
+                        <div class="cal-day">Tue</div>
+                        <div class="cal-day">Wed</div>
+                        <div class="cal-day">Thu</div>
+                        <div class="cal-day">Fri</div>
+                        <div class="cal-day">Sat</div>
+                        <div class="cal-day">Sun</div>
+                        <div class="cal-date">1</div>
+                        <div class="cal-date">2</div>
+                        <div class="cal-date">3</div>
+                        <div class="cal-date">4</div>
+                        <div class="cal-date">5</div>
+                        <div class="cal-date">6</div>
+                        <div class="cal-date">7</div>
+                        <div class="cal-date">8</div>
+                        <div class="cal-date">9</div>
+                        <div class="cal-date">10</div>
+                        <div class="cal-date">11</div>
+                        <div class="cal-date">12</div>
+                        <div class="cal-date">13</div>
+                        <div class="cal-date">14</div>
+                        <div class="cal-date">15</div>
+                        <div class="cal-date">16</div>
+                        <div class="cal-date">17</div>
+                        <div class="cal-date">18</div>
+                        <div class="cal-date">19</div>
+                        <div class="cal-date active">20</div>
+                        <div class="cal-date">21</div>
+                        <div class="cal-date">22</div>
+                        <div class="cal-date">23</div>
+                        <div class="cal-date">24</div>
+                        <div class="cal-date">25</div>
+                        <div class="cal-date">26</div>
+                        <div class="cal-date">27</div>
+                        <div class="cal-date">28</div>
+                        <div class="cal-date">29</div>
+                        <div class="cal-date">30</div>
+                        <div class="cal-date">31</div>
+                    </div>
+                    <div class="calendar-today">
+                        <span>Today: December 20, 2026</span>
+                        <span class="task-count">12 Tasks Today</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        17. AI NURSE ASSISTANT
+        ============================================================ -->
+        <div class="ai-assistant" id="aiAssistant">
+            <button class="ai-toggle nurse-ai-toggle" id="aiToggle">
+                <i class="fas fa-robot"></i>
+            </button>
+            <div class="ai-chat-window" id="aiChatWindow">
+                <div class="ai-header nurse-ai-header">
+                    <div class="ai-header-info">
+                        <i class="fas fa-robot"></i>
+                        <div>
+                            <h4>AI Nurse Assistant</h4>
+                            <span>Online</span>
+                        </div>
+                    </div>
+                    <button class="ai-close" id="aiClose"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="ai-body" id="aiBody">
+                    <div class="ai-message ai-bot">
+                        <div class="ai-avatar"><i class="fas fa-robot"></i></div>
+                        <div class="ai-bubble nurse-ai-bubble">
+                            <p>🩺 Hello! I'm your AI Nurse Assistant. I can help you:</p>
+                            <ul>
+                                <li>Get patient summaries</li>
+                                <li>Medication reminders</li>
+                                <li>Vital sign analysis</li>
+                                <li>Shift management</li>
+                                <li>Voice notes</li>
+                            </ul>
+                            <p>How can I help you with patient care today?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ai-footer">
+                    <div class="ai-input-group">
+                        <input type="text" id="aiInput" placeholder="Ask about patient care...">
+                        <button id="aiSend"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                    <div class="ai-voice">
+                        <button id="aiVoiceBtn"><i class="fas fa-microphone"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        18. QUICK ACTIONS
+        ============================================================ -->
+        <section class="quick-actions" id="quickActions">
+            <div class="container">
+                <div class="actions-grid">
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-thermometer-half"></i>
+                        <span>Register Vitals</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-user-md"></i>
+                        <span>Call Doctor</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-flask"></i>
+                        <span>Request Lab</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-ambulance"></i>
+                        <span>Request Ambulance</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Emergency Alert</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-print"></i>
+                        <span>Print Patient Summary</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        FLOATING BUTTONS
+        ============================================================ -->
+        <div class="floating-buttons">
+            <button class="float-btn emergency" id="emergencyFloat" data-tooltip="Emergency">
+                <i class="fas fa-ambulance"></i>
+            </button>
+            <button class="float-btn chat" id="floatingChat" data-tooltip="AI Assistant">
+                <i class="fas fa-robot"></i>
+            </button>
+            <button class="float-btn scroll-top" id="scrollTop" data-tooltip="Scroll to Top">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+        </div>
+
+        <!-- ============================================================
+        19. FOOTER
+        ============================================================ -->
+        <footer class="dashboard-footer" id="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <p>&copy; 2026 <strong>Gimbie Adventist General Hospital</strong>. All Rights Reserved.</p>
+                    <div class="footer-links">
+                        <a href="../privacy.html">Privacy Policy</a>
+                        <a href="../terms.html">Terms of Service</a>
+                        <a href="../contact.html">Hospital Support</a>
+                        <a href="../contact.html">IT Support</a>
+                        <span class="version">v2.4.1</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- ============================================================
+    SCRIPTS
+    ============================================================ -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+    <script src="../js/nurse-dashboard.js"></script>
+    <script src="../js/ai-assistant.js"></script>
+</body>
+      </html>
