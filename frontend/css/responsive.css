@@ -1,0 +1,555 @@
+/* ============================================================
+   RESPONSIVE.CSS
+   ============================================================ */
+
+/* ============================================================
+   1. LARGE DESKTOP (1200px and above)
+   ============================================================ */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+    
+    .dashboard-wrapper .main-content {
+        padding: 24px 30px 30px 30px;
+    }
+}
+
+/* ============================================================
+   2. DESKTOP (992px - 1199px)
+   ============================================================ */
+@media (max-width: 1199px) {
+    .container {
+        max-width: 960px;
+    }
+    
+    .dashboard-wrapper .main-content {
+        padding: 20px 24px 24px 24px;
+    }
+    
+    .overview-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .dashboard-cards {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+}
+
+/* ============================================================
+   3. TABLET LANDSCAPE (768px - 991px)
+   ============================================================ */
+@media (max-width: 991px) {
+    .container {
+        max-width: 720px;
+    }
+    
+    /* Sidebar */
+    .dashboard-sidebar {
+        transform: translateX(-100%);
+        width: 280px;
+    }
+    
+    .dashboard-sidebar.mobile-open {
+        transform: translateX(0);
+    }
+    
+    .sidebar-overlay.show {
+        display: block;
+    }
+    
+    .dashboard-wrapper .main-content {
+        margin-left: 0 !important;
+        padding: 16px 20px 20px 20px;
+    }
+    
+    /* Header */
+    .dashboard-header {
+        padding: 12px 16px;
+    }
+    
+    .dashboard-header .header-left h1 {
+        font-size: var(--font-size-md);
+    }
+    
+    .dashboard-header .header-left h1 span {
+        display: none;
+    }
+    
+    .header-search input {
+        width: 160px;
+    }
+    
+    .header-search input:focus {
+        width: 200px;
+    }
+    
+    /* Grid */
+    .overview-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .dashboard-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .charts-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .medical-records-section {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .profile-content {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Tables */
+    .table-responsive {
+        overflow-x: auto;
+    }
+    
+    .table th,
+    .table td {
+        padding: 8px 12px;
+        font-size: var(--font-size-xs);
+    }
+}
+
+/* ============================================================
+   4. TABLET PORTRAIT (576px - 767px)
+   ============================================================ */
+@media (max-width: 767px) {
+    .container {
+        max-width: 540px;
+        padding: 0 16px;
+    }
+    
+    /* Header */
+    .dashboard-header {
+        padding: 10px 16px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .dashboard-header .header-left h1 {
+        font-size: var(--font-size-sm);
+    }
+    
+    .dashboard-header .header-left .header-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+    
+    .header-search {
+        display: none;
+    }
+    
+    .profile-dropdown .profile-info {
+        display: none;
+    }
+    
+    .header-action .badge {
+        font-size: 8px;
+        padding: 1px 5px;
+        min-width: 14px;
+    }
+    
+    /* Dashboard Cards */
+    .overview-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+    
+    .dashboard-cards {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+    
+    .dashboard-card {
+        padding: 14px 16px;
+    }
+    
+    .dashboard-card .card-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    
+    .dashboard-card .card-content h3 {
+        font-size: var(--font-size-md);
+    }
+    
+    .dashboard-card .card-content p {
+        font-size: var(--font-size-xs);
+    }
+    
+    /* Cards */
+    .card {
+        padding: 16px;
+    }
+    
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    /* Forms */
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    /* Modals */
+    .modal {
+        padding: 20px;
+        width: 95%;
+    }
+    
+    /* Appointment */
+    .appointment-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Charts */
+    .chart-card canvas {
+        height: 180px !important;
+    }
+    
+    /* AI Widget */
+    .ai-widget .ai-chat-window {
+        width: 300px;
+        height: 420px;
+        right: -20px;
+    }
+    
+    /* Notification Panel */
+    .notification-panel {
+        width: 300px;
+        right: -320px;
+    }
+    
+    /* Quick Actions */
+    .quick-actions {
+        gap: 8px;
+    }
+    
+    .quick-action-btn {
+        padding: 8px 14px;
+        font-size: var(--font-size-xs);
+    }
+    
+    /* Profile */
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+    
+    .profile-header .profile-status {
+        margin-left: 0;
+    }
+    
+    .profile-info-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    /* Tables */
+    .table th,
+    .table td {
+        padding: 6px 10px;
+        font-size: var(--font-size-xs);
+    }
+    
+    /* Footer */
+    .dashboard-footer {
+        padding: 12px 0 6px 0;
+        font-size: var(--font-size-xs);
+    }
+}
+
+/* ============================================================
+   5. MOBILE (480px - 575px)
+   ============================================================ */
+@media (max-width: 575px) {
+    .container {
+        padding: 0 12px;
+    }
+    
+    /* Header */
+    .dashboard-header .header-left h1 {
+        font-size: var(--font-size-xs);
+    }
+    
+    .dashboard-header .header-left .header-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+    
+    .header-action {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+    
+    .profile-dropdown img {
+        width: 32px;
+        height: 32px;
+    }
+    
+    /* Dashboard Cards */
+    .overview-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .dashboard-card {
+        padding: 12px 14px;
+    }
+    
+    .dashboard-card .card-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+    
+    .dashboard-card .card-content h3 {
+        font-size: var(--font-size-sm);
+    }
+    
+    /* Appointment */
+    .appointment-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    /* Billing */
+    .billing-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    /* AI Widget */
+    .ai-widget .ai-chat-window {
+        width: 280px;
+        height: 380px;
+        right: -10px;
+    }
+    
+    .ai-widget .ai-toggle {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+    
+    /* Quick Actions */
+    .quick-actions {
+        gap: 6px;
+    }
+    
+    .quick-action-btn {
+        padding: 6px 12px;
+        font-size: var(--font-size-xs);
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* Stats */
+    .stat-card {
+        padding: 12px 14px;
+    }
+    
+    .stat-card .stat-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+    
+    .stat-card .stat-content h3 {
+        font-size: var(--font-size-md);
+    }
+    
+    /* Modals */
+    .modal {
+        padding: 16px;
+        width: 98%;
+    }
+    
+    .modal-title {
+        font-size: var(--font-size-md);
+    }
+    
+    .modal-footer {
+        flex-direction: column;
+    }
+    
+    .modal-footer .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* Tables */
+    .table th,
+    .table td {
+        padding: 4px 8px;
+        font-size: 11px;
+    }
+    
+    /* Buttons */
+    .btn {
+        padding: 8px 16px;
+        font-size: var(--font-size-xs);
+    }
+    
+    .btn-lg {
+        padding: 10px 20px;
+        font-size: var(--font-size-sm);
+    }
+    
+    /* Pagination */
+    .pagination .page-link {
+        min-width: 30px;
+        height: 30px;
+        font-size: var(--font-size-xs);
+    }
+}
+
+/* ============================================================
+   6. EXTRA SMALL MOBILE (under 480px)
+   ============================================================ */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 8px;
+    }
+    
+    .dashboard-wrapper .main-content {
+        padding: 10px 12px 12px 12px;
+    }
+    
+    .dashboard-header {
+        padding: 8px 12px;
+    }
+    
+    .dashboard-header .header-left h1 {
+        font-size: 11px;
+    }
+    
+    .overview-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .statistics-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .medical-records-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .charts-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .chart-card canvas {
+        height: 150px !important;
+    }
+    
+    .ai-widget .ai-chat-window {
+        width: 260px;
+        height: 340px;
+        right: -10px;
+        bottom: 60px;
+    }
+    
+    .ai-widget .ai-chat-body .message .bubble {
+        font-size: var(--font-size-xs);
+    }
+    
+    .notification-panel {
+        width: 260px;
+        right: -280px;
+    }
+    
+    .profile-modal .modal-content {
+        padding: 16px;
+    }
+}
+
+/* ============================================================
+   7. PRINT STYLES
+   ============================================================ */
+@media print {
+    .no-print,
+    .dashboard-sidebar,
+    .ai-widget,
+    .floating-buttons,
+    .header-search,
+    .header-action,
+    .quick-actions,
+    .dark-mode-toggle,
+    .language-switcher {
+        display: none !important;
+    }
+    
+    .dashboard-wrapper .main-content {
+        margin-left: 0 !important;
+        padding: 0 !important;
+    }
+    
+    .dashboard-header {
+        position: static !important;
+        background: #fff !important;
+        border-bottom: 1px solid #ddd !important;
+    }
+    
+    .card,
+    .dashboard-card,
+    .stat-card,
+    .table-wrapper {
+        break-inside: avoid;
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+        background: #fff !important;
+    }
+    
+    .dark-mode .card,
+    .dark-mode .dashboard-card,
+    .dark-mode .stat-card {
+        background: #fff !important;
+        color: #333 !important;
+    }
+    
+    .dark-mode .card-title,
+    .dark-mode .card-body {
+        color: #333 !important;
+    }
+    
+    .dark-mode .table td {
+        color: #333 !important;
+    }
+    
+    .dark-mode .table th {
+        color: #666 !important;
+    }
+    
+    .dashboard-footer {
+        position: fixed !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        border-top: 1px solid #ddd !important;
+    }
+      }
