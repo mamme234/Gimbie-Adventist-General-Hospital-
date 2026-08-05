@@ -1,0 +1,275 @@
+/* ============================================================
+   EMERGENCY DASHBOARD CSS
+   ============================================================ */
+
+/* ============================================================
+   1. MAIN DASHBOARD LAYOUT
+   ============================================================ */
+.emergency-dashboard-page {
+    background: linear-gradient(135deg, #fdf2f2 0%, #fce4e4 100%);
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.emergency-dashboard-page.dark-mode {
+    background: linear-gradient(135deg, #1a0d0d 0%, #2d1414 100%);
+}
+
+.dashboard-wrapper {
+    display: flex;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+/* ============================================================
+   2. DASHBOARD HEADER
+   ============================================================ */
+.emergency-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 30px;
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.dark-mode .emergency-header {
+    background: rgba(30, 20, 20, 0.95);
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+.emergency-header .header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.emergency-header .header-left h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a2332;
+    margin: 0;
+}
+
+.dark-mode .emergency-header .header-left h1 {
+    color: #e8edf5;
+}
+
+.emergency-header .header-left .emergency-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 20px;
+}
+
+/* ============================================================
+   3. EMERGENCY OVERVIEW CARDS
+   ============================================================ */
+.overview-section {
+    padding: 24px 30px 10px 30px;
+}
+
+.overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+}
+
+.overview-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.dark-mode .overview-card {
+    background: #2d1414;
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.overview-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.overview-card .card-icon {
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.overview-card .card-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a2332;
+    display: block;
+}
+
+.dark-mode .overview-card .card-value {
+    color: #e8edf5;
+}
+
+.overview-card .card-label {
+    font-size: 13px;
+    color: #6b7a8f;
+}
+
+.dark-mode .overview-card .card-label {
+    color: #8899bb;
+}
+
+/* ============================================================
+   4. ACTIVE EMERGENCY LIST
+   ============================================================ */
+.emergency-list-section {
+    padding: 10px 30px 20px 30px;
+}
+
+.emergency-list-section .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.emergency-list-section .section-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a2332;
+    margin: 0;
+}
+
+.dark-mode .emergency-list-section .section-header h2 {
+    color: #e8edf5;
+}
+
+.emergency-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.emergency-item {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border-left: 4px solid #e74c3c;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.dark-mode .emergency-item {
+    background: #2d1414;
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.emergency-item .emergency-info h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a2332;
+    margin: 0 0 4px 0;
+}
+
+.dark-mode .emergency-item .emergency-info h4 {
+    color: #e8edf5;
+}
+
+.emergency-item .emergency-info p {
+    font-size: 13px;
+    color: #6b7a8f;
+    margin: 2px 0;
+}
+
+.dark-mode .emergency-item .emergency-info p {
+    color: #8899bb;
+}
+
+.emergency-item .emergency-status {
+    padding: 4px 14px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.emergency-status.critical {
+    background: rgba(231, 76, 60, 0.12);
+    color: #e74c3c;
+}
+
+.emergency-status.in-progress {
+    background: rgba(255, 152, 0, 0.12);
+    color: #ff9800;
+}
+
+.emergency-status.stable {
+    background: rgba(76, 175, 80, 0.12);
+    color: #4caf50;
+}
+
+/* ============================================================
+   5. RESPONSIVE DESIGN
+   ============================================================ */
+@media (max-width: 1200px) {
+    .overview-section {
+        padding: 20px 20px 10px 20px;
+    }
+    .emergency-list-section {
+        padding: 10px 20px 16px 20px;
+    }
+}
+
+@media (max-width: 992px) {
+    .emergency-header {
+        padding: 12px 20px;
+    }
+    .emergency-header .header-left h1 {
+        font-size: 18px;
+    }
+    .overview-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .emergency-header {
+        padding: 10px 16px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .emergency-header .header-left h1 {
+        font-size: 16px;
+    }
+    .overview-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .emergency-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .overview-grid {
+        grid-template-columns: 1fr;
+    }
+}
