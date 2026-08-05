@@ -1,0 +1,599 @@
+/* ============================================================
+   DARK-MODE.CSS
+   ============================================================ */
+
+/* ============================================================
+   1. BASE DARK MODE
+   ============================================================ */
+.dark-mode {
+    --bg-body: #0d1117;
+    --bg-card: #161b22;
+    --bg-sidebar: #0d1117;
+    --bg-header: rgba(13, 17, 23, 0.95);
+    --text-primary: #e8edf5;
+    --text-secondary: #a0b3d9;
+    --text-muted: #8899bb;
+    --border: rgba(255, 255, 255, 0.06);
+    --border-light: rgba(255, 255, 255, 0.04);
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.5);
+    --gray-light: rgba(255, 255, 255, 0.06);
+    --gray: rgba(255, 255, 255, 0.12);
+}
+
+/* ============================================================
+   2. DARK MODE BODY
+   ============================================================ */
+.dark-mode body {
+    background: var(--bg-body);
+    color: var(--text-primary);
+}
+
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode h5,
+.dark-mode h6 {
+    color: var(--text-primary);
+}
+
+.dark-mode p {
+    color: var(--text-secondary);
+}
+
+/* ============================================================
+   3. DARK MODE SIDEBAR
+   ============================================================ */
+.dark-mode .sidebar {
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+}
+
+.dark-mode .sidebar .sidebar-logo span {
+    color: var(--text-primary);
+}
+
+.dark-mode .sidebar .sidebar-logo span small {
+    color: var(--text-muted);
+}
+
+.dark-mode .sidebar .sidebar-user-info h4 {
+    color: var(--text-primary);
+}
+
+.dark-mode .sidebar .sidebar-user-info .user-dept {
+    color: var(--text-muted);
+}
+
+.dark-mode .sidebar .sidebar-nav li a {
+    color: var(--text-muted);
+}
+
+.dark-mode .sidebar .sidebar-nav li a:hover {
+    color: var(--text-primary);
+    background: var(--border-light);
+}
+
+.dark-mode .sidebar .sidebar-nav li.active a {
+    color: var(--text-primary);
+    background: var(--border-light);
+}
+
+.dark-mode .sidebar .sidebar-nav li.active a i {
+    color: var(--secondary);
+}
+
+.dark-mode .sidebar .sidebar-nav li.logout a {
+    color: var(--danger);
+}
+
+.dark-mode .sidebar .sidebar-nav li.logout a:hover {
+    background: rgba(231, 76, 60, 0.12);
+}
+
+/* ============================================================
+   4. DARK MODE HEADER
+   ============================================================ */
+.dark-mode .dashboard-header {
+    background: var(--bg-header);
+    border-bottom: 1px solid var(--border);
+}
+
+.dark-mode .dashboard-header .header-left h1 {
+    color: var(--text-primary);
+}
+
+.dark-mode .dashboard-header .header-left h1 span {
+    color: var(--text-muted);
+}
+
+.dark-mode .dashboard-header .header-right .header-action {
+    color: var(--text-muted);
+}
+
+.dark-mode .dashboard-header .header-right .header-action:hover {
+    background: var(--border-light);
+    color: var(--text-primary);
+}
+
+.dark-mode .dashboard-header .header-right .header-search input {
+    background: var(--bg-card);
+    border-color: var(--border);
+    color: var(--text-primary);
+}
+
+.dark-mode .dashboard-header .header-right .header-search input::placeholder {
+    color: var(--text-muted);
+}
+
+.dark-mode .dashboard-header .header-right .header-search input:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.12);
+}
+
+/* ============================================================
+   5. DARK MODE CARDS
+   ============================================================ */
+.dark-mode .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+}
+
+.dark-mode .card .card-title {
+    color: var(--text-primary);
+}
+
+.dark-mode .card .card-body {
+    color: var(--text-secondary);
+}
+
+.dark-mode .card .card-header {
+    border-bottom: 1px solid var(--border);
+}
+
+.dark-mode .overview-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+}
+
+.dark-mode .overview-card .card-value {
+    color: var(--text-primary);
+}
+
+.dark-mode .overview-card .card-label {
+    color: var(--text-muted);
+}
+
+.dark-mode .dashboard-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+}
+
+.dark-mode .dashboard-card .card-content h3 {
+    color: var(--text-primary);
+}
+
+.dark-mode .dashboard-card .card-content p {
+    color: var(--text-muted);
+}
+
+.dark-mode .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+}
+
+.dark-mode .stat-card .stat-content h3 {
+    color: var(--text-primary);
+}
+
+.dark-mode .stat-card .stat-content p {
+    color: var(--text-muted);
+}
+
+/* ============================================================
+   6. DARK MODE TABLES
+   ============================================================ */
+.dark-mode .table-wrapper {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+}
+
+.dark-mode .table th {
+    color: var(--text-muted);
+    border-bottom: 2px solid var(--border);
+}
+
+.dark-mode .table td {
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+}
+
+.dark-mode .table tr:hover td {
+    background: var(--border-light);
+}
+
+.dark-mode .table .status-badge {
+    color: var(--text-primary);
+}
+
+/* ============================================================
+   7. DARK MODE FORMS
+   ============================================================ */
+.dark-mode .form-group label {
+    color: var(--text-primary);
+}
+
+.dark-mode .form-group input,
+.dark-mode .form-group select,
+.dark-mode .form-group textarea {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+}
+
+.dark-mode .form-group input::placeholder,
+.dark-mode .form-group select::placeholder,
+.dark-mode .form-group textarea::placeholder {
+    color: var(--text-muted);
+}
+
+.dark-mode .form-group input:focus,
+.dark-mode .form-group select:focus,
+.dark-mode .form-group textarea:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.12);
+}
+
+.dark-mode .form-group .form-text {
+    color: var(--text-muted);
+}
+
+/* ============================================================
+   8. DARK MODE MODALS
+   ============================================================ */
+.dark-mode .modal {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+}
+
+.dark-mode .modal .modal-title {
+    color: var(--text-primary);
+}
+
+.dark-mode .modal .modal-close {
+    color: var(--text-muted);
+}
+
+.dark-mode .modal .modal-close:hover {
+    color: var(--text-primary);
+}
+
+.dark-mode .modal-backdrop {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+/* ============================================================
+   9. DARK MODE BUTTONS
+   ============================================================ */
+.dark-mode .btn-secondary {
+    background: var(--border-light);
+    color: var(--text-primary);
+}
+
+.dark-mode .btn-secondary:hover {
+    background: var(--border);
+    color: var(--text-primary);
+}
+
+.dark-mode .btn-outline {
+    border-color: var(--border);
+    color: var(--text-primary);
+}
+
+.dark-mode .btn-outline:hover {
+    background: var(--border-light);
+    border-color: var(--secondary);
+}
+
+/* ============================================================
+   10. DARK MODE BADGES & STATUS
+   ============================================================ */
+.dark-mode .badge {
+    color: var(--text-primary);
+}
+
+.dark-mode .status-badge {
+    color: var(--text-primary);
+}
+
+.dark-mode .priority-badge {
+    color: var(--text-primary);
+}
+
+/* ============================================================
+   11. DARK MODE AI WIDGET
+   ============================================================ */
+.dark-mode .ai-widget .ai-chat-window {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+}
+
+.dark-mode .ai-widget .ai-chat-body .message.bot .bubble {
+    background: var(--border-light);
+    color: var(--text-primary);
+}
+
+.dark-mode .ai-widget .ai-chat-footer {
+    border-top: 1px solid var(--border);
+}
+
+.dark-mode .ai-widget .ai-chat-footer input {
+    background: var(--bg-body);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+}
+
+.dark-mode .ai-widget .ai-chat-footer .voice-btn {
+    background: var(--border-light);
+    color: var(--text-muted);
+}
+
+.dark-mode .ai-widget .ai-chat-footer .voice-btn:hover {
+    background: var(--border);
+}
+
+/* ============================================================
+   12. DARK MODE NOTIFICATIONS
+   ============================================================ */
+.dark-mode .notifications-panel {
+    background: var(--bg-card);
+    border-left: 1px solid var(--border);
+}
+
+.dark-mode .notifications-panel .panel-header {
+    border-bottom: 1px solid var(--border);
+}
+
+.dark-mode .notifications-panel .panel-header h3 {
+    color: var(--text-primary);
+}
+
+.dark-mode .notifications-panel .notification-item {
+    border-bottom: 1px solid var(--border);
+}
+
+.dark-mode .notifications-panel .notification-item:hover {
+    background: var(--border-light);
+}
+
+.dark-mode .notifications-panel .notification-item .notif-content h4 {
+    color: var(--text-primary);
+}
+
+.dark-mode .notifications-panel .notification-item .notif-content p {
+    color: var(--text-secondary);
+}
+
+/* ============================================================
+   13. DARK MODE PROFILE
+   ============================================================ */
+.dark-mode .profile-section {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+}
+
+.dark-mode .profile-section h3 {
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border);
+}
+
+.dark-mode .profile-info-item .info-label {
+    color: var(--text-muted);
+}
+
+.dark-mode .profile-info-item .info-value {
+    color: var(--text-primary);
+}
+
+.dark-mode .profile-sidebar .sidebar-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+}
+
+.dark-mode .profile-sidebar .sidebar-card h4 {
+    color: var(--text-primary);
+}
+
+.dark-mode .profile-sidebar .sidebar-card ul li {
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+}
+
+/* ============================================================
+   14. DARK MODE SETTINGS
+   ============================================================ */
+.dark-mode .settings-section {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+}
+
+.dark-mode .settings-section .section-title {
+    color: var(--text-primary);
+}
+
+.dark-mode .settings-section .section-description {
+    color: var(--text-muted);
+}
+
+.dark-mode .settings-actions {
+    border-top: 1px solid var(--border);
+}
+
+/* ============================================================
+   15. DARK MODE SCROLLBAR
+   ============================================================ */
+.dark-mode ::-webkit-scrollbar-track {
+    background: var(--border-light);
+}
+
+.dark-mode ::-webkit-scrollbar-thumb {
+    background: var(--border);
+}
+
+.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: var(--gray);
+}
+
+/* ============================================================
+   16. DARK MODE TOGGLE TRANSITION
+   ============================================================ */
+.dark-mode,
+.dark-mode * {
+    transition: background-color 0.3s ease,
+                border-color 0.3s ease,
+                color 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+/* ============================================================
+   17. DARK MODE LOADING
+   ============================================================ */
+.dark-mode #preloader {
+    background: var(--bg-body);
+}
+
+.dark-mode #preloader .loader-logo span {
+    color: var(--text-primary);
+}
+
+.dark-mode #preloader .loader-progress {
+    background: var(--border);
+}
+
+.dark-mode #preloader .loader-text {
+    color: var(--text-muted);
+}
+
+/* ============================================================
+   18. DARK MODE TOGGLE BUTTON STYLES
+   ============================================================ */
+.theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: var(--font-size-md);
+}
+
+.theme-toggle-btn:hover {
+    background: var(--border-light);
+    color: var(--text-primary);
+}
+
+.theme-toggle-btn .sun-icon {
+    display: none;
+}
+
+.theme-toggle-btn .moon-icon {
+    display: block;
+}
+
+.dark-mode .theme-toggle-btn .sun-icon {
+    display: block;
+}
+
+.dark-mode .theme-toggle-btn .moon-icon {
+    display: none;
+}
+
+/* ============================================================
+   19. DARK MODE BREADCRUMB
+   ============================================================ */
+.dark-mode .breadcrumb {
+    color: var(--text-muted);
+}
+
+.dark-mode .breadcrumb .active {
+    color: var(--text-primary);
+}
+
+/* ============================================================
+   20. DARK MODE TABS
+   ============================================================ */
+.dark-mode .tabs {
+    border-bottom: 1px solid var(--border);
+}
+
+.dark-mode .tab {
+    color: var(--text-muted);
+}
+
+.dark-mode .tab:hover {
+    color: var(--text-primary);
+}
+
+.dark-mode .tab.active {
+    color: var(--secondary);
+}
+
+/* ============================================================
+   21. DARK MODE PAGINATION
+   ============================================================ */
+.dark-mode .pagination .page-link {
+    border-color: var(--border);
+    color: var(--text-primary);
+}
+
+.dark-mode .pagination .page-link:hover {
+    background: var(--secondary);
+    color: #fff;
+}
+
+.dark-mode .pagination .page-link.active {
+    background: var(--secondary);
+    color: #fff;
+}
+
+/* ============================================================
+   22. DARK MODE ALERTS
+   ============================================================ */
+.dark-mode .alert-success {
+    background: rgba(76, 175, 80, 0.15);
+    border-color: rgba(76, 175, 80, 0.2);
+    color: #81c784;
+}
+
+.dark-mode .alert-danger {
+    background: rgba(231, 76, 60, 0.15);
+    border-color: rgba(231, 76, 60, 0.2);
+    color: #ef5350;
+}
+
+.dark-mode .alert-warning {
+    background: rgba(255, 152, 0, 0.15);
+    border-color: rgba(255, 152, 0, 0.2);
+    color: #ffb74d;
+}
+
+.dark-mode .alert-info {
+    background: rgba(79, 195, 247, 0.15);
+    border-color: rgba(79, 195, 247, 0.2);
+    color: #81d4fa;
+}
+
+/* ============================================================
+   23. DARK MODE FOOTER
+   ============================================================ */
+.dark-mode .dashboard-footer {
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+}
