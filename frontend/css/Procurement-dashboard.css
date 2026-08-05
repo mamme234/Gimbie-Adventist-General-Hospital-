@@ -1,0 +1,284 @@
+/* ============================================================
+   PROCUREMENT DASHBOARD CSS
+   ============================================================ */
+
+/* ============================================================
+   1. MAIN DASHBOARD LAYOUT
+   ============================================================ */
+.procurement-page {
+    background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.procurement-page.dark-mode {
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+}
+
+.dashboard-wrapper {
+    display: flex;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+/* ============================================================
+   2. DASHBOARD HEADER
+   ============================================================ */
+.procurement-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 30px;
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.dark-mode .procurement-header {
+    background: rgba(20, 30, 45, 0.95);
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+.procurement-header .header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.procurement-header .header-left h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a2332;
+    margin: 0;
+}
+
+.dark-mode .procurement-header .header-left h1 {
+    color: #e8edf5;
+}
+
+.procurement-header .header-left .procurement-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #f0883e, #d9732e);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 20px;
+}
+
+/* ============================================================
+   3. PROCUREMENT OVERVIEW CARDS
+   ============================================================ */
+.overview-section {
+    padding: 24px 0 10px 0;
+}
+
+.overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+}
+
+.overview-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.dark-mode .overview-card {
+    background: #1a2332;
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.overview-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.overview-card .card-icon {
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.overview-card .card-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a2332;
+    display: block;
+}
+
+.dark-mode .overview-card .card-value {
+    color: #e8edf5;
+}
+
+.overview-card .card-label {
+    font-size: 13px;
+    color: #6b7a8f;
+}
+
+.dark-mode .overview-card .card-label {
+    color: #8899bb;
+}
+
+/* ============================================================
+   4. PURCHASE ORDERS TABLE
+   ============================================================ */
+.purchase-section {
+    padding: 10px 0 20px 0;
+}
+
+.purchase-section .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.purchase-section .section-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a2332;
+    margin: 0;
+}
+
+.dark-mode .purchase-section .section-header h2 {
+    color: #e8edf5;
+}
+
+.purchase-table-wrapper {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    overflow-x: auto;
+}
+
+.dark-mode .purchase-table-wrapper {
+    background: #1a2332;
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.purchase-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.purchase-table th {
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #6b7a8f;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.dark-mode .purchase-table th {
+    color: #8899bb;
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.purchase-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 14px;
+    color: #1a2332;
+}
+
+.dark-mode .purchase-table td {
+    color: #e8edf5;
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+.purchase-status {
+    padding: 3px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.purchase-status.approved {
+    background: rgba(76, 175, 80, 0.12);
+    color: #4caf50;
+}
+
+.purchase-status.pending {
+    background: rgba(255, 152, 0, 0.12);
+    color: #ff9800;
+}
+
+.purchase-status.rejected {
+    background: rgba(231, 76, 60, 0.12);
+    color: #e74c3c;
+}
+
+.purchase-status.delivered {
+    background: rgba(79, 195, 247, 0.12);
+    color: #4fc3f7;
+}
+
+/* ============================================================
+   5. RESPONSIVE DESIGN
+   ============================================================ */
+@media (max-width: 1200px) {
+    .procurement-wrapper .main-content {
+        padding: 16px 20px 20px 20px;
+    }
+}
+
+@media (max-width: 992px) {
+    .procurement-wrapper .main-content {
+        margin-left: 0 !important;
+    }
+    .procurement-header {
+        padding: 12px 20px;
+    }
+    .procurement-header .header-left h1 {
+        font-size: 18px;
+    }
+    .overview-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .procurement-header {
+        padding: 10px 16px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .procurement-header .header-left h1 {
+        font-size: 16px;
+    }
+    .overview-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .purchase-table-wrapper {
+        padding: 12px;
+    }
+    .purchase-table th,
+    .purchase-table td {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .overview-grid {
+        grid-template-columns: 1fr;
+    }
+}
