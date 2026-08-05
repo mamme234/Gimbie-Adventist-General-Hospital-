@@ -1,0 +1,1626 @@
+/* ============================================================
+   1. IMPORT GLOBAL CSS
+   ============================================================ */
+@import url('variables.css');
+@import url('reset.css');
+@import url('layout.css');
+@import url('components.css');
+@import url('animations.css');
+
+/* ============================================================
+   2. DASHBOARD BACKGROUND
+   ============================================================ */
+.pharmacy-page {
+    background: linear-gradient(135deg, #f0f7fa 0%, #dde8ef 100%);
+    min-height: 100vh;
+    font-family: var(--font-family, 'Inter', sans-serif);
+}
+
+.pharmacy-page.dark-mode {
+    background: linear-gradient(135deg, #0d1a26 0%, #1a3344 100%);
+}
+
+/* ============================================================
+   3. DASHBOARD WRAPPER
+   ============================================================ */
+.pharmacy-wrapper {
+    display: flex;
+    min-height: 100vh;
+    position: relative;
+}
+
+.pharmacy-wrapper .main-content {
+    flex: 1;
+    margin-left: 260px;
+    padding: 20px 30px 30px 30px;
+    transition: margin-left 0.3s ease;
+    overflow-x: hidden;
+}
+
+.pharmacy-wrapper .main-content.collapsed {
+    margin-left: 70px;
+}
+
+/* ============================================================
+   4. SIDEBAR
+   ============================================================ */
+.pharmacy-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    background: linear-gradient(180deg, #0d1a26 0%, #1a3344 100%);
+    color: #fff;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.pharmacy-sidebar.collapsed {
+    width: 70px;
+}
+
+.pharmacy-sidebar.collapsed .sidebar-logo span,
+.pharmacy-sidebar.collapsed .sidebar-user-info,
+.pharmacy-sidebar.collapsed .sidebar-nav li a span,
+.pharmacy-sidebar.collapsed .sidebar-nav li a .nav-icon-text {
+    display: none;
+}
+
+.pharmacy-sidebar.collapsed .sidebar-nav li a {
+    justify-content: center;
+    padding: 12px;
+}
+
+.pharmacy-sidebar.collapsed .sidebar-nav li a i {
+    margin-right: 0;
+    font-size: 20px;
+}
+
+.pharmacy-sidebar.collapsed .sidebar-nav li a .nav-badge {
+    display: none;
+}
+
+/* Sidebar Logo */
+.sidebar-logo {
+    padding: 18px 20px 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.sidebar-logo i {
+    font-size: 28px;
+    color: #4fc3f7;
+}
+
+.sidebar-logo span {
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+
+.sidebar-logo span small {
+    display: block;
+    font-size: 11px;
+    font-weight: 400;
+    color: #7a9bb5;
+    letter-spacing: 0;
+}
+
+/* Sidebar User */
+.sidebar-user {
+    padding: 18px 20px 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.sidebar-user img {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #4fc3f7;
+}
+
+.sidebar-user-info h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 1px 0;
+    color: #fff;
+}
+
+.sidebar-user-info .user-dept {
+    font-size: 11px;
+    color: #7a9bb5;
+    display: block;
+}
+
+.sidebar-user-info .online-status {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #4caf50;
+    margin-right: 5px;
+}
+
+.sidebar-user-info .status-text {
+    font-size: 11px;
+    color: #4caf50;
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+    flex: 1;
+    padding: 12px 0 20px 0;
+    overflow-y: auto;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li {
+    margin: 1px 0;
+}
+
+.sidebar-nav li a {
+    display: flex;
+    align-items: center;
+    padding: 9px 20px;
+    color: #7a9bb5;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 13.5px;
+    border-left: 3px solid transparent;
+    position: relative;
+}
+
+.sidebar-nav li a i {
+    width: 20px;
+    font-size: 15px;
+    margin-right: 12px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.sidebar-nav li a .nav-badge {
+    margin-left: auto;
+    background: #e74c3c;
+    color: #fff;
+    font-size: 10px;
+    padding: 1px 7px;
+    border-radius: 10px;
+}
+
+.sidebar-nav li a:hover {
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+    border-left-color: #4fc3f7;
+}
+
+.sidebar-nav li.active a {
+    background: rgba(79, 195, 247, 0.10);
+    color: #fff;
+    border-left-color: #4fc3f7;
+}
+
+.sidebar-nav li.active a i {
+    color: #4fc3f7;
+}
+
+.sidebar-nav li.logout a {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    margin-top: 8px;
+    padding-top: 14px;
+    color: #e74c3c;
+}
+
+.sidebar-nav li.logout a:hover {
+    background: rgba(231, 76, 60, 0.12);
+    border-left-color: #e74c3c;
+}
+
+/* Sidebar Toggle */
+.sidebar-toggle-btn {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.06);
+    border: none;
+    color: #fff;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-toggle-btn:hover {
+    background: rgba(255,255,255,0.12);
+}
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+}
+
+/* ============================================================
+   5. HEADER
+   ============================================================ */
+.pharmacy-header {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    padding: 12px 30px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    position: sticky;
+    top: 0;
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dark-mode .pharmacy-header {
+    background: rgba(20, 40, 55, 0.95);
+    border-bottom-color: rgba(255,255,255,0.06);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.header-left h2 {
+    font-size: 19px;
+    font-weight: 600;
+    color: #0d1a26;
+    margin: 0;
+}
+
+.dark-mode .header-left h2 {
+    color: #e8edf5;
+}
+
+.header-left h2 span {
+    font-weight: 300;
+    color: #888;
+    font-size: 13px;
+}
+
+.dark-mode .header-left h2 span {
+    color: #7a9bb5;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Search Bar */
+.header-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.header-search input {
+    padding: 7px 15px 7px 38px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 13px;
+    width: 220px;
+    transition: all 0.3s ease;
+    background: rgba(255,255,255,0.8);
+}
+
+.dark-mode .header-search input {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.12);
+    color: #e8edf5;
+}
+
+.header-search input:focus {
+    outline: none;
+    border-color: #4fc3f7;
+    width: 270px;
+    box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.12);
+}
+
+.header-search i {
+    position: absolute;
+    left: 13px;
+    color: #999;
+    font-size: 14px;
+}
+
+/* Header Actions */
+.header-action {
+    position: relative;
+    cursor: pointer;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    color: #555;
+    background: transparent;
+    border: none;
+    font-size: 17px;
+}
+
+.dark-mode .header-action {
+    color: #7a9bb5;
+}
+
+.header-action:hover {
+    background: rgba(0,0,0,0.05);
+}
+
+.dark-mode .header-action:hover {
+    background: rgba(255,255,255,0.06);
+}
+
+.header-action .badge {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    background: #e74c3c;
+    color: #fff;
+    font-size: 9px;
+    padding: 1px 6px;
+    border-radius: 10px;
+    min-width: 16px;
+    text-align: center;
+}
+
+/* Profile Dropdown */
+.profile-dropdown {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.profile-dropdown img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #4fc3f7;
+}
+
+.profile-dropdown .profile-info {
+    text-align: right;
+}
+
+.profile-dropdown .profile-info h4 {
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0;
+    color: #0d1a26;
+}
+
+.dark-mode .profile-dropdown .profile-info h4 {
+    color: #e8edf5;
+}
+
+.profile-dropdown .profile-info span {
+    font-size: 11px;
+    color: #888;
+}
+
+.dark-mode .profile-dropdown .profile-info span {
+    color: #7a9bb5;
+}
+
+.profile-dropdown-menu {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    min-width: 200px;
+    padding: 8px 0;
+    display: none;
+    z-index: 100;
+}
+
+.dark-mode .profile-dropdown-menu {
+    background: #1a3344;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+
+.profile-dropdown-menu.show {
+    display: block;
+    animation: slideDown 0.25s ease;
+}
+
+.profile-dropdown-menu a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 18px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-size: 13px;
+}
+
+.dark-mode .profile-dropdown-menu a {
+    color: #e8edf5;
+}
+
+.profile-dropdown-menu a:hover {
+    background: rgba(0,0,0,0.04);
+}
+
+.dark-mode .profile-dropdown-menu a:hover {
+    background: rgba(255,255,255,0.06);
+}
+
+.profile-dropdown-menu a i {
+    width: 16px;
+    color: #888;
+}
+
+.dark-mode .profile-dropdown-menu a i {
+    color: #7a9bb5;
+}
+
+.profile-dropdown-menu .divider {
+    height: 1px;
+    background: #eee;
+    margin: 4px 0;
+}
+
+.dark-mode .profile-dropdown-menu .divider {
+    background: rgba(255,255,255,0.06);
+}
+
+.profile-dropdown-menu .logout-btn {
+    color: #e74c3c;
+}
+
+.profile-dropdown-menu .logout-btn i {
+    color: #e74c3c;
+}
+
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+    background: none;
+    border: none;
+    font-size: 17px;
+    cursor: pointer;
+    color: #555;
+    padding: 6px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.dark-mode .dark-mode-toggle {
+    color: #7a9bb5;
+}
+
+.dark-mode-toggle:hover {
+    background: rgba(0,0,0,0.05);
+}
+
+.dark-mode .dark-mode-toggle:hover {
+    background: rgba(255,255,255,0.06);
+}
+
+/* ============================================================
+   6. DASHBOARD CARDS
+   ============================================================ */
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 18px;
+    margin-bottom: 28px;
+}
+
+.dashboard-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px 22px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border: 1px solid rgba(0,0,0,0.04);
+}
+
+.dark-mode .dashboard-card {
+    background: #1a3344;
+    border-color: rgba(255,255,255,0.06);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.dashboard-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.dark-mode .dashboard-card:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.dashboard-card .card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.dashboard-card .card-icon.blue {
+    background: rgba(79, 195, 247, 0.12);
+    color: #4fc3f7;
+}
+
+.dashboard-card .card-icon.green {
+    background: rgba(76, 175, 80, 0.12);
+    color: #4caf50;
+}
+
+.dashboard-card .card-icon.orange {
+    background: rgba(255, 152, 0, 0.12);
+    color: #ff9800;
+}
+
+.dashboard-card .card-icon.red {
+    background: rgba(231, 76, 60, 0.12);
+    color: #e74c3c;
+}
+
+.dashboard-card .card-icon.purple {
+    background: rgba(156, 39, 176, 0.12);
+    color: #9c27b0;
+}
+
+.dashboard-card .card-icon.gold {
+    background: rgba(255, 183, 77, 0.12);
+    color: #ffb74d;
+}
+
+.dashboard-card .card-content h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 2px 0;
+    color: #0d1a26;
+}
+
+.dark-mode .dashboard-card .card-content h3 {
+    color: #e8edf5;
+}
+
+.dashboard-card .card-content p {
+    font-size: 12px;
+    color: #888;
+    margin: 0;
+}
+
+.dark-mode .dashboard-card .card-content p {
+    color: #7a9bb5;
+}
+
+.dashboard-card .card-content .trend {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.dashboard-card .card-content .trend.up {
+    color: #4caf50;
+}
+
+.dashboard-card .card-content .trend.down {
+    color: #e74c3c;
+}
+
+/* ============================================================
+   7. PRESCRIPTION MANAGEMENT
+   ============================================================ */
+.prescription-section {
+    background: #fff;
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 28px;
+    border: 1px solid rgba(0,0,0,0.04);
+}
+
+.dark-mode .prescription-section {
+    background: #1a3344;
+    border-color: rgba(255,255,255,0.06);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.prescription-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.prescription-header h3 {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 0;
+    color: #0d1a26;
+}
+
+.dark-mode .prescription-header h3 {
+    color: #e8edf5;
+}
+
+.prescription-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.prescription-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border-left: 4px solid #4fc3f7;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.dark-mode .prescription-item {
+    background: rgba(255,255,255,0.04);
+}
+
+.prescription-item .presc-info h4 {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+    color: #0d1a26;
+}
+
+.dark-mode .prescription-item .presc-info h4 {
+    color: #e8edf5;
+}
+
+.prescription-item .presc-info p {
+    font-size: 12px;
+    color: #888;
+    margin: 2px 0 0 0;
+}
+
+.dark-mode .prescription-item .presc-info p {
+    color: #7a9bb5;
+}
+
+.prescription-item .presc-status .status-badge {
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.status-badge.pending {
+    background: rgba(255, 152, 0, 0.12);
+    color: #ff9800;
+}
+
+.status-badge.dispensed {
+    background: rgba(76, 175, 80, 0.12);
+    color: #4caf50;
+}
+
+.status-badge.verified {
+    background: rgba(79, 195, 247, 0.12);
+    color: #4fc3f7;
+}
+
+.status-badge.rejected {
+    background: rgba(231, 76, 60, 0.12);
+    color: #e74c3c;
+}
+
+/* ============================================================
+   8. MEDICINE INVENTORY
+   ============================================================ */
+.inventory-section {
+    background: #fff;
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 28px;
+    border: 1px solid rgba(0,0,0,0.04);
+}
+
+.dark-mode .inventory-section {
+    background: #1a3344;
+    border-color: rgba(255,255,255,0.06);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.inventory-table {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.inventory-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.inventory-table th {
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #888;
+    border-bottom: 2px solid #eee;
+}
+
+.dark-mode .inventory-table th {
+    color: #7a9bb5;
+    border-bottom-color: rgba(255,255,255,0.08);
+}
+
+.inventory-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #f5f5f5;
+    font-size: 13px;
+    color: #333;
+}
+
+.dark-mode .inventory-table td {
+    color: #e8edf5;
+    border-bottom-color: rgba(255,255,255,0.06);
+}
+
+.inventory-table .stock-badge {
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.stock-badge.in-stock {
+    background: rgba(76, 175, 80, 0.12);
+    color: #4caf50;
+}
+
+.stock-badge.low-stock {
+    background: rgba(255, 152, 0, 0.12);
+    color: #ff9800;
+}
+
+.stock-badge.out-of-stock {
+    background: rgba(231, 76, 60, 0.12);
+    color: #e74c3c;
+}
+
+.stock-badge.expiring {
+    background: rgba(255, 152, 0, 0.12);
+    color: #ff9800;
+}
+
+.inventory-table .action-btn {
+    padding: 4px 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #f0f0f0;
+    color: #555;
+}
+
+.dark-mode .inventory-table .action-btn {
+    background: rgba(255,255,255,0.06);
+    color: #7a9bb5;
+}
+
+.inventory-table .action-btn:hover {
+    background: #4fc3f7;
+    color: #fff;
+}
+
+/* ============================================================
+   9. DISPENSING SECTION
+   ============================================================ */
+.dispensing-section {
+    background: #fff;
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 28px;
+    border: 1px solid rgba(0,0,0,0.04);
+}
+
+.dark-mode .dispensing-section {
+    background: #1a3344;
+    border-color: rgba(255,255,255,0.06);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.dispensing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+@media (max-width: 768px) {
+    .dispensing-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.dispense-item {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 14px 16px;
+    border-left: 4px solid #4caf50;
+}
+
+.dark-mode .dispense-item {
+    background: rgba(255,255,255,0.04);
+}
+
+.dispense-item .dispense-info h4 {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+    color: #0d1a26;
+}
+
+.dark-mode .dispense-item .dispense-info h4 {
+    color: #e8edf5;
+}
+
+.dispense-item .dispense-info p {
+    font-size: 12px;
+    color: #888;
+    margin: 2px 0 0 0;
+}
+
+.dark-mode .dispense-item .dispense-info p {
+    color: #7a9bb5;
+}
+
+/* ============================================================
+   10. PURCHASE ORDERS
+   ============================================================ */
+.purchase-section {
+    background: #fff;
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 28px;
+    border: 1px solid rgba(0,0,0,0.04);
+}
+
+.dark-mode .purchase-section {
+    background: #1a3344;
+    border-color: rgba(255,255,255,0.06);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.purchase-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border-left: 4px solid #ffb74d;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.dark-mode .purchase-item {
+    background: rgba(255,255,255,0.04);
+}
+
+.purchase-item .purchase-info h4 {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+    color: #0d1a26;
+}
+
+.dark-mode .purchase-item .purchase-info h4 {
+    color: #e8edf5;
+}
+
+.purchase-item .purchase-info p {
+    font-size: 12px;
+    color: #888;
+    margin: 2px 0 0 0;
+}
+
+.dark-mode .purchase-item .purchase-info p {
+    color: #7a9bb5;
+}
+
+/* ============================================================
+   11. SUPPLIER MANAGEMENT
+   ============================================================ */
+.supplier-section {
+    background: #fff;
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 28px;
+    border: 1px solid rgba(0,0,0,0.04);
+}
+
+.dark-mode .supplier-section {
+    background: #1a3344;
+    border-color: rgba(255,255,255,0.06);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.supplier-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.supplier-card {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 14px 16px;
+    border-left: 4px solid #9c27b0;
+}
+
+.dark-mode .supplier-card {
+    background: rgba(255,255,255,0.04);
+}
+
+.supplier-card h4 {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 0 4px 0;
+    color: #0d1a26;
+}
+
+.dark-mode .supplier-card h4 {
+    color: #e8edf5;
+}
+
+.supplier-card p {
+    font-size: 12px;
+    color: #888;
+    margin: 2px 0;
+}
+
+.dark-mode .supplier-card p {
+    color: #7a9bb5;
+}
+
+.supplier-card .rating {
+    color: #ffb74d;
+    font-size: 13px;
+}
+
+/* ============================================================
+   12. EXPIRY MANAGEMENT
+   ============================================================ */
+.expiry-section {
+    background: #fff;
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 28px;
+    border: 1px solid rgba(0,0,0,0.04);
+}
+
+.dark-mode .expiry-section {
+    background: #1a3344;
+    border-color: rgba(255,255,255,0.06);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.expiry-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.expiry-card {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-align: center;
+}
+
+.dark-mode .expiry-card {
+    background: rgba(255,255,255,0.04);
+}
+
+.expiry-card .expiry-count {
+    font-size: 28px;
+    font-weight: 700;
+    display: block;
+    color: #0d1a26;
+}
+
+.dark-mode .expiry-card .expiry-count {
+    color: #e8edf5;
+}
+
+.expiry-card .expiry-label {
+    font-size: 13px;
+    color: #888;
+}
+
+.dark-mode .expiry-card .expiry-label {
+    color: #7a9bb5;
+}
+
+.expiry-card.danger .expiry-count {
+    color: #e74c3c;
+}
+
+.expiry-card.warning .expiry-count {
+    color: #ff9800;
+}
+
+/* ============================================================
+   13. REPORTS
+   ============================================================ */
+.reports-section {
+    background: #fff;
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 28px;
+    border: 1px solid rgba(0,0,0,0.04);
+}
+
+.dark-mode .reports-section {
+    background: #1a3344;
+    border-color: rgba(255,255,255,0.06);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.reports-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+}
+
+.report-item {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.dark-mode .report-item {
+    background: rgba(255,255,255,0.04);
+    color: #e8edf5;
+}
+
+.report-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+
+.report-item i {
+    font-size: 20px;
+    color: #4fc3f7;
+}
+
+.report-item .report-info h4 {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.report-item .report-info p {
+    font-size: 12px;
+    color: #888;
+    margin: 2px 0 0 0;
+}
+
+.dark-mode .report-item .report-info p {
+    color: #7a9bb5;
+}
+
+/* ============================================================
+   14. MESSAGES
+   ============================================================ */
+.messages-section {
+    background: #fff;
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 28px;
+    border: 1px solid rgba(0,0,0,0.04);
+}
+
+.dark-mode .messages-section {
+    background: #1a3344;
+    border-color: rgba(255,255,255,0.06);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.message-item {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+    align-items: center;
+}
+
+.dark-mode .message-item {
+    border-bottom-color: rgba(255,255,255,0.06);
+}
+
+.message-item:last-child {
+    border-bottom: none;
+}
+
+.message-item img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.message-item .message-content {
+    flex: 1;
+}
+
+.message-item .message-content h4 {
+    font-size: 13px;
+    font-weight: 500;
+    margin: 0;
+    color: #0d1a26;
+}
+
+.dark-mode .message-item .message-content h4 {
+    color: #e8edf5;
+}
+
+.message-item .message-content p {
+    font-size: 12px;
+    color: #888;
+    margin: 2px 0 0 0;
+}
+
+.dark-mode .message-item .message-content p {
+    color: #7a9bb5;
+}
+
+.message-item .message-time {
+    font-size: 11px;
+    color: #bbb;
+    white-space: nowrap;
+}
+
+/* ============================================================
+   15. NOTIFICATIONS
+   ============================================================ */
+.notifications-panel {
+    position: fixed;
+    top: 0;
+    right: -360px;
+    width: 340px;
+    height: 100vh;
+    background: #fff;
+    box-shadow: -4px 0 30px rgba(0,0,0,0.1);
+    z-index: 1100;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+}
+
+.dark-mode .notifications-panel {
+    background: #1a3344;
+}
+
+.notifications-panel.show {
+    right: 0;
+}
+
+/* ============================================================
+   16. AI PHARMACY ASSISTANT
+   ============================================================ */
+.ai-widget {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 999;
+}
+
+.ai-widget .ai-toggle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4fc3f7, #0288d1);
+    color: #fff;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(79, 195, 247, 0.4);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ai-widget .ai-toggle:hover {
+    transform: scale(1.06);
+}
+
+/* ============================================================
+   17. QUICK ACTIONS
+   ============================================================ */
+.quick-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 28px;
+}
+
+.quick-action-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: #333;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.dark-mode .quick-action-btn {
+    background: #1a3344;
+    border-color: rgba(255,255,255,0.06);
+    color: #e8edf5;
+}
+
+.quick-action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    border-color: #4fc3f7;
+}
+
+.quick-action-btn i {
+    font-size: 16px;
+    color: #4fc3f7;
+}
+
+/* ============================================================
+   18. PROFILE SETTINGS
+   ============================================================ */
+.profile-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-modal.show {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+}
+
+.profile-modal .modal-content {
+    background: #fff;
+    border-radius: 18px;
+    width: 90%;
+    max-width: 550px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 28px;
+    position: relative;
+}
+
+.dark-mode .profile-modal .modal-content {
+    background: #1a3344;
+}
+
+/* ============================================================
+   19. FOOTER
+   ============================================================ */
+.dashboard-footer {
+    text-align: center;
+    padding: 18px 0 8px 0;
+    font-size: 12px;
+    color: #bbb;
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.dark-mode .dashboard-footer {
+    border-top-color: rgba(255,255,255,0.05);
+    color: #7a9bb5;
+}
+
+.dashboard-footer .version {
+    color: #4fc3f7;
+}
+
+/* ============================================================
+   20. RESPONSIVE DESIGN
+   ============================================================ */
+@media (max-width: 1200px) {
+    .pharmacy-wrapper .main-content {
+        padding: 16px 20px 20px 20px;
+    }
+}
+
+@media (max-width: 992px) {
+    .pharmacy-sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .pharmacy-sidebar.mobile-open {
+        transform: translateX(0);
+    }
+    
+    .sidebar-overlay.show {
+        display: block;
+    }
+    
+    .pharmacy-wrapper .main-content {
+        margin-left: 0 !important;
+    }
+    
+    .pharmacy-header {
+        padding: 10px 16px;
+    }
+    
+    .header-left h2 {
+        font-size: 16px;
+    }
+    
+    .header-search input {
+        width: 140px;
+    }
+    
+    .header-search input:focus {
+        width: 170px;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-cards {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .header-search {
+        display: none;
+    }
+    
+    .profile-dropdown .profile-info {
+        display: none;
+    }
+    
+    .inventory-table {
+        font-size: 12px;
+    }
+    
+    .inventory-table th,
+    .inventory-table td {
+        padding: 6px 8px;
+    }
+    
+    .dispensing-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .quick-actions {
+        gap: 6px;
+    }
+    
+    .quick-action-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .header-left h2 {
+        font-size: 14px;
+    }
+    
+    .header-left h2 span {
+        display: block;
+        font-size: 11px;
+    }
+    
+    .prescription-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .supplier-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .expiry-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .reports-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================================
+   21. CUSTOM SCROLLBAR
+   ============================================================ */
+.pharmacy-sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.pharmacy-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.pharmacy-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.12);
+    border-radius: 2px;
+}
+
+/* ============================================================
+   22. LOADING ANIMATION
+   ============================================================ */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.loading-dots {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    padding: 16px;
+}
+
+.loading-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4fc3f7;
+    animation: pulse 1.4s ease-in-out infinite;
+}
+
+.loading-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loading-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+/* ============================================================
+   23. PRINT STYLES
+   ============================================================ */
+@media print {
+    .pharmacy-sidebar,
+    .ai-widget,
+    .floating-buttons,
+    .header-search,
+    .header-action,
+    .quick-actions,
+    .dark-mode-toggle,
+    .language-switcher {
+        display: none !important;
+    }
+    
+    .pharmacy-wrapper .main-content {
+        margin-left: 0 !important;
+        padding: 0 !important;
+    }
+    
+    .pharmacy-header {
+        position: static !important;
+        background: #fff !important;
+        border-bottom: 1px solid #ddd !important;
+    }
+    
+    .dashboard-card,
+    .prescription-section,
+    .inventory-section,
+    .dispensing-section,
+    .purchase-section,
+    .supplier-section,
+    .expiry-section,
+    .reports-section,
+    .messages-section {
+        break-inside: avoid;
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+        background: #fff !important;
+    }
+    
+    .dark-mode .dashboard-card,
+    .dark-mode .prescription-section,
+    .dark-mode .inventory-section,
+    .dark-mode .dispensing-section {
+        background: #fff !important;
+        color: #333 !important;
+    }
+    
+    .dark-mode .dashboard-card .card-content h3,
+    .dark-mode .dashboard-card .card-content p {
+        color: #333 !important;
+    }
+    
+    .dark-mode .prescription-item .presc-info h4,
+    .dark-mode .prescription-item .presc-info p {
+        color: #333 !important;
+    }
+    
+    .dark-mode .inventory-table td {
+        color: #333 !important;
+    }
+    
+    .dark-mode .inventory-table th {
+        color: #666 !important;
+    }
+    
+    .dashboard-footer {
+        position: fixed !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        border-top: 1px solid #ddd !important;
+    }
+      }
