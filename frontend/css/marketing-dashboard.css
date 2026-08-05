@@ -1,0 +1,253 @@
+/* ============================================================
+   MARKETING DASHBOARD CSS
+   ============================================================ */
+
+/* ============================================================
+   1. MAIN DASHBOARD LAYOUT
+   ============================================================ */
+.marketing-dashboard-page {
+    background: linear-gradient(135deg, #f5f0eb 0%, #e8e0d8 100%);
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.marketing-dashboard-page.dark-mode {
+    background: linear-gradient(135deg, #1a1410 0%, #2d221c 100%);
+}
+
+.dashboard-wrapper {
+    display: flex;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+/* ============================================================
+   2. DASHBOARD HEADER
+   ============================================================ */
+.marketing-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 30px;
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.dark-mode .marketing-header {
+    background: rgba(30, 20, 16, 0.95);
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+.marketing-header .header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.marketing-header .header-left h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2d221c;
+    margin: 0;
+}
+
+.dark-mode .marketing-header .header-left h1 {
+    color: #e8e0d8;
+}
+
+.marketing-header .header-left h1 span {
+    font-weight: 300;
+    color: #6b7a8f;
+    font-size: 15px;
+}
+
+/* ============================================================
+   3. CAMPAIGN OVERVIEW CARDS
+   ============================================================ */
+.overview-section {
+    padding: 24px 30px 10px 30px;
+}
+
+.overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+}
+
+.overview-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.dark-mode .overview-card {
+    background: #2d221c;
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.overview-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.overview-card .card-icon {
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.overview-card .card-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #2d221c;
+    display: block;
+}
+
+.dark-mode .overview-card .card-value {
+    color: #e8e0d8;
+}
+
+.overview-card .card-label {
+    font-size: 13px;
+    color: #6b7a8f;
+}
+
+.dark-mode .overview-card .card-label {
+    color: #a08070;
+}
+
+/* ============================================================
+   4. CAMPAIGN MANAGEMENT
+   ============================================================ */
+.campaign-section {
+    padding: 10px 30px 20px 30px;
+}
+
+.campaign-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.campaign-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+}
+
+.dark-mode .campaign-card {
+    background: #2d221c;
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.campaign-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.campaign-card h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #2d221c;
+    margin: 0 0 4px 0;
+}
+
+.dark-mode .campaign-card h4 {
+    color: #e8e0d8;
+}
+
+.campaign-card .campaign-progress {
+    margin: 8px 0;
+}
+
+.campaign-card .campaign-progress .progress-bar {
+    height: 4px;
+    background: #e2e8f0;
+    border-radius: 2px;
+    overflow: hidden;
+    margin: 4px 0;
+}
+
+.dark-mode .campaign-card .campaign-progress .progress-bar {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.campaign-card .campaign-progress .progress-bar .progress-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.campaign-card .campaign-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #6b7a8f;
+}
+
+.dark-mode .campaign-card .campaign-meta {
+    color: #a08070;
+}
+
+/* ============================================================
+   5. RESPONSIVE DESIGN
+   ============================================================ */
+@media (max-width: 1200px) {
+    .overview-section {
+        padding: 20px 20px 10px 20px;
+    }
+    .campaign-section {
+        padding: 10px 20px 16px 20px;
+    }
+}
+
+@media (max-width: 992px) {
+    .marketing-header {
+        padding: 12px 20px;
+    }
+    .marketing-header .header-left h1 {
+        font-size: 18px;
+    }
+    .overview-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .campaign-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .marketing-header {
+        padding: 10px 16px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .marketing-header .header-left h1 {
+        font-size: 16px;
+    }
+    .overview-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .campaign-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .overview-grid {
+        grid-template-columns: 1fr;
+    }
+}
