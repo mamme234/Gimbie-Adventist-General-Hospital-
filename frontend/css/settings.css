@@ -1,0 +1,264 @@
+/* ============================================================
+   SETTINGS CSS
+   ============================================================ */
+
+/* ============================================================
+   1. SETTINGS PAGE LAYOUT
+   ============================================================ */
+.settings-page {
+    background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.settings-page.dark-mode {
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+}
+
+.settings-wrapper {
+    display: flex;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+.settings-wrapper .main-content {
+    flex: 1;
+    margin-left: 260px;
+    padding: 20px 30px 30px 30px;
+    transition: margin-left 0.3s ease;
+    overflow-x: hidden;
+}
+
+.settings-wrapper .main-content.collapsed {
+    margin-left: 70px;
+}
+
+/* ============================================================
+   2. SETTINGS HEADER
+   ============================================================ */
+.settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    margin-bottom: 24px;
+}
+
+.settings-header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a2332;
+    margin: 0;
+}
+
+.dark-mode .settings-header h1 {
+    color: #e8edf5;
+}
+
+.settings-header .header-actions {
+    display: flex;
+    gap: 12px;
+}
+
+/* ============================================================
+   3. SETTINGS SECTIONS
+   ============================================================ */
+.settings-section {
+    background: #fff;
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    margin-bottom: 20px;
+}
+
+.dark-mode .settings-section {
+    background: #1a2332;
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.settings-section .section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a2332;
+    margin: 0 0 4px 0;
+}
+
+.dark-mode .settings-section .section-title {
+    color: #e8edf5;
+}
+
+.settings-section .section-description {
+    font-size: 14px;
+    color: #6b7a8f;
+    margin: 0 0 20px 0;
+}
+
+.dark-mode .settings-section .section-description {
+    color: #8899bb;
+}
+
+/* Settings Form */
+.settings-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.settings-form .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-form .form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.settings-form .form-group label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1a2332;
+    margin-bottom: 4px;
+}
+
+.dark-mode .settings-form .form-group label {
+    color: #e8edf5;
+}
+
+.settings-form .form-group input,
+.settings-form .form-group select,
+.settings-form .form-group textarea {
+    padding: 10px 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+    color: #1a2332;
+}
+
+.dark-mode .settings-form .form-group input,
+.dark-mode .settings-form .form-group select,
+.dark-mode .settings-form .form-group textarea {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.08);
+    color: #e8edf5;
+}
+
+.settings-form .form-group input:focus,
+.settings-form .form-group select:focus,
+.settings-form .form-group textarea:focus {
+    outline: none;
+    border-color: #4fc3f7;
+    box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.12);
+}
+
+.settings-form .form-group .help-text {
+    font-size: 12px;
+    color: #6b7a8f;
+    margin-top: 4px;
+}
+
+.dark-mode .settings-form .form-group .help-text {
+    color: #8899bb;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    position: relative;
+    width: 48px;
+    height: 26px;
+    display: inline-block;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-switch .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #ccc;
+    transition: 0.3s;
+    border-radius: 26px;
+}
+
+.toggle-switch .slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background: #fff;
+    transition: 0.3s;
+    border-radius: 50%;
+}
+
+.toggle-switch input:checked + .slider {
+    background: #4caf50;
+}
+
+.toggle-switch input:checked + .slider:before {
+    transform: translateX(22px);
+}
+
+/* Settings Actions */
+.settings-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.dark-mode .settings-actions {
+    border-top-color: rgba(255, 255, 255, 0.06);
+}
+
+/* ============================================================
+   4. RESPONSIVE DESIGN
+   ============================================================ */
+@media (max-width: 1200px) {
+    .settings-wrapper .main-content {
+        padding: 16px 20px 20px 20px;
+    }
+}
+
+@media (max-width: 992px) {
+    .settings-wrapper .main-content {
+        margin-left: 0 !important;
+    }
+    .settings-form {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .settings-wrapper .main-content {
+        padding: 12px 16px 16px 16px;
+    }
+    .settings-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .settings-section {
+        padding: 16px;
+    }
+    .settings-actions {
+        flex-direction: column;
+    }
+    .settings-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
