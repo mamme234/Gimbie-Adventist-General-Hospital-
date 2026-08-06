@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nurse Dashboard - Adventist General Hospital</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/nurse.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Doctors</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="../appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- NURSE DASHBOARD                            -->
+    <!-- ============================================ -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-wrapper">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="sidebar-profile">
+                        <img src="../images/nurses/nurse-avatar.jpg" alt="Nurse" />
+                        <h4>Nurse Meseret Hailu</h4>
+                        <span>Head Nurse • ID: NUR-2024-001</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="dashboard.html" class="active"><i class="fas fa-th-large"></i> Dashboard</a>
+                        <a href="patients.html"><i class="fas fa-users"></i> Patients</a>
+                        <a href="wards.html"><i class="fas fa-hospital"></i> Wards</a>
+                        <a href="admissions.html"><i class="fas fa-user-plus"></i> Admissions</a>
+                        <a href="discharge.html"><i class="fas fa-user-minus"></i> Discharge</a>
+                        <a href="medications.html"><i class="fas fa-pills"></i> Medications</a>
+                        <a href="vital-signs.html"><i class="fas fa-heartbeat"></i> Vital Signs</a>
+                        <a href="reports.html"><i class="fas fa-chart-bar"></i> Reports</a>
+                        <a href="../login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    <div class="dashboard-header">
+                        <h1>Good Morning, Nurse Meseret! 👋</h1>
+                        <span class="date"><i class="fas fa-calendar"></i> February 20, 2026</span>
+                    </div>
+
+                    <!-- Stats Cards -->
+                    <div class="stats-cards">
+                        <div class="stat-card primary">
+                            <div class="stat-icon"><i class="fas fa-users"></i></div>
+                            <span class="stat-number">24</span>
+                            <span class="stat-label">Assigned Patients</span>
+                        </div>
+                        <div class="stat-card success">
+                            <div class="stat-icon"><i class="fas fa-bed"></i></div>
+                            <span class="stat-number">18</span>
+                            <span class="stat-label">Wards</span>
+                        </div>
+                        <div class="stat-card warning">
+                            <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                            <span class="stat-number">4</span>
+                            <span class="stat-label">Pending Admissions</span>
+                        </div>
+                        <div class="stat-card danger">
+                            <div class="stat-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                            <span class="stat-number">2</span>
+                            <span class="stat-label">Critical Patients</span>
+                        </div>
+                    </div>
+
+                    <!-- Patient Assignment -->
+                    <div class="assignment-grid">
+                        <div class="assignment-card">
+                            <div class="card-header">
+                                <h3>My Patients</h3>
+                                <span class="badge">24 Total</span>
+                            </div>
+                            <div class="patient-assignment">
+                                <div class="avatar">MT</div>
+                                <div class="info">
+                                    <h4>Meron Tesfaye</h4>
+                                    <span>Room 201 • Cardiology</span>
+                                </div>
+                                <div class="room">Ward 2A</div>
+                                <span class="status stable">Stable</span>
+                            </div>
+                            <div class="patient-assignment">
+                                <div class="avatar">AG</div>
+                                <div class="info">
+                                    <h4>Abel Girma</h4>
+                                    <span>Room 202 • Neurology</span>
+                                </div>
+                                <div class="room">Ward 3B</div>
+                                <span class="status stable">Stable</span>
+                            </div>
+                            <div class="patient-assignment">
+                                <div class="avatar">ST</div>
+                                <div class="info">
+                                    <h4>Selam Tsegaye</h4>
+                                    <span>Room 203 • Cardiology</span>
+                                </div>
+                                <div class="room">Ward 2A</div>
+                                <span class="status observation">Observation</span>
+                            </div>
+                            <div class="patient-assignment">
+                                <div class="avatar">YA</div>
+                                <div class="info">
+                                    <h4>Yonas Alemu</h4>
+                                    <span>Room 204 • ICU</span>
+                                </div>
+                                <div class="room">ICU</div>
+                                <span class="status critical">Critical</span>
+                            </div>
+                            <div class="patient-assignment">
+                                <div class="avatar">TW</div>
+                                <div class="info">
+                                    <h4>Tigist Wondimu</h4>
+                                    <span>Room 205 • Cardiology</span>
+                                </div>
+                                <div class="room">Ward 2A</div>
+                                <span class="status stable">Stable</span>
+                            </div>
+                            <div class="card-footer">
+                                <a href="patients.html" class="btn btn-sm btn-outline-primary">View All Patients →</a>
+                            </div>
+                        </div>
+
+                        <div class="assignment-card">
+                            <div class="card-header">
+                                <h3>Shift Schedule</h3>
+                                <span class="badge warning">Today</span>
+                            </div>
+                            <div class="shift-info">
+                                <div class="shift-time">
+                                    <span class="shift-label">Morning Shift</span>
+                                    <span class="shift-hours">07:00 - 15:00</span>
+                                </div>
+                                <div class="shift-time">
+                                    <span class="shift-label">Afternoon Shift</span>
+                                    <span class="shift-hours">15:00 - 23:00</span>
+                                </div>
+                                <div class="shift-time">
+                                    <span class="shift-label">Night Shift</span>
+                                    <span class="shift-hours">23:00 - 07:00</span>
+                                </div>
+                            </div>
+                            <div class="staff-list">
+                                <h4>Staff on Duty</h4>
+                                <div class="staff-item">
+                                    <span class="staff-name">• Nurse Meseret Hailu</span>
+                                    <span class="staff-role">Head Nurse</span>
+                                </div>
+                                <div class="staff-item">
+                                    <span class="staff-name">• Nurse Sara Tesfaye</span>
+                                    <span class="staff-role">Staff Nurse</span>
+                                </div>
+                                <div class="staff-item">
+                                    <span class="staff-name">• Nurse Abebe Kassa</span>
+                                    <span class="staff-role">Staff Nurse</span>
+                                </div>
+                                <div class="staff-item">
+                                    <span class="staff-name">• Nurse Genet Mekonnen</span>
+                                    <span class="staff-role">Nursing Assistant</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+                              </html>
