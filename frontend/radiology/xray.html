@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>X-Ray - Radiology Portal</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/radiology.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Doctors</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="../appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- X-RAY                                    -->
+    <!-- ============================================ -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-wrapper">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="sidebar-profile">
+                        <img src="../images/radiology/radiologist.jpg" alt="Radiologist" />
+                        <h4>Dr. Martha Ayele</h4>
+                        <span>Head of Radiology • ID: RAD-2024-001</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                        <a href="appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a>
+                        <a href="xray.html" class="active"><i class="fas fa-x-ray"></i> X-Ray</a>
+                        <a href="ct-scan.html"><i class="fas fa-cog"></i> CT Scan</a>
+                        <a href="mri.html"><i class="fas fa-magnet"></i> MRI</a>
+                        <a href="ultrasound.html"><i class="fas fa-wave-square"></i> Ultrasound</a>
+                        <a href="reports.html"><i class="fas fa-file-medical-alt"></i> Reports</a>
+                        <a href="images.html"><i class="fas fa-image"></i> Images</a>
+                        <a href="../login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    <div class="dashboard-header">
+                        <h1>X-Ray</h1>
+                        <div class="xray-actions">
+                            <button class="btn btn-outline-primary btn-sm"><i class="fas fa-sync"></i> Refresh</button>
+                            <button class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> New Exam</button>
+                        </div>
+                    </div>
+
+                    <!-- X-Ray Stats -->
+                    <div class="stats-cards" style="margin-bottom: 30px;">
+                        <div class="stat-card primary">
+                            <div class="stat-icon"><i class="fas fa-x-ray"></i></div>
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Today's Exams</span>
+                        </div>
+                        <div class="stat-card success">
+                            <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                            <span class="stat-number">5</span>
+                            <span class="stat-label">Completed</span>
+                        </div>
+                        <div class="stat-card warning">
+                            <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                            <span class="stat-number">2</span>
+                            <span class="stat-label">In Progress</span>
+                        </div>
+                        <div class="stat-card danger">
+                            <div class="stat-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                            <span class="stat-number">1</span>
+                            <span class="stat-label">Pending Review</span>
+                        </div>
+                    </div>
+
+                    <!-- X-Ray Queue -->
+                    <div class="exam-queue">
+                        <h3>X-Ray Queue</h3>
+                        <div class="exam-item">
+                            <div class="exam-info">
+                                <span class="exam-id">#XR-2026-001</span>
+                                <h4>Meron Tesfaye</h4>
+                                <span>Chest X-Ray (PA/Lateral)</span>
+                                <span class="exam-room">Room 101</span>
+                            </div>
+                            <div class="exam-meta">
+                                <span class="exam-status completed">Completed</span>
+                                <span class="exam-time">09:00 - 09:15</span>
+                            </div>
+                            <div class="exam-actions">
+                                <button class="btn btn-sm btn-outline-primary">View Images</button>
+                                <button class="btn btn-sm btn-outline-primary">Report</button>
+                            </div>
+                        </div>
+
+                        <div class="exam-item in-progress">
+                            <div class="exam-info">
+                                <span class="exam-id">#XR-2026-002</span>
+                                <h4>Abel Girma</h4>
+                                <span>Chest X-Ray (PA)</span>
+                                <span class="exam-room">Room 101</span>
+                            </div>
+                            <div class="exam-meta">
+                                <span class="exam-status in-progress">In Progress</span>
+                                <span class="exam-time">Started: 10:00</span>
+                            </div>
+                            <div class="exam-actions">
+                                <button class="btn btn-sm btn-primary">Complete</button>
+                                <button class="btn btn-sm btn-outline-primary">View</button>
+                            </div>
+                        </div>
+
+                        <div class="exam-item waiting">
+                            <div class="exam-info">
+                                <span class="exam-id">#XR-2026-003</span>
+                                <h4>Yonas Alemu</h4>
+                                <span>Hand X-Ray</span>
+                                <span class="exam-room">Room 101</span>
+                            </div>
+                            <div class="exam-meta">
+                                <span class="exam-status waiting">Waiting</span>
+                                <span class="exam-time">Scheduled: 10:30</span>
+                            </div>
+                            <div class="exam-actions">
+                                <button class="btn btn-sm btn-primary">Start</button>
+                                <button class="btn btn-sm btn-outline-primary">View</button>
+                            </div>
+                        </div>
+
+                        <div class="exam-item waiting">
+                            <div class="exam-info">
+                                <span class="exam-id">#XR-2026-004</span>
+                                <h4>Selam Tsegaye</h4>
+                                <span>Knee X-Ray</span>
+                                <span class="exam-room">Room 101</span>
+                            </div>
+                            <div class="exam-meta">
+                                <span class="exam-status waiting">Waiting</span>
+                                <span class="exam-time">Scheduled: 11:00</span>
+                            </div>
+                            <div class="exam-actions">
+                                <button class="btn btn-sm btn-primary">Start</button>
+                                <button class="btn btn-sm btn-outline-primary">View</button>
+                            </div>
+                        </div>
+
+                        <div class="exam-item scheduled">
+                            <div class="exam-info">
+                                <span class="exam-id">#XR-2026-005</span>
+                                <h4>Tigist Wondimu</h4>
+                                <span>Spine X-Ray</span>
+                                <span class="exam-room">Room 101</span>
+                            </div>
+                            <div class="exam-meta">
+                                <span class="exam-status scheduled">Scheduled</span>
+                                <span class="exam-time">11:30 - 12:00</span>
+                            </div>
+                            <div class="exam-actions">
+                                <button class="btn btn-sm btn-outline-primary">View</button>
+                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+  </html>
