@@ -1,0 +1,249 @@
+/* ============================================ */
+/* DEPARTMENTS.CSS - Departments Page Styles   */
+/* ============================================ */
+
+/* ============================================ */
+/* Filter Section                             */
+/* ============================================ */
+.filter-section {
+    padding: 30px 0 0;
+}
+
+.filter-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 10px 24px;
+    border: 2px solid var(--bg-gray);
+    background: var(--bg-white);
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-medium);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    font-family: var(--font-family);
+}
+
+.filter-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.filter-btn.active {
+    background: var(--primary-color);
+    color: var(--text-white);
+    border-color: var(--primary-color);
+}
+
+/* ============================================ */
+/* Departments Grid                          */
+/* ============================================ */
+.departments-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.department-card {
+    background: var(--bg-white);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-normal);
+}
+
+.department-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.dept-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.dept-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.department-card:hover .dept-image img {
+    transform: scale(1.05);
+}
+
+.dept-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--secondary-color);
+    color: var(--text-white);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.dept-badge.emergency {
+    background: var(--danger);
+}
+
+.dept-info {
+    padding: 24px;
+}
+
+.dept-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(26, 82, 118, 0.08);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+}
+
+.dept-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+}
+
+.dept-info p {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    color: var(--text-light);
+}
+
+.dept-meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.dept-meta span {
+    font-size: 0.85rem;
+    color: var(--text-medium);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.dept-meta i {
+    color: var(--primary-color);
+}
+
+.dept-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.dept-actions .btn {
+    flex: 1;
+}
+
+/* ============================================ */
+/* Department Card Animation                 */
+/* ============================================ */
+.department-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.department-card[style*="display: block"] {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================ */
+/* CTA Section                               */
+/* ============================================ */
+.cta-section {
+    padding: 60px 0;
+}
+
+.cta-wrapper {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    border-radius: var(--border-radius-lg);
+    padding: 50px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-white);
+}
+
+.cta-wrapper .cta-text h2 {
+    color: var(--text-white);
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.cta-wrapper .cta-text p {
+    color: rgba(255,255,255,0.8);
+    margin: 0;
+}
+
+.cta-wrapper .cta-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+/* ============================================ */
+/* Responsive                                */
+/* ============================================ */
+@media (max-width: 992px) {
+    .departments-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .cta-wrapper {
+        flex-direction: column;
+        text-align: center;
+        gap: 24px;
+        padding: 40px 30px;
+    }
+    
+    .cta-wrapper .cta-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .departments-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .filter-tabs {
+        gap: 8px;
+    }
+    
+    .filter-btn {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+    }
+    
+    .cta-wrapper .cta-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .cta-wrapper .cta-buttons .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .dept-actions {
+        flex-direction: column;
+    }
+      }
