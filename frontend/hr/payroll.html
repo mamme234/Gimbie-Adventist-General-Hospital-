@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payroll - HR Portal</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/hr.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Doctors</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="../appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- PAYROLL - HR VIEW                        -->
+    <!-- ============================================ -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-wrapper">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="sidebar-profile">
+                        <img src="../images/hr/hr-manager.jpg" alt="HR Manager" />
+                        <h4>Mrs. Tsion Alemu</h4>
+                        <span>HR Manager • ID: HR-2024-001</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                        <a href="employees.html"><i class="fas fa-users"></i> Employees</a>
+                        <a href="attendance.html"><i class="fas fa-clipboard-check"></i> Attendance</a>
+                        <a href="leave.html"><i class="fas fa-calendar-alt"></i> Leave Management</a>
+                        <a href="recruitment.html"><i class="fas fa-user-plus"></i> Recruitment</a>
+                        <a href="payroll.html" class="active"><i class="fas fa-money-bill"></i> Payroll</a>
+                        <a href="performance.html"><i class="fas fa-star"></i> Performance</a>
+                        <a href="reports.html"><i class="fas fa-file-alt"></i> Reports</a>
+                        <a href="../login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    <div class="dashboard-header">
+                        <h1>Payroll</h1>
+                        <button class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Process Payroll</button>
+                    </div>
+
+                    <!-- Payroll Stats -->
+                    <div class="stats-cards" style="margin-bottom: 30px;">
+                        <div class="stat-card primary">
+                            <div class="stat-icon"><i class="fas fa-money-bill"></i></div>
+                            <span class="stat-number">ETB 2,450,000</span>
+                            <span class="stat-label">Monthly Payroll</span>
+                        </div>
+                        <div class="stat-card success">
+                            <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                            <span class="stat-number">ETB 2,205,000</span>
+                            <span class="stat-label">Net Payroll</span>
+                        </div>
+                        <div class="stat-card warning">
+                            <div class="stat-icon"><i class="fas fa-percent"></i></div>
+                            <span class="stat-number">10%</span>
+                            <span class="stat-label">Deductions Rate</span>
+                        </div>
+                        <div class="stat-card danger">
+                            <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">Pending Approvals</span>
+                        </div>
+                    </div>
+
+                    <!-- Payroll Summary -->
+                    <div class="payroll-summary">
+                        <div class="summary-card">
+                            <h4>February 2026</h4>
+                            <div class="summary-details">
+                                <div class="summary-item">
+                                    <span>Gross Payroll</span>
+                                    <span>ETB 2,450,000</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Income Tax</span>
+                                    <span>ETB 147,000</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Pension</span>
+                                    <span>ETB 49,000</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Other Deductions</span>
+                                    <span>ETB 49,000</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Net Payroll</span>
+                                    <span>ETB 2,205,000</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary">Download Report</button>
+                        </div>
+
+                        <div class="summary-card">
+                            <h4>January 2026</h4>
+                            <div class="summary-details">
+                                <div class="summary-item">
+                                    <span>Gross Payroll</span>
+                                    <span>ETB 2,380,000</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Income Tax</span>
+                                    <span>ETB 142,800</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Pension</span>
+                                    <span>ETB 47,600</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Other Deductions</span>
+                                    <span>ETB 47,600</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Net Payroll</span>
+                                    <span>ETB 2,142,000</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary">Download Report</button>
+                        </div>
+
+                        <div class="summary-card">
+                            <h4>December 2025</h4>
+                            <div class="summary-details">
+                                <div class="summary-item">
+                                    <span>Gross Payroll</span>
+                                    <span>ETB 2,520,000</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Income Tax</span>
+                                    <span>ETB 151,200</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Pension</span>
+                                    <span>ETB 50,400</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Other Deductions</span>
+                                    <span>ETB 50,400</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Net Payroll</span>
+                                    <span>ETB 2,268,000</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary">Download Report</button>
+                        </div>
+                    </div>
+
+                    <!-- Employee Payroll List -->
+                    <div class="employee-payroll">
+                        <h3>Payroll List</h3>
+                        <div class="table-responsive">
+                            <table class="employee-table">
+                                <thead>
+                                    <tr>
+                                        <th>Employee</th>
+                                        <th>Department</th>
+                                        <th>Basic Salary</th>
+                                        <th>Allowances</th>
+                                        <th>Deductions</th>
+                                        <th>Net Pay</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Dr. Samuel Tekle</td>
+                                        <td>Cardiology</td>
+                                        <td>ETB 85,000</td>
+                                        <td>ETB 15,000</td>
+                                        <td>ETB 8,500</td>
+                                        <td>ETB 91,500</td>
+                                        <td><span class="status active">Paid</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dr. Sara Hailu</td>
+                                        <td>Neurology</td>
+                                        <td>ETB 72,000</td>
+                                        <td>ETB 12,000</td>
+                                        <td>ETB 7,200</td>
+                                        <td>ETB 76,800</td>
+                                        <td><span class="status active">Paid</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nurse Meseret Hailu</td>
+                                        <td>Nursing</td>
+                                        <td>ETB 45,000</td>
+                                        <td>ETB 8,000</td>
+                                        <td>ETB 4,500</td>
+                                        <td>ETB 48,500</td>
+                                        <td><span class="status warning">Pending</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dr. Yonas Hailu</td>
+                                        <td>Laboratory</td>
+                                        <td>ETB 52,000</td>
+                                        <td>ETB 9,000</td>
+                                        <td>ETB 5,200</td>
+                                        <td>ETB 55,800</td>
+                                        <td><span class="status active">Paid</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dr. Martha Ayele</td>
+                                        <td>Radiology</td>
+                                        <td>ETB 58,000</td>
+                                        <td>ETB 10,000</td>
+                                        <td>ETB 5,800</td>
+                                        <td>ETB 62,200</td>
+                                        <td><span class="status warning">Pending</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+                              </html>
