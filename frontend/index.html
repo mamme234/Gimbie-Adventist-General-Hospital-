@@ -8,11 +8,13 @@
     <!-- SEO Meta Tags -->
     <meta name="description" content="Adventist General Hospital provides world-class healthcare services with compassionate care. Book appointments, emergency services, and specialist consultations." />
     <meta name="keywords" content="hospital, healthcare, doctors, emergency, medical services, Adventist hospital" />
+    <meta name="author" content="Adventist General Hospital" />
     
     <!-- Open Graph -->
     <meta property="og:title" content="Adventist General Hospital" />
     <meta property="og:description" content="Quality healthcare services with compassionate care" />
     <meta property="og:type" content="website" />
+    <meta property="og:image" content="images/og-image.jpg" />
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -67,10 +69,8 @@
                 <!-- Navigation -->
                 <nav class="nav" id="mainNav">
                     <ul class="nav-menu">
-                        <!-- Home -->
                         <li><a href="index.html" class="active">Home</a></li>
                         
-                        <!-- About -->
                         <li class="dropdown">
                             <a href="about.html">About <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
@@ -81,7 +81,6 @@
                             </ul>
                         </li>
                         
-                        <!-- Departments -->
                         <li class="dropdown">
                             <a href="departments.html">Departments <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
@@ -94,7 +93,6 @@
                             </ul>
                         </li>
                         
-                        <!-- Services -->
                         <li class="dropdown">
                             <a href="services.html">Services <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
@@ -108,10 +106,8 @@
                             </ul>
                         </li>
                         
-                        <!-- Doctors -->
                         <li><a href="doctors.html">Doctors</a></li>
                         
-                        <!-- Patient -->
                         <li class="dropdown">
                             <a href="#">Patient <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
@@ -123,7 +119,6 @@
                             </ul>
                         </li>
                         
-                        <!-- Resources -->
                         <li class="dropdown">
                             <a href="#">Resources <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
@@ -135,7 +130,6 @@
                             </ul>
                         </li>
                         
-                        <!-- Contact -->
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
@@ -162,7 +156,7 @@
         <div class="hero-slider">
             <!-- Slide 1 -->
             <div class="hero-slide active">
-                <div class="hero-bg" style="background-image: url('images/hero/hero-1.jpg');"></div>
+                <div class="hero-bg" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('images/hero/hero-1.jpg');"></div>
                 <div class="container">
                     <div class="hero-content">
                         <span class="hero-badge">🏥 Trusted Since 1965</span>
@@ -172,7 +166,7 @@
                             <a href="appointments.html" class="btn btn-primary btn-lg">
                                 <i class="fas fa-calendar-check"></i> Book Appointment
                             </a>
-                            <a href="about.html" class="btn btn-outline btn-lg">
+                            <a href="about.html" class="btn btn-outline-light btn-lg">
                                 <i class="fas fa-info-circle"></i> Learn More
                             </a>
                         </div>
@@ -182,7 +176,7 @@
             
             <!-- Slide 2 -->
             <div class="hero-slide">
-                <div class="hero-bg" style="background-image: url('images/hero/hero-2.jpg');"></div>
+                <div class="hero-bg" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('images/hero/hero-2.jpg');"></div>
                 <div class="container">
                     <div class="hero-content">
                         <span class="hero-badge">🚑 Emergency Services</span>
@@ -192,7 +186,7 @@
                             <a href="emergency.html" class="btn btn-danger btn-lg">
                                 <i class="fas fa-ambulance"></i> Emergency Services
                             </a>
-                            <a href="tel:+251911234567" class="btn btn-outline btn-lg">
+                            <a href="tel:+251911234567" class="btn btn-outline-light btn-lg">
                                 <i class="fas fa-phone"></i> Call Now
                             </a>
                         </div>
@@ -202,7 +196,7 @@
             
             <!-- Slide 3 -->
             <div class="hero-slide">
-                <div class="hero-bg" style="background-image: url('images/hero/hero-3.jpg');"></div>
+                <div class="hero-bg" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('images/hero/hero-3.jpg');"></div>
                 <div class="container">
                     <div class="hero-content">
                         <span class="hero-badge">💻 Digital Health</span>
@@ -212,7 +206,7 @@
                             <a href="telemedicine.html" class="btn btn-primary btn-lg">
                                 <i class="fas fa-video"></i> Start Consultation
                             </a>
-                            <a href="patient/dashboard.html" class="btn btn-outline btn-lg">
+                            <a href="patient/dashboard.html" class="btn btn-outline-light btn-lg">
                                 <i class="fas fa-user"></i> Patient Portal
                             </a>
                         </div>
@@ -223,8 +217,12 @@
         
         <!-- Slider Controls -->
         <div class="slider-controls">
-            <button class="slider-btn prev" id="prevSlide"><i class="fas fa-chevron-left"></i></button>
-            <button class="slider-btn next" id="nextSlide"><i class="fas fa-chevron-right"></i></button>
+            <button class="slider-btn prev" id="prevSlide" aria-label="Previous Slide">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="slider-btn next" id="nextSlide" aria-label="Next Slide">
+                <i class="fas fa-chevron-right"></i>
+            </button>
         </div>
         
         <!-- Slider Dots -->
@@ -269,7 +267,7 @@
                     <p>Don't wait in critical situations. Call our emergency hotline for immediate assistance.</p>
                 </div>
                 <div class="emergency-actions">
-                    <a href="tel:+251911234567" class="btn btn-danger btn-lg">
+                    <a href="tel:+251911234567" class="btn btn-danger btn-lg pulse-btn">
                         <i class="fas fa-phone"></i> +251-911-234-567
                     </a>
                     <a href="emergency.html" class="btn btn-outline-light">
@@ -293,54 +291,42 @@
             
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-user-md"></i>
-                    </div>
+                    <div class="service-icon"><i class="fas fa-user-md"></i></div>
                     <h3>Medical Consultation</h3>
                     <p>Expert consultations with our specialist doctors across all departments.</p>
                     <a href="services.html#consultation" class="service-link">Learn More →</a>
                 </div>
                 
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-microscope"></i>
-                    </div>
+                    <div class="service-icon"><i class="fas fa-microscope"></i></div>
                     <h3>Laboratory Services</h3>
                     <p>Advanced diagnostic testing with accurate and timely results.</p>
                     <a href="laboratory.html" class="service-link">Learn More →</a>
                 </div>
                 
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-x-ray"></i>
-                    </div>
+                    <div class="service-icon"><i class="fas fa-x-ray"></i></div>
                     <h3>Radiology & Imaging</h3>
                     <p>State-of-the-art imaging including MRI, CT, X-Ray, and Ultrasound.</p>
                     <a href="radiology.html" class="service-link">Learn More →</a>
                 </div>
                 
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-pills"></i>
-                    </div>
+                    <div class="service-icon"><i class="fas fa-pills"></i></div>
                     <h3>Pharmacy Services</h3>
                     <p>Full-service pharmacy with prescription filling and medication counseling.</p>
                     <a href="pharmacy.html" class="service-link">Learn More →</a>
                 </div>
                 
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-video"></i>
-                    </div>
+                    <div class="service-icon"><i class="fas fa-video"></i></div>
                     <h3>Telemedicine</h3>
                     <p>Virtual consultations with doctors from the comfort of your home.</p>
                     <a href="telemedicine.html" class="service-link">Learn More →</a>
                 </div>
                 
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-tint"></i>
-                    </div>
+                    <div class="service-icon"><i class="fas fa-tint"></i></div>
                     <h3>Blood Bank</h3>
                     <p>24/7 blood bank services with comprehensive blood component management.</p>
                     <a href="blood-bank.html" class="service-link">Learn More →</a>
@@ -773,6 +759,7 @@
                     <ul>
                         <li><a href="about.html">About Us</a></li>
                         <li><a href="departments.html">Departments</a></li>
+                        <li><a href="services.html">Services</a></li>
                         <li><a href="doctors.html">Find a Doctor</a></li>
                         <li><a href="appointments.html">Book Appointment</a></li>
                         <li><a href="contact.html">Contact Us</a></li>
@@ -820,119 +807,126 @@
     </footer>
 
     <!-- ============================================ -->
+    <!-- BACK TO TOP BUTTON                         -->
+    <!-- ============================================ -->
+    <button id="backToTop" aria-label="Back to Top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- ============================================ -->
     <!-- SCRIPTS                                   -->
     <!-- ============================================ -->
     <script src="main.js"></script>
     <script>
+        // ============================================
         // Hero Slider
-        const slides = document.querySelectorAll('.hero-slide');
-        const dots = document.getElementById('sliderDots');
-        let currentSlide = 0;
-        let slideInterval;
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.hero-slide');
+            const dotsContainer = document.getElementById('sliderDots');
+            let currentSlide = 0;
+            let slideInterval;
+            const slideCount = slides.length;
 
-        // Create dots
-        slides.forEach((_, index) => {
-            const dot = document.createElement('button');
-            dot.classList.add('dot');
-            if (index === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(index));
-            dots.appendChild(dot);
-        });
-
-        function goToSlide(index) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            document.querySelectorAll('.dot').forEach(dot => dot.classList.remove('active'));
-            slides[index].classList.add('active');
-            document.querySelectorAll('.dot')[index].classList.add('active');
-            currentSlide = index;
-        }
-
-        function nextSlide() {
-            goToSlide((currentSlide + 1) % slides.length);
-        }
-
-        function prevSlide() {
-            goToSlide((currentSlide - 1 + slides.length) % slides.length);
-        }
-
-        document.getElementById('nextSlide').addEventListener('click', () => {
-            clearInterval(slideInterval);
-            nextSlide();
-            slideInterval = setInterval(nextSlide, 5000);
-        });
-
-        document.getElementById('prevSlide').addEventListener('click', () => {
-            clearInterval(slideInterval);
-            prevSlide();
-            slideInterval = setInterval(nextSlide, 5000);
-        });
-
-        // Auto-slide
-        slideInterval = setInterval(nextSlide, 5000);
-
-        // Counter Animation
-        const counters = document.querySelectorAll('.stat-number');
-        const speed = 200;
-
-        const animateCounter = (counter) => {
-            const target = parseInt(counter.getAttribute('data-target'));
-            const increment = Math.ceil(target / speed);
-            let current = 0;
-
-            const updateCounter = () => {
-                current += increment;
-                if (current < target) {
-                    counter.textContent = current;
-                    setTimeout(updateCounter, 20);
-                } else {
-                    counter.textContent = target + '+';
-                }
-            };
-            updateCounter();
-        };
-
-        // Intersection Observer for counters
-        const observerOptions = {
-            threshold: 0.5
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const counter = entry.target;
-                    animateCounter(counter);
-                    observer.unobserve(counter);
-                }
-            });
-        }, observerOptions);
-
-        counters.forEach(counter => observer.observe(counter));
-
-        // Mobile Menu Toggle
-        document.getElementById('mobileToggle').addEventListener('click', function() {
-            document.getElementById('mainNav').classList.toggle('active');
-            this.classList.toggle('active');
-        });
-
-        // Dropdown on mobile
-        document.querySelectorAll('.dropdown > a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                if (window.innerWidth <= 992) {
-                    e.preventDefault();
-                    this.parentElement.classList.toggle('open');
-                }
-            });
-        });
-
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+            // Create dots
+            if (dotsContainer) {
+                slides.forEach((_, index) => {
+                    const dot = document.createElement('button');
+                    dot.classList.add('dot');
+                    if (index === 0) dot.classList.add('active');
+                    dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+                    dot.addEventListener('click', () => goToSlide(index));
+                    dotsContainer.appendChild(dot);
+                });
             }
+
+            function goToSlide(index) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                document.querySelectorAll('.dot').forEach(dot => dot.classList.remove('active'));
+                
+                slides[index].classList.add('active');
+                if (dotsContainer) {
+                    const dots = dotsContainer.querySelectorAll('.dot');
+                    if (dots[index]) dots[index].classList.add('active');
+                }
+                currentSlide = index;
+            }
+
+            function nextSlide() {
+                goToSlide((currentSlide + 1) % slideCount);
+            }
+
+            function prevSlide() {
+                goToSlide((currentSlide - 1 + slideCount) % slideCount);
+            }
+
+            const nextBtn = document.getElementById('nextSlide');
+            const prevBtn = document.getElementById('prevSlide');
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function() {
+                    clearInterval(slideInterval);
+                    nextSlide();
+                    startAutoSlide();
+                });
+            }
+
+            if (prevBtn) {
+                prevBtn.addEventListener('click', function() {
+                    clearInterval(slideInterval);
+                    prevSlide();
+                    startAutoSlide();
+                });
+            }
+
+            function startAutoSlide() {
+                clearInterval(slideInterval);
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+
+            // Start auto-slide
+            startAutoSlide();
+
+            // Pause on hover
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.addEventListener('mouseenter', () => clearInterval(slideInterval));
+                hero.addEventListener('mouseleave', startAutoSlide);
+            }
+
+            // ============================================
+            // Back to Top Button
+            // ============================================
+            const backToTop = document.getElementById('backToTop');
+            if (backToTop) {
+                window.addEventListener('scroll', function() {
+                    if (window.pageYOffset > 500) {
+                        backToTop.classList.add('visible');
+                    } else {
+                        backToTop.classList.remove('visible');
+                    }
+                });
+
+                backToTop.addEventListener('click', function() {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            // ============================================
+            // Keyboard Navigation for Slider
+            // ============================================
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowRight' && document.activeElement?.closest('.hero')) {
+                    clearInterval(slideInterval);
+                    nextSlide();
+                    startAutoSlide();
+                } else if (e.key === 'ArrowLeft' && document.activeElement?.closest('.hero')) {
+                    clearInterval(slideInterval);
+                    prevSlide();
+                    startAutoSlide();
+                }
+            });
         });
     </script>
 </body>
-  </html>
+                            </html>
