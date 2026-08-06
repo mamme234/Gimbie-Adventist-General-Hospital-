@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Insurance - Patient Portal</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/patient.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Doctors</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="../appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- INSURANCE                                 -->
+    <!-- ============================================ -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-wrapper">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="sidebar-profile">
+                        <img src="../images/patients/patient-avatar.jpg" alt="Patient" />
+                        <h4>Meron Tesfaye</h4>
+                        <span>Patient ID: PAT-2026-001</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                        <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                        <a href="medical-records.html"><i class="fas fa-file-medical"></i> Medical Records</a>
+                        <a href="appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a>
+                        <a href="appointment-history.html"><i class="fas fa-history"></i> Appointment History</a>
+                        <a href="prescriptions.html"><i class="fas fa-prescription-bottle"></i> Prescriptions</a>
+                        <a href="laboratory-results.html"><i class="fas fa-flask"></i> Lab Results</a>
+                        <a href="radiology-results.html"><i class="fas fa-x-ray"></i> Radiology Results</a>
+                        <a href="bills.html"><i class="fas fa-file-invoice-dollar"></i> Bills</a>
+                        <a href="payments.html"><i class="fas fa-credit-card"></i> Payments</a>
+                        <a href="insurance.html" class="active"><i class="fas fa-shield-alt"></i> Insurance</a>
+                        <a href="messages.html"><i class="fas fa-envelope"></i> Messages</a>
+                        <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="../login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    <div class="dashboard-header">
+                        <h1>Insurance Information</h1>
+                        <span class="date"><i class="fas fa-shield-alt"></i> 1 Active Policy</span>
+                    </div>
+
+                    <!-- Active Policy -->
+                    <div class="policy-card">
+                        <div class="policy-header">
+                            <div>
+                                <h3>Ethiopian Insurance Corporation</h3>
+                                <span class="policy-status active">Active</span>
+                            </div>
+                            <span class="policy-number">Policy #: EIC-2026-001234</span>
+                        </div>
+                        <div class="policy-details">
+                            <div class="policy-row">
+                                <span class="policy-label">Plan Type</span>
+                                <span class="policy-value">Comprehensive Health Plan</span>
+                            </div>
+                            <div class="policy-row">
+                                <span class="policy-label">Member Name</span>
+                                <span class="policy-value">Meron Tesfaye</span>
+                            </div>
+                            <div class="policy-row">
+                                <span class="policy-label">Date of Birth</span>
+                                <span class="policy-value">March 15, 1985</span>
+                            </div>
+                            <div class="policy-row">
+                                <span class="policy-label">Coverage Start</span>
+                                <span class="policy-value">January 1, 2026</span>
+                            </div>
+                            <div class="policy-row">
+                                <span class="policy-label">Coverage End</span>
+                                <span class="policy-value">December 31, 2026</span>
+                            </div>
+                            <div class="policy-row">
+                                <span class="policy-label">Group Number</span>
+                                <span class="policy-value">GRP-2026-5678</span>
+                            </div>
+                            <div class="policy-row">
+                                <span class="policy-label">Coverage Type</span>
+                                <span class="policy-value">Individual</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Coverage Details -->
+                    <div class="coverage-section">
+                        <h3>Coverage Details</h3>
+                        <div class="coverage-grid">
+                            <div class="coverage-item">
+                                <div class="coverage-icon"><i class="fas fa-stethoscope"></i></div>
+                                <div>
+                                    <h4>Inpatient Services</h4>
+                                    <p>80% coverage up to ETB 500,000 per year</p>
+                                </div>
+                            </div>
+                            <div class="coverage-item">
+                                <div class="coverage-icon"><i class="fas fa-user-md"></i></div>
+                                <div>
+                                    <h4>Outpatient Services</h4>
+                                    <p>70% coverage up to ETB 50,000 per year</p>
+                                </div>
+                            </div>
+                            <div class="coverage-item">
+                                <div class="coverage-icon"><i class="fas fa-prescription-bottle"></i></div>
+                                <div>
+                                    <h4>Prescription Drugs</h4>
+                                    <p>60% coverage up to ETB 20,000 per year</p>
+                                </div>
+                            </div>
+                            <div class="coverage-item">
+                                <div class="coverage-icon"><i class="fas fa-ambulance"></i></div>
+                                <div>
+                                    <h4>Emergency Services</h4>
+                                    <p>90% coverage up to ETB 100,000 per year</p>
+                                </div>
+                            </div>
+                            <div class="coverage-item">
+                                <div class="coverage-icon"><i class="fas fa-flask"></i></div>
+                                <div>
+                                    <h4>Diagnostic Tests</h4>
+                                    <p>75% coverage up to ETB 30,000 per year</p>
+                                </div>
+                            </div>
+                            <div class="coverage-item">
+                                <div class="coverage-icon"><i class="fas fa-tooth"></i></div>
+                                <div>
+                                    <h4>Dental Services</h4>
+                                    <p>50% coverage up to ETB 10,000 per year</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Claims History -->
+                    <div class="claims-history">
+                        <h3>Claims History</h3>
+                        <div class="claim-item">
+                            <div class="claim-info">
+                                <h4>Claim #CLM-2026-001</h4>
+                                <span>Cardiology Consultation - February 15, 2026</span>
+                            </div>
+                            <div class="claim-amount">ETB 1,500</div>
+                            <span class="claim-status approved">Approved</span>
+                        </div>
+                        <div class="claim-item">
+                            <div class="claim-info">
+                                <h4>Claim #CLM-2026-002</h4>
+                                <span>Laboratory Tests - February 10, 2026</span>
+                            </div>
+                            <div class="claim-amount">ETB 1,200</div>
+                            <span class="claim-status approved">Approved</span>
+                        </div>
+                        <div class="claim-item">
+                            <div class="claim-info">
+                                <h4>Claim #CLM-2026-003</h4>
+                                <span>Neurology Consultation - January 28, 2026</span>
+                            </div>
+                            <div class="claim-amount">ETB 1,500</div>
+                            <span class="claim-status pending">Pending</span>
+                        </div>
+                        <div class="claim-item">
+                            <div class="claim-info">
+                                <h4>Claim #CLM-2026-004</h4>
+                                <span>MRI - Lumbar Spine - January 28, 2026</span>
+                            </div>
+                            <div class="claim-amount">ETB 3,000</div>
+                            <span class="claim-status pending">Pending</span>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+  </html>
