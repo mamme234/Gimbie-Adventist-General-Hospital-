@@ -79,4 +79,244 @@
                     <div class="sidebar-profile">
                         <img src="../images/admin/admin-avatar.jpg" alt="Admin" />
                         <h4>Administrator</h4>
-                        <span>System Admin
+                        <span>System Admin • ID: ADM-2024-001</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                        <a href="users.html"><i class="fas fa-users"></i> Users</a>
+                        <a href="roles.html"><i class="fas fa-user-tag"></i> Roles</a>
+                        <a href="permissions.html"><i class="fas fa-lock"></i> Permissions</a>
+                        <a href="patients.html"><i class="fas fa-user-injured"></i> Patients</a>
+                        <a href="doctors.html"><i class="fas fa-user-md"></i> Doctors</a>
+                        <a href="nurses.html"><i class="fas fa-user-nurse"></i> Nurses</a>
+                        <a href="departments.html"><i class="fas fa-building"></i> Departments</a>
+                        <a href="pharmacy.html"><i class="fas fa-pills"></i> Pharmacy</a>
+                        <a href="laboratory.html"><i class="fas fa-microscope"></i> Laboratory</a>
+                        <a href="radiology.html"><i class="fas fa-x-ray"></i> Radiology</a>
+                        <a href="finance.html"><i class="fas fa-coins"></i> Finance</a>
+                        <a href="inventory.html"><i class="fas fa-boxes"></i> Inventory</a>
+                        <a href="ambulance.html" class="active"><i class="fas fa-ambulance"></i> Ambulance</a>
+                        <a href="cms.html"><i class="fas fa-edit"></i> CMS</a>
+                        <a href="analytics.html"><i class="fas fa-chart-line"></i> Analytics</a>
+                        <a href="reports.html"><i class="fas fa-file-alt"></i> Reports</a>
+                        <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="audit-logs.html"><i class="fas fa-history"></i> Audit Logs</a>
+                        <a href="backup.html"><i class="fas fa-database"></i> Backup</a>
+                        <a href="../login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    <div class="dashboard-header">
+                        <h1>Ambulance Services</h1>
+                        <button class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Add Ambulance</button>
+                    </div>
+
+                    <!-- Ambulance Stats -->
+                    <div class="stats-cards" style="margin-bottom: 30px;">
+                        <div class="stat-card primary">
+                            <div class="stat-icon"><i class="fas fa-ambulance"></i></div>
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Total Ambulances</span>
+                        </div>
+                        <div class="stat-card success">
+                            <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Available</span>
+                        </div>
+                        <div class="stat-card warning">
+                            <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">On Dispatch</span>
+                        </div>
+                        <div class="stat-card danger">
+                            <div class="stat-icon"><i class="fas fa-wrench"></i></div>
+                            <span class="stat-number">1</span>
+                            <span class="stat-label">Under Maintenance</span>
+                        </div>
+                    </div>
+
+                    <!-- Ambulance Fleet -->
+                    <div class="ambulance-grid">
+                        <div class="ambulance-card available">
+                            <div class="ambulance-icon"><i class="fas fa-ambulance"></i></div>
+                            <h4>Ambulance #001</h4>
+                            <p>Driver: Mr. Abebe Kassa</p>
+                            <p>Location: Station A</p>
+                            <p>Response Time: 5 min</p>
+                            <span class="ambulance-status available">Available</span>
+                            <div class="ambulance-actions">
+                                <button class="btn btn-sm btn-outline-primary">View</button>
+                                <button class="btn btn-sm btn-primary">Dispatch</button>
+                            </div>
+                        </div>
+
+                        <div class="ambulance-card on-dispatch">
+                            <div class="ambulance-icon"><i class="fas fa-ambulance"></i></div>
+                            <h4>Ambulance #002</h4>
+                            <p>Driver: Mr. Yonas Alemu</p>
+                            <p>Location: En Route - Bole</p>
+                            <p>ETA: 8 min</p>
+                            <span class="ambulance-status on-dispatch">On Dispatch</span>
+                            <div class="ambulance-actions">
+                                <button class="btn btn-sm btn-outline-primary">View</button>
+                                <button class="btn btn-sm btn-danger">Track</button>
+                            </div>
+                        </div>
+
+                        <div class="ambulance-card available">
+                            <div class="ambulance-icon"><i class="fas fa-ambulance"></i></div>
+                            <h4>Ambulance #003</h4>
+                            <p>Driver: Mr. Daniel Assefa</p>
+                            <p>Location: Station B</p>
+                            <p>Response Time: 7 min</p>
+                            <span class="ambulance-status available">Available</span>
+                            <div class="ambulance-actions">
+                                <button class="btn btn-sm btn-outline-primary">View</button>
+                                <button class="btn btn-sm btn-primary">Dispatch</button>
+                            </div>
+                        </div>
+
+                        <div class="ambulance-card maintenance">
+                            <div class="ambulance-icon"><i class="fas fa-ambulance"></i></div>
+                            <h4>Ambulance #004</h4>
+                            <p>Driver: Mr. Tigist Wondimu</p>
+                            <p>Location: Maintenance Bay</p>
+                            <p>Status: Engine repair</p>
+                            <span class="ambulance-status maintenance">Under Maintenance</span>
+                            <div class="ambulance-actions">
+                                <button class="btn btn-sm btn-outline-primary">View</button>
+                                <button class="btn btn-sm btn-warning">Service</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Calls -->
+                    <div class="recent-calls">
+                        <h3>Recent Emergency Calls</h3>
+                        <div class="call-item">
+                            <span class="call-time">10:30 AM</span>
+                            <div class="call-info">
+                                <h4>Emergency - Cardiac Arrest</h4>
+                                <span>Bole Sub-city • Ambulance #002</span>
+                            </div>
+                            <span class="call-status completed">Completed</span>
+                        </div>
+                        <div class="call-item">
+                            <span class="call-time">09:45 AM</span>
+                            <div class="call-info">
+                                <h4>Trauma - Car Accident</h4>
+                                <span>Mexico Road • Ambulance #001</span>
+                            </div>
+                            <span class="call-status in-progress">In Progress</span>
+                        </div>
+                        <div class="call-item">
+                            <span class="call-time">08:20 AM</span>
+                            <div class="call-info">
+                                <h4>Medical - Stroke</h4>
+                                <span>Kazanchis • Ambulance #003</span>
+                            </div>
+                            <span class="call-status completed">Completed</span>
+                        </div>
+                        <div class="call-item">
+                            <span class="call-time">07:00 AM</span>
+                            <div class="call-info">
+                                <h4>Emergency - Respiratory Distress</h4>
+                                <span>Lideta • Ambulance #002</span>
+                            </div>
+                            <span class="call-status completed">Completed</span>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+    </html>
