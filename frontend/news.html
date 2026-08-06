@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News - Adventist General Hospital</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Latest news and updates from Adventist General Hospital. Medical breakthroughs, hospital announcements, and community health news." />
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/news.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="contact.html"><i class="fas fa-map-marker-alt"></i> Find Us</a>
+                <a href="login.html"><i class="fas fa-sign-in-alt"></i> Patient Portal</a>
+                <a href="doctors.html"><i class="fas fa-user-md"></i> Find a Doctor</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="departments.html">Departments</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="doctors.html">Doctors</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- PAGE BANNER                                 -->
+    <!-- ============================================ -->
+    <section class="page-banner">
+        <div class="container">
+            <div class="banner-content">
+                <h1>News & Updates</h1>
+                <nav class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span><i class="fas fa-chevron-right"></i></span>
+                    <span class="current">News</span>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- NEWS CATEGORIES                           -->
+    <!-- ============================================ -->
+    <section class="news-categories section-padding">
+        <div class="container">
+            <div class="category-tabs">
+                <button class="category-btn active" data-category="all">All News</button>
+                <button class="category-btn" data-category="announcements">Announcements</button>
+                <button class="category-btn" data-category="medical">Medical Updates</button>
+                <button class="category-btn" data-category="community">Community</button>
+                <button class="category-btn" data-category="events">Events</button>
+                <button class="category-btn" data-category="research">Research</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- NEWS GRID                                 -->
+    <!-- ============================================ -->
+    <section class="news-grid section-padding bg-light">
+        <div class="container">
+            <div class="news-wrapper">
+                <!-- News 1 - Featured -->
+                <article class="news-card featured" data-category="announcements">
+                    <div class="news-image">
+                        <img src="images/news/news-1.jpg" alt="New Hospital Wing Opens" />
+                        <span class="news-badge">Featured</span>
+                    </div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-date"><i class="fas fa-calendar"></i> February 15, 2026</span>
+                            <span class="news-category">Announcements</span>
+                        </div>
+                        <h3><a href="news-details.html?id=1">New State-of-the-Art Wing Opens at Adventist General Hospital</a></h3>
+                        <p>Adventist General Hospital proudly announces the opening of a new 100-bed wing featuring modern patient rooms, advanced medical technology, and enhanced patient care facilities.</p>
+                        <a href="news-details.html?id=1" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- News 2 -->
+                <article class="news-card" data-category="medical">
+                    <div class="news-image">
+                        <img src="images/news/news-2.jpg" alt="Robotic Surgery" />
+                    </div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-date"><i class="fas fa-calendar"></i> February 10, 2026</span>
+                            <span class="news-category">Medical Updates</span>
+                        </div>
+                        <h3><a href="news-details.html?id=2">Introducing Robotic-Assisted Surgery at Our Hospital</a></h3>
+                        <p>We are excited to introduce robotic-assisted surgery technology, offering patients more precise surgical options with faster recovery times.</p>
+                        <a href="news-details.html?id=2" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- News 3 -->
+                <article class="news-card" data-category="community">
+                    <div class="news-image">
+                        <img src="images/news/news-3.jpg" alt="Free Health Camp" />
+                    </div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-date"><i class="fas fa-calendar"></i> February 5, 2026</span>
+                            <span class="news-category">Community</span>
+                        </div>
+                        <h3><a href="news-details.html?id=3">Free Health Camp Serves 500+ Community Members</a></h3>
+                        <p>Our annual community health camp provided free medical checkups, consultations, and health education to over 500 community members.</p>
+                        <a href="news-details.html?id=3" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- News 4 -->
+                <article class="news-card" data-category="research">
+                    <div class="news-image">
+                        <img src="images/news/news-4.jpg" alt="Medical Research" />
+                    </div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-date"><i class="fas fa-calendar"></i> January 28, 2026</span>
+                            <span class="news-category">Research</span>
+                        </div>
+                        <h3><a href="news-details.html?id=4">Groundbreaking Research in Cardiac Care Published</a></h3>
+                        <p>Our cardiology research team published groundbreaking findings on innovative treatments for heart disease in a leading medical journal.</p>
+                        <a href="news-details.html?id=4" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- News 5 -->
+                <article class="news-card" data-category="events">
+                    <div class="news-image">
+                        <img src="images/news/news-5.jpg" alt="Health Seminar" />
+                    </div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-date"><i class="fas fa-calendar"></i> January 20, 2026</span>
+                            <span class="news-category">Events</span>
+                        </div>
+                        <h3><a href="news-details.html?id=5">Mental Health Awareness Seminar Draws Large Crowd</a></h3>
+                        <p>Our mental health awareness seminar focused on destigmatizing mental health issues and providing resources for patients and families.</p>
+                        <a href="news-details.html?id=5" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- News 6 -->
+                <article class="news-card" data-category="announcements">
+                    <div class="news-image">
+                        <img src="images/news/news-6.jpg" alt="New Doctors Join" />
+                    </div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-date"><i class="fas fa-calendar"></i> January 15, 2026</span>
+                            <span class="news-category">Announcements</span>
+                        </div>
+                        <h3><a href="news-details.html?id=6">New Specialists Join Our Medical Team</a></h3>
+                        <p>We welcome six new specialist doctors to our growing medical team, expanding our capabilities in neurology, cardiology, and orthopedics.</p>
+                        <a href="news-details.html?id=6" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- News 7 -->
+                <article class="news-card" data-category="medical">
+                    <div class="news-image">
+                        <img src="images/news/news-7.jpg" alt="Telemedicine" />
+                    </div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-date"><i class="fas fa-calendar"></i> January 8, 2026</span>
+                            <span class="news-category">Medical Updates</span>
+                        </div>
+                        <h3><a href="news-details.html?id=7">Telemedicine Services Expanded to Rural Areas</a></h3>
+                        <p>Our telemedicine program has been expanded to reach patients in rural areas, providing access to specialist consultations without travel.</p>
+                        <a href="news-details.html?id=7" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- News 8 -->
+                <article class="news-card" data-category="community">
+                    <div class="news-image">
+                        <img src="images/news/news-8.jpg" alt="Blood Donation Drive" />
+                    </div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-date"><i class="fas fa-calendar"></i> January 2, 2026</span>
+                            <span class="news-category">Community</span>
+                        </div>
+                        <h3><a href="news-details.html?id=8">Successful Blood Donation Drive Collects 200+ Units</a></h3>
+                        <p>Our monthly blood donation drive was a huge success, with over 200 units of blood collected to support patients in need.</p>
+                        <a href="news-details.html?id=8" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <a href="#" class="page-btn active">1</a>
+                <a href="#" class="page-btn">2</a>
+                <a href="#" class="page-btn">3</a>
+                <a href="#" class="page-btn next"><i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- NEWSLETTER SIGNUP                         -->
+    <!-- ============================================ -->
+    <section class="newsletter-section section-padding">
+        <div class="container">
+            <div class="newsletter-wrapper">
+                <div class="newsletter-content">
+                    <h2>Subscribe to Our Newsletter</h2>
+                    <p>Stay updated with the latest news, health tips, and hospital announcements.</p>
+                </div>
+                <form class="newsletter-form" id="newsletterForm">
+                    <div class="form-group">
+                        <input type="email" placeholder="Enter your email address" required />
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Subscribe
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="departments.html">Departments</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="doctors.html">Find a Doctor</a></li>
+                        <li><a href="appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="emergency.html">Emergency Care</a></li>
+                        <li><a href="telemedicine.html">Telemedicine</a></li>
+                        <li><a href="laboratory.html">Laboratory</a></li>
+                        <li><a href="radiology.html">Radiology</a></li>
+                        <li><a href="pharmacy.html">Pharmacy</a></li>
+                        <li><a href="blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================ -->
+    <!-- SCRIPTS                                    -->
+    <!-- ============================================ -->
+    <script src="main.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Category filter
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const newsCards = document.querySelectorAll('.news-card');
+
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                const category = this.dataset.category;
+
+                newsCards.forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 100);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Newsletter form
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const input = this.querySelector('input');
+            const btn = this.querySelector('button');
+            
+            if (input.value.trim()) {
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Subscribing...';
+                btn.disabled = true;
+
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fas fa-check"></i> Subscribed!';
+                    btn.style.background = '#28a745';
+                    input.value = '';
+                    setTimeout(() => {
+                        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Subscribe';
+                        btn.disabled = false;
+                        btn.style.background = '';
+                    }, 3000);
+                }, 1500);
+            }
+        });
+    </script>
+</body>
+          </html>
