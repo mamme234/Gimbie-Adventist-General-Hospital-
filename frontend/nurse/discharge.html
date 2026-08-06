@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Discharge - Nurse Portal</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/nurse.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Doctors</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="../appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- DISCHARGE                                 -->
+    <!-- ============================================ -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-wrapper">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="sidebar-profile">
+                        <img src="../images/nurses/nurse-avatar.jpg" alt="Nurse" />
+                        <h4>Nurse Meseret Hailu</h4>
+                        <span>Head Nurse • ID: NUR-2024-001</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                        <a href="patients.html"><i class="fas fa-users"></i> Patients</a>
+                        <a href="wards.html"><i class="fas fa-hospital"></i> Wards</a>
+                        <a href="admissions.html"><i class="fas fa-user-plus"></i> Admissions</a>
+                        <a href="discharge.html" class="active"><i class="fas fa-user-minus"></i> Discharge</a>
+                        <a href="medications.html"><i class="fas fa-pills"></i> Medications</a>
+                        <a href="vital-signs.html"><i class="fas fa-heartbeat"></i> Vital Signs</a>
+                        <a href="reports.html"><i class="fas fa-chart-bar"></i> Reports</a>
+                        <a href="../login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    <div class="dashboard-header">
+                        <h1>Discharge</h1>
+                        <span class="date"><i class="fas fa-user-minus"></i> 3 Patients Ready for Discharge</span>
+                    </div>
+
+                    <!-- Discharge List -->
+                    <div class="discharge-list">
+                        <div class="discharge-card">
+                            <div class="discharge-header">
+                                <div>
+                                    <h4>Meron Tesfaye</h4>
+                                    <span class="discharge-id">Admission #ADM-2026-001</span>
+                                </div>
+                                <span class="discharge-status ready">Ready for Discharge</span>
+                            </div>
+                            <div class="discharge-details">
+                                <p><strong>Department:</strong> Cardiology</p>
+                                <p><strong>Ward:</strong> Ward 2A • Room 201</p>
+                                <p><strong>Admitted:</strong> February 15, 2026</p>
+                                <p><strong>Discharge Date:</strong> February 20, 2026</p>
+                                <p><strong>Attending Doctor:</strong> Dr. Samuel Tekle</p>
+                            </div>
+                            <div class="discharge-actions">
+                                <button class="btn btn-sm btn-outline-primary">View Details</button>
+                                <button class="btn btn-sm btn-primary">Process Discharge</button>
+                                <button class="btn btn-sm btn-outline-secondary">Print Summary</button>
+                            </div>
+                        </div>
+
+                        <div class="discharge-card">
+                            <div class="discharge-header">
+                                <div>
+                                    <h4>Abel Girma</h4>
+                                    <span class="discharge-id">Admission #ADM-2026-002</span>
+                                </div>
+                                <span class="discharge-status pending">Pending</span>
+                            </div>
+                            <div class="discharge-details">
+                                <p><strong>Department:</strong> Neurology</p>
+                                <p><strong>Ward:</strong> Ward 3B • Room 202</p>
+                                <p><strong>Admitted:</strong> February 10, 2026</p>
+                                <p><strong>Discharge Date:</strong> Pending approval</p>
+                                <p><strong>Attending Doctor:</strong> Dr. Sara Hailu</p>
+                            </div>
+                            <div class="discharge-actions">
+                                <button class="btn btn-sm btn-outline-primary">View Details</button>
+                                <button class="btn btn-sm btn-success">Approve</button>
+                                <button class="btn btn-sm btn-outline-danger">Hold</button>
+                            </div>
+                        </div>
+
+                        <div class="discharge-card">
+                            <div class="discharge-header">
+                                <div>
+                                    <h4>Tigist Wondimu</h4>
+                                    <span class="discharge-id">Admission #ADM-2026-005</span>
+                                </div>
+                                <span class="discharge-status completed">Discharged</span>
+                            </div>
+                            <div class="discharge-details">
+                                <p><strong>Department:</strong> Cardiology</p>
+                                <p><strong>Ward:</strong> Ward 2A • Room 205</p>
+                                <p><strong>Admitted:</strong> February 5, 2026</p>
+                                <p><strong>Discharged:</strong> February 19, 2026</p>
+                                <p><strong>Attending Doctor:</strong> Dr. Samuel Tekle</p>
+                            </div>
+                            <div class="discharge-actions">
+                                <button class="btn btn-sm btn-outline-primary">View Details</button>
+                                <button class="btn btn-sm btn-outline-secondary">View Summary</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Discharge Checklist -->
+                    <div class="discharge-checklist">
+                        <h3>Discharge Checklist</h3>
+                        <div class="checklist-grid">
+                            <div class="checklist-item">
+                                <input type="checkbox" id="check1" />
+                                <label for="check1">Patient medically cleared</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="check2" />
+                                <label for="check2">Discharge summary completed</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="check3" />
+                                <label for="check3">Medication reconciliation done</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="check4" />
+                                <label for="check4">Follow-up appointments scheduled</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="check5" />
+                                <label for="check5">Patient education provided</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="check6" />
+                                <label for="check6">Insurance verification</label>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+                          </html>
