@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Careers - Adventist General Hospital</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/careers.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="contact.html"><i class="fas fa-map-marker-alt"></i> Find Us</a>
+                <a href="login.html"><i class="fas fa-sign-in-alt"></i> Patient Portal</a>
+                <a href="doctors.html"><i class="fas fa-user-md"></i> Find a Doctor</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="departments.html">Departments</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="doctors.html">Doctors</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- PAGE BANNER                                 -->
+    <!-- ============================================ -->
+    <section class="page-banner">
+        <div class="container">
+            <div class="banner-content">
+                <h1>Careers</h1>
+                <nav class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span><i class="fas fa-chevron-right"></i></span>
+                    <span class="current">Careers</span>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CAREERS HERO                              -->
+    <!-- ============================================ -->
+    <section class="careers-hero section-padding">
+        <div class="container">
+            <div class="careers-grid">
+                <div class="careers-content">
+                    <span class="section-tag">Join Our Team</span>
+                    <h2>Build Your Career <br /><span class="highlight">With Us</span></h2>
+                    <p>Join a team of dedicated healthcare professionals committed to making a difference in people's lives.</p>
+                    <div class="careers-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Competitive Salary</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Professional Development</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Health Benefits</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Work-Life Balance</span>
+                        </div>
+                    </div>
+                    <a href="#job-listings" class="btn btn-primary btn-lg">
+                        <i class="fas fa-arrow-down"></i> View Openings
+                    </a>
+                </div>
+                <div class="careers-image">
+                    <img src="images/careers/careers-hero.jpg" alt="Careers" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- JOB LISTINGS                              -->
+    <!-- ============================================ -->
+    <section class="job-listings section-padding bg-light" id="job-listings">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">Open Positions</span>
+                <h2>Current <br />Job Openings</h2>
+            </div>
+
+            <div class="job-filters">
+                <select id="jobDeptFilter">
+                    <option value="all">All Departments</option>
+                    <option value="executive">Executive</option>
+                    <option value="doctors">Doctors</option>
+                    <option value="nursing">Nursing</option>
+                    <option value="laboratory">Laboratory</option>
+                    <option value="radiology">Radiology</option>
+                    <option value="pharmacy">Pharmacy</option>
+                    <option value="administration">Administration</option>
+                    <option value="it">Information Technology</option>
+                </select>
+                <select id="jobTypeFilter">
+                    <option value="all">All Types</option>
+                    <option value="full-time">Full Time</option>
+                    <option value="part-time">Part Time</option>
+                    <option value="contract">Contract</option>
+                    <option value="internship">Internship</option>
+                </select>
+            </div>
+
+            <div class="job-list">
+                <!-- Job 1 -->
+                <div class="job-card" data-department="doctors" data-type="full-time">
+                    <div class="job-header">
+                        <h3>Cardiologist</h3>
+                        <span class="job-badge full-time">Full Time</span>
+                    </div>
+                    <p>We are seeking an experienced Cardiologist to join our growing cardiology department.</p>
+                    <div class="job-meta">
+                        <span><i class="fas fa-building"></i> Cardiology Department</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Addis Ababa</span>
+                        <span><i class="fas fa-calendar"></i> Posted: Feb 10, 2026</span>
+                    </div>
+                    <a href="#" class="btn btn-primary btn-sm">Apply Now</a>
+                </div>
+
+                <!-- Job 2 -->
+                <div class="job-card" data-department="nursing" data-type="full-time">
+                    <div class="job-header">
+                        <h3>Registered Nurse - ICU</h3>
+                        <span class="job-badge full-time">Full Time</span>
+                    </div>
+                    <p>Experienced Registered Nurse needed for our Intensive Care Unit with critical care skills.</p>
+                    <div class="job-meta">
+                        <span><i class="fas fa-building"></i> ICU Department</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Addis Ababa</span>
+                        <span><i class="fas fa-calendar"></i> Posted: Feb 8, 2026</span>
+                    </div>
+                    <a href="#" class="btn btn-primary btn-sm">Apply Now</a>
+                </div>
+
+                <!-- Job 3 -->
+                <div class="job-card" data-department="laboratory" data-type="full-time">
+                    <div class="job-header">
+                        <h3>Medical Laboratory Scientist</h3>
+                        <span class="job-badge full-time">Full Time</span>
+                    </div>
+                    <p>We are looking for a skilled Medical Laboratory Scientist to join our diagnostic lab team.</p>
+                    <div class="job-meta">
+                        <span><i class="fas fa-building"></i> Laboratory Department</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Addis Ababa</span>
+                        <span><i class="fas fa-calendar"></i> Posted: Feb 5, 2026</span>
+                    </div>
+                    <a href="#" class="btn btn-primary btn-sm">Apply Now</a>
+                </div>
+
+                <!-- Job 4 -->
+                <div class="job-card" data-department="radiology" data-type="part-time">
+                    <div class="job-header">
+                        <h3>Radiographer</h3>
+                        <span class="job-badge part-time">Part Time</span>
+                    </div>
+                    <p>Part-time Radiographer needed for our busy radiology department.</p>
+                    <div class="job-meta">
+                        <span><i class="fas fa-building"></i> Radiology Department</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Addis Ababa</span>
+                        <span><i class="fas fa-calendar"></i> Posted: Feb 3, 2026</span>
+                    </div>
+                    <a href="#" class="btn btn-primary btn-sm">Apply Now</a>
+                </div>
+
+                <!-- Job 5 -->
+                <div class="job-card" data-department="pharmacy" data-type="full-time">
+                    <div class="job-header">
+                        <h3>Clinical Pharmacist</h3>
+                        <span class="job-badge full-time">Full Time</span>
+                    </div>
+                    <p>Clinical Pharmacist needed to provide pharmaceutical care and medication management.</p>
+                    <div class="job-meta">
+                        <span><i class="fas fa-building"></i> Pharmacy Department</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Addis Ababa</span>
+                        <span><i class="fas fa-calendar"></i> Posted: Feb 1, 2026</span>
+                    </div>
+                    <a href="#" class="btn btn-primary btn-sm">Apply Now</a>
+                </div>
+
+                <!-- Job 6 -->
+                <div class="job-card" data-department="it" data-type="full-time">
+                    <div class="job-header">
+                        <h3>System Administrator</h3>
+                        <span class="job-badge full-time">Full Time</span>
+                    </div>
+                    <p>IT professional needed to manage and maintain our hospital's IT infrastructure.</p>
+                    <div class="job-meta">
+                        <span><i class="fas fa-building"></i> IT Department</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Addis Ababa</span>
+                        <span><i class="fas fa-calendar"></i> Posted: Jan 28, 2026</span>
+                    </div>
+                    <a href="#" class="btn btn-primary btn-sm">Apply Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- BENEFITS                                  -->
+    <!-- ============================================ -->
+    <section class="benefits-section section-padding">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">Why Join Us</span>
+                <h2>Employee <br />Benefits</h2>
+            </div>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <i class="fas fa-heart"></i>
+                    <h4>Health Insurance</h4>
+                    <p>Comprehensive health coverage for you and your family.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h4>Professional Development</h4>
+                    <p>Continuous learning and career growth opportunities.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-clock"></i>
+                    <h4>Flexible Schedule</h4>
+                    <p>Work-life balance with flexible working hours.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-piggy-bank"></i>
+                    <h4>Retirement Plan</h4>
+                    <p>Secure your future with our retirement savings plan.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-child"></i>
+                    <h4>Paid Leave</h4>
+                    <p>Annual leave, sick leave, and maternity/paternity leave.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-trophy"></i>
+                    <h4>Performance Bonuses</h4>
+                    <p>Recognition and rewards for outstanding performance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- APPLICATION PROCESS                       -->
+    <!-- ============================================ -->
+    <section class="process-section section-padding bg-light">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">How to Apply</span>
+                <h2>Application <br />Process</h2>
+            </div>
+
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h4>Submit Application</h4>
+                    <p>Submit your resume and cover letter online.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h4>Initial Review</h4>
+                    <p>Our HR team reviews your application.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h4>Interview</h4>
+                    <p>Selected candidates are invited for an interview.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h4>Offer</h4>
+                    <p>Successful candidates receive a job offer.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CTA SECTION                                -->
+    <!-- ============================================ -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-wrapper">
+                <div class="cta-text">
+                    <h2>Ready to Join Our Team?</h2>
+                    <p>Start your career journey with Adventist General Hospital today.</p>
+                </div>
+                <div class="cta-buttons">
+                    <a href="#job-listings" class="btn btn-primary btn-lg">
+                        <i class="fas fa-briefcase"></i> View Jobs
+                    </a>
+                    <a href="contact.html" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-envelope"></i> Contact HR
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="departments.html">Departments</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="doctors.html">Find a Doctor</a></li>
+                        <li><a href="appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="emergency.html">Emergency Care</a></li>
+                        <li><a href="telemedicine.html">Telemedicine</a></li>
+                        <li><a href="laboratory.html">Laboratory</a></li>
+                        <li><a href="radiology.html">Radiology</a></li>
+                        <li><a href="pharmacy.html">Pharmacy</a></li>
+                        <li><a href="blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Job filters
+        const deptFilter = document.getElementById('jobDeptFilter');
+        const typeFilter = document.getElementById('jobTypeFilter');
+        const jobCards = document.querySelectorAll('.job-card');
+
+        function filterJobs() {
+            const dept = deptFilter.value;
+            const type = typeFilter.value;
+
+            jobCards.forEach(card => {
+                const cardDept = card.dataset.department;
+                const cardType = card.dataset.type;
+                let show = true;
+
+                if (dept !== 'all' && cardDept !== dept) show = false;
+                if (type !== 'all' && cardType !== type) show = false;
+
+                card.style.display = show ? 'block' : 'none';
+            });
+        }
+
+        deptFilter.addEventListener('change', filterJobs);
+        typeFilter.addEventListener('change', filterJobs);
+    </script>
+</body>
+                              </html>
