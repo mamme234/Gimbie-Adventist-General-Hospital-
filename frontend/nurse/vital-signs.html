@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vital Signs - Nurse Portal</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/nurse.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Doctors</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="../appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- VITAL SIGNS                               -->
+    <!-- ============================================ -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-wrapper">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="sidebar-profile">
+                        <img src="../images/nurses/nurse-avatar.jpg" alt="Nurse" />
+                        <h4>Nurse Meseret Hailu</h4>
+                        <span>Head Nurse • ID: NUR-2024-001</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                        <a href="patients.html"><i class="fas fa-users"></i> Patients</a>
+                        <a href="wards.html"><i class="fas fa-hospital"></i> Wards</a>
+                        <a href="admissions.html"><i class="fas fa-user-plus"></i> Admissions</a>
+                        <a href="discharge.html"><i class="fas fa-user-minus"></i> Discharge</a>
+                        <a href="medications.html"><i class="fas fa-pills"></i> Medications</a>
+                        <a href="vital-signs.html" class="active"><i class="fas fa-heartbeat"></i> Vital Signs</a>
+                        <a href="reports.html"><i class="fas fa-chart-bar"></i> Reports</a>
+                        <a href="../login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    <div class="dashboard-header">
+                        <h1>Vital Signs</h1>
+                        <button class="btn btn-primary btn-sm" id="newVitalBtn">
+                            <i class="fas fa-plus"></i> Record Vital Signs
+                        </button>
+                    </div>
+
+                    <!-- Patient Selection -->
+                    <div class="patient-selector">
+                        <select>
+                            <option value="">Select Patient</option>
+                            <option value="1">Meron Tesfaye • Room 201</option>
+                            <option value="2">Abel Girma • Room 202</option>
+                            <option value="3">Selam Tsegaye • Room 203</option>
+                            <option value="4">Yonas Alemu • Room 204</option>
+                            <option value="5">Tigist Wondimu • Room 205</option>
+                        </select>
+                        <button class="btn btn-primary">View Records</button>
+                    </div>
+
+                    <!-- Vital Signs Display -->
+                    <div class="vital-display">
+                        <div class="vital-grid">
+                            <div class="vital-item">
+                                <span class="vital-label">Blood Pressure</span>
+                                <span class="vital-value">120/80</span>
+                                <span class="vital-status normal">Normal</span>
+                                <span class="vital-time">Feb 20, 2026 • 08:00 AM</span>
+                            </div>
+                            <div class="vital-item">
+                                <span class="vital-label">Heart Rate</span>
+                                <span class="vital-value">72 bpm</span>
+                                <span class="vital-status normal">Normal</span>
+                                <span class="vital-time">Feb 20, 2026 • 08:00 AM</span>
+                            </div>
+                            <div class="vital-item">
+                                <span class="vital-label">Temperature</span>
+                                <span class="vital-value">36.7°C</span>
+                                <span class="vital-status normal">Normal</span>
+                                <span class="vital-time">Feb 20, 2026 • 08:00 AM</span>
+                            </div>
+                            <div class="vital-item">
+                                <span class="vital-label">Oxygen Saturation</span>
+                                <span class="vital-value">98%</span>
+                                <span class="vital-status normal">Normal</span>
+                                <span class="vital-time">Feb 20, 2026 • 08:00 AM</span>
+                            </div>
+                            <div class="vital-item">
+                                <span class="vital-label">Respiratory Rate</span>
+                                <span class="vital-value">16/min</span>
+                                <span class="vital-status normal">Normal</span>
+                                <span class="vital-time">Feb 20, 2026 • 08:00 AM</span>
+                            </div>
+                            <div class="vital-item">
+                                <span class="vital-label">Blood Glucose</span>
+                                <span class="vital-value">110 mg/dL</span>
+                                <span class="vital-status normal">Normal</span>
+                                <span class="vital-time">Feb 20, 2026 • 08:00 AM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- History Chart -->
+                    <div class="vital-history">
+                        <h3>Vital Signs History</h3>
+                        <div class="chart-container">
+                            <div class="chart-placeholder">
+                                <div class="chart-bars">
+                                    <div class="chart-bar" style="height: 65%;">
+                                        <span class="bar-label">Feb 15</span>
+                                        <span class="bar-value">118/78</span>
+                                    </div>
+                                    <div class="chart-bar" style="height: 70%;">
+                                        <span class="bar-label">Feb 16</span>
+                                        <span class="bar-value">120/80</span>
+                                    </div>
+                                    <div class="chart-bar" style="height: 60%;">
+                                        <span class="bar-label">Feb 17</span>
+                                        <span class="bar-value">116/76</span>
+                                    </div>
+                                    <div class="chart-bar" style="height: 75%;">
+                                        <span class="bar-label">Feb 18</span>
+                                        <span class="bar-value">122/82</span>
+                                    </div>
+                                    <div class="chart-bar" style="height: 65%;">
+                                        <span class="bar-label">Feb 19</span>
+                                        <span class="bar-value">118/78</span>
+                                    </div>
+                                    <div class="chart-bar" style="height: 70%;">
+                                        <span class="bar-label">Feb 20</span>
+                                        <span class="bar-value">120/80</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Record Vital Signs Modal -->
+                    <div class="modal-overlay" id="vitalModal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3>Record Vital Signs</h3>
+                                <button class="modal-close" id="closeModal"><i class="fas fa-times"></i></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>Patient <span class="required">*</span></label>
+                                    <select>
+                                        <option value="">Select patient</option>
+                                        <option value="1">Meron Tesfaye • Room 201</option>
+                                        <option value="2">Abel Girma • Room 202</option>
+                                        <option value="3">Selam Tsegaye • Room 203</option>
+                                    </select>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Systolic BP <span class="required">*</span></label>
+                                        <input type="number" placeholder="120" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Diastolic BP <span class="required">*</span></label>
+                                        <input type="number" placeholder="80" />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Heart Rate <span class="required">*</span></label>
+                                        <input type="number" placeholder="72" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Temperature (°C) <span class="required">*</span></label>
+                                        <input type="number" step="0.1" placeholder="36.7" />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Oxygen Saturation (%) <span class="required">*</span></label>
+                                        <input type="number" placeholder="98" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Respiratory Rate <span class="required">*</span></label>
+                                        <input type="number" placeholder="16" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Blood Glucose (mg/dL)</label>
+                                    <input type="number" placeholder="110" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Notes</label>
+                                    <textarea rows="3" placeholder="Any observations..."></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-outline-secondary" id="closeModalBtn">Cancel</button>
+                                <button class="btn btn-primary"><i class="fas fa-heartbeat"></i> Save Vitals</button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Modal
+        const modal = document.getElementById('vitalModal');
+        const openBtn = document.getElementById('newVitalBtn');
+        const closeBtns = document.querySelectorAll('#closeModal, #closeModalBtn');
+
+        openBtn.addEventListener('click', function() {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+</body>
+                                                 </html>
