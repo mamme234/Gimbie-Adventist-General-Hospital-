@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Surgery - Doctor Portal</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/doctor.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Doctors</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="../appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- SURGERY                                   -->
+    <!-- ============================================ -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-wrapper">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="sidebar-profile">
+                        <img src="../images/doctors/doctor-1.jpg" alt="Dr. Samuel Tekle" />
+                        <h4>Dr. Samuel Tekle</h4>
+                        <span>Cardiologist • ID: DOC-2024-001</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                        <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                        <a href="patients.html"><i class="fas fa-users"></i> Patients</a>
+                        <a href="patient-details.html"><i class="fas fa-user-md"></i> Patient Details</a>
+                        <a href="appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a>
+                        <a href="schedule.html"><i class="fas fa-clock"></i> Schedule</a>
+                        <a href="prescriptions.html"><i class="fas fa-prescription-bottle"></i> Prescriptions</a>
+                        <a href="diagnosis.html"><i class="fas fa-stethoscope"></i> Diagnosis</a>
+                        <a href="laboratory-orders.html"><i class="fas fa-flask"></i> Lab Orders</a>
+                        <a href="radiology-orders.html"><i class="fas fa-x-ray"></i> Radiology Orders</a>
+                        <a href="surgery.html" class="active"><i class="fas fa-scalpel"></i> Surgery</a>
+                        <a href="referrals.html"><i class="fas fa-user-md"></i> Referrals</a>
+                        <a href="telemedicine.html"><i class="fas fa-video"></i> Telemedicine</a>
+                        <a href="reports.html"><i class="fas fa-chart-bar"></i> Reports</a>
+                        <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="../login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    <div class="dashboard-header">
+                        <h1>Surgery Management</h1>
+                        <button class="btn btn-primary btn-sm" id="newSurgeryBtn">
+                            <i class="fas fa-plus"></i> Schedule Surgery
+                        </button>
+                    </div>
+
+                    <!-- Surgery Stats -->
+                    <div class="stats-cards" style="margin-bottom: 30px;">
+                        <div class="stat-card primary">
+                            <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+                            <span class="stat-number">5</span>
+                            <span class="stat-label">Scheduled</span>
+                        </div>
+                        <div class="stat-card success">
+                            <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Completed</span>
+                        </div>
+                        <div class="stat-card warning">
+                            <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                            <span class="stat-number">2</span>
+                            <span class="stat-label">In Progress</span>
+                        </div>
+                        <div class="stat-card danger">
+                            <div class="stat-icon"><i class="fas fa-times-circle"></i></div>
+                            <span class="stat-number">1</span>
+                            <span class="stat-label">Cancelled</span>
+                        </div>
+                    </div>
+
+                    <!-- Filters -->
+                    <div class="appointment-filters">
+                        <button class="filter-btn active">All</button>
+                        <button class="filter-btn">Scheduled</button>
+                        <button class="filter-btn">In Progress</button>
+                        <button class="filter-btn">Completed</button>
+                        <button class="filter-btn">Cancelled</button>
+                    </div>
+
+                    <!-- Surgery List -->
+                    <div class="surgery-list">
+                        <div class="surgery-card">
+                            <div class="surgery-header">
+                                <div>
+                                    <h4>Coronary Artery Bypass Graft (CABG)</h4>
+                                    <span class="surgery-id">Surgery #SUR-2026-001</span>
+                                </div>
+                                <span class="surgery-status scheduled">Scheduled</span>
+                            </div>
+                            <div class="surgery-details">
+                                <p><strong>Patient:</strong> Meron Tesfaye</p>
+                                <p><strong>Date:</strong> March 5, 2026 • 08:00 AM</p>
+                                <p><strong>Surgeon:</strong> Dr. Yonas Girma</p>
+                                <p><strong>Anesthesiologist:</strong> Dr. Tsehay Lemma</p>
+                                <p><strong>OR:</strong> Operating Theatre 3</p>
+                                <p><strong>Status:</strong> Pre-operative clearance completed</p>
+                            </div>
+                            <div class="surgery-actions">
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i> View Details</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i> Update</button>
+                                <button class="btn btn-sm btn-outline-danger"><i class="fas fa-times"></i> Cancel</button>
+                            </div>
+                        </div>
+
+                        <div class="surgery-card">
+                            <div class="surgery-header">
+                                <div>
+                                    <h4>Total Knee Replacement</h4>
+                                    <span class="surgery-id">Surgery #SUR-2026-002</span>
+                                </div>
+                                <span class="surgery-status in-progress">In Progress</span>
+                            </div>
+                            <div class="surgery-details">
+                                <p><strong>Patient:</strong> Selam Tsegaye</p>
+                                <p><strong>Date:</strong> February 20, 2026 • 10:00 AM</p>
+                                <p><strong>Surgeon:</strong> Dr. Daniel Assefa</p>
+                                <p><strong>Anesthesiologist:</strong> Dr. Biruk Alemu</p>
+                                <p><strong>OR:</strong> Operating Theatre 1</p>
+                                <p><strong>Status:</strong> Surgery in progress - Estimated 2 hours remaining</p>
+                            </div>
+                            <div class="surgery-actions">
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i> Live View</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i> Update</button>
+                            </div>
+                        </div>
+
+                        <div class="surgery-card">
+                            <div class="surgery-header">
+                                <div>
+                                    <h4>Lumbar Laminectomy</h4>
+                                    <span class="surgery-id">Surgery #SUR-2026-003</span>
+                                </div>
+                                <span class="surgery-status scheduled">Scheduled</span>
+                            </div>
+                            <div class="surgery-details">
+                                <p><strong>Patient:</strong> Abel Girma</p>
+                                <p><strong>Date:</strong> March 10, 2026 • 09:00 AM</p>
+                                <p><strong>Surgeon:</strong> Dr. Sara Hailu</p>
+                                <p><strong>Anesthesiologist:</strong> Dr. Tsehay Lemma</p>
+                                <p><strong>OR:</strong> Operating Theatre 2</p>
+                                <p><strong>Status:</strong> Awaiting pre-operative assessment</p>
+                            </div>
+                            <div class="surgery-actions">
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i> View Details</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i> Update</button>
+                                <button class="btn btn-sm btn-outline-danger"><i class="fas fa-times"></i> Cancel</button>
+                            </div>
+                        </div>
+
+                        <div class="surgery-card">
+                            <div class="surgery-header">
+                                <div>
+                                    <h4>Hernia Repair</h4>
+                                    <span class="surgery-id">Surgery #SUR-2026-004</span>
+                                </div>
+                                <span class="surgery-status completed">Completed</span>
+                            </div>
+                            <div class="surgery-details">
+                                <p><strong>Patient:</strong> Yonas Alemu</p>
+                                <p><strong>Date:</strong> February 15, 2026 • 08:30 AM</p>
+                                <p><strong>Surgeon:</strong> Dr. Yonas Girma</p>
+                                <p><strong>Anesthesiologist:</strong> Dr. Biruk Alemu</p>
+                                <p><strong>OR:</strong> Operating Theatre 3</p>
+                                <p><strong>Outcome:</strong> Successful. Patient recovering well.</p>
+                            </div>
+                            <div class="surgery-actions">
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-file-medical"></i> View Report</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-print"></i> Print Summary</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- New Surgery Modal -->
+                    <div class="modal-overlay" id="surgeryModal">
+                        <div class="modal-content large">
+                            <div class="modal-header">
+                                <h3>Schedule Surgery</h3>
+                                <button class="modal-close" id="closeModal"><i class="fas fa-times"></i></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>Patient <span class="required">*</span></label>
+                                    <select>
+                                        <option value="">Select patient</option>
+                                        <option value="1">Meron Tesfaye</option>
+                                        <option value="2">Abel Girma</option>
+                                        <option value="3">Selam Tsegaye</option>
+                                        <option value="4">Yonas Alemu</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Surgery Type <span class="required">*</span></label>
+                                    <input type="text" placeholder="Enter surgery type" />
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Surgery Date <span class="required">*</span></label>
+                                        <input type="date" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Surgery Time <span class="required">*</span></label>
+                                        <input type="time" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Surgeon <span class="required">*</span></label>
+                                    <select>
+                                        <option value="">Select surgeon</option>
+                                        <option value="1">Dr. Yonas Girma</option>
+                                        <option value="2">Dr. Daniel Assefa</option>
+                                        <option value="3">Dr. Sara Hailu</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Anesthesiologist <span class="required">*</span></label>
+                                    <select>
+                                        <option value="">Select anesthesiologist</option>
+                                        <option value="1">Dr. Tsehay Lemma</option>
+                                        <option value="2">Dr. Biruk Alemu</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Operating Theatre <span class="required">*</span></label>
+                                    <select>
+                                        <option value="">Select OR</option>
+                                        <option value="1">Operating Theatre 1</option>
+                                        <option value="2">Operating Theatre 2</option>
+                                        <option value="3">Operating Theatre 3</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Special Instructions</label>
+                                    <textarea rows="3" placeholder="Any special requirements or notes..."></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-outline-secondary" id="closeModalBtn">Cancel</button>
+                                <button class="btn btn-primary"><i class="fas fa-scalpel"></i> Schedule Surgery</button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Modal
+        const modal = document.getElementById('surgeryModal');
+        const openBtn = document.getElementById('newSurgeryBtn');
+        const closeBtns = document.querySelectorAll('#closeModal, #closeModalBtn');
+
+        openBtn.addEventListener('click', function() {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+</body>
+  </html>
