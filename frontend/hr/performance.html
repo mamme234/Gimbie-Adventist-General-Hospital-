@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Performance - HR Portal</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/hr.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Doctors</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="../appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- PERFORMANCE                              -->
+    <!-- ============================================ -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-wrapper">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="sidebar-profile">
+                        <img src="../images/hr/hr-manager.jpg" alt="HR Manager" />
+                        <h4>Mrs. Tsion Alemu</h4>
+                        <span>HR Manager • ID: HR-2024-001</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                        <a href="employees.html"><i class="fas fa-users"></i> Employees</a>
+                        <a href="attendance.html"><i class="fas fa-clipboard-check"></i> Attendance</a>
+                        <a href="leave.html"><i class="fas fa-calendar-alt"></i> Leave Management</a>
+                        <a href="recruitment.html"><i class="fas fa-user-plus"></i> Recruitment</a>
+                        <a href="payroll.html"><i class="fas fa-money-bill"></i> Payroll</a>
+                        <a href="performance.html" class="active"><i class="fas fa-star"></i> Performance</a>
+                        <a href="reports.html"><i class="fas fa-file-alt"></i> Reports</a>
+                        <a href="../login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    <div class="dashboard-header">
+                        <h1>Performance Reviews</h1>
+                        <button class="btn btn-primary btn-sm" id="newReviewBtn">
+                            <i class="fas fa-plus"></i> Create Review
+                        </button>
+                    </div>
+
+                    <!-- Performance Stats -->
+                    <div class="stats-cards" style="margin-bottom: 30px;">
+                        <div class="stat-card primary">
+                            <div class="stat-icon"><i class="fas fa-star"></i></div>
+                            <span class="stat-number">4.5</span>
+                            <span class="stat-label">Avg Rating</span>
+                        </div>
+                        <div class="stat-card success">
+                            <div class="stat-icon"><i class="fas fa-user-check"></i></div>
+                            <span class="stat-number">156</span>
+                            <span class="stat-label">Reviewed</span>
+                        </div>
+                        <div class="stat-card warning">
+                            <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Pending</span>
+                        </div>
+                        <div class="stat-card danger">
+                            <div class="stat-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">Needs Improvement</span>
+                        </div>
+                    </div>
+
+                    <!-- Performance Reviews -->
+                    <div class="performance-reviews">
+                        <div class="review-card">
+                            <div class="review-header">
+                                <h4>Dr. Samuel Tekle</h4>
+                                <span class="review-rating">4.8 ⭐</span>
+                            </div>
+                            <div class="review-details">
+                                <p><strong>Department:</strong> Cardiology</p>
+                                <p><strong>Review Date:</strong> February 15, 2026</p>
+                                <p><strong>Reviewer:</strong> Dr. Amanuel Tesfaye (CEO)</p>
+                                <p><strong>Summary:</strong> Excellent performance. Exceeded all KPIs. Outstanding patient care and leadership.</p>
+                            </div>
+                            <div class="review-actions">
+                                <button class="btn btn-sm btn-outline-primary">View Details</button>
+                                <button class="btn btn-sm btn-outline-primary">Edit</button>
+                            </div>
+                        </div>
+
+                        <div class="review-card">
+                            <div class="review-header">
+                                <h4>Nurse Meseret Hailu</h4>
+                                <span class="review-rating">4.5 ⭐</span>
+                            </div>
+                            <div class="review-details">
+                                <p><strong>Department:</strong> Nursing</p>
+                                <p><strong>Review Date:</strong> February 12, 2026</p>
+                                <p><strong>Reviewer:</strong> HR Manager</p>
+                                <p><strong>Summary:</strong> Strong performance. Excellent team player and mentor to junior nurses.</p>
+                            </div>
+                            <div class="review-actions">
+                                <button class="btn btn-sm btn-outline-primary">View Details</button>
+                                <button class="btn btn-sm btn-outline-primary">Edit</button>
+                            </div>
+                        </div>
+
+                        <div class="review-card">
+                            <div class="review-header">
+                                <h4>Dr. Martha Ayele</h4>
+                                <span class="review-rating">3.8 ⭐</span>
+                            </div>
+                            <div class="review-details">
+                                <p><strong>Department:</strong> Radiology</p>
+                                <p><strong>Review Date:</strong> February 10, 2026</p>
+                                <p><strong>Reviewer:</strong> HR Manager</p>
+                                <p><strong>Summary:</strong> Good performance. Room for improvement in leadership and communication.</p>
+                            </div>
+                            <div class="review-actions">
+                                <button class="btn btn-sm btn-outline-primary">View Details</button>
+                                <button class="btn btn-sm btn-outline-primary">Edit</button>
+                            </div>
+                        </div>
+
+                        <div class="review-card pending">
+                            <div class="review-header">
+                                <h4>Dr. Yonas Hailu</h4>
+                                <span class="review-rating">—</span>
+                            </div>
+                            <div class="review-details">
+                                <p><strong>Department:</strong> Laboratory</p>
+                                <p><strong>Review Date:</strong> Pending</p>
+                                <p><strong>Reviewer:</strong> —</p>
+                                <p><strong>Status:</strong> Awaiting manager input</p>
+                            </div>
+                            <div class="review-actions">
+                                <button class="btn btn-sm btn-primary">Start Review</button>
+                                <button class="btn btn-sm btn-outline-primary">Remind</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- New Review Modal -->
+                    <div class="modal-overlay" id="reviewModal">
+                        <div class="modal-content large">
+                            <div class="modal-header">
+                                <h3>Create Performance Review</h3>
+                                <button class="modal-close" id="closeModal"><i class="fas fa-times"></i></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>Employee <span class="required">*</span></label>
+                                    <select>
+                                        <option value="">Select employee</option>
+                                        <option value="1">Dr. Samuel Tekle</option>
+                                        <option value="2">Dr. Sara Hailu</option>
+                                        <option value="3">Nurse Meseret Hailu</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Reviewer <span class="required">*</span></label>
+                                    <select>
+                                        <option value="">Select reviewer</option>
+                                        <option value="1">HR Manager</option>
+                                        <option value="2">Department Head</option>
+                                        <option value="3">CEO</option>
+                                    </select>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Review Period Start</label>
+                                        <input type="date" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Review Period End</label>
+                                        <input type="date" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Rating (1-5) <span class="required">*</span></label>
+                                    <select>
+                                        <option value="">Select rating</option>
+                                        <option value="1">1 - Poor</option>
+                                        <option value="2">2 - Needs Improvement</option>
+                                        <option value="3">3 - Satisfactory</option>
+                                        <option value="4">4 - Good</option>
+                                        <option value="5">5 - Excellent</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Feedback</label>
+                                    <textarea rows="4" placeholder="Performance feedback..."></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-outline-secondary" id="closeModalBtn">Cancel</button>
+                                <button class="btn btn-primary"><i class="fas fa-star"></i> Submit Review</button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Modal
+        const modal = document.getElementById('reviewModal');
+        const openBtn = document.getElementById('newReviewBtn');
+        const closeBtns = document.querySelectorAll('#closeModal, #closeModalBtn');
+
+        openBtn.addEventListener('click', function() {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+</body>
+                          </html>
