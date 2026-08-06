@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Results - Laboratory Portal</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/laboratory.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Doctors</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="../appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- RESULTS                                  -->
+    <!-- ============================================ -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-wrapper">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="sidebar-profile">
+                        <img src="../images/lab/lab-manager.jpg" alt="Lab Manager" />
+                        <h4>Dr. Yonas Hailu</h4>
+                        <span>Lab Manager • ID: LAB-2024-001</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                        <a href="orders.html"><i class="fas fa-clipboard-list"></i> Orders</a>
+                        <a href="samples.html"><i class="fas fa-vial"></i> Samples</a>
+                        <a href="testing.html"><i class="fas fa-microscope"></i> Testing</a>
+                        <a href="results.html" class="active"><i class="fas fa-file-medical-alt"></i> Results</a>
+                        <a href="inventory.html"><i class="fas fa-boxes"></i> Inventory</a>
+                        <a href="equipment.html"><i class="fas fa-microscope"></i> Equipment</a>
+                        <a href="reports.html"><i class="fas fa-chart-bar"></i> Reports</a>
+                        <a href="../login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    <div class="dashboard-header">
+                        <h1>Test Results</h1>
+                        <div class="result-actions">
+                            <button class="btn btn-outline-primary btn-sm"><i class="fas fa-filter"></i> Filter</button>
+                            <button class="btn btn-primary btn-sm"><i class="fas fa-file-export"></i> Export All</button>
+                        </div>
+                    </div>
+
+                    <!-- Result Cards -->
+                    <div class="result-cards">
+                        <div class="result-card">
+                            <div class="result-header">
+                                <div>
+                                    <h4>Complete Blood Count (CBC)</h4>
+                                    <span class="result-patient">Meron Tesfaye</span>
+                                </div>
+                                <span class="result-date">Feb 20, 2026</span>
+                            </div>
+                            <div class="result-summary">
+                                <div class="result-item">
+                                    <span class="result-label">WBC</span>
+                                    <span class="result-value normal">7.5 x 10³/µL</span>
+                                    <span class="result-range">(4.5-11.0)</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">RBC</span>
+                                    <span class="result-value normal">4.8 x 10⁶/µL</span>
+                                    <span class="result-range">(4.0-5.4)</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">Hemoglobin</span>
+                                    <span class="result-value normal">14.2 g/dL</span>
+                                    <span class="result-range">(12.0-16.0)</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">Platelets</span>
+                                    <span class="result-value normal">280 x 10³/µL</span>
+                                    <span class="result-range">(150-400)</span>
+                                </div>
+                            </div>
+                            <div class="result-actions">
+                                <button class="btn btn-sm btn-outline-primary">View Full Report</button>
+                                <button class="btn btn-sm btn-success">Release Results</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-print"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="result-card">
+                            <div class="result-header">
+                                <div>
+                                    <h4>Lipid Profile</h4>
+                                    <span class="result-patient">Selam Tsegaye</span>
+                                </div>
+                                <span class="result-date">Feb 20, 2026</span>
+                            </div>
+                            <div class="result-summary">
+                                <div class="result-item">
+                                    <span class="result-label">Total Cholesterol</span>
+                                    <span class="result-value normal">180 mg/dL</span>
+                                    <span class="result-range">(<200)</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">LDL</span>
+                                    <span class="result-value normal">95 mg/dL</span>
+                                    <span class="result-range">(<130)</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">HDL</span>
+                                    <span class="result-value normal">55 mg/dL</span>
+                                    <span class="result-range">(>40)</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">Triglycerides</span>
+                                    <span class="result-value normal">150 mg/dL</span>
+                                    <span class="result-range">(<150)</span>
+                                </div>
+                            </div>
+                            <div class="result-actions">
+                                <button class="btn btn-sm btn-outline-primary">View Full Report</button>
+                                <button class="btn btn-sm btn-success">Release Results</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-print"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="result-card">
+                            <div class="result-header">
+                                <div>
+                                    <h4>HbA1c Test</h4>
+                                    <span class="result-patient">Yonas Alemu</span>
+                                </div>
+                                <span class="result-date">Feb 20, 2026</span>
+                            </div>
+                            <div class="result-summary">
+                                <div class="result-item">
+                                    <span class="result-label">HbA1c</span>
+                                    <span class="result-value normal">5.7%</span>
+                                    <span class="result-range">(<5.7)</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">eAG</span>
+                                    <span class="result-value normal">117 mg/dL</span>
+                                    <span class="result-range">(Normal)</span>
+                                </div>
+                            </div>
+                            <div class="result-actions">
+                                <button class="btn btn-sm btn-outline-primary">View Full Report</button>
+                                <button class="btn btn-sm btn-success">Release Results</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-print"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="result-card">
+                            <div class="result-header">
+                                <div>
+                                    <h4>Urinalysis</h4>
+                                    <span class="result-patient">Mekdes Hailu</span>
+                                </div>
+                                <span class="result-date">Feb 19, 2026</span>
+                            </div>
+                            <div class="result-summary">
+                                <div class="result-item">
+                                    <span class="result-label">Color</span>
+                                    <span class="result-value normal">Yellow</span>
+                                    <span class="result-range">(Clear/Yellow)</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">pH</span>
+                                    <span class="result-value normal">6.5</span>
+                                    <span class="result-range">(4.5-8.0)</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">Protein</span>
+                                    <span class="result-value normal">Negative</span>
+                                    <span class="result-range">(Negative)</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">Glucose</span>
+                                    <span class="result-value normal">Negative</span>
+                                    <span class="result-range">(Negative)</span>
+                                </div>
+                            </div>
+                            <div class="result-actions">
+                                <button class="btn btn-sm btn-outline-primary">View Full Report</button>
+                                <button class="btn btn-sm btn-success">Release Results</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-print"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <button class="page-btn">...</button>
+                        <button class="page-btn">10</button>
+                        <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+                          </html>
