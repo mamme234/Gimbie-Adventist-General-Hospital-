@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payments - Finance Portal</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/finance.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Doctors</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="../appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- PAYMENTS                                 -->
+    <!-- ============================================ -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-wrapper">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="sidebar-profile">
+                        <img src="../images/finance/finance-manager.jpg" alt="Finance Manager" />
+                        <h4>Mr. Solomon Haile</h4>
+                        <span>CFO • ID: FIN-2024-001</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                        <a href="billing.html"><i class="fas fa-file-invoice"></i> Billing</a>
+                        <a href="invoices.html"><i class="fas fa-file-invoice-dollar"></i> Invoices</a>
+                        <a href="payments.html" class="active"><i class="fas fa-credit-card"></i> Payments</a>
+                        <a href="insurance.html"><i class="fas fa-shield-alt"></i> Insurance</a>
+                        <a href="payroll.html"><i class="fas fa-user-cog"></i> Payroll</a>
+                        <a href="accounting.html"><i class="fas fa-book"></i> Accounting</a>
+                        <a href="revenue.html"><i class="fas fa-chart-line"></i> Revenue</a>
+                        <a href="reports.html"><i class="fas fa-file-alt"></i> Reports</a>
+                        <a href="../login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    <div class="dashboard-header">
+                        <h1>Payments</h1>
+                        <button class="btn btn-primary btn-sm" id="newPaymentBtn">
+                            <i class="fas fa-plus"></i> Record Payment
+                        </button>
+                    </div>
+
+                    <!-- Payment Stats -->
+                    <div class="stats-cards" style="margin-bottom: 30px;">
+                        <div class="stat-card primary">
+                            <div class="stat-icon"><i class="fas fa-credit-card"></i></div>
+                            <span class="stat-number">ETB 1,820,000</span>
+                            <span class="stat-label">Total Collected</span>
+                        </div>
+                        <div class="stat-card success">
+                            <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                            <span class="stat-number">342</span>
+                            <span class="stat-label">Successful Payments</span>
+                        </div>
+                        <div class="stat-card warning">
+                            <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Pending</span>
+                        </div>
+                        <div class="stat-card danger">
+                            <div class="stat-icon"><i class="fas fa-times-circle"></i></div>
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Failed</span>
+                        </div>
+                    </div>
+
+                    <!-- Payment Methods -->
+                    <div class="payment-methods" style="margin-bottom: 30px;">
+                        <h3>Payment Methods</h3>
+                        <div class="methods-grid">
+                            <div class="method-card active">
+                                <i class="fas fa-credit-card"></i>
+                                <div>
+                                    <h4>Card Payments</h4>
+                                    <span>ETB 980,000 (53.8%)</span>
+                                </div>
+                            </div>
+                            <div class="method-card">
+                                <i class="fas fa-mobile-alt"></i>
+                                <div>
+                                    <h4>Mobile Money</h4>
+                                    <span>ETB 520,000 (28.6%)</span>
+                                </div>
+                            </div>
+                            <div class="method-card">
+                                <i class="fas fa-university"></i>
+                                <div>
+                                    <h4>Bank Transfer</h4>
+                                    <span>ETB 220,000 (12.1%)</span>
+                                </div>
+                            </div>
+                            <div class="method-card">
+                                <i class="fas fa-money-bill"></i>
+                                <div>
+                                    <h4>Cash</h4>
+                                    <span>ETB 100,000 (5.5%)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Table -->
+                    <div class="table-responsive">
+                        <table class="billing-table">
+                            <thead>
+                                <tr>
+                                    <th>Transaction ID</th>
+                                    <th>Patient</th>
+                                    <th>Invoice</th>
+                                    <th>Amount</th>
+                                    <th>Method</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>#TXN-2026-001</strong></td>
+                                    <td>Meron Tesfaye</td>
+                                    <td>#INV-2026-001</td>
+                                    <td class="amount">ETB 3,500</td>
+                                    <td>Card</td>
+                                    <td>Feb 18, 2026</td>
+                                    <td><span class="status paid">Completed</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">Receipt</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#TXN-2026-002</strong></td>
+                                    <td>Selam Tsegaye</td>
+                                    <td>#INV-2026-002</td>
+                                    <td class="amount">ETB 4,500</td>
+                                    <td>Mobile Money</td>
+                                    <td>Feb 17, 2026</td>
+                                    <td><span class="status pending">Pending</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">Receipt</button>
+                                        <button class="btn btn-sm btn-success">Verify</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#TXN-2026-003</strong></td>
+                                    <td>Abel Girma</td>
+                                    <td>#INV-2026-003</td>
+                                    <td class="amount">ETB 3,200</td>
+                                    <td>Bank Transfer</td>
+                                    <td>Feb 15, 2026</td>
+                                    <td><span class="status paid">Completed</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">Receipt</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#TXN-2026-004</strong></td>
+                                    <td>Yonas Alemu</td>
+                                    <td>#INV-2026-004</td>
+                                    <td class="amount">ETB 3,500</td>
+                                    <td>Card</td>
+                                    <td>Feb 12, 2026</td>
+                                    <td><span class="status failed">Failed</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">Receipt</button>
+                                        <button class="btn btn-sm btn-danger">Retry</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#TXN-2026-005</strong></td>
+                                    <td>Tigist Wondimu</td>
+                                    <td>#INV-2026-005</td>
+                                    <td class="amount">ETB 2,800</td>
+                                    <td>Cash</td>
+                                    <td>Feb 10, 2026</td>
+                                    <td><span class="status paid">Completed</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">Receipt</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <button class="page-btn">...</button>
+                        <button class="page-btn">12</button>
+                        <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+
+                    <!-- New Payment Modal -->
+                    <div class="modal-overlay" id="paymentModal">
+                        <div class="modal-content large">
+                            <div class="modal-header">
+                                <h3>Record Payment</h3>
+                                <button class="modal-close" id="closeModal"><i class="fas fa-times"></i></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>Patient <span class="required">*</span></label>
+                                    <select>
+                                        <option value="">Select patient</option>
+                                        <option value="1">Meron Tesfaye</option>
+                                        <option value="2">Abel Girma</option>
+                                        <option value="3">Selam Tsegaye</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Invoice <span class="required">*</span></label>
+                                    <select>
+                                        <option value="">Select invoice</option>
+                                        <option value="1">#INV-2026-001 - ETB 3,500</option>
+                                        <option value="2">#INV-2026-002 - ETB 4,500</option>
+                                        <option value="3">#INV-2026-003 - ETB 3,200</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Amount <span class="required">*</span></label>
+                                    <input type="number" placeholder="ETB 0.00" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Payment Method <span class="required">*</span></label>
+                                    <select>
+                                        <option value="">Select method</option>
+                                        <option value="card">Card Payment</option>
+                                        <option value="mobile">Mobile Money</option>
+                                        <option value="bank">Bank Transfer</option>
+                                        <option value="cash">Cash</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Reference Number</label>
+                                    <input type="text" placeholder="Transaction reference" />
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-outline-secondary" id="closeModalBtn">Cancel</button>
+                                <button class="btn btn-primary"><i class="fas fa-credit-card"></i> Record Payment</button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Modal
+        const modal = document.getElementById('paymentModal');
+        const openBtn = document.getElementById('newPaymentBtn');
+        const closeBtns = document.querySelectorAll('#closeModal, #closeModalBtn');
+
+        openBtn.addEventListener('click', function() {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+</body>
+  </html>
