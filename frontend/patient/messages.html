@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Messages - Patient Portal</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/patient.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Doctors</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="../appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- MESSAGES                                  -->
+    <!-- ============================================ -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-wrapper">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="sidebar-profile">
+                        <img src="../images/patients/patient-avatar.jpg" alt="Patient" />
+                        <h4>Meron Tesfaye</h4>
+                        <span>Patient ID: PAT-2026-001</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                        <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                        <a href="medical-records.html"><i class="fas fa-file-medical"></i> Medical Records</a>
+                        <a href="appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a>
+                        <a href="appointment-history.html"><i class="fas fa-history"></i> Appointment History</a>
+                        <a href="prescriptions.html"><i class="fas fa-prescription-bottle"></i> Prescriptions</a>
+                        <a href="laboratory-results.html"><i class="fas fa-flask"></i> Lab Results</a>
+                        <a href="radiology-results.html"><i class="fas fa-x-ray"></i> Radiology Results</a>
+                        <a href="bills.html"><i class="fas fa-file-invoice-dollar"></i> Bills</a>
+                        <a href="payments.html"><i class="fas fa-credit-card"></i> Payments</a>
+                        <a href="insurance.html"><i class="fas fa-shield-alt"></i> Insurance</a>
+                        <a href="telemedicine.html"><i class="fas fa-video"></i> Telemedicine</a>
+                        <a href="messages.html" class="active"><i class="fas fa-envelope"></i> Messages</a>
+                        <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="../login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    <div class="dashboard-header">
+                        <h1>Messages</h1>
+                        <button class="btn btn-primary btn-sm" id="newMessageBtn">
+                            <i class="fas fa-plus"></i> New Message
+                        </button>
+                    </div>
+
+                    <!-- Message Filters -->
+                    <div class="appointment-filters">
+                        <button class="filter-btn active">All</button>
+                        <button class="filter-btn">Unread</button>
+                        <button class="filter-btn">Sent</button>
+                        <button class="filter-btn">Archived</button>
+                    </div>
+
+                    <!-- Message List -->
+                    <div class="message-list">
+                        <div class="message-item unread">
+                            <div class="message-avatar">
+                                <img src="../images/doctors/doctor-1.jpg" alt="Dr. Samuel Tekle" />
+                            </div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <h4>Dr. Samuel Tekle</h4>
+                                    <span class="message-time">10:30 AM</span>
+                                </div>
+                                <p class="message-subject">Follow-up on your cardiology consultation</p>
+                                <p class="message-preview">Your test results are ready. Please review them and let me know if you have any questions...</p>
+                            </div>
+                            <span class="message-badge">New</span>
+                        </div>
+
+                        <div class="message-item">
+                            <div class="message-avatar">
+                                <img src="../images/doctors/doctor-2.jpg" alt="Dr. Sara Hailu" />
+                            </div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <h4>Dr. Sara Hailu</h4>
+                                    <span class="message-time">Yesterday</span>
+                                </div>
+                                <p class="message-subject">Neurology appointment reminder</p>
+                                <p class="message-preview">Just a reminder about your upcoming appointment on February 28th...</p>
+                            </div>
+                        </div>
+
+                        <div class="message-item">
+                            <div class="message-avatar">
+                                <img src="../images/doctors/doctor-3.jpg" alt="Dr. Daniel Assefa" />
+                            </div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <h4>Dr. Daniel Assefa</h4>
+                                    <span class="message-time">Yesterday</span>
+                                </div>
+                                <p class="message-subject">Orthopedic consultation notes</p>
+                                <p class="message-preview">Please find attached the notes from your recent orthopedic consultation...</p>
+                            </div>
+                        </div>
+
+                        <div class="message-item">
+                            <div class="message-avatar">
+                                <img src="../images/doctors/doctor-5.jpg" alt="Dr. Helen Wondimu" />
+                            </div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <h4>Dr. Helen Wondimu</h4>
+                                    <span class="message-time">Jan 28, 2026</span>
+                                </div>
+                                <p class="message-subject">Lab results notification</p>
+                                <p class="message-preview">Your laboratory results are now available in your patient portal...</p>
+                            </div>
+                        </div>
+
+                        <div class="message-item">
+                            <div class="message-avatar">
+                                <div class="avatar-placeholder">AH</div>
+                            </div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <h4>Appointment Desk</h4>
+                                    <span class="message-time">Jan 25, 2026</span>
+                                </div>
+                                <p class="message-subject">Appointment confirmation</p>
+                                <p class="message-preview">Your appointment with Dr. Samuel Tekle has been confirmed for February 25th...</p>
+                            </div>
+                        </div>
+
+                        <div class="message-item">
+                            <div class="message-avatar">
+                                <div class="avatar-placeholder">BI</div>
+                            </div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <h4>Billing Department</h4>
+                                    <span class="message-time">Jan 20, 2026</span>
+                                </div>
+                                <p class="message-subject">Payment receipt</p>
+                                <p class="message-preview">Thank you for your payment. Your receipt is attached...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- New Message Modal -->
+                    <div class="modal-overlay" id="messageModal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3>New Message</h3>
+                                <button class="modal-close" id="closeModal"><i class="fas fa-times"></i></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>To</label>
+                                    <select>
+                                        <option>Dr. Samuel Tekle (Cardiology)</option>
+                                        <option>Dr. Sara Hailu (Neurology)</option>
+                                        <option>Dr. Daniel Assefa (Orthopedics)</option>
+                                        <option>Dr. Helen Wondimu (OB/GYN)</option>
+                                        <option>Billing Department</option>
+                                        <option>Appointment Desk</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Subject</label>
+                                    <input type="text" placeholder="Enter message subject" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Message</label>
+                                    <textarea rows="6" placeholder="Write your message here..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Attachments (Optional)</label>
+                                    <div class="attachment-upload">
+                                        <input type="file" multiple />
+                                        <span>Drop files here or click to browse</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-outline-secondary" id="closeModalBtn">Cancel</button>
+                                <button class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send Message</button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Message Modal
+        const modal = document.getElementById('messageModal');
+        const openBtn = document.getElementById('newMessageBtn');
+        const closeBtns = document.querySelectorAll('#closeModal, #closeModalBtn');
+
+        openBtn.addEventListener('click', function() {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+  </html>
