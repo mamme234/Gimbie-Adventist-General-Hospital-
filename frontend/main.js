@@ -1,7 +1,8 @@
 /**
  * ============================================
- * MAIN.JS - Global JavaScript Functions
+ * MAIN.JS - Complete Global JavaScript File
  * Adventist General Hospital
+ * Version: 2.0 (Backend Connected)
  * ============================================
  */
 
@@ -24,9 +25,645 @@ document.addEventListener('DOMContentLoaded', function() {
     initBackToTop();
     initSearchFilter();
     initToastMessages();
+    initAuthCheck();
+    initNavAuth();
+    initLogoutHandler();
     
-    console.log('Adventist General Hospital - System Ready 🏥');
+    console.log('🏥 Adventist General Hospital - System Ready');
+    console.log(`📅 ${new Date().toLocaleString()}`);
+    console.log(`👤 User: ${getCurrentUser()?.email || 'Not logged in'}`);
 });
+
+// ============================================
+// ============================================
+// AUTHENTICATION & API INTEGRATION
+// ============================================
+// ============================================
+
+// ============================================
+// API Configuration
+// ============================================
+
+const API_CONFIG = {
+    baseURL: 'https://alpha-af1q.onrender.com/api',
+    timeout: 30000,
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    }
+};
+
+// Token management
+const TOKEN_KEY = 'auth_token';
+const REFRESH_TOKEN_KEY = 'refresh_token';
+const USER_KEY = 'user_data';
+
+/**
+ * Get stored token
+ */
+function getToken() {
+    return localStorage.getItem(TOKEN_KEY);
+}
+
+/**
+ * Get stored refresh token
+ */
+function getRefreshToken() {
+    return localStorage.getItem(REFRESH_TOKEN_KEY);
+}
+
+/**
+ * Set tokens in localStorage
+ */
+function setTokens(token, refreshToken) {
+    if (token) localStorage.setItem(TOKEN_KEY, token);
+    if (refreshToken) localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
+}
+
+/**
+ * Clear tokens from localStorage
+ */
+function clearTokens() {
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(REFRESH_TOKEN_KEY);
+    localStorage.removeItem(USER_KEY);
+}
+
+/**
+ * Get stored user data
+ */
+function getStoredUser() {
+    try {
+        const userData = localStorage.getItem(USER_KEY);
+        return userData ? JSON.parse(userData) : null;
+    } catch {
+        return null;
+    }
+}
+
+/**
+ * Set user data in localStorage
+ */
+function setStoredUser(user) {
+    localStorage.setItem(USER_KEY, JSON.stringify(user));
+}
+
+/**
+ * Check if user is authenticated
+ */
+function isAuthenticated() {
+    return !!getToken();
+}
+
+/**
+ * Get current user
+ */
+function getCurrentUser() {
+    return getStoredUser();
+}
+
+/**
+ * Get role-based dashboard URL
+ */
+function getDashboardUrl(role) {
+    const dashboards = {
+        admin: '/admin/dashboard.html',
+        doctor: '/doctor/dashboard.html',
+        nurse: '/nurse/dashboard.html',
+        patient: '/patient/dashboard.html',
+        staff: '/staff/dashboard.html',
+        finance: '/finance/dashboard.html',
+        hr: '/hr/dashboard.html'
+    };
+    return dashboards[role] || '/patient/dashboard.html';
+}
+
+/**
+ * Redirect to appropriate dashboard based on role
+ */
+function redirectToDashboard() {
+    const user = getCurrentUser();
+    if (user && user.role) {
+        window.location.href = getDashboardUrl(user.role);
+    } else {
+        window.location.href = '/login.html';
+    }
+}
+
+/**
+ * Require authentication - redirect to login if not authenticated
+ */
+function requireAuth() {
+    if (!isAuthenticated()) {
+        window.location.href = '/login.html';
+        return false;
+    }
+    return true;
+}
+
+/**
+ * API request function with authentication
+ */
+async function apiRequest(endpoint, options = {}) {
+    const url = `${API_CONFIG.baseURL}${endpoint}`;
+    const token = getToken();
+
+    const headers = {
+        ...API_CONFIG.headers,
+        ...options.headers
+    };
+
+    if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    const config = {
+        ...options,
+        headers,
+        timeout: API_CONFIG.timeout
+    };
+
+    try {
+        const response = await fetch(url, config);
+        const data = await response.json();
+
+        // Handle token expiration
+        if (response.status === 401 && data.message?.includes('token expired')) {
+            const refreshSuccess = await refreshAccessToken();
+            if (refreshSuccess) {
+                return apiRequest(endpoint, options);
+            }
+        }
+
+        if (!response.ok) {
+            throw {
+                status: response.status,
+                message: data.message || 'API request failed',
+                errors: data.errors || []
+            };
+        }
+
+        return data;
+    } catch (error) {
+        if (error.status === 401) {
+            clearTokens();
+            window.location.href = '/login.html';
+        }
+        throw error;
+    }
+}
+
+/**
+ * Refresh access token
+ */
+async function refreshAccessToken() {
+    try {
+        const refreshToken = getRefreshToken();
+        if (!refreshToken) return false;
+
+        const response = await fetch(`${API_CONFIG.baseURL}/auth/refresh-token`, {
+            method: 'POST',
+            headers: API_CONFIG.headers,
+            body: JSON.stringify({ refreshToken })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+            setTokens(data.token, data.refreshToken);
+            return true;
+        }
+
+        clearTokens();
+        return false;
+    } catch {
+        clearTokens();
+        return false;
+    }
+}
+
+/**
+ * Show toast message
+ */
+function showToast(message, type = 'info', duration = 5000) {
+    const toast = document.createElement('div');
+    toast.className = `toast-message toast-${type}`;
+    toast.setAttribute('data-duration', duration);
+    
+    const icons = {
+        success: 'fa-check-circle',
+        error: 'fa-times-circle',
+        warning: 'fa-exclamation-triangle',
+        info: 'fa-info-circle'
+    };
+    
+    toast.innerHTML = `
+        <i class="fas ${icons[type] || icons.info}"></i>
+        <span>${message}</span>
+        <button class="toast-close">&times;</button>
+    `;
+    
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 100);
+    
+    toast.querySelector('.toast-close').addEventListener('click', function() {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    });
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, duration);
+}
+
+// ============================================
+// API METHODS
+// ============================================
+
+/**
+ * AUTHENTICATION API
+ */
+const AuthAPI = {
+    register: async (userData) => {
+        const response = await apiRequest('/auth/register', {
+            method: 'POST',
+            body: JSON.stringify(userData)
+        });
+        if (response.success) {
+            setTokens(response.token, response.refreshToken);
+            setStoredUser(response.user);
+        }
+        return response;
+    },
+
+    login: async (email, password) => {
+        const response = await apiRequest('/auth/login', {
+            method: 'POST',
+            body: JSON.stringify({ email, password })
+        });
+        if (response.success) {
+            setTokens(response.token, response.refreshToken);
+            setStoredUser(response.user);
+        }
+        return response;
+    },
+
+    logout: async () => {
+        try {
+            await apiRequest('/auth/logout', { method: 'POST' });
+        } catch (error) {
+            console.error('Logout error:', error);
+        } finally {
+            clearTokens();
+            window.location.href = '/login.html';
+        }
+    },
+
+    getProfile: async () => {
+        return apiRequest('/auth/profile');
+    },
+
+    updateProfile: async (profileData) => {
+        const response = await apiRequest('/auth/profile', {
+            method: 'PUT',
+            body: JSON.stringify(profileData)
+        });
+        if (response.success) {
+            setStoredUser(response.user);
+        }
+        return response;
+    },
+
+    changePassword: async (currentPassword, newPassword) => {
+        return apiRequest('/auth/change-password', {
+            method: 'PUT',
+            body: JSON.stringify({ currentPassword, newPassword })
+        });
+    },
+
+    forgotPassword: async (email) => {
+        return apiRequest('/auth/forgot-password', {
+            method: 'POST',
+            body: JSON.stringify({ email })
+        });
+    },
+
+    resetPassword: async (token, newPassword) => {
+        return apiRequest('/auth/reset-password', {
+            method: 'POST',
+            body: JSON.stringify({ token, newPassword })
+        });
+    }
+};
+
+/**
+ * PATIENT API
+ */
+const PatientAPI = {
+    getAll: async (params = {}) => {
+        const query = new URLSearchParams(params).toString();
+        return apiRequest(`/patients?${query}`);
+    },
+
+    getById: async (id) => {
+        return apiRequest(`/patients/${id}`);
+    },
+
+    getMyProfile: async () => {
+        return apiRequest('/patients/me');
+    },
+
+    create: async (patientData) => {
+        return apiRequest('/patients', {
+            method: 'POST',
+            body: JSON.stringify(patientData)
+        });
+    },
+
+    update: async (id, patientData) => {
+        return apiRequest(`/patients/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify(patientData)
+        });
+    },
+
+    getMedicalRecords: async (id) => {
+        return apiRequest(`/patients/${id}/medical-records`);
+    },
+
+    getAppointments: async (id) => {
+        return apiRequest(`/patients/${id}/appointments`);
+    },
+
+    getBills: async (id) => {
+        return apiRequest(`/patients/${id}/bills`);
+    }
+};
+
+/**
+ * DOCTOR API
+ */
+const DoctorAPI = {
+    getAll: async (params = {}) => {
+        const query = new URLSearchParams(params).toString();
+        return apiRequest(`/doctors?${query}`);
+    },
+
+    getById: async (id) => {
+        return apiRequest(`/doctors/${id}`);
+    },
+
+    getMyProfile: async () => {
+        return apiRequest('/doctors/me');
+    },
+
+    getPatients: async () => {
+        return apiRequest('/doctors/patients');
+    },
+
+    getAppointments: async (params = {}) => {
+        const query = new URLSearchParams(params).toString();
+        return apiRequest(`/doctors/appointments?${query}`);
+    },
+
+    getSchedule: async () => {
+        return apiRequest('/doctors/schedule');
+    },
+
+    updateAvailability: async (availability) => {
+        return apiRequest('/doctors/availability', {
+            method: 'PUT',
+            body: JSON.stringify({ availability })
+        });
+    }
+};
+
+/**
+ * APPOINTMENT API
+ */
+const AppointmentAPI = {
+    getAll: async (params = {}) => {
+        const query = new URLSearchParams(params).toString();
+        return apiRequest(`/appointments?${query}`);
+    },
+
+    getById: async (id) => {
+        return apiRequest(`/appointments/${id}`);
+    },
+
+    create: async (appointmentData) => {
+        return apiRequest('/appointments', {
+            method: 'POST',
+            body: JSON.stringify(appointmentData)
+        });
+    },
+
+    update: async (id, appointmentData) => {
+        return apiRequest(`/appointments/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify(appointmentData)
+        });
+    },
+
+    cancel: async (id) => {
+        return apiRequest(`/appointments/${id}/cancel`, {
+            method: 'PUT'
+        });
+    },
+
+    complete: async (id, data) => {
+        return apiRequest(`/appointments/${id}/complete`, {
+            method: 'PUT',
+            body: JSON.stringify(data)
+        });
+    },
+
+    getAvailableSlots: async (doctorId, date) => {
+        return apiRequest(`/appointments/available-slots?doctorId=${doctorId}&date=${date}`);
+    }
+};
+
+/**
+ * DEPARTMENT API
+ */
+const DepartmentAPI = {
+    getAll: async () => {
+        return apiRequest('/departments');
+    },
+
+    getById: async (id) => {
+        return apiRequest(`/departments/${id}`);
+    },
+
+    create: async (departmentData) => {
+        return apiRequest('/departments', {
+            method: 'POST',
+            body: JSON.stringify(departmentData)
+        });
+    },
+
+    update: async (id, departmentData) => {
+        return apiRequest(`/departments/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify(departmentData)
+        });
+    },
+
+    getDoctors: async (id) => {
+        return apiRequest(`/departments/${id}/doctors`);
+    }
+};
+
+/**
+ * PRESCRIPTION API
+ */
+const PrescriptionAPI = {
+    getAll: async (params = {}) => {
+        const query = new URLSearchParams(params).toString();
+        return apiRequest(`/prescriptions?${query}`);
+    },
+
+    getById: async (id) => {
+        return apiRequest(`/prescriptions/${id}`);
+    },
+
+    create: async (prescriptionData) => {
+        return apiRequest('/prescriptions', {
+            method: 'POST',
+            body: JSON.stringify(prescriptionData)
+        });
+    },
+
+    update: async (id, prescriptionData) => {
+        return apiRequest(`/prescriptions/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify(prescriptionData)
+        });
+    },
+
+    getPatientPrescriptions: async (patientId) => {
+        return apiRequest(`/prescriptions/patient/${patientId}`);
+    }
+};
+
+/**
+ * BILLING API
+ */
+const BillingAPI = {
+    getAll: async (params = {}) => {
+        const query = new URLSearchParams(params).toString();
+        return apiRequest(`/billing?${query}`);
+    },
+
+    getById: async (id) => {
+        return apiRequest(`/billing/${id}`);
+    },
+
+    create: async (billData) => {
+        return apiRequest('/billing', {
+            method: 'POST',
+            body: JSON.stringify(billData)
+        });
+    },
+
+    update: async (id, billData) => {
+        return apiRequest(`/billing/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify(billData)
+        });
+    },
+
+    recordPayment: async (id, paymentData) => {
+        return apiRequest(`/billing/${id}/payment`, {
+            method: 'POST',
+            body: JSON.stringify(paymentData)
+        });
+    },
+
+    getPatientBills: async (patientId) => {
+        return apiRequest(`/billing/patient/${patientId}`);
+    }
+};
+
+/**
+ * ADMIN API
+ */
+const AdminAPI = {
+    getStats: async () => {
+        return apiRequest('/admin/stats');
+    },
+
+    getUsers: async (params = {}) => {
+        const query = new URLSearchParams(params).toString();
+        return apiRequest(`/admin/users?${query}`);
+    },
+
+    updateUser: async (id, userData) => {
+        return apiRequest(`/admin/users/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify(userData)
+        });
+    },
+
+    deleteUser: async (id) => {
+        return apiRequest(`/admin/users/${id}`, {
+            method: 'DELETE'
+        });
+    },
+
+    getLogs: async (params = {}) => {
+        const query = new URLSearchParams(params).toString();
+        return apiRequest(`/admin/logs?${query}`);
+    },
+
+    createBackup: async () => {
+        return apiRequest('/admin/backup', {
+            method: 'POST'
+        });
+    }
+};
+
+// ============================================
+// API Namespace
+// ============================================
+
+const API = {
+    config: API_CONFIG,
+    getToken,
+    getRefreshToken,
+    setTokens,
+    clearTokens,
+    getStoredUser,
+    setStoredUser,
+    isAuthenticated,
+    getCurrentUser,
+    getDashboardUrl,
+    redirectToDashboard,
+    requireAuth,
+    apiRequest,
+    showToast,
+    auth: AuthAPI,
+    patients: PatientAPI,
+    doctors: DoctorAPI,
+    appointments: AppointmentAPI,
+    departments: DepartmentAPI,
+    prescriptions: PrescriptionAPI,
+    billing: BillingAPI,
+    admin: AdminAPI
+};
+
+// Make API globally available
+window.API = API;
+
+// ============================================
+// ============================================
+// UI INITIALIZATION FUNCTIONS
+// ============================================
+// ============================================
 
 // ============================================
 // Mobile Menu Toggle
@@ -42,7 +679,6 @@ function initMobileMenu() {
             document.body.classList.toggle('menu-open');
         });
         
-        // Close menu on link click (mobile)
         nav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', function() {
                 if (window.innerWidth <= 992) {
@@ -53,7 +689,6 @@ function initMobileMenu() {
             });
         });
         
-        // Close menu on outside click
         document.addEventListener('click', function(e) {
             if (window.innerWidth <= 992) {
                 if (!nav.contains(e.target) && !toggle.contains(e.target)) {
@@ -70,26 +705,29 @@ function initMobileMenu() {
 // Dropdowns (Desktop & Mobile)
 // ============================================
 function initDropdowns() {
-    // Desktop dropdown hover
     document.querySelectorAll('.dropdown').forEach(dropdown => {
         dropdown.addEventListener('mouseenter', function() {
             if (window.innerWidth > 992) {
-                this.querySelector('.dropdown-menu').style.opacity = '1';
-                this.querySelector('.dropdown-menu').style.visibility = 'visible';
-                this.querySelector('.dropdown-menu').style.transform = 'translateY(0)';
+                const menu = this.querySelector('.dropdown-menu');
+                if (menu) {
+                    menu.style.opacity = '1';
+                    menu.style.visibility = 'visible';
+                    menu.style.transform = 'translateY(0)';
+                }
             }
         });
         
         dropdown.addEventListener('mouseleave', function() {
             if (window.innerWidth > 992) {
-                this.querySelector('.dropdown-menu').style.opacity = '0';
-                this.querySelector('.dropdown-menu').style.visibility = 'hidden';
-                this.querySelector('.dropdown-menu').style.transform = 'translateY(10px)';
+                const menu = this.querySelector('.dropdown-menu');
+                if (menu) {
+                    menu.style.opacity = '0';
+                    menu.style.visibility = 'hidden';
+                    menu.style.transform = 'translateY(10px)';
+                }
             }
         });
     });
-    
-    // Mobile dropdown toggle (handled in HTML via CSS)
 }
 
 // ============================================
@@ -109,7 +747,6 @@ function initHeaderScroll() {
                 header.classList.remove('scrolled');
             }
             
-            // Hide header on scroll down, show on scroll up (optional)
             if (currentScroll > lastScroll && currentScroll > 300) {
                 header.style.transform = 'translateY(-100%)';
             } else {
@@ -117,7 +754,7 @@ function initHeaderScroll() {
             }
             
             lastScroll = currentScroll;
-        });
+        }, { passive: true });
     }
 }
 
@@ -143,7 +780,6 @@ function initCounters() {
                 const increment = target / (duration / 16);
                 let current = 0;
                 
-                // Handle special cases like percentage
                 const isPercentage = counter.textContent.includes('%');
                 const isCurrency = counter.textContent.includes('ETB');
                 
@@ -227,7 +863,6 @@ function initFormValidation() {
                     if (errorElement) errorElement.style.display = 'none';
                 }
                 
-                // Email validation
                 if (input.type === 'email' && value) {
                     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                     if (!emailPattern.test(value)) {
@@ -240,7 +875,6 @@ function initFormValidation() {
                     }
                 }
                 
-                // Phone validation
                 if (input.type === 'tel' && value) {
                     const phonePattern = /^[\+\d\s\-\(\)]{7,20}$/;
                     if (!phonePattern.test(value)) {
@@ -256,7 +890,6 @@ function initFormValidation() {
             
             if (!isValid) {
                 e.preventDefault();
-                // Scroll to first error
                 const firstError = this.querySelector('.error');
                 if (firstError) {
                     firstError.focus();
@@ -264,7 +897,6 @@ function initFormValidation() {
             }
         });
         
-        // Clear error on input
         form.querySelectorAll('input, select, textarea').forEach(input => {
             input.addEventListener('input', function() {
                 this.classList.remove('error');
@@ -299,7 +931,6 @@ function initPasswordToggle() {
 // Modal Management
 // ============================================
 function initModals() {
-    // Open modals
     document.querySelectorAll('[data-modal-open]').forEach(trigger => {
         trigger.addEventListener('click', function() {
             const modalId = this.getAttribute('data-modal-open');
@@ -310,7 +941,6 @@ function initModals() {
         });
     });
     
-    // Close modals
     document.querySelectorAll('[data-modal-close]').forEach(button => {
         button.addEventListener('click', function() {
             const modal = this.closest('.modal-overlay');
@@ -320,7 +950,6 @@ function initModals() {
         });
     });
     
-    // Close on overlay click
     document.querySelectorAll('.modal-overlay').forEach(modal => {
         modal.addEventListener('click', function(e) {
             if (e.target === this) {
@@ -329,7 +958,6 @@ function initModals() {
         });
     });
     
-    // Close on Escape key
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             document.querySelectorAll('.modal-overlay.active').forEach(modal => {
@@ -342,7 +970,6 @@ function initModals() {
 function openModal(modal) {
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
-    // Focus trap
     const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
     if (focusable.length) {
         focusable[0].focus();
@@ -366,11 +993,9 @@ function initTabs() {
             tab.addEventListener('click', function() {
                 const targetId = this.getAttribute('data-tab');
                 
-                // Update active tab
                 tabs.forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
                 
-                // Update active content
                 contents.forEach(content => {
                     content.classList.remove('active');
                     if (content.id === targetId) {
@@ -418,7 +1043,7 @@ function initBackToTop() {
         } else {
             button.classList.remove('visible');
         }
-    });
+    }, { passive: true });
     
     button.addEventListener('click', function() {
         window.scrollTo({
@@ -429,7 +1054,7 @@ function initBackToTop() {
 }
 
 // ============================================
-// Search Filter (for tables/lists)
+// Search Filter
 // ============================================
 function initSearchFilter() {
     document.querySelectorAll('[data-search]').forEach(searchInput => {
@@ -454,10 +1079,9 @@ function initSearchFilter() {
 }
 
 // ============================================
-// Toast Messages / Notifications
+// Toast Messages
 // ============================================
 function initToastMessages() {
-    // Auto-dismiss toast messages
     document.querySelectorAll('.toast-message').forEach(toast => {
         const duration = parseInt(toast.getAttribute('data-duration')) || 5000;
         setTimeout(() => {
@@ -470,57 +1094,115 @@ function initToastMessages() {
 }
 
 // ============================================
+// Authentication Check
+// ============================================
+function initAuthCheck() {
+    // Check if current page requires authentication
+    const protectedPages = ['/patient/', '/doctor/', '/nurse/', '/admin/', '/finance/', '/hr/'];
+    const currentPath = window.location.pathname;
+    const isProtected = protectedPages.some(page => currentPath.includes(page));
+    
+    if (isProtected) {
+        if (!isAuthenticated()) {
+            window.location.href = '/login.html';
+            return;
+        }
+        
+        // Check if user has access to this page
+        const user = getCurrentUser();
+        if (user) {
+            const pageRole = currentPath.split('/')[1]; // patient, doctor, admin, etc.
+            if (pageRole && user.role !== pageRole && user.role !== 'admin') {
+                window.location.href = getDashboardUrl(user.role);
+            }
+        }
+    }
+}
+
+// ============================================
+// Navigation Authentication
+// ============================================
+function initNavAuth() {
+    const isLoggedIn = isAuthenticated();
+    const user = getCurrentUser();
+    const navMenu = document.querySelector('.nav-menu');
+    
+    if (!navMenu) return;
+    
+    // Remove existing auth links
+    const existingAuth = navMenu.querySelector('.auth-link');
+    if (existingAuth) existingAuth.remove();
+    
+    // Remove existing logout link
+    const existingLogout = navMenu.querySelector('.logout-link');
+    if (existingLogout) existingLogout.remove();
+    
+    if (isLoggedIn && user) {
+        const li = document.createElement('li');
+        li.className = 'auth-link';
+        li.innerHTML = `
+            <a href="${getDashboardUrl(user.role)}" class="user-avatar-link">
+                <span class="user-avatar-small">${user.firstName?.[0] || 'U'}</span>
+                <span class="user-name">${user.firstName || 'User'}</span>
+            </a>
+        `;
+        navMenu.appendChild(li);
+        
+        // Add logout link in mobile menu
+        if (window.innerWidth <= 992) {
+            const logoutLi = document.createElement('li');
+            logoutLi.className = 'logout-link';
+            logoutLi.innerHTML = `<a href="#" id="mobileLogout"><i class="fas fa-sign-out-alt"></i> Logout</a>`;
+            navMenu.appendChild(logoutLi);
+            
+            document.getElementById('mobileLogout')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                logout();
+            });
+        }
+    } else {
+        // Show login/register links
+        const loginLi = document.createElement('li');
+        loginLi.className = 'auth-link';
+        loginLi.innerHTML = `
+            <a href="/login.html" class="login-link">Login</a>
+            <a href="/register.html" class="register-link btn btn-primary btn-sm" style="margin-left: 10px;">Register</a>
+        `;
+        navMenu.appendChild(loginLi);
+    }
+}
+
+// ============================================
+// Logout Handler
+// ============================================
+function initLogoutHandler() {
+    // Check if logout button exists in page
+    document.querySelectorAll('#logoutBtn, .logout-btn, .sidebar-logout').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            logout();
+        });
+    });
+}
+
+// ============================================
+// Logout Function
+// ============================================
+function logout() {
+    if (window.API && window.API.auth) {
+        window.API.auth.logout();
+    } else {
+        clearTokens();
+        window.location.href = '/login.html';
+    }
+}
+
+// ============================================
 // Utility Functions (Global)
 // ============================================
 
 /**
- * Show a toast notification
- * @param {string} message - The message to display
- * @param {string} type - 'success', 'error', 'warning', 'info'
- * @param {number} duration - Time in milliseconds
- */
-function showToast(message, type = 'info', duration = 5000) {
-    const toast = document.createElement('div');
-    toast.className = `toast-message toast-${type}`;
-    toast.setAttribute('data-duration', duration);
-    
-    const icons = {
-        success: 'fa-check-circle',
-        error: 'fa-times-circle',
-        warning: 'fa-exclamation-triangle',
-        info: 'fa-info-circle'
-    };
-    
-    toast.innerHTML = `
-        <i class="fas ${icons[type] || icons.info}"></i>
-        <span>${message}</span>
-        <button class="toast-close">&times;</button>
-    `;
-    
-    document.body.appendChild(toast);
-    
-    // Trigger animation
-    setTimeout(() => {
-        toast.classList.add('show');
-    }, 100);
-    
-    // Close button
-    toast.querySelector('.toast-close').addEventListener('click', function() {
-        toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 300);
-    });
-    
-    // Auto dismiss
-    setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 300);
-    }, duration);
-}
-
-/**
  * Format currency
- * @param {number} amount - The amount to format
- * @param {string} currency - Currency code (default: ETB)
  */
 function formatCurrency(amount, currency = 'ETB') {
     return `${currency} ${amount.toLocaleString()}`;
@@ -528,8 +1210,6 @@ function formatCurrency(amount, currency = 'ETB') {
 
 /**
  * Format date
- * @param {string|Date} date - The date to format
- * @param {string} format - 'short', 'long', 'full'
  */
 function formatDate(date, format = 'short') {
     const d = new Date(date);
@@ -542,9 +1222,7 @@ function formatDate(date, format = 'short') {
 }
 
 /**
- * Debounce function for performance
- * @param {function} func - The function to debounce
- * @param {number} wait - Wait time in milliseconds
+ * Debounce function
  */
 function debounce(func, wait = 250) {
     let timeout;
@@ -556,7 +1234,6 @@ function debounce(func, wait = 250) {
 
 /**
  * Validate email format
- * @param {string} email - The email to validate
  */
 function isValidEmail(email) {
     const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -565,11 +1242,47 @@ function isValidEmail(email) {
 
 /**
  * Validate phone number
- * @param {string} phone - The phone number to validate
  */
 function isValidPhone(phone) {
     const pattern = /^[\+\d\s\-\(\)]{7,20}$/;
     return pattern.test(phone);
+}
+
+/**
+ * Get URL parameters
+ */
+function getUrlParams() {
+    const params = new URLSearchParams(window.location.search);
+    const result = {};
+    for (const [key, value] of params) {
+        result[key] = value;
+    }
+    return result;
+}
+
+/**
+ * Get parameter from URL
+ */
+function getUrlParam(key) {
+    const params = new URLSearchParams(window.location.search);
+    return params.get(key);
+}
+
+/**
+ * Truncate text
+ */
+function truncateText(text, maxLength = 100) {
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength) + '...';
+}
+
+/**
+ * Escape HTML
+ */
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
 }
 
 // ============================================
@@ -577,13 +1290,33 @@ function isValidPhone(phone) {
 // ============================================
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
+        API,
         showToast,
         formatCurrency,
         formatDate,
         debounce,
         isValidEmail,
         isValidPhone,
+        getUrlParams,
+        getUrlParam,
+        truncateText,
+        escapeHtml,
         openModal,
-        closeModal
+        closeModal,
+        logout,
+        isAuthenticated,
+        getCurrentUser,
+        redirectToDashboard,
+        requireAuth
     };
-                          }
+}
+
+// ============================================
+// Console Log - System Info
+// ============================================
+console.log('🏥 Adventist General Hospital - v2.0 (Backend Connected)');
+console.log(`📅 ${new Date().toLocaleString()}`);
+console.log(`🔗 API URL: ${API_CONFIG.baseURL}`);
+console.log(`👤 User: ${getCurrentUser()?.email || 'Not logged in'}`);
+console.log(`🔐 Authenticated: ${isAuthenticated() ? '✅ Yes' : '❌ No'}`);
+console.log('📦 API Modules Available:', Object.keys(API).filter(k => typeof API[k] === 'object'));
