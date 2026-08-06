@@ -205,4 +205,360 @@
                     <div class="footer-logo">
                         <img src="../images/logo-white.png" alt="Adventist General Hospital" />
                         <h3>Adventist General Hospital</h3>
-                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================ -->
+    <!-- SCRIPTS                                   -->
+    <!-- ============================================ -->
+    <script src="../js/api.js"></script>
+    <script src="../main.js"></script>
+    <script>
+        // ============================================
+        // PATIENT DASHBOARD LOGIC
+        // ============================================
+
+        // Mobile menu
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        // Header scroll
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Set current date
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        // ============================================
+        // CHECK AUTHENTICATION
+        // ============================================
+
+        if (!API.isAuthenticated()) {
+            window.location.href = '../login.html';
+        }
+
+        // ============================================
+        // LOAD DASHBOARD DATA
+        // ============================================
+
+        async function loadDashboard() {
+            try {
+                const user = API.getStoredUser();
+                if (!user) {
+                    window.location.href = '../login.html';
+                    return;
+                }
+
+                // Set user info
+                document.getElementById('patientName').textContent = `${user.firstName} ${user.lastName}`;
+                document.getElementById('patientId').textContent = `Patient ID: ${user.id}`;
+                document.getElementById('welcomeMessage').textContent = `Welcome back, ${user.firstName}! 👋`;
+
+                // Load patient data
+                const patientData = await API.patients.getMyProfile();
+                
+                if (patientData.success && patientData.data) {
+                    const patient = patientData.data;
+                    
+                    // Load appointments
+                    await loadAppointments(patient._id || patient.id);
+                    
+                    // Load prescriptions
+                    await loadPrescriptions(patient._id || patient.id);
+                    
+                    // Load lab results
+                    await loadLabResults(patient._id || patient.id);
+                    
+                    // Load health summary
+                    await loadHealthSummary(patient._id || patient.id);
+                    
+                    // Update stats
+                    updateStats(patient);
+                }
+
+                // Hide loading, show content
+                document.getElementById('loadingState').style.display = 'none';
+                document.getElementById('dashboardContent').style.display = 'block';
+
+            } catch (error) {
+                console.error('Error loading dashboard:', error);
+                document.getElementById('loadingState').innerHTML = `
+                    <i class="fas fa-exclamation-triangle fa-3x" style="color: var(--danger);"></i>
+                    <p style="margin-top: 20px; color: var(--text-light);">Failed to load dashboard. Please try again.</p>
+                    <button onclick="location.reload()" class="btn btn-primary">Retry</button>
+                `;
+            }
+        }
+
+        // ============================================
+        // LOAD APPOINTMENTS
+        // ============================================
+
+        async function loadAppointments(patientId) {
+            try {
+                const response = await API.appointments.getAll({ patientId });
+                
+                const list = document.getElementById('upcomingList');
+                
+                if (response.success && response.data && response.data.length > 0) {
+                    const upcoming = response.data.filter(a => a.status !== 'Completed' && a.status !== 'Cancelled');
+                    
+                    if (upcoming.length > 0) {
+                        list.innerHTML = upcoming.slice(0, 3).map(app => `
+                            <li>
+                                <div>
+                                    <span class="item-title">${app.doctor?.name || 'Doctor'}</span>
+                                    <span class="item-date">${new Date(app.date).toLocaleDateString()} • ${app.time}</span>
+                                </div>
+                                <span class="item-status ${app.status?.toLowerCase() || 'pending'}">${app.status || 'Pending'}</span>
+                            </li>
+                        `).join('');
+                        
+                        // Update count
+                        document.getElementById('upcomingAppointments').textContent = upcoming.length;
+                    } else {
+                        list.innerHTML = `
+                            <li style="color: var(--text-light); text-align: center; padding: 20px 0;">
+                                No upcoming appointments
+                            </li>
+                        `;
+                        document.getElementById('upcomingAppointments').textContent = '0';
+                    }
+                } else {
+                    list.innerHTML = `
+                        <li style="color: var(--text-light); text-align: center; padding: 20px 0;">
+                            No appointments found
+                        </li>
+                    `;
+                    document.getElementById('upcomingAppointments').textContent = '0';
+                }
+            } catch (error) {
+                console.error('Error loading appointments:', error);
+                document.getElementById('upcomingList').innerHTML = `
+                    <li style="color: var(--text-light); text-align: center; padding: 20px 0;">
+                        <i class="fas fa-exclamation-triangle"></i> Failed to load appointments
+                    </li>
+                `;
+            }
+        }
+
+        // ============================================
+        // LOAD PRESCRIPTIONS
+        // ============================================
+
+        async function loadPrescriptions(patientId) {
+            try {
+                const response = await API.prescriptions.getPatientPrescriptions(patientId);
+                
+                const list = document.getElementById('prescriptionList');
+                
+                if (response.success && response.data && response.data.length > 0) {
+                    const active = response.data.filter(p => p.status === 'Active');
+                    
+                    if (active.length > 0) {
+                        list.innerHTML = active.slice(0, 3).map(p => `
+                            <li>
+                                <div>
+                                    <span class="item-title">${p.medications?.[0]?.name || 'Prescription'}</span>
+                                    <span class="item-date">${new Date(p.createdAt).toLocaleDateString()} • ${p.doctor?.name || 'Doctor'}</span>
+                                </div>
+                                <span class="item-status confirmed">Active</span>
+                            </li>
+                        `).join('');
+                        
+                        document.getElementById('activePrescriptions').textContent = active.length;
+                    } else {
+                        list.innerHTML = `
+                            <li style="color: var(--text-light); text-align: center; padding: 20px 0;">
+                                No active prescriptions
+                            </li>
+                        `;
+                        document.getElementById('activePrescriptions').textContent = '0';
+                    }
+                } else {
+                    list.innerHTML = `
+                        <li style="color: var(--text-light); text-align: center; padding: 20px 0;">
+                            No prescriptions found
+                        </li>
+                    `;
+                    document.getElementById('activePrescriptions').textContent = '0';
+                }
+            } catch (error) {
+                console.error('Error loading prescriptions:', error);
+                document.getElementById('prescriptionList').innerHTML = `
+                    <li style="color: var(--text-light); text-align: center; padding: 20px 0;">
+                        <i class="fas fa-exclamation-triangle"></i> Failed to load prescriptions
+                    </li>
+                `;
+            }
+        }
+
+        // ============================================
+        // LOAD LAB RESULTS
+        // ============================================
+
+        async function loadLabResults(patientId) {
+            try {
+                // This would be a real API call - for now, show placeholder
+                const list = document.getElementById('labResultsList');
+                list.innerHTML = `
+                    <li>
+                        <div>
+                            <span class="item-title">Complete Blood Count</span>
+                            <span class="item-date">Feb 14, 2026</span>
+                        </div>
+                        <span class="item-status completed">Available</span>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="item-title">Lipid Profile</span>
+                            <span class="item-date">Feb 14, 2026</span>
+                        </div>
+                        <span class="item-status completed">Available</span>
+                    </li>
+                `;
+                document.getElementById('pendingLabResults').textContent = '0';
+            } catch (error) {
+                console.error('Error loading lab results:', error);
+            }
+        }
+
+        // ============================================
+        // LOAD HEALTH SUMMARY
+        // ============================================
+
+        async function loadHealthSummary(patientId) {
+            try {
+                const list = document.getElementById('healthSummary');
+                list.innerHTML = `
+                    <li>
+                        <div>
+                            <span class="item-title">Blood Pressure</span>
+                            <span class="item-date">120/80 mmHg</span>
+                        </div>
+                        <span class="item-status confirmed">Normal</span>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="item-title">Heart Rate</span>
+                            <span class="item-date">72 bpm</span>
+                        </div>
+                        <span class="item-status confirmed">Normal</span>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="item-title">BMI</span>
+                            <span class="item-date">24.5 kg/m²</span>
+                        </div>
+                        <span class="item-status confirmed">Normal</span>
+                    </li>
+                `;
+            } catch (error) {
+                console.error('Error loading health summary:', error);
+            }
+        }
+
+        // ============================================
+        // UPDATE STATS
+        // ============================================
+
+        function updateStats(patient) {
+            // Stats are already updated in individual load functions
+            // This is for any additional stats
+        }
+
+        // ============================================
+        // LOGOUT
+        // ============================================
+
+        function logout() {
+            API.auth.logout();
+        }
+
+        document.getElementById('logoutBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            logout();
+        });
+
+        document.getElementById('sidebarLogout').addEventListener('click', function(e) {
+            e.preventDefault();
+            logout();
+        });
+
+        // ============================================
+        // INITIALIZE
+        // ============================================
+
+        loadDashboard();
+    </script>
+</body>
+                            </html>
