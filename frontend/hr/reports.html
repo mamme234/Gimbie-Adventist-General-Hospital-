@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reports - HR Portal</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/hr.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Doctors</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="../appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- HR REPORTS                               -->
+    <!-- ============================================ -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-wrapper">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="sidebar-profile">
+                        <img src="../images/hr/hr-manager.jpg" alt="HR Manager" />
+                        <h4>Mrs. Tsion Alemu</h4>
+                        <span>HR Manager • ID: HR-2024-001</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                        <a href="employees.html"><i class="fas fa-users"></i> Employees</a>
+                        <a href="attendance.html"><i class="fas fa-clipboard-check"></i> Attendance</a>
+                        <a href="leave.html"><i class="fas fa-calendar-alt"></i> Leave Management</a>
+                        <a href="recruitment.html"><i class="fas fa-user-plus"></i> Recruitment</a>
+                        <a href="payroll.html"><i class="fas fa-money-bill"></i> Payroll</a>
+                        <a href="performance.html"><i class="fas fa-star"></i> Performance</a>
+                        <a href="reports.html" class="active"><i class="fas fa-file-alt"></i> Reports</a>
+                        <a href="../login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    <div class="dashboard-header">
+                        <h1>HR Reports</h1>
+                        <div class="report-actions">
+                            <button class="btn btn-outline-primary btn-sm"><i class="fas fa-file-export"></i> Export</button>
+                            <button class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Generate Report</button>
+                        </div>
+                    </div>
+
+                    <!-- Report Categories -->
+                    <div class="appointment-filters">
+                        <button class="filter-btn active">All Reports</button>
+                        <button class="filter-btn">Employee Reports</button>
+                        <button class="filter-btn">Attendance Reports</button>
+                        <button class="filter-btn">Leave Reports</button>
+                        <button class="filter-btn">Payroll Reports</button>
+                        <button class="filter-btn">Performance Reports</button>
+                    </div>
+
+                    <!-- Report List -->
+                    <div class="report-list">
+                        <div class="report-card">
+                            <div class="report-header">
+                                <div>
+                                    <h4>Employee Directory</h4>
+                                    <span class="report-id">Report #HR-REP-2026-001</span>
+                                </div>
+                                <span class="report-date">February 20, 2026</span>
+                            </div>
+                            <div class="report-details">
+                                <p><strong>Total Employees:</strong> 512</p>
+                                <p><strong>Active:</strong> 478 (93.4%)</p>
+                                <p><strong>On Leave:</strong> 18 (3.5%)</p>
+                                <p><strong>Inactive:</strong> 16 (3.1%)</p>
+                                <p><strong>Departments:</strong> 12</p>
+                            </div>
+                            <div class="report-actions">
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i> View</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i> Download</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-print"></i> Print</button>
+                            </div>
+                        </div>
+
+                        <div class="report-card">
+                            <div class="report-header">
+                                <div>
+                                    <h4>Attendance Summary - February 2026</h4>
+                                    <span class="report-id">Report #HR-REP-2026-002</span>
+                                </div>
+                                <span class="report-date">February 19, 2026</span>
+                            </div>
+                            <div class="report-details">
+                                <p><strong>Average Attendance:</strong> 94%</p>
+                                <p><strong>Present:</strong> 478</p>
+                                <p><strong>Late Arrivals:</strong> 18</p>
+                                <p><strong>Absent:</strong> 12</p>
+                                <p><strong>Working Days:</strong> 20</p>
+                            </div>
+                            <div class="report-actions">
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i> View</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i> Download</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-print"></i> Print</button>
+                            </div>
+                        </div>
+
+                        <div class="report-card">
+                            <div class="report-header">
+                                <div>
+                                    <h4>Leave Report - February 2026</h4>
+                                    <span class="report-id">Report #HR-REP-2026-003</span>
+                                </div>
+                                <span class="report-date">February 18, 2026</span>
+                            </div>
+                            <div class="report-details">
+                                <p><strong>On Leave Today:</strong> 18</p>
+                                <p><strong>Approved:</strong> 32</p>
+                                <p><strong>Pending:</strong> 8</p>
+                                <p><strong>Rejected:</strong> 4</p>
+                                <p><strong>Leave Days Used:</strong> 124</p>
+                            </div>
+                            <div class="report-actions">
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i> View</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i> Download</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-print"></i> Print</button>
+                            </div>
+                        </div>
+
+                        <div class="report-card">
+                            <div class="report-header">
+                                <div>
+                                    <h4>Payroll Report - February 2026</h4>
+                                    <span class="report-id">Report #HR-REP-2026-004</span>
+                                </div>
+                                <span class="report-date">February 15, 2026</span>
+                            </div>
+                            <div class="report-details">
+                                <p><strong>Gross Payroll:</strong> ETB 2,450,000</p>
+                                <p><strong>Net Payroll:</strong> ETB 2,205,000</p>
+                                <p><strong>Income Tax:</strong> ETB 147,000</p>
+                                <p><strong>Pension:</strong> ETB 49,000</p>
+                                <p><strong>Other Deductions:</strong> ETB 49,000</p>
+                            </div>
+                            <div class="report-actions">
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i> View</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i> Download</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-print"></i> Print</button>
+                            </div>
+                        </div>
+
+                        <div class="report-card">
+                            <div class="report-header">
+                                <div>
+                                    <h4>Performance Summary - Q1 2026</h4>
+                                    <span class="report-id">Report #HR-REP-2026-005</span>
+                                </div>
+                                <span class="report-date">February 12, 2026</span>
+                            </div>
+                            <div class="report-details">
+                                <p><strong>Average Rating:</strong> 4.5</p>
+                                <p><strong>Reviewed:</strong> 156</p>
+                                <p><strong>Pending:</strong> 12</p>
+                                <p><strong>Excellent:</strong> 45 (28.8%)</p>
+                                <p><strong>Good:</strong> 78 (50%)</p>
+                                <p><strong>Needs Improvement:</strong> 33 (21.2%)</p>
+                            </div>
+                            <div class="report-actions">
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i> View</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i> Download</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-print"></i> Print</button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+  </html>
