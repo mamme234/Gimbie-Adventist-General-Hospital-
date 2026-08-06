@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Health Blog - Adventist General Hospital</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/blog.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="contact.html"><i class="fas fa-map-marker-alt"></i> Find Us</a>
+                <a href="login.html"><i class="fas fa-sign-in-alt"></i> Patient Portal</a>
+                <a href="doctors.html"><i class="fas fa-user-md"></i> Find a Doctor</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="departments.html">Departments</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="doctors.html">Doctors</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- PAGE BANNER                                 -->
+    <!-- ============================================ -->
+    <section class="page-banner">
+        <div class="container">
+            <div class="banner-content">
+                <h1>Health Blog</h1>
+                <nav class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span><i class="fas fa-chevron-right"></i></span>
+                    <span class="current">Blog</span>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FEATURED ARTICLE                           -->
+    <!-- ============================================ -->
+    <section class="featured-article section-padding">
+        <div class="container">
+            <div class="featured-wrapper">
+                <div class="featured-image">
+                    <img src="images/blog/featured.jpg" alt="Featured Article" />
+                    <span class="featured-badge">Featured</span>
+                </div>
+                <div class="featured-content">
+                    <span class="featured-tag">Health Tips</span>
+                    <h2>10 Tips for a Healthy Heart</h2>
+                    <p>Learn about the lifestyle changes that can significantly improve your cardiovascular health and reduce the risk of heart disease.</p>
+                    <div class="featured-meta">
+                        <span><i class="fas fa-user"></i> Dr. Samuel Tekle</span>
+                        <span><i class="fas fa-calendar"></i> February 14, 2026</span>
+                        <span><i class="fas fa-clock"></i> 5 min read</span>
+                    </div>
+                    <a href="news-details.html?id=1" class="btn btn-primary">Read Article <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- BLOG GRID                                 -->
+    <!-- ============================================ -->
+    <section class="blog-grid section-padding bg-light">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">Articles</span>
+                <h2>Latest Health <br />Articles</h2>
+            </div>
+
+            <div class="blog-wrapper">
+                <!-- Article 1 -->
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="images/blog/blog-1.jpg" alt="Heart Health" />
+                        <span class="blog-tag">Cardiology</span>
+                    </div>
+                    <div class="blog-content">
+                        <h3><a href="#">Understanding High Blood Pressure</a></h3>
+                        <p>Learn about the causes, symptoms, and treatment options for hypertension.</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-user"></i> Dr. Helen Wondimu</span>
+                            <span><i class="fas fa-calendar"></i> Feb 12, 2026</span>
+                        </div>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="images/blog/blog-2.jpg" alt="Nutrition" />
+                        <span class="blog-tag">Nutrition</span>
+                    </div>
+                    <div class="blog-content">
+                        <h3><a href="#">Nutrition Guide for Cancer Patients</a></h3>
+                        <p>Essential dietary advice for patients undergoing cancer treatment.</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-user"></i> Dr. Tigist Wondimu</span>
+                            <span><i class="fas fa-calendar"></i> Feb 10, 2026</span>
+                        </div>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="images/blog/blog-3.jpg" alt="Mental Health" />
+                        <span class="blog-tag">Mental Health</span>
+                    </div>
+                    <div class="blog-content">
+                        <h3><a href="#">Managing Stress and Anxiety</a></h3>
+                        <p>Practical strategies to cope with stress and improve mental well-being.</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-user"></i> Dr. Michael Tesfaye</span>
+                            <span><i class="fas fa-calendar"></i> Feb 8, 2026</span>
+                        </div>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+
+                <!-- Article 4 -->
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="images/blog/blog-4.jpg" alt="Women's Health" />
+                        <span class="blog-tag">Women's Health</span>
+                    </div>
+                    <div class="blog-content">
+                        <h3><a href="#">Understanding Menopause</a></h3>
+                        <p>What every woman should know about menopause and its management.</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-user"></i> Dr. Helen Wondimu</span>
+                            <span><i class="fas fa-calendar"></i> Feb 5, 2026</span>
+                        </div>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+
+                <!-- Article 5 -->
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="images/blog/blog-5.jpg" alt="Pediatrics" />
+                        <span class="blog-tag">Pediatrics</span>
+                    </div>
+                    <div class="blog-content">
+                        <h3><a href="#">Childhood Vaccination Guide</a></h3>
+                        <p>Complete guide to vaccinations for children from birth to adolescence.</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-user"></i> Dr. Tigist Wondimu</span>
+                            <span><i class="fas fa-calendar"></i> Feb 2, 2026</span>
+                        </div>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+
+                <!-- Article 6 -->
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="images/blog/blog-6.jpg" alt="Exercise" />
+                        <span class="blog-tag">Fitness</span>
+                    </div>
+                    <div class="blog-content">
+                        <h3><a href="#">Exercise and Heart Health</a></h3>
+                        <p>How regular physical activity can improve your cardiovascular health.</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-user"></i> Dr. Samuel Tekle</span>
+                            <span><i class="fas fa-calendar"></i> Jan 30, 2026</span>
+                        </div>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <a href="#" class="page-btn active">1</a>
+                <a href="#" class="page-btn">2</a>
+                <a href="#" class="page-btn">3</a>
+                <a href="#" class="page-btn next"><i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- NEWSLETTER SIGNUP                         -->
+    <!-- ============================================ -->
+    <section class="newsletter-section section-padding">
+        <div class="container">
+            <div class="newsletter-wrapper">
+                <div class="newsletter-content">
+                    <h2>Subscribe to Our Health Blog</h2>
+                    <p>Get the latest health tips and articles delivered to your inbox.</p>
+                </div>
+                <form class="newsletter-form">
+                    <div class="form-group">
+                        <input type="email" placeholder="Enter your email address" required />
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Subscribe
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="departments.html">Departments</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="doctors.html">Find a Doctor</a></li>
+                        <li><a href="appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="emergency.html">Emergency Care</a></li>
+                        <li><a href="telemedicine.html">Telemedicine</a></li>
+                        <li><a href="laboratory.html">Laboratory</a></li>
+                        <li><a href="radiology.html">Radiology</a></li>
+                        <li><a href="pharmacy.html">Pharmacy</a></li>
+                        <li><a href="blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+                                                                    </html>
