@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ - Adventist General Hospital</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/faq.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="contact.html"><i class="fas fa-map-marker-alt"></i> Find Us</a>
+                <a href="login.html"><i class="fas fa-sign-in-alt"></i> Patient Portal</a>
+                <a href="doctors.html"><i class="fas fa-user-md"></i> Find a Doctor</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="departments.html">Departments</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="doctors.html">Doctors</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- PAGE BANNER                                 -->
+    <!-- ============================================ -->
+    <section class="page-banner">
+        <div class="container">
+            <div class="banner-content">
+                <h1>Frequently Asked Questions</h1>
+                <nav class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span><i class="fas fa-chevron-right"></i></span>
+                    <span class="current">FAQ</span>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FAQ SEARCH                                -->
+    <!-- ============================================ -->
+    <section class="faq-search section-padding">
+        <div class="container">
+            <div class="search-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" id="faqSearch" placeholder="Search for answers..." />
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FAQ CATEGORIES                            -->
+    <!-- ============================================ -->
+    <section class="faq-categories">
+        <div class="container">
+            <div class="category-tabs">
+                <button class="category-btn active" data-category="all">All Questions</button>
+                <button class="category-btn" data-category="general">General</button>
+                <button class="category-btn" data-category="appointments">Appointments</button>
+                <button class="category-btn" data-category="billing">Billing & Insurance</button>
+                <button class="category-btn" data-category="visiting">Visiting</button>
+                <button class="category-btn" data-category="services">Services</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FAQ LIST                                  -->
+    <!-- ============================================ -->
+    <section class="faq-list section-padding bg-light">
+        <div class="container">
+            <div class="faq-grid">
+                <!-- General -->
+                <div class="faq-item" data-category="general">
+                    <div class="faq-question">
+                        <h4>What are the hospital's visiting hours?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Visiting hours are from 8:00 AM to 8:00 PM daily. ICU and special care units have limited visiting hours. Please check with the nursing station for specific unit policies.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="general">
+                    <div class="faq-question">
+                        <h4>Where is the hospital located?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Adventist General Hospital is located in Bole Sub-city, Addis Ababa, Ethiopia. We are easily accessible by public transport and have ample parking available.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="general">
+                    <div class="faq-question">
+                        <h4>Is the hospital open 24/7?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, Adventist General Hospital operates 24 hours a day, 7 days a week. Our emergency department is always open, and we provide round-the-clock patient care.</p>
+                    </div>
+                </div>
+
+                <!-- Appointments -->
+                <div class="faq-item" data-category="appointments">
+                    <div class="faq-question">
+                        <h4>How do I book an appointment?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can book an appointment online through our website, call our appointment desk at +251-911-234-567, or visit our hospital in person.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="appointments">
+                    <div class="faq-question">
+                        <h4>Can I cancel or reschedule my appointment?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, you can cancel or reschedule your appointment by calling our appointment desk or through your patient portal account. Please notify us at least 24 hours in advance.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="appointments">
+                    <div class="faq-question">
+                        <h4>What should I bring to my appointment?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Please bring your ID, insurance card, referral letter (if applicable), and any previous medical records or test results.</p>
+                    </div>
+                </div>
+
+                <!-- Billing -->
+                <div class="faq-item" data-category="billing">
+                    <div class="faq-question">
+                        <h4>What insurance plans do you accept?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept most major insurance plans including Ethiopian Insurance, NYALA, Awash, Global, Axium, Union, Oromia, and Lucy Insurance. Contact our billing department for specific plan verification.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="billing">
+                    <div class="faq-question">
+                        <h4>How do I pay my hospital bill?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can pay your bill in person at our finance department, online through our patient portal, or via bank transfer. We also accept cash, credit/debit cards, and mobile money.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="billing">
+                    <div class="faq-question">
+                        <h4>Do you offer payment plans?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we offer flexible payment plans for patients who need assistance. Contact our finance department to discuss payment options that fit your situation.</p>
+                    </div>
+                </div>
+
+                <!-- Visiting -->
+                <div class="faq-item" data-category="visiting">
+                    <div class="faq-question">
+                        <h4>How many visitors can a patient have?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Patients can have up to 2 visitors at a time. Children under 12 must be accompanied by an adult. Special arrangements can be made for immediate family members.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="visiting">
+                    <div class="faq-question">
+                        <h4>Is there parking available?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we have a large parking lot with ample free parking spaces for patients and visitors. Valet parking is also available for a small fee.</p>
+                    </div>
+                </div>
+
+                <!-- Services -->
+                <div class="faq-item" data-category="services">
+                    <div class="faq-question">
+                        <h4>What services do you offer?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer a comprehensive range of services including Emergency Care, Cardiology, Neurology, Orthopedics, Pediatrics, Obstetrics, Surgery, Laboratory, Radiology, Pharmacy, and Blood Bank services.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="services">
+                    <div class="faq-question">
+                        <h4>Do you offer telemedicine consultations?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we offer telemedicine consultations with our specialists. You can book a virtual consultation through our website or by calling our appointment desk.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="services">
+                    <div class="faq-question">
+                        <h4>How do I access my medical records?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can access your medical records through our patient portal. You can also request copies of your records from our Medical Records Department with proper identification.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- No Results -->
+            <div id="noResults" style="display: none;" class="no-results">
+                <i class="fas fa-search"></i>
+                <h3>No results found</h3>
+                <p>Try adjusting your search or browse through our categories.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CONTACT CTA                               -->
+    <!-- ============================================ -->
+    <section class="faq-cta section-padding">
+        <div class="container">
+            <div class="cta-wrapper">
+                <div class="cta-text">
+                    <h2>Still Have Questions?</h2>
+                    <p>Contact us and we'll be happy to help you.</p>
+                </div>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-primary btn-lg">
+                        <i class="fas fa-envelope"></i> Contact Us
+                    </a>
+                    <a href="tel:+251911234567" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-phone"></i> Call Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="departments.html">Departments</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="doctors.html">Find a Doctor</a></li>
+                        <li><a href="appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="emergency.html">Emergency Care</a></li>
+                        <li><a href="telemedicine.html">Telemedicine</a></li>
+                        <li><a href="laboratory.html">Laboratory</a></li>
+                        <li><a href="radiology.html">Radiology</a></li>
+                        <li><a href="pharmacy.html">Pharmacy</a></li>
+                        <li><a href="blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // FAQ Toggle
+        document.querySelectorAll('.faq-item').forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', function() {
+                item.classList.toggle('open');
+                const icon = this.querySelector('.faq-toggle i');
+                if (item.classList.contains('open')) {
+                    icon.className = 'fas fa-minus';
+                } else {
+                    icon.className = 'fas fa-plus';
+                }
+            });
+        });
+
+        // Category filter
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                const category = this.dataset.category;
+
+                faqItems.forEach(item => {
+                    if (category === 'all' || item.dataset.category === category) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Search
+        const searchInput = document.getElementById('faqSearch');
+        const noResults = document.getElementById('noResults');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            let resultsFound = 0;
+
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question h4').textContent.toLowerCase();
+                const answer = item.querySelector('.faq-answer p').textContent.toLowerCase();
+
+                if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                    item.style.display = 'block';
+                    resultsFound++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            noResults.style.display = resultsFound === 0 && searchTerm !== '' ? 'block' : 'none';
+
+            // Reset category buttons
+            if (searchTerm !== '') {
+                categoryBtns.forEach(b => b.classList.remove('active'));
+            } else {
+                document.querySelector('.category-btn[data-category="all"]').classList.add('active');
+            }
+        });
+    </script>
+</body>
+  </html>
