@@ -1,0 +1,310 @@
+/* ============================================ */
+/* SERVICES.CSS - Services Page Styles        */
+/* ============================================ */
+
+/* ============================================ */
+/* Services Overview                          */
+/* ============================================ */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.service-card {
+    background: var(--bg-white);
+    padding: 32px 24px;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-normal);
+    border: 1px solid var(--bg-gray);
+    display: flex;
+    flex-direction: column;
+}
+
+.service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-color);
+}
+
+.service-card.featured {
+    border-color: var(--primary-color);
+    background: linear-gradient(135deg, #f8faff, #eef4fb);
+}
+
+.service-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+    transition: all var(--transition-normal);
+}
+
+.service-icon.emergency {
+    background: rgba(231, 76, 60, 0.15);
+    color: var(--danger);
+}
+
+.service-card:hover .service-icon.emergency {
+    background: var(--danger);
+    color: var(--text-white);
+}
+
+.service-icon.telemedicine {
+    background: rgba(52, 152, 219, 0.15);
+    color: var(--info);
+}
+
+.service-card:hover .service-icon.telemedicine {
+    background: var(--info);
+    color: var(--text-white);
+}
+
+.service-icon.laboratory {
+    background: rgba(155, 89, 182, 0.15);
+    color: #8e44ad;
+}
+
+.service-card:hover .service-icon.laboratory {
+    background: #8e44ad;
+    color: var(--text-white);
+}
+
+.service-icon.radiology {
+    background: rgba(241, 196, 15, 0.15);
+    color: #f39c12;
+}
+
+.service-card:hover .service-icon.radiology {
+    background: #f39c12;
+    color: var(--text-white);
+}
+
+.service-icon.pharmacy {
+    background: rgba(46, 204, 113, 0.15);
+    color: var(--secondary-color);
+}
+
+.service-card:hover .service-icon.pharmacy {
+    background: var(--secondary-color);
+    color: var(--text-white);
+}
+
+.service-icon.bloodbank {
+    background: rgba(231, 76, 60, 0.15);
+    color: var(--danger);
+}
+
+.service-card:hover .service-icon.bloodbank {
+    background: var(--danger);
+    color: var(--text-white);
+}
+
+.service-icon.surgery {
+    background: rgba(26, 82, 118, 0.15);
+    color: var(--primary-color);
+}
+
+.service-card:hover .service-icon.surgery {
+    background: var(--primary-color);
+    color: var(--text-white);
+}
+
+.service-icon.maternity {
+    background: rgba(231, 76, 60, 0.10);
+    color: #e84393;
+}
+
+.service-card:hover .service-icon.maternity {
+    background: #e84393;
+    color: var(--text-white);
+}
+
+.service-icon.rehab {
+    background: rgba(26, 188, 156, 0.15);
+    color: #1abc9c;
+}
+
+.service-card:hover .service-icon.rehab {
+    background: #1abc9c;
+    color: var(--text-white);
+}
+
+.service-icon.packages {
+    background: rgba(241, 196, 15, 0.15);
+    color: #f1c40f;
+}
+
+.service-card:hover .service-icon.packages {
+    background: #f1c40f;
+    color: var(--text-white);
+}
+
+.service-icon.dental {
+    background: rgba(52, 152, 219, 0.15);
+    color: #2980b9;
+}
+
+.service-card:hover .service-icon.dental {
+    background: #2980b9;
+    color: var(--text-white);
+}
+
+.service-icon.mental {
+    background: rgba(155, 89, 182, 0.15);
+    color: #8e44ad;
+}
+
+.service-card:hover .service-icon.mental {
+    background: #8e44ad;
+    color: var(--text-white);
+}
+
+.service-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+}
+
+.service-card p {
+    font-size: 0.95rem;
+    flex-grow: 1;
+}
+
+.service-features {
+    margin: 16px 0;
+}
+
+.service-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 0;
+    font-size: 0.9rem;
+    color: var(--text-medium);
+}
+
+.service-features li i {
+    color: var(--secondary-color);
+    font-size: 0.8rem;
+}
+
+/* ============================================ */
+/* Features Banner                            */
+/* ============================================ */
+.features-banner {
+    background: var(--bg-dark);
+    padding: 40px 0;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+}
+
+.feature-item {
+    text-align: center;
+    color: var(--text-white);
+}
+
+.feature-item i {
+    font-size: 2rem;
+    color: var(--gold-color);
+    margin-bottom: 8px;
+    display: block;
+}
+
+.feature-item h4 {
+    color: var(--text-white);
+    font-size: 1rem;
+    margin-bottom: 2px;
+}
+
+.feature-item p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+/* ============================================ */
+/* CTA Section                               */
+/* ============================================ */
+.cta-section {
+    padding: 60px 0;
+}
+
+.cta-wrapper {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    border-radius: var(--border-radius-lg);
+    padding: 50px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-white);
+}
+
+.cta-wrapper .cta-text h2 {
+    color: var(--text-white);
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.cta-wrapper .cta-text p {
+    color: rgba(255,255,255,0.8);
+    margin: 0;
+}
+
+.cta-wrapper .cta-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+/* ============================================ */
+/* Responsive                                */
+/* ============================================ */
+@media (max-width: 992px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .cta-wrapper {
+        flex-direction: column;
+        text-align: center;
+        gap: 24px;
+        padding: 40px 30px;
+    }
+    
+    .cta-wrapper .cta-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .cta-wrapper .cta-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .cta-wrapper .cta-buttons .btn {
+        width: 100%;
+        justify-content: center;
+    }
+  }
