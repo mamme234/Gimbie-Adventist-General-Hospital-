@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor Profile - Adventist General Hospital</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/doctor.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Doctors</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="../appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- DOCTOR PROFILE                             -->
+    <!-- ============================================ -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-wrapper">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="sidebar-profile">
+                        <img src="../images/doctors/doctor-1.jpg" alt="Dr. Samuel Tekle" />
+                        <h4>Dr. Samuel Tekle</h4>
+                        <span>Cardiologist • ID: DOC-2024-001</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                        <a href="profile.html" class="active"><i class="fas fa-user"></i> Profile</a>
+                        <a href="patients.html"><i class="fas fa-users"></i> Patients</a>
+                        <a href="patient-details.html"><i class="fas fa-user-md"></i> Patient Details</a>
+                        <a href="appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a>
+                        <a href="schedule.html"><i class="fas fa-clock"></i> Schedule</a>
+                        <a href="prescriptions.html"><i class="fas fa-prescription-bottle"></i> Prescriptions</a>
+                        <a href="diagnosis.html"><i class="fas fa-stethoscope"></i> Diagnosis</a>
+                        <a href="../login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    <div class="dashboard-header">
+                        <h1>My Profile</h1>
+                        <span class="date"><i class="fas fa-edit"></i> Last updated: Jan 15, 2026</span>
+                    </div>
+
+                    <!-- Profile Header -->
+                    <div class="profile-header-section">
+                        <div class="profile-picture">
+                            <img src="../images/doctors/doctor-1.jpg" alt="Dr. Samuel Tekle" />
+                        </div>
+                        <div class="profile-title">
+                            <h2>Dr. Samuel Tekle</h2>
+                            <span>Interventional Cardiologist</span>
+                            <span class="profile-id">Medical License: MD-ET-2024-001</span>
+                        </div>
+                        <button class="btn btn-primary"><i class="fas fa-edit"></i> Edit Profile</button>
+                    </div>
+
+                    <!-- Profile Sections -->
+                    <div class="profile-sections">
+                        <!-- Personal Information -->
+                        <div class="profile-section">
+                            <h3>Personal Information</h3>
+                            <div class="profile-grid">
+                                <div class="profile-field">
+                                    <label>Full Name</label>
+                                    <p>Dr. Samuel Tekle</p>
+                                </div>
+                                <div class="profile-field">
+                                    <label>Date of Birth</label>
+                                    <p>May 12, 1978</p>
+                                </div>
+                                <div class="profile-field">
+                                    <label>Gender</label>
+                                    <p>Male</p>
+                                </div>
+                                <div class="profile-field">
+                                    <label>Nationality</label>
+                                    <p>Ethiopian</p>
+                                </div>
+                                <div class="profile-field">
+                                    <label>Email</label>
+                                    <p>samuel.tekle@adventisthospital.et</p>
+                                </div>
+                                <div class="profile-field">
+                                    <label>Phone</label>
+                                    <p>+251-911-234-567</p>
+                                </div>
+                                <div class="profile-field">
+                                    <label>Address</label>
+                                    <p>Bole Sub-city, Addis Ababa, Ethiopia</p>
+                                </div>
+                                <div class="profile-field">
+                                    <label>Blood Type</label>
+                                    <p>O+</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Professional Information -->
+                        <div class="profile-section">
+                            <h3>Professional Information</h3>
+                            <div class="profile-grid">
+                                <div class="profile-field">
+                                    <label>Specialty</label>
+                                    <p>Interventional Cardiology</p>
+                                </div>
+                                <div class="profile-field">
+                                    <label>Department</label>
+                                    <p>Cardiology</p>
+                                </div>
+                                <div class="profile-field">
+                                    <label>Medical License</label>
+                                    <p>MD-ET-2024-001</p>
+                                </div>
+                                <div class="profile-field">
+                                    <label>Years of Experience</label>
+                                    <p>22+ Years</p>
+                                </div>
+                                <div class="profile-field">
+                                    <label>Education</label>
+                                    <p>MD, FACC, FESC</p>
+                                </div>
+                                <div class="profile-field">
+                                    <label>Joined Hospital</label>
+                                    <p>January 2010</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Qualifications -->
+                        <div class="profile-section">
+                            <h3>Qualifications & Certifications</h3>
+                            <div class="qualification-list">
+                                <div class="qualification-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <div>
+                                        <strong>Fellow, American College of Cardiology (FACC)</strong>
+                                        <p>American College of Cardiology</p>
+                                    </div>
+                                </div>
+                                <div class="qualification-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <div>
+                                        <strong>Fellow, European Society of Cardiology (FESC)</strong>
+                                        <p>European Society of Cardiology</p>
+                                    </div>
+                                </div>
+                                <div class="qualification-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <div>
+                                        <strong>MD, Addis Ababa University</strong>
+                                        <p>Medical Degree - 2002</p>
+                                    </div>
+                                </div>
+                                <div class="qualification-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <div>
+                                        <strong>Fellowship in Interventional Cardiology</strong>
+                                        <p>Cleveland Clinic, USA</p>
+                                    </div>
+                                </div>
+                                <div class="qualification-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <div>
+                                        <strong>Board Certified in Cardiology</strong>
+                                        <p>American Board of Internal Medicine</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Specialties -->
+                        <div class="profile-section">
+                            <h3>Areas of Specialization</h3>
+                            <div class="specialties-tags">
+                                <span class="tag">Interventional Cardiology</span>
+                                <span class="tag">Angioplasty</span>
+                                <span class="tag">Stenting</span>
+                                <span class="tag">Cardiac Catheterization</span>
+                                <span class="tag">Valvular Heart Disease</span>
+                                <span class="tag">Coronary Artery Disease</span>
+                                <span class="tag">Acute Coronary Syndrome</span>
+                            </div>
+                        </div>
+
+                        <!-- Account Settings -->
+                        <div class="profile-section">
+                            <h3>Account Settings</h3>
+                            <div class="settings-actions">
+                                <button class="btn btn-outline-primary"><i class="fas fa-key"></i> Change Password</button>
+                                <button class="btn btn-outline-primary"><i class="fas fa-bell"></i> Notification Preferences</button>
+                                <button class="btn btn-outline-primary"><i class="fas fa-shield-alt"></i> Two-Factor Authentication</button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+  </html>
