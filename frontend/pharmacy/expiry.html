@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expiry Management - Pharmacy Portal</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/pharmacy.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Doctors</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="../appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- EXPIRY MANAGEMENT                         -->
+    <!-- ============================================ -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-wrapper">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="sidebar-profile">
+                        <img src="../images/pharmacy/pharmacist-1.jpg" alt="Chief Pharmacist" />
+                        <h4>Dr. Yonas Hailu</h4>
+                        <span>Chief Pharmacist • ID: PHA-2024-001</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                        <a href="medicines.html"><i class="fas fa-pills"></i> Medicines</a>
+                        <a href="prescriptions.html"><i class="fas fa-prescription-bottle"></i> Prescriptions</a>
+                        <a href="inventory.html"><i class="fas fa-boxes"></i> Inventory</a>
+                        <a href="suppliers.html"><i class="fas fa-truck"></i> Suppliers</a>
+                        <a href="purchase-orders.html"><i class="fas fa-shopping-cart"></i> Purchase Orders</a>
+                        <a href="expiry.html" class="active"><i class="fas fa-clock"></i> Expiry Management</a>
+                        <a href="reports.html"><i class="fas fa-chart-bar"></i> Reports</a>
+                        <a href="../login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    <div class="dashboard-header">
+                        <h1>Expiry Management</h1>
+                        <span class="date"><i class="fas fa-clock"></i> 18 Items Expiring Soon</span>
+                    </div>
+
+                    <!-- Expiry Summary -->
+                    <div class="expiry-summary">
+                        <div class="summary-card critical">
+                            <span class="summary-number">5</span>
+                            <span class="summary-label">Critical (7 Days)</span>
+                        </div>
+                        <div class="summary-card warning">
+                            <span class="summary-number">8</span>
+                            <span class="summary-label">Warning (30 Days)</span>
+                        </div>
+                        <div class="summary-card info">
+                            <span class="summary-number">5</span>
+                            <span class="summary-label">Notice (90 Days)</span>
+                        </div>
+                        <div class="summary-card success">
+                            <span class="summary-number">1,227</span>
+                            <span class="summary-label">Valid Stock</span>
+                        </div>
+                    </div>
+
+                    <!-- Expiry Alerts -->
+                    <div class="expiry-alerts">
+                        <div class="alert-header">
+                            <h3>Expiring Items (7 Days)</h3>
+                            <span class="alert-count">5</span>
+                        </div>
+                        <div class="expiry-item">
+                            <div class="expiry-info">
+                                <h4>Amoxicillin 500mg</h4>
+                                <span>Batch: AMX-2024-001 • 18 units</span>
+                            </div>
+                            <span class="expiry-date urgent">Expires: Feb 25, 2026</span>
+                            <button class="btn btn-sm btn-danger">Action Required</button>
+                        </div>
+                        <div class="expiry-item">
+                            <div class="expiry-info">
+                                <h4>Ibuprofen 400mg</h4>
+                                <span>Batch: IBU-2024-003 • 12 units</span>
+                            </div>
+                            <span class="expiry-date urgent">Expires: Feb 27, 2026</span>
+                            <button class="btn btn-sm btn-danger">Action Required</button>
+                        </div>
+                        <div class="expiry-item">
+                            <div class="expiry-info">
+                                <h4>Omeprazole 20mg</h4>
+                                <span>Batch: OME-2024-002 • 8 units</span>
+                            </div>
+                            <span class="expiry-date urgent">Expires: Feb 28, 2026</span>
+                            <button class="btn btn-sm btn-danger">Action Required</button>
+                        </div>
+                    </div>
+
+                    <!-- Expiry List -->
+                    <div class="expiry-list">
+                        <h3>All Expiring Items</h3>
+                        <div class="table-responsive">
+                            <table class="inventory-table">
+                                <thead>
+                                    <tr>
+                                        <th>Medicine</th>
+                                        <th>Batch Number</th>
+                                        <th>Quantity</th>
+                                        <th>Expiry Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Amoxicillin 500mg</strong></td>
+                                        <td>AMX-2024-001</td>
+                                        <td>18</td>
+                                        <td class="expiry-urgent">Feb 25, 2026</td>
+                                        <td><span class="status danger">Critical</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-danger">Dispose</button>
+                                            <button class="btn btn-sm btn-outline-primary">Move</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Ibuprofen 400mg</strong></td>
+                                        <td>IBU-2024-003</td>
+                                        <td>12</td>
+                                        <td class="expiry-urgent">Feb 27, 2026</td>
+                                        <td><span class="status danger">Critical</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-danger">Dispose</button>
+                                            <button class="btn btn-sm btn-outline-primary">Move</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Omeprazole 20mg</strong></td>
+                                        <td>OME-2024-002</td>
+                                        <td>8</td>
+                                        <td class="expiry-urgent">Feb 28, 2026</td>
+                                        <td><span class="status danger">Critical</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-danger">Dispose</button>
+                                            <button class="btn btn-sm btn-outline-primary">Move</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Lisinopril 10mg</strong></td>
+                                        <td>LIS-2024-005</td>
+                                        <td>45</td>
+                                        <td class="expiry-warning">Mar 15, 2026</td>
+                                        <td><span class="status warning">Warning</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-warning">Mark</button>
+                                            <button class="btn btn-sm btn-outline-primary">Move</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Atorvastatin 20mg</strong></td>
+                                        <td>ATO-2024-002</td>
+                                        <td>28</td>
+                                        <td class="expiry-warning">Mar 20, 2026</td>
+                                        <td><span class="status warning">Warning</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-warning">Mark</button>
+                                            <button class="btn btn-sm btn-outline-primary">Move</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+                                                   </html>
