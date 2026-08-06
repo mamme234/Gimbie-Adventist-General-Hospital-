@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Insurance - Adventist General Hospital</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Insurance information at Adventist General Hospital. Accepted insurance providers, claims process, and payment options." />
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/insurance.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="contact.html"><i class="fas fa-map-marker-alt"></i> Find Us</a>
+                <a href="login.html"><i class="fas fa-sign-in-alt"></i> Patient Portal</a>
+                <a href="doctors.html"><i class="fas fa-user-md"></i> Find a Doctor</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="departments.html">Departments</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="doctors.html">Doctors</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- PAGE BANNER                                 -->
+    <!-- ============================================ -->
+    <section class="page-banner">
+        <div class="container">
+            <div class="banner-content">
+                <h1>Insurance Information</h1>
+                <nav class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span><i class="fas fa-chevron-right"></i></span>
+                    <span class="current">Insurance</span>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- INSURANCE HERO                            -->
+    <!-- ============================================ -->
+    <section class="insurance-hero section-padding">
+        <div class="container">
+            <div class="insurance-grid">
+                <div class="insurance-content">
+                    <span class="section-tag">Coverage</span>
+                    <h2>We Accept <br /><span class="highlight">Most Insurance</span> Plans</h2>
+                    <p>We work with a wide range of insurance providers to make your healthcare more affordable and accessible.</p>
+                    <div class="insurance-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Direct Billing</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>No Hidden Fees</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Quick Claims Processing</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Insurance Verification</span>
+                        </div>
+                    </div>
+                    <div class="insurance-actions">
+                        <a href="#accepted-insurance" class="btn btn-primary btn-lg">
+                            <i class="fas fa-arrow-down"></i> Accepted Providers
+                        </a>
+                        <a href="#claims" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-file-invoice"></i> Claims Process
+                        </a>
+                    </div>
+                </div>
+                <div class="insurance-image">
+                    <img src="images/insurance/insurance-hero.jpg" alt="Insurance" />
+                    <div class="insurance-badge">
+                        <i class="fas fa-certificate"></i>
+                        <span>Trusted Partners</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- ACCEPTED INSURANCE PROVIDERS              -->
+    <!-- ============================================ -->
+    <section class="accepted-insurance section-padding bg-light" id="accepted-insurance">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">Accepted Plans</span>
+                <h2>Insurance <br />Providers</h2>
+                <p>We work with these major insurance providers</p>
+            </div>
+
+            <div class="providers-grid">
+                <div class="provider-card">
+                    <div class="provider-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h4>Ethiopian Insurance Corporation</h4>
+                    <p>Comprehensive health insurance coverage for individuals and groups.</p>
+                    <span class="provider-plan">Plan: Health Shield</span>
+                </div>
+
+                <div class="provider-card">
+                    <div class="provider-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h4>NYALA Insurance</h4>
+                    <p>Full health insurance solutions with extensive coverage.</p>
+                    <span class="provider-plan">Plan: Nyala Health Plus</span>
+                </div>
+
+                <div class="provider-card">
+                    <div class="provider-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h4>Awash Insurance</h4>
+                    <p>Competitive health plans for families and individuals.</p>
+                    <span class="provider-plan">Plan: Awash Health</span>
+                </div>
+
+                <div class="provider-card">
+                    <div class="provider-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h4>Global Insurance</h4>
+                    <p>International health coverage for expatriates and travelers.</p>
+                    <span class="provider-plan">Plan: Global Care</span>
+                </div>
+
+                <div class="provider-card">
+                    <div class="provider-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h4>Axium Insurance</h4>
+                    <p>Corporate health plans with flexible coverage options.</p>
+                    <span class="provider-plan">Plan: Axium Health</span>
+                </div>
+
+                <div class="provider-card">
+                    <div class="provider-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h4>Union Insurance</h4>
+                    <p>Affordable health insurance for individuals and families.</p>
+                    <span class="provider-plan">Plan: Union Care</span>
+                </div>
+
+                <div class="provider-card">
+                    <div class="provider-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h4>Oromia Insurance</h4>
+                    <p>Regional health insurance coverage with comprehensive benefits.</p>
+                    <span class="provider-plan">Plan: Oromia Health</span>
+                </div>
+
+                <div class="provider-card">
+                    <div class="provider-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h4>Lucy Insurance</h4>
+                    <p>Specialized health plans for maternal and child health.</p>
+                    <span class="provider-plan">Plan: Lucy Care</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CLAIMS PROCESS                            -->
+    <!-- ============================================ -->
+    <section class="claims-process section-padding" id="claims">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">How It Works</span>
+                <h2>Insurance <br />Claims Process</h2>
+                <p>Simple and straightforward claims process for your convenience</p>
+            </div>
+
+            <div class="claims-steps">
+                <div class="claim-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Verify Coverage</h4>
+                        <p>Our team verifies your insurance coverage before treatment.</p>
+                    </div>
+                </div>
+
+                <div class="claim-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Treatment</h4>
+                        <p>Receive quality medical care without worrying about payment.</p>
+                    </div>
+                </div>
+
+                <div class="claim-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Claim Submission</h4>
+                        <p>We submit your claim to the insurance company directly.</p>
+                    </div>
+                </div>
+
+                <div class="claim-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Payment</h4>
+                        <p>Insurance pays approved claims directly to the hospital.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FAQ - INSURANCE                           -->
+    <!-- ============================================ -->
+    <section class="insurance-faq section-padding bg-light">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">FAQ</span>
+                <h2>Frequently Asked <br />Questions</h2>
+            </div>
+
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>What insurance plans do you accept?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept most major insurance plans including Ethiopian Insurance, NYALA, Awash, Global, Axium, Union, Oromia, and Lucy Insurance. Contact our billing department to verify your specific plan.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Do you accept international insurance?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we accept international insurance plans. Please contact our international patient services team for assistance with your specific plan.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>How do I file a claim?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We handle the claim filing process for you. Simply provide your insurance information at registration, and we'll submit the claim on your behalf.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>What if my insurance doesn't cover a service?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>If a service isn't covered, we'll inform you in advance and provide options for payment. We offer flexible payment plans to make healthcare affordable.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>How long does claim processing take?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Claim processing typically takes 7-14 business days. We'll keep you updated on the status of your claim.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Can I use insurance for telemedicine consultations?</h4>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, many insurance plans cover telemedicine consultations. Contact your insurance provider to confirm coverage for virtual visits.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CTA SECTION                                -->
+    <!-- ============================================ -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-wrapper">
+                <div class="cta-text">
+                    <h2>Have Insurance Questions?</h2>
+                    <p>Our billing team is here to help you with insurance inquiries.</p>
+                </div>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-primary btn-lg">
+                        <i class="fas fa-envelope"></i> Contact Us
+                    </a>
+                    <a href="tel:+251911234567" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-phone"></i> Call Billing
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="departments.html">Departments</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="doctors.html">Find a Doctor</a></li>
+                        <li><a href="appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="emergency.html">Emergency Care</a></li>
+                        <li><a href="telemedicine.html">Telemedicine</a></li>
+                        <li><a href="laboratory.html">Laboratory</a></li>
+                        <li><a href="radiology.html">Radiology</a></li>
+                        <li><a href="pharmacy.html">Pharmacy</a></li>
+                        <li><a href="blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================ -->
+    <!-- SCRIPTS                                    -->
+    <!-- ============================================ -->
+    <script src="main.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // FAQ Toggle
+        document.querySelectorAll('.faq-item').forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', function() {
+                item.classList.toggle('open');
+                const icon = this.querySelector('.faq-toggle i');
+                if (item.classList.contains('open')) {
+                    icon.className = 'fas fa-minus';
+                } else {
+                    icon.className = 'fas fa-plus';
+                }
+            });
+        });
+    </script>
+</body>
+                      </html>
