@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notifications - Patient Portal</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/patient.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Doctors</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="../appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- NOTIFICATIONS                             -->
+    <!-- ============================================ -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-wrapper">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="sidebar-profile">
+                        <img src="../images/patients/patient-avatar.jpg" alt="Patient" />
+                        <h4>Meron Tesfaye</h4>
+                        <span>Patient ID: PAT-2026-001</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                        <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                        <a href="medical-records.html"><i class="fas fa-file-medical"></i> Medical Records</a>
+                        <a href="appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a>
+                        <a href="appointment-history.html"><i class="fas fa-history"></i> Appointment History</a>
+                        <a href="prescriptions.html"><i class="fas fa-prescription-bottle"></i> Prescriptions</a>
+                        <a href="laboratory-results.html"><i class="fas fa-flask"></i> Lab Results</a>
+                        <a href="radiology-results.html"><i class="fas fa-x-ray"></i> Radiology Results</a>
+                        <a href="bills.html"><i class="fas fa-file-invoice-dollar"></i> Bills</a>
+                        <a href="payments.html"><i class="fas fa-credit-card"></i> Payments</a>
+                        <a href="insurance.html"><i class="fas fa-shield-alt"></i> Insurance</a>
+                        <a href="telemedicine.html"><i class="fas fa-video"></i> Telemedicine</a>
+                        <a href="messages.html"><i class="fas fa-envelope"></i> Messages</a>
+                        <a href="notifications.html" class="active"><i class="fas fa-bell"></i> Notifications</a>
+                        <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="../login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    <div class="dashboard-header">
+                        <h1>Notifications</h1>
+                        <div class="notification-actions">
+                            <button class="btn btn-outline-primary btn-sm"><i class="fas fa-check-double"></i> Mark All Read</button>
+                            <button class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i> Clear All</button>
+                        </div>
+                    </div>
+
+                    <!-- Filter Tabs -->
+                    <div class="appointment-filters">
+                        <button class="filter-btn active">All</button>
+                        <button class="filter-btn">Unread</button>
+                        <button class="filter-btn">Appointments</button>
+                        <button class="filter-btn">Medical</button>
+                        <button class="filter-btn">Billing</button>
+                        <button class="filter-btn">System</button>
+                    </div>
+
+                    <!-- Notification List -->
+                    <div class="notification-list">
+                        <div class="notification-item unread">
+                            <div class="notification-icon appointment">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-header">
+                                    <h4>Appointment Confirmed</h4>
+                                    <span class="notification-time">10 minutes ago</span>
+                                </div>
+                                <p>Your appointment with Dr. Samuel Tekle on February 25, 2026 at 10:00 AM has been confirmed.</p>
+                            </div>
+                            <span class="notification-badge">New</span>
+                        </div>
+
+                        <div class="notification-item unread">
+                            <div class="notification-icon medical">
+                                <i class="fas fa-flask"></i>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-header">
+                                    <h4>Lab Results Available</h4>
+                                    <span class="notification-time">2 hours ago</span>
+                                </div>
+                                <p>Your laboratory results from February 10, 2026 are now available. Please review them at your earliest convenience.</p>
+                            </div>
+                            <span class="notification-badge">New</span>
+                        </div>
+
+                        <div class="notification-item">
+                            <div class="notification-icon billing">
+                                <i class="fas fa-file-invoice-dollar"></i>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-header">
+                                    <h4>New Bill Generated</h4>
+                                    <span class="notification-time">Yesterday</span>
+                                </div>
+                                <p>Bill #BILL-2026-001 for ETB 3,500 has been generated. Please make payment before the due date.</p>
+                            </div>
+                        </div>
+
+                        <div class="notification-item">
+                            <div class="notification-icon appointment">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-header">
+                                    <h4>Telemedicine Reminder</h4>
+                                    <span class="notification-time">Yesterday</span>
+                                </div>
+                                <p>Reminder: Your virtual consultation with Dr. Sara Hailu is scheduled for February 28, 2026 at 2:30 PM.</p>
+                            </div>
+                        </div>
+
+                        <div class="notification-item">
+                            <div class="notification-icon medical">
+                                <i class="fas fa-prescription-bottle"></i>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-header">
+                                    <h4>Prescription Refill Available</h4>
+                                    <span class="notification-time">2 days ago</span>
+                                </div>
+                                <p>Your prescription for Lisinopril 10mg is ready for refill. Please submit a refill request through your portal.</p>
+                            </div>
+                        </div>
+
+                        <div class="notification-item">
+                            <div class="notification-icon system">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-header">
+                                    <h4>Security Alert</h4>
+                                    <span class="notification-time">3 days ago</span>
+                                </div>
+                                <p>We detected a new login to your account from a new device. If this was you, no action is needed.</p>
+                            </div>
+                        </div>
+
+                        <div class="notification-item">
+                            <div class="notification-icon billing">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-header">
+                                    <h4>Payment Confirmation</h4>
+                                    <span class="notification-time">4 days ago</span>
+                                </div>
+                                <p>Your payment of ETB 3,300 for Bill #BILL-2026-003 has been successfully processed.</p>
+                            </div>
+                        </div>
+
+                        <div class="notification-item">
+                            <div class="notification-icon appointment">
+                                <i class="fas fa-calendar-times"></i>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-header">
+                                    <h4>Appointment Cancelled</h4>
+                                    <span class="notification-time">5 days ago</span>
+                                </div>
+                                <p>Your appointment with Dr. Sara Hailu on November 25, 2025 has been cancelled due to an emergency.</p>
+                            </div>
+                        </div>
+
+                        <div class="notification-item">
+                            <div class="notification-icon medical">
+                                <i class="fas fa-ambulance"></i>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-header">
+                                    <h4>Emergency Service Update</h4>
+                                    <span class="notification-time">1 week ago</span>
+                                </div>
+                                <p>Our emergency services are fully operational 24/7. In case of emergency, please call +251-911-234-567.</p>
+                            </div>
+                        </div>
+
+                        <div class="notification-item">
+                            <div class="notification-icon system">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-header">
+                                    <h4>System Maintenance</h4>
+                                    <span class="notification-time">1 week ago</span>
+                                </div>
+                                <p>The patient portal will be under maintenance on March 1, 2026 from 2:00 AM to 4:00 AM.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Load More -->
+                    <div class="text-center mt-4">
+                        <button class="btn btn-outline-primary btn-load-more">
+                            <i class="fas fa-sync"></i> Load More Notifications
+                        </button>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Mark as read on click
+        document.querySelectorAll('.notification-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.classList.remove('unread');
+                const badge = this.querySelector('.notification-badge');
+                if (badge) badge.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+  </html>
