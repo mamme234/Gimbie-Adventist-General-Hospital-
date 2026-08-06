@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blood Bank - Adventist General Hospital</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="24/7 Blood Bank services at Adventist General Hospital. Blood donation, blood component therapy, and emergency blood supply." />
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/blood-bank.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="contact.html"><i class="fas fa-map-marker-alt"></i> Find Us</a>
+                <a href="login.html"><i class="fas fa-sign-in-alt"></i> Patient Portal</a>
+                <a href="doctors.html"><i class="fas fa-user-md"></i> Find a Doctor</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="departments.html">Departments</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="doctors.html">Doctors</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- PAGE BANNER                                 -->
+    <!-- ============================================ -->
+    <section class="page-banner">
+        <div class="container">
+            <div class="banner-content">
+                <h1>Blood Bank</h1>
+                <nav class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span><i class="fas fa-chevron-right"></i></span>
+                    <span class="current">Blood Bank</span>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- BLOOD BANK HERO                           -->
+    <!-- ============================================ -->
+    <section class="bloodbank-hero section-padding">
+        <div class="container">
+            <div class="bloodbank-grid">
+                <div class="bloodbank-content">
+                    <span class="section-tag">Save Lives</span>
+                    <h2>Donate Blood <br /><span class="highlight">Save a Life</span></h2>
+                    <p>Our 24/7 blood bank provides safe and reliable blood products for patients in need. Every donation can save up to three lives.</p>
+                    <div class="bloodbank-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>24/7 Blood Bank</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Screened & Safe Blood</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Component Therapy</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Emergency Supply</span>
+                        </div>
+                    </div>
+                    <div class="bloodbank-actions">
+                        <a href="#donate-form" class="btn btn-danger btn-lg">
+                            <i class="fas fa-heart"></i> Donate Now
+                        </a>
+                        <a href="#blood-availability" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-arrow-down"></i> Check Availability
+                        </a>
+                    </div>
+                </div>
+                <div class="bloodbank-image">
+                    <img src="images/blood-bank/blood-donation.jpg" alt="Blood Donation" />
+                    <div class="bloodbank-badge">
+                        <i class="fas fa-certificate"></i>
+                        <span>FDA Approved</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- BLOOD AVAILABILITY                         -->
+    <!-- ============================================ -->
+    <section class="blood-availability section-padding bg-light" id="blood-availability">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">Current Stock</span>
+                <h2>Blood <br />Availability</h2>
+                <p>Updated in real-time. Urgent needs are highlighted.</p>
+            </div>
+
+            <div class="blood-types-grid">
+                <div class="blood-type available">
+                    <span class="blood-icon"><i class="fas fa-tint"></i></span>
+                    <h4>A+</h4>
+                    <span class="stock-label">Available</span>
+                    <span class="stock-level high">High Stock</span>
+                </div>
+
+                <div class="blood-type available">
+                    <span class="blood-icon"><i class="fas fa-tint"></i></span>
+                    <h4>A-</h4>
+                    <span class="stock-label">Available</span>
+                    <span class="stock-level medium">Medium Stock</span>
+                </div>
+
+                <div class="blood-type urgent">
+                    <span class="blood-icon"><i class="fas fa-tint"></i></span>
+                    <h4>B+</h4>
+                    <span class="stock-label">Urgent Need</span>
+                    <span class="stock-level low">Low Stock</span>
+                </div>
+
+                <div class="blood-type available">
+                    <span class="blood-icon"><i class="fas fa-tint"></i></span>
+                    <h4>B-</h4>
+                    <span class="stock-label">Available</span>
+                    <span class="stock-level medium">Medium Stock</span>
+                </div>
+
+                <div class="blood-type urgent">
+                    <span class="blood-icon"><i class="fas fa-tint"></i></span>
+                    <h4>AB+</h4>
+                    <span class="stock-label">Urgent Need</span>
+                    <span class="stock-level low">Low Stock</span>
+                </div>
+
+                <div class="blood-type available">
+                    <span class="blood-icon"><i class="fas fa-tint"></i></span>
+                    <h4>AB-</h4>
+                    <span class="stock-label">Available</span>
+                    <span class="stock-level medium">Medium Stock</span>
+                </div>
+
+                <div class="blood-type available">
+                    <span class="blood-icon"><i class="fas fa-tint"></i></span>
+                    <h4>O+</h4>
+                    <span class="stock-label">Available</span>
+                    <span class="stock-level high">High Stock</span>
+                </div>
+
+                <div class="blood-type urgent">
+                    <span class="blood-icon"><i class="fas fa-tint"></i></span>
+                    <h4>O-</h4>
+                    <span class="stock-label">Urgent Need</span>
+                    <span class="stock-level critical">Critical Stock</span>
+                </div>
+            </div>
+
+            <div class="availability-note">
+                <p><i class="fas fa-info-circle"></i> Need blood urgently? Call us at <strong>+251-911-234-567</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- BLOOD DONATION PROCESS                    -->
+    <!-- ============================================ -->
+    <section class="donation-process section-padding">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">How It Works</span>
+                <h2>The Donation <br />Process</h2>
+            </div>
+
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h4>Registration</h4>
+                    <p>Fill out a simple form with your basic information.</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <h4>Health Check</h4>
+                    <p>Quick health screening including blood pressure and hemoglobin test.</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h4>Donation</h4>
+                    <p>Safe and comfortable blood collection process (10-15 minutes).</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">
+                        <i class="fas fa-mug-hot"></i>
+                    </div>
+                    <h4>Recovery</h4>
+                    <p>Refreshments and monitoring before you leave.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- BLOOD DONATION FORM                       -->
+    <!-- ============================================ -->
+    <section class="donation-form-section section-padding bg-light" id="donate-form">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">Join Us</span>
+                <h2>Schedule Your <br />Blood Donation</h2>
+            </div>
+
+            <div class="donation-wrapper">
+                <form id="donationForm" class="donation-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="donorName">Full Name <span class="required">*</span></label>
+                            <input type="text" id="donorName" name="donorName" placeholder="Enter your full name" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="donorPhone">Phone Number <span class="required">*</span></label>
+                            <input type="tel" id="donorPhone" name="donorPhone" placeholder="+251-XXX-XXX-XXX" required />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="donorEmail">Email Address</label>
+                            <input type="email" id="donorEmail" name="donorEmail" placeholder="your@email.com" />
+                        </div>
+                        <div class="form-group">
+                            <label for="bloodType">Blood Type <span class="required">*</span></label>
+                            <select id="bloodType" name="bloodType" required>
+                                <option value="">Select Blood Type</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                                <option value="unknown">Don't Know</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="preferredDate">Preferred Date <span class="required">*</span></label>
+                            <input type="date" id="preferredDate" name="preferredDate" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="preferredTime">Preferred Time <span class="required">*</span></label>
+                            <select id="preferredTime" name="preferredTime" required>
+                                <option value="">Select Time</option>
+                                <option value="09:00">09:00 AM</option>
+                                <option value="10:00">10:00 AM</option>
+                                <option value="11:00">11:00 AM</option>
+                                <option value="12:00">12:00 PM</option>
+                                <option value="14:00">02:00 PM</option>
+                                <option value="15:00">03:00 PM</option>
+                                <option value="16:00">04:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="donationNotes">Additional Notes</label>
+                        <textarea id="donationNotes" name="donationNotes" rows="3" placeholder="Any health conditions or special requirements..."></textarea>
+                    </div>
+
+                    <div class="form-check">
+                        <input type="checkbox" id="consent" name="consent" required />
+                        <label for="consent">I confirm that I meet the eligibility criteria for blood donation and consent to the donation process.</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-danger btn-lg btn-block">
+                        <i class="fas fa-heart"></i> Schedule Donation
+                    </button>
+                </form>
+
+                <div id="donationSuccess" style="display: none;" class="success-message">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Donation Scheduled!</h3>
+                    <p>Thank you for saving lives. You will receive a confirmation email with details.</p>
+                    <button onclick="location.reload()" class="btn btn-outline-primary">
+                        <i class="fas fa-plus"></i> Schedule Another
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- ELIGIBILITY CHECK                         -->
+    <!-- ============================================ -->
+    <section class="eligibility-section section-padding">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">Check Your Eligibility</span>
+                <h2>Who Can <br />Donate Blood?</h2>
+            </div>
+
+            <div class="eligibility-grid">
+                <div class="eligibility-card eligible">
+                    <h4><i class="fas fa-check-circle"></i> You Can Donate If:</h4>
+                    <ul>
+                        <li>Age between 18 and 65 years</li>
+                        <li>Weight at least 50 kg</li>
+                        <li>In good general health</li>
+                        <li>Hemoglobin level above 12.5 g/dL</li>
+                        <li>No recent surgeries or infections</li>
+                        <li>Not pregnant or breastfeeding</li>
+                    </ul>
+                </div>
+                <div class="eligibility-card not-eligible">
+                    <h4><i class="fas fa-times-circle"></i> You Cannot Donate If:</h4>
+                    <ul>
+                        <li>Age under 18 or over 65</li>
+                        <li>Weight below 50 kg</li>
+                        <li>Anemic or low hemoglobin</li>
+                        <li>Recent tattoos or piercings (within 6 months)</li>
+                        <li>Chronic diseases like HIV, Hepatitis B/C</li>
+                        <li>Pregnant or breastfeeding</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CTA SECTION                                -->
+    <!-- ============================================ -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-wrapper blood-cta">
+                <div class="cta-text">
+                    <h2>Save a Life Today</h2>
+                    <p>Your blood donation can save up to three lives. Join us in this life-saving mission.</p>
+                </div>
+                <div class="cta-buttons">
+                    <a href="#donate-form" class="btn btn-danger btn-lg pulse-btn">
+                        <i class="fas fa-heart"></i> Donate Now
+                    </a>
+                    <a href="tel:+251911234567" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-phone"></i> Call for Info
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="departments.html">Departments</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="doctors.html">Find a Doctor</a></li>
+                        <li><a href="appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="emergency.html">Emergency Care</a></li>
+                        <li><a href="telemedicine.html">Telemedicine</a></li>
+                        <li><a href="laboratory.html">Laboratory</a></li>
+                        <li><a href="radiology.html">Radiology</a></li>
+                        <li><a href="pharmacy.html">Pharmacy</a></li>
+                        <li><a href="blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================ -->
+    <!-- SCRIPTS                                    -->
+    <!-- ============================================ -->
+    <script src="main.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Donation form submission
+        document.getElementById('donationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const inputs = this.querySelectorAll('input[required], select[required]');
+            let valid = true;
+
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.classList.add('error');
+                    valid = false;
+                } else {
+                    input.classList.remove('error');
+                }
+            });
+
+            const consent = document.getElementById('consent');
+            if (!consent.checked) {
+                consent.classList.add('error');
+                valid = false;
+            } else {
+                consent.classList.remove('error');
+            }
+
+            if (valid) {
+                const btn = this.querySelector('button[type="submit"]');
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Scheduling...';
+                btn.disabled = true;
+
+                setTimeout(() => {
+                    this.style.display = 'none';
+                    document.getElementById('donationSuccess').style.display = 'block';
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+                          </html>
