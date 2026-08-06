@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Medicines - Pharmacy Portal</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/pharmacy.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Doctors</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="../appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- MEDICINES                                -->
+    <!-- ============================================ -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-wrapper">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="sidebar-profile">
+                        <img src="../images/pharmacy/pharmacist-1.jpg" alt="Chief Pharmacist" />
+                        <h4>Dr. Yonas Hailu</h4>
+                        <span>Chief Pharmacist • ID: PHA-2024-001</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                        <a href="medicines.html" class="active"><i class="fas fa-pills"></i> Medicines</a>
+                        <a href="prescriptions.html"><i class="fas fa-prescription-bottle"></i> Prescriptions</a>
+                        <a href="inventory.html"><i class="fas fa-boxes"></i> Inventory</a>
+                        <a href="suppliers.html"><i class="fas fa-truck"></i> Suppliers</a>
+                        <a href="purchase-orders.html"><i class="fas fa-shopping-cart"></i> Purchase Orders</a>
+                        <a href="expiry.html"><i class="fas fa-clock"></i> Expiry Management</a>
+                        <a href="reports.html"><i class="fas fa-chart-bar"></i> Reports</a>
+                        <a href="../login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    <div class="dashboard-header">
+                        <h1>Medicine Catalog</h1>
+                        <button class="btn btn-primary btn-sm" id="newMedicineBtn">
+                            <i class="fas fa-plus"></i> Add Medicine
+                        </button>
+                    </div>
+
+                    <!-- Filters -->
+                    <div class="inventory-filters">
+                        <input type="text" placeholder="Search medicines..." />
+                        <select>
+                            <option value="">All Categories</option>
+                            <option value="antibiotics">Antibiotics</option>
+                            <option value="cardiovascular">Cardiovascular</option>
+                            <option value="analgesics">Analgesics</option>
+                            <option value="antidiabetic">Antidiabetic</option>
+                            <option value="antihypertensive">Antihypertensive</option>
+                        </select>
+                        <select>
+                            <option value="">All Status</option>
+                            <option value="in-stock">In Stock</option>
+                            <option value="low-stock">Low Stock</option>
+                            <option value="out-of-stock">Out of Stock</option>
+                            <option value="discontinued">Discontinued</option>
+                        </select>
+                        <button class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+                    </div>
+
+                    <!-- Medicine Table -->
+                    <div class="table-responsive">
+                        <table class="inventory-table">
+                            <thead>
+                                <tr>
+                                    <th>Medicine Name</th>
+                                    <th>Category</th>
+                                    <th>Strength</th>
+                                    <th>Stock</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Lisinopril</strong></td>
+                                    <td>Antihypertensive</td>
+                                    <td>10mg</td>
+                                    <td>
+                                        <span class="stock-indicator"><span class="fill high" style="width: 85%;"></span></span>
+                                        <span class="stock-text high">245 units</span>
+                                    </td>
+                                    <td>ETB 45.00</td>
+                                    <td><span class="status active">In Stock</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                        <button class="btn btn-sm btn-outline-primary">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Atorvastatin</strong></td>
+                                    <td>Cardiovascular</td>
+                                    <td>20mg</td>
+                                    <td>
+                                        <span class="stock-indicator"><span class="fill medium" style="width: 55%;"></span></span>
+                                        <span class="stock-text medium">128 units</span>
+                                    </td>
+                                    <td>ETB 78.00</td>
+                                    <td><span class="status active">In Stock</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                        <button class="btn btn-sm btn-outline-primary">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Metformin</strong></td>
+                                    <td>Antidiabetic</td>
+                                    <td>500mg</td>
+                                    <td>
+                                        <span class="stock-indicator"><span class="fill high" style="width: 90%;"></span></span>
+                                        <span class="stock-text high">320 units</span>
+                                    </td>
+                                    <td>ETB 32.00</td>
+                                    <td><span class="status active">In Stock</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                        <button class="btn btn-sm btn-outline-primary">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Amitriptyline</strong></td>
+                                    <td>Antidepressant</td>
+                                    <td>25mg</td>
+                                    <td>
+                                        <span class="stock-indicator"><span class="fill low" style="width: 20%;"></span></span>
+                                        <span class="stock-text low">45 units</span>
+                                    </td>
+                                    <td>ETB 55.00</td>
+                                    <td><span class="status warning">Low Stock</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                        <button class="btn btn-sm btn-primary">Reorder</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Albuterol Inhaler</strong></td>
+                                    <td>Respiratory</td>
+                                    <td>90mcg</td>
+                                    <td>
+                                        <span class="stock-indicator"><span class="fill medium" style="width: 60%;"></span></span>
+                                        <span class="stock-text medium">75 units</span>
+                                    </td>
+                                    <td>ETB 120.00</td>
+                                    <td><span class="status active">In Stock</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                        <button class="btn btn-sm btn-outline-primary">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Amoxicillin</strong></td>
+                                    <td>Antibiotics</td>
+                                    <td>500mg</td>
+                                    <td>
+                                        <span class="stock-indicator"><span class="fill low" style="width: 10%;"></span></span>
+                                        <span class="stock-text low">18 units</span>
+                                    </td>
+                                    <td>ETB 65.00</td>
+                                    <td><span class="status danger">Out of Stock</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                        <button class="btn btn-sm btn-danger">Reorder</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <button class="page-btn">...</button>
+                        <button class="page-btn">25</button>
+                        <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+
+                    <!-- New Medicine Modal -->
+                    <div class="modal-overlay" id="medicineModal">
+                        <div class="modal-content large">
+                            <div class="modal-header">
+                                <h3>Add New Medicine</h3>
+                                <button class="modal-close" id="closeModal"><i class="fas fa-times"></i></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>Medicine Name <span class="required">*</span></label>
+                                    <input type="text" placeholder="Enter medicine name" />
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Category <span class="required">*</span></label>
+                                        <select>
+                                            <option value="">Select category</option>
+                                            <option value="antibiotics">Antibiotics</option>
+                                            <option value="cardiovascular">Cardiovascular</option>
+                                            <option value="analgesics">Analgesics</option>
+                                            <option value="antidiabetic">Antidiabetic</option>
+                                            <option value="antihypertensive">Antihypertensive</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Strength <span class="required">*</span></label>
+                                        <input type="text" placeholder="e.g., 10mg" />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Quantity <span class="required">*</span></label>
+                                        <input type="number" placeholder="Initial stock quantity" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Unit Price <span class="required">*</span></label>
+                                        <input type="number" placeholder="Price per unit" />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Expiry Date <span class="required">*</span></label>
+                                        <input type="date" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Supplier</label>
+                                        <select>
+                                            <option value="">Select supplier</option>
+                                            <option value="1">PharmaMed Supplies</option>
+                                            <option value="2">Ethio Health Distributors</option>
+                                            <option value="3">Global Medical Solutions</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea rows="3" placeholder="Medicine description..."></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-outline-secondary" id="closeModalBtn">Cancel</button>
+                                <button class="btn btn-primary"><i class="fas fa-pills"></i> Add Medicine</button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Modal
+        const modal = document.getElementById('medicineModal');
+        const openBtn = document.getElementById('newMedicineBtn');
+        const closeBtns = document.querySelectorAll('#closeModal, #closeModalBtn');
+
+        openBtn.addEventListener('click', function() {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+</body>
+  </html>
