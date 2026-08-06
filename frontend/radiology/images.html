@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Images - Radiology Portal</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/radiology.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Doctors</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="../appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- IMAGES                                   -->
+    <!-- ============================================ -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-wrapper">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="sidebar-profile">
+                        <img src="../images/radiology/radiologist.jpg" alt="Radiologist" />
+                        <h4>Dr. Martha Ayele</h4>
+                        <span>Head of Radiology • ID: RAD-2024-001</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                        <a href="appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a>
+                        <a href="xray.html"><i class="fas fa-x-ray"></i> X-Ray</a>
+                        <a href="ct-scan.html"><i class="fas fa-cog"></i> CT Scan</a>
+                        <a href="mri.html"><i class="fas fa-magnet"></i> MRI</a>
+                        <a href="ultrasound.html"><i class="fas fa-wave-square"></i> Ultrasound</a>
+                        <a href="reports.html"><i class="fas fa-file-medical-alt"></i> Reports</a>
+                        <a href="images.html" class="active"><i class="fas fa-image"></i> Images</a>
+                        <a href="../login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    <div class="dashboard-header">
+                        <h1>Image Library</h1>
+                        <div class="image-actions">
+                            <button class="btn btn-outline-primary btn-sm"><i class="fas fa-upload"></i> Upload</button>
+                            <button class="btn btn-outline-primary btn-sm"><i class="fas fa-sliders-h"></i> Filters</button>
+                        </div>
+                    </div>
+
+                    <!-- Image Filters -->
+                    <div class="image-filters">
+                        <select>
+                            <option value="">All Modalities</option>
+                            <option value="xray">X-Ray</option>
+                            <option value="ct">CT Scan</option>
+                            <option value="mri">MRI</option>
+                            <option value="ultrasound">Ultrasound</option>
+                            <option value="echo">Echocardiogram</option>
+                        </select>
+                        <select>
+                            <option value="">All Patients</option>
+                            <option value="1">Meron Tesfaye</option>
+                            <option value="2">Selam Tsegaye</option>
+                            <option value="3">Abel Girma</option>
+                        </select>
+                        <input type="text" placeholder="Search images..." />
+                        <button class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+                    </div>
+
+                    <!-- Image Grid -->
+                    <div class="image-grid">
+                        <div class="image-card">
+                            <div class="image-thumbnail">
+                                <img src="../images/radiology/chest-xray.jpg" alt="Chest X-Ray" />
+                                <span class="image-badge">X-Ray</span>
+                            </div>
+                            <div class="image-info">
+                                <h4>Chest X-Ray</h4>
+                                <p>Meron Tesfaye</p>
+                                <span class="image-date">Feb 20, 2026</span>
+                            </div>
+                            <div class="image-actions">
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i> View</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="image-card">
+                            <div class="image-thumbnail">
+                                <img src="../images/radiology/mri-spine.jpg" alt="MRI Spine" />
+                                <span class="image-badge">MRI</span>
+                            </div>
+                            <div class="image-info">
+                                <h4>MRI Lumbar Spine</h4>
+                                <p>Selam Tsegaye</p>
+                                <span class="image-date">Feb 20, 2026</span>
+                            </div>
+                            <div class="image-actions">
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i> View</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="image-card">
+                            <div class="image-thumbnail">
+                                <img src="../images/radiology/ct-head.jpg" alt="CT Head" />
+                                <span class="image-badge">CT Scan</span>
+                            </div>
+                            <div class="image-info">
+                                <h4>CT Head</h4>
+                                <p>Abel Girma</p>
+                                <span class="image-date">Feb 19, 2026</span>
+                            </div>
+                            <div class="image-actions">
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i> View</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="image-card">
+                            <div class="image-thumbnail">
+                                <img src="../images/radiology/ultrasound-abdomen.jpg" alt="Ultrasound" />
+                                <span class="image-badge">Ultrasound</span>
+                            </div>
+                            <div class="image-info">
+                                <h4>Ultrasound Abdomen</h4>
+                                <p>Yonas Alemu</p>
+                                <span class="image-date">Feb 19, 2026</span>
+                            </div>
+                            <div class="image-actions">
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i> View</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="image-card">
+                            <div class="image-thumbnail">
+                                <img src="../images/radiology/echocardiogram.jpg" alt="Echocardiogram" />
+                                <span class="image-badge">Echo</span>
+                            </div>
+                            <div class="image-info">
+                                <h4>Echocardiogram</h4>
+                                <p>Tigist Wondimu</p>
+                                <span class="image-date">Feb 18, 2026</span>
+                            </div>
+                            <div class="image-actions">
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i> View</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="image-card">
+                            <div class="image-thumbnail">
+                                <img src="../images/radiology/knee-xray.jpg" alt="Knee X-Ray" />
+                                <span class="image-badge">X-Ray</span>
+                            </div>
+                            <div class="image-info">
+                                <h4>Knee X-Ray</h4>
+                                <p>Mekdes Hailu</p>
+                                <span class="image-date">Feb 17, 2026</span>
+                            </div>
+                            <div class="image-actions">
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i> View</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Load More -->
+                    <div class="text-center mt-4">
+                        <button class="btn btn-outline-primary btn-load-more">
+                            <i class="fas fa-sync"></i> Load More Images
+                        </button>
+                    </div>
+
+                    <!-- Image Viewer Modal -->
+                    <div class="modal-overlay" id="imageViewer">
+                        <div class="modal-content image-viewer">
+                            <div class="modal-header">
+                                <h3>Chest X-Ray - Meron Tesfaye</h3>
+                                <button class="modal-close" id="closeViewer"><i class="fas fa-times"></i></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="viewer-container">
+                                    <img src="../images/radiology/chest-xray.jpg" alt="Chest X-Ray" />
+                                    <div class="viewer-controls">
+                                        <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-zoom-in"></i></button>
+                                        <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-zoom-out"></i></button>
+                                        <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-rotate-left"></i></button>
+                                        <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-rotate-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-outline-primary"><i class="fas fa-download"></i> Download</button>
+                                <button class="btn btn-outline-primary"><i class="fas fa-print"></i> Print</button>
+                                <button class="btn btn-outline-primary"><i class="fas fa-file-medical-alt"></i> View Report</button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Image Viewer Modal
+        document.querySelectorAll('.image-card .btn-outline-primary').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const modal = document.getElementById('imageViewer');
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        document.getElementById('closeViewer').addEventListener('click', function() {
+            document.getElementById('imageViewer').classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        document.getElementById('imageViewer').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+</body>
+  </html>
