@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Health Summary - Patient Portal</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/patient.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Doctors</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="../appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- HEALTH SUMMARY                             -->
+    <!-- ============================================ -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-wrapper">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="sidebar-profile">
+                        <img src="../images/patients/patient-avatar.jpg" alt="Patient" />
+                        <h4>Meron Tesfaye</h4>
+                        <span>Patient ID: PAT-2026-001</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                        <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                        <a href="medical-records.html"><i class="fas fa-file-medical"></i> Medical Records</a>
+                        <a href="appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a>
+                        <a href="appointment-history.html"><i class="fas fa-history"></i> Appointment History</a>
+                        <a href="prescriptions.html"><i class="fas fa-prescription-bottle"></i> Prescriptions</a>
+                        <a href="laboratory-results.html"><i class="fas fa-flask"></i> Lab Results</a>
+                        <a href="radiology-results.html"><i class="fas fa-x-ray"></i> Radiology Results</a>
+                        <a href="bills.html"><i class="fas fa-file-invoice-dollar"></i> Bills</a>
+                        <a href="payments.html"><i class="fas fa-credit-card"></i> Payments</a>
+                        <a href="insurance.html"><i class="fas fa-shield-alt"></i> Insurance</a>
+                        <a href="telemedicine.html"><i class="fas fa-video"></i> Telemedicine</a>
+                        <a href="messages.html"><i class="fas fa-envelope"></i> Messages</a>
+                        <a href="notifications.html"><i class="fas fa-bell"></i> Notifications</a>
+                        <a href="family-members.html"><i class="fas fa-users"></i> Family Members</a>
+                        <a href="health-summary.html" class="active"><i class="fas fa-chart-pie"></i> Health Summary</a>
+                        <a href="vaccination.html"><i class="fas fa-syringe"></i> Vaccination</a>
+                        <a href="allergies.html"><i class="fas fa-allergies"></i> Allergies</a>
+                        <a href="medications.html"><i class="fas fa-pills"></i> Medications</a>
+                        <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="../login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    <div class="dashboard-header">
+                        <h1>Health Summary</h1>
+                        <span class="date"><i class="fas fa-chart-pie"></i> Updated: February 20, 2026</span>
+                    </div>
+
+                    <!-- Vital Stats -->
+                    <div class="stats-cards">
+                        <div class="stat-card primary">
+                            <div class="stat-icon"><i class="fas fa-heartbeat"></i></div>
+                            <span class="stat-number">120/80</span>
+                            <span class="stat-label">Blood Pressure</span>
+                            <span class="stat-change positive">Normal</span>
+                        </div>
+                        <div class="stat-card success">
+                            <div class="stat-icon"><i class="fas fa-heart"></i></div>
+                            <span class="stat-number">72</span>
+                            <span class="stat-label">Heart Rate (bpm)</span>
+                            <span class="stat-change positive">Normal</span>
+                        </div>
+                        <div class="stat-card warning">
+                            <div class="stat-icon"><i class="fas fa-weight"></i></div>
+                            <span class="stat-number">72</span>
+                            <span class="stat-label">Weight (kg)</span>
+                            <span class="stat-change positive">Stable</span>
+                        </div>
+                        <div class="stat-card primary">
+                            <div class="stat-icon"><i class="fas fa-ruler"></i></div>
+                            <span class="stat-number">24.5</span>
+                            <span class="stat-label">BMI</span>
+                            <span class="stat-change positive">Normal</span>
+                        </div>
+                    </div>
+
+                    <!-- Health Metrics -->
+                    <div class="health-metrics">
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <h4>Blood Pressure Trend</h4>
+                                <span class="metric-status normal">Normal</span>
+                            </div>
+                            <div class="metric-chart">
+                                <div class="chart-bars">
+                                    <div class="chart-bar" style="height: 60%;">
+                                        <span class="bar-label">Jan</span>
+                                        <span class="bar-value">118/78</span>
+                                    </div>
+                                    <div class="chart-bar" style="height: 65%;">
+                                        <span class="bar-label">Feb</span>
+                                        <span class="bar-value">120/80</span>
+                                    </div>
+                                    <div class="chart-bar" style="height: 55%;">
+                                        <span class="bar-label">Mar</span>
+                                        <span class="bar-value">116/76</span>
+                                    </div>
+                                    <div class="chart-bar" style="height: 70%;">
+                                        <span class="bar-label">Apr</span>
+                                        <span class="bar-value">122/82</span>
+                                    </div>
+                                    <div class="chart-bar" style="height: 60%;">
+                                        <span class="bar-label">May</span>
+                                        <span class="bar-value">118/78</span>
+                                    </div>
+                                    <div class="chart-bar" style="height: 65%;">
+                                        <span class="bar-label">Jun</span>
+                                        <span class="bar-value">120/80</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <h4>Weight Trend</h4>
+                                <span class="metric-status normal">Stable</span>
+                            </div>
+                            <div class="metric-chart">
+                                <div class="chart-bars">
+                                    <div class="chart-bar" style="height: 70%;">
+                                        <span class="bar-label">Jan</span>
+                                        <span class="bar-value">73</span>
+                                    </div>
+                                    <div class="chart-bar" style="height: 72%;">
+                                        <span class="bar-label">Feb</span>
+                                        <span class="bar-value">74</span>
+                                    </div>
+                                    <div class="chart-bar" style="height: 70%;">
+                                        <span class="bar-label">Mar</span>
+                                        <span class="bar-value">72</span>
+                                    </div>
+                                    <div class="chart-bar" style="height: 68%;">
+                                        <span class="bar-label">Apr</span>
+                                        <span class="bar-value">71</span>
+                                    </div>
+                                    <div class="chart-bar" style="height: 70%;">
+                                        <span class="bar-label">May</span>
+                                        <span class="bar-value">72</span>
+                                    </div>
+                                    <div class="chart-bar" style="height: 70%;">
+                                        <span class="bar-label">Jun</span>
+                                        <span class="bar-value">72</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Health Data -->
+                    <div class="recent-health">
+                        <h3>Recent Health Data</h3>
+                        <div class="health-data-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Blood Pressure</th>
+                                        <th>Heart Rate</th>
+                                        <th>Weight</th>
+                                        <th>BMI</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Feb 20, 2026</td>
+                                        <td>120/80</td>
+                                        <td>72</td>
+                                        <td>72 kg</td>
+                                        <td>24.5</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Feb 15, 2026</td>
+                                        <td>118/78</td>
+                                        <td>70</td>
+                                        <td>71.5 kg</td>
+                                        <td>24.3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Feb 10, 2026</td>
+                                        <td>122/82</td>
+                                        <td>74</td>
+                                        <td>72 kg</td>
+                                        <td>24.5</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Feb 5, 2026</td>
+                                        <td>116/76</td>
+                                        <td>68</td>
+                                        <td>71 kg</td>
+                                        <td>24.1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jan 28, 2026</td>
+                                        <td>120/78</td>
+                                        <td>72</td>
+                                        <td>72 kg</td>
+                                        <td>24.5</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Health Conditions -->
+                    <div class="health-conditions">
+                        <h3>Chronic Conditions</h3>
+                        <div class="condition-item">
+                            <div class="condition-icon"><i class="fas fa-heart"></i></div>
+                            <div class="condition-info">
+                                <h4>Hypertension</h4>
+                                <p>Diagnosed: January 2023 • Managed with medication</p>
+                            </div>
+                            <span class="condition-status controlled">Controlled</span>
+                        </div>
+                        <div class="condition-item">
+                            <div class="condition-icon"><i class="fas fa-lungs"></i></div>
+                            <div class="condition-info">
+                                <h4>Asthma</h4>
+                                <p>Diagnosed: March 2019 • Seasonal triggers</p>
+                            </div>
+                            <span class="condition-status stable">Stable</span>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+  </html>
