@@ -1,0 +1,302 @@
+/* ============================================ */
+/* DOCTORS.CSS - Doctors Page Styles          */
+/* ============================================ */
+
+/* ============================================ */
+/* Search Section                             */
+/* ============================================ */
+.search-section {
+    padding: 30px 0;
+    background: var(--bg-light);
+}
+
+.search-wrapper {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.search-box {
+    flex: 1;
+    min-width: 250px;
+    position: relative;
+}
+
+.search-box i {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light);
+}
+
+.search-box input {
+    width: 100%;
+    padding: 14px 16px 14px 46px;
+    border: 2px solid var(--bg-gray);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-family: var(--font-family);
+    transition: all var(--transition-normal);
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(26, 82, 118, 0.1);
+}
+
+.filter-wrapper {
+    display: flex;
+    gap: 12px;
+}
+
+.filter-wrapper select {
+    padding: 14px 40px 14px 16px;
+    border: 2px solid var(--bg-gray);
+    border-radius: var(--border-radius);
+    font-size: 0.95rem;
+    font-family: var(--font-family);
+    background: var(--bg-white);
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235d6d7e' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.filter-wrapper select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(26, 82, 118, 0.1);
+}
+
+/* ============================================ */
+/* Doctors Grid                              */
+/* ============================================ */
+.doctors-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.doctor-card {
+    background: var(--bg-white);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-normal);
+}
+
+.doctor-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.doctor-image {
+    position: relative;
+    height: 260px;
+    overflow: hidden;
+}
+
+.doctor-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.doctor-card:hover .doctor-image img {
+    transform: scale(1.05);
+}
+
+.availability-badge {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background: var(--bg-white);
+    box-shadow: var(--shadow-sm);
+}
+
+.availability-badge.available {
+    color: var(--success);
+    border: 2px solid var(--success);
+}
+
+.availability-badge.unavailable {
+    color: var(--danger);
+    border: 2px solid var(--danger);
+}
+
+.doctor-info {
+    padding: 24px;
+}
+
+.doctor-info h4 {
+    font-size: 1.2rem;
+    margin-bottom: 2px;
+}
+
+.doctor-specialty {
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.doctor-details {
+    margin: 12px 0;
+}
+
+.doctor-details p {
+    font-size: 0.85rem;
+    color: var(--text-medium);
+    margin: 4px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.doctor-details i {
+    width: 18px;
+    color: var(--primary-color);
+}
+
+.doctor-details span {
+    color: var(--text-light);
+}
+
+.doctor-bio {
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    margin: 12px 0 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.doctor-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.doctor-actions .btn {
+    flex: 1;
+}
+
+/* ============================================ */
+/* Load More Button                           */
+/* ============================================ */
+.btn-load-more {
+    padding: 14px 48px;
+    font-size: 1rem;
+}
+
+/* ============================================ */
+/* CTA Section                               */
+/* ============================================ */
+.cta-section {
+    padding: 60px 0;
+}
+
+.cta-wrapper {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    border-radius: var(--border-radius-lg);
+    padding: 50px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-white);
+}
+
+.cta-wrapper .cta-text h2 {
+    color: var(--text-white);
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.cta-wrapper .cta-text p {
+    color: rgba(255,255,255,0.8);
+    margin: 0;
+}
+
+.cta-wrapper .cta-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+/* ============================================ */
+/* Responsive                                */
+/* ============================================ */
+@media (max-width: 992px) {
+    .doctors-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .search-wrapper {
+        flex-direction: column;
+    }
+    
+    .filter-wrapper {
+        flex-wrap: wrap;
+    }
+    
+    .filter-wrapper select {
+        flex: 1;
+        min-width: 150px;
+    }
+    
+    .cta-wrapper {
+        flex-direction: column;
+        text-align: center;
+        gap: 24px;
+        padding: 40px 30px;
+    }
+    
+    .cta-wrapper .cta-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .doctors-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    .doctor-image {
+        height: 220px;
+    }
+    
+    .filter-wrapper {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .filter-wrapper select {
+        width: 100%;
+    }
+    
+    .cta-wrapper .cta-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .cta-wrapper .cta-buttons .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .doctor-actions {
+        flex-direction: column;
+    }
+  }
