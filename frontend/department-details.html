@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Department Details - Adventist General Hospital</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/department-details.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="contact.html"><i class="fas fa-map-marker-alt"></i> Find Us</a>
+                <a href="login.html"><i class="fas fa-sign-in-alt"></i> Patient Portal</a>
+                <a href="doctors.html"><i class="fas fa-user-md"></i> Find a Doctor</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="departments.html">Departments</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="doctors.html">Doctors</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- DEPARTMENT HERO                            -->
+    <!-- ============================================ -->
+    <section class="dept-hero" id="deptHero">
+        <div class="container">
+            <div class="dept-hero-content">
+                <div class="dept-hero-left">
+                    <nav class="breadcrumb">
+                        <a href="index.html">Home</a>
+                        <span><i class="fas fa-chevron-right"></i></span>
+                        <a href="departments.html">Departments</a>
+                        <span><i class="fas fa-chevron-right"></i></span>
+                        <span class="current" id="deptName">Cardiology</span>
+                    </nav>
+                    <h1 id="deptTitle">Cardiology Department</h1>
+                    <p id="deptDescription">Comprehensive heart care including diagnosis, treatment, and prevention of cardiovascular diseases with state-of-the-art technology and expert cardiologists.</p>
+                    <div class="dept-hero-meta">
+                        <span><i class="fas fa-user-md"></i> <span id="deptDoctors">12</span> Specialists</span>
+                        <span><i class="fas fa-bed"></i> <span id="deptBeds">40</span> Beds</span>
+                        <span><i class="fas fa-clock"></i> 24/7 Service</span>
+                        <span class="dept-status active"><i class="fas fa-circle"></i> Active</span>
+                    </div>
+                    <div class="dept-hero-actions">
+                        <a href="appointments.html" class="btn btn-primary btn-lg">
+                            <i class="fas fa-calendar-check"></i> Book Appointment
+                        </a>
+                        <a href="#doctors" class="btn btn-outline btn-lg">
+                            <i class="fas fa-user-md"></i> Meet Our Doctors
+                        </a>
+                    </div>
+                </div>
+                <div class="dept-hero-right">
+                    <div class="dept-hero-image">
+                        <img src="images/departments/cardiology-hero.jpg" alt="Cardiology Department" id="deptHeroImage" />
+                        <div class="dept-badge-large">
+                            <i class="fas fa-heart"></i>
+                            <span>Advanced Cardiac Care</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- DEPARTMENT TABS                             -->
+    <!-- ============================================ -->
+    <section class="dept-tabs-section">
+        <div class="container">
+            <div class="dept-tabs">
+                <button class="dept-tab active" data-tab="overview">Overview</button>
+                <button class="dept-tab" data-tab="services">Services</button>
+                <button class="dept-tab" data-tab="doctors">Doctors</button>
+                <button class="dept-tab" data-tab="facilities">Facilities</button>
+                <button class="dept-tab" data-tab="appointments">Appointments</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- TAB CONTENT - OVERVIEW                     -->
+    <!-- ============================================ -->
+    <section class="tab-content active" id="tab-overview">
+        <div class="container">
+            <div class="overview-grid">
+                <div class="overview-main">
+                    <h2>About the Department</h2>
+                    <p id="deptFullDescription">The Cardiology Department at Adventist General Hospital provides comprehensive heart care services. Our team of highly skilled cardiologists uses the latest technology to diagnose and treat all types of heart conditions, from common issues to complex cardiovascular diseases.</p>
+                    <p>We are committed to providing patient-centered care that focuses on prevention, early detection, and effective treatment. Our state-of-the-art facilities include advanced diagnostic equipment, cardiac catheterization labs, and a dedicated cardiac care unit (CCU).</p>
+                    
+                    <div class="overview-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-stethoscope"></i>
+                            <div>
+                                <h4>Expert Diagnosis</h4>
+                                <p>Advanced diagnostic tools for accurate assessment</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-heartbeat"></i>
+                            <div>
+                                <h4>Comprehensive Treatment</h4>
+                                <p>From medication to surgical interventions</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-chart-line"></i>
+                            <div>
+                                <h4>Preventive Care</h4>
+                                <p>Focus on heart health and risk reduction</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-hands-heart"></i>
+                            <div>
+                                <h4>Patient Support</h4>
+                                <p>Counseling, rehabilitation, and follow-up care</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="overview-sidebar">
+                    <div class="sidebar-card">
+                        <h4>Quick Info</h4>
+                        <ul class="sidebar-list">
+                            <li><i class="fas fa-user-md"></i> <span>Head of Department:</span> Dr. Samuel Tekle</li>
+                            <li><i class="fas fa-users"></i> <span>Specialists:</span> 12</li>
+                            <li><i class="fas fa-bed"></i> <span>Beds:</span> 40</li>
+                            <li><i class="fas fa-clock"></i> <span>Operating Hours:</span> 24/7</li>
+                            <li><i class="fas fa-phone"></i> <span>Phone:</span> +251-911-234-567</li>
+                            <li><i class="fas fa-envelope"></i> <span>Email:</span> cardiology@adventisthospital.et</li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h4>Book an Appointment</h4>
+                        <p>Schedule a consultation with our cardiology specialists.</p>
+                        <a href="appointments.html" class="btn btn-primary btn-block">Book Now</a>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h4>Emergency?</h4>
+                        <p>For cardiac emergencies, call us immediately.</p>
+                        <a href="tel:+251911234567" class="btn btn-danger btn-block">
+                            <i class="fas fa-phone"></i> +251-911-234-567
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- TAB CONTENT - SERVICES                     -->
+    <!-- ============================================ -->
+    <section class="tab-content" id="tab-services">
+        <div class="container">
+            <h2 class="tab-section-title">Our Services</h2>
+            <p class="tab-section-desc">Comprehensive cardiac services delivered with precision and care</p>
+            
+            <div class="services-list">
+                <div class="service-detail">
+                    <div class="service-detail-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="service-detail-content">
+                        <h4>Cardiac Consultation</h4>
+                        <p>Comprehensive evaluation by expert cardiologists for all heart-related concerns.</p>
+                    </div>
+                </div>
+                
+                <div class="service-detail">
+                    <div class="service-detail-icon">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <div class="service-detail-content">
+                        <h4>Diagnostic Testing</h4>
+                        <p>ECG, Echocardiography, Stress Tests, Holter Monitoring, and Cardiac Catheterization.</p>
+                    </div>
+                </div>
+                
+                <div class="service-detail">
+                    <div class="service-detail-icon">
+                        <i class="fas fa-scalpel"></i>
+                    </div>
+                    <div class="service-detail-content">
+                        <h4>Cardiac Surgery</h4>
+                        <p>Bypass surgery, valve replacement, and other advanced cardiac surgical procedures.</p>
+                    </div>
+                </div>
+                
+                <div class="service-detail">
+                    <div class="service-detail-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="service-detail-content">
+                        <h4>Interventional Cardiology</h4>
+                        <p>Angioplasty, stenting, and other minimally invasive cardiac interventions.</p>
+                    </div>
+                </div>
+                
+                <div class="service-detail">
+                    <div class="service-detail-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div class="service-detail-content">
+                        <h4>Preventive Cardiology</h4>
+                        <p>Risk assessment, lifestyle counseling, and preventive strategies for heart health.</p>
+                    </div>
+                </div>
+                
+                <div class="service-detail">
+                    <div class="service-detail-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <div class="service-detail-content">
+                        <h4>Cardiac Rehabilitation</h4>
+                        <p>Comprehensive rehabilitation program for heart attack and post-surgery recovery.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- TAB CONTENT - DOCTORS                      -->
+    <!-- ============================================ -->
+    <section class="tab-content" id="tab-doctors">
+        <div class="container">
+            <h2 class="tab-section-title">Our Cardiology Specialists</h2>
+            <p class="tab-section-desc">Meet our team of expert cardiologists committed to your heart health</p>
+            
+            <div class="doctors-grid">
+                <div class="doctor-card">
+                    <div class="doctor-image">
+                        <img src="images/doctors/doctor-1.jpg" alt="Dr. Samuel Tekle" />
+                    </div>
+                    <div class="doctor-info">
+                        <h4>Dr. Samuel Tekle</h4>
+                        <span class="doctor-specialty">Head of Cardiology - Interventional Cardiologist</span>
+                        <div class="doctor-details">
+                            <p><i class="fas fa-graduation-cap"></i> MD, FACC, FESC</p>
+                            <p><i class="fas fa-briefcase"></i> 22+ Years Experience</p>
+                            <p><i class="fas fa-star"></i> 4.9 (124 Reviews)</p>
+                        </div>
+                        <div class="doctor-actions">
+                            <a href="doctor-profile.html?id=1" class="btn btn-sm btn-outline-primary">View Profile</a>
+                            <a href="appointments.html?doctor=1" class="btn btn-sm btn-primary">Book</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="doctor-card">
+                    <div class="doctor-image">
+                        <img src="images/doctors/doctor-5.jpg" alt="Dr. Helen Wondimu" />
+                    </div>
+                    <div class="doctor-info">
+                        <h4>Dr. Helen Wondimu</h4>
+                        <span class="doctor-specialty">Non-Invasive Cardiologist</span>
+                        <div class="doctor-details">
+                            <p><i class="fas fa-graduation-cap"></i> MD, FACC</p>
+                            <p><i class="fas fa-briefcase"></i> 18+ Years Experience</p>
+                            <p><i class="fas fa-star"></i> 4.8 (98 Reviews)</p>
+                        </div>
+                        <div class="doctor-actions">
+                            <a href="doctor-profile.html?id=5" class="btn btn-sm btn-outline-primary">View Profile</a>
+                            <a href="appointments.html?doctor=5" class="btn btn-sm btn-primary">Book</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="doctor-card">
+                    <div class="doctor-image">
+                        <img src="images/doctors/doctor-6.jpg" alt="Dr. Yonas Girma" />
+                    </div>
+                    <div class="doctor-info">
+                        <h4>Dr. Yonas Girma</h4>
+                        <span class="doctor-specialty">Cardiac Surgeon</span>
+                        <div class="doctor-details">
+                            <p><i class="fas fa-graduation-cap"></i> MD, FACS</p>
+                            <p><i class="fas fa-briefcase"></i> 15+ Years Experience</p>
+                            <p><i class="fas fa-star"></i> 4.7 (87 Reviews)</p>
+                        </div>
+                        <div class="doctor-actions">
+                            <a href="doctor-profile.html?id=6" class="btn btn-sm btn-outline-primary">View Profile</a>
+                            <a href="appointments.html?doctor=6" class="btn btn-sm btn-primary">Book</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="doctors.html" class="btn btn-primary">View All Doctors <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- TAB CONTENT - FACILITIES                   -->
+    <!-- ============================================ -->
+    <section class="tab-content" id="tab-facilities">
+        <div class="container">
+            <h2 class="tab-section-title">Our Facilities</h2>
+            <p class="tab-section-desc">State-of-the-art facilities for advanced cardiac care</p>
+            
+            <div class="facilities-grid">
+                <div class="facility-item">
+                    <i class="fas fa-heartbeat"></i>
+                    <h4>Cardiac Catheterization Lab</h4>
+                    <p>Advanced cath lab for diagnostic and interventional procedures.</p>
+                </div>
+                
+                <div class="facility-item">
+                    <i class="fas fa-bed"></i>
+                    <h4>Cardiac Care Unit (CCU)</h4>
+                    <p>Specialized ICU for cardiac patients with 24/7 monitoring.</p>
+                </div>
+                
+                <div class="facility-item">
+                    <i class="fas fa-stethoscope"></i>
+                    <h4>Echocardiography Lab</h4>
+                    <p>Advanced imaging for accurate cardiac assessment.</p>
+                </div>
+                
+                <div class="facility-item">
+                    <i class="fas fa-microscope"></i>
+                    <h4>Stress Testing Lab</h4>
+                    <p>Exercise and pharmacological stress testing facilities.</p>
+                </div>
+                
+                <div class="facility-item">
+                    <i class="fas fa-scalpel"></i>
+                    <h4>Cardiac Operating Theatres</h4>
+                    <p>State-of-the-art OT with advanced surgical equipment.</p>
+                </div>
+                
+                <div class="facility-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <h4>24/7 Emergency Heart Care</h4>
+                    <p>Round-the-clock emergency cardiac services.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- TAB CONTENT - APPOINTMENTS                 -->
+    <!-- ============================================ -->
+    <section class="tab-content" id="tab-appointments">
+        <div class="container">
+            <div class="appointment-info">
+                <div class="appointment-text">
+                    <h2>Book an Appointment</h2>
+                    <p>Schedule your consultation with our cardiology specialists. We're here to help you with all your heart health needs.</p>
+                    
+                    <div class="appointment-methods">
+                        <div class="method">
+                            <i class="fas fa-calendar-check"></i>
+                            <div>
+                                <h4>Online Booking</h4>
+                                <p>Book your appointment 24/7 through our online system</p>
+                                <a href="appointments.html" class="btn btn-primary btn-sm">Book Now</a>
+                            </div>
+                        </div>
+                        <div class="method">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Call Us</h4>
+                                <p>Speak directly with our appointment desk</p>
+                                <a href="tel:+251911234567" class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-phone"></i> +251-911-234-567
+                                </a>
+                            </div>
+                        </div>
+                        <div class="method">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email Us</h4>
+                                <p>Send us an email and we'll get back to you</p>
+                                <a href="mailto:appointments@adventisthospital.et" class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-envelope"></i> Send Email
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="departments.html">Departments</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="doctors.html">Find a Doctor</a></li>
+                        <li><a href="appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="emergency.html">Emergency Care</a></li>
+                        <li><a href="telemedicine.html">Telemedicine</a></li>
+                        <li><a href="laboratory.html">Laboratory</a></li>
+                        <li><a href="radiology.html">Radiology</a></li>
+                        <li><a href="pharmacy.html">Pharmacy</a></li>
+                        <li><a href="blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================ -->
+    <!-- SCRIPTS                                    -->
+    <!-- ============================================ -->
+    <script src="main.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        // Dropdown on mobile
+        document.querySelectorAll('.dropdown > a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (window.innerWidth <= 992) {
+                    e.preventDefault();
+                    this.parentElement.classList.toggle('open');
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Tab functionality
+        const tabs = document.querySelectorAll('.dept-tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Update active tab
+                tabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+
+                // Show corresponding content
+                const tabId = this.dataset.tab;
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === 'tab-' + tabId) {
+                        content.classList.add('active');
+                    }
+                });
+
+                // Update URL hash
+                history.pushState(null, '', '#' + tabId);
+            });
+        });
+
+        // Check URL hash on load
+        if (window.location.hash) {
+            const hash = window.location.hash.replace('#', '');
+            const tab = document.querySelector(`[data-tab="${hash}"]`);
+            if (tab) {
+                tab.click();
+            }
+        }
+
+        // Get department data from URL param
+        function getDeptData() {
+            const params = new URLSearchParams(window.location.search);
+            const dept = params.get('dept');
+            
+            const departments = {
+                cardiology: {
+                    name: 'Cardiology',
+                    title: 'Cardiology Department',
+                    description: 'Comprehensive heart care including diagnosis, treatment, and prevention of cardiovascular diseases.',
+                    fullDescription: 'The Cardiology Department provides comprehensive care for all heart conditions. Our team uses the latest technology and evidence-based practices to ensure the best outcomes.',
+                    doctors: 12,
+                    beds: 40,
+                    image: 'images/departments/cardiology-hero.jpg'
+                },
+                neurology: {
+                    name: 'Neurology',
+                    title: 'Neurology Department',
+                    description: 'Specialized care for disorders of the nervous system including brain, spine, and nerves.',
+                    fullDescription: 'Our Neurology Department offers advanced diagnosis and treatment for neurological conditions. We provide comprehensive care for patients with brain, spine, and nerve disorders.',
+                    doctors: 8,
+                    beds: 30,
+                    image: 'images/departments/neurology-hero.jpg'
+                },
+                orthopedics: {
+                    name: 'Orthopedics',
+                    title: 'Orthopedics Department',
+                    description: 'Treatment of musculoskeletal conditions including bones, joints, ligaments, and tendons.',
+                    fullDescription: 'The Orthopedics Department provides comprehensive care for bone and joint conditions. Our team of specialists offers both surgical and non-surgical treatments.',
+                    doctors: 10,
+                    beds: 35,
+                    image: 'images/departments/orthopedics-hero.jpg'
+                },
+                pediatrics: {
+                    name: 'Pediatrics',
+                    title: 'Pediatrics Department',
+                    description: 'Comprehensive healthcare for children from birth through adolescence.',
+                    fullDescription: 'Our Pediatrics Department provides specialized care for infants, children, and adolescents. We offer a full range of pediatric services in a child-friendly environment.',
+                    doctors: 9,
+                    beds: 45,
+                    image: 'images/departments/pediatrics-hero.jpg'
+                },
+                obstetrics: {
+                    name: 'Obstetrics & Gynecology',
+                    title: 'Obstetrics & Gynecology Department',
+                    description: 'Women\'s health services including prenatal care, delivery, and gynecological treatments.',
+                    fullDescription: 'The OB/GYN department provides comprehensive women\'s health services. We offer prenatal care, delivery services, and gynecological treatments in a supportive environment.',
+                    doctors: 11,
+                    beds: 50,
+                    image: 'images/departments/obstetrics-hero.jpg'
+                },
+                emergency: {
+                    name: 'Emergency Medicine',
+                    title: 'Emergency Department',
+                    description: '24/7 emergency care for critical and trauma patients with rapid response and life-saving treatment.',
+                    fullDescription: 'Our Emergency Department is equipped to handle all medical emergencies. We provide 24/7 trauma care, critical interventions, and life-saving treatments.',
+                    doctors: 15,
+                    beds: 25,
+                    image: 'images/departments/emergency-hero.jpg'
+                }
+            };
+            
+            return departments[dept] || departments.cardiology;
+        }
+
+        // Populate department data
+        const deptData = getDeptData();
+        document.getElementById('deptName').textContent = deptData.name;
+        document.getElementById('deptTitle').textContent = deptData.title;
+        document.getElementById('deptDescription').textContent = deptData.description;
+        document.getElementById('deptFullDescription').textContent = deptData.fullDescription;
+        document.getElementById('deptDoctors').textContent = deptData.doctors;
+        document.getElementById('deptBeds').textContent = deptData.beds;
+        document.getElementById('deptHeroImage').src = deptData.image;
+        document.getElementById('deptHeroImage').alt = deptData.name;
+
+        // Update page title
+        document.title = deptData.name + ' - Adventist General Hospital';
+    </script>
+</body>
+  </html>
