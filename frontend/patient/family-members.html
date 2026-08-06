@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Family Members - Patient Portal</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/patient.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Doctors</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="../appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- FAMILY MEMBERS                             -->
+    <!-- ============================================ -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-wrapper">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="sidebar-profile">
+                        <img src="../images/patients/patient-avatar.jpg" alt="Patient" />
+                        <h4>Meron Tesfaye</h4>
+                        <span>Patient ID: PAT-2026-001</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                        <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                        <a href="medical-records.html"><i class="fas fa-file-medical"></i> Medical Records</a>
+                        <a href="appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a>
+                        <a href="appointment-history.html"><i class="fas fa-history"></i> Appointment History</a>
+                        <a href="prescriptions.html"><i class="fas fa-prescription-bottle"></i> Prescriptions</a>
+                        <a href="laboratory-results.html"><i class="fas fa-flask"></i> Lab Results</a>
+                        <a href="radiology-results.html"><i class="fas fa-x-ray"></i> Radiology Results</a>
+                        <a href="bills.html"><i class="fas fa-file-invoice-dollar"></i> Bills</a>
+                        <a href="payments.html"><i class="fas fa-credit-card"></i> Payments</a>
+                        <a href="insurance.html"><i class="fas fa-shield-alt"></i> Insurance</a>
+                        <a href="telemedicine.html"><i class="fas fa-video"></i> Telemedicine</a>
+                        <a href="messages.html"><i class="fas fa-envelope"></i> Messages</a>
+                        <a href="notifications.html"><i class="fas fa-bell"></i> Notifications</a>
+                        <a href="family-members.html" class="active"><i class="fas fa-users"></i> Family Members</a>
+                        <a href="health-summary.html"><i class="fas fa-chart-pie"></i> Health Summary</a>
+                        <a href="vaccination.html"><i class="fas fa-syringe"></i> Vaccination</a>
+                        <a href="allergies.html"><i class="fas fa-allergies"></i> Allergies</a>
+                        <a href="medications.html"><i class="fas fa-pills"></i> Medications</a>
+                        <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="../login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    <div class="dashboard-header">
+                        <h1>Family Members</h1>
+                        <button class="btn btn-primary btn-sm" id="addMemberBtn">
+                            <i class="fas fa-plus"></i> Add Family Member
+                        </button>
+                    </div>
+
+                    <!-- Family Members Grid -->
+                    <div class="family-grid">
+                        <!-- Member 1 - Spouse -->
+                        <div class="family-card">
+                            <div class="family-avatar">
+                                <img src="../images/patients/family-spouse.jpg" alt="Abel Tesfaye" />
+                                <span class="relationship-badge">Spouse</span>
+                            </div>
+                            <div class="family-info">
+                                <h4>Abel Tesfaye</h4>
+                                <span class="family-detail"><i class="fas fa-calendar"></i> Born: Jan 10, 1982</span>
+                                <span class="family-detail"><i class="fas fa-phone"></i> +251-911-234-568</span>
+                                <span class="family-detail"><i class="fas fa-envelope"></i> abel.t@email.com</span>
+                                <span class="family-detail"><i class="fas fa-tint"></i> Blood Type: O+</span>
+                            </div>
+                            <div class="family-actions">
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Member 2 - Child -->
+                        <div class="family-card">
+                            <div class="family-avatar">
+                                <img src="../images/patients/family-child1.jpg" alt="Sami Tesfaye" />
+                                <span class="relationship-badge child">Child</span>
+                            </div>
+                            <div class="family-info">
+                                <h4>Sami Tesfaye</h4>
+                                <span class="family-detail"><i class="fas fa-calendar"></i> Born: Jun 15, 2015</span>
+                                <span class="family-detail"><i class="fas fa-phone"></i> +251-911-234-569</span>
+                                <span class="family-detail"><i class="fas fa-envelope"></i> sami.t@email.com</span>
+                                <span class="family-detail"><i class="fas fa-tint"></i> Blood Type: A+</span>
+                            </div>
+                            <div class="family-actions">
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Member 3 - Child -->
+                        <div class="family-card">
+                            <div class="family-avatar">
+                                <img src="../images/patients/family-child2.jpg" alt="Liya Tesfaye" />
+                                <span class="relationship-badge child">Child</span>
+                            </div>
+                            <div class="family-info">
+                                <h4>Liya Tesfaye</h4>
+                                <span class="family-detail"><i class="fas fa-calendar"></i> Born: Sep 22, 2018</span>
+                                <span class="family-detail"><i class="fas fa-phone"></i> +251-911-234-570</span>
+                                <span class="family-detail"><i class="fas fa-envelope"></i> liya.t@email.com</span>
+                                <span class="family-detail"><i class="fas fa-tint"></i> Blood Type: A+</span>
+                            </div>
+                            <div class="family-actions">
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Member 4 - Parent -->
+                        <div class="family-card">
+                            <div class="family-avatar">
+                                <img src="../images/patients/family-parent.jpg" alt="Tigist Wondimu" />
+                                <span class="relationship-badge parent">Parent</span>
+                            </div>
+                            <div class="family-info">
+                                <h4>Tigist Wondimu</h4>
+                                <span class="family-detail"><i class="fas fa-calendar"></i> Born: Mar 5, 1960</span>
+                                <span class="family-detail"><i class="fas fa-phone"></i> +251-911-234-571</span>
+                                <span class="family-detail"><i class="fas fa-envelope"></i> tigist.w@email.com</span>
+                                <span class="family-detail"><i class="fas fa-tint"></i> Blood Type: B+</span>
+                            </div>
+                            <div class="family-actions">
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add Family Member Modal -->
+                    <div class="modal-overlay" id="familyModal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3>Add Family Member</h3>
+                                <button class="modal-close" id="closeModal"><i class="fas fa-times"></i></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>First Name <span class="required">*</span></label>
+                                        <input type="text" placeholder="Enter first name" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Last Name <span class="required">*</span></label>
+                                        <input type="text" placeholder="Enter last name" />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Relationship <span class="required">*</span></label>
+                                        <select>
+                                            <option value="">Select relationship</option>
+                                            <option value="spouse">Spouse</option>
+                                            <option value="child">Child</option>
+                                            <option value="parent">Parent</option>
+                                            <option value="sibling">Sibling</option>
+                                            <option value="grandparent">Grandparent</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Date of Birth <span class="required">*</span></label>
+                                        <input type="date" />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="email" placeholder="Enter email address" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Phone</label>
+                                        <input type="tel" placeholder="+251-XXX-XXX-XXX" />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Blood Type</label>
+                                        <select>
+                                            <option value="">Select blood type</option>
+                                            <option value="A+">A+</option>
+                                            <option value="A-">A-</option>
+                                            <option value="B+">B+</option>
+                                            <option value="B-">B-</option>
+                                            <option value="AB+">AB+</option>
+                                            <option value="AB-">AB-</option>
+                                            <option value="O+">O+</option>
+                                            <option value="O-">O-</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Gender</label>
+                                        <select>
+                                            <option value="">Select gender</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Medical Notes (Optional)</label>
+                                    <textarea rows="3" placeholder="Any relevant medical information..."></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-outline-secondary" id="closeModalBtn">Cancel</button>
+                                <button class="btn btn-primary"><i class="fas fa-user-plus"></i> Add Member</button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Modal
+        const modal = document.getElementById('familyModal');
+        const openBtn = document.getElementById('addMemberBtn');
+        const closeBtns = document.querySelectorAll('#closeModal, #closeModalBtn');
+
+        openBtn.addEventListener('click', function() {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+</body>
+  </html>
