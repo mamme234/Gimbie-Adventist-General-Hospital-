@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Patients - Doctor Portal</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/doctor.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Doctors</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="../appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- PATIENTS LIST                             -->
+    <!-- ============================================ -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-wrapper">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="sidebar-profile">
+                        <img src="../images/doctors/doctor-1.jpg" alt="Dr. Samuel Tekle" />
+                        <h4>Dr. Samuel Tekle</h4>
+                        <span>Cardiologist • ID: DOC-2024-001</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                        <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                        <a href="patients.html" class="active"><i class="fas fa-users"></i> Patients</a>
+                        <a href="patient-details.html"><i class="fas fa-user-md"></i> Patient Details</a>
+                        <a href="appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a>
+                        <a href="schedule.html"><i class="fas fa-clock"></i> Schedule</a>
+                        <a href="prescriptions.html"><i class="fas fa-prescription-bottle"></i> Prescriptions</a>
+                        <a href="diagnosis.html"><i class="fas fa-stethoscope"></i> Diagnosis</a>
+                        <a href="../login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    <div class="dashboard-header">
+                        <h1>My Patients</h1>
+                        <span class="date"><i class="fas fa-users"></i> 124 Patients</span>
+                    </div>
+
+                    <!-- Search & Filters -->
+                    <div class="patient-filters">
+                        <input type="text" placeholder="Search patients by name or ID..." />
+                        <select>
+                            <option value="">All Conditions</option>
+                            <option value="hypertension">Hypertension</option>
+                            <option value="diabetes">Diabetes</option>
+                            <option value="heart-disease">Heart Disease</option>
+                            <option value="asthma">Asthma</option>
+                        </select>
+                        <select>
+                            <option value="">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="critical">Critical</option>
+                        </select>
+                        <button class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+                    </div>
+
+                    <!-- Patient Table -->
+                    <div class="table-responsive">
+                        <table class="patient-table">
+                            <thead>
+                                <tr>
+                                    <th>Patient</th>
+                                    <th>ID</th>
+                                    <th>Last Visit</th>
+                                    <th>Condition</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="patient-avatar">MT</div>
+                                        Meron Tesfaye
+                                    </td>
+                                    <td>PAT-2026-001</td>
+                                    <td>Feb 15, 2026</td>
+                                    <td>Hypertension</td>
+                                    <td><span class="status checked-in">Active</span></td>
+                                    <td>
+                                        <a href="patient-details.html?id=1" class="btn btn-sm btn-outline-primary">View</a>
+                                        <a href="patient-details.html?id=1" class="btn btn-sm btn-primary">Chart</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="patient-avatar">AG</div>
+                                        Abel Girma
+                                    </td>
+                                    <td>PAT-2026-002</td>
+                                    <td>Feb 10, 2026</td>
+                                    <td>Diabetes Type 2</td>
+                                    <td><span class="status waiting">Pending</span></td>
+                                    <td>
+                                        <a href="patient-details.html?id=2" class="btn btn-sm btn-outline-primary">View</a>
+                                        <a href="patient-details.html?id=2" class="btn btn-sm btn-primary">Chart</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="patient-avatar">ST</div>
+                                        Selam Tsegaye
+                                    </td>
+                                    <td>PAT-2026-003</td>
+                                    <td>Feb 8, 2026</td>
+                                    <td>Coronary Artery Disease</td>
+                                    <td><span class="status completed">Completed</span></td>
+                                    <td>
+                                        <a href="patient-details.html?id=3" class="btn btn-sm btn-outline-primary">View</a>
+                                        <a href="patient-details.html?id=3" class="btn btn-sm btn-primary">Chart</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="patient-avatar">YA</div>
+                                        Yonas Alemu
+                                    </td>
+                                    <td>PAT-2026-004</td>
+                                    <td>Feb 5, 2026</td>
+                                    <td>Hypertension</td>
+                                    <td><span class="status completed">Completed</span></td>
+                                    <td>
+                                        <a href="patient-details.html?id=4" class="btn btn-sm btn-outline-primary">View</a>
+                                        <a href="patient-details.html?id=4" class="btn btn-sm btn-primary">Chart</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="patient-avatar">TW</div>
+                                        Tigist Wondimu
+                                    </td>
+                                    <td>PAT-2026-005</td>
+                                    <td>Feb 3, 2026</td>
+                                    <td>Heart Failure</td>
+                                    <td><span class="status checked-in">Active</span></td>
+                                    <td>
+                                        <a href="patient-details.html?id=5" class="btn btn-sm btn-outline-primary">View</a>
+                                        <a href="patient-details.html?id=5" class="btn btn-sm btn-primary">Chart</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="patient-avatar">MH</div>
+                                        Mekdes Hailu
+                                    </td>
+                                    <td>PAT-2026-006</td>
+                                    <td>Feb 1, 2026</td>
+                                    <td>Cardiac Arrhythmia</td>
+                                    <td><span class="status cancelled">Critical</span></td>
+                                    <td>
+                                        <a href="patient-details.html?id=6" class="btn btn-sm btn-outline-primary">View</a>
+                                        <a href="patient-details.html?id=6" class="btn btn-sm btn-primary">Chart</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <button class="page-btn">...</button>
+                        <button class="page-btn">12</button>
+                        <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+                                                                          </html>
