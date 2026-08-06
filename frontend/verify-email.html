@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verify Email - Adventist General Hospital</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/auth.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR - Minimal                           -->
+    <!-- ============================================ -->
+    <div class="top-bar minimal">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+            </div>
+            <div class="top-bar-right">
+                <a href="index.html"><i class="fas fa-home"></i> Back to Home</a>
+                <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- VERIFY EMAIL                              -->
+    <!-- ============================================ -->
+    <section class="auth-section">
+        <div class="container">
+            <div class="auth-wrapper minimal-wrapper">
+                <div class="auth-box centered">
+                    <div class="verify-icon">
+                        <i class="fas fa-envelope-open-text"></i>
+                    </div>
+                    
+                    <div class="auth-header">
+                        <h1>Verify Your Email</h1>
+                        <p>Please check your email for the verification link</p>
+                    </div>
+
+                    <div class="verify-message">
+                        <div class="verify-info">
+                            <i class="fas fa-info-circle"></i>
+                            <p>We've sent a verification email to <strong>j****@email.com</strong></p>
+                            <p class="verify-detail">Please click the link in the email to verify your account.</p>
+                        </div>
+
+                        <div class="verify-actions">
+                            <button class="btn btn-primary btn-lg btn-block" id="resendBtn">
+                                <i class="fas fa-redo"></i> Resend Email
+                            </button>
+                            <a href="login.html" class="btn btn-outline-primary btn-block">
+                                <i class="fas fa-sign-in-alt"></i> Go to Login
+                            </a>
+                        </div>
+
+                        <div id="resendSuccess" style="display: none;" class="resend-success">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Verification email resent successfully!</span>
+                        </div>
+                    </div>
+
+                    <div class="auth-footer">
+                        <p>Didn't receive the email? <a href="#" id="checkSpam">Check your spam folder</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER - Minimal                           -->
+    <!-- ============================================ -->
+    <footer class="footer minimal">
+        <div class="container">
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+        document.getElementById('resendBtn').addEventListener('click', function() {
+            const btn = this;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-check"></i> Resent!';
+                btn.style.background = '#28a745';
+                
+                const success = document.getElementById('resendSuccess');
+                success.style.display = 'block';
+                
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fas fa-redo"></i> Resend Email';
+                    btn.disabled = false;
+                    btn.style.background = '';
+                    success.style.display = 'none';
+                }, 3000);
+            }, 1500);
+        });
+
+        document.getElementById('checkSpam').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Please check your spam or junk folder. If you still don\'t see the email, click "Resend Email" to receive a new verification link.');
+        });
+    </script>
+</body>
+                              </html>
