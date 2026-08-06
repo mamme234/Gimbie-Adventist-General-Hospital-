@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reports - Laboratory Portal</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/laboratory.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Doctors</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="../appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- REPORTS                                  -->
+    <!-- ============================================ -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-wrapper">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="sidebar-profile">
+                        <img src="../images/lab/lab-manager.jpg" alt="Lab Manager" />
+                        <h4>Dr. Yonas Hailu</h4>
+                        <span>Lab Manager • ID: LAB-2024-001</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                        <a href="orders.html"><i class="fas fa-clipboard-list"></i> Orders</a>
+                        <a href="samples.html"><i class="fas fa-vial"></i> Samples</a>
+                        <a href="testing.html"><i class="fas fa-microscope"></i> Testing</a>
+                        <a href="results.html"><i class="fas fa-file-medical-alt"></i> Results</a>
+                        <a href="inventory.html"><i class="fas fa-boxes"></i> Inventory</a>
+                        <a href="equipment.html"><i class="fas fa-microscope"></i> Equipment</a>
+                        <a href="reports.html" class="active"><i class="fas fa-chart-bar"></i> Reports</a>
+                        <a href="../login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    <div class="dashboard-header">
+                        <h1>Laboratory Reports</h1>
+                        <div class="report-actions">
+                            <button class="btn btn-outline-primary btn-sm"><i class="fas fa-file-export"></i> Export</button>
+                            <button class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Generate Report</button>
+                        </div>
+                    </div>
+
+                    <!-- Report Categories -->
+                    <div class="appointment-filters">
+                        <button class="filter-btn active">All Reports</button>
+                        <button class="filter-btn">Test Reports</button>
+                        <button class="filter-btn">Monthly Summary</button>
+                        <button class="filter-btn">Inventory</button>
+                        <button class="filter-btn">Equipment</button>
+                    </div>
+
+                    <!-- Report List -->
+                    <div class="report-list">
+                        <div class="report-card">
+                            <div class="report-header">
+                                <div>
+                                    <h4>February 2026 - Monthly Test Summary</h4>
+                                    <span class="report-id">Report #LAB-REP-2026-001</span>
+                                </div>
+                                <span class="report-date">February 20, 2026</span>
+                            </div>
+                            <div class="report-details">
+                                <p><strong>Total Tests:</strong> 1,245</p>
+                                <p><strong>Completed:</strong> 1,120 (90%)</p>
+                                <p><strong>In Progress:</strong> 85</p>
+                                <p><strong>Pending:</strong> 40</p>
+                                <p><strong>Top Tests:</strong> CBC (320), Lipid Profile (210), Thyroid (145)</p>
+                            </div>
+                            <div class="report-actions">
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i> View</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i> Download</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-print"></i> Print</button>
+                            </div>
+                        </div>
+
+                        <div class="report-card">
+                            <div class="report-header">
+                                <div>
+                                    <h4>Inventory Report - Reagents</h4>
+                                    <span class="report-id">Report #LAB-REP-2026-002</span>
+                                </div>
+                                <span class="report-date">February 20, 2026</span>
+                            </div>
+                            <div class="report-details">
+                                <p><strong>Total Items:</strong> 32</p>
+                                <p><strong>High Stock:</strong> 12 items</p>
+                                <p><strong>Medium Stock:</strong> 10 items</p>
+                                <p><strong>Low Stock:</strong> 8 items</p>
+                                <p><strong>Critical:</strong> 2 items</p>
+                            </div>
+                            <div class="report-actions">
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i> View</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i> Download</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-print"></i> Print</button>
+                            </div>
+                        </div>
+
+                        <div class="report-card">
+                            <div class="report-header">
+                                <div>
+                                    <h4>Equipment Maintenance Report</h4>
+                                    <span class="report-id">Report #LAB-REP-2026-003</span>
+                                </div>
+                                <span class="report-date">February 19, 2026</span>
+                            </div>
+                            <div class="report-details">
+                                <p><strong>Total Equipment:</strong> 12</p>
+                                <p><strong>Operational:</strong> 10</p>
+                                <p><strong>In Maintenance:</strong> 1</p>
+                                <p><strong>Out of Service:</strong> 1</p>
+                                <p><strong>Upcoming Calibrations:</strong> 3</p>
+                            </div>
+                            <div class="report-actions">
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i> View</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i> Download</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-print"></i> Print</button>
+                            </div>
+                        </div>
+
+                        <div class="report-card">
+                            <div class="report-header">
+                                <div>
+                                    <h4>STAT Test Performance Report</h4>
+                                    <span class="report-id">Report #LAB-REP-2026-004</span>
+                                </div>
+                                <span class="report-date">February 18, 2026</span>
+                            </div>
+                            <div class="report-details">
+                                <p><strong>STAT Orders:</strong> 45</p>
+                                <p><strong>Completed within 1 hr:</strong> 38 (84%)</p>
+                                <p><strong>Completed within 2 hrs:</strong> 42 (93%)</p>
+                                <p><strong>Average Turnaround:</strong> 52 min</p>
+                            </div>
+                            <div class="report-actions">
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i> View</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i> Download</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-print"></i> Print</button>
+                            </div>
+                        </div>
+
+                        <div class="report-card">
+                            <div class="report-header">
+                                <div>
+                                    <h4>Quality Control Report - January 2026</h4>
+                                    <span class="report-id">Report #LAB-REP-2026-005</span>
+                                </div>
+                                <span class="report-date">February 1, 2026</span>
+                            </div>
+                            <div class="report-details">
+                                <p><strong>QC Passed:</strong> 98.5%</p>
+                                <p><strong>QC Failed:</strong> 1.5%</p>
+                                <p><strong>Corrective Actions:</strong> 3</p>
+                                <p><strong>All resolved within timeframe</strong></p>
+                            </div>
+                            <div class="report-actions">
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i> View</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i> Download</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-print"></i> Print</button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+      </html>
