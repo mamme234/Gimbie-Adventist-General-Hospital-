@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Patient Details - Doctor Portal</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/doctor.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Doctors</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="../appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- PATIENT DETAILS                            -->
+    <!-- ============================================ -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-wrapper">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="sidebar-profile">
+                        <img src="../images/doctors/doctor-1.jpg" alt="Dr. Samuel Tekle" />
+                        <h4>Dr. Samuel Tekle</h4>
+                        <span>Cardiologist • ID: DOC-2024-001</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                        <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                        <a href="patients.html"><i class="fas fa-users"></i> Patients</a>
+                        <a href="patient-details.html" class="active"><i class="fas fa-user-md"></i> Patient Details</a>
+                        <a href="appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a>
+                        <a href="schedule.html"><i class="fas fa-clock"></i> Schedule</a>
+                        <a href="prescriptions.html"><i class="fas fa-prescription-bottle"></i> Prescriptions</a>
+                        <a href="diagnosis.html"><i class="fas fa-stethoscope"></i> Diagnosis</a>
+                        <a href="../login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    <!-- Patient Header -->
+                    <div class="patient-header">
+                        <div class="patient-header-left">
+                            <div class="patient-avatar-lg">MT</div>
+                            <div>
+                                <h1>Meron Tesfaye</h1>
+                                <span>Patient ID: PAT-2026-001</span>
+                                <span class="patient-dob">DOB: March 15, 1985 (Age: 40)</span>
+                                <span class="patient-gender">Female</span>
+                            </div>
+                        </div>
+                        <div class="patient-header-right">
+                            <span class="patient-status active">Active</span>
+                            <button class="btn btn-primary"><i class="fas fa-calendar-check"></i> Book Appointment</button>
+                            <button class="btn btn-outline-primary"><i class="fas fa-edit"></i> Edit</button>
+                        </div>
+                    </div>
+
+                    <!-- Patient Tabs -->
+                    <div class="patient-tabs">
+                        <button class="tab-btn active" data-tab="overview">Overview</button>
+                        <button class="tab-btn" data-tab="records">Medical Records</button>
+                        <button class="tab-btn" data-tab="prescriptions">Prescriptions</button>
+                        <button class="tab-btn" data-tab="tests">Lab & Radiology</button>
+                        <button class="tab-btn" data-tab="notes">Notes</button>
+                    </div>
+
+                    <!-- Tab Content -->
+                    <div class="tab-content active" id="tab-overview">
+                        <!-- Patient Info Grid -->
+                        <div class="patient-info-grid">
+                            <div class="info-card">
+                                <h4>Personal Information</h4>
+                                <div class="info-row">
+                                    <span class="info-label">Full Name</span>
+                                    <span>Meron Tesfaye</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Date of Birth</span>
+                                    <span>March 15, 1985</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Gender</span>
+                                    <span>Female</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Blood Type</span>
+                                    <span>A+</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Phone</span>
+                                    <span>+251-911-234-567</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Email</span>
+                                    <span>meron.t@email.com</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Address</span>
+                                    <span>Bole Sub-city, Addis Ababa</span>
+                                </div>
+                            </div>
+
+                            <div class="info-card">
+                                <h4>Medical Information</h4>
+                                <div class="info-row">
+                                    <span class="info-label">Primary Condition</span>
+                                    <span>Hypertension</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Diagnosed</span>
+                                    <span>January 2023</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Allergies</span>
+                                    <span>Penicillin, Peanuts</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Smoking Status</span>
+                                    <span>Non-smoker</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">BMI</span>
+                                    <span>24.5 (Normal)</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Blood Pressure</span>
+                                    <span>120/80 mmHg</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Heart Rate</span>
+                                    <span>72 bpm</span>
+                                </div>
+                            </div>
+
+                            <div class="info-card">
+                                <h4>Insurance Information</h4>
+                                <div class="info-row">
+                                    <span class="info-label">Provider</span>
+                                    <span>Ethiopian Insurance Corp</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Policy Number</span>
+                                    <span>EIC-2026-001234</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Plan Type</span>
+                                    <span>Comprehensive Health</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Expiry Date</span>
+                                    <span>December 31, 2026</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Vital Signs -->
+                        <div class="vital-signs">
+                            <h3>Recent Vital Signs</h3>
+                            <div class="vital-grid">
+                                <div class="vital-item">
+                                    <span class="vital-label">Blood Pressure</span>
+                                    <span class="vital-value">120/80</span>
+                                    <span class="vital-status normal">Normal</span>
+                                </div>
+                                <div class="vital-item">
+                                    <span class="vital-label">Heart Rate</span>
+                                    <span class="vital-value">72 bpm</span>
+                                    <span class="vital-status normal">Normal</span>
+                                </div>
+                                <div class="vital-item">
+                                    <span class="vital-label">Temperature</span>
+                                    <span class="vital-value">36.7°C</span>
+                                    <span class="vital-status normal">Normal</span>
+                                </div>
+                                <div class="vital-item">
+                                    <span class="vital-label">Oxygen Saturation</span>
+                                    <span class="vital-value">98%</span>
+                                    <span class="vital-status normal">Normal</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab: Medical Records -->
+                    <div class="tab-content" id="tab-records">
+                        <div class="records-list">
+                            <div class="record-item">
+                                <span class="record-date">Feb 15, 2026</span>
+                                <h4>Cardiology Consultation</h4>
+                                <p>Follow-up appointment for hypertension management. Blood pressure well controlled.</p>
+                                <button class="btn btn-sm btn-outline-primary">View Details</button>
+                            </div>
+                            <div class="record-item">
+                                <span class="record-date">Jan 28, 2026</span>
+                                <h4>Lab Report - CBC</h4>
+                                <p>Complete blood count results. All parameters within normal range.</p>
+                                <button class="btn btn-sm btn-outline-primary">View Details</button>
+                            </div>
+                            <div class="record-item">
+                                <span class="record-date">Jan 15, 2026</span>
+                                <h4>Annual Physical Examination</h4>
+                                <p>Complete physical examination. Overall health good.</p>
+                                <button class="btn btn-sm btn-outline-primary">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab: Prescriptions -->
+                    <div class="tab-content" id="tab-prescriptions">
+                        <div class="prescriptions-list">
+                            <div class="prescription-item">
+                                <h4>Lisinopril 10mg</h4>
+                                <p>1 tablet daily in the morning</p>
+                                <span class="prescription-status active">Active</span>
+                                <span class="prescription-date">Prescribed: Feb 10, 2026</span>
+                            </div>
+                            <div class="prescription-item">
+                                <h4>Atorvastatin 20mg</h4>
+                                <p>1 tablet daily in the evening</p>
+                                <span class="prescription-status active">Active</span>
+                                <span class="prescription-date">Prescribed: Feb 15, 2026</span>
+                            </div>
+                            <div class="prescription-item">
+                                <h4>Amoxicillin 500mg</h4>
+                                <p>1 tablet every 8 hours</p>
+                                <span class="prescription-status completed">Completed</span>
+                                <span class="prescription-date">Prescribed: Feb 15, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab: Tests -->
+                    <div class="tab-content" id="tab-tests">
+                        <div class="tests-grid">
+                            <div class="test-card">
+                                <h4>Chest X-Ray</h4>
+                                <span class="test-date">Feb 15, 2026</span>
+                                <span class="test-status completed">Completed</span>
+                                <p>Normal chest X-ray. No acute abnormalities.</p>
+                            </div>
+                            <div class="test-card">
+                                <h4>Lipid Profile</h4>
+                                <span class="test-date">Feb 10, 2026</span>
+                                <span class="test-status completed">Completed</span>
+                                <p>Total Cholesterol: 180 mg/dL (Normal)</p>
+                            </div>
+                            <div class="test-card">
+                                <h4>ECG</h4>
+                                <span class="test-date">Feb 15, 2026</span>
+                                <span class="test-status pending">Pending</span>
+                                <p>Results pending review.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab: Notes -->
+                    <div class="tab-content" id="tab-notes">
+                        <div class="notes-section">
+                            <div class="note-item">
+                                <div class="note-header">
+                                    <h4>Feb 15, 2026 - Follow-up</h4>
+                                    <span>By: Dr. Samuel Tekle</span>
+                                </div>
+                                <p>Patient came for follow-up. Blood pressure 120/80. Stable on current medications. Continue Lisinopril 10mg daily. Next appointment in 3 months.</p>
+                            </div>
+                            <div class="note-item">
+                                <div class="note-header">
+                                    <h4>Jan 28, 2026 - Initial Consultation</h4>
+                                    <span>By: Dr. Samuel Tekle</span>
+                                </div>
+                                <p>New patient consult. History of hypertension. Started on Lisinopril 10mg. Ordered baseline lab work. Follow-up in 2 weeks.</p>
+                            </div>
+                            <button class="btn btn-primary"><i class="fas fa-plus"></i> Add Note</button>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Tabs
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const tabId = this.dataset.tab;
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                document.getElementById('tab-' + tabId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+  </html>
