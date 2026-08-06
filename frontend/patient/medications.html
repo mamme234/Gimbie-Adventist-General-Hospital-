@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Medications - Patient Portal</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/patient.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Doctors</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="../appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- MEDICATIONS                               -->
+    <!-- ============================================ -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-wrapper">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="sidebar-profile">
+                        <img src="../images/patients/patient-avatar.jpg" alt="Patient" />
+                        <h4>Meron Tesfaye</h4>
+                        <span>Patient ID: PAT-2026-001</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                        <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                        <a href="medical-records.html"><i class="fas fa-file-medical"></i> Medical Records</a>
+                        <a href="appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a>
+                        <a href="appointment-history.html"><i class="fas fa-history"></i> Appointment History</a>
+                        <a href="prescriptions.html"><i class="fas fa-prescription-bottle"></i> Prescriptions</a>
+                        <a href="laboratory-results.html"><i class="fas fa-flask"></i> Lab Results</a>
+                        <a href="radiology-results.html"><i class="fas fa-x-ray"></i> Radiology Results</a>
+                        <a href="bills.html"><i class="fas fa-file-invoice-dollar"></i> Bills</a>
+                        <a href="payments.html"><i class="fas fa-credit-card"></i> Payments</a>
+                        <a href="insurance.html"><i class="fas fa-shield-alt"></i> Insurance</a>
+                        <a href="telemedicine.html"><i class="fas fa-video"></i> Telemedicine</a>
+                        <a href="messages.html"><i class="fas fa-envelope"></i> Messages</a>
+                        <a href="notifications.html"><i class="fas fa-bell"></i> Notifications</a>
+                        <a href="family-members.html"><i class="fas fa-users"></i> Family Members</a>
+                        <a href="health-summary.html"><i class="fas fa-chart-pie"></i> Health Summary</a>
+                        <a href="vaccination.html"><i class="fas fa-syringe"></i> Vaccination</a>
+                        <a href="allergies.html"><i class="fas fa-allergies"></i> Allergies</a>
+                        <a href="medications.html" class="active"><i class="fas fa-pills"></i> Medications</a>
+                        <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="../login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    <div class="dashboard-header">
+                        <h1>Medications</h1>
+                        <button class="btn btn-primary btn-sm" id="addMedicationBtn">
+                            <i class="fas fa-plus"></i> Add Medication
+                        </button>
+                    </div>
+
+                    <!-- Summary Cards -->
+                    <div class="stats-cards" style="margin-bottom: 30px;">
+                        <div class="stat-card primary">
+                            <div class="stat-icon"><i class="fas fa-pills"></i></div>
+                            <span class="stat-number">4</span>
+                            <span class="stat-label">Active Medications</span>
+                        </div>
+                        <div class="stat-card success">
+                            <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">Refills Available</span>
+                        </div>
+                        <div class="stat-card warning">
+                            <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                            <span class="stat-number">2</span>
+                            <span class="stat-label">Expiring Soon</span>
+                        </div>
+                        <div class="stat-card danger">
+                            <div class="stat-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                            <span class="stat-number">1</span>
+                            <span class="stat-label">Discontinued</span>
+                        </div>
+                    </div>
+
+                    <!-- Medication List -->
+                    <div class="medication-list">
+                        <div class="medication-item active">
+                            <div class="medication-icon">
+                                <i class="fas fa-prescription-bottle"></i>
+                            </div>
+                            <div class="medication-info">
+                                <h4>Lisinopril 10mg</h4>
+                                <span class="medication-type">Prescription</span>
+                                <p><strong>Prescribed by:</strong> Dr. Samuel Tekle</p>
+                                <p><strong>Dosage:</strong> 1 tablet daily in the morning</p>
+                                <p><strong>Refills:</strong> 2 remaining</p>
+                                <span class="medication-date">Expires: December 2026</span>
+                            </div>
+                            <div class="medication-status active">Active</div>
+                            <div class="medication-actions">
+                                <button class="btn btn-sm btn-primary"><i class="fas fa-prescription"></i> Refill</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="medication-item active">
+                            <div class="medication-icon">
+                                <i class="fas fa-prescription-bottle"></i>
+                            </div>
+                            <div class="medication-info">
+                                <h4>Amitriptyline 25mg</h4>
+                                <span class="medication-type">Prescription</span>
+                                <p><strong>Prescribed by:</strong> Dr. Sara Hailu</p>
+                                <p><strong>Dosage:</strong> 1 tablet at bedtime</p>
+                                <p><strong>Refills:</strong> 1 remaining</p>
+                                <span class="medication-date">Expires: March 2026</span>
+                            </div>
+                            <div class="medication-status active">Active</div>
+                            <div class="medication-actions">
+                                <button class="btn btn-sm btn-primary"><i class="fas fa-prescription"></i> Refill</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="medication-item active">
+                            <div class="medication-icon">
+                                <i class="fas fa-prescription-bottle"></i>
+                            </div>
+                            <div class="medication-info">
+                                <h4>Atorvastatin 20mg</h4>
+                                <span class="medication-type">Prescription</span>
+                                <p><strong>Prescribed by:</strong> Dr. Samuel Tekle</p>
+                                <p><strong>Dosage:</strong> 1 tablet daily in the evening</p>
+                                <p><strong>Refills:</strong> 0 remaining</p>
+                                <span class="medication-date">Expires: August 2026</span>
+                            </div>
+                            <div class="medication-status active">Active</div>
+                            <div class="medication-actions">
+                                <button class="btn btn-sm btn-primary"><i class="fas fa-prescription"></i> Refill</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="medication-item active">
+                            <div class="medication-icon">
+                                <i class="fas fa-prescription-bottle"></i>
+                            </div>
+                            <div class="medication-info">
+                                <h4>Albuterol Inhaler</h4>
+                                <span class="medication-type">Prescription</span>
+                                <p><strong>Prescribed by:</strong> Dr. Sara Hailu</p>
+                                <p><strong>Dosage:</strong> 2 puffs as needed for wheezing</p>
+                                <p><strong>Refills:</strong> 2 remaining</p>
+                                <span class="medication-date">Expires: June 2026</span>
+                            </div>
+                            <div class="medication-status active">Active</div>
+                            <div class="medication-actions">
+                                <button class="btn btn-sm btn-primary"><i class="fas fa-prescription"></i> Refill</button>
+                                <button class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="medication-item discontinued">
+                            <div class="medication-icon">
+                                <i class="fas fa-prescription-bottle"></i>
+                            </div>
+                            <div class="medication-info">
+                                <h4>Amoxicillin 500mg</h4>
+                                <span class="medication-type">Prescription (Short-term)</span>
+                                <p><strong>Prescribed by:</strong> Dr. Samuel Tekle</p>
+                                <p><strong>Dosage:</strong> 1 tablet every 8 hours</p>
+                                <p><strong>Duration:</strong> 10 days (Completed)</p>
+                                <span class="medication-date">Completed: February 25, 2026</span>
+                            </div>
+                            <div class="medication-status discontinued">Discontinued</div>
+                            <div class="medication-actions">
+                                <button class="btn btn-sm btn-outline-secondary" disabled><i class="fas fa-check"></i> Completed</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add Medication Modal -->
+                    <div class="modal-overlay" id="medicationModal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3>Add Medication</h3>
+                                <button class="modal-close" id="closeModal"><i class="fas fa-times"></i></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>Medication Name <span class="required">*</span></label>
+                                    <input type="text" placeholder="Enter medication name" />
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Dosage <span class="required">*</span></label>
+                                        <input type="text" placeholder="e.g., 10mg" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Form <span class="required">*</span></label>
+                                        <select>
+                                            <option value="">Select form</option>
+                                            <option value="tablet">Tablet</option>
+                                            <option value="capsule">Capsule</option>
+                                            <option value="liquid">Liquid</option>
+                                            <option value="inhaler">Inhaler</option>
+                                            <option value="injection">Injection</option>
+                                            <option value="cream">Cream</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Prescribed By <span class="required">*</span></label>
+                                    <select>
+                                        <option value="">Select doctor</option>
+                                        <option value="1">Dr. Samuel Tekle</option>
+                                        <option value="2">Dr. Sara Hailu</option>
+                                        <option value="3">Dr. Daniel Assefa</option>
+                                        <option value="4">Dr. Tigist Wondimu</option>
+                                    </select>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Start Date <span class="required">*</span></label>
+                                        <input type="date" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>End Date</label>
+                                        <input type="date" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Instructions</label>
+                                    <textarea rows="3" placeholder="Dosage instructions..."></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-outline-secondary" id="closeModalBtn">Cancel</button>
+                                <button class="btn btn-primary"><i class="fas fa-plus"></i> Add Medication</button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Modal
+        const modal = document.getElementById('medicationModal');
+        const openBtn = document.getElementById('addMedicationBtn');
+        const closeBtns = document.querySelectorAll('#closeModal, #closeModalBtn');
+
+        openBtn.addEventListener('click', function() {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+</body>
+  </html>
