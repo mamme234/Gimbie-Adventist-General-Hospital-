@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings - Doctor Portal</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/doctor.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+    <!-- ============================================ -->
+    <!-- TOP BAR                                     -->
+    <!-- ============================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
+                <span><i class="fas fa-clock"></i> 24/7 Service</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HEADER                                      -->
+    <!-- ============================================ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Adventist General Hospital" />
+                        <span class="logo-text">
+                            <strong>Adventist</strong>
+                            <small>General Hospital</small>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Doctors</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="../appointments.html" class="btn btn-primary btn-sm">
+                        <i class="fas fa-calendar-check"></i> Book Appointment
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- SETTINGS                                  -->
+    <!-- ============================================ -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-wrapper">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="sidebar-profile">
+                        <img src="../images/doctors/doctor-1.jpg" alt="Dr. Samuel Tekle" />
+                        <h4>Dr. Samuel Tekle</h4>
+                        <span>Cardiologist • ID: DOC-2024-001</span>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+                        <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                        <a href="patients.html"><i class="fas fa-users"></i> Patients</a>
+                        <a href="patient-details.html"><i class="fas fa-user-md"></i> Patient Details</a>
+                        <a href="appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a>
+                        <a href="schedule.html"><i class="fas fa-clock"></i> Schedule</a>
+                        <a href="prescriptions.html"><i class="fas fa-prescription-bottle"></i> Prescriptions</a>
+                        <a href="diagnosis.html"><i class="fas fa-stethoscope"></i> Diagnosis</a>
+                        <a href="laboratory-orders.html"><i class="fas fa-flask"></i> Lab Orders</a>
+                        <a href="radiology-orders.html"><i class="fas fa-x-ray"></i> Radiology Orders</a>
+                        <a href="surgery.html"><i class="fas fa-scalpel"></i> Surgery</a>
+                        <a href="referrals.html"><i class="fas fa-user-md"></i> Referrals</a>
+                        <a href="telemedicine.html"><i class="fas fa-video"></i> Telemedicine</a>
+                        <a href="reports.html"><i class="fas fa-chart-bar"></i> Reports</a>
+                        <a href="settings.html" class="active"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="../login.html" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="dashboard-main">
+                    <div class="dashboard-header">
+                        <h1>Settings</h1>
+                        <span class="date"><i class="fas fa-cog"></i> Manage your preferences</span>
+                    </div>
+
+                    <!-- Settings Sections -->
+                    <div class="settings-sections">
+                        <!-- Account Settings -->
+                        <div class="settings-section">
+                            <h3>Account Settings</h3>
+                            <div class="settings-group">
+                                <div class="setting-item">
+                                    <div>
+                                        <h4>Email Address</h4>
+                                        <p>samuel.tekle@adventisthospital.et</p>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-primary">Change</button>
+                                </div>
+                                <div class="setting-item">
+                                    <div>
+                                        <h4>Phone Number</h4>
+                                        <p>+251-911-234-567</p>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-primary">Change</button>
+                                </div>
+                                <div class="setting-item">
+                                    <div>
+                                        <h4>Change Password</h4>
+                                        <p>Update your account password</p>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-primary">Change</button>
+                                </div>
+                                <div class="setting-item">
+                                    <div>
+                                        <h4>Two-Factor Authentication</h4>
+                                        <p>Add an extra layer of security</p>
+                                    </div>
+                                    <button class="btn btn-sm btn-success">Enable</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Notification Settings -->
+                        <div class="settings-section">
+                            <h3>Notification Preferences</h3>
+                            <div class="settings-group">
+                                <div class="setting-item toggle">
+                                    <div>
+                                        <h4>Appointment Reminders</h4>
+                                        <p>Get reminders for upcoming appointments</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked />
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="setting-item toggle">
+                                    <div>
+                                        <h4>Lab Results Notifications</h4>
+                                        <p>Get notified when new results are available</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked />
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="setting-item toggle">
+                                    <div>
+                                        <h4>Referral Updates</h4>
+                                        <p>Get notified about referral status changes</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked />
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="setting-item toggle">
+                                    <div>
+                                        <h4>Patient Messages</h4>
+                                        <p>Get notified when patients send messages</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked />
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="setting-item toggle">
+                                    <div>
+                                        <h4>Email Notifications</h4>
+                                        <p>Receive notifications via email</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked />
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="setting-item toggle">
+                                    <div>
+                                        <h4>SMS Notifications</h4>
+                                        <p>Receive notifications via SMS</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" />
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Practice Settings -->
+                        <div class="settings-section">
+                            <h3>Practice Settings</h3>
+                            <div class="settings-group">
+                                <div class="setting-item">
+                                    <div>
+                                        <h4>Default Consultation Duration</h4>
+                                        <p>Set default appointment duration</p>
+                                    </div>
+                                    <select class="settings-select">
+                                        <option value="15">15 minutes</option>
+                                        <option value="30" selected>30 minutes</option>
+                                        <option value="45">45 minutes</option>
+                                        <option value="60">60 minutes</option>
+                                    </select>
+                                </div>
+                                <div class="setting-item">
+                                    <div>
+                                        <h4>Working Hours</h4>
+                                        <p>Set your availability hours</p>
+                                    </div>
+                                    <div class="settings-time">
+                                        <input type="time" value="08:00" />
+                                        <span>to</span>
+                                        <input type="time" value="17:00" />
+                                    </div>
+                                </div>
+                                <div class="setting-item">
+                                    <div>
+                                        <h4>Days Off</h4>
+                                        <p>Set your days off</p>
+                                    </div>
+                                    <div class="settings-days">
+                                        <label><input type="checkbox" /> Sat</label>
+                                        <label><input type="checkbox" checked /> Sun</label>
+                                    </div>
+                                </div>
+                                <div class="setting-item">
+                                    <div>
+                                        <h4>Telemedicine Availability</h4>
+                                        <p>Set your telemedicine availability</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked />
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Clinical Settings -->
+                        <div class="settings-section">
+                            <h3>Clinical Settings</h3>
+                            <div class="settings-group">
+                                <div class="setting-item">
+                                    <div>
+                                        <h4>Default Diagnosis Template</h4>
+                                        <p>Select your default diagnosis template</p>
+                                    </div>
+                                    <select class="settings-select">
+                                        <option value="standard">Standard Template</option>
+                                        <option value="detailed">Detailed Template</option>
+                                        <option value="brief">Brief Template</option>
+                                    </select>
+                                </div>
+                                <div class="setting-item">
+                                    <div>
+                                        <h4>Prescription Format</h4>
+                                        <p>Select your preferred prescription format</p>
+                                    </div>
+                                    <select class="settings-select">
+                                        <option value="standard">Standard Format</option>
+                                        <option value="digital">Digital Format</option>
+                                    </select>
+                                </div>
+                                <div class="setting-item">
+                                    <div>
+                                        <h4>Lab Order Templates</h4>
+                                        <p>Manage common lab order templates</p>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-primary">Manage</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Privacy Settings -->
+                        <div class="settings-section">
+                            <h3>Privacy & Security</h3>
+                            <div class="settings-group">
+                                <div class="setting-item">
+                                    <div>
+                                        <h4>View Audit Log</h4>
+                                        <p>See who accessed patient records</p>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-primary">View</button>
+                                </div>
+                                <div class="setting-item">
+                                    <div>
+                                        <h4>Export Data</h4>
+                                        <p>Export your practice data</p>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i> Export</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Save Button -->
+                        <div class="settings-save">
+                            <button class="btn btn-primary btn-lg">
+                                <i class="fas fa-save"></i> Save All Settings
+                            </button>
+                            <button class="btn btn-outline-secondary">
+                                <i class="fas fa-undo"></i> Reset to Defaults
+                            </button>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                      -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../images/logo-white.png" alt="Adventist General Hospital" />
+                        <h3>Adventist General Hospital</h3>
+                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../departments.html">Departments</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../doctors.html">Find a Doctor</a></li>
+                        <li><a href="../appointments.html">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="../emergency.html">Emergency Care</a></li>
+                        <li><a href="../telemedicine.html">Telemedicine</a></li>
+                        <li><a href="../laboratory.html">Laboratory</a></li>
+                        <li><a href="../radiology.html">Radiology</a></li>
+                        <li><a href="../pharmacy.html">Pharmacy</a></li>
+                        <li><a href="../blood-bank.html">Blood Bank</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
+                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
+                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
+                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../faq.html">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Toggle switches
+        document.querySelectorAll('.toggle-switch input').forEach(toggle => {
+            toggle.addEventListener('change', function() {
+                const slider = this.nextElementSibling;
+                if (this.checked) {
+                    slider.classList.add('checked');
+                } else {
+                    slider.classList.remove('checked');
+                }
+            });
+        });
+
+        // Initialize toggle states
+        document.querySelectorAll('.toggle-switch input:checked').forEach(toggle => {
+            toggle.nextElementSibling.classList.add('checked');
+        });
+    </script>
+</body>
+      </html>
