@@ -1,3 +1,4 @@
+// config/multer.js - FIXED
 /**
  * ============================================
  * MULTER.JS - File Upload Configuration
@@ -7,36 +8,32 @@
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-const { v4: uuidv4 } = require('uuid');
+
+// Generate unique ID without uuid dependency
+const generateId = () => {
+  return Date.now().toString(36) + Math.random().toString(36).substring(2, 8);
+};
 
 /**
  * File upload configuration
  */
 const uploadConfig = {
-  // File size limits (in bytes)
   limits: {
-    fileSize: process.env.MAX_FILE_SIZE || 5 * 1024 * 1024, // 5MB
+    fileSize: parseInt(process.env.MAX_FILE_SIZE) || 5 * 1024 * 1024, // 5MB
   },
-
-  // Allowed file types
   allowedMimeTypes: {
     image: ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml'],
     document: ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
     medical: ['application/pdf', 'image/jpeg', 'image/png', 'application/dicom'],
     all: ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
   },
-
-  // Maximum number of files
   maxFiles: 10,
 };
 
 /**
  * Create storage engine with dynamic path
- * @param {string} basePath - Base folder path
- * @returns {Object} Multer storage engine
  */
 const createStorage = (basePath) => {
-  // Ensure directory exists
   const fullPath = path.join(__dirname, '..', basePath);
   if (!fs.existsSync(fullPath)) {
     fs.mkdirSync(fullPath, { recursive: true });
@@ -47,72 +44,59 @@ const createStorage = (basePath) => {
       cb(null, fullPath);
     },
     filename: (req, file, cb) => {
-      // Generate unique filename: timestamp-uuid-originalname
-      const uniqueSuffix = Date.now() + '-' + uuidv4();
+      const uniqueSuffix = Date.now() + '-' + generateId();
       const ext = path.extname(file.originalname);
       const name = path.basename(file.originalname, ext);
-      cb(null, `${name}-${uniqueSuffix}${ext}`);
+      const sanitizedName = name.replace(/[^a-zA-Z0-9]/g, '_');
+      cb(null, `${sanitizedName}-${uniqueSuffix}${ext}`);
     }
   });
 };
 
 /**
  * File filter for validation
- * @param {Array} allowedTypes - Array of allowed MIME types
- * @returns {Function} Multer file filter
  */
 const fileFilter = (allowedTypes) => {
   return (req, file, cb) => {
     if (allowedTypes.includes(file.mimetype)) {
       cb(null, true);
     } else {
-      cb(new Error(`Invalid file type. Allowed types: ${allowedTypes.join(', ')}`), false);
+      cb(new Error(`Invalid file type. Allowed: ${allowedTypes.join(', ')}`), false);
     }
   };
 };
 
 /**
- * Create multer instance for different upload types
+ * Create multer instances
  */
 const multerConfig = {
-  // Profile images
   profile: multer({
     storage: createStorage('uploads/profiles'),
     limits: uploadConfig.limits,
     fileFilter: fileFilter(uploadConfig.allowedMimeTypes.image),
   }),
-
-  // Medical records
   medical: multer({
     storage: createStorage('uploads/medical'),
     limits: uploadConfig.limits,
     fileFilter: fileFilter(uploadConfig.allowedMimeTypes.medical),
   }),
-
-  // Prescriptions
   prescription: multer({
     storage: createStorage('uploads/prescriptions'),
     limits: uploadConfig.limits,
     fileFilter: fileFilter(uploadConfig.allowedMimeTypes.document),
   }),
-
-  // Lab results
   lab: multer({
     storage: createStorage('uploads/lab-results'),
     limits: uploadConfig.limits,
     fileFilter: fileFilter(uploadConfig.allowedMimeTypes.all),
   }),
-
-  // Radiology images
   radiology: multer({
     storage: createStorage('uploads/radiology'),
     limits: {
-      fileSize: 20 * 1024 * 1024, // 20MB for medical images
+      fileSize: 20 * 1024 * 1024,
     },
     fileFilter: fileFilter(['image/jpeg', 'image/png', 'application/dicom']),
   }),
-
-  // General upload
   general: multer({
     storage: createStorage('uploads/general'),
     limits: uploadConfig.limits,
@@ -121,29 +105,18 @@ const multerConfig = {
 };
 
 /**
- * Helper to handle multer errors
- * @param {Error} err - Multer error
- * @param {Object} req - Express request
- * @param {Object} res - Express response
- * @param {Function} next - Express next function
+ * Handle multer errors
  */
 const handleMulterError = (err, req, res, next) => {
   if (err instanceof multer.MulterError) {
-    if (err.code === 'FILE_TOO_LARGE') {
-      return res.status(400).json({
-        success: false,
-        message: 'File too large. Maximum size is 5MB.',
-      });
-    }
-    if (err.code === 'LIMIT_FILE_COUNT') {
-      return res.status(400).json({
-        success: false,
-        message: 'Too many files uploaded.',
-      });
-    }
+    const errorMessages = {
+      'FILE_TOO_LARGE': `File too large. Maximum size is ${uploadConfig.limits.fileSize / 1024 / 1024}MB.`,
+      'LIMIT_FILE_COUNT': 'Too many files uploaded.',
+      'LIMIT_UNEXPECTED_FILE': 'Unexpected file field.',
+    };
     return res.status(400).json({
       success: false,
-      message: err.message,
+      message: errorMessages[err.code] || err.message,
     });
   }
   if (err) {
