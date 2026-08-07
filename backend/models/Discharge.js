@@ -1,3 +1,4 @@
+// models/Discharge.js
 /**
  * ============================================
  * DISCHARGE.JS - Discharge Model
@@ -71,4 +72,30 @@ const dischargeSchema = new mongoose.Schema(
       diet: { type: String, trim: true },
       activity: { type: String, trim: true },
       woundCare: { type: String, trim: true },
-      warningSigns: { type: String, trim:
+      warningSigns: { type: String, trim: true }
+    },
+    notes: {
+      type: String,
+      trim: true
+    },
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  },
+  {
+    timestamps: true
+  }
+);
+
+// Indexes
+dischargeSchema.index({ dischargeId: 1 });
+dischargeSchema.index({ admission: 1 });
+dischargeSchema.index({ patient: 1 });
+dischargeSchema.index({ doctor: 1 });
+dischargeSchema.index({ dischargeDate: -1 });
+dischargeSchema.index({ dischargeType: 1 });
+
+const Discharge = mongoose.model('Discharge', dischargeSchema);
+
+module.exports = Discharge;
