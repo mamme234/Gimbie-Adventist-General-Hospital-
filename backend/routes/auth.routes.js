@@ -1,119 +1,103 @@
-/**
- * ============================================
- * AUTH.ROUTES.JS - Authentication Routes
- * ============================================
- */
-
+// routes/auth.routes.js
 const express = require('express');
-const { body } = require('express-validator');
-const {
-  register,
-  login,
-  refreshToken,
-  logout,
-  getProfile,
-  updateProfile,
-  changePassword,
-  forgotPassword,
-  resetPassword,
-  verifyEmail,
-  resendVerification,
-} = require('../controllers/auth.controller');
-const { authenticate } = require('../middleware/auth.middleware');
-const { rateLimit } = require('express-rate-limit');
-
 const router = express.Router();
+const authController = require('../controllers/auth.controller');
+const { validate } = require('../middleware/validation');
+const rateLimiter = require('../middleware/rateLimiter');
 
-// Rate limiting for auth endpoints
-const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 10,
-  message: 'Too many authentication attempts, please try again later.',
-});
+// ============================================
+// VALIDATION SCHEMAS
+// ============================================
 
-// Validation rules
-const registerValidation = [
-  body('firstName').notEmpty().withMessage('First name is required'),
-  body('lastName').notEmpty().withMessage('Last name is required'),
-  body('email').isEmail().withMessage('Please provide a valid email'),
-  body('password').isLength({ min: 8 }).withMessage('Password must be at least 8 characters'),
-  body('phone').notEmpty().withMessage('Phone number is required'),
-];
-
+// Login validation
 const loginValidation = [
-  body('email').isEmail().withMessage('Please provide a valid email'),
-  body('password').notEmpty().withMessage('Password is required'),
+  validate.body({
+    email: { type: 'string', required: true, email: true },
+    password: { type: 'string', required: true, min: 6 }
+  })
 ];
 
-const changePasswordValidation = [
-  body('currentPassword').notEmpty().withMessage('Current password is required'),
-  body('newPassword').isLength({ min: 8 }).withMessage('New password must be at least 8 characters'),
+// Register validation
+const registerValidation = [
+  validate.body({
+    firstName: { type: 'string', required: true, min: 2, max: 50 },
+    lastName: { type: 'string', required: true, min: 2, max: 50 },
+    email: { type: 'string', required: true, email: true },
+    password: { type: 'string', required: true, min: 8 },
+    phone: { type: 'string', required: true },
+    role: { type: 'string', enum: ['patient', 'doctor', 'nurse', 'admin'] }
+  })
 ];
 
+// Forgot password validation
 const forgotPasswordValidation = [
-  body('email').isEmail().withMessage('Please provide a valid email'),
+  validate.body({
+    email: { type: 'string', required: true, email: true }
+  })
 ];
 
+// Reset password validation
 const resetPasswordValidation = [
-  body('token').notEmpty().withMessage('Reset token is required'),
-  body('newPassword').isLength({ min: 8 }).withMessage('New password must be at least 8 characters'),
+  validate.body({
+    token: { type: 'string', required: true },
+    password: { type: 'string', required: true, min: 8 }
+  })
 ];
 
-const verifyEmailValidation = [
-  body('token').notEmpty().withMessage('Verification token is required'),
+// Change password validation (FIXED: Only declared once)
+const changePasswordValidation = [
+  validate.body({
+    currentPassword: { type: 'string', required: true },
+    newPassword: { type: 'string', required: true, min: 8 }
+  })
 ];
 
-const resendVerificationValidation = [
-  body('email').isEmail().withMessage('Please provide a valid email'),
+// Refresh token validation
+const refreshTokenValidation = [
+  validate.body({
+    refreshToken: { type: 'string', required: true }
+  })
 ];
+
+// ============================================
+// ROUTES
+// ============================================
 
 // Public routes
-router.post('/register', registerValidation, register);
-router.post('/login', authLimiter, loginValidation, login);
-router.post('/refresh-token', refreshToken);
-router.post('/forgot-password', forgotPasswordValidation, forgotPassword);
-router.post('/reset-password', resetPasswordValidation, resetPassword);
-router.post('/verify-email', verifyEmailValidation, verifyEmail);
-router.post('/resend-verification', resendVerificationValidation, resendVerification);
+router.post('/login', loginValidation, rateLimiter.createAuth(), authController.login);
+router.post('/register', registerValidation, rateLimiter.createAuth(), authController.register);
+router.post('/forgot-password', forgotPasswordValidation, authController.forgotPassword);
+router.post('/reset-password', resetPasswordValidation, authController.resetPassword);
+router.post('/refresh', refreshTokenValidation, authController.refreshToken);
 
-// Protected routes
-router.post('/logout', authenticate, logout);
-router.get('/profile', authenticate, getProfile);
-router.put('/profile', authenticate, updateProfile);
-router.put('/change-password', authenticate, changePasswordValidation, changePassword);
+// Protected routes (require authentication)
+router.use(authController.authenticate);
 
-module.exports = router;
-const changePasswordValidation = [
-  body('currentPassword').notEmpty().withMessage('Current password is required'),
-  body('newPassword').isLength({ min: 8 }).withMessage('New password must be at least 8 characters')
-];
+// Change password
+router.put('/change-password', changePasswordValidation, authController.changePassword);
 
-const forgotPasswordValidation = [
-  body('email').isEmail().withMessage('Please provide a valid email')
-];
+// Logout
+router.post('/logout', authController.logout);
 
-const resetPasswordValidation = [
-  body('token').notEmpty().withMessage('Reset token is required'),
-  body('newPassword').isLength({ min: 8 }).withMessage('New password must be at least 8 characters')
-];
+// Get current user
+router.get('/me', authController.getCurrentUser);
 
-const updateProfileValidation = [
-  body('firstName').optional().notEmpty().withMessage('First name cannot be empty'),
-  body('lastName').optional().notEmpty().withMessage('Last name cannot be empty'),
-  body('phone').optional().isMobilePhone().withMessage('Please provide a valid phone number')
-];
+// Update profile
+router.put('/profile', authController.updateProfile);
 
-// Public routes
-router.post('/register', registerValidation, register);
-router.post('/login', loginValidation, login);
-router.post('/refresh-token', refreshToken);
-router.post('/forgot-password', forgotPasswordValidation, forgotPassword);
-router.post('/reset-password', resetPasswordValidation, resetPassword);
+// Verify email
+router.get('/verify/:token', authController.verifyEmail);
 
-// Protected routes
-router.post('/logout', authenticate, logout);
-router.get('/profile', authenticate, getProfile);
-router.put('/profile', authenticate, updateProfileValidation, updateProfile);
-router.put('/change-password', authenticate, changePasswordValidation, changePassword);
+// Resend verification
+router.post('/resend-verification', authController.resendVerification);
+
+// Enable 2FA
+router.post('/2fa/enable', authController.enable2FA);
+
+// Verify 2FA
+router.post('/2fa/verify', authController.verify2FA);
+
+// Disable 2FA
+router.post('/2fa/disable', authController.disable2FA);
 
 module.exports = router;
