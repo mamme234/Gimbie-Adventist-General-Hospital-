@@ -1,186 +1,196 @@
-// utils/logger.js
-const winston = require('winston');
-const path = require('path');
-const fs = require('fs');
+// sockets/index.js
+const { logger } = require('../utils/logger');
+const { jwt } = require('../utils/jwt');
 
-// Create logs directory if it doesn't exist
-const logDir = path.join(__dirname, '../logs');
-if (!fs.existsSync(logDir)) {
-  fs.mkdirSync(logDir, { recursive: true });
-}
+class SocketServer {
+  constructor(server) {
+    this.io = null;
+    this.onlineUsers = new Map();
+    this.userSockets = new Map();
+    this.initialize(server);
+  }
 
-// Custom file transport with rotation
-const fileTransport = new winston.transports.File({
-  filename: path.join(logDir, 'error.log'),
-  level: 'error',
-  maxsize: 5242880, // 5MB
-  maxFiles: 5,
-  tailable: true,
-  format: winston.format.combine(
-    winston.format.timestamp(),
-    winston.format.json()
-  )
-});
+  initialize(server) {
+    try {
+      const socketIO = require('socket.io');
+      
+      this.io = socketIO(server, {
+        cors: {
+          origin: '*',
+          methods: ['GET', 'POST'],
+          credentials: true
+        },
+        transports: ['websocket', 'polling'],
+        pingTimeout: 60000,
+        pingInterval: 25000
+      });
 
-const combinedFileTransport = new winston.transports.File({
-  filename: path.join(logDir, 'combined.log'),
-  maxsize: 10485760, // 10MB
-  maxFiles: 5,
-  tailable: true,
-  format: winston.format.combine(
-    winston.format.timestamp(),
-    winston.format.json()
-  )
-});
+      // Authentication middleware
+      this.io.use((socket, next) => {
+        try {
+          const token = socket.handshake.auth.token || 
+                        socket.handshake.headers.authorization?.split(' ')[1];
+          
+          if (!token) {
+            return next(new Error('Authentication required'));
+          }
 
-// Create logger
-const logger = winston.createLogger({
-  level: process.env.LOG_LEVEL || 'info',
-  format: winston.format.combine(
-    winston.format.timestamp({
-      format: 'YYYY-MM-DD HH:mm:ss'
-    }),
-    winston.format.errors({ stack: true }),
-    winston.format.splat(),
-    winston.format.printf(({ timestamp, level, message, ...meta }) => {
-      const metaStr = Object.keys(meta).length ? JSON.stringify(meta) : '';
-      return `${timestamp} [${level.toUpperCase()}]: ${message} ${metaStr}`;
-    })
-  ),
-  transports: [
-    // Console transport
-    new winston.transports.Console({
-      format: winston.format.combine(
-        winston.format.colorize(),
-        winston.format.simple(),
-        winston.format.printf(({ timestamp, level, message, ...meta }) => {
-          const metaStr = Object.keys(meta).length ? JSON.stringify(meta) : '';
-          return `${timestamp} [${level}]: ${message} ${metaStr}`;
-        })
-      )
-    }),
-    // Error file transport
-    fileTransport,
-    // Combined file transport
-    combinedFileTransport
-  ],
-  exceptionHandlers: [
-    new winston.transports.File({
-      filename: path.join(logDir, 'exceptions.log'),
-      maxsize: 5242880,
-      maxFiles: 5,
-      format: winston.format.combine(
-        winston.format.timestamp(),
-        winston.format.json()
-      )
-    })
-  ],
-  rejectionHandlers: [
-    new winston.transports.File({
-      filename: path.join(logDir, 'rejections.log'),
-      maxsize: 5242880,
-      maxFiles: 5,
-      format: winston.format.combine(
-        winston.format.timestamp(),
-        winston.format.json()
-      )
-    })
-  ]
-});
+          // Verify token (simplified)
+          const decoded = jwt.verify(token);
+          socket.userId = decoded.id;
+          socket.user = decoded;
+          next();
+        } catch (error) {
+          next(new Error('Invalid token'));
+        }
+      });
 
-// Request logger middleware
-const requestLogger = (req, res, next) => {
-  const startTime = Date.now();
-  
-  // Log request
-  logger.info(`REQUEST: ${req.method} ${req.originalUrl}`, {
-    method: req.method,
-    url: req.originalUrl,
-    ip: req.ip || req.connection.remoteAddress,
-    userAgent: req.headers['user-agent'],
-    query: req.query,
-    body: req.method !== 'GET' ? req.body : undefined
-  });
+      this.io.on('connection', (socket) => {
+        this.handleConnection(socket);
+      });
 
-  // Capture response
-  const oldJson = res.json;
-  res.json = function(data) {
-    const duration = Date.now() - startTime;
+      this.io.on('error', (error) => {
+        logger.error('Socket.IO error:', error);
+      });
+
+      logger.info('Socket.IO initialized successfully');
+    } catch (error) {
+      logger.error('Socket.IO initialization error:', error);
+    }
+  }
+
+  handleConnection(socket) {
+    const userId = socket.userId;
     
-    // Log response
-    logger.info(`RESPONSE: ${req.method} ${req.originalUrl} ${res.statusCode} ${duration}ms`, {
-      method: req.method,
-      url: req.originalUrl,
-      status: res.statusCode,
-      duration: `${duration}ms`
+    // Store user
+    this.onlineUsers.set(userId, {
+      socketId: socket.id,
+      connectedAt: new Date()
+    });
+    this.userSockets.set(userId, socket);
+
+    logger.info(`User ${userId} connected`);
+
+    // Join user room
+    socket.join(`user:${userId}`);
+
+    // Handle disconnect
+    socket.on('disconnect', () => {
+      this.onlineUsers.delete(userId);
+      this.userSockets.delete(userId);
+      logger.info(`User ${userId} disconnected`);
     });
 
-    // Log errors
-    if (res.statusCode >= 400) {
-      logger.error(`ERROR: ${req.method} ${req.originalUrl} ${res.statusCode}`, {
-        method: req.method,
-        url: req.originalUrl,
-        status: res.statusCode,
-        duration: `${duration}ms`,
-        error: data
+    // Handle messages
+    socket.on('message', (data) => {
+      this.handleMessage(socket, data);
+    });
+
+    // Handle typing
+    socket.on('typing', (data) => {
+      socket.to(`user:${data.targetUserId}`).emit('typing', {
+        userId,
+        isTyping: data.isTyping
       });
-    }
-
-    // Log slow requests
-    if (duration > 1000) {
-      logger.warn(`SLOW REQUEST: ${req.method} ${req.originalUrl} ${duration}ms`, {
-        method: req.method,
-        url: req.originalUrl,
-        duration: `${duration}ms`,
-        threshold: '1000ms'
-      });
-    }
-
-    return oldJson.call(this, data);
-  };
-
-  next();
-};
-
-// Custom log methods
-const customLogger = {
-  info: (message, meta = {}) => logger.info(message, meta),
-  error: (message, meta = {}) => logger.error(message, meta),
-  warn: (message, meta = {}) => logger.warn(message, meta),
-  debug: (message, meta = {}) => logger.debug(message, meta),
-  verbose: (message, meta = {}) => logger.verbose(message, meta),
-  silly: (message, meta = {}) => logger.silly(message, meta),
-  
-  // Security logs
-  security: (message, meta = {}) => {
-    logger.info(`SECURITY: ${message}`, {
-      ...meta,
-      timestamp: new Date().toISOString(),
-      type: 'security'
-    });
-  },
-  
-  // Business logs
-  business: (message, meta = {}) => {
-    logger.info(`BUSINESS: ${message}`, {
-      ...meta,
-      timestamp: new Date().toISOString(),
-      type: 'business'
-    });
-  },
-  
-  // System logs
-  system: (message, meta = {}) => {
-    logger.info(`SYSTEM: ${message}`, {
-      ...meta,
-      timestamp: new Date().toISOString(),
-      type: 'system'
     });
   }
-};
+
+  handleMessage(socket, data) {
+    try {
+      const { targetUserId, message, type } = data;
+      
+      // Send to target user
+      this.sendToUser(targetUserId, 'message', {
+        from: socket.userId,
+        message,
+        type: type || 'text',
+        timestamp: new Date()
+      });
+
+      // Send confirmation to sender
+      socket.emit('message_sent', {
+        to: targetUserId,
+        message,
+        timestamp: new Date()
+      });
+    } catch (error) {
+      logger.error('Message handling error:', error);
+      socket.emit('error', { message: 'Failed to send message' });
+    }
+  }
+
+  sendToUser(userId, event, data) {
+    try {
+      const socket = this.userSockets.get(userId);
+      if (socket) {
+        socket.emit(event, data);
+        return true;
+      }
+      return false;
+    } catch (error) {
+      logger.error('Send to user error:', error);
+      return false;
+    }
+  }
+
+  sendToRoom(roomId, event, data) {
+    try {
+      if (this.io) {
+        this.io.to(roomId).emit(event, data);
+        return true;
+      }
+      return false;
+    } catch (error) {
+      logger.error('Send to room error:', error);
+      return false;
+    }
+  }
+
+  broadcast(event, data) {
+    try {
+      if (this.io) {
+        this.io.emit(event, data);
+        return true;
+      }
+      return false;
+    } catch (error) {
+      logger.error('Broadcast error:', error);
+      return false;
+    }
+  }
+
+  getOnlineUsers() {
+    return Array.from(this.onlineUsers.keys());
+  }
+
+  isUserOnline(userId) {
+    return this.onlineUsers.has(userId);
+  }
+
+  shutdown() {
+    if (this.io) {
+      this.io.close();
+    }
+    this.onlineUsers.clear();
+    this.userSockets.clear();
+    logger.info('Socket.IO shutdown complete');
+  }
+}
+
+let socketServer = null;
+
+function initializeSocket(server) {
+  if (!socketServer) {
+    socketServer = new SocketServer(server);
+  }
+  return socketServer;
+}
+
+function getSocketInstance() {
+  return socketServer;
+}
 
 module.exports = {
-  logger: customLogger,
-  requestLogger,
-  winston: logger
+  initializeSocket,
+  getSocketInstance
 };
