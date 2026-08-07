@@ -1,6 +1,8 @@
 // server.js
 const app = require('./app');
 const http = require('http');
+
+// ✅ FIXED: Import logger correctly using destructuring
 const { logger } = require('./utils/logger');
 const config = require('./config/server');
 const database = require('./config/database');
