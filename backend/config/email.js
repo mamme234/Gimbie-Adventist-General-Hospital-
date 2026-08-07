@@ -1,3 +1,4 @@
+// config/email.js - FIXED
 /**
  * ============================================
  * EMAIL.JS - Email Configuration
@@ -23,18 +24,8 @@ const emailConfig = {
     pass: process.env.SMTP_PASS,
   },
   from: {
-    name: 'Adventist General Hospital',
-    email: process.env.SMTP_FROM || 'noreply@adventisthospital.et',
-  },
-  templates: {
-    welcome: 'welcome.html',
-    appointment: 'appointment.html',
-    appointmentReminder: 'appointment-reminder.html',
-    prescription: 'prescription.html',
-    billing: 'billing.html',
-    passwordReset: 'password-reset.html',
-    labResult: 'lab-result.html',
-    general: 'general.html',
+    name: process.env.HOSPITAL_NAME || 'Gimbie Adventist General Hospital',
+    email: process.env.SMTP_FROM || 'noreply@gimbiehospital.com',
   },
 };
 
@@ -59,42 +50,36 @@ const getTransporter = () => {
 };
 
 /**
- * Load email template
- * @param {string} templateName - Name of template file
- * @param {Object} data - Data to inject into template
- * @returns {string} Rendered HTML
+ * Load email template with fallback
  */
 const loadTemplate = (templateName, data = {}) => {
   const templatePath = path.join(__dirname, '../templates/email', templateName);
   try {
+    // Check if template file exists
+    if (!fs.existsSync(templatePath)) {
+      // Return simple HTML fallback
+      let html = `<html><body><h1>${templateName}</h1><p>${JSON.stringify(data)}</p></body></html>`;
+      return html;
+    }
+    
     let html = fs.readFileSync(templatePath, 'utf8');
-    // Replace placeholders with data
     for (const [key, value] of Object.entries(data)) {
       html = html.replace(new RegExp(`{{${key}}}`, 'g'), value);
     }
     return html;
   } catch (error) {
-    console.error(`Template ${templateName} not found:`, error);
-    return `<html><body><p>${JSON.stringify(data)}</p></body></html>`;
+    console.error(`Template ${templateName} error:`, error.message);
+    return `<html><body><h1>${templateName}</h1><p>${JSON.stringify(data)}</p></body></html>`;
   }
 };
 
 /**
  * Send email
- * @param {Object} options - Email options
- * @param {string} options.to - Recipient email
- * @param {string} options.subject - Email subject
- * @param {string} options.html - HTML content
- * @param {string} options.template - Template name (optional)
- * @param {Object} options.templateData - Data for template
- * @param {Array} options.attachments - File attachments
- * @returns {Promise} Nodemailer send result
  */
 const sendEmail = async (options) => {
   try {
     const transporter = getTransporter();
     
-    // If template is provided, load it
     let html = options.html;
     if (options.template) {
       html = loadTemplate(options.template, options.templateData || {});
@@ -112,134 +97,120 @@ const sendEmail = async (options) => {
     console.log(`✅ Email sent to ${options.to}: ${info.messageId}`);
     return info;
   } catch (error) {
-    console.error('❌ Email send error:', error);
+    console.error('❌ Email send error:', error.message);
     throw error;
   }
 };
 
 /**
  * Send welcome email
- * @param {string} to - Recipient email
- * @param {string} name - User name
- * @param {string} role - User role
- * @returns {Promise}
  */
 const sendWelcomeEmail = (to, name, role = 'Patient') => {
   return sendEmail({
     to,
-    subject: `Welcome to Adventist General Hospital, ${name}!`,
-    template: 'welcome',
+    subject: `Welcome to Gimbie Adventist General Hospital, ${name}!`,
+    template: 'welcome.html',
     templateData: {
       name,
       role,
       year: new Date().getFullYear(),
-      loginLink: `${process.env.FRONTEND_URL}/login`,
+      hospitalName: process.env.HOSPITAL_NAME || 'Gimbie Adventist General Hospital',
+      loginLink: `${process.env.FRONTEND_URL || 'https://gimbiehospital.com'}/login`,
     },
   });
 };
 
 /**
  * Send appointment confirmation
- * @param {string} to - Recipient email
- * @param {Object} appointment - Appointment details
- * @returns {Promise}
  */
 const sendAppointmentEmail = (to, appointment) => {
   return sendEmail({
     to,
     subject: `Appointment Confirmation - ${appointment.date}`,
-    template: 'appointment',
+    template: 'appointment.html',
     templateData: {
-      patientName: appointment.patientName,
-      doctorName: appointment.doctorName,
-      date: appointment.date,
-      time: appointment.time,
-      location: appointment.location || 'Adventist General Hospital',
+      patientName: appointment.patientName || 'Patient',
+      doctorName: appointment.doctorName || 'Doctor',
+      date: appointment.date || 'N/A',
+      time: appointment.time || 'N/A',
+      location: appointment.location || 'Gimbie Adventist General Hospital',
       notes: appointment.notes || '',
+      hospitalName: process.env.HOSPITAL_NAME || 'Gimbie Adventist General Hospital',
     },
   });
 };
 
 /**
  * Send appointment reminder
- * @param {string} to - Recipient email
- * @param {Object} appointment - Appointment details
- * @returns {Promise}
  */
 const sendAppointmentReminder = (to, appointment) => {
   return sendEmail({
     to,
     subject: `Reminder: Upcoming Appointment - ${appointment.date}`,
-    template: 'appointment-reminder',
+    template: 'appointment-reminder.html',
     templateData: {
-      patientName: appointment.patientName,
-      doctorName: appointment.doctorName,
-      date: appointment.date,
-      time: appointment.time,
-      location: appointment.location || 'Adventist General Hospital',
+      patientName: appointment.patientName || 'Patient',
+      doctorName: appointment.doctorName || 'Doctor',
+      date: appointment.date || 'N/A',
+      time: appointment.time || 'N/A',
+      location: appointment.location || 'Gimbie Adventist General Hospital',
+      hospitalName: process.env.HOSPITAL_NAME || 'Gimbie Adventist General Hospital',
     },
   });
 };
 
 /**
  * Send password reset email
- * @param {string} to - Recipient email
- * @param {string} name - User name
- * @param {string} resetLink - Password reset link
- * @returns {Promise}
  */
 const sendPasswordResetEmail = (to, name, resetLink) => {
   return sendEmail({
     to,
-    subject: 'Password Reset - Adventist General Hospital',
-    template: 'password-reset',
+    subject: 'Password Reset - Gimbie Adventist General Hospital',
+    template: 'password-reset.html',
     templateData: {
       name,
       resetLink,
       year: new Date().getFullYear(),
+      hospitalName: process.env.HOSPITAL_NAME || 'Gimbie Adventist General Hospital',
     },
   });
 };
 
 /**
  * Send lab result email
- * @param {string} to - Recipient email
- * @param {Object} result - Lab result details
- * @returns {Promise}
  */
 const sendLabResultEmail = (to, result) => {
   return sendEmail({
     to,
-    subject: `Lab Results Available - ${result.testName}`,
-    template: 'lab-result',
+    subject: `Lab Results Available - ${result.testName || 'Lab Test'}`,
+    template: 'lab-result.html',
     templateData: {
-      patientName: result.patientName,
-      testName: result.testName,
-      resultDate: result.resultDate,
+      patientName: result.patientName || 'Patient',
+      testName: result.testName || 'Lab Test',
+      resultDate: result.resultDate || new Date().toLocaleDateString(),
       summary: result.summary || 'Your lab results are now available.',
-      viewLink: `${process.env.FRONTEND_URL}/patient/laboratory-results.html`,
+      viewLink: `${process.env.FRONTEND_URL || 'https://gimbiehospital.com'}/patient/laboratory-results.html`,
+      hospitalName: process.env.HOSPITAL_NAME || 'Gimbie Adventist General Hospital',
     },
   });
 };
 
 /**
  * Send billing email
- * @param {string} to - Recipient email
- * @param {Object} bill - Bill details
- * @returns {Promise}
  */
 const sendBillingEmail = (to, bill) => {
   return sendEmail({
     to,
-    subject: `Bill #${bill.invoiceNumber} - Adventist General Hospital`,
-    template: 'billing',
+    subject: `Bill #${bill.invoiceNumber || 'N/A'} - Gimbie Adventist General Hospital`,
+    template: 'billing.html',
     templateData: {
-      patientName: bill.patientName,
-      invoiceNumber: bill.invoiceNumber,
-      amount: bill.amount,
-      dueDate: bill.dueDate,
-      status: bill.status,
-      viewLink: `${process.env.FRONTEND_URL}/patient/bills.html`,
+      patientName: bill.patientName || 'Patient',
+      invoiceNumber: bill.invoiceNumber || 'N/A',
+      amount: bill.amount || '0.00',
+      dueDate: bill.dueDate || 'N/A',
+      status: bill.status || 'Pending',
+      viewLink: `${process.env.FRONTEND_URL || 'https://gimbiehospital.com'}/patient/bills.html`,
+      hospitalName: process.env.HOSPITAL_NAME || 'Gimbie Adventist General Hospital',
     },
   });
 };
