@@ -3,19 +3,42 @@ const app = require('./app');
 const http = require('http');
 const { logger } = require('./utils/logger');
 const config = require('./config/server');
+const database = require('./config/database');
 
 // Create HTTP server
 const server = http.createServer(app);
 
+// Initialize Socket.IO (if needed)
+let socketServer = null;
+try {
+  const { initializeSocket } = require('./sockets');
+  socketServer = initializeSocket(server);
+  logger.info('🔌 Socket.IO initialized');
+} catch (error) {
+  logger.warn('Socket.IO not initialized:', error.message);
+}
+
+// Connect to database
+database.connect();
+
 // Start server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || config.port || 3000;
 const HOST = '0.0.0.0';
 
 server.listen(PORT, HOST, () => {
-  console.log(`🏥 Gimbie Adventist General Hospital - Backend Server`);
+  console.log('\n========================================');
+  console.log(`🏥 ${config.hospital.name || 'Gimbie Adventist General Hospital'}`);
+  console.log('========================================');
   console.log(`🚀 Server running on ${HOST}:${PORT}`);
-  console.log(`📡 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`📡 Environment: ${config.env}`);
   console.log(`🔗 API URL: http://${HOST}:${PORT}/api/v1`);
+  console.log(`📊 Health Check: http://${HOST}:${PORT}/health`);
+  console.log(`💳 Payment Banks: ${require('./config/payment').getEnabledBanks().map(b => b.shortName).join(', ')}`);
+  console.log('========================================\n');
+  
+  // Log database status
+  const dbStatus = database.getConnectionStatus();
+  logger.info(`💾 Database: ${dbStatus.state} (${dbStatus.name})`);
 });
 
 // Graceful shutdown
@@ -24,15 +47,27 @@ const gracefulShutdown = async (signal) => {
   
   server.close(async (err) => {
     if (err) {
-      console.error('Error closing server:', err);
+      logger.error('Error closing server:', err);
       process.exit(1);
     }
-    console.log('🏥 Gimbie Adventist General Hospital server shutdown complete');
+    
+    logger.info('HTTP server closed');
+    
+    // Close database connection
+    await database.disconnect();
+    
+    // Shutdown Socket.IO
+    if (socketServer && socketServer.shutdown) {
+      socketServer.shutdown();
+    }
+    
+    logger.info(`🏥 ${config.hospital.name || 'Gimbie Adventist General Hospital'} server shutdown complete`);
     process.exit(0);
   });
 
+  // Force exit after timeout
   setTimeout(() => {
-    console.error('Could not close connections in time, forcefully shutting down');
+    logger.error('Could not close connections in time, forcefully shutting down');
     process.exit(1);
   }, 10000);
 };
@@ -43,13 +78,15 @@ process.on('SIGINT', () => gracefulShutdown('SIGINT'));
 
 // Handle uncaught exceptions
 process.on('uncaughtException', (error) => {
-  console.error('Uncaught Exception:', error);
+  logger.error('Uncaught Exception:', error);
   gracefulShutdown('uncaughtException');
 });
 
+// Handle unhandled rejections
 process.on('unhandledRejection', (reason, promise) => {
-  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  logger.error('Unhandled Rejection at:', promise, 'reason:', reason);
   gracefulShutdown('unhandledRejection');
 });
 
-module.exports = { server };
+// Export for testing
+module.exports = { server, socketServer };
