@@ -1,3 +1,4 @@
+// scripts/seed.js - FIXED
 /**
  * ============================================
  * SEED.JS - Seed Database with Sample Data
@@ -7,9 +8,10 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const bcrypt = require('bcryptjs');
+const path = require('path');
 
 // Load environment variables
-dotenv.config();
+dotenv.config({ path: path.join(__dirname, '../.env') });
 
 // Import models
 const User = require('../models/User');
@@ -26,11 +28,7 @@ const sampleData = {
       name: 'Cardiology',
       code: 'CAR',
       description: 'Comprehensive heart care including diagnosis, treatment, and prevention of cardiovascular diseases.',
-      location: {
-        wing: 'A',
-        floor: '2',
-        roomNumbers: ['201', '202', '203', '204']
-      },
+      location: { wing: 'A', floor: '2', roomNumbers: ['201', '202', '203', '204'] },
       totalBeds: 40,
       availableBeds: 12,
       services: ['Heart Surgery', 'Angioplasty', 'Echocardiography', 'Cardiac Catheterization']
@@ -39,12 +37,8 @@ const sampleData = {
       departmentId: 'DEPT-2026-002',
       name: 'Neurology',
       code: 'NEU',
-      description: 'Specialized care for disorders of the nervous system including brain, spine, and nerves.',
-      location: {
-        wing: 'B',
-        floor: '3',
-        roomNumbers: ['301', '302', '303']
-      },
+      description: 'Specialized care for disorders of the nervous system.',
+      location: { wing: 'B', floor: '3', roomNumbers: ['301', '302', '303'] },
       totalBeds: 30,
       availableBeds: 8,
       services: ['Brain Surgery', 'Stroke Treatment', 'Spinal Surgery', 'Epilepsy Management']
@@ -53,12 +47,8 @@ const sampleData = {
       departmentId: 'DEPT-2026-003',
       name: 'Orthopedics',
       code: 'ORT',
-      description: 'Treatment of musculoskeletal conditions including bones, joints, ligaments, and tendons.',
-      location: {
-        wing: 'C',
-        floor: '1',
-        roomNumbers: ['101', '102', '103']
-      },
+      description: 'Treatment of musculoskeletal conditions.',
+      location: { wing: 'C', floor: '1', roomNumbers: ['101', '102', '103'] },
       totalBeds: 35,
       availableBeds: 10,
       services: ['Joint Replacement', 'Fracture Treatment', 'Sports Medicine', 'Spine Surgery']
@@ -67,12 +57,8 @@ const sampleData = {
       departmentId: 'DEPT-2026-004',
       name: 'Pediatrics',
       code: 'PED',
-      description: 'Comprehensive healthcare for children from birth through adolescence.',
-      location: {
-        wing: 'D',
-        floor: '2',
-        roomNumbers: ['401', '402', '403']
-      },
+      description: 'Comprehensive healthcare for children.',
+      location: { wing: 'D', floor: '2', roomNumbers: ['401', '402', '403'] },
       totalBeds: 45,
       availableBeds: 15,
       services: ['Child Vaccination', 'Pediatric Surgery', 'Newborn Care', 'Adolescent Medicine']
@@ -82,7 +68,7 @@ const sampleData = {
     {
       firstName: 'Admin',
       lastName: 'User',
-      email: 'admin@adventisthospital.et',
+      email: 'admin@gimbiehospital.com',
       password: 'Admin@2026',
       phone: '+251-911-000-000',
       role: 'admin',
@@ -91,7 +77,7 @@ const sampleData = {
     {
       firstName: 'Samuel',
       lastName: 'Tekle',
-      email: 'samuel.tekle@adventisthospital.et',
+      email: 'samuel.tekle@gimbiehospital.com',
       password: 'Doctor@2026',
       phone: '+251-911-234-567',
       role: 'doctor',
@@ -100,7 +86,7 @@ const sampleData = {
     {
       firstName: 'Meron',
       lastName: 'Tesfaye',
-      email: 'meron.t@email.com',
+      email: 'meron.t@gmail.com',
       password: 'Patient@2026',
       phone: '+251-911-234-568',
       role: 'patient',
@@ -117,7 +103,8 @@ const seedDatabase = async () => {
     console.log('🌱 Starting database seeding...');
 
     // Connect to MongoDB
-    await mongoose.connect(process.env.MONGODB_URI);
+    const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/gimbie_hospital';
+    await mongoose.connect(mongoUri);
     console.log('✅ Connected to MongoDB');
 
     // Clear existing data
@@ -210,6 +197,7 @@ const seedDatabase = async () => {
     process.exit(0);
   } catch (error) {
     console.error('❌ Seeding error:', error);
+    console.error('Stack:', error.stack);
     process.exit(1);
   }
 };
