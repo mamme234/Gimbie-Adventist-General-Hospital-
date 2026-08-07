@@ -1,3 +1,4 @@
+// config/jwt.js - FIXED
 /**
  * ============================================
  * JWT.JS - JWT Configuration
@@ -15,17 +16,14 @@ dotenv.config();
 const jwtConfig = {
   secret: process.env.JWT_SECRET || 'default-secret-change-in-production',
   expiresIn: process.env.JWT_EXPIRE || '7d',
-  refreshExpiresIn: '30d',
+  refreshExpiresIn: process.env.JWT_REFRESH_EXPIRE || '30d',
   algorithm: 'HS256',
-  issuer: 'adventist-hospital',
-  audience: 'adventist-hospital-users',
+  issuer: 'gimbie-hospital',
+  audience: 'gimbie-hospital-users',
 };
 
 /**
  * Generate JWT token
- * @param {Object} payload - Data to encode in token
- * @param {Object} options - Additional options
- * @returns {string} JWT token
  */
 const generateToken = (payload, options = {}) => {
   return jwt.sign(
@@ -43,8 +41,6 @@ const generateToken = (payload, options = {}) => {
 
 /**
  * Generate refresh token
- * @param {Object} payload - Data to encode in token
- * @returns {string} Refresh token
  */
 const generateRefreshToken = (payload) => {
   return jwt.sign(
@@ -61,9 +57,6 @@ const generateRefreshToken = (payload) => {
 
 /**
  * Verify JWT token
- * @param {string} token - JWT token to verify
- * @returns {Object} Decoded payload
- * @throws {Error} If token is invalid or expired
  */
 const verifyToken = (token) => {
   return jwt.verify(token, jwtConfig.secret, {
@@ -73,9 +66,7 @@ const verifyToken = (token) => {
 };
 
 /**
- * Decode JWT token (without verification)
- * @param {string} token - JWT token to decode
- * @returns {Object|null} Decoded payload or null
+ * Decode JWT token
  */
 const decodeToken = (token) => {
   try {
@@ -87,8 +78,6 @@ const decodeToken = (token) => {
 
 /**
  * Check if token is expired
- * @param {string} token - JWT token to check
- * @returns {boolean} True if expired
  */
 const isTokenExpired = (token) => {
   try {
@@ -102,8 +91,6 @@ const isTokenExpired = (token) => {
 
 /**
  * Get remaining time in seconds
- * @param {string} token - JWT token
- * @returns {number} Seconds remaining
  */
 const getTokenRemainingTime = (token) => {
   try {
