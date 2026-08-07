@@ -1,7 +1,6 @@
 // middleware/errorHandler.js
-const { logger, customLogger } = require('./logger');
+const { logger } = require('../utils/logger');
 const { AuditLog } = require('../models/AuditLog');
-const mongoose = require('mongoose');
 
 class AppError extends Error {
   constructor(message, statusCode, code, details = {}) {
@@ -15,7 +14,6 @@ class AppError extends Error {
 }
 
 const errorHandler = {
-  // Main error handler
   handle: (err, req, res, next) => {
     // Log error
     logger.error('Error occurred:', {
@@ -24,23 +22,11 @@ const errorHandler = {
       url: req.originalUrl,
       method: req.method,
       ip: req.ip,
-      userId: req.user?._id || null,
-      body: req.body,
-      params: req.params,
-      query: req.query
+      userId: req.user?._id || null
     });
 
-    // Check if error is operational
-    if (!err.isOperational) {
-      customLogger.error('Non-operational error', {
-        error: err,
-        stack: err.stack,
-        url: req.originalUrl
-      });
-    }
-
     // Mongoose validation error
-    if (err instanceof mongoose.Error.ValidationError) {
+    if (err.name === 'ValidationError') {
       return res.status(400).json({
         success: false,
         message: 'Validation failed',
@@ -64,7 +50,7 @@ const errorHandler = {
     }
 
     // Mongoose cast error
-    if (err instanceof mongoose.Error.CastError) {
+    if (err.name === 'CastError') {
       return res.status(400).json({
         success: false,
         message: `Invalid ${err.path}: ${err.value}`,
@@ -91,15 +77,6 @@ const errorHandler = {
       });
     }
 
-    // Multer errors
-    if (err.name === 'MulterError') {
-      return res.status(400).json({
-        success: false,
-        message: err.message,
-        code: 'UPLOAD_ERROR'
-      });
-    }
-
     // Custom AppError
     if (err instanceof AppError) {
       return res.status(err.statusCode).json({
@@ -123,26 +100,8 @@ const errorHandler = {
         details: err.details
       })
     });
-
-    // Log to audit for critical errors
-    if (statusCode >= 500) {
-      AuditLog.logAction({
-        action: 'error',
-        resource: 'system',
-        userId: req.user?._id || null,
-        details: {
-          error: err.message,
-          stack: err.stack,
-          url: req.originalUrl,
-          method: req.method
-        },
-        status: 'error',
-        severity: 'critical'
-      }).catch(err => logger.error('Audit log error:', err));
-    }
   },
 
-  // 404 handler
   notFound: (req, res) => {
     res.status(404).json({
       success: false,
@@ -151,20 +110,17 @@ const errorHandler = {
     });
   },
 
-  // Async handler wrapper
   asyncHandler: (fn) => {
     return (req, res, next) => {
       Promise.resolve(fn(req, res, next)).catch(next);
     };
   },
 
-  // Custom error factory
   createError: (message, statusCode, code, details = {}) => {
     return new AppError(message, statusCode, code, details);
   },
 
-  // Common error creators
-  badRequest: (message, code = 'BAD_REQUEST') => {
+  badRequest: (message = 'Bad request', code = 'BAD_REQUEST') => {
     return new AppError(message, 400, code);
   },
   
@@ -186,14 +142,6 @@ const errorHandler = {
   
   validation: (message = 'Validation failed', details) => {
     return new AppError(message, 400, 'VALIDATION_ERROR', details);
-  },
-  
-  database: (message = 'Database error', code = 'DATABASE_ERROR') => {
-    return new AppError(message, 500, code);
-  },
-  
-  external: (message = 'External service error', code = 'EXTERNAL_ERROR') => {
-    return new AppError(message, 503, code);
   }
 };
 
