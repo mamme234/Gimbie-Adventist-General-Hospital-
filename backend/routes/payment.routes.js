@@ -1,137 +1,147 @@
-/**
- * ============================================
- * PAYMENT.ROUTES.JS - Payment Routes
- * ============================================
- */
-
+// routes/payment.routes.js
 const express = require('express');
-const { body, param, query } = require('express-validator');
-const {
-  // Payments
-  getPayments,
-  getPaymentById,
-  createPayment,
-  updatePayment,
-  deletePayment,
-  getPatientPayments,
-  getPendingPayments,
-  getCompletedPayments,
-  getFailedPayments,
-  
-  // Payment Methods
-  getPaymentMethods,
-  getPaymentMethodById,
-  createPaymentMethod,
-  updatePaymentMethod,
-  deletePaymentMethod,
-  
-  // Payment Processing
-  processPayment,
-  verifyPayment,
-  refundPayment,
-  reversePayment,
-  
-  // Payment Gateway
-  initializePayment,
-  handleWebhook,
-  getPaymentStatus,
-  
-  // Reports
-  getPaymentReports,
-  generatePaymentReport,
-  
-  // Stats
-  getPaymentStats,
-  getDailyStats,
-  getMonthlyStats,
-} = require('../controllers/payment.controller');
-const { authenticate, authorize } = require('../middleware/auth.middleware');
-
 const router = express.Router();
+const paymentService = require('../services/payment.service');
+const paymentConfig = require('../config/payment');
+const auth = require('../middleware/auth');
+const { logger } = require('../utils/logger');
 
-// Validation rules
-const paymentIdValidation = [
-  param('id').isMongoId().withMessage('Invalid payment ID'),
-];
+// Get available banks
+router.get('/banks', auth.authenticate, (req, res) => {
+  try {
+    const banks = paymentConfig.getEnabledBanks();
+    res.json({
+      success: true,
+      banks: banks.map(bank => ({
+        name: bank.name,
+        shortName: bank.shortName,
+        logo: bank.logo,
+        supportedMethods: bank.supportedMethods,
+        description: bank.description
+      }))
+    });
+  } catch (error) {
+    logger.error('Get banks error:', error);
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
 
-const createPaymentValidation = [
-  body('patientId').isMongoId().withMessage('Invalid patient ID'),
-  body('billId').isMongoId().withMessage('Invalid bill ID'),
-  body('amount').isNumeric().withMessage('Amount must be a number'),
-  body('method').isIn(['Cash', 'Card', 'Mobile Money', 'Bank Transfer', 'Insurance', 'Other']).withMessage('Invalid payment method'),
-  body('reference').optional().isString(),
-];
+// Initiate payment
+router.post('/initiate', auth.authenticate, async (req, res) => {
+  try {
+    const {
+      amount,
+      currency,
+      bank,
+      paymentMethod,
+      description,
+      metadata
+    } = req.body;
 
-const updatePaymentValidation = [
-  body('status').optional().isIn(['Pending', 'Completed', 'Failed', 'Refunded']).withMessage('Invalid status'),
-  body('amount').optional().isNumeric().withMessage('Amount must be a number'),
-];
+    const result = await paymentService.processPayment({
+      amount,
+      currency,
+      bankName: bank,
+      customerId: req.user._id,
+      customerName: `${req.user.firstName} ${req.user.lastName}`,
+      customerEmail: req.user.email,
+      customerPhone: req.user.phone,
+      paymentMethod,
+      description,
+      metadata
+    });
 
-const paymentMethodValidation = [
-  body('type').isIn(['Card', 'Mobile Money', 'Bank Transfer', 'Cash']).withMessage('Invalid payment type'),
-  body('name').notEmpty().withMessage('Name is required'),
-  body('details').isObject().withMessage('Details must be an object'),
-];
+    res.json({
+      success: true,
+      data: result
+    });
+  } catch (error) {
+    logger.error('Initiate payment error:', error);
+    res.status(400).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
 
-const processPaymentValidation = [
-  body('paymentId').isMongoId().withMessage('Invalid payment ID'),
-  body('gateway').optional().isString(),
-];
+// Check payment status
+router.get('/status/:transactionId', auth.authenticate, async (req, res) => {
+  try {
+    const { transactionId } = req.params;
+    const status = await paymentService.checkPaymentStatus(transactionId);
+    res.json({
+      success: true,
+      data: status
+    });
+  } catch (error) {
+    logger.error('Check payment status error:', error);
+    res.status(400).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
 
-const refundPaymentValidation = [
-  body('paymentId').isMongoId().withMessage('Invalid payment ID'),
-  body('amount').isNumeric().withMessage('Amount must be a number'),
-  body('reason').notEmpty().withMessage('Reason is required'),
-];
+// Refund payment
+router.post('/refund', auth.authenticate, async (req, res) => {
+  try {
+    const { transactionId, amount } = req.body;
+    const result = await paymentService.refundPayment(transactionId, amount);
+    res.json({
+      success: true,
+      data: result
+    });
+  } catch (error) {
+    logger.error('Refund payment error:', error);
+    res.status(400).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
 
-const initializePaymentValidation = [
-  body('patientId').isMongoId().withMessage('Invalid patient ID'),
-  body('amount').isNumeric().withMessage('Amount must be a number'),
-  body('currency').optional().isString(),
-  body('description').optional().isString(),
-];
+// Webhook handlers
+router.post('/webhook/cbe', async (req, res) => {
+  try {
+    const result = await paymentService.handleWebhook('cbe', req.body);
+    res.json(result);
+  } catch (error) {
+    logger.error('CBE webhook error:', error);
+    res.status(400).json({ success: false, message: error.message });
+  }
+});
 
-// Webhook route (no auth required)
-router.post('/webhook', handleWebhook);
+router.post('/webhook/telebirr', async (req, res) => {
+  try {
+    const result = await paymentService.handleWebhook('telebirr', req.body);
+    res.json(result);
+  } catch (error) {
+    logger.error('Telebirr webhook error:', error);
+    res.status(400).json({ success: false, message: error.message });
+  }
+});
 
-// All other routes require authentication
-router.use(authenticate);
+router.post('/webhook/awash', async (req, res) => {
+  try {
+    const result = await paymentService.handleWebhook('awash', req.body);
+    res.json(result);
+  } catch (error) {
+    logger.error('Awash webhook error:', error);
+    res.status(400).json({ success: false, message: error.message });
+  }
+});
 
-// Payment operations
-router.get('/', authorize('admin', 'finance'), getPayments);
-router.get('/pending', authorize('admin', 'finance', 'patient'), getPendingPayments);
-router.get('/completed', authorize('admin', 'finance', 'patient'), getCompletedPayments);
-router.get('/failed', authorize('admin', 'finance'), getFailedPayments);
-router.get('/patient/:patientId', authorize('admin', 'finance', 'patient'), getPatientPayments);
-router.post('/', authorize('admin', 'finance', 'patient'), createPaymentValidation, createPayment);
-router.get('/:id', authorize('admin', 'finance', 'patient'), paymentIdValidation, getPaymentById);
-router.put('/:id', authorize('admin', 'finance'), paymentIdValidation, updatePaymentValidation, updatePayment);
-router.delete('/:id', authorize('admin'), paymentIdValidation, deletePayment);
-
-// Payment Methods
-router.get('/methods', authorize('admin', 'finance', 'patient'), getPaymentMethods);
-router.post('/methods', authorize('admin', 'finance', 'patient'), paymentMethodValidation, createPaymentMethod);
-router.get('/methods/:id', authorize('admin', 'finance', 'patient'), getPaymentMethodById);
-router.put('/methods/:id', authorize('admin', 'finance', 'patient'), paymentMethodValidation, updatePaymentMethod);
-router.delete('/methods/:id', authorize('admin'), deletePaymentMethod);
-
-// Payment Processing
-router.post('/process', authorize('admin', 'finance'), processPaymentValidation, processPayment);
-router.post('/verify', authorize('admin', 'finance'), verifyPayment);
-router.post('/refund', authorize('admin', 'finance'), refundPaymentValidation, refundPayment);
-router.post('/reverse', authorize('admin', 'finance'), refundPaymentValidation, reversePayment);
-
-// Payment Gateway
-router.post('/initialize', authorize('admin', 'finance', 'patient'), initializePaymentValidation, initializePayment);
-router.get('/status/:transactionId', authorize('admin', 'finance', 'patient'), getPaymentStatus);
-
-// Reports
-router.get('/reports', authorize('admin', 'finance'), getPaymentReports);
-router.post('/reports/generate', authorize('admin', 'finance'), generatePaymentReport);
-
-// Stats
-router.get('/stats', authorize('admin', 'finance'), getPaymentStats);
-router.get('/stats/daily', authorize('admin', 'finance'), getDailyStats);
-router.get('/stats/monthly', authorize('admin', 'finance'), getMonthlyStats);
+router.post('/webhook/coop', async (req, res) => {
+  try {
+    const result = await paymentService.handleWebhook('coop', req.body);
+    res.json(result);
+  } catch (error) {
+    logger.error('Coop webhook error:', error);
+    res.status(400).json({ success: false, message: error.message });
+  }
+});
 
 module.exports = router;
