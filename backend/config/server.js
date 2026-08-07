@@ -1,98 +1,64 @@
-/**
- * ============================================
- * SERVER.JS - Server Configuration
- * ============================================
- */
-
-const cors = require('cors');
-const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
-const morgan = require('morgan');
-const path = require('path');
+// config/server.js
 const dotenv = require('dotenv');
+const path = require('path');
 
-dotenv.config();
+// Load environment variables
+dotenv.config({ path: path.join(__dirname, '../.env') });
 
-/**
- * Server configuration object
- */
-const serverConfig = {
-  // Server settings
-  port: process.env.PORT || 5000,
+const config = {
+  // Server
   env: process.env.NODE_ENV || 'development',
-  frontendUrl: process.env.FRONTEND_URL || 'http://localhost:3000',
-
-  // CORS options
-  corsOptions: {
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-    credentials: true,
-    optionsSuccessStatus: 200,
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS']
+  host: process.env.HOST || '0.0.0.0',
+  port: parseInt(process.env.PORT, 10) || 3000,
+  
+  // Database
+  db: {
+    uri: process.env.MONGODB_URI || 'mongodb://localhost:27017/gimbie_hospital',
+    name: process.env.MONGODB_DB || 'gimbie_hospital'
   },
 
-  // Rate limiting
-  rateLimiter: rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // Limit each IP to 100 requests per windowMs
-    message: {
-      success: false,
-      message: 'Too many requests from this IP, please try again later.'
-    },
-    standardHeaders: true,
-    legacyHeaders: false,
-  }),
-
-  // Helmet security options
-  helmetOptions: {
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'"],
-        styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
-        fontSrc: ["'self'", 'https://fonts.gstatic.com'],
-        scriptSrc: ["'self'", "'unsafe-inline'"],
-        imgSrc: ["'self'", 'data:', 'https:'],
-      },
-    },
-    crossOriginEmbedderPolicy: true,
-    crossOriginOpenerPolicy: true,
-    crossOriginResourcePolicy: { policy: "cross-origin" },
-    dnsPrefetchControl: true,
-    frameguard: { action: 'deny' },
-    hidePoweredBy: true,
-    hsts: { maxAge: 31536000, includeSubDomains: true, preload: true },
-    ieNoOpen: true,
-    noSniff: true,
-    originAgentCluster: true,
-    permittedCrossDomainPolicies: { permittedPolicies: 'none' },
-    referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
-    xssFilter: true,
+  // JWT
+  jwt: {
+    secret: process.env.JWT_SECRET || 'gimbie-hospital-secret-key',
+    refreshSecret: process.env.JWT_REFRESH_SECRET || 'gimbie-hospital-refresh-secret-key',
+    expiresIn: process.env.JWT_EXPIRE || '7d'
   },
 
-  // Morgan logging options
-  morganOptions: {
-    format: process.env.NODE_ENV === 'production' ? 'combined' : 'dev',
-    stream: {
-      write: (message) => {
-        // Will be handled by logger
-        console.log(message.trim());
-      }
-    }
+  // Hospital Info
+  hospital: {
+    name: process.env.HOSPITAL_NAME || 'Gimbie Adventist General Hospital',
+    website: process.env.HOSPITAL_WEBSITE || 'https://gimbiehospital.com',
+    email: process.env.HOSPITAL_EMAIL || 'info@gimbiehospital.com',
+    phone: process.env.HOSPITAL_PHONE || '+251-123-456789'
   },
 
-  // File upload paths
-  uploadPaths: {
-    profileImages: path.join(__dirname, '../uploads/profiles'),
-    medicalRecords: path.join(__dirname, '../uploads/medical'),
-    prescriptions: path.join(__dirname, '../uploads/prescriptions'),
-    labResults: path.join(__dirname, '../uploads/lab-results'),
-    radiologyImages: path.join(__dirname, '../uploads/radiology'),
-    temp: path.join(__dirname, '../uploads/temp'),
+  // CORS
+  corsOrigins: process.env.CORS_ORIGINS ? 
+    process.env.CORS_ORIGINS.split(',') : 
+    ['*'],
+
+  // Logging
+  logging: {
+    level: process.env.LOG_LEVEL || 'info'
   },
 
-  // API versioning
-  apiVersion: 'v1',
-  apiPrefix: '/api',
+  // Payment
+  payment: {
+    defaultCurrency: process.env.DEFAULT_CURRENCY || 'ETB',
+    timeout: parseInt(process.env.PAYMENT_TIMEOUT, 10) || 300
+  }
 };
 
-module.exports = serverConfig;
+// Validate required environment variables
+const requiredEnvVars = ['JWT_SECRET', 'JWT_REFRESH_SECRET'];
+
+if (process.env.NODE_ENV === 'production') {
+  const missingEnvVars = requiredEnvVars.filter((varName) => !process.env[varName]);
+  if (missingEnvVars.length > 0) {
+    console.error('❌ Missing required environment variables:');
+    missingEnvVars.forEach((varName) => console.error(`  - ${varName}`));
+    process.exit(1);
+  }
+}
+
+module.exports = config;
