@@ -3,218 +3,40 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const compression = require('compression');
-const morgan = require('morgan');
-const rateLimit = require('express-rate-limit');
 const path = require('path');
-const fs = require('fs');
 
-// Import configurations
-const config = require('./config/server');
-const paymentConfig = require('./config/payment');
-
-// Import middleware
-const { logger, requestLogger } = require('./utils/logger');
-const { errorHandler } = require('./middleware/errorHandler');
-const notFoundHandler = require('./middleware/notFound');
-
-// Import routes
-const routes = require('./routes');
-
-// Initialize Express
 const app = express();
 
-// ============================================
-// CREATE REQUIRED DIRECTORIES
-// ============================================
-const directories = [
-  'uploads',
-  'uploads/patients',
-  'uploads/doctors',
-  'uploads/staff',
-  'uploads/reports',
-  'uploads/laboratory',
-  'uploads/radiology',
-  'uploads/gallery',
-  'uploads/documents',
-  'logs',
-  'backups'
-];
-
-directories.forEach(dir => {
-  const dirPath = path.join(__dirname, dir);
-  if (!fs.existsSync(dirPath)) {
-    fs.mkdirSync(dirPath, { recursive: true });
-    console.log(`📁 Created directory: ${dir}`);
-  }
-});
-
-// ============================================
-// SECURITY MIDDLEWARE
-// ============================================
+// Basic middleware
 app.use(helmet({
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'"],
-      styleSrc: ["'self'", "'unsafe-inline'"],
-      scriptSrc: ["'self'", "'unsafe-inline'"],
-      imgSrc: ["'self'", "data:", "https:"],
-      connectSrc: ["'self'", "wss:", "https:"],
-      frameSrc: ["'self'"],
-      objectSrc: ["'none'"],
-      upgradeInsecureRequests: []
-    }
-  },
+  contentSecurityPolicy: false,
   crossOriginEmbedderPolicy: false,
-  crossOriginResourcePolicy: { policy: 'cross-origin' },
-  referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
-  hsts: {
-    maxAge: 31536000,
-    includeSubDomains: true,
-    preload: true
-  },
-  frameguard: { action: 'deny' },
-  noSniff: true,
-  xssFilter: true
+  crossOriginResourcePolicy: { policy: 'cross-origin' }
 }));
 
-// ============================================
-// CORS CONFIGURATION
-// ============================================
-const corsOptions = {
-  origin: config.corsOrigins || '*',
+app.use(cors({
+  origin: '*',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: [
-    'Content-Type',
-    'Authorization',
-    'X-Requested-With',
-    'X-CSRF-Token',
-    'Accept',
-    'Origin',
-    'User-Agent',
-    'Cache-Control'
-  ],
-  exposedHeaders: [
-    'X-Total-Count',
-    'X-RateLimit-Limit',
-    'X-RateLimit-Remaining',
-    'X-RateLimit-Reset'
-  ],
-  maxAge: 86400
-};
-
-app.use(cors(corsOptions));
-
-// ============================================
-// COMPRESSION
-// ============================================
-app.use(compression({
-  level: 6,
-  threshold: 100 * 1024,
-  filter: (req, res) => {
-    if (req.headers['x-no-compression']) {
-      return false;
-    }
-    return compression.filter(req, res);
-  }
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
 
-// ============================================
-// REQUEST PARSING
-// ============================================
-app.use(express.json({
-  limit: '50mb',
-  verify: (req, res, buf) => {
-    req.rawBody = buf;
-  }
-}));
+app.use(compression());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
-app.use(express.urlencoded({
-  extended: true,
-  limit: '50mb'
-}));
-
-app.use(express.text({ limit: '10mb' }));
-
-// ============================================
-// STATIC FILES
-// ============================================
+// Static files
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-app.use('/docs', express.static(path.join(__dirname, 'public/docs')));
-
-// ============================================
-// RATE LIMITING
-// ============================================
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  message: {
-    success: false,
-    message: 'Too many requests from this IP, please try again later.',
-    code: 'RATE_LIMIT_EXCEEDED',
-    retryAfter: 900
-  },
-  standardHeaders: true,
-  legacyHeaders: false,
-  skipSuccessfulRequests: false,
-  skip: (req) => {
-    return req.path === '/health' || 
-           req.path === '/' ||
-           req.path.startsWith('/api/docs') ||
-           req.path.startsWith('/api/v1/health');
-  },
-  keyGenerator: (req) => {
-    return req.user?.id || req.ip;
-  }
-});
-
-app.use('/api', limiter);
-
-// Stricter rate limit for authentication routes
-const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 20,
-  message: {
-    success: false,
-    message: 'Too many login attempts, please try again later.',
-    code: 'AUTH_RATE_LIMIT_EXCEEDED',
-    retryAfter: 900
-  },
-  standardHeaders: true,
-  legacyHeaders: false,
-  skipSuccessfulRequests: true,
-  keyGenerator: (req) => req.ip
-});
-
-app.use('/api/v1/auth', authLimiter);
-
-// ============================================
-// LOGGING
-// ============================================
-app.use(morgan('combined', {
-  stream: {
-    write: (message) => logger.info(message.trim())
-  },
-  skip: (req) => req.path === '/health'
-}));
-
-app.use(requestLogger);
 
 // ============================================
 // HOSPITAL INFORMATION
 // ============================================
 const hospitalInfo = {
-  name: config.hospital.name || 'Gimbie Adventist General Hospital',
-  website: config.hospital.website || 'https://gimbiehospital.com',
-  email: config.hospital.email || 'info@gimbiehospital.com',
-  phone: config.hospital.phone || '+251-123-456789',
-  version: require('./package.json').version,
-  environment: config.env,
-  banks: paymentConfig.getEnabledBanks ? paymentConfig.getEnabledBanks().map(b => ({
-    name: b.name,
-    shortName: b.shortName,
-    supportedMethods: b.supportedMethods
-  })) : []
+  name: 'Gimbie Adventist General Hospital',
+  website: 'https://gimbiehospital.com',
+  email: 'info@gimbiehospital.com',
+  phone: '+251-123-456789',
+  version: '1.0.0'
 };
 
 // ============================================
@@ -228,14 +50,14 @@ app.get('/', (req, res) => {
     endpoints: {
       api: '/api/v1',
       health: '/health',
-      docs: '/api/docs'
+      banks: '/api/banks'
     },
     timestamp: new Date().toISOString()
   });
 });
 
 app.get('/health', (req, res) => {
-  const healthStatus = {
+  res.json({
     success: true,
     status: 'healthy',
     hospital: hospitalInfo.name,
@@ -246,83 +68,165 @@ app.get('/health', (req, res) => {
       heapTotal: `${Math.round(process.memoryUsage().heapTotal / 1024 / 1024)} MB`,
       heapUsed: `${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)} MB`
     },
-    environment: config.env,
-    services: {
-      database: 'connected',
-      paymentBanks: hospitalInfo.banks.map(b => b.shortName)
-    },
     version: hospitalInfo.version
-  };
-
-  res.json(healthStatus);
+  });
 });
 
 // ============================================
-// BANKS INFORMATION ENDPOINT
+// BANKS INFORMATION
 // ============================================
 app.get('/api/banks', (req, res) => {
-  const banks = paymentConfig.getEnabledBanks ? paymentConfig.getEnabledBanks() : [];
+  const banks = [
+    {
+      id: 'cbe',
+      name: 'Commercial Bank of Ethiopia',
+      shortName: 'CBE',
+      supportedMethods: ['card', 'mobile', 'internet-banking'],
+      description: 'Pay with CBE Internet Banking, CBE Birr or CBE Card'
+    },
+    {
+      id: 'telebirr',
+      name: 'Telebirr',
+      shortName: 'Telebirr',
+      supportedMethods: ['mobile'],
+      description: 'Pay with Telebirr mobile money'
+    },
+    {
+      id: 'awash',
+      name: 'Awash Bank',
+      shortName: 'Awash',
+      supportedMethods: ['card', 'internet-banking'],
+      description: 'Pay with Awash Bank Internet Banking or Card'
+    },
+    {
+      id: 'coop',
+      name: 'Cooperative Bank of Oromia',
+      shortName: 'Coop',
+      supportedMethods: ['card', 'internet-banking'],
+      description: 'Pay with Coop Bank Internet Banking or Card'
+    }
+  ];
+
   res.json({
     success: true,
-    data: banks.map(bank => ({
-      id: bank.shortName.toLowerCase(),
-      name: bank.name,
-      shortName: bank.shortName,
-      logo: bank.logo,
-      supportedMethods: bank.supportedMethods,
-      description: bank.description
-    })),
-    defaultCurrency: paymentConfig.defaultCurrency || 'ETB',
+    data: banks,
+    defaultCurrency: 'ETB',
     timestamp: new Date().toISOString()
   });
 });
 
 // ============================================
-// TEST ENDPOINT
+// TEST PAYMENT ENDPOINT
 // ============================================
-if (config.env !== 'production') {
-  app.post('/api/test/payment', (req, res) => {
-    const { bank, amount = 100, currency = 'ETB' } = req.body;
-    
-    const bankConfig = paymentConfig.getBank ? paymentConfig.getBank(bank) : null;
-    
-    if (!bankConfig || !bankConfig.enabled) {
-      return res.status(400).json({
-        success: false,
-        message: `Bank ${bank} is not available`,
-        availableBanks: paymentConfig.getEnabledBanks ? paymentConfig.getEnabledBanks().map(b => b.shortName) : []
-      });
-    }
+app.post('/api/test/payment', (req, res) => {
+  const { bank = 'cbe', amount = 100, currency = 'ETB' } = req.body;
+  
+  const banks = {
+    cbe: { name: 'Commercial Bank of Ethiopia', shortName: 'CBE' },
+    telebirr: { name: 'Telebirr', shortName: 'Telebirr' },
+    awash: { name: 'Awash Bank', shortName: 'Awash' },
+    coop: { name: 'Cooperative Bank of Oromia', shortName: 'Coop' }
+  };
 
-    res.json({
-      success: true,
-      message: `Test payment initiated with ${bankConfig.name}`,
-      data: {
-        bank: bankConfig.shortName,
-        amount,
-        currency,
-        transactionId: `TEST-${Date.now()}`,
-        status: 'pending',
-        redirectUrl: `https://${bank}.com/pay/test-${Date.now()}`
-      }
+  const bankInfo = banks[bank];
+  if (!bankInfo) {
+    return res.status(400).json({
+      success: false,
+      message: `Bank ${bank} not found`,
+      availableBanks: Object.keys(banks)
     });
+  }
+
+  res.json({
+    success: true,
+    message: `Test payment initiated with ${bankInfo.name}`,
+    data: {
+      bank: bankInfo.shortName,
+      amount,
+      currency,
+      transactionId: `TEST-${Date.now()}`,
+      status: 'pending',
+      redirectUrl: `https://${bank}.com/pay/test-${Date.now()}`,
+      timestamp: new Date().toISOString()
+    }
   });
-}
+});
 
 // ============================================
-// API ROUTES
+// API V1 ROUTES
 // ============================================
-app.use('/api/v1', routes);
-app.use('/api', routes);
+app.get('/api/v1', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Gimbie Adventist General Hospital API v1',
+    version: '1.0.0',
+    endpoints: {
+      auth: '/api/v1/auth',
+      patients: '/api/v1/patients',
+      emergency: '/api/v1/emergency',
+      appointments: '/api/v1/appointments',
+      payments: '/api/v1/payments',
+      banks: '/api/banks'
+    }
+  });
+});
+
+// ============================================
+// AUTH ROUTES (Simple for testing)
+// ============================================
+app.post('/api/v1/auth/login', (req, res) => {
+  const { email, password } = req.body;
+  
+  if (!email || !password) {
+    return res.status(400).json({
+      success: false,
+      message: 'Email and password are required'
+    });
+  }
+
+  res.json({
+    success: true,
+    message: 'Login successful',
+    data: {
+      user: {
+        id: '1',
+        email: email,
+        name: 'Test User',
+        role: 'admin',
+        hospital: 'Gimbie Adventist General Hospital'
+      },
+      token: 'demo-jwt-token-' + Date.now(),
+      expiresIn: '7d'
+    }
+  });
+});
 
 // ============================================
 // 404 HANDLER
 // ============================================
-app.use(notFoundHandler);
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: `Route ${req.originalUrl} not found`,
+    code: 'NOT_FOUND'
+  });
+});
 
 // ============================================
 // ERROR HANDLER
 // ============================================
-app.use(errorHandler.handle);
+app.use((err, req, res, next) => {
+  console.error('Error:', err.message);
+  console.error('Stack:', err.stack);
+  
+  res.status(500).json({
+    success: false,
+    message: err.message || 'Internal server error',
+    code: 'INTERNAL_ERROR',
+    ...(process.env.NODE_ENV === 'development' && {
+      stack: err.stack
+    })
+  });
+});
 
 module.exports = app;
