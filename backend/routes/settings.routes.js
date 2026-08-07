@@ -155,4 +155,88 @@ const backupSettingsValidation = [
 const maintenanceSettingsValidation = [
   body('enabled').optional().isBoolean(),
   body('message').optional().isString(),
-  body('allowIPs').optional
+  body('allowIPs').optional().isArray(),
+  body('startTime').optional().isISO8601(),
+  body('endTime').optional().isISO8601(),
+];
+
+// All routes require authentication and admin role
+router.use(authenticate);
+router.use(authorize('admin'));
+
+// General Settings
+router.get('/general', getGeneralSettings);
+router.put('/general', generalSettingsValidation, updateGeneralSettings);
+router.get('/hospital', getHospitalInfo);
+router.put('/hospital', generalSettingsValidation, updateHospitalInfo);
+
+// System Settings
+router.get('/system', getSystemSettings);
+router.put('/system', systemSettingsValidation, updateSystemSettings);
+router.get('/system/status', getSystemStatus);
+router.get('/system/info', getSystemInfo);
+
+// User Settings
+router.get('/user', getUserSettings);
+router.put('/user', updateUserSettings);
+router.get('/user/preferences', getUserPreferences);
+router.put('/user/preferences', updateUserPreferences);
+
+// Security Settings
+router.get('/security', getSecuritySettings);
+router.put('/security', securitySettingsValidation, updateSecuritySettings);
+router.get('/security/logs', getSecurityLogs);
+
+// Email Settings
+router.get('/email', getEmailSettings);
+router.put('/email', emailSettingsValidation, updateEmailSettings);
+router.post('/email/test', testEmailSettings);
+
+// SMS Settings
+router.get('/sms', getSmsSettings);
+router.put('/sms', updateSmsSettings);
+router.post('/sms/test', testSmsSettings);
+
+// Payment Settings
+router.get('/payment', getPaymentSettings);
+router.put('/payment', paymentSettingsValidation, updatePaymentSettings);
+router.post('/payment/test', testPaymentSettings);
+
+// Notification Settings
+router.get('/notification', getNotificationSettings);
+router.put('/notification', notificationSettingsValidation, updateNotificationSettings);
+
+// Integration Settings
+router.get('/integration', getIntegrationSettings);
+router.put('/integration', updateIntegrationSettings);
+router.post('/integration/test', testIntegration);
+
+// Backup Settings
+router.get('/backup', getBackupSettings);
+router.put('/backup', backupSettingsValidation, updateBackupSettings);
+router.post('/backup/create', createBackup);
+router.post('/backup/restore', restoreBackup);
+
+// Audit Settings
+router.get('/audit', getAuditSettings);
+router.put('/audit', updateAuditSettings);
+router.get('/audit/logs', getAuditLogs);
+
+// Maintenance Settings
+router.get('/maintenance', getMaintenanceSettings);
+router.put('/maintenance', maintenanceSettingsValidation, updateMaintenanceSettings);
+router.post('/maintenance/toggle', toggleMaintenance);
+
+// Theme Settings
+router.get('/theme', getThemeSettings);
+router.put('/theme', updateThemeSettings);
+
+// Language Settings
+router.get('/language', getLanguageSettings);
+router.put('/language', updateLanguageSettings);
+
+// Reset Settings
+router.post('/reset', resetSettings);
+router.get('/default', getDefaultSettings);
+
+module.exports = router;
