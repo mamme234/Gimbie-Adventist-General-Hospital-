@@ -1,196 +1,314 @@
-// sockets/index.js
-const { logger } = require('../utils/logger');
-const { jwt } = require('../utils/jwt');
+// utils/logger.js
+const winston = require('winston');
+const DailyRotateFile = require('winston-daily-rotate-file');
+const path = require('path');
+const fs = require('fs');
 
-class SocketServer {
-  constructor(server) {
-    this.io = null;
-    this.onlineUsers = new Map();
-    this.userSockets = new Map();
-    this.initialize(server);
-  }
+// Create logs directory if it doesn't exist
+const logDir = path.join(__dirname, '../logs');
+if (!fs.existsSync(logDir)) {
+  fs.mkdirSync(logDir, { recursive: true });
+}
 
-  initialize(server) {
-    try {
-      const socketIO = require('socket.io');
-      
-      this.io = socketIO(server, {
-        cors: {
-          origin: '*',
-          methods: ['GET', 'POST'],
-          credentials: true
-        },
-        transports: ['websocket', 'polling'],
-        pingTimeout: 60000,
-        pingInterval: 25000
-      });
+// Custom format for console logging
+const consoleFormat = winston.format.printf(({ timestamp, level, message, ...meta }) => {
+  const metaStr = Object.keys(meta).length ? JSON.stringify(meta) : '';
+  return `${timestamp} [${level.toUpperCase()}]: ${message} ${metaStr}`;
+});
 
-      // Authentication middleware
-      this.io.use((socket, next) => {
-        try {
-          const token = socket.handshake.auth.token || 
-                        socket.handshake.headers.authorization?.split(' ')[1];
-          
-          if (!token) {
-            return next(new Error('Authentication required'));
-          }
+// Custom format for file logging
+const fileFormat = winston.format.combine(
+  winston.format.timestamp(),
+  winston.format.json()
+);
 
-          // Verify token (simplified)
-          const decoded = jwt.verify(token);
-          socket.userId = decoded.id;
-          socket.user = decoded;
-          next();
-        } catch (error) {
-          next(new Error('Invalid token'));
-        }
-      });
-
-      this.io.on('connection', (socket) => {
-        this.handleConnection(socket);
-      });
-
-      this.io.on('error', (error) => {
-        logger.error('Socket.IO error:', error);
-      });
-
-      logger.info('Socket.IO initialized successfully');
-    } catch (error) {
-      logger.error('Socket.IO initialization error:', error);
-    }
-  }
-
-  handleConnection(socket) {
-    const userId = socket.userId;
+// Create the logger instance
+const logger = winston.createLogger({
+  level: process.env.LOG_LEVEL || 'info',
+  format: winston.format.combine(
+    winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+    winston.format.errors({ stack: true }),
+    winston.format.splat()
+  ),
+  transports: [
+    // Console transport with colors
+    new winston.transports.Console({
+      format: winston.format.combine(
+        winston.format.colorize(),
+        winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+        consoleFormat
+      )
+    }),
     
-    // Store user
-    this.onlineUsers.set(userId, {
-      socketId: socket.id,
-      connectedAt: new Date()
+    // Daily rotate file for all logs
+    new DailyRotateFile({
+      filename: path.join(logDir, 'combined-%DATE%.log'),
+      datePattern: 'YYYY-MM-DD',
+      maxSize: '20m',
+      maxFiles: '14d',
+      format: fileFormat
+    }),
+    
+    // Daily rotate file for errors only
+    new DailyRotateFile({
+      filename: path.join(logDir, 'error-%DATE%.log'),
+      datePattern: 'YYYY-MM-DD',
+      level: 'error',
+      maxSize: '20m',
+      maxFiles: '30d',
+      format: fileFormat
+    })
+  ],
+  
+  // Handle uncaught exceptions
+  exceptionHandlers: [
+    new DailyRotateFile({
+      filename: path.join(logDir, 'exceptions-%DATE%.log'),
+      datePattern: 'YYYY-MM-DD',
+      maxSize: '20m',
+      maxFiles: '30d',
+      format: fileFormat
+    })
+  ],
+  
+  // Handle unhandled rejections
+  rejectionHandlers: [
+    new DailyRotateFile({
+      filename: path.join(logDir, 'rejections-%DATE%.log'),
+      datePattern: 'YYYY-MM-DD',
+      maxSize: '20m',
+      maxFiles: '30d',
+      format: fileFormat
+    })
+  ]
+});
+
+// ============================================
+// REQUEST LOGGER MIDDLEWARE
+// ============================================
+const requestLogger = (req, res, next) => {
+  const startTime = Date.now();
+  
+  // Log incoming request
+  logger.info(`➡️  ${req.method} ${req.originalUrl}`, {
+    method: req.method,
+    url: req.originalUrl,
+    ip: req.ip || req.connection?.remoteAddress || req.socket?.remoteAddress,
+    userAgent: req.headers['user-agent'],
+    query: req.query,
+    body: req.method !== 'GET' ? req.body : undefined
+  });
+
+  // Capture response
+  const oldJson = res.json;
+  const oldSend = res.send;
+  
+  res.json = function(data) {
+    const duration = Date.now() - startTime;
+    
+    // Log response
+    logger.info(`⬅️  ${req.method} ${req.originalUrl} ${res.statusCode} ${duration}ms`, {
+      method: req.method,
+      url: req.originalUrl,
+      status: res.statusCode,
+      duration: `${duration}ms`
     });
-    this.userSockets.set(userId, socket);
 
-    logger.info(`User ${userId} connected`);
-
-    // Join user room
-    socket.join(`user:${userId}`);
-
-    // Handle disconnect
-    socket.on('disconnect', () => {
-      this.onlineUsers.delete(userId);
-      this.userSockets.delete(userId);
-      logger.info(`User ${userId} disconnected`);
-    });
-
-    // Handle messages
-    socket.on('message', (data) => {
-      this.handleMessage(socket, data);
-    });
-
-    // Handle typing
-    socket.on('typing', (data) => {
-      socket.to(`user:${data.targetUserId}`).emit('typing', {
-        userId,
-        isTyping: data.isTyping
+    // Log errors
+    if (res.statusCode >= 400) {
+      logger.error(`❌ ${req.method} ${req.originalUrl} ${res.statusCode}`, {
+        method: req.method,
+        url: req.originalUrl,
+        status: res.statusCode,
+        duration: `${duration}ms`,
+        error: data
       });
+    }
+
+    // Log slow requests
+    if (duration > 1000) {
+      logger.warn(`🐌 SLOW REQUEST: ${req.method} ${req.originalUrl} ${duration}ms`, {
+        method: req.method,
+        url: req.originalUrl,
+        duration: `${duration}ms`,
+        threshold: '1000ms'
+      });
+    }
+
+    return oldJson.call(this, data);
+  };
+
+  res.send = function(data) {
+    const duration = Date.now() - startTime;
+    
+    logger.info(`⬅️  ${req.method} ${req.originalUrl} ${res.statusCode} ${duration}ms (send)`, {
+      method: req.method,
+      url: req.originalUrl,
+      status: res.statusCode,
+      duration: `${duration}ms`
+    });
+
+    return oldSend.call(this, data);
+  };
+
+  next();
+};
+
+// ============================================
+// CUSTOM LOG METHODS
+// ============================================
+const customLogger = {
+  // Standard log levels
+  info: (message, meta = {}) => logger.info(message, meta),
+  error: (message, meta = {}) => logger.error(message, meta),
+  warn: (message, meta = {}) => logger.warn(message, meta),
+  debug: (message, meta = {}) => logger.debug(message, meta),
+  verbose: (message, meta = {}) => logger.verbose(message, meta),
+  silly: (message, meta = {}) => logger.silly(message, meta),
+  http: (message, meta = {}) => logger.http(message, meta),
+  
+  // Security logging
+  security: (message, meta = {}) => {
+    logger.info(`🔒 SECURITY: ${message}`, {
+      ...meta,
+      timestamp: new Date().toISOString(),
+      type: 'security',
+      severity: meta.severity || 'info'
+    });
+  },
+  
+  // Business logging
+  business: (message, meta = {}) => {
+    logger.info(`💼 BUSINESS: ${message}`, {
+      ...meta,
+      timestamp: new Date().toISOString(),
+      type: 'business'
+    });
+  },
+  
+  // System logging
+  system: (message, meta = {}) => {
+    logger.info(`⚙️ SYSTEM: ${message}`, {
+      ...meta,
+      timestamp: new Date().toISOString(),
+      type: 'system'
+    });
+  },
+  
+  // Audit logging
+  audit: (message, meta = {}) => {
+    logger.info(`📋 AUDIT: ${message}`, {
+      ...meta,
+      timestamp: new Date().toISOString(),
+      type: 'audit'
+    });
+  },
+  
+  // Performance logging
+  performance: (message, meta = {}) => {
+    logger.info(`⚡ PERFORMANCE: ${message}`, {
+      ...meta,
+      timestamp: new Date().toISOString(),
+      type: 'performance'
+    });
+  },
+  
+  // Database logging
+  database: (message, meta = {}) => {
+    logger.info(`🗄️ DATABASE: ${message}`, {
+      ...meta,
+      timestamp: new Date().toISOString(),
+      type: 'database'
+    });
+  },
+  
+  // API logging
+  api: (message, meta = {}) => {
+    logger.info(`🌐 API: ${message}`, {
+      ...meta,
+      timestamp: new Date().toISOString(),
+      type: 'api'
+    });
+  },
+  
+  // Payment logging
+  payment: (message, meta = {}) => {
+    logger.info(`💳 PAYMENT: ${message}`, {
+      ...meta,
+      timestamp: new Date().toISOString(),
+      type: 'payment'
+    });
+  },
+  
+  // Emergency logging
+  emergency: (message, meta = {}) => {
+    logger.info(`🚑 EMERGENCY: ${message}`, {
+      ...meta,
+      timestamp: new Date().toISOString(),
+      type: 'emergency'
     });
   }
+};
 
-  handleMessage(socket, data) {
-    try {
-      const { targetUserId, message, type } = data;
+// ============================================
+// DATABASE LOGGER HELPER
+// ============================================
+const dbLogger = (collection, operation, query, options = {}) => {
+  const startTime = process.hrtime();
+  
+  return {
+    finish: (result) => {
+      const diff = process.hrtime(startTime);
+      const duration = (diff[0] * 1000 + diff[1] / 1000000);
       
-      // Send to target user
-      this.sendToUser(targetUserId, 'message', {
-        from: socket.userId,
-        message,
-        type: type || 'text',
-        timestamp: new Date()
+      logger.debug(`DATABASE: ${operation} on ${collection}`, {
+        operation,
+        collection,
+        query,
+        duration: `${duration.toFixed(2)}ms`,
+        resultSize: result?.length || 0,
+        ...options
       });
 
-      // Send confirmation to sender
-      socket.emit('message_sent', {
-        to: targetUserId,
-        message,
-        timestamp: new Date()
+      if (duration > 100) {
+        logger.performance(`Slow query: ${operation} on ${collection}`, {
+          duration: `${duration.toFixed(2)}ms`,
+          query
+        });
+      }
+    },
+    error: (error) => {
+      logger.error(`DATABASE ERROR: ${operation} on ${collection}`, {
+        operation,
+        collection,
+        query,
+        error: error.message,
+        stack: error.stack
       });
-    } catch (error) {
-      logger.error('Message handling error:', error);
-      socket.emit('error', { message: 'Failed to send message' });
     }
-  }
+  };
+};
 
-  sendToUser(userId, event, data) {
-    try {
-      const socket = this.userSockets.get(userId);
-      if (socket) {
-        socket.emit(event, data);
-        return true;
-      }
-      return false;
-    } catch (error) {
-      logger.error('Send to user error:', error);
-      return false;
-    }
-  }
+// ============================================
+// MEMORY USAGE LOGGER
+// ============================================
+const logMemoryUsage = () => {
+  const memory = process.memoryUsage();
+  logger.debug('Memory usage', {
+    rss: `${(memory.rss / 1024 / 1024).toFixed(2)} MB`,
+    heapTotal: `${(memory.heapTotal / 1024 / 1024).toFixed(2)} MB`,
+    heapUsed: `${(memory.heapUsed / 1024 / 1024).toFixed(2)} MB`,
+    external: `${(memory.external / 1024 / 1024).toFixed(2)} MB`
+  });
+};
 
-  sendToRoom(roomId, event, data) {
-    try {
-      if (this.io) {
-        this.io.to(roomId).emit(event, data);
-        return true;
-      }
-      return false;
-    } catch (error) {
-      logger.error('Send to room error:', error);
-      return false;
-    }
-  }
-
-  broadcast(event, data) {
-    try {
-      if (this.io) {
-        this.io.emit(event, data);
-        return true;
-      }
-      return false;
-    } catch (error) {
-      logger.error('Broadcast error:', error);
-      return false;
-    }
-  }
-
-  getOnlineUsers() {
-    return Array.from(this.onlineUsers.keys());
-  }
-
-  isUserOnline(userId) {
-    return this.onlineUsers.has(userId);
-  }
-
-  shutdown() {
-    if (this.io) {
-      this.io.close();
-    }
-    this.onlineUsers.clear();
-    this.userSockets.clear();
-    logger.info('Socket.IO shutdown complete');
-  }
-}
-
-let socketServer = null;
-
-function initializeSocket(server) {
-  if (!socketServer) {
-    socketServer = new SocketServer(server);
-  }
-  return socketServer;
-}
-
-function getSocketInstance() {
-  return socketServer;
-}
-
+// ============================================
+// EXPORT
+// ============================================
 module.exports = {
-  initializeSocket,
-  getSocketInstance
+  logger: customLogger,
+  requestLogger,
+  dbLogger,
+  logMemoryUsage,
+  winston: logger // Export raw winston instance if needed
 };
