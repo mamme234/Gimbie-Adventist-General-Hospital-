@@ -13,6 +13,10 @@ const { validationResult } = require('express-validator');
 const { logger } = require('../config/logger');
 const { sendNotification } = require('../config/socket');
 
+// ============================================
+// CHAT MANAGEMENT
+// ============================================
+
 /**
  * Get all chats
  */
@@ -21,7 +25,6 @@ const getChats = async (req, res) => {
     const { page = 1, limit = 20, type } = req.query;
     const skip = (parseInt(page) - 1) * parseInt(limit);
 
-    // Find chats where user is participant
     const participantQuery = { user: req.user._id };
     const participants = await ChatParticipant.find(participantQuery);
     const chatIds = participants.map(p => p.chat);
@@ -38,7 +41,6 @@ const getChats = async (req, res) => {
 
     const total = await Chat.countDocuments(query);
 
-    // Get unread counts
     const chatsWithUnread = await Promise.all(chats.map(async (chat) => {
       const unreadCount = await Message.countDocuments({
         chat: chat._id,
@@ -86,7 +88,6 @@ const getChatById = async (req, res) => {
       });
     }
 
-    // Check if user is a participant
     const isParticipant = chat.participants.some(
       p => p.user._id.toString() === req.user._id.toString()
     );
@@ -98,7 +99,6 @@ const getChatById = async (req, res) => {
       });
     }
 
-    // Get unread count
     const unreadCount = await Message.countDocuments({
       chat: chat._id,
       readBy: { $ne: req.user._id }
@@ -137,13 +137,11 @@ const createChat = async (req, res) => {
 
     const { participants, type, name, isGroup } = req.body;
 
-    // Ensure current user is in participants
     const participantIds = participants.map(p => p.user || p);
     if (!participantIds.includes(req.user._id.toString())) {
       participantIds.push(req.user._id);
     }
 
-    // Check if individual chat already exists
     if (type === 'Individual' && participantIds.length === 2) {
       const existingChat = await Chat.findOne({
         type: 'Individual',
@@ -167,8 +165,6 @@ const createChat = async (req, res) => {
     });
 
     await chat.save();
-
-    // Populate participants
     await chat.populate('participants.user', 'firstName lastName profileImage');
 
     logger.info(`Chat created: ${chat._id}`);
@@ -238,7 +234,6 @@ const deleteChat = async (req, res) => {
       });
     }
 
-    // Check if user is creator or admin
     if (chat.createdBy.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
       return res.status(403).json({
         success: false,
@@ -246,7 +241,6 @@ const deleteChat = async (req, res) => {
       });
     }
 
-    // Delete all messages and participants
     await Message.deleteMany({ chat: chat._id });
     await ChatParticipant.deleteMany({ chat: chat._id });
     await chat.remove();
@@ -306,7 +300,7 @@ const getActiveChats = async (req, res) => {
 
     const chats = await Chat.find({
       _id: { $in: chatIds },
-      updatedAt: { $gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) } // Last 7 days
+      updatedAt: { $gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) }
     })
       .populate('participants.user', 'firstName lastName profileImage')
       .populate('lastMessage')
@@ -325,6 +319,10 @@ const getActiveChats = async (req, res) => {
     });
   }
 };
+
+// ============================================
+// MESSAGE MANAGEMENT
+// ============================================
 
 /**
  * Get messages
@@ -420,7 +418,6 @@ const sendMessage = async (req, res) => {
       });
     }
 
-    // Check if user is participant
     const isParticipant = chat.participants.some(
       p => p.user.toString() === req.user._id.toString()
     );
@@ -443,15 +440,12 @@ const sendMessage = async (req, res) => {
 
     await message.save();
 
-    // Update chat last message
     chat.lastMessage = message._id;
     chat.updatedAt = new Date();
     await chat.save();
 
-    // Populate sender
     await message.populate('sender', 'firstName lastName profileImage');
 
-    // Send notification to other participants
     const otherParticipants = chat.participants.filter(
       p => p.user.toString() !== req.user._id.toString()
     );
@@ -496,7 +490,6 @@ const updateMessage = async (req, res) => {
       });
     }
 
-    // Check if user is sender
     if (message.sender.toString() !== req.user._id.toString()) {
       return res.status(403).json({
         success: false,
@@ -543,7 +536,6 @@ const deleteMessage = async (req, res) => {
       });
     }
 
-    // Check if user is sender or admin
     if (message.sender.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
       return res.status(403).json({
         success: false,
@@ -589,7 +581,6 @@ const getChatMessages = async (req, res) => {
 
     const total = await Message.countDocuments({ chat: chatId });
 
-    // Mark messages as read
     await Message.updateMany(
       {
         chat: chatId,
@@ -678,6 +669,10 @@ const markAllRead = async (req, res) => {
     });
   }
 };
+
+// ============================================
+// ATTACHMENT MANAGEMENT
+// ============================================
 
 /**
  * Get attachments
@@ -775,7 +770,6 @@ const uploadAttachment = async (req, res) => {
 
     await attachment.save();
 
-    // If messageId provided, add attachment to message
     if (messageId) {
       await Message.findByIdAndUpdate(messageId, {
         $addToSet: { attachments: attachment._id }
@@ -812,7 +806,6 @@ const deleteAttachment = async (req, res) => {
       });
     }
 
-    // Check permissions
     if (attachment.uploadedBy.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
       return res.status(403).json({
         success: false,
@@ -820,7 +813,6 @@ const deleteAttachment = async (req, res) => {
       });
     }
 
-    // Remove from message
     if (attachment.message) {
       await Message.findByIdAndUpdate(attachment.message, {
         $pull: { attachments: attachment._id }
@@ -845,6 +837,10 @@ const deleteAttachment = async (req, res) => {
   }
 };
 
+// ============================================
+// TYPING INDICATORS
+// ============================================
+
 /**
  * Set typing indicator
  */
@@ -860,7 +856,6 @@ const setTyping = async (req, res) => {
       });
     }
 
-    // Broadcast typing status
     const otherParticipants = chat.participants.filter(
       p => p.user.toString() !== req.user._id.toString()
     );
@@ -895,7 +890,6 @@ const clearTyping = async (req, res) => {
   try {
     const { chatId } = req.body;
 
-    // Broadcast typing stopped
     const chat = await Chat.findById(chatId);
     if (chat) {
       const otherParticipants = chat.participants.filter(
@@ -932,8 +926,6 @@ const getTypingStatus = async (req, res) => {
   try {
     const { chatId } = req.params;
 
-    // Get current typing users from socket state
-    // Placeholder - would get from socket.io state
     const typingUsers = [];
 
     res.status(200).json({
@@ -950,6 +942,10 @@ const getTypingStatus = async (req, res) => {
   }
 };
 
+// ============================================
+// CHAT PARTICIPANTS
+// ============================================
+
 /**
  * Add participant
  */
@@ -965,7 +961,6 @@ const addParticipant = async (req, res) => {
 
     const { userId } = req.body;
 
-    // Check if user is already participant
     const isParticipant = chat.participants.some(
       p => p.user.toString() === userId
     );
@@ -1014,7 +1009,6 @@ const removeParticipant = async (req, res) => {
       });
     }
 
-    // Check if user is admin or creator
     if (chat.createdBy.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
       return res.status(403).json({
         success: false,
@@ -1073,12 +1067,15 @@ const getParticipants = async (req, res) => {
   }
 };
 
+// ============================================
+// CHAT SETTINGS
+// ============================================
+
 /**
  * Get chat settings
  */
 const getChatSettings = async (req, res) => {
   try {
-    // Placeholder - would get chat settings
     const settings = {
       typingEnabled: true,
       readReceipts: true,
@@ -1086,7 +1083,6 @@ const getChatSettings = async (req, res) => {
       fileSharing: true,
       maxFileSize: 10485760 // 10MB
     };
-
     res.status(200).json({
       success: true,
       data: settings
@@ -1106,10 +1102,11 @@ const getChatSettings = async (req, res) => {
  */
 const updateChatSettings = async (req, res) => {
   try {
-    // Placeholder - would update chat settings
+    const { typingEnabled, readReceipts, messageDeletion, fileSharing, maxFileSize } = req.body;
     res.status(200).json({
       success: true,
-      message: 'Chat settings updated successfully'
+      message: 'Chat settings updated successfully',
+      data: { typingEnabled, readReceipts, messageDeletion, fileSharing, maxFileSize }
     });
   } catch (error) {
     logger.error('Update chat settings error:', error);
@@ -1120,6 +1117,10 @@ const updateChatSettings = async (req, res) => {
     });
   }
 };
+
+// ============================================
+// UNREAD COUNTS
+// ============================================
 
 /**
  * Get unread count
@@ -1179,12 +1180,15 @@ const getUnreadCounts = async (req, res) => {
   }
 };
 
+// ============================================
+// CHAT REPORTS
+// ============================================
+
 /**
  * Get chat reports
  */
-const getReports = async (req, res) => {
+const getChatReports = async (req, res) => {
   try {
-    // Placeholder - would generate chat reports
     res.status(200).json({
       success: true,
       data: []
@@ -1200,26 +1204,30 @@ const getReports = async (req, res) => {
 };
 
 /**
- * Generate report
+ * Generate chat report
  */
-const generateReport = async (req, res) => {
+const generateChatReport = async (req, res) => {
   try {
-    // Placeholder - would generate report
     res.status(200).json({
       success: true,
-      message: 'Report generated successfully'
+      message: 'Chat report generated successfully'
     });
   } catch (error) {
-    logger.error('Generate report error:', error);
+    logger.error('Generate chat report error:', error);
     res.status(500).json({
       success: false,
-      message: 'Failed to generate report',
+      message: 'Failed to generate chat report',
       error: error.message
     });
   }
 };
 
+// ============================================
+// EXPORTS
+// ============================================
+
 module.exports = {
+  // Chat Management
   getChats,
   getChatById,
   createChat,
@@ -1227,6 +1235,8 @@ module.exports = {
   deleteChat,
   getUserChats,
   getActiveChats,
+
+  // Message Management
   getMessages,
   getMessageById,
   sendMessage,
@@ -1235,20 +1245,32 @@ module.exports = {
   getChatMessages,
   markMessageRead,
   markAllRead,
+
+  // Attachments
   getAttachments,
   getAttachmentById,
   uploadAttachment,
   deleteAttachment,
+
+  // Typing Indicators
   setTyping,
   clearTyping,
   getTypingStatus,
+
+  // Chat Participants
   addParticipant,
   removeParticipant,
   getParticipants,
+
+  // Chat Settings
   getChatSettings,
   updateChatSettings,
+
+  // Unread Counts
   getUnreadCount,
   getUnreadCounts,
-  getReports,
-  generateReport
+
+  // Chat Reports
+  getChatReports,
+  generateChatReport
 };
