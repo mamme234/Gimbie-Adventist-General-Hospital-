@@ -16,7 +16,6 @@ const paymentConfig = require('./config/payment');
 const { logger, requestLogger } = require('./utils/logger');
 const { errorHandler } = require('./middleware/errorHandler');
 const notFoundHandler = require('./middleware/notFound');
-const auth = require('./middleware/auth');
 
 // Import routes
 const routes = require('./routes');
@@ -101,7 +100,7 @@ const corsOptions = {
     'X-RateLimit-Remaining',
     'X-RateLimit-Reset'
   ],
-  maxAge: 86400 // 24 hours
+  maxAge: 86400
 };
 
 app.use(cors(corsOptions));
@@ -111,7 +110,7 @@ app.use(cors(corsOptions));
 // ============================================
 app.use(compression({
   level: 6,
-  threshold: 100 * 1024, // 100KB
+  threshold: 100 * 1024,
   filter: (req, res) => {
     if (req.headers['x-no-compression']) {
       return false;
@@ -147,26 +146,24 @@ app.use('/docs', express.static(path.join(__dirname, 'public/docs')));
 // RATE LIMITING
 // ============================================
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
+  windowMs: 15 * 60 * 1000,
+  max: 100,
   message: {
     success: false,
     message: 'Too many requests from this IP, please try again later.',
     code: 'RATE_LIMIT_EXCEEDED',
-    retryAfter: 900 // seconds
+    retryAfter: 900
   },
   standardHeaders: true,
   legacyHeaders: false,
   skipSuccessfulRequests: false,
   skip: (req) => {
-    // Skip rate limiting for health checks and documentation
     return req.path === '/health' || 
            req.path === '/' ||
            req.path.startsWith('/api/docs') ||
            req.path.startsWith('/api/v1/health');
   },
   keyGenerator: (req) => {
-    // Use user ID if authenticated, otherwise use IP
     return req.user?.id || req.ip;
   }
 });
@@ -176,7 +173,7 @@ app.use('/api', limiter);
 // Stricter rate limit for authentication routes
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 20, // 20 login attempts per 15 minutes
+  max: 20,
   message: {
     success: false,
     message: 'Too many login attempts, please try again later.',
@@ -194,7 +191,6 @@ app.use('/api/v1/auth', authLimiter);
 // ============================================
 // LOGGING
 // ============================================
-// Morgan logging
 app.use(morgan('combined', {
   stream: {
     write: (message) => logger.info(message.trim())
@@ -202,28 +198,7 @@ app.use(morgan('combined', {
   skip: (req) => req.path === '/health'
 }));
 
-// Custom request logger
 app.use(requestLogger);
-
-// ============================================
-// SESSION CONFIGURATION (Optional)
-// ============================================
-// Uncomment if you need session support
-/*
-const session = require('express-session');
-app.use(session({
-  secret: process.env.SESSION_SECRET || 'gimbie-hospital-session-secret',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: config.env === 'production',
-    httpOnly: true,
-    maxAge: 24 * 60 * 60 * 1000, // 24 hours
-    sameSite: 'strict'
-  },
-  name: 'gimbie.sid'
-}));
-*/
 
 // ============================================
 // HOSPITAL INFORMATION
@@ -235,18 +210,16 @@ const hospitalInfo = {
   phone: config.hospital.phone || '+251-123-456789',
   version: require('./package.json').version,
   environment: config.env,
-  banks: paymentConfig.getEnabledBanks().map(b => ({
+  banks: paymentConfig.getEnabledBanks ? paymentConfig.getEnabledBanks().map(b => ({
     name: b.name,
     shortName: b.shortName,
     supportedMethods: b.supportedMethods
-  }))
+  })) : []
 };
 
 // ============================================
 // HEALTH CHECK ENDPOINTS
 // ============================================
-
-// Root endpoint
 app.get('/', (req, res) => {
   res.json({
     success: true,
@@ -261,7 +234,6 @@ app.get('/', (req, res) => {
   });
 });
 
-// Health check
 app.get('/health', (req, res) => {
   const healthStatus = {
     success: true,
@@ -276,7 +248,7 @@ app.get('/health', (req, res) => {
     },
     environment: config.env,
     services: {
-      database: 'connected', // Will be updated by database module
+      database: 'connected',
       paymentBanks: hospitalInfo.banks.map(b => b.shortName)
     },
     version: hospitalInfo.version
@@ -285,38 +257,11 @@ app.get('/health', (req, res) => {
   res.json(healthStatus);
 });
 
-// Detailed health check
-app.get('/health/detailed', async (req, res) => {
-  const database = require('./config/database');
-  const dbStatus = database.getConnectionStatus();
-
-  const detailedHealth = {
-    success: true,
-    status: 'healthy',
-    hospital: hospitalInfo.name,
-    timestamp: new Date().toISOString(),
-    uptime: process.uptime(),
-    system: {
-      platform: process.platform,
-      arch: process.arch,
-      nodeVersion: process.version,
-      memory: process.memoryUsage(),
-      cpu: process.cpuUsage()
-    },
-    database: dbStatus,
-    paymentBanks: hospitalInfo.banks,
-    environment: config.env,
-    version: hospitalInfo.version
-  };
-
-  res.json(detailedHealth);
-});
-
 // ============================================
 // BANKS INFORMATION ENDPOINT
 // ============================================
 app.get('/api/banks', (req, res) => {
-  const banks = paymentConfig.getEnabledBanks();
+  const banks = paymentConfig.getEnabledBanks ? paymentConfig.getEnabledBanks() : [];
   res.json({
     success: true,
     data: banks.map(bank => ({
@@ -327,25 +272,25 @@ app.get('/api/banks', (req, res) => {
       supportedMethods: bank.supportedMethods,
       description: bank.description
     })),
-    defaultCurrency: paymentConfig.defaultCurrency,
+    defaultCurrency: paymentConfig.defaultCurrency || 'ETB',
     timestamp: new Date().toISOString()
   });
 });
 
 // ============================================
-// PAYMENT TEST ENDPOINT (Development Only)
+// TEST ENDPOINT
 // ============================================
 if (config.env !== 'production') {
   app.post('/api/test/payment', (req, res) => {
     const { bank, amount = 100, currency = 'ETB' } = req.body;
     
-    const bankConfig = paymentConfig.getBank(bank);
+    const bankConfig = paymentConfig.getBank ? paymentConfig.getBank(bank) : null;
     
     if (!bankConfig || !bankConfig.enabled) {
       return res.status(400).json({
         success: false,
         message: `Bank ${bank} is not available`,
-        availableBanks: paymentConfig.getEnabledBanks().map(b => b.shortName)
+        availableBanks: paymentConfig.getEnabledBanks ? paymentConfig.getEnabledBanks().map(b => b.shortName) : []
       });
     }
 
@@ -358,8 +303,7 @@ if (config.env !== 'production') {
         currency,
         transactionId: `TEST-${Date.now()}`,
         status: 'pending',
-        redirectUrl: `https://${bank}.com/pay/test-${Date.now()}`,
-        qrCode: bank === 'telebirr' ? `telebirr://pay?txn=TEST-${Date.now()}` : null
+        redirectUrl: `https://${bank}.com/pay/test-${Date.now()}`
       }
     });
   });
@@ -369,8 +313,6 @@ if (config.env !== 'production') {
 // API ROUTES
 // ============================================
 app.use('/api/v1', routes);
-
-// Alternative API version (for compatibility)
 app.use('/api', routes);
 
 // ============================================
@@ -379,11 +321,8 @@ app.use('/api', routes);
 app.use(notFoundHandler);
 
 // ============================================
-// ERROR HANDLER (Must be last)
+// ERROR HANDLER
 // ============================================
 app.use(errorHandler.handle);
 
-// ============================================
-// EXPORT APP
-// ============================================
 module.exports = app;
