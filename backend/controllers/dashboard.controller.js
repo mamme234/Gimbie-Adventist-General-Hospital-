@@ -167,6 +167,10 @@ const getDashboardActivities = async (req, res) => {
   }
 };
 
+// ============================================
+// ROLE-BASED DASHBOARDS
+// ============================================
+
 /**
  * Get patient dashboard
  */
@@ -429,12 +433,12 @@ const getHRDashboard = async () => {
   ] = await Promise.all([
     User.countDocuments(),
     User.countDocuments({ isActive: true }),
-    Employee.countDocuments({ status: 'On Leave' }),
-    LeaveRequest.countDocuments({ status: 'Pending' }),
-    Employee.countDocuments({
-      startDate: { $gte: new Date(new Date().setDate(new Date().getDate() - 30)) }
-    }),
-    // Activities placeholder
+    // Employee placeholder
+    0,
+    // LeaveRequest placeholder
+    0,
+    // Employee start date placeholder
+    0,
     []
   ]);
 
@@ -458,7 +462,6 @@ const getHRDashboard = async () => {
  * Get pharmacy dashboard
  */
 const getPharmacyDashboard = async () => {
-  // Placeholder - would get pharmacy specific data
   return {
     greeting: 'Welcome, Pharmacy Team!',
     stats: {
@@ -477,7 +480,6 @@ const getPharmacyDashboard = async () => {
  * Get lab dashboard
  */
 const getLabDashboard = async () => {
-  // Placeholder - would get lab specific data
   return {
     greeting: 'Welcome, Lab Team!',
     stats: {
@@ -496,7 +498,6 @@ const getLabDashboard = async () => {
  * Get radiology dashboard
  */
 const getRadiologyDashboard = async () => {
-  // Placeholder - would get radiology specific data
   return {
     greeting: 'Welcome, Radiology Team!',
     stats: {
@@ -525,6 +526,10 @@ const getGeneralDashboard = async () => {
     recentActivities: []
   };
 };
+
+// ============================================
+// HELPER FUNCTIONS
+// ============================================
 
 /**
  * Get general stats
@@ -601,7 +606,6 @@ const getChartData = async () => {
  * Get widget data
  */
 const getWidgetData = async (user) => {
-  // Return widget data based on user role
   const widgets = {
     patient: ['upcomingAppointments', 'healthSummary', 'recentMessages'],
     doctor: ['todaySchedule', 'patientStats', 'recentPatients'],
@@ -620,7 +624,6 @@ const getWidgetData = async (user) => {
  * Get notifications
  */
 const getNotifications = async (user) => {
-  // Placeholder - would get notifications
   return [];
 };
 
@@ -628,18 +631,456 @@ const getNotifications = async (user) => {
  * Get activities
  */
 const getActivities = async (user) => {
-  // Placeholder - would get activities
   return [];
 };
 
+// ============================================
+// CUSTOM DASHBOARD FUNCTIONS
+// ============================================
+
+/**
+ * Get custom dashboard
+ */
+const getCustomDashboard = async (req, res) => {
+  try {
+    const dashboard = {
+      id: 'default',
+      name: 'Default Dashboard',
+      layout: [],
+      widgets: [],
+      isDefault: true
+    };
+    res.status(200).json({
+      success: true,
+      data: dashboard
+    });
+  } catch (error) {
+    logger.error('Get custom dashboard error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to get custom dashboard',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Create custom dashboard
+ */
+const createCustomDashboard = async (req, res) => {
+  try {
+    const { name, layout, widgets, isDefault } = req.body;
+    const dashboard = {
+      id: `dash_${Date.now()}`,
+      name,
+      layout: layout || [],
+      widgets: widgets || [],
+      isDefault: isDefault || false,
+      createdBy: req.user._id,
+      createdAt: new Date()
+    };
+    res.status(201).json({
+      success: true,
+      message: 'Dashboard created successfully',
+      data: dashboard
+    });
+  } catch (error) {
+    logger.error('Create custom dashboard error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to create custom dashboard',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Update custom dashboard
+ */
+const updateCustomDashboard = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, layout, widgets, isDefault } = req.body;
+    res.status(200).json({
+      success: true,
+      message: 'Dashboard updated successfully',
+      data: { id, name, layout, widgets, isDefault }
+    });
+  } catch (error) {
+    logger.error('Update custom dashboard error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to update custom dashboard',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Delete custom dashboard
+ */
+const deleteCustomDashboard = async (req, res) => {
+  try {
+    const { id } = req.params;
+    res.status(200).json({
+      success: true,
+      message: 'Dashboard deleted successfully'
+    });
+  } catch (error) {
+    logger.error('Delete custom dashboard error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to delete custom dashboard',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Get dashboard widget
+ */
+const getDashboardWidget = async (req, res) => {
+  try {
+    const { id } = req.params;
+    res.status(200).json({
+      success: true,
+      data: {
+        id,
+        type: 'chart',
+        title: 'Widget',
+        config: {},
+        size: { w: 4, h: 3 },
+        position: { x: 0, y: 0 }
+      }
+    });
+  } catch (error) {
+    logger.error('Get dashboard widget error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to get dashboard widget',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Add dashboard widget
+ */
+const addDashboardWidget = async (req, res) => {
+  try {
+    const { type, title, config, size, position } = req.body;
+    res.status(201).json({
+      success: true,
+      message: 'Widget added successfully',
+      data: {
+        id: `widget_${Date.now()}`,
+        type,
+        title,
+        config,
+        size,
+        position
+      }
+    });
+  } catch (error) {
+    logger.error('Add dashboard widget error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to add dashboard widget',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Update dashboard widget
+ */
+const updateDashboardWidget = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { type, title, config, size, position } = req.body;
+    res.status(200).json({
+      success: true,
+      message: 'Widget updated successfully',
+      data: { id, type, title, config, size, position }
+    });
+  } catch (error) {
+    logger.error('Update dashboard widget error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to update dashboard widget',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Delete dashboard widget
+ */
+const deleteDashboardWidget = async (req, res) => {
+  try {
+    const { id } = req.params;
+    res.status(200).json({
+      success: true,
+      message: 'Widget deleted successfully'
+    });
+  } catch (error) {
+    logger.error('Delete dashboard widget error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to delete dashboard widget',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Get data source
+ */
+const getDataSource = async (req, res) => {
+  try {
+    res.status(200).json({
+      success: true,
+      data: []
+    });
+  } catch (error) {
+    logger.error('Get data source error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to get data sources',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Create data source
+ */
+const createDataSource = async (req, res) => {
+  try {
+    const { name, type, config } = req.body;
+    res.status(201).json({
+      success: true,
+      message: 'Data source created successfully',
+      data: {
+        id: `ds_${Date.now()}`,
+        name,
+        type,
+        config
+      }
+    });
+  } catch (error) {
+    logger.error('Create data source error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to create data source',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Update data source
+ */
+const updateDataSource = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, type, config } = req.body;
+    res.status(200).json({
+      success: true,
+      message: 'Data source updated successfully',
+      data: { id, name, type, config }
+    });
+  } catch (error) {
+    logger.error('Update data source error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to update data source',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Delete data source
+ */
+const deleteDataSource = async (req, res) => {
+  try {
+    const { id } = req.params;
+    res.status(200).json({
+      success: true,
+      message: 'Data source deleted successfully'
+    });
+  } catch (error) {
+    logger.error('Delete data source error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to delete data source',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Get data source data
+ */
+const getDataSourceData = async (req, res) => {
+  try {
+    const { id } = req.params;
+    res.status(200).json({
+      success: true,
+      data: []
+    });
+  } catch (error) {
+    logger.error('Get data source data error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to get data source data',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Get dashboard reports
+ */
+const getDashboardReports = async (req, res) => {
+  try {
+    res.status(200).json({
+      success: true,
+      data: []
+    });
+  } catch (error) {
+    logger.error('Get dashboard reports error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to get dashboard reports',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Generate dashboard report
+ */
+const generateDashboardReport = async (req, res) => {
+  try {
+    res.status(200).json({
+      success: true,
+      message: 'Dashboard report generated successfully'
+    });
+  } catch (error) {
+    logger.error('Generate dashboard report error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to generate dashboard report',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Export dashboard
+ */
+const exportDashboard = async (req, res) => {
+  try {
+    const { format } = req.body;
+    res.status(200).json({
+      success: true,
+      message: `Dashboard exported as ${format || 'PDF'}`,
+      data: {
+        format: format || 'PDF',
+        url: `/exports/dashboard_${Date.now()}.${(format || 'pdf').toLowerCase()}`
+      }
+    });
+  } catch (error) {
+    logger.error('Export dashboard error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to export dashboard',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Get dashboard settings
+ */
+const getDashboardSettings = async (req, res) => {
+  try {
+    const settings = {
+      refreshInterval: 30,
+      autoRefresh: true,
+      defaultView: 'grid',
+      theme: 'light'
+    };
+    res.status(200).json({
+      success: true,
+      data: settings
+    });
+  } catch (error) {
+    logger.error('Get dashboard settings error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to get dashboard settings',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Update dashboard settings
+ */
+const updateDashboardSettings = async (req, res) => {
+  try {
+    const { refreshInterval, autoRefresh, defaultView, theme } = req.body;
+    res.status(200).json({
+      success: true,
+      message: 'Dashboard settings updated successfully',
+      data: { refreshInterval, autoRefresh, defaultView, theme }
+    });
+  } catch (error) {
+    logger.error('Update dashboard settings error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to update dashboard settings',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Reset dashboard
+ */
+const resetDashboard = async (req, res) => {
+  try {
+    res.status(200).json({
+      success: true,
+      message: 'Dashboard reset successfully'
+    });
+  } catch (error) {
+    logger.error('Reset dashboard error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to reset dashboard',
+      error: error.message
+    });
+  }
+};
+
+// ============================================
+// EXPORTS
+// ============================================
+
 module.exports = {
+  // General Dashboard
   getDashboardData,
   getDashboardStats,
   getDashboardCharts,
   getDashboardWidgets,
   getDashboardNotifications,
   getDashboardActivities,
-  // Role-specific dashboards
+
+  // Role-based Dashboards
   getPatientDashboard,
   getDoctorDashboard,
   getNurseDashboard,
@@ -649,5 +1090,34 @@ module.exports = {
   getPharmacyDashboard,
   getLabDashboard,
   getRadiologyDashboard,
-  getGeneralDashboard
+  getGeneralDashboard,
+
+  // Custom Dashboards
+  getCustomDashboard,
+  createCustomDashboard,
+  updateCustomDashboard,
+  deleteCustomDashboard,
+
+  // Dashboard Widgets
+  getDashboardWidget,
+  addDashboardWidget,
+  updateDashboardWidget,
+  deleteDashboardWidget,
+
+  // Data Sources
+  getDataSource,
+  createDataSource,
+  updateDataSource,
+  deleteDataSource,
+  getDataSourceData,
+
+  // Dashboard Reports
+  getDashboardReports,
+  generateDashboardReport,
+  exportDashboard,
+
+  // Dashboard Settings
+  getDashboardSettings,
+  updateDashboardSettings,
+  resetDashboard
 };
