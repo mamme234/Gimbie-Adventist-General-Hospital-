@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wards - Nurse - Gimbie Adventist General Hospital</title>
+    <link rel="icon" href="/assets/images/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/nurse.css" />
+    <link rel="stylesheet" href="/src/css/responsive.css" />
+</head>
+<body>
+    <div class="nurse-wrapper">
+        <aside class="nurse-sidebar" id="nurseSidebar">
+            <div class="profile-section">
+                <div class="avatar">N</div>
+                <div class="name">Nurse Name</div>
+                <div class="specialty">Ward</div>
+            </div>
+            <nav class="nurse-sidebar__nav">
+                <ul>
+                    <li><a href="/pages/nurse/dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                    <li><a href="/pages/nurse/patients.html"><i class="fas fa-users"></i> Patients</a></li>
+                    <li><a href="/pages/nurse/vitals.html"><i class="fas fa-heartbeat"></i> Vitals</a></li>
+                    <li><a href="/pages/nurse/medications.html"><i class="fas fa-syringe"></i> Medications</a></li>
+                    <li><a href="/pages/nurse/wards.html" class="active"><i class="fas fa-bed"></i> Wards</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="nurse-main">
+            <div class="doctor-topbar">
+                <div class="admin-topbar__title">
+                    <h1>Ward Management</h1>
+                    <p>Manage beds and patient assignments</p>
+                </div>
+            </div>
+
+            <!-- Ward Stats -->
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;" id="wardStats">
+                <div class="stat-card">
+                    <div class="stat-card__icon"><i class="fas fa-bed"></i></div>
+                    <div class="stat-card__number" id="totalBeds">87</div>
+                    <div class="stat-card__label">Total Beds</div>
+                </div>
+                <div class="stat-card stat-card--blue">
+                    <div class="stat-card__icon"><i class="fas fa-check-circle"></i></div>
+                    <div class="stat-card__number" id="availableBeds">45</div>
+                    <div class="stat-card__label">Available</div>
+                </div>
+                <div class="stat-card stat-card--orange">
+                    <div class="stat-card__icon"><i class="fas fa-user"></i></div>
+                    <div class="stat-card__number" id="occupiedBeds">38</div>
+                    <div class="stat-card__label">Occupied</div>
+                </div>
+                <div class="stat-card stat-card--red">
+                    <div class="stat-card__icon"><i class="fas fa-wrench"></i></div>
+                    <div class="stat-card__number" id="maintenanceBeds">4</div>
+                    <div class="stat-card__label">Maintenance</div>
+                </div>
+            </div>
+
+            <!-- Ward Grid -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;" id="wardGrid">
+                <!-- Ward A -->
+                <div style="background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px;">
+                    <h3 style="margin-bottom: 12px;">Ward A</h3>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;" id="wardA">
+                        <div style="background: var(--primary-lighter); padding: 8px; border-radius: 6px; text-align: center; font-size: 0.85rem; border: 2px solid var(--primary);">Bed 101 <span style="display: block; font-size: 0.7rem; color: var(--primary);">Available</span></div>
+                        <div style="background: #ffebee; padding: 8px; border-radius: 6px; text-align: center; font-size: 0.85rem; border: 2px solid var(--danger);">Bed 102 <span style="display: block; font-size: 0.7rem; color: var(--danger);">Occupied</span></div>
+                        <div style="background: var(--primary-lighter); padding: 8px; border-radius: 6px; text-align: center; font-size: 0.85rem; border: 2px solid var(--primary);">Bed 103 <span style="display: block; font-size: 0.7rem; color: var(--primary);">Available</span></div>
+                        <div style="background: #fff3e0; padding: 8px; border-radius: 6px; text-align: center; font-size: 0.85rem; border: 2px solid var(--warning);">Bed 104 <span style="display: block; font-size: 0.7rem; color: var(--warning);">Reserved</span></div>
+                        <div style="background: var(--primary-lighter); padding: 8px; border-radius: 6px; text-align: center; font-size: 0.85rem; border: 2px solid var(--primary);">Bed 105 <span style="display: block; font-size: 0.7rem; color: var(--primary);">Available</span></div>
+                        <div style="background: #ffebee; padding: 8px; border-radius: 6px; text-align: center; font-size: 0.85rem; border: 2px solid var(--danger);">Bed 106 <span style="display: block; font-size: 0.7rem; color: var(--danger);">Occupied</span></div>
+                    </div>
+                </div>
+
+                <!-- Ward B -->
+                <div style="background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px;">
+                    <h3 style="margin-bottom: 12px;">Ward B</h3>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;" id="wardB">
+                        <div style="background: #ffebee; padding: 8px; border-radius: 6px; text-align: center; font-size: 0.85rem; border: 2px solid var(--danger);">Bed 201 <span style="display: block; font-size: 0.7rem; color: var(--danger);">Occupied</span></div>
+                        <div style="background: var(--primary-lighter); padding: 8px; border-radius: 6px; text-align: center; font-size: 0.85rem; border: 2px solid var(--primary);">Bed 202 <span style="display: block; font-size: 0.7rem; color: var(--primary);">Available</span></div>
+                        <div style="background: #ffebee; padding: 8px; border-radius: 6px; text-align: center; font-size: 0.85rem; border: 2px solid var(--danger);">Bed 203 <span style="display: block; font-size: 0.7rem; color: var(--danger);">Occupied</span></div>
+                        <div style="background: var(--primary-lighter); padding: 8px; border-radius: 6px; text-align: center; font-size: 0.85rem; border: 2px solid var(--primary);">Bed 204 <span style="display: block; font-size: 0.7rem; color: var(--primary);">Available</span></div>
+                        <div style="background: #fff3e0; padding: 8px; border-radius: 6px; text-align: center; font-size: 0.85rem; border: 2px solid var(--warning);">Bed 205 <span style="display: block; font-size: 0.7rem; color: var(--warning);">Reserved</span></div>
+                        <div style="background: var(--primary-lighter); padding: 8px; border-radius: 6px; text-align: center; font-size: 0.85rem; border: 2px solid var(--primary);">Bed 206 <span style="display: block; font-size: 0.7rem; color: var(--primary);">Available</span></div>
+                    </div>
+                </div>
+
+                <!-- Maternity -->
+                <div style="background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px;">
+                    <h3 style="margin-bottom: 12px;">Maternity Ward</h3>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;" id="maternityWard">
+                        <div style="background: #ffebee; padding: 8px; border-radius: 6px; text-align: center; font-size: 0.85rem; border: 2px solid var(--danger);">Bed M1 <span style="display: block; font-size: 0.7rem; color: var(--danger);">Occupied</span></div>
+                        <div style="background: var(--primary-lighter); padding: 8px; border-radius: 6px; text-align: center; font-size: 0.85rem; border: 2px solid var(--primary);">Bed M2 <span style="display: block; font-size: 0.7rem; color: var(--primary);">Available</span></div>
+                        <div style="background: #ffebee; padding: 8px; border-radius: 6px; text-align: center; font-size: 0.85rem; border: 2px solid var(--danger);">Bed M3 <span style="display: block; font-size: 0.7rem; color: var(--danger);">Occupied</span></div>
+                        <div style="background: var(--primary-lighter); padding: 8px; border-radius: 6px; text-align: center; font-size: 0.85rem; border: 2px solid var(--primary);">Bed M4 <span style="display: block; font-size: 0.7rem; color: var(--primary);">Available</span></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module">
+        import { loadWardStats } from '/src/js/nurse.js';
+        document.addEventListener('DOMContentLoaded', () => loadWardStats());
+    </script>
+</body>
+                                                                                                           </html>
