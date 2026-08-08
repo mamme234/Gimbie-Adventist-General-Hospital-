@@ -1,0 +1,159 @@
+/* ============================================
+   RADIOLOGY DASHBOARD STYLES
+   Gimbie Adventist General Hospital
+   ============================================ */
+
+.radiology-wrapper {
+    display: flex;
+    min-height: 100vh;
+    background: var(--bg-light);
+}
+
+.radiology-sidebar {
+    width: 220px;
+    background: var(--bg-white);
+    border-right: 1px solid #e8edea;
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    overflow-y: auto;
+    z-index: 100;
+}
+
+.radiology-sidebar__nav {
+    padding: 0 12px;
+}
+
+.radiology-sidebar__nav a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.radiology-sidebar__nav a i {
+    width: 20px;
+}
+
+.radiology-sidebar__nav a:hover {
+    background: var(--primary-lighter);
+    color: var(--primary);
+}
+
+.radiology-sidebar__nav a.active {
+    background: #e65100;
+    color: #fff;
+}
+
+.radiology-main {
+    flex: 1;
+    margin-left: 220px;
+    padding: 24px 32px;
+}
+
+/* ===== EXAM STATS ===== */
+.exam-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+/* ===== IMAGE GALLERY ===== */
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.image-gallery .image-item {
+    background: var(--bg-white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    position: relative;
+}
+
+.image-gallery .image-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.image-gallery .image-item .info {
+    padding: 12px;
+}
+
+.image-gallery .image-item .info .title {
+    font-weight: 500;
+}
+
+.image-gallery .image-item .info .date {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.image-gallery .image-item .actions {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    gap: 4px;
+}
+
+.image-gallery .image-item .actions button {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.image-gallery .image-item .actions button:hover {
+    background: rgba(0,0,0,0.8);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+    .exam-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .image-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .radiology-sidebar {
+        transform: translateX(-100%);
+        width: 280px;
+    }
+    
+    .radiology-sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .radiology-main {
+        margin-left: 0;
+        padding: 16px;
+    }
+    
+    .exam-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .image-gallery {
+        grid-template-columns: 1fr;
+    }
+}
