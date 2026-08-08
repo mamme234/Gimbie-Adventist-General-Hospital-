@@ -20,23 +20,6 @@ const config = {
     expiresIn: process.env.JWT_EXPIRE || '7d'
   },
 
-  smtp: {
-    host: process.env.SMTP_HOST || 'smtp.gmail.com',
-    port: parseInt(process.env.SMTP_PORT) || 587,
-    secure: process.env.SMTP_SECURE === 'true',
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-    from: process.env.SMTP_FROM || 'noreply@gimbiehospital.com',
-    enabled: process.env.EMAIL_ENABLED === 'true'
-  },
-
-  twilio: {
-    accountSid: process.env.TWILIO_ACCOUNT_SID,
-    authToken: process.env.TWILIO_AUTH_TOKEN,
-    phoneNumber: process.env.TWILIO_PHONE_NUMBER,
-    enabled: process.env.SMS_ENABLED === 'true'
-  },
-
   gemini: {
     apiKey: process.env.GEMINI_API_KEY,
     model: process.env.GEMINI_MODEL || 'gemini-pro',
@@ -67,6 +50,10 @@ const config = {
   security: {
     bcryptRounds: parseInt(process.env.BCRYPT_ROUNDS) || 10,
     encryptionKey: process.env.ENCRYPTION_KEY || 'default-encryption-key'
+  },
+
+  frontend: {
+    url: process.env.FRONTEND_URL || 'https://gimbiehospital.com'
   }
 };
 
