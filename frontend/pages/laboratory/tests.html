@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tests - Laboratory - Gimbie Adventist General Hospital</title>
+    <link rel="icon" href="/assets/images/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/laboratory.css" />
+    <link rel="stylesheet" href="/src/css/responsive.css" />
+</head>
+<body>
+    <div class="lab-wrapper">
+        <aside class="lab-sidebar" id="labSidebar">
+            <div class="logo" style="padding: 0 20px 20px; border-bottom: 1px solid #e8edea; margin-bottom: 16px;">
+                <a href="/pages/laboratory/dashboard.html">
+                    <img src="/assets/images/logo.png" alt="Gimbie Adventist" class="logo__img" style="height: 36px;" />
+                    <div class="logo__text">
+                        <span class="logo__name" style="font-size: 0.95rem;">Gimbie Adventist</span>
+                        <span class="logo__tag" style="font-size: 0.65rem;">Laboratory</span>
+                    </div>
+                </a>
+            </div>
+            <nav class="lab-sidebar__nav">
+                <ul>
+                    <li><a href="/pages/laboratory/dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                    <li><a href="/pages/laboratory/tests.html" class="active"><i class="fas fa-flask"></i> Tests</a></li>
+                    <li><a href="/pages/laboratory/results.html"><i class="fas fa-file-medical-alt"></i> Results</a></li>
+                    <li><a href="/pages/laboratory/reports.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="lab-main">
+            <div class="doctor-topbar">
+                <div class="admin-topbar__title">
+                    <h1>Lab Tests</h1>
+                    <p>Manage and process laboratory tests</p>
+                </div>
+                <div class="admin-topbar__actions">
+                    <button class="btn btn--primary" onclick="window.location.href='/pages/laboratory/test-add.html'">
+                        <i class="fas fa-plus"></i> New Test
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div style="background: #fff; padding: 16px 20px; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 24px;">
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 150px;">
+                        <input type="text" id="searchInput" placeholder="Search tests..." style="width: 100%; padding: 10px 16px; border: 1px solid #ddd; border-radius: 8px;" />
+                    </div>
+                    <div>
+                        <select id="statusFilter" style="padding: 10px 16px; border: 1px solid #ddd; border-radius: 8px;">
+                            <option value="">All Status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Sample Collected">Sample Collected</option>
+                            <option value="Processing">Processing</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Verified">Verified</option>
+                        </select>
+                    </div>
+                    <div>
+                        <select id="categoryFilter" style="padding: 10px 16px; border: 1px solid #ddd; border-radius: 8px;">
+                            <option value="">All Categories</option>
+                            <option value="Hematology">Hematology</option>
+                            <option value="Biochemistry">Biochemistry</option>
+                            <option value="Microbiology">Microbiology</option>
+                            <option value="Serology">Serology</option>
+                            <option value="Urinalysis">Urinalysis</option>
+                            <option value="Immunology">Immunology</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button class="btn btn--primary" onclick="applyFilters()"><i class="fas fa-search"></i> Search</button>
+                        <button class="btn btn--outline" onclick="resetFilters()"><i class="fas fa-undo"></i> Reset</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test Table -->
+            <div class="test-queue">
+                <div class="header">
+                    <h3>All Tests</h3>
+                    <span id="testCount">0 tests</span>
+                </div>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Test ID</th>
+                            <th>Patient</th>
+                            <th>Test Name</th>
+                            <th>Category</th>
+                            <th>Sample Type</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="testsTable">
+                        <!-- Loaded from JS -->
+                    </tbody>
+                </table>
+                <div style="padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e8edea;">
+                    <span id="paginationInfo">Showing 0-0 of 0</span>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn btn--small btn--outline" onclick="prevPage()"><i class="fas fa-chevron-left"></i></button>
+                        <span id="pageInfo" style="padding: 6px 12px;">Page 1</span>
+                        <button class="btn btn--small btn--outline" onclick="nextPage()"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module">
+        import { loadTests } from '/src/js/laboratory.js';
+        let currentPage = 1;
+        
+        window.applyFilters = () => {
+            const search = document.getElementById('searchInput').value;
+            const status = document.getElementById('statusFilter').value;
+            const category = document.getElementById('categoryFilter').value;
+            loadTests(1, search, status, category);
+        };
+        
+        window.resetFilters = () => {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('statusFilter').value = '';
+            document.getElementById('categoryFilter').value = '';
+            loadTests(1);
+        };
+        
+        window.prevPage = () => {
+            if (currentPage > 1) { currentPage--; loadTests(currentPage); }
+        };
+        
+        window.nextPage = () => {
+            currentPage++; loadTests(currentPage);
+        };
+        
+        document.addEventListener('DOMContentLoaded', () => loadTests(1));
+    </script>
+</body>
+                      </html>
