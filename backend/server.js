@@ -7,15 +7,17 @@ const { logger } = require('./utils/logger');
 
 const server = http.createServer(app);
 
+// Socket.IO
 let socketServer = null;
 try {
   const { initializeSocket } = require('./sockets');
   socketServer = initializeSocket(server);
-  logger.info('🔌 Socket.IO initialized successfully');
+  logger.info('🔌 Socket.IO initialized');
 } catch (error) {
   logger.warn('⚠️ Socket.IO not initialized:', error.message);
 }
 
+// Database
 database.connect();
 
 const PORT = process.env.PORT || 3000;
@@ -29,36 +31,24 @@ server.listen(PORT, HOST, () => {
   console.log(`║    📡 Environment : ${config.env}`);
   console.log(`║    🔗 API URL     : http://${HOST}:${PORT}/api/v1`);
   console.log(`║    📊 Health      : http://${HOST}:${PORT}/health`);
+  console.log(`║    🤖 Gemini AI   : ${config.gemini.enabled ? '✅ Enabled' : '❌ Disabled'}`);
   console.log('╚══════════════════════════════════════════════════════════╝\n');
 
   const dbStatus = database.getConnectionStatus();
   logger.info(`💾 Database: ${dbStatus.state} (${dbStatus.name})`);
 });
 
+// Graceful shutdown
 const gracefulShutdown = async (signal) => {
-  console.log(`\n🛑 ${signal} received. Shutting down gracefully...`);
-
+  console.log(`\n🛑 ${signal} received. Shutting down...`);
   server.close(async (err) => {
-    if (err) {
-      logger.error('Error closing server:', err);
-      process.exit(1);
-    }
-
-    logger.info('HTTP server closed');
+    if (err) logger.error('Error closing server:', err);
     await database.disconnect();
-
-    if (socketServer && socketServer.shutdown) {
-      socketServer.shutdown();
-    }
-
-    logger.info(`✅ ${config.hospital?.name || 'Gimbie Adventist General Hospital'} shutdown complete`);
+    if (socketServer?.shutdown) socketServer.shutdown();
+    logger.info('✅ Shutdown complete');
     process.exit(0);
   });
-
-  setTimeout(() => {
-    logger.error('⚠️ Forcefully shutting down');
-    process.exit(1);
-  }, 10000);
+  setTimeout(() => { logger.error('⚠️ Force shutdown'); process.exit(1); }, 10000);
 };
 
 process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
@@ -69,7 +59,7 @@ process.on('uncaughtException', (error) => {
   gracefulShutdown('uncaughtException');
 });
 
-process.on('unhandledRejection', (reason, promise) => {
+process.on('unhandledRejection', (reason) => {
   logger.error('💥 Unhandled Rejection:', reason);
   gracefulShutdown('unhandledRejection');
 });
