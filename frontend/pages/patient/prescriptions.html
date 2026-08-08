@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prescriptions - Patient - Gimbie Adventist General Hospital</title>
+    <link rel="icon" href="/assets/images/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/patient.css" />
+    <link rel="stylesheet" href="/src/css/responsive.css" />
+</head>
+<body>
+    <div class="patient-wrapper">
+        <aside class="patient-sidebar" id="patientSidebar">
+            <div class="profile-section">
+                <div class="avatar">P</div>
+                <div class="name">Patient Name</div>
+                <div class="patient-id">ID: N/A</div>
+            </div>
+            <nav class="patient-sidebar__nav">
+                <ul>
+                    <li><a href="/pages/patient/dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                    <li><a href="/pages/patient/appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a></li>
+                    <li><a href="/pages/patient/medical-records.html"><i class="fas fa-file-medical"></i> Medical Records</a></li>
+                    <li><a href="/pages/patient/lab-results.html"><i class="fas fa-microscope"></i> Lab Results</a></li>
+                    <li><a href="/pages/patient/prescriptions.html" class="active"><i class="fas fa-prescription"></i> Prescriptions</a></li>
+                    <li><a href="/pages/patient/billing.html"><i class="fas fa-file-invoice-dollar"></i> Billing</a></li>
+                    <li><a href="/pages/patient/profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="patient-main">
+            <div class="doctor-topbar">
+                <div class="admin-topbar__title">
+                    <h1>My Prescriptions</h1>
+                    <p>View your active and past prescriptions</p>
+                </div>
+            </div>
+
+            <div class="medical-records">
+                <div class="header">
+                    <h3>All Prescriptions</h3>
+                    <span id="prescriptionCount">0 prescriptions</span>
+                </div>
+                <div id="prescriptions">
+                    <!-- Loaded from JS -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module">
+        import { loadPrescriptions } from '/src/js/patient.js';
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = API.getCurrentUser();
+            if (user) loadPrescriptions(user.id);
+        });
+    </script>
+</body>
+  </html>
