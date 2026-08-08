@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - Gimbie Adventist General Hospital</title>
+    <link rel="icon" href="/assets/images/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/responsive.css" />
+</head>
+<body style="background: var(--bg-light);">
+
+<!-- ===== REGISTER CONTAINER ===== -->
+<div class="auth-container" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 20px;">
+    <div class="auth-card" style="background: #fff; border-radius: var(--radius-lg); padding: 48px; max-width: 480px; width: 100%; box-shadow: var(--shadow-hover);">
+        <div style="text-align: center; margin-bottom: 32px;">
+            <img src="/assets/images/logo.png" alt="Gimbie Adventist General Hospital" style="height: 60px; margin-bottom: 16px;" />
+            <h1 style="font-size: 1.5rem; font-weight: 700;">Create Account</h1>
+            <p style="color: var(--text-secondary);">Register for patient portal access</p>
+        </div>
+
+        <form id="registerForm">
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name" />
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email" />
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number" />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required placeholder="Create a password (min 6 characters)" />
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password" />
+            </div>
+            <button type="submit" class="btn btn--primary btn--full" style="padding: 14px;">Create Account</button>
+        </form>
+
+        <div style="text-align: center; margin-top: 24px; color: var(--text-secondary);">
+            Already have an account? <a href="/pages/login.html" style="color: var(--primary); font-weight: 600;">Login</a>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="/src/js/auth.js"></script>
+</body>
+</html>
