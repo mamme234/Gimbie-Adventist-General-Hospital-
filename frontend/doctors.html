@@ -3,622 +3,136 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Our Doctors - Adventist General Hospital</title>
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Meet our expert doctors at Adventist General Hospital. Find specialists in cardiology, neurology, orthopedics, pediatrics, and more." />
-    
-    <!-- Font Awesome -->
+    <title>Doctors - Gimbie Adventist General Hospital</title>
+    <link rel="icon" href="/assets/images/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/doctors.css" />
-    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/responsive.css" />
 </head>
 <body>
 
-    <!-- ============================================ -->
-    <!-- TOP BAR                                     -->
-    <!-- ============================================ -->
-    <div class="top-bar">
-        <div class="container">
-            <div class="top-bar-left">
-                <span><i class="fas fa-phone-alt"></i> Emergency: <strong>+251-911-234-567</strong></span>
-                <span><i class="fas fa-clock"></i> 24/7 Service</span>
-            </div>
-            <div class="top-bar-right">
-                <a href="contact.html"><i class="fas fa-map-marker-alt"></i> Find Us</a>
-                <a href="login.html"><i class="fas fa-sign-in-alt"></i> Patient Portal</a>
-                <a href="doctors.html"><i class="fas fa-user-md"></i> Find a Doctor</a>
-            </div>
+<!-- ===== EMERGENCY BANNER ===== -->
+<div class="emergency-banner">
+    <div class="container">
+        <i class="fas fa-phone-alt"></i>
+        <span>Emergency: <a href="tel:+251777100051">+251 77 710 0051</a></span>
+        <span>| 24/7 Service</span>
+        <span>| Open 24 Hours</span>
+    </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header class="header" id="header">
+    <div class="container header__inner">
+        <div class="logo">
+            <a href="/">
+                <img src="/assets/images/logo.png" alt="Gimbie Adventist General Hospital" class="logo__img" />
+                <div class="logo__text">
+                    <span class="logo__name">Gimbie Adventist</span>
+                    <span class="logo__tag">General Hospital</span>
+                </div>
+            </a>
+        </div>
+        <nav class="nav" id="mainNav">
+            <ul class="nav__list">
+                <li><a href="/" class="nav__link">Home</a></li>
+                <li><a href="/pages/about.html" class="nav__link">About</a></li>
+                <li><a href="/pages/services.html" class="nav__link">Services</a></li>
+                <li><a href="/pages/doctors.html" class="nav__link active">Doctors</a></li>
+                <li><a href="/pages/departments.html" class="nav__link">Departments</a></li>
+                <li><a href="/pages/gallery.html" class="nav__link">Gallery</a></li>
+                <li><a href="/pages/testimonials.html" class="nav__link">Testimonials</a></li>
+                <li><a href="/pages/contact.html" class="nav__link">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="header__actions">
+            <a href="/pages/appointments.html" class="btn btn--primary"><i class="fas fa-calendar-check"></i> Book Appointment</a>
+            <a href="/pages/login.html" class="btn btn--outline"><i class="fas fa-user"></i> Login</a>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </div>
+</header>
 
-    <!-- ============================================ -->
-    <!-- HEADER                                      -->
-    <!-- ============================================ -->
-    <header class="header" id="header">
-        <div class="container">
-            <div class="header-inner">
+<!-- ===== PAGE HEADER ===== -->
+<section class="page-header" style="background: linear-gradient(135deg, #0a2a1a 0%, #1a4a2a 100%); padding: 120px 0 60px; color: #fff;">
+    <div class="container">
+        <h1>Our Doctors</h1>
+        <p>Meet our dedicated medical professionals</p>
+    </div>
+</section>
+
+<!-- ===== DOCTORS LIST ===== -->
+<section class="doctors-list section">
+    <div class="container">
+        <div class="section__header">
+            <span class="section__tag">Medical Team</span>
+            <h2 class="section__title">Expert Physicians</h2>
+            <p class="section__subtitle">
+                Highly qualified and experienced doctors dedicated to your health
+            </p>
+        </div>
+        <div class="doctors__grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;" id="doctorsContainer">
+            <!-- Loaded from API -->
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer__grid">
+            <div class="footer__brand">
                 <div class="logo">
-                    <a href="index.html">
-                        <img src="images/logo.png" alt="Adventist General Hospital" />
-                        <span class="logo-text">
-                            <strong>Adventist</strong>
-                            <small>General Hospital</small>
-                        </span>
-                    </a>
+                    <img src="/assets/images/logo.png" alt="Gimbie Adventist General Hospital" class="logo__img" />
+                    <div class="logo__text">
+                        <span class="logo__name">Gimbie Adventist</span>
+                        <span class="logo__tag">General Hospital</span>
+                    </div>
                 </div>
-
-                <nav class="nav" id="mainNav">
-                    <ul class="nav-menu">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="departments.html">Departments</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="doctors.html" class="active">Doctors</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </nav>
-
-                <div class="header-actions">
-                    <a href="appointments.html" class="btn btn-primary btn-sm">
-                        <i class="fas fa-calendar-check"></i> Book Appointment
-                    </a>
-                    <button class="mobile-toggle" id="mobileToggle">
-                        <span></span><span></span><span></span>
-                    </button>
+                <p class="footer__desc">Healing with faith and compassion since 1948.</p>
+                <div class="footer__social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
                 </div>
+            </div>
+            <div class="footer__links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/pages/about.html">About</a></li>
+                    <li><a href="/pages/services.html">Services</a></li>
+                    <li><a href="/pages/contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer__links">
+                <h4>Patient Resources</h4>
+                <ul>
+                    <li><a href="/pages/appointments.html">Book Appointment</a></li>
+                    <li><a href="/pages/login.html">Patient Portal</a></li>
+                    <li><a href="/pages/gallery.html">Gallery</a></li>
+                </ul>
+            </div>
+            <div class="footer__contact">
+                <h4>Contact</h4>
+                <p><i class="fas fa-phone"></i> +251 77 710 0051</p>
+                <p><i class="fas fa-envelope"></i> gimbieadventisthosp@gmail.com</p>
+                <p><i class="fas fa-map-pin"></i> Gimbi, West Wollega, Ethiopia</p>
+                <p><i class="fas fa-clock"></i> Open 24/7</p>
             </div>
         </div>
-    </header>
-
-    <!-- ============================================ -->
-    <!-- PAGE BANNER                                 -->
-    <!-- ============================================ -->
-    <section class="page-banner">
-        <div class="container">
-            <div class="banner-content">
-                <h1>Our Doctors</h1>
-                <nav class="breadcrumb">
-                    <a href="index.html">Home</a>
-                    <span><i class="fas fa-chevron-right"></i></span>
-                    <span class="current">Doctors</span>
-                </nav>
-            </div>
+        <div class="footer__bottom">
+            <p>&copy; 2026 Gimbie Adventist General Hospital. All rights reserved.</p>
         </div>
-    </section>
+    </div>
+</footer>
 
-    <!-- ============================================ -->
-    <!-- SEARCH & FILTER                            -->
-    <!-- ============================================ -->
-    <section class="search-section">
-        <div class="container">
-            <div class="search-wrapper">
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id="doctorSearch" placeholder="Search doctors by name, specialty, or department..." />
-                </div>
-                <div class="filter-wrapper">
-                    <select id="specialtyFilter">
-                        <option value="all">All Specialties</option>
-                        <option value="cardiology">Cardiology</option>
-                        <option value="neurology">Neurology</option>
-                        <option value="orthopedics">Orthopedics</option>
-                        <option value="pediatrics">Pediatrics</option>
-                        <option value="obstetrics">Obstetrics & Gynecology</option>
-                        <option value="surgery">Surgery</option>
-                        <option value="emergency">Emergency</option>
-                        <option value="radiology">Radiology</option>
-                        <option value="ophthalmology">Ophthalmology</option>
-                        <option value="ent">ENT</option>
-                        <option value="psychiatry">Psychiatry</option>
-                        <option value="dermatology">Dermatology</option>
-                    </select>
-                    <select id="availabilityFilter">
-                        <option value="all">All</option>
-                        <option value="available">Available Today</option>
-                        <option value="unavailable">Not Available</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================ -->
-    <!-- DOCTORS GRID                               -->
-    <!-- ============================================ -->
-    <section class="doctors-section section-padding">
-        <div class="container">
-            <div class="section-header text-center">
-                <span class="section-tag">Meet Our Team</span>
-                <h2>Expert Medical <br />Specialists</h2>
-                <p>Highly qualified doctors dedicated to providing compassionate, patient-centered care</p>
-            </div>
-
-            <div class="doctors-grid" id="doctorsGrid">
-                <!-- Doctor 1 -->
-                <div class="doctor-card" data-specialty="cardiology" data-available="true">
-                    <div class="doctor-image">
-                        <img src="images/doctors/doctor-1.jpg" alt="Dr. Samuel Tekle" />
-                        <span class="availability-badge available">Available Today</span>
-                    </div>
-                    <div class="doctor-info">
-                        <h4>Dr. Samuel Tekle</h4>
-                        <span class="doctor-specialty">Interventional Cardiologist</span>
-                        <div class="doctor-details">
-                            <p><i class="fas fa-graduation-cap"></i> MD, FACC, FESC</p>
-                            <p><i class="fas fa-briefcase"></i> 22+ Years Experience</p>
-                            <p><i class="fas fa-star"></i> 4.9 <span>(124 Reviews)</span></p>
-                        </div>
-                        <p class="doctor-bio">Expert in complex cardiac interventions, angioplasty, and stenting procedures.</p>
-                        <div class="doctor-actions">
-                            <a href="doctor-profile.html?id=1" class="btn btn-outline-primary btn-sm">View Profile</a>
-                            <a href="appointments.html?doctor=1" class="btn btn-primary btn-sm">Book Appointment</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Doctor 2 -->
-                <div class="doctor-card" data-specialty="neurology" data-available="false">
-                    <div class="doctor-image">
-                        <img src="images/doctors/doctor-2.jpg" alt="Dr. Sara Hailu" />
-                        <span class="availability-badge unavailable">Not Available Today</span>
-                    </div>
-                    <div class="doctor-info">
-                        <h4>Dr. Sara Hailu</h4>
-                        <span class="doctor-specialty">Neurologist</span>
-                        <div class="doctor-details">
-                            <p><i class="fas fa-graduation-cap"></i> MD, PhD</p>
-                            <p><i class="fas fa-briefcase"></i> 18+ Years Experience</p>
-                            <p><i class="fas fa-star"></i> 4.8 <span>(98 Reviews)</span></p>
-                        </div>
-                        <p class="doctor-bio">Specializes in neurodegenerative disorders, stroke, and epilepsy management.</p>
-                        <div class="doctor-actions">
-                            <a href="doctor-profile.html?id=2" class="btn btn-outline-primary btn-sm">View Profile</a>
-                            <a href="appointments.html?doctor=2" class="btn btn-primary btn-sm">Book Appointment</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Doctor 3 -->
-                <div class="doctor-card" data-specialty="orthopedics" data-available="true">
-                    <div class="doctor-image">
-                        <img src="images/doctors/doctor-3.jpg" alt="Dr. Daniel Assefa" />
-                        <span class="availability-badge available">Available Today</span>
-                    </div>
-                    <div class="doctor-info">
-                        <h4>Dr. Daniel Assefa</h4>
-                        <span class="doctor-specialty">Orthopedic Surgeon</span>
-                        <div class="doctor-details">
-                            <p><i class="fas fa-graduation-cap"></i> MD, FACS</p>
-                            <p><i class="fas fa-briefcase"></i> 15+ Years Experience</p>
-                            <p><i class="fas fa-star"></i> 4.7 <span>(87 Reviews)</span></p>
-                        </div>
-                        <p class="doctor-bio">Specializes in joint replacement, sports medicine, and arthroscopic surgery.</p>
-                        <div class="doctor-actions">
-                            <a href="doctor-profile.html?id=3" class="btn btn-outline-primary btn-sm">View Profile</a>
-                            <a href="appointments.html?doctor=3" class="btn btn-primary btn-sm">Book Appointment</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Doctor 4 -->
-                <div class="doctor-card" data-specialty="pediatrics" data-available="true">
-                    <div class="doctor-image">
-                        <img src="images/doctors/doctor-4.jpg" alt="Dr. Tigist Wondimu" />
-                        <span class="availability-badge available">Available Today</span>
-                    </div>
-                    <div class="doctor-info">
-                        <h4>Dr. Tigist Wondimu</h4>
-                        <span class="doctor-specialty">Pediatrician</span>
-                        <div class="doctor-details">
-                            <p><i class="fas fa-graduation-cap"></i> MD, FAAP</p>
-                            <p><i class="fas fa-briefcase"></i> 14+ Years Experience</p>
-                            <p><i class="fas fa-star"></i> 4.9 <span>(112 Reviews)</span></p>
-                        </div>
-                        <p class="doctor-bio">Expert in pediatric care, child development, and adolescent medicine.</p>
-                        <div class="doctor-actions">
-                            <a href="doctor-profile.html?id=4" class="btn btn-outline-primary btn-sm">View Profile</a>
-                            <a href="appointments.html?doctor=4" class="btn btn-primary btn-sm">Book Appointment</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Doctor 5 -->
-                <div class="doctor-card" data-specialty="obstetrics" data-available="true">
-                    <div class="doctor-image">
-                        <img src="images/doctors/doctor-5.jpg" alt="Dr. Helen Wondimu" />
-                        <span class="availability-badge available">Available Today</span>
-                    </div>
-                    <div class="doctor-info">
-                        <h4>Dr. Helen Wondimu</h4>
-                        <span class="doctor-specialty">Obstetrician & Gynecologist</span>
-                        <div class="doctor-details">
-                            <p><i class="fas fa-graduation-cap"></i> MD, FACOG</p>
-                            <p><i class="fas fa-briefcase"></i> 16+ Years Experience</p>
-                            <p><i class="fas fa-star"></i> 4.8 <span>(95 Reviews)</span></p>
-                        </div>
-                        <p class="doctor-bio">Specializes in high-risk pregnancy, infertility, and minimally invasive gynecological surgery.</p>
-                        <div class="doctor-actions">
-                            <a href="doctor-profile.html?id=5" class="btn btn-outline-primary btn-sm">View Profile</a>
-                            <a href="appointments.html?doctor=5" class="btn btn-primary btn-sm">Book Appointment</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Doctor 6 -->
-                <div class="doctor-card" data-specialty="surgery" data-available="false">
-                    <div class="doctor-image">
-                        <img src="images/doctors/doctor-6.jpg" alt="Dr. Yonas Girma" />
-                        <span class="availability-badge unavailable">Not Available Today</span>
-                    </div>
-                    <div class="doctor-info">
-                        <h4>Dr. Yonas Girma</h4>
-                        <span class="doctor-specialty">General Surgeon</span>
-                        <div class="doctor-details">
-                            <p><i class="fas fa-graduation-cap"></i> MD, FACS</p>
-                            <p><i class="fas fa-briefcase"></i> 20+ Years Experience</p>
-                            <p><i class="fas fa-star"></i> 4.6 <span>(78 Reviews)</span></p>
-                        </div>
-                        <p class="doctor-bio">Expert in laparoscopic surgery, gastrointestinal surgery, and endocrine surgery.</p>
-                        <div class="doctor-actions">
-                            <a href="doctor-profile.html?id=6" class="btn btn-outline-primary btn-sm">View Profile</a>
-                            <a href="appointments.html?doctor=6" class="btn btn-primary btn-sm">Book Appointment</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Doctor 7 -->
-                <div class="doctor-card" data-specialty="emergency" data-available="true">
-                    <div class="doctor-image">
-                        <img src="images/doctors/doctor-7.jpg" alt="Dr. Abebe Kassa" />
-                        <span class="availability-badge available">Available Today</span>
-                    </div>
-                    <div class="doctor-info">
-                        <h4>Dr. Abebe Kassa</h4>
-                        <span class="doctor-specialty">Emergency Physician</span>
-                        <div class="doctor-details">
-                            <p><i class="fas fa-graduation-cap"></i> MD, FACEP</p>
-                            <p><i class="fas fa-briefcase"></i> 12+ Years Experience</p>
-                            <p><i class="fas fa-star"></i> 4.7 <span>(65 Reviews)</span></p>
-                        </div>
-                        <p class="doctor-bio">Specializes in trauma care, critical care, and emergency medicine.</p>
-                        <div class="doctor-actions">
-                            <a href="doctor-profile.html?id=7" class="btn btn-outline-primary btn-sm">View Profile</a>
-                            <a href="appointments.html?doctor=7" class="btn btn-primary btn-sm">Book Appointment</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Doctor 8 -->
-                <div class="doctor-card" data-specialty="radiology" data-available="true">
-                    <div class="doctor-image">
-                        <img src="images/doctors/doctor-8.jpg" alt="Dr. Martha Ayele" />
-                        <span class="availability-badge available">Available Today</span>
-                    </div>
-                    <div class="doctor-info">
-                        <h4>Dr. Martha Ayele</h4>
-                        <span class="doctor-specialty">Radiologist</span>
-                        <div class="doctor-details">
-                            <p><i class="fas fa-graduation-cap"></i> MD, DABR</p>
-                            <p><i class="fas fa-briefcase"></i> 13+ Years Experience</p>
-                            <p><i class="fas fa-star"></i> 4.8 <span>(72 Reviews)</span></p>
-                        </div>
-                        <p class="doctor-bio">Expert in MRI, CT, Ultrasound, and diagnostic imaging interpretation.</p>
-                        <div class="doctor-actions">
-                            <a href="doctor-profile.html?id=8" class="btn btn-outline-primary btn-sm">View Profile</a>
-                            <a href="appointments.html?doctor=8" class="btn btn-primary btn-sm">Book Appointment</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Doctor 9 -->
-                <div class="doctor-card" data-specialty="ophthalmology" data-available="true">
-                    <div class="doctor-image">
-                        <img src="images/doctors/doctor-9.jpg" alt="Dr. Fikre Assefa" />
-                        <span class="availability-badge available">Available Today</span>
-                    </div>
-                    <div class="doctor-info">
-                        <h4>Dr. Fikre Assefa</h4>
-                        <span class="doctor-specialty">Ophthalmologist</span>
-                        <div class="doctor-details">
-                            <p><i class="fas fa-graduation-cap"></i> MD, FACS</p>
-                            <p><i class="fas fa-briefcase"></i> 11+ Years Experience</p>
-                            <p><i class="fas fa-star"></i> 4.9 <span>(56 Reviews)</span></p>
-                        </div>
-                        <p class="doctor-bio">Specializes in cataract surgery, glaucoma, and retinal disorders.</p>
-                        <div class="doctor-actions">
-                            <a href="doctor-profile.html?id=9" class="btn btn-outline-primary btn-sm">View Profile</a>
-                            <a href="appointments.html?doctor=9" class="btn btn-primary btn-sm">Book Appointment</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Doctor 10 -->
-                <div class="doctor-card" data-specialty="ent" data-available="false">
-                    <div class="doctor-image">
-                        <img src="images/doctors/doctor-10.jpg" alt="Dr. Genet Tefera" />
-                        <span class="availability-badge unavailable">Not Available Today</span>
-                    </div>
-                    <div class="doctor-info">
-                        <h4>Dr. Genet Tefera</h4>
-                        <span class="doctor-specialty">ENT Specialist</span>
-                        <div class="doctor-details">
-                            <p><i class="fas fa-graduation-cap"></i> MD, FACS</p>
-                            <p><i class="fas fa-briefcase"></i> 10+ Years Experience</p>
-                            <p><i class="fas fa-star"></i> 4.6 <span>(43 Reviews)</span></p>
-                        </div>
-                        <p class="doctor-bio">Specializes in otology, rhinology, and head & neck surgery.</p>
-                        <div class="doctor-actions">
-                            <a href="doctor-profile.html?id=10" class="btn btn-outline-primary btn-sm">View Profile</a>
-                            <a href="appointments.html?doctor=10" class="btn btn-primary btn-sm">Book Appointment</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Doctor 11 -->
-                <div class="doctor-card" data-specialty="psychiatry" data-available="true">
-                    <div class="doctor-image">
-                        <img src="images/doctors/doctor-11.jpg" alt="Dr. Michael Tesfaye" />
-                        <span class="availability-badge available">Available Today</span>
-                    </div>
-                    <div class="doctor-info">
-                        <h4>Dr. Michael Tesfaye</h4>
-                        <span class="doctor-specialty">Psychiatrist</span>
-                        <div class="doctor-details">
-                            <p><i class="fas fa-graduation-cap"></i> MD, FRCPC</p>
-                            <p><i class="fas fa-briefcase"></i> 9+ Years Experience</p>
-                            <p><i class="fas fa-star"></i> 4.7 <span>(38 Reviews)</span></p>
-                        </div>
-                        <p class="doctor-bio">Expert in adult psychiatry, depression, anxiety, and mental health disorders.</p>
-                        <div class="doctor-actions">
-                            <a href="doctor-profile.html?id=11" class="btn btn-outline-primary btn-sm">View Profile</a>
-                            <a href="appointments.html?doctor=11" class="btn btn-primary btn-sm">Book Appointment</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Doctor 12 -->
-                <div class="doctor-card" data-specialty="dermatology" data-available="true">
-                    <div class="doctor-image">
-                        <img src="images/doctors/doctor-12.jpg" alt="Dr. Selam Tsegaye" />
-                        <span class="availability-badge available">Available Today</span>
-                    </div>
-                    <div class="doctor-info">
-                        <h4>Dr. Selam Tsegaye</h4>
-                        <span class="doctor-specialty">Dermatologist</span>
-                        <div class="doctor-details">
-                            <p><i class="fas fa-graduation-cap"></i> MD, FAAD</p>
-                            <p><i class="fas fa-briefcase"></i> 8+ Years Experience</p>
-                            <p><i class="fas fa-star"></i> 4.8 <span>(42 Reviews)</span></p>
-                        </div>
-                        <p class="doctor-bio">Specializes in skin disorders, dermatological surgery, and cosmetic dermatology.</p>
-                        <div class="doctor-actions">
-                            <a href="doctor-profile.html?id=12" class="btn btn-outline-primary btn-sm">View Profile</a>
-                            <a href="appointments.html?doctor=12" class="btn btn-primary btn-sm">Book Appointment</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Load More -->
-            <div class="text-center mt-4">
-                <button class="btn btn-primary btn-load-more" id="loadMoreBtn">
-                    <i class="fas fa-sync"></i> Load More Doctors
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================ -->
-    <!-- CTA SECTION                                -->
-    <!-- ============================================ -->
-    <section class="cta-section">
-        <div class="container">
-            <div class="cta-wrapper">
-                <div class="cta-text">
-                    <h2>Find the Right Doctor for You</h2>
-                    <p>Our team of specialists is ready to provide you with the best possible care.</p>
-                </div>
-                <div class="cta-buttons">
-                    <a href="appointments.html" class="btn btn-primary btn-lg">
-                        <i class="fas fa-calendar-check"></i> Book Appointment
-                    </a>
-                    <a href="contact.html" class="btn btn-outline-light btn-lg">
-                        <i class="fas fa-phone"></i> Call for Assistance
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================ -->
-    <!-- FOOTER                                      -->
-    <!-- ============================================ -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <div class="footer-logo">
-                        <img src="images/logo-white.png" alt="Adventist General Hospital" />
-                        <h3>Adventist General Hospital</h3>
-                        <p>Providing quality healthcare services with compassion and excellence since 1965.</p>
-                    </div>
-                    <div class="footer-social">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-col">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="departments.html">Departments</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="doctors.html">Find a Doctor</a></li>
-                        <li><a href="appointments.html">Book Appointment</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-col">
-                    <h4>Our Services</h4>
-                    <ul>
-                        <li><a href="emergency.html">Emergency Care</a></li>
-                        <li><a href="telemedicine.html">Telemedicine</a></li>
-                        <li><a href="laboratory.html">Laboratory</a></li>
-                        <li><a href="radiology.html">Radiology</a></li>
-                        <li><a href="pharmacy.html">Pharmacy</a></li>
-                        <li><a href="blood-bank.html">Blood Bank</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-col">
-                    <h4>Contact Us</h4>
-                    <ul class="footer-contact">
-                        <li><i class="fas fa-map-marker-alt"></i> Bole Sub-city, Addis Ababa, Ethiopia</li>
-                        <li><i class="fas fa-phone"></i> +251-911-234-567</li>
-                        <li><i class="fas fa-phone"></i> +251-115-678-910</li>
-                        <li><i class="fas fa-envelope"></i> info@adventisthospital.et</li>
-                        <li><i class="fas fa-clock"></i> 24/7 Service</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <div class="footer-bottom-left">
-                    <p>&copy; 2026 Adventist General Hospital. All rights reserved.</p>
-                </div>
-                <div class="footer-bottom-right">
-                    <a href="privacy-policy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms of Service</a>
-                    <a href="faq.html">FAQs</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- ============================================ -->
-    <!-- SCRIPTS                                    -->
-    <!-- ============================================ -->
-    <script src="main.js"></script>
-    <script>
-        // Mobile menu toggle
-        document.getElementById('mobileToggle').addEventListener('click', function() {
-            document.getElementById('mainNav').classList.toggle('active');
-            this.classList.toggle('active');
-        });
-
-        // Dropdown on mobile
-        document.querySelectorAll('.dropdown > a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                if (window.innerWidth <= 992) {
-                    e.preventDefault();
-                    this.parentElement.classList.toggle('open');
-                }
-            });
-        });
-
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        // Search and Filter
-        const searchInput = document.getElementById('doctorSearch');
-        const specialtyFilter = document.getElementById('specialtyFilter');
-        const availabilityFilter = document.getElementById('availabilityFilter');
-        const doctorCards = document.querySelectorAll('.doctor-card');
-
-        function filterDoctors() {
-            const searchTerm = searchInput.value.toLowerCase().trim();
-            const specialty = specialtyFilter.value;
-            const availability = availabilityFilter.value;
-
-            doctorCards.forEach(card => {
-                const name = card.querySelector('h4').textContent.toLowerCase();
-                const specialtyText = card.querySelector('.doctor-specialty').textContent.toLowerCase();
-                const bio = card.querySelector('.doctor-bio').textContent.toLowerCase();
-                const cardSpecialty = card.dataset.specialty;
-                const isAvailable = card.dataset.available === 'true';
-
-                let show = true;
-
-                // Search filter
-                if (searchTerm && !name.includes(searchTerm) && !specialtyText.includes(searchTerm) && !bio.includes(searchTerm)) {
-                    show = false;
-                }
-
-                // Specialty filter
-                if (specialty !== 'all' && cardSpecialty !== specialty) {
-                    show = false;
-                }
-
-                // Availability filter
-                if (availability === 'available' && !isAvailable) {
-                    show = false;
-                }
-                if (availability === 'unavailable' && isAvailable) {
-                    show = false;
-                }
-
-                card.style.display = show ? 'block' : 'none';
-                if (show) {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                } else {
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(20px)';
-                }
-            });
-        }
-
-        searchInput.addEventListener('input', filterDoctors);
-        specialtyFilter.addEventListener('change', filterDoctors);
-        availabilityFilter.addEventListener('change', filterDoctors);
-
-        // Load More functionality
-        const loadMoreBtn = document.getElementById('loadMoreBtn');
-        let visibleCount = 8;
-        const totalDoctors = doctorCards.length;
-
-        function updateVisibleDoctors() {
-            doctorCards.forEach((card, index) => {
-                if (index < visibleCount) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        // Initially show first 8 doctors
-        updateVisibleDoctors();
-
-        loadMoreBtn.addEventListener('click', function() {
-            visibleCount = Math.min(visibleCount + 4, totalDoctors);
-            updateVisibleDoctors();
-
-            if (visibleCount >= totalDoctors) {
-                this.style.display = 'none';
-            }
-
-            // Update filter results
-            filterDoctors();
-        });
-    </script>
+<script type="module" src="/src/js/app.js"></script>
 </body>
-                      </html>
+</html>
