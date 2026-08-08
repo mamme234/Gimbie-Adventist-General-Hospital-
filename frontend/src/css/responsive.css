@@ -1,0 +1,131 @@
+/* ============================================
+   RESPONSIVE STYLES
+   ============================================ */
+
+/* ===== MOBILE FIRST ===== */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 16px;
+    }
+    
+    .section {
+        padding: 50px 0;
+    }
+    
+    .section__title {
+        font-size: 1.5rem;
+    }
+    
+    .hero {
+        min-height: 70vh;
+    }
+    
+    .hero__title {
+        font-size: 1.8rem;
+    }
+    
+    .hero__desc {
+        font-size: 0.95rem;
+    }
+    
+    .hero__stats {
+        gap: 16px;
+    }
+    
+    .stat__number {
+        font-size: 1.5rem;
+    }
+    
+    .statistic__number {
+        font-size: 2rem;
+    }
+    
+    .btn--large {
+        padding: 12px 24px;
+        font-size: 0.95rem;
+    }
+    
+    .contact__form {
+        padding: 20px;
+    }
+    
+    .footer {
+        padding: 40px 0 20px;
+    }
+}
+
+/* ===== TABLET ===== */
+@media (min-width: 481px) and (max-width: 768px) {
+    .hero__title {
+        font-size: 2.5rem;
+    }
+    
+    .features__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .services__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .testimonials__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ===== LAPTOP ===== */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .hero__title {
+        font-size: 2.8rem;
+    }
+}
+
+/* ===== DARK MODE SUPPORT ===== */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-white: #1a1a2e;
+        --bg-light: #24243a;
+        --bg-gray: #2a2a42;
+        --text-primary: #e8e8f0;
+        --text-secondary: #b0b0c8;
+        --text-light: #8888a8;
+        --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+    
+    .header {
+        background: rgba(26, 26, 46, 0.96);
+    }
+    
+    .feature-card,
+    .service-card,
+    .testimonial-card {
+        background: var(--bg-light);
+        border-color: #3a3a5a;
+    }
+    
+    .contact__form {
+        background: var(--bg-light);
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        background: var(--bg-gray);
+        border-color: #3a3a5a;
+        color: var(--text-primary);
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus {
+        border-color: var(--primary);
+    }
+    
+    .nav {
+        background: var(--bg-white);
+    }
+    
+    .emergency-banner {
+        background: #b71c1c;
+    }
+    }
