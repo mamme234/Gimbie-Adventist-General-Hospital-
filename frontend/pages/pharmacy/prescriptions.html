@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prescriptions - Pharmacy - Gimbie Adventist General Hospital</title>
+    <link rel="icon" href="/assets/images/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/pharmacy.css" />
+    <link rel="stylesheet" href="/src/css/responsive.css" />
+</head>
+<body>
+    <div class="pharmacy-wrapper">
+        <aside class="pharmacy-sidebar" id="pharmacySidebar">
+            <div class="logo" style="padding: 0 20px 20px; border-bottom: 1px solid #e8edea; margin-bottom: 16px;">
+                <a href="/pages/pharmacy/dashboard.html">
+                    <img src="/assets/images/logo.png" alt="Gimbie Adventist" class="logo__img" style="height: 36px;" />
+                    <div class="logo__text">
+                        <span class="logo__name" style="font-size: 0.95rem;">Gimbie Adventist</span>
+                        <span class="logo__tag" style="font-size: 0.65rem;">Pharmacy</span>
+                    </div>
+                </a>
+            </div>
+            <nav class="pharmacy-sidebar__nav">
+                <ul>
+                    <li><a href="/pages/pharmacy/dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                    <li><a href="/pages/pharmacy/medications.html"><i class="fas fa-pills"></i> Medications</a></li>
+                    <li><a href="/pages/pharmacy/stock.html"><i class="fas fa-boxes"></i> Stock</a></li>
+                    <li><a href="/pages/pharmacy/prescriptions.html" class="active"><i class="fas fa-prescription"></i> Prescriptions</a></li>
+                    <li><a href="/pages/pharmacy/reports.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="pharmacy-main">
+            <div class="doctor-topbar">
+                <div class="admin-topbar__title">
+                    <h1>Prescriptions</h1>
+                    <p>Process and manage prescriptions</p>
+                </div>
+            </div>
+
+            <!-- Prescription Queue -->
+            <div class="prescription-queue">
+                <div class="header">
+                    <h3>Prescription Queue</h3>
+                    <span id="queueCount">0 pending</span>
+                </div>
+                <div id="prescriptionQueue">
+                    <!-- Loaded from JS -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module">
+        import { loadPrescriptionQueue } from '/src/js/pharmacy.js';
+        document.addEventListener('DOMContentLoaded', () => loadPrescriptionQueue());
+    </script>
+</body>
+</html>
