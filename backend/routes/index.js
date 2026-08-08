@@ -38,6 +38,7 @@ const contactRoutes = require('./contact.routes');
 const settingsRoutes = require('./settings.routes');
 const uploadRoutes = require('./upload.routes');
 const dashboardRoutes = require('./dashboard.routes');
+const aiRoutes = require('./ai.routes'); // <-- AI ROUTES ADDED
 
 // ============================================
 // AUTH MIDDLEWARE
@@ -86,6 +87,19 @@ router.get('/health', (req, res) => {
     uptime: process.uptime(),
     version: require('../package.json').version,
     banks: paymentConfig.getEnabledBanks ? paymentConfig.getEnabledBanks().map(b => b.shortName) : []
+  });
+});
+
+// ============================================
+// AI STATUS (Public - no auth required)
+// ============================================
+const aiService = require('../services/ai.service');
+router.get('/ai/status', (req, res) => {
+  res.json({
+    success: true,
+    aiAvailable: aiService.isAvailable(),
+    geminiEnabled: process.env.AI_ENABLED === 'true',
+    model: process.env.GEMINI_MODEL || 'gemini-pro'
   });
 });
 
@@ -191,6 +205,11 @@ router.use('/upload', uploadRoutes);
 // DASHBOARD
 // ============================================
 router.use('/dashboard', dashboardRoutes);
+
+// ============================================
+// AI ROUTES (Gemini AI Integration)
+// ============================================
+router.use('/ai', aiRoutes);
 
 // ============================================
 // ERROR HANDLING FOR ROUTES
