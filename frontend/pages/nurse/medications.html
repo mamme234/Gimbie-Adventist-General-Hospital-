@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Medications - Nurse - Gimbie Adventist General Hospital</title>
+    <link rel="icon" href="/assets/images/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/nurse.css" />
+    <link rel="stylesheet" href="/src/css/responsive.css" />
+</head>
+<body>
+    <div class="nurse-wrapper">
+        <aside class="nurse-sidebar" id="nurseSidebar">
+            <div class="profile-section">
+                <div class="avatar">N</div>
+                <div class="name">Nurse Name</div>
+                <div class="specialty">Ward</div>
+            </div>
+            <nav class="nurse-sidebar__nav">
+                <ul>
+                    <li><a href="/pages/nurse/dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                    <li><a href="/pages/nurse/patients.html"><i class="fas fa-users"></i> Patients</a></li>
+                    <li><a href="/pages/nurse/vitals.html"><i class="fas fa-heartbeat"></i> Vitals</a></li>
+                    <li><a href="/pages/nurse/medications.html" class="active"><i class="fas fa-syringe"></i> Medications</a></li>
+                    <li><a href="/pages/nurse/wards.html"><i class="fas fa-bed"></i> Wards</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="nurse-main">
+            <div class="doctor-topbar">
+                <div class="admin-topbar__title">
+                    <h1>Medication Administration</h1>
+                    <p>Administer medications to patients</p>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                <!-- Medication Form -->
+                <div style="background: #fff; padding: 24px; border-radius: var(--radius); box-shadow: var(--shadow);">
+                    <h3 style="margin-bottom: 16px;">Administer Medication</h3>
+                    <form id="medicationForm">
+                        <div class="form-group">
+                            <label>Patient</label>
+                            <select required>
+                                <option value="">Select Patient</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Medication</label>
+                            <select required>
+                                <option value="">Select Medication</option>
+                            </select>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                            <div class="form-group">
+                                <label>Dosage</label>
+                                <input type="text" placeholder="500mg" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Route</label>
+                                <select required>
+                                    <option value="">Select Route</option>
+                                    <option value="Oral">Oral</option>
+                                    <option value="IV">IV</option>
+                                    <option value="IM">IM</option>
+                                    <option value="SC">SC</option>
+                                    <option value="Topical">Topical</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Notes</label>
+                            <textarea rows="2" placeholder="Administration notes..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn--primary">Administer</button>
+                    </form>
+                </div>
+
+                <!-- Medication Schedule -->
+                <div style="background: #fff; padding: 24px; border-radius: var(--radius); box-shadow: var(--shadow);">
+                    <h3 style="margin-bottom: 16px;">Today's Medications</h3>
+                    <div id="medicationSchedule">
+                        <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                            <i class="fas fa-prescription" style="font-size: 2rem; display: block; margin-bottom: 8px;"></i>
+                            No medications scheduled for today
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module">
+        import { administerMedication } from '/src/js/nurse.js';
+        document.getElementById('medicationForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            await administerMedication(Object.fromEntries(formData));
+        });
+    </script>
+</body>
+                                                                                         </html>
