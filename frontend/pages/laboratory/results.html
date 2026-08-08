@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Results - Laboratory - Gimbie Adventist General Hospital</title>
+    <link rel="icon" href="/assets/images/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/laboratory.css" />
+    <link rel="stylesheet" href="/src/css/responsive.css" />
+</head>
+<body>
+    <div class="lab-wrapper">
+        <aside class="lab-sidebar" id="labSidebar">
+            <div class="logo" style="padding: 0 20px 20px; border-bottom: 1px solid #e8edea; margin-bottom: 16px;">
+                <a href="/pages/laboratory/dashboard.html">
+                    <img src="/assets/images/logo.png" alt="Gimbie Adventist" class="logo__img" style="height: 36px;" />
+                    <div class="logo__text">
+                        <span class="logo__name" style="font-size: 0.95rem;">Gimbie Adventist</span>
+                        <span class="logo__tag" style="font-size: 0.65rem;">Laboratory</span>
+                    </div>
+                </a>
+            </div>
+            <nav class="lab-sidebar__nav">
+                <ul>
+                    <li><a href="/pages/laboratory/dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                    <li><a href="/pages/laboratory/tests.html"><i class="fas fa-flask"></i> Tests</a></li>
+                    <li><a href="/pages/laboratory/results.html" class="active"><i class="fas fa-file-medical-alt"></i> Results</a></li>
+                    <li><a href="/pages/laboratory/reports.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="lab-main">
+            <div class="doctor-topbar">
+                <div class="admin-topbar__title">
+                    <h1>Test Results</h1>
+                    <p>Enter and verify test results</p>
+                </div>
+            </div>
+
+            <!-- Results Entry -->
+            <div class="results-entry">
+                <h3 style="margin-bottom: 16px;">Enter Results</h3>
+                <form id="resultsForm" data-test-id="">
+                    <div class="form-group">
+                        <label>Select Test</label>
+                        <select id="testSelect" required>
+                            <option value="">Select a pending test</option>
+                            <!-- Loaded from JS -->
+                        </select>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Test Name</label>
+                            <input type="text" id="resultTestName" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label>Patient</label>
+                            <input type="text" id="resultPatient" readonly />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Results</label>
+                        <textarea id="resultData" rows="4" placeholder="Enter test results..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Reference Range</label>
+                        <input type="text" id="resultReference" placeholder="e.g., 4.5-11.0 x 10^3/µL" />
+                    </div>
+                    <div class="form-group">
+                        <label>Notes</label>
+                        <textarea id="resultNotes" rows="2" placeholder="Additional notes..."></textarea>
+                    </div>
+                    <div style="display: flex; gap: 12px;">
+                        <button type="submit" class="btn btn--primary">Save Results</button>
+                        <button type="button" class="btn btn--outline" onclick="verifyResults()">
+                            <i class="fas fa-check-circle"></i> Verify
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Recent Results -->
+            <div style="background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px; margin-top: 24px;">
+                <h3 style="margin-bottom: 16px;">Recent Results</h3>
+                <div id="recentResults">
+                    <!-- Loaded from JS -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module">
+        import { enterResults, verifyResults, loadRecentResults } from '/src/js/laboratory.js';
+        
+        window.verifyResults = async () => {
+            const testId = document.getElementById('testSelect').value;
+            if (!testId) {
+                alert('Please select a test first');
+                return;
+            }
+            await verifyResults(testId);
+        };
+        
+        document.getElementById('resultsForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const testId = document.getElementById('testSelect').value;
+            if (!testId) {
+                alert('Please select a test');
+                return;
+            }
+            const data = {
+                results: document.getElementById('resultData').value,
+                referenceRange: document.getElementById('resultReference').value,
+                notes: document.getElementById('resultNotes').value,
+            };
+            await enterResults(testId, data);
+        });
+        
+        document.getElementById('testSelect')?.addEventListener('change', async (e) => {
+            const testId = e.target.value;
+            if (testId) {
+                // Load test details
+                const response = await API.laboratory.get(testId);
+                if (response.success) {
+                    document.getElementById('resultTestName').value = response.data.testName;
+                    document.getElementById('resultPatient').value = response.data.patient?.fullName || 'N/A';
+                    document.getElementById('resultReference').value = response.data.referenceRange || '';
+                    document.getElementById('resultData').value = response.data.results || '';
+                    document.getElementById('resultNotes').value = response.data.notes || '';
+                }
+            }
+        });
+        
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Load pending tests
+            const response = await API.laboratory.getPending();
+            if (response.success) {
+                const select = document.getElementById('testSelect');
+                response.data.forEach(test => {
+                    const option = document.createElement('option');
+                    option.value = test._id;
+                    option.textContent = `${test.testId} - ${test.patient?.fullName || 'Unknown'} - ${test.testName}`;
+                    select.appendChild(option);
+                });
+            }
+            
+            loadRecentResults();
+        });
+    </script>
+</body>
+                          </html>
