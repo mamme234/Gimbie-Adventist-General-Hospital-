@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Billing - Patient - Gimbie Adventist General Hospital</title>
+    <link rel="icon" href="/assets/images/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/patient.css" />
+    <link rel="stylesheet" href="/src/css/responsive.css" />
+</head>
+<body>
+    <div class="patient-wrapper">
+        <aside class="patient-sidebar" id="patientSidebar">
+            <div class="profile-section">
+                <div class="avatar">P</div>
+                <div class="name">Patient Name</div>
+                <div class="patient-id">ID: N/A</div>
+            </div>
+            <nav class="patient-sidebar__nav">
+                <ul>
+                    <li><a href="/pages/patient/dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                    <li><a href="/pages/patient/appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a></li>
+                    <li><a href="/pages/patient/medical-records.html"><i class="fas fa-file-medical"></i> Medical Records</a></li>
+                    <li><a href="/pages/patient/lab-results.html"><i class="fas fa-microscope"></i> Lab Results</a></li>
+                    <li><a href="/pages/patient/prescriptions.html"><i class="fas fa-prescription"></i> Prescriptions</a></li>
+                    <li><a href="/pages/patient/billing.html" class="active"><i class="fas fa-file-invoice-dollar"></i> Billing</a></li>
+                    <li><a href="/pages/patient/profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="patient-main">
+            <div class="doctor-topbar">
+                <div class="admin-topbar__title">
+                    <h1>Billing & Payments</h1>
+                    <p>View your invoices and payment history</p>
+                </div>
+            </div>
+
+            <!-- Outstanding Balance -->
+            <div style="background: #fff; padding: 20px 24px; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 24px; border-left: 4px solid var(--danger);">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <span style="color: var(--text-secondary);">Outstanding Balance</span>
+                        <h2 id="outstandingBalance" style="color: var(--danger);">ETB 0.00</h2>
+                    </div>
+                    <button class="btn btn--primary" onclick="window.location.href='/pages/patient/payment.html'">
+                        <i class="fas fa-credit-card"></i> Make Payment
+                    </button>
+                </div>
+            </div>
+
+            <div class="medical-records">
+                <div class="header">
+                    <h3>All Invoices</h3>
+                    <span id="invoiceCount">0 invoices</span>
+                </div>
+                <div id="billingContainer">
+                    <!-- Loaded from JS -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module">
+        import { loadBilling } from '/src/js/patient.js';
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = API.getCurrentUser();
+            if (user) loadBilling(user.id);
+        });
+    </script>
+</body>
+                                                                        </html>
