@@ -1,41 +1,21 @@
 // middleware/rateLimiter.js
-const redis = require('../config/redis');
 const { AuditLog } = require('../models/AuditLog');
 const { logger } = require('../utils/logger');
+
+// In-memory rate limit storage
+const rateLimitStore = new Map();
 
 class RateLimiter {
   constructor() {
     this.defaultConfig = {
-      windowMs: 60000, // 1 minute
+      windowMs: 60000,
       maxRequests: 100,
-      blockDuration: 300000 // 5 minutes
+      blockDuration: 300000
     };
-    
-    // In-memory fallback if Redis is not available
-    this.memoryStore = new Map();
-    this.useRedis = false;
-    
-    // Check if Redis is available
-    this.checkRedisConnection();
+    // Clean up expired entries every minute
+    setInterval(() => this.cleanup(), 60000);
   }
 
-  // Check Redis connection
-  async checkRedisConnection() {
-    try {
-      const status = redis.getStatus ? redis.getStatus() : { connected: false };
-      this.useRedis = status.connected || false;
-      if (this.useRedis) {
-        logger.info('✅ Rate limiter using Redis');
-      } else {
-        logger.warn('⚠️ Rate limiter using memory store (Redis not available)');
-      }
-    } catch (error) {
-      this.useRedis = false;
-      logger.warn('⚠️ Rate limiter using memory store (Redis connection failed)');
-    }
-  }
-
-  // Main rate limiter middleware
   create(config = {}) {
     const options = { ...this.defaultConfig, ...config };
     
@@ -44,22 +24,18 @@ class RateLimiter {
         const key = this.getRateLimitKey(req);
         const currentCount = await this.getRequestCount(key);
         
-        // Check if blocked
-        const isBlocked = await this.isBlocked(key);
+        const isBlocked = this.isBlocked(key);
         if (isBlocked) {
           return this.handleBlocked(req, res);
         }
 
-        // Check rate limit
         if (currentCount >= options.maxRequests) {
-          await this.blockKey(key, options.blockDuration);
+          this.blockKey(key, options.blockDuration);
           return this.handleRateLimitExceeded(req, res, options);
         }
 
-        // Increment counter
-        await this.incrementRequestCount(key, options.windowMs);
+        this.incrementRequestCount(key, options.windowMs);
         
-        // Add rate limit headers
         this.setRateLimitHeaders(res, {
           limit: options.maxRequests,
           remaining: Math.max(0, options.maxRequests - currentCount - 1),
@@ -69,126 +45,68 @@ class RateLimiter {
         next();
       } catch (error) {
         logger.error('Rate limiter error:', error);
-        next(); // Fail open - allow request if rate limiter fails
+        next();
       }
     };
   }
 
-  // Get rate limit key
   getRateLimitKey(req) {
     const baseKey = 'rate_limit';
-    const userKey = req.user?._id || req.ip || req.connection.remoteAddress;
+    const userKey = req.user?._id || req.ip || req.connection?.remoteAddress || 'anonymous';
     const endpointKey = this.getEndpointKey(req);
     return `${baseKey}:${userKey}:${endpointKey}`;
   }
 
-  // Get endpoint key
   getEndpointKey(req) {
     const method = req.method;
     const path = req.originalUrl?.split('?')[0] || req.url || '/';
     return `${method}:${path}`;
   }
 
-  // Get request count
-  async getRequestCount(key) {
-    try {
-      if (this.useRedis) {
-        const count = await redis.get(key, false);
-        return parseInt(count) || 0;
-      } else {
-        // Memory store fallback
-        const data = this.memoryStore.get(key);
-        if (!data) return 0;
-        
-        // Check if window has expired
-        if (Date.now() > data.windowEnd) {
-          this.memoryStore.delete(key);
-          return 0;
-        }
-        return data.count || 0;
-      }
-    } catch (error) {
-      logger.error('Get request count error:', error);
+  getRequestCount(key) {
+    const data = rateLimitStore.get(key);
+    if (!data) return 0;
+    if (Date.now() > data.windowEnd) {
+      rateLimitStore.delete(key);
       return 0;
     }
+    return data.count || 0;
   }
 
-  // Increment request count
-  async incrementRequestCount(key, windowMs) {
-    try {
-      if (this.useRedis) {
-        // Use Redis multi for atomic operation
-        const multi = redis.client.multi();
-        multi.incr(key);
-        multi.expire(key, Math.ceil(windowMs / 1000));
-        await multi.exec();
-      } else {
-        // Memory store fallback
-        const now = Date.now();
-        const data = this.memoryStore.get(key) || { count: 0, windowEnd: now + windowMs };
-        
-        if (now > data.windowEnd) {
-          data.count = 1;
-          data.windowEnd = now + windowMs;
-        } else {
-          data.count += 1;
-        }
-        
-        this.memoryStore.set(key, data);
-        
-        // Clean up expired entries periodically
-        if (this.memoryStore.size > 1000) {
-          this.cleanupMemoryStore();
-        }
-      }
-    } catch (error) {
-      logger.error('Increment request count error:', error);
-      throw error;
+  incrementRequestCount(key, windowMs) {
+    const now = Date.now();
+    const data = rateLimitStore.get(key) || { count: 0, windowEnd: now + windowMs };
+    
+    if (now > data.windowEnd) {
+      data.count = 1;
+      data.windowEnd = now + windowMs;
+    } else {
+      data.count += 1;
     }
+    
+    rateLimitStore.set(key, data);
   }
 
-  // Block key
-  async blockKey(key, duration) {
-    try {
-      const blockKey = `${key}:blocked`;
-      if (this.useRedis) {
-        await redis.setex(blockKey, Math.ceil(duration / 1000), '1');
-      } else {
-        this.memoryStore.set(blockKey, {
-          blocked: true,
-          expiresAt: Date.now() + duration
-        });
-      }
-    } catch (error) {
-      logger.error('Block key error:', error);
-    }
+  blockKey(key, duration) {
+    const blockKey = `${key}:blocked`;
+    rateLimitStore.set(blockKey, {
+      blocked: true,
+      expiresAt: Date.now() + duration
+    });
   }
 
-  // Check if blocked
-  async isBlocked(key) {
-    try {
-      const blockKey = `${key}:blocked`;
-      if (this.useRedis) {
-        const blocked = await redis.get(blockKey, false);
-        return !!blocked;
-      } else {
-        const data = this.memoryStore.get(blockKey);
-        if (!data) return false;
-        if (Date.now() > data.expiresAt) {
-          this.memoryStore.delete(blockKey);
-          return false;
-        }
-        return data.blocked || false;
-      }
-    } catch (error) {
-      logger.error('Check blocked error:', error);
+  isBlocked(key) {
+    const blockKey = `${key}:blocked`;
+    const data = rateLimitStore.get(blockKey);
+    if (!data) return false;
+    if (Date.now() > data.expiresAt) {
+      rateLimitStore.delete(blockKey);
       return false;
     }
+    return data.blocked || false;
   }
 
-  // Handle rate limit exceeded
   handleRateLimitExceeded(req, res, options) {
-    // Log rate limit exceeded
     AuditLog.logAction({
       action: 'rate_limit',
       resource: 'request',
@@ -217,17 +135,15 @@ class RateLimiter {
     });
   }
 
-  // Handle blocked
   handleBlocked(req, res) {
     return res.status(429).json({
       success: false,
       message: 'You have been temporarily blocked due to excessive requests.',
       code: 'RATE_LIMIT_BLOCKED',
-      retryAfter: Math.ceil(300000 / 1000) // 5 minutes default
+      retryAfter: 300
     });
   }
 
-  // Set rate limit headers
   setRateLimitHeaders(res, info) {
     res.set({
       'X-RateLimit-Limit': info.limit,
@@ -236,176 +152,81 @@ class RateLimiter {
     });
   }
 
-  // Clean up memory store
-  cleanupMemoryStore() {
+  cleanup() {
     const now = Date.now();
-    for (const [key, value] of this.memoryStore.entries()) {
+    for (const [key, value] of rateLimitStore.entries()) {
       if (value.windowEnd && now > value.windowEnd) {
-        this.memoryStore.delete(key);
+        rateLimitStore.delete(key);
       }
       if (value.expiresAt && now > value.expiresAt) {
-        this.memoryStore.delete(key);
+        rateLimitStore.delete(key);
       }
     }
   }
 
-  // ============================================
-  // SPECIALIZED RATE LIMITERS
-  // ============================================
-
-  // Global rate limiter
-  createGlobal() {
-    return this.create({
-      windowMs: 60000,
-      maxRequests: 1000,
-      blockDuration: 600000 // 10 minutes
-    });
-  }
-
-  // Authentication rate limiter (stricter)
   createAuth() {
     return this.create({
-      windowMs: 300000, // 5 minutes
+      windowMs: 300000,
       maxRequests: 20,
-      blockDuration: 1800000 // 30 minutes
+      blockDuration: 1800000
     });
   }
 
-  // API rate limiter
   createApi() {
     return this.create({
       windowMs: 60000,
       maxRequests: 500,
-      blockDuration: 300000 // 5 minutes
+      blockDuration: 300000
     });
   }
 
-  // Sensitive operations rate limiter
   createSensitive() {
     return this.create({
-      windowMs: 3600000, // 1 hour
+      windowMs: 3600000,
       maxRequests: 100,
-      blockDuration: 3600000 // 1 hour
+      blockDuration: 3600000
     });
   }
 
-  // Bulk operations rate limiter
   createBulk() {
     return this.create({
       windowMs: 60000,
       maxRequests: 10,
-      blockDuration: 600000 // 10 minutes
+      blockDuration: 600000
     });
   }
 
-  // Emergency endpoints rate limiter
   createEmergency() {
     return this.create({
       windowMs: 60000,
       maxRequests: 30,
-      blockDuration: 300000 // 5 minutes
+      blockDuration: 300000
     });
   }
 
-  // Chat endpoints rate limiter
   createChat() {
     return this.create({
-      windowMs: 10000, // 10 seconds
+      windowMs: 10000,
       maxRequests: 20,
-      blockDuration: 60000 // 1 minute
+      blockDuration: 60000
     });
   }
 
-  // File upload rate limiter
   createUpload() {
     return this.create({
-      windowMs: 3600000, // 1 hour
+      windowMs: 3600000,
       maxRequests: 50,
-      blockDuration: 3600000 // 1 hour
+      blockDuration: 3600000
     });
   }
 
-  // Payment endpoints rate limiter
   createPayment() {
     return this.create({
-      windowMs: 600000, // 10 minutes
+      windowMs: 600000,
       maxRequests: 10,
-      blockDuration: 1800000 // 30 minutes
+      blockDuration: 1800000
     });
-  }
-
-  // ============================================
-  // UTILITY METHODS
-  // ============================================
-
-  // Reset rate limit for a specific key
-  async resetLimit(key) {
-    try {
-      if (this.useRedis) {
-        await redis.del(key);
-        await redis.del(`${key}:blocked`);
-      } else {
-        this.memoryStore.delete(key);
-        this.memoryStore.delete(`${key}:blocked`);
-      }
-      return true;
-    } catch (error) {
-      logger.error('Reset limit error:', error);
-      return false;
-    }
-  }
-
-  // Get current rate limit status
-  async getStatus(key) {
-    try {
-      const count = await this.getRequestCount(key);
-      const isBlocked = await this.isBlocked(key);
-      return {
-        count,
-        isBlocked,
-        remaining: Math.max(0, 100 - count), // Assuming default max 100
-        resetIn: isBlocked ? 300 : 60 // Seconds
-      };
-    } catch (error) {
-      logger.error('Get status error:', error);
-      return null;
-    }
-  }
-
-  // Get all rate limit keys (for monitoring)
-  async getAllKeys() {
-    try {
-      if (this.useRedis) {
-        return await redis.keys('rate_limit:*');
-      } else {
-        return Array.from(this.memoryStore.keys());
-      }
-    } catch (error) {
-      logger.error('Get all keys error:', error);
-      return [];
-    }
-  }
-
-  // Clear all rate limits
-  async clearAll() {
-    try {
-      if (this.useRedis) {
-        const keys = await redis.keys('rate_limit:*');
-        for (const key of keys) {
-          await redis.del(key);
-        }
-        return keys.length;
-      } else {
-        const count = this.memoryStore.size;
-        this.memoryStore.clear();
-        return count;
-      }
-    } catch (error) {
-      logger.error('Clear all error:', error);
-      return 0;
-    }
   }
 }
 
-// Export singleton instance
 module.exports = new RateLimiter();
