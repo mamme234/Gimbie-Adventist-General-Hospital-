@@ -2,7 +2,13 @@
  * Gimbie Adventist General Hospital - Main Application
  */
 
+import API from './api.js';
+import { initAuth } from './auth.js';
+
 document.addEventListener('DOMContentLoaded', function() {
+    // ===== INITIALIZE AUTH =====
+    initAuth();
+
     // ===== MOBILE MENU =====
     const hamburger = document.getElementById('hamburger');
     const nav = document.getElementById('mainNav');
@@ -70,11 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCounter();
     };
 
-    // Intersection Observer for counters
-    const observerOptions = {
-        threshold: 0.5,
-    };
-
+    const observerOptions = { threshold: 0.5 };
     const counterObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -111,13 +113,12 @@ document.addEventListener('DOMContentLoaded', function() {
             };
 
             try {
-                // In production, send to backend
                 console.log('Contact form submitted:', data);
-                alert('Thank you for your message! We will get back to you soon.');
+                showToast('Thank you for your message! We will get back to you soon.', 'success');
                 this.reset();
             } catch (error) {
                 console.error('Error sending message:', error);
-                alert('Something went wrong. Please try again later.');
+                showToast('Something went wrong. Please try again later.', 'error');
             }
         });
     }
@@ -146,7 +147,6 @@ async function loadTestimonials() {
                 </div>
             `).join('');
         } else {
-            // Fallback testimonials
             container.innerHTML = getFallbackTestimonials();
         }
     } catch (error) {
@@ -155,7 +155,6 @@ async function loadTestimonials() {
     }
 }
 
-// ===== FALLBACK TESTIMONIALS =====
 function getFallbackTestimonials() {
     const testimonials = [
         {
@@ -175,24 +174,6 @@ function getFallbackTestimonials() {
             location: 'Gimbi',
             rating: 5,
             comment: 'The hospital environment was comfortable, and the staff were helpful throughout my visit.'
-        },
-        {
-            name: 'Patient',
-            location: 'West Wollega',
-            rating: 5,
-            comment: 'I appreciated the friendly service and the attention given to patients.'
-        },
-        {
-            name: 'Patient',
-            location: 'Gimbi',
-            rating: 5,
-            comment: 'The appointment and consultation process was organized and easy to understand.'
-        },
-        {
-            name: 'Patient',
-            location: 'West Wollega',
-            rating: 5,
-            comment: 'The healthcare team showed kindness and professionalism throughout my visit.'
         }
     ];
 
@@ -211,7 +192,7 @@ function getFallbackTestimonials() {
 }
 
 // ===== LOAD SERVICES =====
-async function loadServices() {
+function loadServices() {
     const container = document.getElementById('servicesGrid');
     if (!container) return;
 
@@ -233,37 +214,8 @@ async function loadServices() {
     `).join('');
 }
 
-// ===== UTILITY FUNCTIONS =====
-function formatDate(date) {
-    return new Date(date).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-    });
-}
-
-function formatTime(time) {
-    const [hours, minutes] = time.split(':');
-    const hour = parseInt(hours);
-    const ampm = hour >= 12 ? 'PM' : 'AM';
-    const hour12 = hour % 12 || 12;
-    return `${hour12}:${minutes} ${ampm}`;
-}
-
-function formatCurrency(amount) {
-    return new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'ETB',
-        minimumFractionDigits: 2,
-    }).format(amount);
-}
-
-function getInitials(name) {
-    return name.split(' ').map(word => word[0]).join('').toUpperCase();
-}
-
+// ===== SHOW TOAST =====
 function showToast(message, type = 'success') {
-    // Simple toast notification
     const toast = document.createElement('div');
     toast.className = `toast toast--${type}`;
     toast.textContent = message;
@@ -290,7 +242,7 @@ function showToast(message, type = 'success') {
     }, 3000);
 }
 
-// Add animation styles
+// ===== ANIMATION STYLES =====
 const styleSheet = document.createElement('style');
 styleSheet.textContent = `
     @keyframes slideIn {
@@ -312,3 +264,6 @@ styleSheet.textContent = `
     }
 `;
 document.head.appendChild(styleSheet);
+
+// ===== EXPOSE GLOBALLY =====
+window.API = API;
