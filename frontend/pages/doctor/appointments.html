@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Appointments - Doctor - Gimbie Adventist General Hospital</title>
+    <link rel="icon" href="/assets/images/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/doctor.css" />
+    <link rel="stylesheet" href="/src/css/responsive.css" />
+</head>
+<body>
+    <div class="doctor-wrapper">
+        <aside class="doctor-sidebar" id="doctorSidebar">
+            <div class="profile-section">
+                <div class="avatar">D</div>
+                <div class="name">Dr. Name</div>
+                <div class="specialty">Specialty</div>
+            </div>
+            <nav class="doctor-sidebar__nav">
+                <ul>
+                    <li><a href="/pages/doctor/dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                    <li><a href="/pages/doctor/appointments.html" class="active"><i class="fas fa-calendar-check"></i> Appointments</a></li>
+                    <li><a href="/pages/doctor/patients.html"><i class="fas fa-users"></i> Patients</a></li>
+                    <li><a href="/pages/doctor/consultations.html"><i class="fas fa-stethoscope"></i> Consultations</a></li>
+                    <li><a href="/pages/doctor/prescriptions.html"><i class="fas fa-prescription"></i> Prescriptions</a></li>
+                    <li><a href="/pages/doctor/lab-requests.html"><i class="fas fa-microscope"></i> Lab Requests</a></li>
+                    <li><a href="/pages/doctor/profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="doctor-main">
+            <div class="doctor-topbar">
+                <div class="admin-topbar__title">
+                    <h1>My Appointments</h1>
+                    <p>View and manage your appointments</p>
+                </div>
+            </div>
+
+            <div class="doctor-appointments" id="appointmentsList">
+                <!-- Loaded from JS -->
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="/src/js/doctor.js"></script>
+</body>
+</html>
