@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Patients - Nurse - Gimbie Adventist General Hospital</title>
+    <link rel="icon" href="/assets/images/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/nurse.css" />
+    <link rel="stylesheet" href="/src/css/responsive.css" />
+</head>
+<body>
+    <div class="nurse-wrapper">
+        <aside class="nurse-sidebar" id="nurseSidebar">
+            <div class="profile-section">
+                <div class="avatar">N</div>
+                <div class="name">Nurse Name</div>
+                <div class="specialty">Ward</div>
+            </div>
+            <nav class="nurse-sidebar__nav">
+                <ul>
+                    <li><a href="/pages/nurse/dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                    <li><a href="/pages/nurse/patients.html" class="active"><i class="fas fa-users"></i> Patients</a></li>
+                    <li><a href="/pages/nurse/vitals.html"><i class="fas fa-heartbeat"></i> Vitals</a></li>
+                    <li><a href="/pages/nurse/medications.html"><i class="fas fa-syringe"></i> Medications</a></li>
+                    <li><a href="/pages/nurse/wards.html"><i class="fas fa-bed"></i> Wards</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="nurse-main">
+            <div class="doctor-topbar">
+                <div class="admin-topbar__title">
+                    <h1>My Patients</h1>
+                    <p>View and manage assigned patients</p>
+                </div>
+            </div>
+
+            <!-- Search -->
+            <div style="background: #fff; padding: 16px 20px; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 24px;">
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 200px;">
+                        <input type="text" id="searchInput" placeholder="Search patients..." style="width: 100%; padding: 10px 16px; border: 1px solid #ddd; border-radius: 8px;" />
+                    </div>
+                    <div>
+                        <select id="wardFilter" style="padding: 10px 16px; border: 1px solid #ddd; border-radius: 8px;">
+                            <option value="">All Wards</option>
+                            <option value="Ward A">Ward A</option>
+                            <option value="Ward B">Ward B</option>
+                            <option value="Ward C">Ward C</option>
+                            <option value="Maternity">Maternity</option>
+                            <option value="Emergency">Emergency</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button class="btn btn--primary" onclick="searchPatients()"><i class="fas fa-search"></i> Search</button>
+                        <button class="btn btn--outline" onclick="resetSearch()"><i class="fas fa-undo"></i> Reset</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Patients List -->
+            <div id="patientsList" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px;">
+                <!-- Loaded from JS -->
+            </div>
+        </main>
+    </div>
+
+    <script type="module">
+        import { loadAssignedPatients } from '/src/js/nurse.js';
+        window.searchPatients = () => {
+            const search = document.getElementById('searchInput').value;
+            const ward = document.getElementById('wardFilter').value;
+            loadAssignedPatients(search, ward);
+        };
+        window.resetSearch = () => {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('wardFilter').value = '';
+            loadAssignedPatients();
+        };
+        document.addEventListener('DOMContentLoaded', () => loadAssignedPatients());
+    </script>
+</body>
+                                                             </html>
