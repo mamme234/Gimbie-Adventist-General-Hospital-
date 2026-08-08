@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Patient Dashboard - Gimbie Adventist General Hospital</title>
+    <link rel="icon" href="/assets/images/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/patient.css" />
+    <link rel="stylesheet" href="/src/css/responsive.css" />
+</head>
+<body>
+    <div class="patient-wrapper">
+        <!-- Sidebar -->
+        <aside class="patient-sidebar" id="patientSidebar">
+            <div class="profile-section">
+                <div class="avatar" id="patientAvatar">P</div>
+                <div class="name" id="patientName">Patient Name</div>
+                <div class="patient-id" id="patientId">ID: N/A</div>
+            </div>
+            <nav class="patient-sidebar__nav">
+                <ul>
+                    <li><a href="/pages/patient/dashboard.html" class="active"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                    <li><a href="/pages/patient/appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a></li>
+                    <li><a href="/pages/patient/medical-records.html"><i class="fas fa-file-medical"></i> Medical Records</a></li>
+                    <li><a href="/pages/patient/lab-results.html"><i class="fas fa-microscope"></i> Lab Results</a></li>
+                    <li><a href="/pages/patient/prescriptions.html"><i class="fas fa-prescription"></i> Prescriptions</a></li>
+                    <li><a href="/pages/patient/billing.html"><i class="fas fa-file-invoice-dollar"></i> Billing</a></li>
+                    <li><a href="/pages/patient/profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="patient-main">
+            <div class="doctor-topbar">
+                <div class="admin-topbar__title">
+                    <h1>Patient Dashboard</h1>
+                    <p>Welcome back, Patient</p>
+                </div>
+                <div class="admin-topbar__actions">
+                    <button class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="dot"></span>
+                    </button>
+                    <div class="user-profile">
+                        <div class="avatar" id="patientAvatarSmall">P</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="patient-stats" id="patientStats">
+                <!-- Loaded from JS -->
+            </div>
+
+            <!-- Upcoming Appointments -->
+            <div class="upcoming-appointments">
+                <div class="header">
+                    <h3>Upcoming Appointments</h3>
+                    <a href="/pages/patient/appointments.html" class="btn btn--small btn--outline">View All</a>
+                </div>
+                <div id="appointmentsList">
+                    <!-- Loaded from JS -->
+                </div>
+            </div>
+
+            <!-- Medical Records -->
+            <div class="medical-records">
+                <div class="header">
+                    <h3>Recent Medical Records</h3>
+                    <a href="/pages/patient/medical-records.html" class="btn btn--small btn--outline">View All</a>
+                </div>
+                <div id="medicalRecords">
+                    <!-- Loaded from JS -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="/src/js/patient.js"></script>
+</body>
+                  </html>
