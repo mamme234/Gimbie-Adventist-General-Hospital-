@@ -3,24 +3,23 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const { Employee } = require('../models/Employee');
-const { Patient } = require('../models/Patient');
 const { AuditLog } = require('../models/AuditLog');
-const { logger } = require('../middleware/logger');
+const { logger } = require('../utils/logger');
 const { AppError } = require('../middleware/errorHandler');
-const redis = require('../config/redis');
 const emailService = require('./email.service');
 const smsService = require('./sms.service');
 
+// In-memory token blacklist (no Redis)
+const tokenBlacklist = new Map();
+
 class AuthService {
   constructor() {
-    this.tokenBlacklist = new Map();
-    this.refreshTokens = new Map();
+    // Clean blacklist every hour
+    setInterval(() => this.cleanupBlacklist(), 3600000);
   }
 
-  // Login user
   async login(email, password, ip, userAgent) {
     try {
-      // Find user
       const user = await Employee.findOne({ email })
         .select('+password +refreshToken')
         .lean();
@@ -30,30 +29,25 @@ class AuthService {
         throw AppError.unauthorized('Invalid email or password');
       }
 
-      // Check if account is active
       if (user.status !== 'active') {
         logger.warn(`Login attempt failed: Account inactive - ${email}`);
         throw AppError.forbidden('Account is not active. Please contact support.');
       }
 
-      // Verify password
       const isPasswordValid = await bcrypt.compare(password, user.password);
       if (!isPasswordValid) {
         logger.warn(`Login attempt failed: Invalid password - ${email}`);
         throw AppError.unauthorized('Invalid email or password');
       }
 
-      // Generate tokens
       const tokens = this.generateTokens(user);
 
-      // Update refresh token in database
       await Employee.findByIdAndUpdate(user._id, {
         refreshToken: tokens.refreshToken,
         lastLogin: new Date(),
         lastLoginIP: ip
       });
 
-      // Log successful login
       await AuditLog.logAction({
         action: 'login',
         resource: 'employee',
@@ -63,7 +57,6 @@ class AuthService {
         status: 'success'
       });
 
-      // Remove sensitive data
       delete user.password;
       delete user.refreshToken;
 
@@ -78,19 +71,15 @@ class AuthService {
     }
   }
 
-  // Register new user
   async register(userData, ip, userAgent) {
     try {
-      // Check if email exists
       const existingUser = await Employee.findOne({ email: userData.email });
       if (existingUser) {
         throw AppError.conflict('Email already registered');
       }
 
-      // Hash password
       const hashedPassword = await bcrypt.hash(userData.password, 10);
 
-      // Create user
       const user = new Employee({
         ...userData,
         password: hashedPassword,
@@ -100,10 +89,8 @@ class AuthService {
 
       await user.save();
 
-      // Send welcome email
       await emailService.sendWelcomeEmail(user.email, user.firstName);
 
-      // Log registration
       await AuditLog.logAction({
         action: 'register',
         resource: 'employee',
@@ -113,10 +100,8 @@ class AuthService {
         status: 'success'
       });
 
-      // Generate tokens
       const tokens = this.generateTokens(user);
 
-      // Remove sensitive data
       user.password = undefined;
       user.refreshToken = undefined;
 
@@ -130,18 +115,15 @@ class AuthService {
     }
   }
 
-  // Logout user
   async logout(userId, token, ip) {
     try {
-      // Blacklist token
-      await this.blacklistToken(token);
+      // Blacklist token (in-memory)
+      this.blacklistToken(token);
 
-      // Clear refresh token
       await Employee.findByIdAndUpdate(userId, {
         refreshToken: null
       });
 
-      // Log logout
       await AuditLog.logAction({
         action: 'logout',
         resource: 'employee',
@@ -158,13 +140,10 @@ class AuthService {
     }
   }
 
-  // Refresh token
   async refreshToken(refreshToken, ip) {
     try {
-      // Verify refresh token
       const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
 
-      // Find user with refresh token
       const user = await Employee.findOne({
         _id: decoded.id,
         refreshToken: refreshToken
@@ -174,22 +153,17 @@ class AuthService {
         throw AppError.unauthorized('Invalid refresh token');
       }
 
-      // Check if refresh token is blacklisted
-      const isBlacklisted = await this.isTokenBlacklisted(refreshToken);
-      if (isBlacklisted) {
+      if (tokenBlacklist.has(refreshToken)) {
         throw AppError.unauthorized('Token has been revoked');
       }
 
-      // Generate new tokens
       const tokens = this.generateTokens(user);
 
-      // Update refresh token in database
       await Employee.findByIdAndUpdate(user._id, {
         refreshToken: tokens.refreshToken
       });
 
-      // Blacklist old refresh token
-      await this.blacklistToken(refreshToken);
+      this.blacklistToken(refreshToken);
 
       return tokens;
     } catch (error) {
@@ -198,7 +172,6 @@ class AuthService {
     }
   }
 
-  // Generate tokens
   generateTokens(user) {
     const accessToken = jwt.sign(
       {
@@ -220,44 +193,40 @@ class AuthService {
     return { accessToken, refreshToken };
   }
 
-  // Blacklist token
-  async blacklistToken(token) {
+  blacklistToken(token) {
     try {
       const decoded = jwt.decode(token);
       if (!decoded) return;
 
       const expiresIn = decoded.exp - Math.floor(Date.now() / 1000);
       if (expiresIn > 0) {
-        await redis.setex(
-          `blacklist:${token}`,
-          expiresIn,
-          '1'
-        );
+        tokenBlacklist.set(token, {
+          expiresAt: new Date(decoded.exp * 1000)
+        });
+        setTimeout(() => {
+          tokenBlacklist.delete(token);
+        }, expiresIn * 1000);
       }
     } catch (error) {
       logger.error('Blacklist token error:', error);
     }
   }
 
-  // Check if token is blacklisted
-  async isTokenBlacklisted(token) {
-    try {
-      const result = await redis.get(`blacklist:${token}`);
-      return !!result;
-    } catch (error) {
-      logger.error('Check token blacklist error:', error);
-      return false;
+  cleanupBlacklist() {
+    const now = Date.now();
+    for (const [token, data] of tokenBlacklist.entries()) {
+      if (data.expiresAt && data.expiresAt.getTime() < now) {
+        tokenBlacklist.delete(token);
+      }
     }
   }
 
-  // Generate employee ID
   async generateEmployeeId() {
     const year = new Date().getFullYear();
     const count = await Employee.countDocuments() + 1;
     return `EMP${year}${String(count).padStart(4, '0')}`;
   }
 
-  // Change password
   async changePassword(userId, currentPassword, newPassword, ip) {
     try {
       const user = await Employee.findById(userId).select('+password');
@@ -265,19 +234,16 @@ class AuthService {
         throw AppError.notFound('User not found');
       }
 
-      // Verify current password
       const isValid = await bcrypt.compare(currentPassword, user.password);
       if (!isValid) {
         throw AppError.unauthorized('Current password is incorrect');
       }
 
-      // Hash new password
       user.password = await bcrypt.hash(newPassword, 10);
       user.passwordChangedAt = new Date();
       user.tokenVersion = (user.tokenVersion || 0) + 1;
       await user.save();
 
-      // Log password change
       await AuditLog.logAction({
         action: 'change_password',
         resource: 'employee',
@@ -288,7 +254,6 @@ class AuthService {
         severity: 'warning'
       });
 
-      // Send notification
       await emailService.sendPasswordChangedEmail(user.email, user.firstName);
 
       return { success: true };
@@ -298,7 +263,6 @@ class AuthService {
     }
   }
 
-  // Reset password
   async resetPassword(email) {
     try {
       const user = await Employee.findOne({ email });
@@ -306,17 +270,14 @@ class AuthService {
         throw AppError.notFound('User not found');
       }
 
-      // Generate reset token
       const resetToken = crypto.randomBytes(32).toString('hex');
-      const resetTokenExpiry = Date.now() + 3600000; // 1 hour
+      const resetTokenExpiry = Date.now() + 3600000;
 
-      // Store reset token
       await Employee.findByIdAndUpdate(user._id, {
         resetPasswordToken: resetToken,
         resetPasswordExpiry: resetTokenExpiry
       });
 
-      // Send reset email
       const resetUrl = `${process.env.FRONTEND_URL}/reset-password?token=${resetToken}`;
       await emailService.sendPasswordResetEmail(user.email, user.firstName, resetUrl);
 
@@ -337,7 +298,6 @@ class AuthService {
     }
   }
 
-  // Confirm reset password
   async confirmResetPassword(token, newPassword) {
     try {
       const user = await Employee.findOne({
@@ -349,7 +309,6 @@ class AuthService {
         throw AppError.badRequest('Invalid or expired reset token');
       }
 
-      // Update password
       user.password = await bcrypt.hash(newPassword, 10);
       user.passwordChangedAt = new Date();
       user.tokenVersion = (user.tokenVersion || 0) + 1;
@@ -373,7 +332,6 @@ class AuthService {
     }
   }
 
-  // Verify email
   async verifyEmail(token) {
     try {
       const user = await Employee.findOne({
@@ -405,7 +363,6 @@ class AuthService {
     }
   }
 
-  // Two-factor authentication
   async enable2FA(userId) {
     try {
       const user = await Employee.findById(userId);
@@ -413,18 +370,15 @@ class AuthService {
         throw AppError.notFound('User not found');
       }
 
-      // Generate TOTP secret
       const { authenticator } = require('otplib');
       const secret = authenticator.generateSecret();
 
-      // Store secret temporarily
       user.twoFactorSecret = secret;
       await user.save();
 
-      // Generate QR code
       const otpauth = authenticator.keyuri(
         user.email,
-        process.env.APP_NAME || 'EmergencySystem',
+        process.env.APP_NAME || 'Gimbie Hospital',
         secret
       );
 
@@ -439,7 +393,6 @@ class AuthService {
     }
   }
 
-  // Verify 2FA
   async verify2FA(userId, token) {
     try {
       const user = await Employee.findById(userId);
@@ -477,7 +430,6 @@ class AuthService {
     }
   }
 
-  // Generate QR code
   async generateQRCode(otpauth) {
     const QRCode = require('qrcode');
     try {
@@ -488,7 +440,6 @@ class AuthService {
     }
   }
 
-  // Social login
   async socialLogin(provider, profile, ip, userAgent) {
     try {
       let user = await Employee.findOne({
@@ -496,11 +447,9 @@ class AuthService {
       });
 
       if (!user) {
-        // Try to find by email
         user = await Employee.findOne({ email: profile.email });
         
         if (!user) {
-          // Create new user
           user = new Employee({
             email: profile.email,
             firstName: profile.firstName,
@@ -518,7 +467,6 @@ class AuthService {
           });
           await user.save();
         } else {
-          // Link social account to existing user
           user.socialLogins[provider] = {
             id: profile.id,
             email: profile.email,
@@ -529,10 +477,8 @@ class AuthService {
         }
       }
 
-      // Generate tokens
       const tokens = this.generateTokens(user);
 
-      // Update refresh token
       await Employee.findByIdAndUpdate(user._id, {
         refreshToken: tokens.refreshToken,
         lastLogin: new Date(),
