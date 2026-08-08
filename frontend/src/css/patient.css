@@ -1,0 +1,239 @@
+/* ============================================
+   PATIENT DASHBOARD STYLES
+   Gimbie Adventist General Hospital
+   ============================================ */
+
+.patient-wrapper {
+    display: flex;
+    min-height: 100vh;
+    background: var(--bg-light);
+}
+
+/* ===== PATIENT SIDEBAR ===== */
+.patient-sidebar {
+    width: 220px;
+    background: var(--bg-white);
+    border-right: 1px solid #e8edea;
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    overflow-y: auto;
+    z-index: 100;
+}
+
+.patient-sidebar .profile-section {
+    padding: 0 20px 20px;
+    text-align: center;
+    border-bottom: 1px solid #e8edea;
+    margin-bottom: 16px;
+}
+
+.patient-sidebar .profile-section .avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: var(--info);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 auto 12px;
+}
+
+.patient-sidebar .profile-section .patient-id {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.patient-sidebar__nav {
+    padding: 0 12px;
+}
+
+.patient-sidebar__nav a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.patient-sidebar__nav a i {
+    width: 20px;
+}
+
+.patient-sidebar__nav a:hover {
+    background: var(--primary-lighter);
+    color: var(--primary);
+}
+
+.patient-sidebar__nav a.active {
+    background: var(--info);
+    color: #fff;
+}
+
+/* ===== PATIENT MAIN ===== */
+.patient-main {
+    flex: 1;
+    margin-left: 220px;
+    padding: 24px 32px;
+}
+
+/* ===== PATIENT STATS ===== */
+.patient-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+/* ===== UPCOMING APPOINTMENTS ===== */
+.upcoming-appointments {
+    background: var(--bg-white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.upcoming-appointments .header {
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e8edea;
+}
+
+.appointment-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    border-bottom: 1px solid #e8edea;
+    transition: var(--transition);
+}
+
+.appointment-item:hover {
+    background: var(--bg-light);
+}
+
+.appointment-item .info .doctor {
+    font-weight: 600;
+}
+
+.appointment-item .info .date-time {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.appointment-item .info .department {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+.appointment-item .status {
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.appointment-item .status--confirmed {
+    background: #e8f5e9;
+    color: var(--primary);
+}
+
+.appointment-item .status--pending {
+    background: #fff3e0;
+    color: var(--warning);
+}
+
+.appointment-item .status--cancelled {
+    background: #ffebee;
+    color: var(--danger);
+}
+
+.appointment-item .status--completed {
+    background: #e3f2fd;
+    color: var(--info);
+}
+
+/* ===== MEDICAL RECORDS ===== */
+.medical-records {
+    background: var(--bg-white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.medical-records .header {
+    padding: 16px 24px;
+    border-bottom: 1px solid #e8edea;
+}
+
+.record-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 24px;
+    border-bottom: 1px solid #e8edea;
+}
+
+.record-item .icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary-lighter);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+}
+
+.record-item .info .title {
+    font-weight: 500;
+}
+
+.record-item .info .date {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+    .patient-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .patient-sidebar {
+        transform: translateX(-100%);
+        width: 280px;
+    }
+    
+    .patient-sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .patient-main {
+        margin-left: 0;
+        padding: 16px;
+    }
+    
+    .patient-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .appointment-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
