@@ -101,4 +101,7 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`🚀 Gimbie Hospital API running on port ${PORT}`);
-    console.log(`📍
+    console.log(`📍 Environment: ${process.env.NODE_ENV}`);
+    console.log(`🏥 Hospital: Gimbie Adventist General Hospital`);
+    console.log(`📅 Established: 1948`);
+});
