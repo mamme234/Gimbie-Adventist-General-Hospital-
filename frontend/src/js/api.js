@@ -5,10 +5,8 @@
 
 const API_BASE_URL = 'https://alpha-af1q.onrender.com/api';
 
-// Get auth token from localStorage
+// ===== TOKEN MANAGEMENT =====
 const getToken = () => localStorage.getItem('token');
-
-// Set auth token
 const setToken = (token) => {
     if (token) {
         localStorage.setItem('token', token);
@@ -17,13 +15,11 @@ const setToken = (token) => {
     }
 };
 
-// Get current user from localStorage
 const getCurrentUser = () => {
     const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
 };
 
-// Set current user
 const setCurrentUser = (user) => {
     if (user) {
         localStorage.setItem('user', JSON.stringify(user));
@@ -32,7 +28,7 @@ const setCurrentUser = (user) => {
     }
 };
 
-// API request helper
+// ===== API REQUEST HELPER =====
 const apiRequest = async (endpoint, options = {}) => {
     const url = `${API_BASE_URL}${endpoint}`;
     const token = getToken();
@@ -68,7 +64,6 @@ const apiRequest = async (endpoint, options = {}) => {
 
 // ===== AUTH API =====
 const authAPI = {
-    // Register user
     register: async (userData) => {
         return apiRequest('/auth/register', {
             method: 'POST',
@@ -76,7 +71,6 @@ const authAPI = {
         });
     },
 
-    // Login user
     login: async (email, password) => {
         const response = await apiRequest('/auth/login', {
             method: 'POST',
@@ -91,12 +85,10 @@ const authAPI = {
         return response;
     },
 
-    // Get current user
     getMe: async () => {
         return apiRequest('/auth/me');
     },
 
-    // Update profile
     updateProfile: async (data) => {
         return apiRequest('/auth/profile', {
             method: 'PUT',
@@ -104,7 +96,6 @@ const authAPI = {
         });
     },
 
-    // Change password
     changePassword: async (currentPassword, newPassword) => {
         return apiRequest('/auth/change-password', {
             method: 'PUT',
@@ -112,7 +103,6 @@ const authAPI = {
         });
     },
 
-    // Forgot password
     forgotPassword: async (email) => {
         return apiRequest('/auth/forgot-password', {
             method: 'POST',
@@ -120,7 +110,6 @@ const authAPI = {
         });
     },
 
-    // Reset password
     resetPassword: async (token, newPassword) => {
         return apiRequest('/auth/reset-password', {
             method: 'POST',
@@ -128,7 +117,6 @@ const authAPI = {
         });
     },
 
-    // Logout
     logout: () => {
         setToken(null);
         setCurrentUser(null);
@@ -138,18 +126,15 @@ const authAPI = {
 
 // ===== PATIENT API =====
 const patientAPI = {
-    // Get all patients
     getAll: async (params = {}) => {
         const query = new URLSearchParams(params).toString();
         return apiRequest(`/patients?${query}`);
     },
 
-    // Get single patient
     get: async (id) => {
         return apiRequest(`/patients/${id}`);
     },
 
-    // Create patient
     create: async (data) => {
         return apiRequest('/patients', {
             method: 'POST',
@@ -157,7 +142,6 @@ const patientAPI = {
         });
     },
 
-    // Update patient
     update: async (id, data) => {
         return apiRequest(`/patients/${id}`, {
             method: 'PUT',
@@ -165,34 +149,28 @@ const patientAPI = {
         });
     },
 
-    // Delete patient
     delete: async (id) => {
         return apiRequest(`/patients/${id}`, {
             method: 'DELETE',
         });
     },
 
-    // Search patients
     search: async (query) => {
         return apiRequest(`/patients/search?q=${encodeURIComponent(query)}`);
     },
 
-    // Get patient history
     getHistory: async (id) => {
         return apiRequest(`/patients/${id}/history`);
     },
 
-    // Get patient appointments
     getAppointments: async (id) => {
         return apiRequest(`/patients/${id}/appointments`);
     },
 
-    // Get patient bills
     getBills: async (id) => {
         return apiRequest(`/patients/${id}/bills`);
     },
 
-    // Get patient lab results
     getLabResults: async (id) => {
         return apiRequest(`/patients/${id}/lab-results`);
     },
@@ -200,39 +178,32 @@ const patientAPI = {
 
 // ===== DOCTOR API =====
 const doctorAPI = {
-    // Get all doctors
     getAll: async (params = {}) => {
         const query = new URLSearchParams(params).toString();
         return apiRequest(`/doctors?${query}`);
     },
 
-    // Get single doctor
     get: async (id) => {
         return apiRequest(`/doctors/${id}`);
     },
 
-    // Get doctor by department
     getByDepartment: async (department) => {
         return apiRequest(`/doctors/by-department/${department}`);
     },
 
-    // Get doctor appointments
     getAppointments: async (id, params = {}) => {
         const query = new URLSearchParams(params).toString();
         return apiRequest(`/doctors/${id}/appointments?${query}`);
     },
 
-    // Get doctor patients
     getPatients: async (id) => {
         return apiRequest(`/doctors/${id}/patients`);
     },
 
-    // Get doctor availability
     getAvailability: async (id) => {
         return apiRequest(`/doctors/${id}/availability`);
     },
 
-    // Update availability
     updateAvailability: async (id, data) => {
         return apiRequest(`/doctors/${id}/availability`, {
             method: 'PUT',
@@ -243,18 +214,15 @@ const doctorAPI = {
 
 // ===== APPOINTMENT API =====
 const appointmentAPI = {
-    // Get all appointments
     getAll: async (params = {}) => {
         const query = new URLSearchParams(params).toString();
         return apiRequest(`/appointments?${query}`);
     },
 
-    // Get single appointment
     get: async (id) => {
         return apiRequest(`/appointments/${id}`);
     },
 
-    // Create appointment
     create: async (data) => {
         return apiRequest('/appointments', {
             method: 'POST',
@@ -262,7 +230,6 @@ const appointmentAPI = {
         });
     },
 
-    // Update appointment
     update: async (id, data) => {
         return apiRequest(`/appointments/${id}`, {
             method: 'PUT',
@@ -270,7 +237,6 @@ const appointmentAPI = {
         });
     },
 
-    // Cancel appointment
     cancel: async (id, reason) => {
         return apiRequest(`/appointments/${id}/cancel`, {
             method: 'PUT',
@@ -278,7 +244,6 @@ const appointmentAPI = {
         });
     },
 
-    // Reschedule appointment
     reschedule: async (id, date, time) => {
         return apiRequest(`/appointments/${id}/reschedule`, {
             method: 'PUT',
@@ -286,18 +251,15 @@ const appointmentAPI = {
         });
     },
 
-    // Get today's appointments
     getToday: async () => {
         return apiRequest('/appointments/today');
     },
 
-    // Get queue
     getQueue: async (params = {}) => {
         const query = new URLSearchParams(params).toString();
         return apiRequest(`/appointments/queue?${query}`);
     },
 
-    // Get doctor availability
     getDoctorAvailability: async (doctorId, date) => {
         return apiRequest(`/appointments/availability/${doctorId}?date=${date}`);
     },
@@ -305,18 +267,15 @@ const appointmentAPI = {
 
 // ===== PHARMACY API =====
 const pharmacyAPI = {
-    // Get all medications
     getAll: async (params = {}) => {
         const query = new URLSearchParams(params).toString();
         return apiRequest(`/pharmacy?${query}`);
     },
 
-    // Get single medication
     get: async (id) => {
         return apiRequest(`/pharmacy/${id}`);
     },
 
-    // Create medication
     create: async (data) => {
         return apiRequest('/pharmacy', {
             method: 'POST',
@@ -324,7 +283,6 @@ const pharmacyAPI = {
         });
     },
 
-    // Update medication
     update: async (id, data) => {
         return apiRequest(`/pharmacy/${id}`, {
             method: 'PUT',
@@ -332,24 +290,20 @@ const pharmacyAPI = {
         });
     },
 
-    // Delete medication
     delete: async (id) => {
         return apiRequest(`/pharmacy/${id}`, {
             method: 'DELETE',
         });
     },
 
-    // Get low stock
     getLowStock: async () => {
         return apiRequest('/pharmacy/low-stock');
     },
 
-    // Get expiring medications
     getExpiring: async (days = 30) => {
         return apiRequest(`/pharmacy/expiring?days=${days}`);
     },
 
-    // Dispense medication
     dispense: async (id, data) => {
         return apiRequest(`/pharmacy/${id}/dispense`, {
             method: 'PUT',
@@ -357,7 +311,6 @@ const pharmacyAPI = {
         });
     },
 
-    // Restock medication
     restock: async (id, data) => {
         return apiRequest(`/pharmacy/${id}/restock`, {
             method: 'PUT',
@@ -368,18 +321,15 @@ const pharmacyAPI = {
 
 // ===== LABORATORY API =====
 const laboratoryAPI = {
-    // Get all lab tests
     getAll: async (params = {}) => {
         const query = new URLSearchParams(params).toString();
         return apiRequest(`/laboratory?${query}`);
     },
 
-    // Get single lab test
     get: async (id) => {
         return apiRequest(`/laboratory/${id}`);
     },
 
-    // Create lab test
     create: async (data) => {
         return apiRequest('/laboratory', {
             method: 'POST',
@@ -387,14 +337,12 @@ const laboratoryAPI = {
         });
     },
 
-    // Collect sample
     collectSample: async (id) => {
         return apiRequest(`/laboratory/${id}/collect-sample`, {
             method: 'PUT',
         });
     },
 
-    // Enter results
     enterResults: async (id, data) => {
         return apiRequest(`/laboratory/${id}/enter-results`, {
             method: 'PUT',
@@ -402,19 +350,16 @@ const laboratoryAPI = {
         });
     },
 
-    // Verify results
     verifyResults: async (id) => {
         return apiRequest(`/laboratory/${id}/verify-results`, {
             method: 'PUT',
         });
     },
 
-    // Get pending tests
     getPending: async () => {
         return apiRequest('/laboratory/pending');
     },
 
-    // Get patient lab results
     getPatientResults: async (patientId) => {
         return apiRequest(`/laboratory/patient/${patientId}`);
     },
@@ -422,18 +367,15 @@ const laboratoryAPI = {
 
 // ===== BILLING API =====
 const billingAPI = {
-    // Get all invoices
     getAll: async (params = {}) => {
         const query = new URLSearchParams(params).toString();
         return apiRequest(`/billing?${query}`);
     },
 
-    // Get single invoice
     get: async (id) => {
         return apiRequest(`/billing/${id}`);
     },
 
-    // Create invoice
     create: async (data) => {
         return apiRequest('/billing', {
             method: 'POST',
@@ -441,7 +383,6 @@ const billingAPI = {
         });
     },
 
-    // Process payment
     pay: async (id, data) => {
         return apiRequest(`/billing/${id}/pay`, {
             method: 'PUT',
@@ -449,17 +390,14 @@ const billingAPI = {
         });
     },
 
-    // Get patient invoices
     getPatientInvoices: async (patientId) => {
         return apiRequest(`/billing/patient/${patientId}`);
     },
 
-    // Get outstanding balances
     getOutstanding: async () => {
         return apiRequest('/billing/outstanding');
     },
 
-    // Get revenue reports
     getRevenue: async (params = {}) => {
         const query = new URLSearchParams(params).toString();
         return apiRequest(`/billing/revenue?${query}`);
@@ -468,27 +406,22 @@ const billingAPI = {
 
 // ===== DEPARTMENT API =====
 const departmentAPI = {
-    // Get all departments
     getAll: async () => {
         return apiRequest('/departments');
     },
 
-    // Get single department
     get: async (id) => {
         return apiRequest(`/departments/${id}`);
     },
 
-    // Get active departments
     getActive: async () => {
         return apiRequest('/departments/active');
     },
 
-    // Get department staff
     getStaff: async (id) => {
         return apiRequest(`/departments/${id}/staff`);
     },
 
-    // Get department services
     getServices: async (id) => {
         return apiRequest(`/departments/${id}/services`);
     },
@@ -496,22 +429,18 @@ const departmentAPI = {
 
 // ===== TESTIMONIAL API =====
 const testimonialAPI = {
-    // Get all testimonials
     getAll: async () => {
         return apiRequest('/testimonials');
     },
 
-    // Get approved testimonials
     getApproved: async () => {
         return apiRequest('/testimonials/approved');
     },
 
-    // Get featured testimonials
     getFeatured: async () => {
         return apiRequest('/testimonials/featured');
     },
 
-    // Create testimonial
     create: async (data) => {
         return apiRequest('/testimonials', {
             method: 'POST',
@@ -522,32 +451,27 @@ const testimonialAPI = {
 
 // ===== NOTIFICATION API =====
 const notificationAPI = {
-    // Get all notifications
     getAll: async (params = {}) => {
         const query = new URLSearchParams(params).toString();
         return apiRequest(`/notifications?${query}`);
     },
 
-    // Mark as read
     markAsRead: async (id) => {
         return apiRequest(`/notifications/${id}`, {
             method: 'PUT',
         });
     },
 
-    // Mark all as read
     markAllAsRead: async () => {
         return apiRequest('/notifications/mark-all-read', {
             method: 'PUT',
         });
     },
 
-    // Get unread count
     getUnreadCount: async () => {
         return apiRequest('/notifications/unread-count');
     },
 
-    // Delete notification
     delete: async (id) => {
         return apiRequest(`/notifications/${id}`, {
             method: 'DELETE',
@@ -557,28 +481,23 @@ const notificationAPI = {
 
 // ===== BED API =====
 const bedAPI = {
-    // Get all beds
     getAll: async (params = {}) => {
         const query = new URLSearchParams(params).toString();
         return apiRequest(`/beds?${query}`);
     },
 
-    // Get available beds
     getAvailable: async () => {
         return apiRequest('/beds/available');
     },
 
-    // Get occupied beds
     getOccupied: async () => {
         return apiRequest('/beds/occupied');
     },
 
-    // Get bed stats
     getStats: async () => {
         return apiRequest('/beds/stats');
     },
 
-    // Assign bed
     assign: async (bedId, patientId) => {
         return apiRequest(`/beds/${bedId}/assign`, {
             method: 'PUT',
@@ -586,7 +505,6 @@ const bedAPI = {
         });
     },
 
-    // Discharge bed
     discharge: async (bedId) => {
         return apiRequest(`/beds/${bedId}/discharge`, {
             method: 'PUT',
@@ -596,18 +514,15 @@ const bedAPI = {
 
 // ===== STAFF API =====
 const staffAPI = {
-    // Get all staff
     getAll: async (params = {}) => {
         const query = new URLSearchParams(params).toString();
         return apiRequest(`/staff?${query}`);
     },
 
-    // Get staff by department
     getByDepartment: async (department) => {
         return apiRequest(`/staff/department/${department}`);
     },
 
-    // Get staff by position
     getByPosition: async (position) => {
         return apiRequest(`/staff/position/${position}`);
     },
@@ -615,50 +530,42 @@ const staffAPI = {
 
 // ===== REPORTS API =====
 const reportsAPI = {
-    // Get patient statistics
     getPatientStats: async () => {
         return apiRequest('/reports/patients');
     },
 
-    // Get doctor statistics
     getDoctorStats: async () => {
         return apiRequest('/reports/doctors');
     },
 
-    // Get department statistics
     getDepartmentStats: async () => {
         return apiRequest('/reports/departments');
     },
 
-    // Get admissions report
     getAdmissions: async (params = {}) => {
         const query = new URLSearchParams(params).toString();
         return apiRequest(`/reports/admissions?${query}`);
     },
 
-    // Get bed occupancy
     getBedOccupancy: async () => {
         return apiRequest('/reports/bed-occupancy');
     },
 
-    // Get revenue report
     getRevenue: async (params = {}) => {
         const query = new URLSearchParams(params).toString();
         return apiRequest(`/reports/revenue?${query}`);
     },
 
-    // Get financial analytics
     getFinancial: async () => {
         return apiRequest('/reports/financial');
     },
 
-    // Get medical analytics
     getMedical: async () => {
         return apiRequest('/reports/medical');
     },
 };
 
-// Export all APIs
+// ===== EXPORT ALL =====
 const API = {
     auth: authAPI,
     patients: patientAPI,
@@ -679,7 +586,5 @@ const API = {
     setCurrentUser,
 };
 
-// Make API globally available
-window.API = API;
-
 export default API;
+window.API = API;
