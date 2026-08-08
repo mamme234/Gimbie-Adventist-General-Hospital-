@@ -1,40 +1,22 @@
+// server.js
 const express = require('express');
 const cors = require('cors');
-const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
 const dotenv = require('dotenv');
 const connectDB = require('./config/database');
 
-// Load environment variables
 dotenv.config();
-
-// Connect to MongoDB
 connectDB();
 
 const app = express();
 
-// Security middleware
-app.use(helmet());
-
-// Rate limiting
-const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // 100 requests per window
-    message: 'Too many requests from this IP, please try again later.',
-});
-app.use('/api', limiter);
-
-// CORS
+// Middleware
 app.use(cors({
-    origin: process.env.CORS_ORIGIN || '*',
+    origin: '*',
     credentials: true,
 }));
-
-// Body parser
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-// Routes
+// ===== IMPORT ROUTES =====
 const authRoutes = require('./routes/auth');
 const patientRoutes = require('./routes/patients');
 const doctorRoutes = require('./routes/doctors');
@@ -50,8 +32,14 @@ const bedRoutes = require('./routes/beds');
 const reportRoutes = require('./routes/reports');
 const departmentRoutes = require('./routes/departments');
 const testimonialRoutes = require('./routes/testimonials');
+const notificationRoutes = require('./routes/notifications');
+const insuranceRoutes = require('./routes/insurance');
+const procurementRoutes = require('./routes/procurement');
+const settingsRoutes = require('./routes/settings');
+const uploadRoutes = require('./routes/upload');
+const dashboardRoutes = require('./routes/dashboard');
 
-// API routes
+// ===== MOUNT ROUTES =====
 app.use('/api/auth', authRoutes);
 app.use('/api/patients', patientRoutes);
 app.use('/api/doctors', doctorRoutes);
@@ -67,8 +55,14 @@ app.use('/api/beds', bedRoutes);
 app.use('/api/reports', reportRoutes);
 app.use('/api/departments', departmentRoutes);
 app.use('/api/testimonials', testimonialRoutes);
+app.use('/api/notifications', notificationRoutes);
+app.use('/api/insurance', insuranceRoutes);
+app.use('/api/procurement', procurementRoutes);
+app.use('/api/settings', settingsRoutes);
+app.use('/api/upload', uploadRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 
-// Health check
+// ===== HEALTH CHECK =====
 app.get('/api/health', (req, res) => {
     res.json({
         status: 'OK',
@@ -76,32 +70,57 @@ app.get('/api/health', (req, res) => {
         uptime: process.uptime(),
         environment: process.env.NODE_ENV,
         hospital: 'Gimbie Adventist General Hospital',
+        message: 'API is running successfully!'
     });
 });
 
-// 404 handler
+// ===== ROOT =====
+app.get('/', (req, res) => {
+    res.json({
+        message: 'Gimbie Adventist General Hospital API',
+        version: '1.0.0',
+        endpoints: {
+            health: '/api/health',
+            auth: '/api/auth',
+            patients: '/api/patients',
+            doctors: '/api/doctors',
+            appointments: '/api/appointments',
+            pharmacy: '/api/pharmacy',
+            laboratory: '/api/laboratory',
+            billing: '/api/billing',
+        }
+    });
+});
+
+// ===== 404 Handler =====
 app.use((req, res) => {
     res.status(404).json({
         success: false,
-        message: 'Route not found',
+        message: `Route not found: ${req.method} ${req.originalUrl}`,
+        availableRoutes: [
+            'GET /',
+            'GET /api/health',
+            'POST /api/auth/login',
+            'POST /api/auth/register',
+            'GET /api/patients',
+            'GET /api/doctors',
+            'GET /api/appointments',
+        ]
     });
 });
 
-// Error handler
+// ===== Error Handler =====
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(err.status || 500).json({
+    console.error('Error:', err);
+    res.status(500).json({
         success: false,
         message: err.message || 'Internal server error',
-        stack: process.env.NODE_ENV === 'development' ? err.stack : undefined,
     });
 });
 
-// Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`🚀 Gimbie Hospital API running on port ${PORT}`);
+    console.log(`🚀 Server running on port ${PORT}`);
     console.log(`📍 Environment: ${process.env.NODE_ENV}`);
     console.log(`🏥 Hospital: Gimbie Adventist General Hospital`);
-    console.log(`📅 Established: 1948`);
 });
