@@ -1,3 +1,4 @@
+// routes/index.js
 const express = require('express');
 const router = express.Router();
 
@@ -47,7 +48,7 @@ router.use('/settings', settingsRoutes);
 router.use('/upload', uploadRoutes);
 router.use('/dashboard', dashboardRoutes);
 
-// Health check route
+// Health check
 router.get('/health', (req, res) => {
     res.status(200).json({
         status: 'OK',
@@ -56,37 +57,6 @@ router.get('/health', (req, res) => {
         environment: process.env.NODE_ENV,
         hospital: 'Gimbie Adventist General Hospital',
         version: '1.0.0',
-    });
-});
-
-// API documentation route
-router.get('/docs', (req, res) => {
-    res.status(200).json({
-        message: 'Gimbie Adventist General Hospital API Documentation',
-        version: '1.0.0',
-        endpoints: {
-            auth: '/api/auth',
-            patients: '/api/patients',
-            doctors: '/api/doctors',
-            appointments: '/api/appointments',
-            nursing: '/api/nursing',
-            pharmacy: '/api/pharmacy',
-            laboratory: '/api/laboratory',
-            radiology: '/api/radiology',
-            billing: '/api/billing',
-            inventory: '/api/inventory',
-            staff: '/api/staff',
-            beds: '/api/beds',
-            reports: '/api/reports',
-            departments: '/api/departments',
-            testimonials: '/api/testimonials',
-            notifications: '/api/notifications',
-            insurance: '/api/insurance',
-            procurement: '/api/procurement',
-            settings: '/api/settings',
-            upload: '/api/upload',
-            dashboard: '/api/dashboard',
-        },
     });
 });
 
