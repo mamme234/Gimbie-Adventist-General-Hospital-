@@ -1,4 +1,3 @@
-// models/User.js
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
@@ -69,6 +68,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         unique: true,
         sparse: true,
+        // REMOVED: index: true
     },
     profileImage: {
         type: String,
@@ -104,11 +104,13 @@ const UserSchema = new mongoose.Schema({
     timestamps: true,
 });
 
+// ===== INDEXES - Defined once here =====
+UserSchema.index({ email: 1 });
+UserSchema.index({ staffId: 1 }, { sparse: true }); // Only here, not in field
+
 // Hash password before saving
 UserSchema.pre('save', async function (next) {
-    // Only hash if password is modified
     if (!this.isModified('password')) return next();
-    
     try {
         const salt = await bcrypt.genSalt(10);
         this.password = await bcrypt.hash(this.password, salt);
@@ -157,9 +159,5 @@ UserSchema.virtual('fullNameWithTitle').get(function() {
     const title = titles[this.role] || '';
     return title ? `${title} ${this.fullName}` : this.fullName;
 });
-
-// Ensure indexes are properly defined - remove duplicate indexes
-UserSchema.index({ email: 1 });
-UserSchema.index({ staffId: 1 }, { sparse: true });
 
 module.exports = mongoose.model('User', UserSchema);
