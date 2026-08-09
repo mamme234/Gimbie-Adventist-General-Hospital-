@@ -4,24 +4,27 @@
  */
 
 import API from './api.js';
-import { formatDate, formatTime, formatCurrency, getStatusBadge } from './utils.js';
+import { formatDate, formatTime, formatCurrency } from './utils.js';
 
 // ===== DOM ELEMENTS =====
 const statsContainer = document.getElementById('patientStats');
 const appointmentsList = document.getElementById('appointmentsList');
 const medicalRecordsContainer = document.getElementById('medicalRecords');
-const labResultsContainer = document.getElementById('labResults');
-const prescriptionsContainer = document.getElementById('prescriptions');
-const billingContainer = document.getElementById('billingContainer');
-const profileForm = document.getElementById('profileForm');
+const logoutBtn = document.getElementById('logoutBtn');
 
 // ===== DASHBOARD =====
 export async function loadPatientDashboard() {
     try {
         const user = API.getCurrentUser();
-        if (!user) return;
-        
-        // Get patient data
+        if (!user) {
+            window.location.href = '/pages/login.html';
+            return;
+        }
+
+        // Update UI with user info
+        updateUserInfo(user);
+
+        // Load patient data
         const response = await API.patients.get(user.id);
         if (response.success) {
             const patient = response.data;
@@ -31,34 +34,62 @@ export async function loadPatientDashboard() {
         }
     } catch (error) {
         console.error('Error loading patient dashboard:', error);
+        showToast('Error loading dashboard data', 'error');
     }
+}
+
+function updateUserInfo(user) {
+    const name = user.fullName || 'Patient';
+    const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+
+    document.getElementById('welcomeName').textContent = name;
+    document.getElementById('patientName').textContent = name;
+    document.getElementById('userName').textContent = name;
+    document.getElementById('patientId').textContent = `ID: ${user.patientId || 'N/A'}`;
+    document.getElementById('patientAvatar').textContent = initials;
+    document.getElementById('patientAvatarSmall').textContent = initials;
+
+    // Check notifications
+    checkNotifications();
 }
 
 function updateStats(patient) {
     if (!statsContainer) return;
-    
-    statsContainer.innerHTML = `
-        <div class="stat-card">
-            <div class="stat-card__icon"><i class="fas fa-calendar-check"></i></div>
-            <div class="stat-card__number">${patient.upcomingAppointments || 0}</div>
-            <div class="stat-card__label">Upcoming Appointments</div>
+
+    const stats = [
+        {
+            icon: 'fa-calendar-check',
+            number: patient.upcomingAppointments || 0,
+            label: 'Upcoming Appointments',
+            class: ''
+        },
+        {
+            icon: 'fa-file-medical',
+            number: patient.totalRecords || 0,
+            label: 'Medical Records',
+            class: 'stat-card--blue'
+        },
+        {
+            icon: 'fa-prescription-bottle',
+            number: patient.activePrescriptions || 0,
+            label: 'Active Prescriptions',
+            class: 'stat-card--orange'
+        },
+        {
+            icon: 'fa-money-bill-wave',
+            number: formatCurrency(patient.outstandingBalance || 0),
+            label: 'Outstanding Balance',
+            class: 'stat-card--red'
+        }
+    ];
+
+    statsContainer.innerHTML = stats.map(stat => `
+        <div class="stat-card ${stat.class}">
+            <div class="stat-card__icon"><i class="fas ${stat.icon}"></i></div>
+            <div class="stat-card__number">${stat.number}</div>
+            <div class="stat-card__label">${stat.label}</div>
         </div>
-        <div class="stat-card stat-card--blue">
-            <div class="stat-card__icon"><i class="fas fa-file-medical"></i></div>
-            <div class="stat-card__number">${patient.totalRecords || 0}</div>
-            <div class="stat-card__label">Medical Records</div>
-        </div>
-        <div class="stat-card stat-card--orange">
-            <div class="stat-card__icon"><i class="fas fa-prescription"></i></div>
-            <div class="stat-card__number">${patient.activePrescriptions || 0}</div>
-            <div class="stat-card__label">Active Prescriptions</div>
-        </div>
-        <div class="stat-card stat-card--red">
-            <div class="stat-card__icon"><i class="fas fa-money-bill"></i></div>
-            <div class="stat-card__number">${formatCurrency(patient.outstandingBalance || 0)}</div>
-            <div class="stat-card__label">Outstanding Balance</div>
-        </div>
-    `;
+    `).join('');
 }
 
 // ===== APPOINTMENTS =====
@@ -75,25 +106,35 @@ export async function loadAppointments(patientId) {
 
 function renderAppointments(appointments) {
     if (!appointmentsList) return;
-    
-    if (appointments.length === 0) {
+
+    const upcoming = appointments
+        .filter(a => a.status === 'Scheduled' || a.status === 'Confirmed')
+        .slice(0, 5);
+
+    if (upcoming.length === 0) {
         appointmentsList.innerHTML = `
-            <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
-                <i class="fas fa-calendar" style="font-size: 2rem; display: block; margin-bottom: 8px;"></i>
-                No appointments scheduled
+            <div class="empty-state">
+                <i class="fas fa-calendar-check"></i>
+                <h4>No Upcoming Appointments</h4>
+                <p>Book an appointment to get started</p>
+                <a href="/pages/appointments.html" class="btn btn--primary btn--small" style="margin-top: 8px;">
+                    <i class="fas fa-plus"></i> Book Now
+                </a>
             </div>
         `;
         return;
     }
-    
-    appointmentsList.innerHTML = appointments.map(app => `
+
+    appointmentsList.innerHTML = upcoming.map(app => `
         <div class="appointment-item">
             <div class="info">
                 <div class="doctor">${app.doctor?.userId?.fullName || 'Doctor'}</div>
                 <div class="date-time">${formatDate(app.date)} at ${formatTime(app.time)}</div>
                 <div class="department">${app.department || 'General'}</div>
             </div>
-            <span class="status status--${app.status.toLowerCase()}">${app.status}</span>
+            <div>
+                <span class="status status--${app.status.toLowerCase()}">${app.status}</span>
+            </div>
         </div>
     `).join('');
 }
@@ -112,159 +153,62 @@ export async function loadMedicalRecords(patientId) {
 
 function renderMedicalRecords(records) {
     if (!medicalRecordsContainer) return;
-    
-    if (!records || records.length === 0) {
+
+    const recent = (records || []).slice(0, 5);
+
+    if (recent.length === 0) {
         medicalRecordsContainer.innerHTML = `
-            <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
-                <i class="fas fa-file-medical" style="font-size: 2rem; display: block; margin-bottom: 8px;"></i>
-                No medical records found
+            <div class="empty-state">
+                <i class="fas fa-file-medical"></i>
+                <h4>No Medical Records</h4>
+                <p>Your medical records will appear here after your visits</p>
             </div>
         `;
         return;
     }
-    
-    medicalRecordsContainer.innerHTML = records.map(record => `
+
+    medicalRecordsContainer.innerHTML = recent.map(record => `
         <div class="record-item">
             <div class="icon"><i class="fas fa-file-medical-alt"></i></div>
             <div class="info">
                 <div class="title">${record.diagnosis || 'Medical Record'}</div>
                 <div class="date">${formatDate(record.date)}</div>
+                <div class="doctor-name">${record.doctor || 'Doctor'}</div>
             </div>
         </div>
     `).join('');
 }
 
-// ===== LAB RESULTS =====
-export async function loadLabResults(patientId) {
+// ===== NOTIFICATIONS =====
+async function checkNotifications() {
     try {
-        const response = await API.patients.getLabResults(patientId);
-        if (response.success && labResultsContainer) {
-            renderLabResults(response.data);
+        const response = await API.notifications.getUnreadCount();
+        if (response.success && response.data.count > 0) {
+            document.getElementById('notificationDot').style.display = 'block';
         }
     } catch (error) {
-        console.error('Error loading lab results:', error);
+        console.error('Error checking notifications:', error);
     }
 }
 
-function renderLabResults(results) {
-    if (!labResultsContainer) return;
-    
-    if (!results || results.length === 0) {
-        labResultsContainer.innerHTML = `
-            <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
-                <i class="fas fa-microscope" style="font-size: 2rem; display: block; margin-bottom: 8px;"></i>
-                No lab results found
-            </div>
-        `;
-        return;
-    }
-    
-    labResultsContainer.innerHTML = results.map(result => `
-        <div class="record-item">
-            <div class="icon"><i class="fas fa-flask"></i></div>
-            <div class="info">
-                <div class="title">${result.testName}</div>
-                <div class="date">${formatDate(result.createdAt)}</div>
-                <span class="badge">${result.status}</span>
-            </div>
-        </div>
-    `).join('');
-}
-
-// ===== PRESCRIPTIONS =====
-export async function loadPrescriptions(patientId) {
-    try {
-        // This would call the prescriptions API
-        if (prescriptionsContainer) {
-            prescriptionsContainer.innerHTML = `
-                <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
-                    <i class="fas fa-prescription" style="font-size: 2rem; display: block; margin-bottom: 8px;"></i>
-                    No prescriptions found
-                </div>
-            `;
-        }
-    } catch (error) {
-        console.error('Error loading prescriptions:', error);
+// ===== LOGOUT =====
+function handleLogout(e) {
+    e.preventDefault();
+    if (confirm('Are you sure you want to logout?')) {
+        API.setToken(null);
+        API.setCurrentUser(null);
+        window.location.href = '/pages/login.html';
     }
 }
 
-// ===== BILLING =====
-export async function loadBilling(patientId) {
-    try {
-        const response = await API.patients.getBills(patientId);
-        if (response.success && billingContainer) {
-            renderBilling(response.data);
-        }
-    } catch (error) {
-        console.error('Error loading billing:', error);
-    }
+// ===== TOGGLE DROPDOWN =====
+function toggleDropdown(e) {
+    e.stopPropagation();
+    const dropdown = document.getElementById('userDropdown');
+    dropdown.classList.toggle('active');
 }
 
-function renderBilling(bills) {
-    if (!billingContainer) return;
-    
-    if (!bills || bills.length === 0) {
-        billingContainer.innerHTML = `
-            <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
-                <i class="fas fa-file-invoice" style="font-size: 2rem; display: block; margin-bottom: 8px;"></i>
-                No bills found
-            </div>
-        `;
-        return;
-    }
-    
-    billingContainer.innerHTML = bills.map(bill => `
-        <div class="record-item">
-            <div class="icon"><i class="fas fa-file-invoice-dollar"></i></div>
-            <div class="info">
-                <div class="title">${bill.invoiceNumber}</div>
-                <div class="date">${formatCurrency(bill.total)}</div>
-                <span class="badge">${bill.status}</span>
-            </div>
-        </div>
-    `).join('');
-}
-
-// ===== PROFILE =====
-export async function updateProfile(data) {
-    try {
-        const response = await API.auth.updateProfile(data);
-        if (response.success) {
-            showToast('Profile updated successfully', 'success');
-        }
-    } catch (error) {
-        console.error('Error updating profile:', error);
-        showToast('Error updating profile', 'error');
-    }
-}
-
-// ===== FORM HANDLERS =====
-document.addEventListener('DOMContentLoaded', () => {
-    // Profile form
-    if (profileForm) {
-        profileForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = new FormData(profileForm);
-            await updateProfile(Object.fromEntries(formData));
-        });
-    }
-    
-    // Load dashboard
-    if (document.querySelector('.patient-dashboard')) {
-        loadPatientDashboard();
-    }
-    
-    if (document.querySelector('.patient-lab-results')) {
-        const user = API.getCurrentUser();
-        if (user) loadLabResults(user.id);
-    }
-    
-    if (document.querySelector('.patient-billing')) {
-        const user = API.getCurrentUser();
-        if (user) loadBilling(user.id);
-    }
-});
-
+// ===== SHOW TOAST =====
 function showToast(message, type = 'success') {
     const toast = document.createElement('div');
     toast.style.cssText = `
@@ -284,4 +228,37 @@ function showToast(message, type = 'success') {
     toast.textContent = message;
     document.body.appendChild(toast);
     setTimeout(() => toast.remove(), 3000);
-      }
+}
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if user is logged in
+    const user = API.getCurrentUser();
+    if (!user) {
+        window.location.href = '/pages/login.html';
+        return;
+    }
+
+    // Load dashboard
+    loadPatientDashboard();
+
+    // Logout button
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', handleLogout);
+    }
+
+    // User profile dropdown toggle
+    const userProfile = document.getElementById('userProfile');
+    if (userProfile) {
+        userProfile.addEventListener('click', toggleDropdown);
+    }
+
+    // Close dropdown on outside click
+    document.addEventListener('click', () => {
+        const dropdown = document.getElementById('userDropdown');
+        if (dropdown) dropdown.classList.remove('active');
+    });
+});
+
+// ===== EXPOSE FOR GLOBAL USE =====
+window.loadPatientDashboard = loadPatientDashboard;
