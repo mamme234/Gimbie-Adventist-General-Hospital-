@@ -11,16 +11,165 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="/src/css/style.css" />
     <link rel="stylesheet" href="/src/css/responsive.css" />
+    <style>
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            background: var(--bg-light);
+        }
+        .auth-card {
+            background: #fff;
+            border-radius: var(--radius-lg);
+            padding: 48px;
+            max-width: 440px;
+            width: 100%;
+            box-shadow: var(--shadow-hover);
+        }
+        .auth-card .logo {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .auth-card .logo img {
+            height: 60px;
+            margin-bottom: 16px;
+        }
+        .auth-card .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .auth-card .logo p {
+            color: var(--text-secondary);
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 4px;
+            font-size: 0.9rem;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: var(--font);
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(15, 92, 46, 0.1);
+        }
+        .btn--full {
+            width: 100%;
+            justify-content: center;
+            padding: 14px;
+        }
+        .auth-footer {
+            text-align: center;
+            margin-top: 24px;
+            color: var(--text-secondary);
+        }
+        .auth-footer a {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .error-message {
+            background: #ffebee;
+            color: var(--danger);
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            display: none;
+        }
+        .error-message.show {
+            display: block;
+        }
+        .role-selector {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .role-selector .role-btn {
+            flex: 1;
+            padding: 8px 12px;
+            border: 2px solid #e8edea;
+            border-radius: 8px;
+            background: #fff;
+            cursor: pointer;
+            text-align: center;
+            transition: var(--transition);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .role-selector .role-btn:hover {
+            border-color: var(--primary);
+        }
+        .role-selector .role-btn.active {
+            border-color: var(--primary);
+            background: var(--primary-lighter);
+            color: var(--primary);
+        }
+        .role-selector .role-btn i {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+        .demo-credentials {
+            background: var(--bg-light);
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 16px;
+            font-size: 0.85rem;
+        }
+        .demo-credentials code {
+            background: #fff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+    </style>
 </head>
-<body style="background: var(--bg-light);">
+<body>
 
-<!-- ===== LOGIN CONTAINER ===== -->
-<div class="auth-container" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 20px;">
-    <div class="auth-card" style="background: #fff; border-radius: var(--radius-lg); padding: 48px; max-width: 440px; width: 100%; box-shadow: var(--shadow-hover);">
-        <div style="text-align: center; margin-bottom: 32px;">
-            <img src="/assets/images/logo.png" alt="Gimbie Adventist General Hospital" style="height: 60px; margin-bottom: 16px;" />
-            <h1 style="font-size: 1.5rem; font-weight: 700;">Welcome Back</h1>
-            <p style="color: var(--text-secondary);">Login to your account</p>
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="logo">
+            <img src="/assets/images/logo.png" alt="Gimbie Adventist General Hospital" />
+            <h1>Welcome Back</h1>
+            <p>Login to your account</p>
+        </div>
+
+        <div class="error-message" id="errorMessage">
+            <i class="fas fa-exclamation-circle"></i>
+            <span id="errorText">Invalid credentials</span>
+        </div>
+
+        <!-- Role Selector -->
+        <div class="role-selector" id="roleSelector">
+            <div class="role-btn active" data-role="patient">
+                <i class="fas fa-user"></i>
+                Patient
+            </div>
+            <div class="role-btn" data-role="doctor">
+                <i class="fas fa-user-md"></i>
+                Doctor
+            </div>
+            <div class="role-btn" data-role="admin">
+                <i class="fas fa-user-tie"></i>
+                Admin
+            </div>
+            <div class="role-btn" data-role="nurse">
+                <i class="fas fa-user-nurse"></i>
+                Nurse
+            </div>
         </div>
 
         <form id="loginForm">
@@ -34,19 +183,124 @@
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                 <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-secondary);">
-                    <input type="checkbox" /> Remember me
+                    <input type="checkbox" id="rememberMe" /> Remember me
                 </label>
                 <a href="/pages/forgot-password.html" style="font-size: 0.9rem; color: var(--primary);">Forgot Password?</a>
             </div>
-            <button type="submit" class="btn btn--primary btn--full" style="padding: 14px;">Login</button>
+            <button type="submit" class="btn btn--primary btn--full" id="loginBtn">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </button>
         </form>
 
-        <div style="text-align: center; margin-top: 24px; color: var(--text-secondary);">
-            Don't have an account? <a href="/pages/register.html" style="color: var(--primary); font-weight: 600;">Register</a>
+        <!-- Demo Credentials -->
+        <div class="demo-credentials">
+            <strong>Demo Credentials:</strong><br />
+            <strong>Doctor:</strong> <code>doctor@hospital.com</code> / <code>Doctor123</code><br />
+            <strong>Admin:</strong> <code>admin@gimbiehospital.com</code> / <code>Gimbie@2026Admin</code><br />
+            <strong>Patient:</strong> <code>patient@test.com</code> / <code>Patient123</code>
+        </div>
+
+        <div class="auth-footer">
+            Don't have an account? <a href="/pages/register.html">Register</a>
         </div>
     </div>
 </div>
 
-<script type="module" src="/src/js/auth.js"></script>
+<script src="/src/js/api.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if already logged in
+    const token = API.getToken();
+    const user = API.getCurrentUser();
+    if (token && user) {
+        redirectByRole(user.role);
+        return;
+    }
+
+    // Role selector
+    const roleBtns = document.querySelectorAll('.role-btn');
+    let selectedRole = 'patient';
+
+    roleBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            roleBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            selectedRole = this.dataset.role;
+            
+            // Auto-fill demo credentials
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            
+            const demos = {
+                'patient': { email: 'patient@test.com', password: 'Patient123' },
+                'doctor': { email: 'doctor@hospital.com', password: 'Doctor123' },
+                'admin': { email: 'admin@gimbiehospital.com', password: 'Gimbie@2026Admin' },
+                'nurse': { email: 'nurse@hospital.com', password: 'Nurse123' }
+            };
+            
+            if (demos[selectedRole]) {
+                emailInput.value = demos[selectedRole].email;
+                passwordInput.value = demos[selectedRole].password;
+            }
+        });
+    });
+
+    // Login form
+    const loginForm = document.getElementById('loginForm');
+    const errorMessage = document.getElementById('errorMessage');
+    const errorText = document.getElementById('errorText');
+
+    loginForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const rememberMe = document.getElementById('rememberMe').checked;
+
+        // Hide previous error
+        errorMessage.classList.remove('show');
+
+        try {
+            const response = await API.auth.login(email, password);
+            
+            if (response.success) {
+                // Store user
+                API.setCurrentUser(response.user);
+                
+                // Redirect based on role
+                redirectByRole(response.user.role);
+            } else {
+                errorText.textContent = response.message || 'Login failed';
+                errorMessage.classList.add('show');
+            }
+        } catch (error) {
+            errorText.textContent = error.message || 'Something went wrong';
+            errorMessage.classList.add('show');
+        }
+    });
+
+    // Redirect by role
+    function redirectByRole(role) {
+        const roleMap = {
+            'super_admin': '/pages/admin/dashboard.html',
+            'admin': '/pages/admin/dashboard.html',
+            'doctor': '/pages/doctor/dashboard.html',
+            'nurse': '/pages/nurse/dashboard.html',
+            'pharmacist': '/pages/pharmacy/dashboard.html',
+            'lab_technician': '/pages/laboratory/dashboard.html',
+            'radiologist': '/pages/radiology/dashboard.html',
+            'accountant': '/pages/admin/billing.html',
+            'receptionist': '/pages/admin/appointments.html',
+            'patient': '/pages/patient/dashboard.html',
+        };
+        
+        const redirectUrl = roleMap[role] || '/';
+        window.location.href = redirectUrl;
+    }
+
+    // Auto-select first role and fill credentials
+    document.querySelector('.role-btn.active')?.click();
+});
+</script>
 </body>
-</html>
+                    </html>
