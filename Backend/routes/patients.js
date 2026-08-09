@@ -1,4 +1,3 @@
-// routes/patients.js
 const express = require('express');
 const router = express.Router();
 const { protect, authorize } = require('../middleware/auth');
@@ -7,11 +6,15 @@ const {
     getPatient,
     createPatient,
     updatePatient,
-    getMyPatientProfile,
+    deletePatient,
+    searchPatients,
+    getPatientHistory,
+    addMedicalHistory,
     getPatientAppointments,
     getPatientBills,
-    getPatientHistory,
     getPatientLabResults,
+    getPatientRadiology,
+    getMyPatientProfile,
 } = require('../controllers/patientController');
 
 // Protected routes
@@ -21,7 +24,10 @@ router.use(protect);
 router.get('/me', getMyPatientProfile);
 
 // Get all patients (admin only)
-router.get('/', authorize('super_admin', 'admin'), getPatients);
+router.get('/', authorize('super_admin', 'admin', 'doctor', 'nurse', 'receptionist'), getPatients);
+
+// Search patients
+router.get('/search', authorize('super_admin', 'admin', 'doctor', 'nurse'), searchPatients);
 
 // Create patient
 router.post('/', authorize('super_admin', 'admin', 'receptionist'), createPatient);
@@ -32,10 +38,15 @@ router.get('/:id', getPatient);
 // Update patient
 router.put('/:id', authorize('super_admin', 'admin', 'doctor', 'nurse'), updatePatient);
 
+// Delete patient
+router.delete('/:id', authorize('super_admin', 'admin'), deletePatient);
+
 // Patient sub-routes
+router.get('/:id/history', getPatientHistory);
+router.post('/:id/history', authorize('super_admin', 'admin', 'doctor'), addMedicalHistory);
 router.get('/:id/appointments', getPatientAppointments);
 router.get('/:id/bills', getPatientBills);
-router.get('/:id/history', getPatientHistory);
 router.get('/:id/lab-results', getPatientLabResults);
+router.get('/:id/radiology', getPatientRadiology);
 
 module.exports = router;
