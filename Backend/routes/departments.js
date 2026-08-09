@@ -2,33 +2,58 @@ const express = require('express');
 const router = express.Router();
 const { protect, authorize } = require('../middleware/auth');
 const {
-    getDepartments,
-    getDepartment,
-    createDepartment,
-    updateDepartment,
-    deleteDepartment,
-    getDepartmentStats,
-    getDepartmentStaff,
-    getDepartmentServices,
-    updateDepartmentHead,
-    getActiveDepartments,
-} = require('../controllers/departmentController');
-
-// Public routes
-router.get('/', getDepartments);
-router.get('/active', getActiveDepartments);
+    getPatientStatistics,
+    getDoctorStatistics,
+    getDepartmentStatistics,
+    getDiseaseStatistics,
+    getAdmissionReports,
+    getDischargeReports,
+    getEmergencyReports,
+    getBedOccupancyReports,
+    getPharmacyReports,
+    getLaboratoryReports,
+    getRadiologyReports,
+    getRevenueReports,
+    getExpenseReports,
+    getInsuranceReports,
+    getInventoryReports,
+    getStaffReports,
+    getFinancialAnalytics,
+    getMedicalAnalytics,
+    exportReportPDF,
+    exportReportExcel,
+} = require('../controllers/reportController');
 
 // Protected routes
-router.post('/', protect, authorize('super_admin', 'admin'), createDepartment);
+router.use(protect);
+router.use(authorize('super_admin', 'admin', 'accountant', 'hr_manager'));
 
-router.route('/:id')
-    .get(getDepartment)
-    .put(protect, authorize('super_admin', 'admin'), updateDepartment)
-    .delete(protect, authorize('super_admin', 'admin'), deleteDepartment);
+// Statistics routes
+router.get('/patients', getPatientStatistics);
+router.get('/doctors', getDoctorStatistics);
+router.get('/departments', getDepartmentStatistics);
+router.get('/diseases', getDiseaseStatistics);
 
-router.get('/:id/stats', protect, authorize('super_admin', 'admin'), getDepartmentStats);
-router.get('/:id/staff', protect, getDepartmentStaff);
-router.get('/:id/services', protect, getDepartmentServices);
-router.put('/:id/head', protect, authorize('super_admin', 'admin'), updateDepartmentHead);
+// Reports routes
+router.get('/admissions', getAdmissionReports);
+router.get('/discharges', getDischargeReports);
+router.get('/emergency', getEmergencyReports);
+router.get('/bed-occupancy', getBedOccupancyReports);
+router.get('/pharmacy', getPharmacyReports);
+router.get('/laboratory', getLaboratoryReports);
+router.get('/radiology', getRadiologyReports);
+router.get('/revenue', getRevenueReports);
+router.get('/expenses', getExpenseReports);
+router.get('/insurance', getInsuranceReports);
+router.get('/inventory', getInventoryReports);
+router.get('/staff', getStaffReports);
+
+// Analytics routes
+router.get('/financial', getFinancialAnalytics);
+router.get('/medical', getMedicalAnalytics);
+
+// Export routes
+router.get('/export/pdf', exportReportPDF);
+router.get('/export/excel', exportReportExcel);
 
 module.exports = router;
