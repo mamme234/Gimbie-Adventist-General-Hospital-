@@ -12,128 +12,244 @@
     <link rel="stylesheet" href="/src/css/style.css" />
     <link rel="stylesheet" href="/src/css/responsive.css" />
     <style>
-        .auth-container {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8edea 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 40px 20px;
-            background: var(--bg-light);
+            padding: 20px;
         }
+
+        .auth-container {
+            width: 100%;
+            max-width: 420px;
+        }
+
         .auth-card {
             background: #fff;
-            border-radius: var(--radius-lg);
-            padding: 48px;
-            max-width: 440px;
-            width: 100%;
-            box-shadow: var(--shadow-hover);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
         }
+
         .auth-card .logo {
             text-align: center;
-            margin-bottom: 32px;
+            margin-bottom: 28px;
         }
+
         .auth-card .logo img {
-            height: 60px;
-            margin-bottom: 16px;
+            height: 56px;
+            margin-bottom: 12px;
         }
+
         .auth-card .logo h1 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
+            color: #1a1a2e;
         }
+
         .auth-card .logo p {
-            color: var(--text-secondary);
+            color: #4a5568;
+            font-size: 0.9rem;
         }
+
         .form-group {
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
+
         .form-group label {
             display: block;
             font-weight: 500;
             margin-bottom: 4px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            color: #1a1a2e;
         }
+
         .form-group input {
             width: 100%;
-            padding: 12px 16px;
+            padding: 11px 14px;
             border: 1px solid #ddd;
             border-radius: 8px;
-            font-family: var(--font);
+            font-family: 'Inter', sans-serif;
             font-size: 0.95rem;
-            transition: var(--transition);
+            transition: 0.2s ease;
+            background: #fff;
         }
+
         .form-group input:focus {
             outline: none;
-            border-color: var(--primary);
+            border-color: #0f5c2e;
             box-shadow: 0 0 0 3px rgba(15, 92, 46, 0.1);
         }
-        .btn--full {
-            width: 100%;
-            justify-content: center;
-            padding: 14px;
+
+        .form-group input::placeholder {
+            color: #8a8fa8;
         }
-        .auth-footer {
-            text-align: center;
-            margin-top: 24px;
-            color: var(--text-secondary);
-        }
-        .auth-footer a {
-            color: var(--primary);
-            font-weight: 600;
-        }
-        .error-message {
-            background: #ffebee;
-            color: var(--danger);
-            padding: 12px 16px;
-            border-radius: 8px;
-            margin-bottom: 16px;
-            display: none;
-        }
-        .error-message.show {
-            display: block;
-        }
+
         .role-selector {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin-bottom: 18px;
         }
+
         .role-selector .role-btn {
-            flex: 1;
-            padding: 8px 12px;
+            padding: 8px 4px;
             border: 2px solid #e8edea;
             border-radius: 8px;
             background: #fff;
             cursor: pointer;
             text-align: center;
-            transition: var(--transition);
-            font-size: 0.85rem;
+            transition: 0.2s ease;
+            font-size: 0.7rem;
             font-weight: 500;
+            color: #4a5568;
         }
-        .role-selector .role-btn:hover {
-            border-color: var(--primary);
-        }
-        .role-selector .role-btn.active {
-            border-color: var(--primary);
-            background: var(--primary-lighter);
-            color: var(--primary);
-        }
+
         .role-selector .role-btn i {
             display: block;
             font-size: 1.2rem;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
-        .demo-credentials {
-            background: var(--bg-light);
-            padding: 12px 16px;
-            border-radius: 8px;
-            margin-top: 16px;
+
+        .role-selector .role-btn:hover {
+            border-color: #0f5c2e;
+            background: #f8faf9;
+        }
+
+        .role-selector .role-btn.active {
+            border-color: #0f5c2e;
+            background: #e8f5e9;
+            color: #0f5c2e;
+        }
+
+        .btn--full {
+            width: 100%;
+            justify-content: center;
+            padding: 13px;
+            font-size: 1rem;
+            border-radius: 50px;
+        }
+
+        .btn--primary {
+            background: #0f5c2e;
+            color: #fff;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn--primary:hover {
+            background: #0a4522;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(15, 92, 46, 0.25);
+        }
+
+        .btn--primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .auth-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 12px 0 18px;
+        }
+
+        .auth-options label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
             font-size: 0.85rem;
+            color: #4a5568;
+            cursor: pointer;
         }
-        .demo-credentials code {
-            background: #fff;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.8rem;
+
+        .auth-options label input[type="checkbox"] {
+            width: 15px;
+            height: 15px;
+            accent-color: #0f5c2e;
+        }
+
+        .auth-options a {
+            font-size: 0.85rem;
+            color: #0f5c2e;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .auth-options a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-bottom: 14px;
+            display: none;
+            font-size: 0.85rem;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .error-message.show {
+            display: flex;
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #4a5568;
+            font-size: 0.9rem;
+        }
+
+        .auth-footer a {
+            color: #0f5c2e;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 480px) {
+            .auth-card {
+                padding: 24px;
+            }
+            .role-selector {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
@@ -141,12 +257,14 @@
 
 <div class="auth-container">
     <div class="auth-card">
+        <!-- Logo -->
         <div class="logo">
             <img src="/assets/images/logo.png" alt="Gimbie Adventist General Hospital" />
             <h1>Welcome Back</h1>
             <p>Login to your account</p>
         </div>
 
+        <!-- Error Message -->
         <div class="error-message" id="errorMessage">
             <i class="fas fa-exclamation-circle"></i>
             <span id="errorText">Invalid credentials</span>
@@ -172,33 +290,28 @@
             </div>
         </div>
 
-        <form id="loginForm">
+        <!-- Login Form -->
+        <form id="loginForm" novalidate>
             <div class="form-group">
                 <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" required placeholder="Enter your email" />
+                <input type="email" id="email" name="email" required placeholder="Enter your email" autocomplete="email" />
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" required placeholder="Enter your password" />
+                <input type="password" id="password" name="password" required placeholder="Enter your password" autocomplete="current-password" />
             </div>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-secondary);">
+
+            <div class="auth-options">
+                <label>
                     <input type="checkbox" id="rememberMe" /> Remember me
                 </label>
-                <a href="/pages/forgot-password.html" style="font-size: 0.9rem; color: var(--primary);">Forgot Password?</a>
+                <a href="/pages/forgot-password.html">Forgot Password?</a>
             </div>
+
             <button type="submit" class="btn btn--primary btn--full" id="loginBtn">
                 <i class="fas fa-sign-in-alt"></i> Login
             </button>
         </form>
-
-        <!-- Demo Credentials -->
-        <div class="demo-credentials">
-            <strong>Demo Credentials:</strong><br />
-            <strong>Doctor:</strong> <code>doctor@hospital.com</code> / <code>Doctor123</code><br />
-            <strong>Admin:</strong> <code>admin@gimbiehospital.com</code> / <code>Gimbie@2026Admin</code><br />
-            <strong>Patient:</strong> <code>patient@test.com</code> / <code>Patient123</code>
-        </div>
 
         <div class="auth-footer">
             Don't have an account? <a href="/pages/register.html">Register</a>
@@ -206,82 +319,29 @@
     </div>
 </div>
 
-<script src="/src/js/api.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Check if already logged in
-    const token = API.getToken();
-    const user = API.getCurrentUser();
-    if (token && user) {
-        redirectByRole(user.role);
-        return;
-    }
+    (function() {
+        'use strict';
 
-    // Role selector
-    const roleBtns = document.querySelectorAll('.role-btn');
-    let selectedRole = 'patient';
+        // ===== DOM ELEMENTS =====
+        const loginForm = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const loginBtn = document.getElementById('loginBtn');
+        const errorMessage = document.getElementById('errorMessage');
+        const errorText = document.getElementById('errorText');
+        const roleBtns = document.querySelectorAll('.role-btn');
+        const rememberMe = document.getElementById('rememberMe');
 
-    roleBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            roleBtns.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            selectedRole = this.dataset.role;
-            
-            // Auto-fill demo credentials
-            const emailInput = document.getElementById('email');
-            const passwordInput = document.getElementById('password');
-            
-            const demos = {
-                'patient': { email: 'patient@test.com', password: 'Patient123' },
-                'doctor': { email: 'doctor@hospital.com', password: 'Doctor123' },
-                'admin': { email: 'admin@gimbiehospital.com', password: 'Gimbie@2026Admin' },
-                'nurse': { email: 'nurse@hospital.com', password: 'Nurse123' }
-            };
-            
-            if (demos[selectedRole]) {
-                emailInput.value = demos[selectedRole].email;
-                passwordInput.value = demos[selectedRole].password;
-            }
-        });
-    });
+        // ===== API BASE URL =====
+        const API_URL = 'https://alpha-af1q.onrender.com/api';
 
-    // Login form
-    const loginForm = document.getElementById('loginForm');
-    const errorMessage = document.getElementById('errorMessage');
-    const errorText = document.getElementById('errorText');
+        // ===== STATE =====
+        let selectedRole = 'patient';
+        let isLoading = false;
 
-    loginForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const rememberMe = document.getElementById('rememberMe').checked;
-
-        // Hide previous error
-        errorMessage.classList.remove('show');
-
-        try {
-            const response = await API.auth.login(email, password);
-            
-            if (response.success) {
-                // Store user
-                API.setCurrentUser(response.user);
-                
-                // Redirect based on role
-                redirectByRole(response.user.role);
-            } else {
-                errorText.textContent = response.message || 'Login failed';
-                errorMessage.classList.add('show');
-            }
-        } catch (error) {
-            errorText.textContent = error.message || 'Something went wrong';
-            errorMessage.classList.add('show');
-        }
-    });
-
-    // Redirect by role
-    function redirectByRole(role) {
-        const roleMap = {
+        // ===== ROLE REDIRECT MAP =====
+        const ROLE_REDIRECT = {
             'super_admin': '/pages/admin/dashboard.html',
             'admin': '/pages/admin/dashboard.html',
             'doctor': '/pages/doctor/dashboard.html',
@@ -291,16 +351,186 @@ document.addEventListener('DOMContentLoaded', function() {
             'radiologist': '/pages/radiology/dashboard.html',
             'accountant': '/pages/admin/billing.html',
             'receptionist': '/pages/admin/appointments.html',
-            'patient': '/pages/patient/dashboard.html',
+            'patient': '/pages/patient/dashboard.html'
         };
-        
-        const redirectUrl = roleMap[role] || '/';
-        window.location.href = redirectUrl;
-    }
 
-    // Auto-select first role and fill credentials
-    document.querySelector('.role-btn.active')?.click();
-});
+        // ===== CHECK IF ALREADY LOGGED IN =====
+        function checkAuth() {
+            const token = localStorage.getItem('token');
+            const user = JSON.parse(localStorage.getItem('user') || 'null');
+            
+            if (token && user) {
+                const redirect = ROLE_REDIRECT[user.role] || '/';
+                window.location.href = redirect;
+                return true;
+            }
+            return false;
+        }
+
+        // ===== SHOW ERROR =====
+        function showError(message) {
+            errorText.textContent = message;
+            errorMessage.classList.add('show');
+            setTimeout(() => {
+                errorMessage.classList.remove('show');
+            }, 5000);
+        }
+
+        // ===== HIDE ERROR =====
+        function hideError() {
+            errorMessage.classList.remove('show');
+        }
+
+        // ===== SET LOADING STATE =====
+        function setLoading(loading) {
+            isLoading = loading;
+            if (loading) {
+                loginBtn.disabled = true;
+                loginBtn.innerHTML = '<span class="spinner"></span> Logging in...';
+            } else {
+                loginBtn.disabled = false;
+                loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+            }
+        }
+
+        // ===== HANDLE LOGIN =====
+        async function handleLogin(e) {
+            e.preventDefault();
+            hideError();
+
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            // Validation
+            if (!email) {
+                showError('Please enter your email address');
+                emailInput.focus();
+                return;
+            }
+
+            if (!password) {
+                showError('Please enter your password');
+                passwordInput.focus();
+                return;
+            }
+
+            if (password.length < 6) {
+                showError('Password must be at least 6 characters');
+                passwordInput.focus();
+                return;
+            }
+
+            setLoading(true);
+
+            try {
+                const response = await fetch(`${API_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.message || 'Login failed');
+                }
+
+                if (data.success && data.token) {
+                    // Save token and user
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+
+                    if (rememberMe.checked) {
+                        localStorage.setItem('rememberMe', 'true');
+                    } else {
+                        localStorage.removeItem('rememberMe');
+                    }
+
+                    // Redirect based on role
+                    const redirect = ROLE_REDIRECT[data.user.role] || '/';
+                    window.location.href = redirect;
+                } else {
+                    throw new Error(data.message || 'Invalid credentials');
+                }
+
+            } catch (error) {
+                console.error('Login error:', error);
+                showError(error.message || 'Invalid email or password. Please try again.');
+                setLoading(false);
+            }
+        }
+
+        // ===== ROLE SELECTOR =====
+        roleBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                roleBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                selectedRole = this.dataset.role;
+                
+                // Clear any errors
+                hideError();
+                
+                // Clear previous credentials
+                emailInput.value = '';
+                passwordInput.value = '';
+                
+                // Focus on email
+                emailInput.focus();
+            });
+        });
+
+        // ===== REMEMBER ME =====
+        function loadRemembered() {
+            const remembered = localStorage.getItem('rememberMe');
+            if (remembered === 'true') {
+                rememberMe.checked = true;
+                const savedEmail = localStorage.getItem('savedEmail');
+                if (savedEmail) {
+                    emailInput.value = savedEmail;
+                }
+            }
+        }
+
+        // ===== SAVE EMAIL IF REMEMBERED =====
+        function saveEmail() {
+            if (rememberMe.checked) {
+                localStorage.setItem('savedEmail', emailInput.value);
+            } else {
+                localStorage.removeItem('savedEmail');
+            }
+        }
+
+        // ===== EVENT LISTENERS =====
+        loginForm.addEventListener('submit', handleLogin);
+
+        // Save email on input blur if remember me is checked
+        emailInput.addEventListener('blur', saveEmail);
+
+        // Clear error on input
+        emailInput.addEventListener('input', hideError);
+        passwordInput.addEventListener('input', hideError);
+
+        // Enter key support
+        passwordInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                loginForm.dispatchEvent(new Event('submit'));
+            }
+        });
+
+        // ===== INIT =====
+        if (checkAuth()) {
+            return; // Already logged in, redirected
+        }
+
+        loadRemembered();
+        emailInput.focus();
+
+    })();
 </script>
 </body>
-                    </html>
+    </html>
