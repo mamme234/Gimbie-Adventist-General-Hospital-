@@ -15,11 +15,12 @@ const {
     getDoctorsByDepartment,
 } = require('../controllers/doctorController');
 
-router.route('/')
-    .get(getDoctors)
-    .post(protect, authorize('super_admin', 'admin'), createDoctor);
-
+// Public routes
+router.get('/', getDoctors);
 router.get('/by-department/:department', getDoctorsByDepartment);
+
+// Protected routes
+router.post('/', protect, authorize('super_admin', 'admin'), createDoctor);
 router.get('/stats/:id', protect, authorize('super_admin', 'admin'), getDoctorStats);
 
 router.route('/:id')
