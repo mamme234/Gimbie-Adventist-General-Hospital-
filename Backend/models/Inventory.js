@@ -5,6 +5,7 @@ const InventorySchema = new mongoose.Schema({
         type: String,
         unique: true,
         required: true,
+        // REMOVED: index: true
     },
     name: {
         type: String,
@@ -71,7 +72,7 @@ const InventorySchema = new mongoose.Schema({
     timestamps: true,
 });
 
-// Indexes
+// ===== INDEXES - Defined once here =====
 InventorySchema.index({ itemId: 1 });
 InventorySchema.index({ name: 1 });
 InventorySchema.index({ category: 1 });
