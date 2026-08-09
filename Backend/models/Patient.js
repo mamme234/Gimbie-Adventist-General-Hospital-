@@ -5,11 +5,13 @@ const PatientSchema = new mongoose.Schema({
         type: String,
         unique: true,
         required: true,
+        // REMOVED: index: true
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
+        // REMOVED: index: true
     },
     fullName: {
         type: String,
@@ -98,7 +100,7 @@ const PatientSchema = new mongoose.Schema({
     timestamps: true,
 });
 
-// Indexes
+// ===== INDEXES - Defined once here =====
 PatientSchema.index({ patientId: 1 });
 PatientSchema.index({ userId: 1 });
 PatientSchema.index({ fullName: 1 });
