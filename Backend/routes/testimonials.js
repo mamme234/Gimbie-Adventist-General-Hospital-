@@ -9,11 +9,13 @@ const {
     deleteTestimonial,
     approveTestimonial,
     getApprovedTestimonials,
+    getFeaturedTestimonials,
 } = require('../controllers/testimonialController');
 
 // Public routes
 router.get('/', getTestimonials);
 router.get('/approved', getApprovedTestimonials);
+router.get('/featured', getFeaturedTestimonials);
 
 // Protected routes
 router.post('/', protect, createTestimonial);
