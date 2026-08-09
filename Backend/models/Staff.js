@@ -5,6 +5,7 @@ const StaffSchema = new mongoose.Schema({
         type: String,
         unique: true,
         required: true,
+        // REMOVED: index: true
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -92,7 +93,7 @@ const StaffSchema = new mongoose.Schema({
     timestamps: true,
 });
 
-// Indexes
+// ===== INDEXES - Defined once here =====
 StaffSchema.index({ staffId: 1 });
 StaffSchema.index({ department: 1 });
 StaffSchema.index({ position: 1 });
