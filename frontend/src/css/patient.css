@@ -11,16 +11,17 @@
 
 /* ===== PATIENT SIDEBAR ===== */
 .patient-sidebar {
-    width: 220px;
+    width: 260px;
     background: var(--bg-white);
     border-right: 1px solid #e8edea;
-    padding: 20px 0;
+    padding: 24px 0;
     position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
     overflow-y: auto;
     z-index: 100;
+    transition: var(--transition);
 }
 
 .patient-sidebar .profile-section {
@@ -31,17 +32,22 @@
 }
 
 .patient-sidebar .profile-section .avatar {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     background: var(--info);
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 700;
     margin: 0 auto 12px;
+}
+
+.patient-sidebar .profile-section .name {
+    font-weight: 600;
+    font-size: 1.1rem;
 }
 
 .patient-sidebar .profile-section .patient-id {
@@ -51,6 +57,10 @@
 
 .patient-sidebar__nav {
     padding: 0 12px;
+}
+
+.patient-sidebar__nav li {
+    margin-bottom: 4px;
 }
 
 .patient-sidebar__nav a {
@@ -66,6 +76,7 @@
 
 .patient-sidebar__nav a i {
     width: 20px;
+    font-size: 1rem;
 }
 
 .patient-sidebar__nav a:hover {
@@ -81,8 +92,160 @@
 /* ===== PATIENT MAIN ===== */
 .patient-main {
     flex: 1;
-    margin-left: 220px;
+    margin-left: 260px;
     padding: 24px 32px;
+}
+
+/* ===== TOP BAR ===== */
+.patient-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background: var(--bg-white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+}
+
+.patient-topbar__title h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.patient-topbar__title p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.patient-topbar__actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.patient-topbar__actions .notification-btn {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: var(--bg-light);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+.patient-topbar__actions .notification-btn:hover {
+    background: var(--primary-lighter);
+    color: var(--primary);
+}
+
+.patient-topbar__actions .notification-btn .dot {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 8px;
+    height: 8px;
+    background: var(--danger);
+    border-radius: 50%;
+}
+
+.patient-topbar__actions .user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 4px 12px 4px 4px;
+    border-radius: 50px;
+    background: var(--bg-light);
+    transition: var(--transition);
+}
+
+.patient-topbar__actions .user-profile:hover {
+    background: var(--primary-lighter);
+}
+
+.patient-topbar__actions .user-profile .avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--info);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.patient-topbar__actions .user-profile .name {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.patient-topbar__actions .user-profile .dropdown-icon {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+/* ===== USER DROPDOWN ===== */
+.user-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #fff;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hover);
+    min-width: 200px;
+    padding: 8px 0;
+    margin-top: 8px;
+    display: none;
+    z-index: 1000;
+    border: 1px solid #e8edea;
+}
+
+.user-dropdown.active {
+    display: block;
+}
+
+.user-dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    color: var(--text-secondary);
+    transition: var(--transition);
+    font-size: 0.9rem;
+}
+
+.user-dropdown a:hover {
+    background: var(--bg-light);
+    color: var(--primary);
+}
+
+.user-dropdown a i {
+    width: 18px;
+    font-size: 0.9rem;
+}
+
+.user-dropdown .divider {
+    height: 1px;
+    background: #e8edea;
+    margin: 4px 0;
+}
+
+.user-dropdown .logout-btn {
+    color: var(--danger);
+}
+
+.user-dropdown .logout-btn:hover {
+    background: #ffebee;
+    color: var(--danger);
 }
 
 /* ===== PATIENT STATS ===== */
@@ -91,6 +254,104 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     margin-bottom: 24px;
+}
+
+.stat-card {
+    background: var(--bg-white);
+    padding: 20px 24px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--primary);
+    transition: var(--transition);
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+}
+
+.stat-card__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--primary-lighter);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--primary);
+    margin-bottom: 12px;
+}
+
+.stat-card__number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.stat-card__label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.stat-card__change {
+    font-size: 0.8rem;
+    margin-top: 8px;
+}
+
+.stat-card__change.up {
+    color: var(--primary);
+}
+
+.stat-card__change.down {
+    color: var(--danger);
+}
+
+.stat-card--blue { border-left-color: var(--info); }
+.stat-card--blue .stat-card__icon { background: #e3f2fd; color: var(--info); }
+
+.stat-card--orange { border-left-color: var(--warning); }
+.stat-card--orange .stat-card__icon { background: #fff3e0; color: var(--warning); }
+
+.stat-card--red { border-left-color: var(--danger); }
+.stat-card--red .stat-card__icon { background: #ffebee; color: var(--danger); }
+
+/* ===== QUICK ACTIONS ===== */
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.quick-action {
+    background: var(--bg-white);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: var(--transition);
+    cursor: pointer;
+    border: 1px solid #e8edea;
+}
+
+.quick-action:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+}
+
+.quick-action i {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 8px;
+    display: block;
+}
+
+.quick-action span {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-primary);
 }
 
 /* ===== UPCOMING APPOINTMENTS ===== */
@@ -110,6 +371,20 @@
     border-bottom: 1px solid #e8edea;
 }
 
+.upcoming-appointments .header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.upcoming-appointments .header .badge {
+    background: var(--primary-lighter);
+    color: var(--primary);
+    padding: 2px 10px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
 .appointment-item {
     display: flex;
     align-items: center;
@@ -125,6 +400,7 @@
 
 .appointment-item .info .doctor {
     font-weight: 600;
+    font-size: 1rem;
 }
 
 .appointment-item .info .date-time {
@@ -144,25 +420,11 @@
     font-weight: 600;
 }
 
-.appointment-item .status--confirmed {
-    background: #e8f5e9;
-    color: var(--primary);
-}
-
-.appointment-item .status--pending {
-    background: #fff3e0;
-    color: var(--warning);
-}
-
-.appointment-item .status--cancelled {
-    background: #ffebee;
-    color: var(--danger);
-}
-
-.appointment-item .status--completed {
-    background: #e3f2fd;
-    color: var(--info);
-}
+.appointment-item .status--confirmed { background: #e8f5e9; color: var(--primary); }
+.appointment-item .status--scheduled { background: #e3f2fd; color: var(--info); }
+.appointment-item .status--pending { background: #fff3e0; color: var(--warning); }
+.appointment-item .status--cancelled { background: #ffebee; color: var(--danger); }
+.appointment-item .status--completed { background: #e8f5e9; color: var(--primary); }
 
 /* ===== MEDICAL RECORDS ===== */
 .medical-records {
@@ -174,7 +436,15 @@
 
 .medical-records .header {
     padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     border-bottom: 1px solid #e8edea;
+}
+
+.medical-records .header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
 }
 
 .record-item {
@@ -183,6 +453,11 @@
     gap: 16px;
     padding: 12px 24px;
     border-bottom: 1px solid #e8edea;
+    transition: var(--transition);
+}
+
+.record-item:hover {
+    background: var(--bg-light);
 }
 
 .record-item .icon {
@@ -194,6 +469,7 @@
     align-items: center;
     justify-content: center;
     color: var(--primary);
+    flex-shrink: 0;
 }
 
 .record-item .info .title {
@@ -205,9 +481,42 @@
     color: var(--text-secondary);
 }
 
+.record-item .info .doctor-name {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+/* ===== EMPTY STATE ===== */
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-secondary);
+}
+
+.empty-state i {
+    font-size: 3rem;
+    color: var(--text-light);
+    margin-bottom: 12px;
+    display: block;
+}
+
+.empty-state h4 {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.empty-state p {
+    font-size: 0.9rem;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
     .patient-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .quick-actions {
         grid-template-columns: repeat(2, 1fr);
     }
 }
@@ -227,8 +536,18 @@
         padding: 16px;
     }
     
+    .patient-topbar {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+    
     .patient-stats {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .quick-actions {
+        grid-template-columns: 1fr 1fr;
     }
     
     .appointment-item {
@@ -236,4 +555,23 @@
         align-items: flex-start;
         gap: 8px;
     }
+    
+    .patient-topbar__actions .user-profile .name {
+        display: none;
+    }
 }
+
+@media (max-width: 480px) {
+    .patient-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .quick-actions {
+        grid-template-columns: 1fr;
+    }
+    
+    .patient-sidebar {
+        width: 100%;
+        max-width: 300px;
+    }
+   }
