@@ -1,13 +1,15 @@
+// controllers/patientController.js
 const Patient = require('../models/Patient');
 const User = require('../models/User');
 const Appointment = require('../models/Appointment');
 const Invoice = require('../models/Invoice');
 const LabTest = require('../models/LabTest');
+const Radiology = require('../models/Radiology');
 const { generatePatientId } = require('../utils/generateId');
 
-// @desc    Get patient by userId (for current user)
-// @route   GET /api/patients/me
-// @access  Private
+// ============================================
+// GET MY PATIENT PROFILE
+// ============================================
 exports.getMyPatientProfile = async (req, res) => {
     try {
         const patient = await Patient.findOne({ userId: req.user.id });
@@ -54,34 +56,9 @@ exports.getMyPatientProfile = async (req, res) => {
     }
 };
 
-// @desc    Get patient by ID
-// @route   GET /api/patients/:id
-// @access  Private
-exports.getPatient = async (req, res) => {
-    try {
-        const patient = await Patient.findById(req.params.id);
-        if (!patient) {
-            return res.status(404).json({
-                success: false,
-                message: 'Patient not found',
-            });
-        }
-
-        res.status(200).json({
-            success: true,
-            data: patient,
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: error.message,
-        });
-    }
-};
-
-// @desc    Get all patients
-// @route   GET /api/patients
-// @access  Private
+// ============================================
+// GET ALL PATIENTS
+// ============================================
 exports.getPatients = async (req, res) => {
     try {
         const patients = await Patient.find().populate('userId', 'fullName email');
@@ -97,9 +74,33 @@ exports.getPatients = async (req, res) => {
     }
 };
 
-// @desc    Create patient
-// @route   POST /api/patients
-// @access  Private
+// ============================================
+// GET PATIENT BY ID
+// ============================================
+exports.getPatient = async (req, res) => {
+    try {
+        const patient = await Patient.findById(req.params.id);
+        if (!patient) {
+            return res.status(404).json({
+                success: false,
+                message: 'Patient not found',
+            });
+        }
+        res.status(200).json({
+            success: true,
+            data: patient,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
+// ============================================
+// CREATE PATIENT
+// ============================================
 exports.createPatient = async (req, res) => {
     try {
         const patientData = req.body;
@@ -119,9 +120,9 @@ exports.createPatient = async (req, res) => {
     }
 };
 
-// @desc    Update patient
-// @route   PUT /api/patients/:id
-// @access  Private
+// ============================================
+// UPDATE PATIENT
+// ============================================
 exports.updatePatient = async (req, res) => {
     try {
         const patient = await Patient.findById(req.params.id);
@@ -150,9 +151,126 @@ exports.updatePatient = async (req, res) => {
     }
 };
 
-// @desc    Get patient appointments
-// @route   GET /api/patients/:id/appointments
-// @access  Private
+// ============================================
+// DELETE PATIENT
+// ============================================
+exports.deletePatient = async (req, res) => {
+    try {
+        const patient = await Patient.findById(req.params.id);
+        if (!patient) {
+            return res.status(404).json({
+                success: false,
+                message: 'Patient not found',
+            });
+        }
+        patient.status = 'Inactive';
+        await patient.save();
+        res.status(200).json({
+            success: true,
+            message: 'Patient deactivated successfully',
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
+// ============================================
+// SEARCH PATIENTS
+// ============================================
+exports.searchPatients = async (req, res) => {
+    try {
+        const { q } = req.query;
+        if (!q) {
+            return res.status(400).json({
+                success: false,
+                message: 'Search query is required',
+            });
+        }
+
+        const patients = await Patient.find({
+            $or: [
+                { fullName: { $regex: q, $options: 'i' } },
+                { patientId: { $regex: q, $options: 'i' } },
+                { phone: { $regex: q, $options: 'i' } },
+            ],
+        });
+
+        res.status(200).json({
+            success: true,
+            data: patients,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
+// ============================================
+// GET PATIENT HISTORY
+// ============================================
+exports.getPatientHistory = async (req, res) => {
+    try {
+        const patient = await Patient.findById(req.params.id);
+        if (!patient) {
+            return res.status(404).json({
+                success: false,
+                message: 'Patient not found',
+            });
+        }
+        res.status(200).json({
+            success: true,
+            data: patient.medicalHistory || [],
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
+// ============================================
+// ADD MEDICAL HISTORY
+// ============================================
+exports.addMedicalHistory = async (req, res) => {
+    try {
+        const patient = await Patient.findById(req.params.id);
+        if (!patient) {
+            return res.status(404).json({
+                success: false,
+                message: 'Patient not found',
+            });
+        }
+
+        patient.medicalHistory.push({
+            condition: req.body.condition,
+            diagnosis: req.body.diagnosis,
+            date: req.body.date || new Date(),
+            doctor: req.body.doctor,
+            notes: req.body.notes,
+        });
+        await patient.save();
+
+        res.status(200).json({
+            success: true,
+            data: patient.medicalHistory,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
+// ============================================
+// GET PATIENT APPOINTMENTS
+// ============================================
 exports.getPatientAppointments = async (req, res) => {
     try {
         const patient = await Patient.findById(req.params.id);
@@ -164,7 +282,6 @@ exports.getPatientAppointments = async (req, res) => {
         }
 
         const appointments = await Appointment.find({ patient: patient._id })
-            .populate('doctor', 'userId')
             .populate({
                 path: 'doctor',
                 populate: {
@@ -186,9 +303,9 @@ exports.getPatientAppointments = async (req, res) => {
     }
 };
 
-// @desc    Get patient bills
-// @route   GET /api/patients/:id/bills
-// @access  Private
+// ============================================
+// GET PATIENT BILLS
+// ============================================
 exports.getPatientBills = async (req, res) => {
     try {
         const patient = await Patient.findById(req.params.id);
@@ -212,34 +329,9 @@ exports.getPatientBills = async (req, res) => {
     }
 };
 
-// @desc    Get patient medical history
-// @route   GET /api/patients/:id/history
-// @access  Private
-exports.getPatientHistory = async (req, res) => {
-    try {
-        const patient = await Patient.findById(req.params.id);
-        if (!patient) {
-            return res.status(404).json({
-                success: false,
-                message: 'Patient not found',
-            });
-        }
-
-        res.status(200).json({
-            success: true,
-            data: patient.medicalHistory || [],
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: error.message,
-        });
-    }
-};
-
-// @desc    Get patient lab results
-// @route   GET /api/patients/:id/lab-results
-// @access  Private
+// ============================================
+// GET PATIENT LAB RESULTS
+// ============================================
 exports.getPatientLabResults = async (req, res) => {
     try {
         const patient = await Patient.findById(req.params.id);
@@ -257,6 +349,35 @@ exports.getPatientLabResults = async (req, res) => {
         res.status(200).json({
             success: true,
             data: results,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
+// ============================================
+// GET PATIENT RADIOLOGY
+// ============================================
+exports.getPatientRadiology = async (req, res) => {
+    try {
+        const patient = await Patient.findById(req.params.id);
+        if (!patient) {
+            return res.status(404).json({
+                success: false,
+                message: 'Patient not found',
+            });
+        }
+
+        const radiology = await Radiology.find({ patient: patient._id })
+            .populate('doctor', 'userId')
+            .sort({ createdAt: -1 });
+
+        res.status(200).json({
+            success: true,
+            data: radiology,
         });
     } catch (error) {
         res.status(500).json({
