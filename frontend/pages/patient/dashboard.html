@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Patient Dashboard - Gimbie Adventist General Hospital</title>
+    <title>Dashboard - Gimbie Adventist General Hospital</title>
     <link rel="icon" href="/assets/images/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,7 +15,7 @@
 </head>
 <body>
     <div class="patient-wrapper">
-        <!-- ===== SIDEBAR ===== -->
+        <!-- Sidebar -->
         <aside class="patient-sidebar">
             <div class="profile-section">
                 <div class="avatar" id="patientAvatar">P</div>
@@ -30,6 +30,7 @@
                     <li><a href="/pages/patient/lab-results.html"><i class="fas fa-microscope"></i> Lab Results</a></li>
                     <li><a href="/pages/patient/prescriptions.html"><i class="fas fa-prescription-bottle"></i> Prescriptions</a></li>
                     <li><a href="/pages/patient/billing.html"><i class="fas fa-file-invoice-dollar"></i> Billing</a></li>
+                    <li><a href="/pages/patient/payment.html"><i class="fas fa-credit-card"></i> Make Payment</a></li>
                     <li><a href="/pages/patient/profile.html"><i class="fas fa-user"></i> Profile</a></li>
                     <li class="logout-li">
                         <a href="#" id="sidebarLogoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
@@ -38,9 +39,8 @@
             </nav>
         </aside>
 
-        <!-- ===== MAIN ===== -->
+        <!-- Main -->
         <main class="patient-main">
-            <!-- Top Bar -->
             <div class="patient-topbar">
                 <div class="patient-topbar__title">
                     <h1>Dashboard</h1>
@@ -62,55 +62,45 @@
                 </div>
             </div>
 
-            <!-- Stats Cards -->
-            <div class="patient-stats" id="patientStats">
-                <!-- Loaded from API -->
-            </div>
+            <div class="patient-stats" id="patientStats"></div>
 
-            <!-- Quick Actions - 4 Cards in a Row -->
             <div class="quick-actions">
-                <div class="quick-action" data-action="appointment">
+                <div class="quick-action" onclick="window.location.href='/pages/appointments.html'">
                     <i class="fas fa-calendar-plus"></i>
                     <span>Book Appointment</span>
                 </div>
-                <div class="quick-action" data-action="records">
+                <div class="quick-action" onclick="window.location.href='/pages/patient/medical-records.html'">
                     <i class="fas fa-file-medical"></i>
                     <span>Medical Records</span>
                 </div>
-                <div class="quick-action" data-action="billing">
+                <div class="quick-action" onclick="window.location.href='/pages/patient/payment.html'">
                     <i class="fas fa-credit-card"></i>
                     <span>Pay Bill</span>
                 </div>
-                <div class="quick-action" data-action="profile">
+                <div class="quick-action" onclick="window.location.href='/pages/patient/profile.html'">
                     <i class="fas fa-user-edit"></i>
                     <span>Update Profile</span>
                 </div>
             </div>
 
-            <!-- Appointments Section -->
             <div class="upcoming-appointments">
                 <div class="header">
                     <h3>Upcoming Appointments</h3>
                     <a href="/pages/patient/appointments.html" class="btn btn--small btn--outline">View All</a>
                 </div>
-                <div id="appointmentsList">
-                    <!-- Loaded from API -->
-                </div>
+                <div id="appointmentsList"></div>
             </div>
 
-            <!-- Medical Records Section -->
             <div class="medical-records">
                 <div class="header">
                     <h3>Recent Medical Records</h3>
                     <a href="/pages/patient/medical-records.html" class="btn btn--small btn--outline">View All</a>
                 </div>
-                <div id="medicalRecords">
-                    <!-- Loaded from API -->
-                </div>
+                <div id="medicalRecords"></div>
             </div>
         </main>
     </div>
 
     <script src="/src/js/patient.js"></script>
 </body>
-    </html>
+                                                                  </html>
