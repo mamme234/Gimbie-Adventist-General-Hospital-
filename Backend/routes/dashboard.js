@@ -1,7 +1,9 @@
+// routes/dashboard.js
 const express = require('express');
 const router = express.Router();
 const { protect } = require('../middleware/auth');
 const {
+    getSuperAdminDashboard,
     getAdminDashboard,
     getDoctorDashboard,
     getNurseDashboard,
@@ -14,7 +16,6 @@ const {
     getHRDashboard,
     getInventoryDashboard,
     getProcurementDashboard,
-    getSuperAdminDashboard,
 } = require('../controllers/dashboardController');
 
 // Protected routes
