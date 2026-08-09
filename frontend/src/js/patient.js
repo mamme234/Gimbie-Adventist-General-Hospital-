@@ -24,13 +24,19 @@ export async function loadPatientDashboard() {
         // Update UI with user info
         updateUserInfo(user);
 
-        // Load patient data
-        const response = await API.patients.get(user.id);
+        // Load patient data from /api/patients/me
+        console.log('Loading patient data...');
+        const response = await API.patients.getMe();
+        console.log('Patient data response:', response);
+        
         if (response.success) {
             const patient = response.data;
             updateStats(patient);
             loadAppointments(patient._id);
             loadMedicalRecords(patient._id);
+        } else {
+            console.error('Failed to load patient:', response.message);
+            showToast('Failed to load patient data', 'error');
         }
     } catch (error) {
         console.error('Error loading patient dashboard:', error);
@@ -48,9 +54,6 @@ function updateUserInfo(user) {
     document.getElementById('patientId').textContent = `ID: ${user.patientId || 'N/A'}`;
     document.getElementById('patientAvatar').textContent = initials;
     document.getElementById('patientAvatarSmall').textContent = initials;
-
-    // Check notifications
-    checkNotifications();
 }
 
 function updateStats(patient) {
@@ -95,7 +98,10 @@ function updateStats(patient) {
 // ===== APPOINTMENTS =====
 export async function loadAppointments(patientId) {
     try {
+        console.log('Loading appointments for patient:', patientId);
         const response = await API.patients.getAppointments(patientId);
+        console.log('Appointments response:', response);
+        
         if (response.success && appointmentsList) {
             renderAppointments(response.data);
         }
@@ -142,7 +148,10 @@ function renderAppointments(appointments) {
 // ===== MEDICAL RECORDS =====
 export async function loadMedicalRecords(patientId) {
     try {
+        console.log('Loading medical records for patient:', patientId);
         const response = await API.patients.getHistory(patientId);
+        console.log('Medical records response:', response);
+        
         if (response.success && medicalRecordsContainer) {
             renderMedicalRecords(response.data);
         }
@@ -179,17 +188,9 @@ function renderMedicalRecords(records) {
     `).join('');
 }
 
-// ===== NOTIFICATIONS =====
-async function checkNotifications() {
-    try {
-        const response = await API.notifications.getUnreadCount();
-        if (response.success && response.data.count > 0) {
-            document.getElementById('notificationDot').style.display = 'block';
-        }
-    } catch (error) {
-        console.error('Error checking notifications:', error);
-    }
-}
+// ===== ADD GET ME TO API =====
+// Add this to api.js if not already there:
+// getMe: async () => { return apiRequest('/patients/me'); }
 
 // ===== LOGOUT =====
 function handleLogout(e) {
