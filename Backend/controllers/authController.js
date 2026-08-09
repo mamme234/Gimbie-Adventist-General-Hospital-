@@ -1,14 +1,20 @@
 // controllers/authController.js
 const User = require('../models/User');
+const Patient = require('../models/Patient');
 const { generateToken } = require('../config/auth');
+const { generatePatientId } = require('../utils/generateId');
 const crypto = require('crypto');
 
+// ============================================
 // @desc    Register user
 // @route   POST /api/auth/register
 // @access  Public
+// ============================================
 exports.register = async (req, res) => {
     try {
         const { fullName, email, password, phone, role, department } = req.body;
+
+        console.log('Registration attempt for:', email);
 
         // Check if user exists
         const userExists = await User.findOne({ email: email.toLowerCase() });
@@ -30,6 +36,27 @@ exports.register = async (req, res) => {
             isActive: true,
         });
 
+        console.log('User created:', user._id);
+
+        // If role is patient, create patient profile
+        if (user.role === 'patient') {
+            const patient = await Patient.create({
+                patientId: generatePatientId(),
+                userId: user._id,
+                fullName: user.fullName,
+                email: user.email,
+                phone: user.phone,
+                registeredBy: user._id,
+                status: 'Active',
+            });
+            
+            console.log('Patient profile created:', patient.patientId);
+            
+            // Update user with patientId
+            user.patientId = patient.patientId;
+            await user.save();
+        }
+
         // Generate staff ID for staff roles
         if (role && role !== 'patient') {
             user.staffId = user.generateStaffId();
@@ -44,6 +71,7 @@ exports.register = async (req, res) => {
                 fullName: user.fullName,
                 email: user.email,
                 role: user.role,
+                patientId: user.patientId || null,
             },
         });
     } catch (error) {
@@ -55,9 +83,11 @@ exports.register = async (req, res) => {
     }
 };
 
+// ============================================
 // @desc    Login user
 // @route   POST /api/auth/login
 // @access  Public
+// ============================================
 exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -106,6 +136,15 @@ exports.login = async (req, res) => {
         user.lastLogin = new Date();
         await user.save();
 
+        // Get patientId if patient
+        let patientId = null;
+        if (user.role === 'patient') {
+            const patient = await Patient.findOne({ userId: user._id });
+            if (patient) {
+                patientId = patient.patientId;
+            }
+        }
+
         // Generate token
         const token = generateToken(user._id, user.role);
 
@@ -121,6 +160,7 @@ exports.login = async (req, res) => {
                 phone: user.phone,
                 department: user.department,
                 profileImage: user.profileImage,
+                patientId: patientId || user.patientId || null,
                 lastLogin: user.lastLogin,
             },
         });
@@ -133,17 +173,50 @@ exports.login = async (req, res) => {
     }
 };
 
+// ============================================
 // @desc    Get current user
 // @route   GET /api/auth/me
 // @access  Private
+// ============================================
 exports.getMe = async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
+        
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: 'User not found',
+            });
+        }
+
+        // Get patientId if patient
+        let patientId = null;
+        if (user.role === 'patient') {
+            const patient = await Patient.findOne({ userId: user._id });
+            if (patient) {
+                patientId = patient.patientId;
+            }
+        }
+
         res.status(200).json({
             success: true,
-            user,
+            user: {
+                id: user._id,
+                fullName: user.fullName,
+                email: user.email,
+                role: user.role,
+                staffId: user.staffId,
+                phone: user.phone,
+                department: user.department,
+                profileImage: user.profileImage,
+                patientId: patientId || user.patientId || null,
+                lastLogin: user.lastLogin,
+                preferences: user.preferences,
+                isActive: user.isActive,
+            },
         });
     } catch (error) {
+        console.error('Get me error:', error);
         res.status(500).json({
             success: false,
             message: error.message,
@@ -151,9 +224,11 @@ exports.getMe = async (req, res) => {
     }
 };
 
+// ============================================
 // @desc    Update profile
 // @route   PUT /api/auth/profile
 // @access  Private
+// ============================================
 exports.updateProfile = async (req, res) => {
     try {
         const { fullName, phone, preferences } = req.body;
@@ -172,8 +247,19 @@ exports.updateProfile = async (req, res) => {
 
         await user.save();
 
+        // Update patient profile if patient
+        if (user.role === 'patient') {
+            const patient = await Patient.findOne({ userId: user._id });
+            if (patient) {
+                if (fullName) patient.fullName = fullName;
+                if (phone) patient.phone = phone;
+                await patient.save();
+            }
+        }
+
         res.status(200).json({
             success: true,
+            message: 'Profile updated successfully',
             user: {
                 id: user._id,
                 fullName: user.fullName,
@@ -183,6 +269,7 @@ exports.updateProfile = async (req, res) => {
             },
         });
     } catch (error) {
+        console.error('Update profile error:', error);
         res.status(500).json({
             success: false,
             message: error.message,
@@ -190,9 +277,11 @@ exports.updateProfile = async (req, res) => {
     }
 };
 
+// ============================================
 // @desc    Change password
 // @route   PUT /api/auth/change-password
 // @access  Private
+// ============================================
 exports.changePassword = async (req, res) => {
     try {
         const { currentPassword, newPassword } = req.body;
@@ -201,6 +290,13 @@ exports.changePassword = async (req, res) => {
             return res.status(400).json({
                 success: false,
                 message: 'Please provide current and new password',
+            });
+        }
+
+        if (newPassword.length < 6) {
+            return res.status(400).json({
+                success: false,
+                message: 'New password must be at least 6 characters',
             });
         }
 
@@ -228,6 +324,7 @@ exports.changePassword = async (req, res) => {
             message: 'Password changed successfully',
         });
     } catch (error) {
+        console.error('Change password error:', error);
         res.status(500).json({
             success: false,
             message: error.message,
@@ -235,12 +332,22 @@ exports.changePassword = async (req, res) => {
     }
 };
 
+// ============================================
 // @desc    Forgot password
 // @route   POST /api/auth/forgot-password
 // @access  Public
+// ============================================
 exports.forgotPassword = async (req, res) => {
     try {
         const { email } = req.body;
+
+        if (!email) {
+            return res.status(400).json({
+                success: false,
+                message: 'Please provide email',
+            });
+        }
+
         const user = await User.findOne({ email: email.toLowerCase() });
 
         if (!user) {
@@ -260,12 +367,18 @@ exports.forgotPassword = async (req, res) => {
 
         await user.save();
 
+        // In production, send email here
+        // await sendResetEmail(user.email, resetToken);
+
+        console.log('Reset token for', user.email, ':', resetToken);
+
         res.status(200).json({
             success: true,
             message: 'Password reset link sent to email',
-            token: resetToken,
+            token: resetToken, // Remove in production
         });
     } catch (error) {
+        console.error('Forgot password error:', error);
         res.status(500).json({
             success: false,
             message: error.message,
@@ -273,12 +386,28 @@ exports.forgotPassword = async (req, res) => {
     }
 };
 
+// ============================================
 // @desc    Reset password
 // @route   POST /api/auth/reset-password
 // @access  Public
+// ============================================
 exports.resetPassword = async (req, res) => {
     try {
         const { token, newPassword } = req.body;
+
+        if (!token || !newPassword) {
+            return res.status(400).json({
+                success: false,
+                message: 'Please provide token and new password',
+            });
+        }
+
+        if (newPassword.length < 6) {
+            return res.status(400).json({
+                success: false,
+                message: 'Password must be at least 6 characters',
+            });
+        }
 
         const resetPasswordToken = crypto
             .createHash('sha256')
@@ -307,6 +436,7 @@ exports.resetPassword = async (req, res) => {
             message: 'Password reset successfully',
         });
     } catch (error) {
+        console.error('Reset password error:', error);
         res.status(500).json({
             success: false,
             message: error.message,
@@ -314,12 +444,58 @@ exports.resetPassword = async (req, res) => {
     }
 };
 
+// ============================================
 // @desc    Logout
 // @route   POST /api/auth/logout
 // @access  Private
+// ============================================
 exports.logout = async (req, res) => {
-    res.status(200).json({
-        success: true,
-        message: 'Logged out successfully',
-    });
+    try {
+        // JWT is stateless, so we just send a success response
+        // Client should remove the token from storage
+        res.status(200).json({
+            success: true,
+            message: 'Logged out successfully',
+        });
+    } catch (error) {
+        console.error('Logout error:', error);
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
+// ============================================
+// @desc    Verify token
+// @route   GET /api/auth/verify
+// @access  Private
+// ============================================
+exports.verifyToken = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id);
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: 'User not found',
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            user: {
+                id: user._id,
+                fullName: user.fullName,
+                email: user.email,
+                role: user.role,
+                isActive: user.isActive,
+            },
+        });
+    } catch (error) {
+        console.error('Verify token error:', error);
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
 };
