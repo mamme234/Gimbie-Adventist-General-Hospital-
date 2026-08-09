@@ -18,23 +18,26 @@ const {
     adjustStock,
 } = require('../controllers/pharmacyController');
 
-router.route('/')
-    .get(protect, getMedications)
-    .post(protect, authorize('super_admin', 'admin', 'pharmacist'), createMedication);
+// Protected routes
+router.use(protect);
 
-router.get('/low-stock', protect, authorize('super_admin', 'admin', 'pharmacist'), getLowStock);
-router.get('/expiring', protect, authorize('super_admin', 'admin', 'pharmacist'), getExpiringMedications);
-router.get('/queue', protect, authorize('super_admin', 'admin', 'pharmacist', 'doctor'), getPrescriptionQueue);
-router.get('/dashboard', protect, authorize('super_admin', 'admin', 'pharmacist'), getPharmacyDashboard);
+// Public (authenticated) routes
+router.get('/', getMedications);
+router.get('/low-stock', authorize('super_admin', 'admin', 'pharmacist'), getLowStock);
+router.get('/expiring', authorize('super_admin', 'admin', 'pharmacist'), getExpiringMedications);
+router.get('/queue', authorize('super_admin', 'admin', 'pharmacist', 'doctor'), getPrescriptionQueue);
+router.get('/dashboard', authorize('super_admin', 'admin', 'pharmacist'), getPharmacyDashboard);
+
+router.post('/', authorize('super_admin', 'admin', 'pharmacist'), createMedication);
 
 router.route('/:id')
-    .get(protect, getMedication)
-    .put(protect, authorize('super_admin', 'admin', 'pharmacist'), updateMedication)
-    .delete(protect, authorize('super_admin', 'admin'), deleteMedication);
+    .get(getMedication)
+    .put(authorize('super_admin', 'admin', 'pharmacist'), updateMedication)
+    .delete(authorize('super_admin', 'admin'), deleteMedication);
 
-router.put('/:id/dispense', protect, authorize('super_admin', 'admin', 'pharmacist'), dispenseMedication);
-router.put('/:id/restock', protect, authorize('super_admin', 'admin', 'pharmacist'), restockMedication);
-router.put('/:id/adjust-stock', protect, authorize('super_admin', 'admin', 'pharmacist'), adjustStock);
-router.get('/:id/history', protect, getMedicationHistory);
+router.put('/:id/dispense', authorize('super_admin', 'admin', 'pharmacist'), dispenseMedication);
+router.put('/:id/restock', authorize('super_admin', 'admin', 'pharmacist'), restockMedication);
+router.put('/:id/adjust-stock', authorize('super_admin', 'admin', 'pharmacist'), adjustStock);
+router.get('/:id/history', getMedicationHistory);
 
 module.exports = router;
