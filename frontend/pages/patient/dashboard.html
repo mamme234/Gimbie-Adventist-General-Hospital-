@@ -15,11 +15,11 @@
 </head>
 <body>
     <div class="patient-wrapper">
-        <!-- Sidebar -->
-        <aside class="patient-sidebar" id="patientSidebar">
+        <!-- ===== SIDEBAR ===== -->
+        <aside class="patient-sidebar">
             <div class="profile-section">
                 <div class="avatar" id="patientAvatar">P</div>
-                <div class="name" id="patientName">Patient Name</div>
+                <div class="name" id="patientName">Patient</div>
                 <div class="patient-id" id="patientId">ID: N/A</div>
             </div>
             <nav class="patient-sidebar__nav">
@@ -31,11 +31,14 @@
                     <li><a href="/pages/patient/prescriptions.html"><i class="fas fa-prescription-bottle"></i> Prescriptions</a></li>
                     <li><a href="/pages/patient/billing.html"><i class="fas fa-file-invoice-dollar"></i> Billing</a></li>
                     <li><a href="/pages/patient/profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                    <li class="logout-li">
+                        <a href="#" id="sidebarLogoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </li>
                 </ul>
             </nav>
         </aside>
 
-        <!-- Main Content -->
+        <!-- ===== MAIN ===== -->
         <main class="patient-main">
             <!-- Top Bar -->
             <div class="patient-topbar">
@@ -44,76 +47,70 @@
                     <p>Welcome back, <span id="welcomeName">Patient</span></p>
                 </div>
                 <div class="patient-topbar__actions">
-                    <button class="notification-btn" onclick="window.location.href='/pages/patient/notifications.html'">
-                        <i class="fas fa-bell"></i>
-                        <span class="dot" id="notificationDot"></span>
-                    </button>
                     <div class="user-profile" id="userProfile">
                         <div class="avatar" id="patientAvatarSmall">P</div>
                         <span class="name" id="userName">Patient</span>
-                        <span class="dropdown-icon"><i class="fas fa-chevron-down"></i></span>
-                        <!-- Dropdown -->
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
                         <div class="user-dropdown" id="userDropdown">
-                            <a href="/pages/patient/profile.html"><i class="fas fa-user"></i> My Profile</a>
-                            <a href="/pages/patient/appointments.html"><i class="fas fa-calendar-check"></i> My Appointments</a>
-                            <a href="/pages/patient/billing.html"><i class="fas fa-file-invoice-dollar"></i> My Bills</a>
-                            <div class="divider"></div>
-                            <a href="#" class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                            <a href="/pages/patient/profile.html"><i class="fas fa-user"></i> Profile</a>
+                            <a href="/pages/patient/appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a>
+                            <a href="/pages/patient/billing.html"><i class="fas fa-file-invoice-dollar"></i> Billing</a>
+                            <hr />
+                            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Stats -->
+            <!-- Stats Cards -->
             <div class="patient-stats" id="patientStats">
-                <!-- Loaded from JS -->
+                <!-- Loaded from API -->
             </div>
 
-            <!-- Quick Actions -->
+            <!-- Quick Actions - 4 Cards in a Row -->
             <div class="quick-actions">
-                <div class="quick-action" onclick="window.location.href='/pages/appointments.html'">
+                <div class="quick-action" data-action="appointment">
                     <i class="fas fa-calendar-plus"></i>
                     <span>Book Appointment</span>
                 </div>
-                <div class="quick-action" onclick="window.location.href='/pages/patient/medical-records.html'">
+                <div class="quick-action" data-action="records">
                     <i class="fas fa-file-medical"></i>
-                    <span>View Records</span>
+                    <span>Medical Records</span>
                 </div>
-                <div class="quick-action" onclick="window.location.href='/pages/patient/billing.html'">
+                <div class="quick-action" data-action="billing">
                     <i class="fas fa-credit-card"></i>
                     <span>Pay Bill</span>
                 </div>
-                <div class="quick-action" onclick="window.location.href='/pages/patient/profile.html'">
+                <div class="quick-action" data-action="profile">
                     <i class="fas fa-user-edit"></i>
                     <span>Update Profile</span>
                 </div>
             </div>
 
-            <!-- Upcoming Appointments -->
+            <!-- Appointments Section -->
             <div class="upcoming-appointments">
                 <div class="header">
                     <h3>Upcoming Appointments</h3>
                     <a href="/pages/patient/appointments.html" class="btn btn--small btn--outline">View All</a>
                 </div>
                 <div id="appointmentsList">
-                    <!-- Loaded from JS -->
+                    <!-- Loaded from API -->
                 </div>
             </div>
 
-            <!-- Medical Records -->
+            <!-- Medical Records Section -->
             <div class="medical-records">
                 <div class="header">
                     <h3>Recent Medical Records</h3>
                     <a href="/pages/patient/medical-records.html" class="btn btn--small btn--outline">View All</a>
                 </div>
                 <div id="medicalRecords">
-                    <!-- Loaded from JS -->
+                    <!-- Loaded from API -->
                 </div>
             </div>
         </main>
     </div>
 
-    <script src="/src/js/api.js"></script>
     <script src="/src/js/patient.js"></script>
 </body>
-                                                                           </html>
+    </html>
