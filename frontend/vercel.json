@@ -28,11 +28,11 @@
       "dest": "pages/$1"
     },
     {
-      "src": "/css/(.*)",
+      "src": "/src/css/(.*)",
       "dest": "src/css/$1"
     },
     {
-      "src": "/js/(.*)",
+      "src": "/src/js/(.*)",
       "dest": "src/js/$1"
     },
     {
