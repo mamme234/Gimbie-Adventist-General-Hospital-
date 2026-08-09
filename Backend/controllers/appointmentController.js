@@ -1,12 +1,130 @@
+// controllers/appointmentController.js
 const Appointment = require('../models/Appointment');
 const Patient = require('../models/Patient');
 const Doctor = require('../models/Doctor');
-const { generateAppointmentId } = require('../utils/generateId');
+const User = require('../models/User');
 const Notification = require('../models/Notification');
+const { generateAppointmentId, generatePatientId, generateNotificationId } = require('../utils/generateId');
 
-// @desc    Get all appointments
-// @route   GET /api/appointments
-// @access  Private
+// ============================================
+// BOOK APPOINTMENT (PUBLIC)
+// ============================================
+exports.bookAppointment = async (req, res) => {
+    try {
+        const { patientName, patientEmail, patientPhone, department, doctor, date, time, type, symptoms } = req.body;
+
+        console.log('Booking appointment for:', patientEmail);
+
+        // Validation
+        if (!patientName || !patientEmail || !patientPhone || !department || !date || !time) {
+            return res.status(400).json({
+                success: false,
+                message: 'Please fill in all required fields'
+            });
+        }
+
+        // Check if patient exists
+        let user = await User.findOne({ email: patientEmail.toLowerCase() });
+        let patient;
+
+        if (!user) {
+            // Create user
+            user = await User.create({
+                fullName: patientName,
+                email: patientEmail.toLowerCase(),
+                password: 'Temp123456',
+                phone: patientPhone,
+                role: 'patient',
+                isActive: true
+            });
+
+            // Create patient profile
+            patient = await Patient.create({
+                patientId: generatePatientId(),
+                userId: user._id,
+                fullName: patientName,
+                email: patientEmail,
+                phone: patientPhone,
+                registeredBy: user._id,
+                status: 'Active'
+            });
+
+            console.log('New patient created:', patient.patientId);
+        } else {
+            // Check if patient profile exists
+            patient = await Patient.findOne({ userId: user._id });
+            if (!patient) {
+                patient = await Patient.create({
+                    patientId: generatePatientId(),
+                    userId: user._id,
+                    fullName: patientName,
+                    email: patientEmail,
+                    phone: patientPhone,
+                    registeredBy: user._id,
+                    status: 'Active'
+                });
+            }
+        }
+
+        // Find or create a default doctor
+        let doctorDoc = await Doctor.findOne({ specialty: department });
+        if (!doctorDoc) {
+            doctorDoc = await Doctor.create({
+                userId: user._id,
+                specialty: department,
+                licenseNumber: `LIC-${Date.now()}`,
+                department: department,
+                isAvailable: true
+            });
+            console.log('Default doctor created for:', department);
+        }
+
+        // Create appointment
+        const appointment = await Appointment.create({
+            appointmentId: generateAppointmentId(),
+            patient: patient._id,
+            doctor: doctorDoc._id,
+            department: department,
+            date: new Date(date),
+            time: time,
+            type: type || 'Consultation',
+            status: 'Scheduled',
+            priority: 'Medium',
+            symptoms: symptoms ? [symptoms] : [],
+            createdBy: user._id
+        });
+
+        console.log('Appointment created:', appointment.appointmentId);
+
+        // Create notification
+        await Notification.create({
+            notificationId: generateNotificationId(),
+            recipient: user._id,
+            title: 'Appointment Confirmed',
+            message: `Your appointment on ${new Date(date).toLocaleDateString()} at ${time} with ${department} department has been confirmed.`,
+            type: 'Appointment',
+            priority: 'High',
+            link: '/pages/patient/dashboard.html'
+        });
+
+        res.status(201).json({
+            success: true,
+            message: 'Appointment booked successfully',
+            data: appointment
+        });
+
+    } catch (error) {
+        console.error('Book appointment error:', error);
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
+// ============================================
+// GET ALL APPOINTMENTS
+// ============================================
 exports.getAppointments = async (req, res) => {
     try {
         const { patient, doctor, date, status, page = 1, limit = 20 } = req.query;
@@ -43,6 +161,7 @@ exports.getAppointments = async (req, res) => {
             },
         });
     } catch (error) {
+        console.error('Get appointments error:', error);
         res.status(500).json({
             success: false,
             message: error.message,
@@ -50,9 +169,9 @@ exports.getAppointments = async (req, res) => {
     }
 };
 
-// @desc    Get single appointment
-// @route   GET /api/appointments/:id
-// @access  Private
+// ============================================
+// GET SINGLE APPOINTMENT
+// ============================================
 exports.getAppointment = async (req, res) => {
     try {
         const appointment = await Appointment.findById(req.params.id)
@@ -71,6 +190,7 @@ exports.getAppointment = async (req, res) => {
             data: appointment,
         });
     } catch (error) {
+        console.error('Get appointment error:', error);
         res.status(500).json({
             success: false,
             message: error.message,
@@ -78,14 +198,13 @@ exports.getAppointment = async (req, res) => {
     }
 };
 
-// @desc    Create appointment
-// @route   POST /api/appointments
-// @access  Private
+// ============================================
+// CREATE APPOINTMENT (AUTHENTICATED)
+// ============================================
 exports.createAppointment = async (req, res) => {
     try {
         const { patient, doctor, date, time, type, symptoms, notes, priority } = req.body;
 
-        // Check if patient exists
         const patientExists = await Patient.findById(patient);
         if (!patientExists) {
             return res.status(404).json({
@@ -94,36 +213,11 @@ exports.createAppointment = async (req, res) => {
             });
         }
 
-        // Check if doctor exists
         const doctorExists = await Doctor.findById(doctor);
         if (!doctorExists) {
             return res.status(404).json({
                 success: false,
                 message: 'Doctor not found',
-            });
-        }
-
-        // Check doctor availability
-        const isAvailable = doctorExists.isAvailableAt(new Date(date), time);
-        if (!isAvailable) {
-            return res.status(400).json({
-                success: false,
-                message: 'Doctor is not available at this time',
-            });
-        }
-
-        // Check for conflicting appointments
-        const conflictingAppointments = await Appointment.countDocuments({
-            doctor,
-            date: new Date(date),
-            time,
-            status: { $ne: 'Cancelled' },
-        });
-
-        if (conflictingAppointments > 0) {
-            return res.status(400).json({
-                success: false,
-                message: 'Doctor already has an appointment at this time',
             });
         }
 
@@ -135,22 +229,12 @@ exports.createAppointment = async (req, res) => {
 
         const appointment = await Appointment.create(appointmentData);
 
-        // Create notification for patient
-        await Notification.create({
-            notificationId: `NOT-${Date.now()}`,
-            recipient: patientExists.userId || patient,
-            title: 'Appointment Scheduled',
-            message: `Your appointment with Dr. ${doctorExists.userId.fullName} on ${new Date(date).toLocaleDateString()} at ${time} has been scheduled.`,
-            type: 'Appointment',
-            priority: 'High',
-            link: `/appointments/${appointment._id}`,
-        });
-
         res.status(201).json({
             success: true,
             data: appointment,
         });
     } catch (error) {
+        console.error('Create appointment error:', error);
         res.status(500).json({
             success: false,
             message: error.message,
@@ -158,9 +242,9 @@ exports.createAppointment = async (req, res) => {
     }
 };
 
-// @desc    Update appointment
-// @route   PUT /api/appointments/:id
-// @access  Private
+// ============================================
+// UPDATE APPOINTMENT
+// ============================================
 exports.updateAppointment = async (req, res) => {
     try {
         const appointment = await Appointment.findById(req.params.id);
@@ -182,6 +266,7 @@ exports.updateAppointment = async (req, res) => {
             data: updatedAppointment,
         });
     } catch (error) {
+        console.error('Update appointment error:', error);
         res.status(500).json({
             success: false,
             message: error.message,
@@ -189,9 +274,9 @@ exports.updateAppointment = async (req, res) => {
     }
 };
 
-// @desc    Cancel appointment
-// @route   PUT /api/appointments/:id/cancel
-// @access  Private
+// ============================================
+// CANCEL APPOINTMENT
+// ============================================
 exports.cancelAppointment = async (req, res) => {
     try {
         const { reason } = req.body;
@@ -222,6 +307,7 @@ exports.cancelAppointment = async (req, res) => {
             data: appointment,
         });
     } catch (error) {
+        console.error('Cancel appointment error:', error);
         res.status(500).json({
             success: false,
             message: error.message,
@@ -229,9 +315,9 @@ exports.cancelAppointment = async (req, res) => {
     }
 };
 
-// @desc    Reschedule appointment
-// @route   PUT /api/appointments/:id/reschedule
-// @access  Private
+// ============================================
+// RESCHEDULE APPOINTMENT
+// ============================================
 exports.rescheduleAppointment = async (req, res) => {
     try {
         const { date, time } = req.body;
@@ -244,41 +330,20 @@ exports.rescheduleAppointment = async (req, res) => {
             });
         }
 
-        // Check doctor availability
-        const doctor = await Doctor.findById(appointment.doctor);
-        const isAvailable = doctor.isAvailableAt(new Date(date), time);
-        if (!isAvailable) {
-            return res.status(400).json({
-                success: false,
-                message: 'Doctor is not available at this time',
-            });
-        }
-
         const oldDate = appointment.date;
         const oldTime = appointment.time;
 
         appointment.date = new Date(date);
         appointment.time = time;
         appointment.status = 'Rescheduled';
-        appointment.rescheduledFrom = appointment._id;
         await appointment.save();
-
-        // Create notification
-        await Notification.create({
-            notificationId: `NOT-${Date.now()}`,
-            recipient: appointment.patient.userId || appointment.patient,
-            title: 'Appointment Rescheduled',
-            message: `Your appointment has been rescheduled from ${new Date(oldDate).toLocaleDateString()} at ${oldTime} to ${new Date(date).toLocaleDateString()} at ${time}.`,
-            type: 'Appointment',
-            priority: 'High',
-            link: `/appointments/${appointment._id}`,
-        });
 
         res.status(200).json({
             success: true,
             data: appointment,
         });
     } catch (error) {
+        console.error('Reschedule appointment error:', error);
         res.status(500).json({
             success: false,
             message: error.message,
@@ -286,9 +351,9 @@ exports.rescheduleAppointment = async (req, res) => {
     }
 };
 
-// @desc    Confirm appointment
-// @route   PUT /api/appointments/:id/confirm
-// @access  Private
+// ============================================
+// CONFIRM APPOINTMENT
+// ============================================
 exports.confirmAppointment = async (req, res) => {
     try {
         const appointment = await Appointment.findById(req.params.id);
@@ -307,6 +372,7 @@ exports.confirmAppointment = async (req, res) => {
             data: appointment,
         });
     } catch (error) {
+        console.error('Confirm appointment error:', error);
         res.status(500).json({
             success: false,
             message: error.message,
@@ -314,9 +380,9 @@ exports.confirmAppointment = async (req, res) => {
     }
 };
 
-// @desc    Complete appointment
-// @route   PUT /api/appointments/:id/complete
-// @access  Private
+// ============================================
+// COMPLETE APPOINTMENT
+// ============================================
 exports.completeAppointment = async (req, res) => {
     try {
         const appointment = await Appointment.findById(req.params.id);
@@ -330,16 +396,12 @@ exports.completeAppointment = async (req, res) => {
         appointment.status = 'Completed';
         await appointment.save();
 
-        // Update doctor stats
-        await Doctor.findByIdAndUpdate(appointment.doctor, {
-            $inc: { totalPatients: 1, totalAppointments: 1 },
-        });
-
         res.status(200).json({
             success: true,
             data: appointment,
         });
     } catch (error) {
+        console.error('Complete appointment error:', error);
         res.status(500).json({
             success: false,
             message: error.message,
@@ -347,14 +409,12 @@ exports.completeAppointment = async (req, res) => {
     }
 };
 
-// @desc    Get doctor availability
-// @route   GET /api/appointments/availability/:doctorId
-// @access  Private
+// ============================================
+// GET DOCTOR AVAILABILITY
+// ============================================
 exports.getDoctorAvailability = async (req, res) => {
     try {
-        const { date } = req.query;
         const doctor = await Doctor.findById(req.params.doctorId);
-
         if (!doctor) {
             return res.status(404).json({
                 success: false,
@@ -362,45 +422,16 @@ exports.getDoctorAvailability = async (req, res) => {
             });
         }
 
-        const availability = {
-            availableDays: doctor.availableDays,
-            availableTime: doctor.availableTime,
-            breakTime: doctor.breakTime,
-            isAvailable: doctor.isAvailable,
-        };
-
-        if (date) {
-            const appointments = await Appointment.find({
-                doctor: req.params.doctorId,
-                date: new Date(date),
-                status: { $ne: 'Cancelled' },
-            });
-
-            availability.bookedSlots = appointments.map(a => a.time);
-            availability.availableSlots = [];
-
-            // Generate available time slots
-            const start = doctor.availableTime.start;
-            const end = doctor.availableTime.end;
-            const slotDuration = 30; // minutes
-
-            let current = new Date(`2000-01-01 ${start}`);
-            const endTime = new Date(`2000-01-01 ${end}`);
-
-            while (current < endTime) {
-                const timeString = current.toTimeString().slice(0, 5);
-                if (!availability.bookedSlots.includes(timeString)) {
-                    availability.availableSlots.push(timeString);
-                }
-                current.setMinutes(current.getMinutes() + slotDuration);
-            }
-        }
-
         res.status(200).json({
             success: true,
-            data: availability,
+            data: {
+                availableDays: doctor.availableDays,
+                availableTime: doctor.availableTime,
+                isAvailable: doctor.isAvailable,
+            },
         });
     } catch (error) {
+        console.error('Get availability error:', error);
         res.status(500).json({
             success: false,
             message: error.message,
@@ -408,9 +439,9 @@ exports.getDoctorAvailability = async (req, res) => {
     }
 };
 
-// @desc    Get today's appointments
-// @route   GET /api/appointments/today
-// @access  Private
+// ============================================
+// GET TODAY'S APPOINTMENTS
+// ============================================
 exports.getTodayAppointments = async (req, res) => {
     try {
         const today = new Date();
@@ -423,11 +454,6 @@ exports.getTodayAppointments = async (req, res) => {
             status: { $ne: 'Cancelled' },
         };
 
-        if (req.user.role === 'doctor') {
-            const doctor = await Doctor.findOne({ userId: req.user.id });
-            if (doctor) query.doctor = doctor._id;
-        }
-
         const appointments = await Appointment.find(query)
             .populate('patient', 'fullName patientId phone')
             .populate('doctor', 'userId department')
@@ -438,6 +464,7 @@ exports.getTodayAppointments = async (req, res) => {
             data: appointments,
         });
     } catch (error) {
+        console.error('Get today appointments error:', error);
         res.status(500).json({
             success: false,
             message: error.message,
@@ -445,17 +472,17 @@ exports.getTodayAppointments = async (req, res) => {
     }
 };
 
-// @desc    Get appointment queue
-// @route   GET /api/appointments/queue
-// @access  Private
+// ============================================
+// GET APPOINTMENT QUEUE
+// ============================================
 exports.getAppointmentQueue = async (req, res) => {
     try {
-        const { department, date } = req.query;
-        const queryDate = date ? new Date(date) : new Date();
-        queryDate.setHours(0, 0, 0, 0);
+        const { department } = req.query;
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
 
         const query = {
-            date: { $gte: queryDate, $lt: new Date(queryDate.getTime() + 86400000) },
+            date: { $gte: today, $lt: new Date(today.getTime() + 86400000) },
             status: { $in: ['Scheduled', 'Confirmed', 'In Progress'] },
         };
 
@@ -464,9 +491,8 @@ exports.getAppointmentQueue = async (req, res) => {
         const appointments = await Appointment.find(query)
             .populate('patient', 'fullName patientId phone')
             .populate('doctor', 'userId department')
-            .sort({ priority: -1, time: 1 });
+            .sort({ time: 1 });
 
-        // Assign queue numbers
         appointments.forEach((app, index) => {
             app.queueNumber = index + 1;
         });
@@ -476,6 +502,7 @@ exports.getAppointmentQueue = async (req, res) => {
             data: appointments,
         });
     } catch (error) {
+        console.error('Get queue error:', error);
         res.status(500).json({
             success: false,
             message: error.message,
@@ -483,9 +510,9 @@ exports.getAppointmentQueue = async (req, res) => {
     }
 };
 
-// @desc    Update queue status
-// @route   PUT /api/appointments/:id/queue
-// @access  Private
+// ============================================
+// UPDATE QUEUE STATUS
+// ============================================
 exports.updateQueueStatus = async (req, res) => {
     try {
         const { status } = req.body;
@@ -506,6 +533,7 @@ exports.updateQueueStatus = async (req, res) => {
             data: appointment,
         });
     } catch (error) {
+        console.error('Update queue error:', error);
         res.status(500).json({
             success: false,
             message: error.message,
@@ -513,9 +541,9 @@ exports.updateQueueStatus = async (req, res) => {
     }
 };
 
-// @desc    Get patient appointments
-// @route   GET /api/appointments/patient/:patientId
-// @access  Private
+// ============================================
+// GET PATIENT APPOINTMENTS
+// ============================================
 exports.getPatientAppointments = async (req, res) => {
     try {
         const appointments = await Appointment.find({
@@ -529,6 +557,7 @@ exports.getPatientAppointments = async (req, res) => {
             data: appointments,
         });
     } catch (error) {
+        console.error('Get patient appointments error:', error);
         res.status(500).json({
             success: false,
             message: error.message,
