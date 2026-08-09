@@ -17,23 +17,27 @@ const {
     getBillingDashboard,
 } = require('../controllers/billingController');
 
-router.route('/')
-    .get(protect, authorize('super_admin', 'admin', 'accountant'), getInvoices)
-    .post(protect, authorize('super_admin', 'admin', 'accountant'), createInvoice);
+// Protected routes
+router.use(protect);
 
-router.get('/patient/:patientId', protect, getPatientInvoices);
-router.get('/outstanding', protect, authorize('super_admin', 'admin', 'accountant'), getOutstandingBalances);
-router.get('/revenue', protect, authorize('super_admin', 'admin', 'accountant'), getRevenueReports);
-router.get('/dashboard', protect, authorize('super_admin', 'admin', 'accountant'), getBillingDashboard);
+// Billing routes
+router.route('/')
+    .get(authorize('super_admin', 'admin', 'accountant'), getInvoices)
+    .post(authorize('super_admin', 'admin', 'accountant'), createInvoice);
+
+router.get('/patient/:patientId', getPatientInvoices);
+router.get('/outstanding', authorize('super_admin', 'admin', 'accountant'), getOutstandingBalances);
+router.get('/revenue', authorize('super_admin', 'admin', 'accountant'), getRevenueReports);
+router.get('/dashboard', authorize('super_admin', 'admin', 'accountant'), getBillingDashboard);
 
 router.route('/:id')
-    .get(protect, getInvoice)
-    .put(protect, authorize('super_admin', 'admin', 'accountant'), updateInvoice)
-    .delete(protect, authorize('super_admin', 'admin'), deleteInvoice);
+    .get(getInvoice)
+    .put(authorize('super_admin', 'admin', 'accountant'), updateInvoice)
+    .delete(authorize('super_admin', 'admin'), deleteInvoice);
 
-router.put('/:id/pay', protect, authorize('super_admin', 'admin', 'accountant'), processPayment);
-router.put('/:id/refund', protect, authorize('super_admin', 'admin', 'accountant'), refundPayment);
-router.get('/:id/pdf', protect, generateInvoicePDF);
-router.post('/:id/email', protect, authorize('super_admin', 'admin', 'accountant'), sendInvoiceEmail);
+router.put('/:id/pay', authorize('super_admin', 'admin', 'accountant'), processPayment);
+router.put('/:id/refund', authorize('super_admin', 'admin', 'accountant'), refundPayment);
+router.get('/:id/pdf', generateInvoicePDF);
+router.post('/:id/email', authorize('super_admin', 'admin', 'accountant'), sendInvoiceEmail);
 
 module.exports = router;
