@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Appointments - Gimbie Adventist General Hospital</title>
+    <link rel="icon" href="/assets/images/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/patient.css" />
+    <link rel="stylesheet" href="/src/css/responsive.css" />
+</head>
+<body>
+    <div class="patient-wrapper">
+        <aside class="patient-sidebar">
+            <div class="profile-section">
+                <div class="avatar" id="patientAvatar">P</div>
+                <div class="name" id="patientName">Patient</div>
+                <div class="patient-id" id="patientId">ID: N/A</div>
+            </div>
+            <nav class="patient-sidebar__nav">
+                <ul>
+                    <li><a href="/pages/patient/dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                    <li><a href="/pages/patient/appointments.html" class="active"><i class="fas fa-calendar-check"></i> Appointments</a></li>
+                    <li><a href="/pages/patient/medical-records.html"><i class="fas fa-file-medical"></i> Medical Records</a></li>
+                    <li><a href="/pages/patient/lab-results.html"><i class="fas fa-microscope"></i> Lab Results</a></li>
+                    <li><a href="/pages/patient/prescriptions.html"><i class="fas fa-prescription-bottle"></i> Prescriptions</a></li>
+                    <li><a href="/pages/patient/billing.html"><i class="fas fa-file-invoice-dollar"></i> Billing</a></li>
+                    <li><a href="/pages/patient/payment.html"><i class="fas fa-credit-card"></i> Make Payment</a></li>
+                    <li><a href="/pages/patient/profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                    <li class="logout-li">
+                        <a href="#" id="sidebarLogoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="patient-main">
+            <div class="patient-topbar">
+                <div class="patient-topbar__title">
+                    <h1>My Appointments</h1>
+                    <p>View and manage your appointments</p>
+                </div>
+                <div class="patient-topbar__actions">
+                    <div class="user-profile" id="userProfile">
+                        <div class="avatar" id="patientAvatarSmall">P</div>
+                        <span class="name" id="userName">Patient</span>
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                        <div class="user-dropdown" id="userDropdown">
+                            <a href="/pages/patient/profile.html"><i class="fas fa-user"></i> Profile</a>
+                            <a href="/pages/patient/appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a>
+                            <a href="/pages/patient/billing.html"><i class="fas fa-file-invoice-dollar"></i> Billing</a>
+                            <hr />
+                            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="appointments-header">
+                <h2>All Appointments</h2>
+                <a href="/pages/appointments.html" class="btn btn--primary"><i class="fas fa-plus"></i> Book New</a>
+            </div>
+
+            <div class="filter-tabs" id="filterTabs">
+                <button class="tab active" data-filter="all">All</button>
+                <button class="tab" data-filter="upcoming">Upcoming</button>
+                <button class="tab" data-filter="past">Past</button>
+                <button class="tab" data-filter="cancelled">Cancelled</button>
+            </div>
+
+            <div id="appointmentsList"></div>
+        </main>
+    </div>
+
+    <script>
+        // Same script as before - keeping it clean
+        // All logic in patient.js will handle this
+    </script>
+    <script src="/src/js/patient.js"></script>
+</body>
+                  </html>
