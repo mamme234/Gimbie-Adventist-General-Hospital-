@@ -5,6 +5,7 @@ const InsuranceSchema = new mongoose.Schema({
         type: String,
         unique: true,
         required: true,
+        // REMOVED: index: true
     },
     provider: {
         type: String,
@@ -54,7 +55,7 @@ const InsuranceSchema = new mongoose.Schema({
     timestamps: true,
 });
 
-// Indexes
+// ===== INDEXES - Defined once here =====
 InsuranceSchema.index({ insuranceId: 1 });
 InsuranceSchema.index({ provider: 1 });
 InsuranceSchema.index({ patient: 1 });
