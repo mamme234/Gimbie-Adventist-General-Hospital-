@@ -5,13 +5,15 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const dotenv = require('dotenv');
 const path = require('path');
+const mongoose = require('mongoose');
 const connectDB = require('./config/database');
-const routes = require('./routes');
 
 // Load environment variables
 dotenv.config();
 
-// Connect to MongoDB
+// ============================================
+// DATABASE CONNECTION
+// ============================================
 connectDB();
 
 const app = express();
@@ -86,6 +88,7 @@ app.use('/api', generalLimiter);
 app.use('/api/auth/login', authLimiter);
 app.use('/api/auth/register', authLimiter);
 app.use('/api/auth/forgot-password', authLimiter);
+app.use('/api/auth/reset-password', authLimiter);
 
 // ============================================
 // BODY PARSER
@@ -99,7 +102,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // ============================================
-// REQUEST LOGGING (Development only)
+// REQUEST LOGGING
 // ============================================
 if (process.env.NODE_ENV === 'development') {
     app.use((req, res, next) => {
@@ -111,6 +114,7 @@ if (process.env.NODE_ENV === 'development') {
 // ============================================
 // API ROUTES
 // ============================================
+const routes = require('./routes');
 app.use('/api', routes);
 
 // ============================================
@@ -178,7 +182,6 @@ app.get('/api/docs', (req, res) => {
         endpoints: [
             {
                 path: '/auth',
-                methods: ['POST'],
                 description: 'Authentication endpoints',
                 routes: [
                     { method: 'POST', path: '/register', description: 'Register new user' },
@@ -193,7 +196,6 @@ app.get('/api/docs', (req, res) => {
             },
             {
                 path: '/appointments',
-                methods: ['GET', 'POST'],
                 description: 'Appointment management',
                 routes: [
                     { method: 'POST', path: '/book', description: 'Book appointment (Public)' },
@@ -209,7 +211,6 @@ app.get('/api/docs', (req, res) => {
             },
             {
                 path: '/patients',
-                methods: ['GET', 'POST'],
                 description: 'Patient management',
                 routes: [
                     { method: 'GET', path: '/me', description: 'Get current patient (Authenticated)' },
@@ -244,8 +245,8 @@ app.use((req, res) => {
             'GET /api/docs',
             'POST /api/auth/login',
             'POST /api/auth/register',
-            'GET /api/appointments',
             'POST /api/appointments/book',
+            'GET /api/appointments',
             'GET /api/patients',
             'GET /api/doctors',
         ],
@@ -321,9 +322,6 @@ app.use((err, req, res, next) => {
 // START SERVER
 // ============================================
 const PORT = process.env.PORT || 5000;
-
-// Import mongoose for health check
-const mongoose = require('mongoose');
 
 const server = app.listen(PORT, () => {
     console.log('========================================');
