@@ -9,30 +9,37 @@ const PatientSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
+        required: true,
     },
     fullName: {
         type: String,
         required: true,
+        trim: true,
     },
     dateOfBirth: {
         type: Date,
-        required: true,
     },
     gender: {
         type: String,
         enum: ['Male', 'Female', 'Other'],
-        required: true,
     },
     phone: {
         type: String,
         required: true,
     },
-    email: String,
+    email: {
+        type: String,
+        lowercase: true,
+        trim: true,
+    },
     address: {
         street: String,
         city: String,
         state: String,
-        country: String,
+        country: {
+            type: String,
+            default: 'Ethiopia',
+        },
         zipCode: String,
     },
     emergencyContact: {
@@ -45,7 +52,10 @@ const PatientSchema = new mongoose.Schema({
         enum: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-', 'Unknown'],
         default: 'Unknown',
     },
-    allergies: [String],
+    allergies: [{
+        type: String,
+        trim: true,
+    }],
     medicalHistory: [{
         condition: String,
         diagnosis: String,
@@ -71,23 +81,50 @@ const PatientSchema = new mongoose.Schema({
         expiryDate: Date,
         coverage: String,
     },
-    documents: [{
-        name: String,
-        type: String,
-        url: String,
-        uploadedAt: Date,
-    }],
     status: {
         type: String,
-        enum: ['Active', 'Inactive', 'Deceased'],
+        enum: ['Active', 'Inactive', 'Pending'],
         default: 'Active',
     },
     registeredBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
+    registrationDate: {
+        type: Date,
+        default: Date.now,
+    },
 }, {
     timestamps: true,
 });
+
+// Indexes
+PatientSchema.index({ patientId: 1 });
+PatientSchema.index({ userId: 1 });
+PatientSchema.index({ fullName: 1 });
+PatientSchema.index({ phone: 1 });
+PatientSchema.index({ email: 1 });
+
+// Virtual for age
+PatientSchema.virtual('age').get(function() {
+    if (!this.dateOfBirth) return null;
+    const today = new Date();
+    let age = today.getFullYear() - this.dateOfBirth.getFullYear();
+    const monthDiff = today.getMonth() - this.dateOfBirth.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < this.dateOfBirth.getDate())) {
+        age--;
+    }
+    return age;
+});
+
+// Method to get patient by userId
+PatientSchema.statics.findByUserId = function(userId) {
+    return this.findOne({ userId });
+};
+
+// Method to get patient by patientId
+PatientSchema.statics.findByPatientId = function(patientId) {
+    return this.findOne({ patientId });
+};
 
 module.exports = mongoose.model('Patient', PatientSchema);
