@@ -25,7 +25,7 @@ const settingsRoutes = require('./settings');
 const uploadRoutes = require('./upload');
 const dashboardRoutes = require('./dashboard');
 
-// Mount all routes
+// Mount all routes - MAKE SURE EACH IS A ROUTER
 router.use('/auth', authRoutes);
 router.use('/patients', patientRoutes);
 router.use('/doctors', doctorRoutes);
@@ -51,6 +51,7 @@ router.use('/dashboard', dashboardRoutes);
 // Health check
 router.get('/health', (req, res) => {
     res.status(200).json({
+        success: true,
         status: 'OK',
         timestamp: new Date().toISOString(),
         uptime: process.uptime(),
