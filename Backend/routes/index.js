@@ -1,4 +1,3 @@
-// routes/index.js
 const express = require('express');
 const router = express.Router();
 
@@ -25,7 +24,7 @@ const settingsRoutes = require('./settings');
 const uploadRoutes = require('./upload');
 const dashboardRoutes = require('./dashboard');
 
-// Mount all routes - MAKE SURE EACH IS A ROUTER
+// Mount all routes
 router.use('/auth', authRoutes);
 router.use('/patients', patientRoutes);
 router.use('/doctors', doctorRoutes);
