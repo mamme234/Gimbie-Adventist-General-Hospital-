@@ -1,6 +1,6 @@
+// controllers/authController.js
 const User = require('../models/User');
 const { generateToken } = require('../config/auth');
-const { generateStaffId } = require('../utils/generateId');
 const crypto = require('crypto');
 
 // @desc    Register user
@@ -11,7 +11,7 @@ exports.register = async (req, res) => {
         const { fullName, email, password, phone, role, department } = req.body;
 
         // Check if user exists
-        const userExists = await User.findOne({ email });
+        const userExists = await User.findOne({ email: email.toLowerCase() });
         if (userExists) {
             return res.status(400).json({
                 success: false,
@@ -22,35 +22,32 @@ exports.register = async (req, res) => {
         // Create user
         const user = await User.create({
             fullName,
-            email,
+            email: email.toLowerCase(),
             password,
             phone,
             role: role || 'patient',
             department,
+            isActive: true,
         });
 
         // Generate staff ID for staff roles
         if (role && role !== 'patient') {
-            user.staffId = generateStaffId(department);
+            user.staffId = user.generateStaffId();
             await user.save();
         }
 
-        // Generate token
-        const token = generateToken(user._id, user.role);
-
         res.status(201).json({
             success: true,
-            token,
+            message: 'User registered successfully! Please login.',
             user: {
                 id: user._id,
                 fullName: user.fullName,
                 email: user.email,
                 role: user.role,
-                staffId: user.staffId,
-                phone: user.phone,
             },
         });
     } catch (error) {
+        console.error('Registration error:', error);
         res.status(500).json({
             success: false,
             message: error.message,
@@ -65,6 +62,8 @@ exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
+        console.log('Login attempt for:', email);
+
         // Validate email & password
         if (!email || !password) {
             return res.status(400).json({
@@ -73,12 +72,14 @@ exports.login = async (req, res) => {
             });
         }
 
-        // Check user
-        const user = await User.findOne({ email }).select('+password');
+        // Check user - explicitly select password field
+        const user = await User.findOne({ email: email.toLowerCase() }).select('+password');
+        console.log('User found:', user ? 'Yes' : 'No');
+
         if (!user) {
             return res.status(401).json({
                 success: false,
-                message: 'Invalid credentials',
+                message: 'Invalid credentials - User not found',
             });
         }
 
@@ -92,10 +93,12 @@ exports.login = async (req, res) => {
 
         // Check password
         const isPasswordMatch = await user.comparePassword(password);
+        console.log('Password match:', isPasswordMatch);
+
         if (!isPasswordMatch) {
             return res.status(401).json({
                 success: false,
-                message: 'Invalid credentials',
+                message: 'Invalid credentials - Wrong password',
             });
         }
 
@@ -122,6 +125,7 @@ exports.login = async (req, res) => {
             },
         });
     } catch (error) {
+        console.error('Login error:', error);
         res.status(500).json({
             success: false,
             message: error.message,
@@ -237,7 +241,7 @@ exports.changePassword = async (req, res) => {
 exports.forgotPassword = async (req, res) => {
     try {
         const { email } = req.body;
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email: email.toLowerCase() });
 
         if (!user) {
             return res.status(404).json({
@@ -256,13 +260,10 @@ exports.forgotPassword = async (req, res) => {
 
         await user.save();
 
-        // Send email (placeholder)
-        // await sendResetEmail(user.email, resetToken);
-
         res.status(200).json({
             success: true,
             message: 'Password reset link sent to email',
-            token: resetToken, // Remove in production
+            token: resetToken,
         });
     } catch (error) {
         res.status(500).json({
