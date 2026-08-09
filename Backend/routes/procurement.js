@@ -1,4 +1,3 @@
-// routes/procurement.js
 const express = require('express');
 const router = express.Router();
 const { protect, authorize } = require('../middleware/auth');
@@ -19,7 +18,6 @@ const {
     getPurchaseRequests,
     createPurchaseRequest,
     updatePurchaseRequest,
-    deletePurchaseRequest,
     approvePurchaseRequest,
 } = require('../controllers/procurementController');
 
@@ -27,7 +25,7 @@ const {
 router.use(protect);
 router.use(authorize('super_admin', 'admin', 'procurement_manager'));
 
-// ===== SUPPLIERS =====
+// Suppliers
 router.route('/suppliers')
     .get(getSuppliers)
     .post(createSupplier);
@@ -37,7 +35,7 @@ router.route('/suppliers/:id')
     .put(updateSupplier)
     .delete(deleteSupplier);
 
-// ===== PURCHASE REQUESTS =====
+// Purchase requests
 router.route('/requests')
     .get(getPurchaseRequests)
     .post(createPurchaseRequest);
@@ -48,7 +46,7 @@ router.route('/requests/:id')
 
 router.put('/requests/:id/approve', approvePurchaseRequest);
 
-// ===== PURCHASE ORDERS =====
+// Purchase orders
 router.route('/orders')
     .get(getPurchaseOrders)
     .post(createPurchaseOrder);
@@ -61,7 +59,7 @@ router.route('/orders/:id')
 router.put('/orders/:id/approve', approvePurchaseOrder);
 router.put('/orders/:id/receive', receiveGoods);
 
-// ===== DASHBOARD =====
+// Dashboard
 router.get('/dashboard', getProcurementDashboard);
 
 module.exports = router;
