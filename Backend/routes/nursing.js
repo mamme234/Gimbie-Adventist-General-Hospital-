@@ -15,7 +15,7 @@ const {
     getNurseDashboard,
 } = require('../controllers/nursingController');
 
-// Protected routes - Nurses only
+// All routes require authentication and nurse role
 router.use(protect);
 router.use(authorize('super_admin', 'admin', 'nurse'));
 
