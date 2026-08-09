@@ -1,4 +1,3 @@
-<!-- frontend/pages/patient/dashboard.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,9 +9,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/patient.css" />
-    <link rel="stylesheet" href="/css/responsive.css" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/patient.css" />
+    <link rel="stylesheet" href="/src/css/responsive.css" />
 </head>
 <body>
     <div class="patient-wrapper">
@@ -29,7 +28,7 @@
                     <li><a href="/pages/patient/appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a></li>
                     <li><a href="/pages/patient/medical-records.html"><i class="fas fa-file-medical"></i> Medical Records</a></li>
                     <li><a href="/pages/patient/lab-results.html"><i class="fas fa-microscope"></i> Lab Results</a></li>
-                    <li><a href="/pages/patient/prescriptions.html"><i class="fas fa-prescription"></i> Prescriptions</a></li>
+                    <li><a href="/pages/patient/prescriptions.html"><i class="fas fa-prescription-bottle"></i> Prescriptions</a></li>
                     <li><a href="/pages/patient/billing.html"><i class="fas fa-file-invoice-dollar"></i> Billing</a></li>
                     <li><a href="/pages/patient/profile.html"><i class="fas fa-user"></i> Profile</a></li>
                 </ul>
@@ -38,18 +37,29 @@
 
         <!-- Main Content -->
         <main class="patient-main">
-            <div class="doctor-topbar">
-                <div class="admin-topbar__title">
-                    <h1>Patient Dashboard</h1>
+            <!-- Top Bar -->
+            <div class="patient-topbar">
+                <div class="patient-topbar__title">
+                    <h1>Dashboard</h1>
                     <p>Welcome back, <span id="welcomeName">Patient</span></p>
                 </div>
-                <div class="admin-topbar__actions">
+                <div class="patient-topbar__actions">
                     <button class="notification-btn" onclick="window.location.href='/pages/patient/notifications.html'">
                         <i class="fas fa-bell"></i>
                         <span class="dot" id="notificationDot"></span>
                     </button>
-                    <div class="user-profile" onclick="window.location.href='/pages/patient/profile.html'">
+                    <div class="user-profile" id="userProfile">
                         <div class="avatar" id="patientAvatarSmall">P</div>
+                        <span class="name" id="userName">Patient</span>
+                        <span class="dropdown-icon"><i class="fas fa-chevron-down"></i></span>
+                        <!-- Dropdown -->
+                        <div class="user-dropdown" id="userDropdown">
+                            <a href="/pages/patient/profile.html"><i class="fas fa-user"></i> My Profile</a>
+                            <a href="/pages/patient/appointments.html"><i class="fas fa-calendar-check"></i> My Appointments</a>
+                            <a href="/pages/patient/billing.html"><i class="fas fa-file-invoice-dollar"></i> My Bills</a>
+                            <div class="divider"></div>
+                            <a href="#" class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -57,6 +67,26 @@
             <!-- Stats -->
             <div class="patient-stats" id="patientStats">
                 <!-- Loaded from JS -->
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <div class="quick-action" onclick="window.location.href='/pages/appointments.html'">
+                    <i class="fas fa-calendar-plus"></i>
+                    <span>Book Appointment</span>
+                </div>
+                <div class="quick-action" onclick="window.location.href='/pages/patient/medical-records.html'">
+                    <i class="fas fa-file-medical"></i>
+                    <span>View Records</span>
+                </div>
+                <div class="quick-action" onclick="window.location.href='/pages/patient/billing.html'">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Pay Bill</span>
+                </div>
+                <div class="quick-action" onclick="window.location.href='/pages/patient/profile.html'">
+                    <i class="fas fa-user-edit"></i>
+                    <span>Update Profile</span>
+                </div>
             </div>
 
             <!-- Upcoming Appointments -->
@@ -83,30 +113,7 @@
         </main>
     </div>
 
-    <script src="/js/api.js"></script>
-    <script src="/js/patient.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check if user is logged in
-            const user = API.getCurrentUser();
-            if (!user) {
-                window.location.href = '/pages/login.html';
-                return;
-            }
-            
-            // Update welcome message
-            document.getElementById('welcomeName').textContent = user.fullName || 'Patient';
-            document.getElementById('patientName').textContent = user.fullName || 'Patient Name';
-            document.getElementById('patientId').textContent = `ID: ${user.patientId || 'N/A'}`;
-            
-            // Set avatar initials
-            const initials = user.fullName ? user.fullName.split(' ').map(n => n[0]).join('').toUpperCase() : 'P';
-            document.getElementById('patientAvatar').textContent = initials;
-            document.getElementById('patientAvatarSmall').textContent = initials;
-            
-            // Load dashboard data
-            loadPatientDashboard();
-        });
-    </script>
+    <script src="/src/js/api.js"></script>
+    <script src="/src/js/patient.js"></script>
 </body>
-    </html>
+                                                                           </html>
