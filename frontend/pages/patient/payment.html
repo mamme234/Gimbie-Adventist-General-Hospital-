@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Make Payment - Gimbie Adventist General Hospital</title>
+    <link rel="icon" href="/assets/images/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/patient.css" />
+    <link rel="stylesheet" href="/src/css/responsive.css" />
+    <style>
+        /* ===== PAYMENT PAGE STYLES ===== */
+        .payment-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .payment-card {
+            background: #fff;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 24px;
+        }
+
+        .payment-card .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e8edea;
+        }
+
+        .payment-card .card-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .payment-card .card-header .badge {
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .payment-card .card-header .badge--pending {
+            background: #fff3e0;
+            color: var(--warning);
+        }
+
+        .payment-card .card-header .badge--paid {
+            background: #e8f5e9;
+            color: var(--primary);
+        }
+
+        .payment-card .card-header .badge--overdue {
+            background: #ffebee;
+            color: var(--danger);
+        }
+
+        .payment-summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .payment-summary .summary-item {
+            text-align: center;
+            padding: 12px;
+            background: var(--bg-light);
+            border-radius: var(--radius);
+        }
+
+        .payment-summary .summary-item .label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .payment-summary .summary-item .value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .payment-summary .summary-item .value.danger {
+            color: var(--danger);
+        }
+
+        .payment-summary .summary-item .value.success {
+            color: var(--primary);
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 16px 0;
+        }
+
+        .payment-method {
+            padding: 12px;
+            border: 2px solid #e8edea;
+            border-radius: var(--radius);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .payment-method:hover {
+            border-color: var(--primary);
+        }
+
+        .payment-method.active {
+            border-color: var(--primary);
+            background: var(--primary-lighter);
+        }
+
+        .payment-method i {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .payment-method .method-name {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .payment-amount-input {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 16px 0;
+        }
+
+        .payment-amount-input input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .payment-amount-input input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .payment-amount-input .currency {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        .invoice-select {
+            width: 100%;
+            padding: 10px 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+
+        .invoice-select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .payment-history {
+            margin-top: 16px;
+        }
+
+        .payment-history .history-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e8edea;
+        }
+
+        .payment-history .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .payment-history .history-item .amount {
+            font-weight: 600;
+        }
+
+        .payment-history .history-item .amount.success {
+            color: var(--primary);
+        }
+
+        .payment-history .history-item .date {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .payment-history .history-item .method {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .payment-success {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .payment-success i {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .payment-success h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .payment-success p {
+            color: var(--text-secondary);
+        }
+
+        .payment-success .receipt-details {
+            background: var(--bg-light);
+            padding: 16px;
+            border-radius: var(--radius);
+            margin: 16px 0;
+            text-align: left;
+        }
+
+        .payment-success .receipt-details .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+        }
+
+        .payment-success .receipt-details .row .label {
+            color: var(--text-secondary);
+        }
+
+        .payment-success .receipt-details .row .value {
+            font-weight: 600;
+        }
+
+        @media (max-width: 1024px) {
+            .payment-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .payment-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-methods {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .payment-amount-input {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="patient-wrapper">
+        <!-- Sidebar -->
+        <aside class="patient-sidebar" id="patientSidebar">
+            <div class="profile-section">
+                <div class="avatar" id="patientAvatar">P</div>
+                <div class="name" id="patientName">Patient Name</div>
+                <div class="patient-id" id="patientId">ID: N/A</div>
+            </div>
+            <nav class="patient-sidebar__nav">
+                <ul>
+                    <li><a href="/pages/patient/dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                    <li><a href="/pages/patient/appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a></li>
+                    <li><a href="/pages/patient/medical-records.html"><i class="fas fa-file-medical"></i> Medical Records</a></li>
+                    <li><a href="/pages/patient/lab-results.html"><i class="fas fa-microscope"></i> Lab Results</a></li>
+                    <li><a href="/pages/patient/prescriptions.html"><i class="fas fa-prescription-bottle"></i> Prescriptions</a></li>
+                    <li><a href="/pages/patient/billing.html"><i class="fas fa-file-invoice-dollar"></i> Billing</a></li>
+                    <li><a href="/pages/patient/notifications.html"><i class="fas fa-bell"></i> Notifications</a></li>
+                    <li><a href="/pages/patient/profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="patient-main">
+            <!-- Top Bar -->
+            <div class="patient-topbar">
+                <div class="patient-topbar__title">
+                    <h1>Make Payment</h1>
+                    <p>Pay your hospital bills securely</p>
+                </div>
+                <div class="patient-topbar__actions">
+                    <div class="user-profile" id="userProfile">
+                        <div class="avatar" id="patientAvatarSmall">P</div>
+                        <span class="name" id="userName">Patient</span>
+                        <span class="dropdown-icon"><i class="fas fa-chevron-down"></i></span>
+                        <div class="user-dropdown" id="userDropdown">
+                            <a href="/pages/patient/profile.html"><i class="fas fa-user"></i> My Profile</a>
+                            <a href="/pages/patient/appointments.html"><i class="fas fa-calendar-check"></i> My Appointments</a>
+                            <a href="/pages/patient/billing.html"><i class="fas fa-file-invoice-dollar"></i> My Bills</a>
+                            <div class="divider"></div>
+                            <a href="#" class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Container -->
+            <div class="payment-container">
+                <!-- Payment Form -->
+                <div class="payment-card" id="paymentFormCard">
+                    <div class="card-header">
+                        <h3>Payment Details</h3>
+                        <span class="badge badge--pending" id="paymentStatusBadge">Pending</span>
+                    </div>
+
+                    <!-- Payment Summary -->
+                    <div class="payment-summary">
+                        <div class="summary-item">
+                            <div class="label">Total Balance</div>
+                            <div class="value danger" id="totalBalance">ETB 0.00</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="label">Amount to Pay</div>
+                            <div class="value" id="amountToPay">ETB 0.00</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="label">Remaining</div>
+                            <div class="value" id="remainingBalance">ETB 0.00</div>
+                        </div>
+                    </div>
+
+                    <!-- Select Invoice -->
+                    <div class="form-group">
+                        <label for="invoiceSelect">Select Invoice</label>
+                        <select id="invoiceSelect" class="invoice-select">
+                            <option value="">-- Select an invoice --</option>
+                        </select>
+                    </div>
+
+                    <!-- Payment Amount -->
+                    <div class="payment-amount-input">
+                        <span class="currency">ETB</span>
+                        <input type="number" id="paymentAmount" placeholder="0.00" min="0.01" step="0.01" />
+                        <button class="btn btn--small btn--outline" id="payFullBtn">Pay Full</button>
+                    </div>
+
+                    <!-- Payment Methods -->
+                    <label style="font-weight: 500; font-size: 0.9rem; display: block; margin-bottom: 8px;">Payment Method</label>
+                    <div class="payment-methods">
+                        <div class="payment-method active" data-method="Cash">
+                            <i class="fas fa-money-bill-wave" style="color: var(--primary);"></i>
+                            <span class="method-name">Cash</span>
+                        </div>
+                        <div class="payment-method" data-method="Card">
+                            <i class="fas fa-credit-card" style="color: var(--info);"></i>
+                            <span class="method-name">Card</span>
+                        </div>
+                        <div class="payment-method" data-method="Telebirr">
+                            <i class="fas fa-mobile-alt" style="color: #6a1b9a;"></i>
+                            <span class="method-name">Telebirr</span>
+                        </div>
+                        <div class="payment-method" data-method="Bank Transfer">
+                            <i class="fas fa-university" style="color: var(--warning);"></i>
+                            <span class="method-name">Bank Transfer</span>
+                        </div>
+                    </div>
+
+                    <!-- Reference Number -->
+                    <div class="form-group" style="margin-top: 12px;">
+                        <label for="referenceInput">Reference / Transaction ID (Optional)</label>
+                        <input type="text" id="referenceInput" placeholder="Enter reference number" />
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button class="btn btn--primary btn--full" id="payBtn" style="margin-top: 16px; padding: 14px;">
+                        <i class="fas fa-check-circle"></i> Process Payment
+                    </button>
+                </div>
+
+                <!-- Payment History -->
+                <div class="payment-card">
+                    <div class="card-header">
+                        <h3>Payment History</h3>
+                        <span id="historyCount">0 payments</span>
+                    </div>
+                    <div id="paymentHistory">
+                        <div style="text-align: center; padding: 20px; color: var(--text-secondary);">
+                            <i class="fas fa-history" style="font-size: 2rem; display: block; margin-bottom: 8px;"></i>
+                            No payment history found
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success Modal -->
+            <div id="paymentSuccessModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+                <div style="background: #fff; border-radius: var(--radius-lg); padding: 40px; max-width: 480px; width: 90%; max-height: 90vh; overflow-y: auto; position: relative;">
+                    <button onclick="closeSuccessModal()" style="position: absolute; top: 12px; right: 16px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-secondary);">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <div class="payment-success">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Payment Successful!</h3>
+                        <p>Your payment has been processed successfully.</p>
+                        <div class="receipt-details" id="receiptDetails">
+                            <div class="row">
+                                <span class="label">Invoice #</span>
+                                <span class="value" id="receiptInvoice">N/A</span>
+                            </div>
+                            <div class="row">
+                                <span class="label">Amount Paid</span>
+                                <span class="value" id="receiptAmount">ETB 0.00</span>
+                            </div>
+                            <div class="row">
+                                <span class="label">Payment Method</span>
+                                <span class="value" id="receiptMethod">N/A</span>
+                            </div>
+                            <div class="row">
+                                <span class="label">Transaction ID</span>
+                                <span class="value" id="receiptReference">N/A</span>
+                            </div>
+                            <div class="row">
+                                <span class="label">Date</span>
+                                <span class="value" id="receiptDate">N/A</span>
+                            </div>
+                            <div class="row">
+                                <span class="label">Status</span>
+                                <span class="value" style="color: var(--primary);">Completed</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 12px; justify-content: center; margin-top: 16px;">
+                            <button class="btn btn--primary" onclick="closeSuccessModal()">Done</button>
+                            <button class="btn btn--outline" onclick="window.print()">
+                                <i class="fas fa-print"></i> Print Receipt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/src/js/api.js"></script>
+    <script>
+        // ===== PAYMENT PAGE =====
+        let selectedMethod = 'Cash';
+        let patientId = null;
+        let selectedInvoiceId = null;
+        let invoices = [];
+        let paymentHistory = [];
+
+        // ===== GET USER =====
+        const user = API.getCurrentUser();
+        if (!user) {
+            window.location.href = '/pages/login.html';
+        }
+
+        // ===== UPDATE USER INFO =====
+        function updateUserInfo() {
+            const name = user.fullName || 'Patient';
+            const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+
+            document.getElementById('patientName').textContent = name;
+            document.getElementById('userName').textContent = name;
+            document.getElementById('patientId').textContent = `ID: ${user.patientId || 'N/A'}`;
+            document.getElementById('patientAvatar').textContent = initials;
+            document.getElementById('patientAvatarSmall').textContent = initials;
+        }
+        updateUserInfo();
+
+        // ===== GET PATIENT DATA =====
+        async function getPatientData() {
+            try {
+                const response = await API.patients.get(user.id);
+                if (response.success) {
+                    patientId = response.data._id;
+                    await loadInvoices(patientId);
+                    await loadPaymentHistory(patientId);
+                    updateSummary();
+                }
+            } catch (error) {
+                console.error('Error getting patient data:', error);
+                showToast('Error loading patient data', 'error');
+            }
+        }
+
+        // ===== LOAD INVOICES =====
+        async function loadInvoices(patientId) {
+            try {
+                const response = await API.billing.getPatientInvoices(patientId);
+                if (response.success) {
+                    invoices = response.data.filter(inv => inv.status === 'Pending' || inv.status === 'Partially Paid');
+                    populateInvoiceSelect(invoices);
+                    updateSummary();
+                }
+            } catch (error) {
+                console.error('Error loading invoices:', error);
+                showToast('Error loading invoices', 'error');
+            }
+        }
+
+        // ===== POPULATE INVOICE SELECT =====
+        function populateInvoiceSelect(invoices) {
+            const select = document.getElementById('invoiceSelect');
+            select.innerHTML = '<option value="">-- Select an invoice --</option>';
+
+            if (!invoices || invoices.length === 0) {
+                select.innerHTML += '<option value="" disabled>No pending invoices</option>';
+                document.getElementById('paymentStatusBadge').textContent = 'No Pending Bills';
+                document.getElementById('paymentStatusBadge').className = 'badge badge--paid';
+                return;
+            }
+
+            invoices.forEach(inv => {
+                const option = document.createElement('option');
+                option.value = inv._id;
+                option.textContent = `${inv.invoiceNumber} - ${inv.total.toFixed(2)} ETB (Balance: ${inv.balance.toFixed(2)} ETB)`;
+                select.appendChild(option);
+            });
+
+            document.getElementById('paymentStatusBadge').textContent = `${invoices.length} Pending`;
+            document.getElementById('paymentStatusBadge').className = 'badge badge--pending';
+        }
+
+        // ===== UPDATE SUMMARY =====
+        function updateSummary() {
+            const totalBalance = invoices.reduce((sum, inv) => sum + inv.balance, 0);
+            const amountInput = document.getElementById('paymentAmount');
+            const amount = parseFloat(amountInput.value) || 0;
+
+            document.getElementById('totalBalance').textContent = `ETB ${totalBalance.toFixed(2)}`;
+            document.getElementById('amountToPay').textContent = `ETB ${amount.toFixed(2)}`;
+            document.getElementById('remainingBalance').textContent = `ETB ${Math.max(0, totalBalance - amount).toFixed(2)}`;
+        }
+
+        // ===== INVOICE SELECT CHANGE =====
+        document.getElementById('invoiceSelect').addEventListener('change', function() {
+            selectedInvoiceId = this.value;
+            if (selectedInvoiceId) {
+                const invoice = invoices.find(inv => inv._id === selectedInvoiceId);
+                if (invoice) {
+                    document.getElementById('paymentAmount').value = invoice.balance.toFixed(2);
+                    updateSummary();
+                }
+            } else {
+                document.getElementById('paymentAmount').value = '';
+                updateSummary();
+            }
+        });
+
+        // ===== PAY FULL BUTTON =====
+        document.getElementById('payFullBtn').addEventListener('click', function() {
+            const totalBalance = invoices.reduce((sum, inv) => sum + inv.balance, 0);
+            if (totalBalance > 0) {
+                document.getElementById('paymentAmount').value = totalBalance.toFixed(2);
+                updateSummary();
+            }
+        });
+
+        // ===== PAYMENT AMOUNT INPUT =====
+        document.getElementById('paymentAmount').addEventListener('input', updateSummary);
+
+        // ===== PAYMENT METHOD SELECT =====
+        document.querySelectorAll('.payment-method').forEach(el => {
+            el.addEventListener('click', function() {
+                document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+                this.classList.add('active');
+                selectedMethod = this.dataset.method;
+            });
+        });
+
+        // ===== LOAD PAYMENT HISTORY =====
+        async function loadPaymentHistory(patientId) {
+            try {
+                const response = await API.billing.getPatientInvoices(patientId);
+                if (response.success) {
+                    const paidInvoices = response.data.filter(inv => inv.status === 'Paid');
+                    paymentHistory = paidInvoices;
+                    renderPaymentHistory(paidInvoices);
+                }
+            } catch (error) {
+                console.error('Error loading payment history:', error);
+            }
+        }
+
+        // ===== RENDER PAYMENT HISTORY =====
+        function renderPaymentHistory(history) {
+            const container = document.getElementById('paymentHistory');
+            document.getElementById('historyCount').textContent = `${history.length} payments`;
+
+            if (!history || history.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 20px; color: var(--text-secondary);">
+                        <i class="fas fa-history" style="font-size: 2rem; display: block; margin-bottom: 8px;"></i>
+                        No payment history found
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = history.map(payment => `
+                <div class="history-item">
+                    <div>
+                        <div style="font-weight: 500;">${payment.invoiceNumber}</div>
+                        <div class="date">${formatDate(payment.paymentDate || payment.createdAt)}</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div class="amount success">+ETB ${payment.paidAmount.toFixed(2)}</div>
+                        <div class="method">${payment.paymentMethod || 'Cash'}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ===== PROCESS PAYMENT =====
+        async function processPayment() {
+            const amount = parseFloat(document.getElementById('paymentAmount').value);
+            const reference = document.getElementById('referenceInput').value.trim();
+
+            if (!selectedInvoiceId) {
+                showToast('Please select an invoice', 'error');
+                return;
+            }
+
+            if (!amount || amount <= 0) {
+                showToast('Please enter a valid amount', 'error');
+                return;
+            }
+
+            const invoice = invoices.find(inv => inv._id === selectedInvoiceId);
+            if (!invoice) {
+                showToast('Invoice not found', 'error');
+                return;
+            }
+
+            if (amount > invoice.balance) {
+                showToast(`Amount exceeds balance of ${invoice.balance.toFixed(2)} ETB`, 'error');
+                return;
+            }
+
+            try {
+                const response = await API.billing.pay(selectedInvoiceId, {
+                    amount: amount,
+                    method: selectedMethod,
+                    reference: reference || `PAY-${Date.now()}`
+                });
+
+                if (response.success) {
+                    showSuccessModal({
+                        invoiceNumber: invoice.invoiceNumber,
+                        amount: amount,
+                        method: selectedMethod,
+                        reference: reference || `PAY-${Date.now()}`
+                    });
+                    getPatientData(); // Refresh data
+                }
+            } catch (error) {
+                console.error('Payment error:', error);
+                showToast(error.message || 'Payment failed. Please try again.', 'error');
+            }
+        }
+
+        // ===== SHOW SUCCESS MODAL =====
+        function showSuccessModal(data) {
+            document.getElementById('receiptInvoice').textContent = data.invoiceNumber || 'N/A';
+            document.getElementById('receiptAmount').textContent = `ETB ${data.amount.toFixed(2)}`;
+            document.getElementById('receiptMethod').textContent = data.method;
+            document.getElementById('receiptReference').textContent = data.reference || 'N/A';
+            document.getElementById('receiptDate').textContent = new Date().toLocaleString();
+
+            document.getElementById('paymentSuccessModal').style.display = 'flex';
+        }
+
+        // ===== CLOSE SUCCESS MODAL =====
+        function closeSuccessModal() {
+            document.getElementById('paymentSuccessModal').style.display = 'none';
+            document.getElementById('paymentAmount').value = '';
+            document.getElementById('invoiceSelect').value = '';
+            updateSummary();
+        }
+
+        // ===== FORMAT DATE =====
+        function formatDate(date) {
+            if (!date) return 'N/A';
+            const d = new Date(date);
+            return d.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // ===== SHOW TOAST =====
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                padding: 16px 24px;
+                border-radius: 8px;
+                color: #fff;
+                font-weight: 500;
+                z-index: 9999;
+                background: ${type === 'success' ? '#0f5c2e' : '#c62828'};
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                max-width: 400px;
+                animation: slideIn 0.3s ease;
+            `;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // ===== TOGGLE DROPDOWN =====
+        function toggleDropdown(e) {
+            e.stopPropagation();
+            const dropdown = document.getElementById('userDropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        // ===== LOGOUT =====
+        function handleLogout(e) {
+            e.preventDefault();
+            if (confirm('Are you sure you want to logout?')) {
+                API.setToken(null);
+                API.setCurrentUser(null);
+                window.location.href = '/pages/login.html';
+            }
+        }
+
+        // ===== EVENT LISTENERS =====
+        document.addEventListener('DOMContentLoaded', () => {
+            getPatientData();
+
+            // Pay button
+            document.getElementById('payBtn').addEventListener('click', processPayment);
+
+            // User dropdown
+            document.getElementById('userProfile')?.addEventListener('click', toggleDropdown);
+
+            // Logout
+            document.getElementById('logoutBtn')?.addEventListener('click', handleLogout);
+
+            // Close dropdown on outside click
+            document.addEventListener('click', () => {
+                const dropdown = document.getElementById('userDropdown');
+                if (dropdown) dropdown.classList.remove('active');
+            });
+        });
+
+        // ===== EXPOSE GLOBALLY =====
+        window.closeSuccessModal = closeSuccessModal;
+    </script>
+</body>
+  </html>
