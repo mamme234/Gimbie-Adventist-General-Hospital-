@@ -1,3 +1,4 @@
+<!-- frontend/pages/patient/dashboard.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,9 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="stylesheet" href="/src/css/style.css" />
-    <link rel="stylesheet" href="/src/css/patient.css" />
-    <link rel="stylesheet" href="/src/css/responsive.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/patient.css" />
+    <link rel="stylesheet" href="/css/responsive.css" />
 </head>
 <body>
     <div class="patient-wrapper">
@@ -40,14 +41,14 @@
             <div class="doctor-topbar">
                 <div class="admin-topbar__title">
                     <h1>Patient Dashboard</h1>
-                    <p>Welcome back, Patient</p>
+                    <p>Welcome back, <span id="welcomeName">Patient</span></p>
                 </div>
                 <div class="admin-topbar__actions">
-                    <button class="notification-btn">
+                    <button class="notification-btn" onclick="window.location.href='/pages/patient/notifications.html'">
                         <i class="fas fa-bell"></i>
-                        <span class="dot"></span>
+                        <span class="dot" id="notificationDot"></span>
                     </button>
-                    <div class="user-profile">
+                    <div class="user-profile" onclick="window.location.href='/pages/patient/profile.html'">
                         <div class="avatar" id="patientAvatarSmall">P</div>
                     </div>
                 </div>
@@ -82,6 +83,30 @@
         </main>
     </div>
 
-    <script type="module" src="/src/js/patient.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/patient.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            const user = API.getCurrentUser();
+            if (!user) {
+                window.location.href = '/pages/login.html';
+                return;
+            }
+            
+            // Update welcome message
+            document.getElementById('welcomeName').textContent = user.fullName || 'Patient';
+            document.getElementById('patientName').textContent = user.fullName || 'Patient Name';
+            document.getElementById('patientId').textContent = `ID: ${user.patientId || 'N/A'}`;
+            
+            // Set avatar initials
+            const initials = user.fullName ? user.fullName.split(' ').map(n => n[0]).join('').toUpperCase() : 'P';
+            document.getElementById('patientAvatar').textContent = initials;
+            document.getElementById('patientAvatarSmall').textContent = initials;
+            
+            // Load dashboard data
+            loadPatientDashboard();
+        });
+    </script>
 </body>
-                  </html>
+    </html>
