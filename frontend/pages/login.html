@@ -1,209 +1,195 @@
+<!-- pages/login.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - Gimbie Adventist General Hospital</title>
-    <link rel="icon" href="/assets/images/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="/src/css/style.css" />
     <link rel="stylesheet" href="/src/css/responsive.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
         .auth-container {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e8edea 100%);
-        }
-        .auth-card {
+            max-width: 440px;
+            margin: 100px auto 40px;
+            padding: 40px;
             background: #fff;
             border-radius: 16px;
-            padding: 40px;
-            max-width: 420px;
-            width: 100%;
             box-shadow: 0 20px 60px rgba(0,0,0,0.1);
         }
-        .auth-card .logo { text-align: center; margin-bottom: 28px; }
-        .auth-card .logo img { height: 56px; margin-bottom: 12px; }
-        .auth-card .logo h1 { font-size: 1.4rem; font-weight: 700; color: #1a1a2e; }
-        .auth-card .logo p { color: #4a5568; font-size: 0.9rem; }
-        .form-group { margin-bottom: 14px; }
-        .form-group label { display: block; font-weight: 500; margin-bottom: 4px; font-size: 0.85rem; color: #1a1a2e; }
-        .form-group input {
-            width: 100%; padding: 11px 14px; border: 1px solid #ddd; border-radius: 8px;
-            font-family: 'Inter', sans-serif; font-size: 0.95rem; transition: 0.2s ease; background: #fff;
+        .auth-container h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: #1a1a2e;
+            text-align: center;
         }
-        .form-group input:focus { outline: none; border-color: #0f5c2e; box-shadow: 0 0 0 3px rgba(15,92,46,0.1); }
-        .btn--full { width: 100%; justify-content: center; padding: 13px; font-size: 1rem; border-radius: 50px; }
-        .btn--primary { background: #0f5c2e; color: #fff; border: none; font-weight: 600; cursor: pointer; transition: 0.2s ease; display: inline-flex; align-items: center; gap: 8px; }
-        .btn--primary:hover { background: #0a4522; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(15,92,46,0.25); }
-        .btn--primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-        .auth-options { display: flex; justify-content: space-between; align-items: center; margin: 12px 0 18px; }
-        .auth-options label { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: #4a5568; cursor: pointer; }
-        .auth-options label input[type="checkbox"] { width: 15px; height: 15px; accent-color: #0f5c2e; }
-        .auth-options a { font-size: 0.85rem; color: #0f5c2e; text-decoration: none; font-weight: 500; }
-        .auth-options a:hover { text-decoration: underline; }
-        .error-message { background: #ffebee; color: #c62828; padding: 10px 14px; border-radius: 8px; margin-bottom: 14px; display: none; font-size: 0.85rem; align-items: center; gap: 8px; }
-        .error-message.show { display: flex; }
-        .auth-footer { text-align: center; margin-top: 20px; color: #4a5568; font-size: 0.9rem; }
-        .auth-footer a { color: #0f5c2e; font-weight: 600; text-decoration: none; }
-        .auth-footer a:hover { text-decoration: underline; }
-        .spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid #fff; border-radius: 50%; border-top-color: transparent; animation: spin 0.6s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .role-selector { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 18px; }
-        .role-selector .role-btn { padding: 8px 4px; border: 2px solid #e8edea; border-radius: 8px; background: #fff; cursor: pointer; text-align: center; transition: 0.2s ease; font-size: 0.7rem; font-weight: 500; color: #4a5568; }
-        .role-selector .role-btn i { display: block; font-size: 1.2rem; margin-bottom: 2px; }
-        .role-selector .role-btn:hover { border-color: #0f5c2e; background: #f8faf9; }
-        .role-selector .role-btn.active { border-color: #0f5c2e; background: #e8f5e9; color: #0f5c2e; }
-        @media (max-width: 480px) { .auth-card { padding: 24px; } .role-selector { grid-template-columns: repeat(2, 1fr); } }
+        .auth-container .subtitle {
+            text-align: center;
+            color: #4a5568;
+            margin-bottom: 28px;
+        }
+        .role-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .role-selector label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 8px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #4a5568;
+        }
+        .role-selector label:hover {
+            border-color: #0f5c2e;
+        }
+        .role-selector input[type="radio"] {
+            display: none;
+        }
+        .role-selector input[type="radio"]:checked + label {
+            border-color: #0f5c2e;
+            background: #f0f7f3;
+            color: #0f5c2e;
+        }
+        .role-selector i {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+        .btn--full {
+            width: 100%;
+            padding: 14px;
+            font-size: 1rem;
+            border-radius: 50px;
+        }
+        .auth-links {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #4a5568;
+        }
+        .auth-links a {
+            color: #0f5c2e;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .auth-links a:hover {
+            text-decoration: underline;
+        }
+        .toast {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            padding: 16px 24px;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 500;
+            z-index: 9999;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            max-width: 400px;
+            animation: slideIn 0.3s ease;
+        }
+        .toast-success { background: #0f5c2e; }
+        .toast-error { background: #c62828; }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.6s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .form-group .error-text {
+            color: #c62828;
+            font-size: 0.8rem;
+            margin-top: 4px;
+            display: none;
+        }
+        @media (max-width: 600px) {
+            .auth-container { padding: 24px; margin: 80px 16px 40px; }
+            .role-selector { grid-template-columns: 1fr 1fr; }
+        }
     </style>
 </head>
 <body>
-
-<div class="auth-container">
-    <div class="auth-card">
-        <div class="logo">
-            <img src="/assets/images/logo.png" alt="Gimbie Adventist General Hospital" />
-            <h1>Welcome Back</h1>
-            <p>Login to your account</p>
-        </div>
-
-        <div class="error-message" id="errorMessage">
-            <i class="fas fa-exclamation-circle"></i>
-            <span id="errorText">Invalid credentials</span>
-        </div>
-
-        <div class="role-selector" id="roleSelector">
-            <div class="role-btn active" data-role="patient"><i class="fas fa-user"></i> Patient</div>
-            <div class="role-btn" data-role="doctor"><i class="fas fa-user-md"></i> Doctor</div>
-            <div class="role-btn" data-role="admin"><i class="fas fa-user-tie"></i> Admin</div>
-            <div class="role-btn" data-role="nurse"><i class="fas fa-user-nurse"></i> Nurse</div>
-        </div>
+    <div class="auth-container">
+        <h2>Welcome Back</h2>
+        <p class="subtitle">Login to your account</p>
 
         <form id="loginForm">
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" required placeholder="Enter your email" autocomplete="email" />
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required placeholder="Enter your password" autocomplete="current-password" />
+            <!-- Role Selector -->
+            <div class="role-selector" id="roleSelector">
+                <input type="radio" name="role" value="patient" id="rolePatient" checked />
+                <label for="rolePatient"><i class="fas fa-user"></i> Patient</label>
+                
+                <input type="radio" name="role" value="doctor" id="roleDoctor" />
+                <label for="roleDoctor"><i class="fas fa-user-md"></i> Doctor</label>
+                
+                <input type="radio" name="role" value="admin" id="roleAdmin" />
+                <label for="roleAdmin"><i class="fas fa-user-shield"></i> Admin</label>
+                
+                <input type="radio" name="role" value="nurse" id="roleNurse" />
+                <label for="roleNurse"><i class="fas fa-user-nurse"></i> Nurse</label>
             </div>
 
-            <div class="auth-options">
-                <label><input type="checkbox" id="rememberMe" /> Remember me</label>
-                <a href="/pages/forgot-password.html">Forgot Password?</a>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email" />
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required placeholder="Enter your password" />
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                <label style="display:flex; align-items:center; gap:8px; font-size:0.9rem; color:#4a5568; cursor:pointer;">
+                    <input type="checkbox" id="rememberMe" /> Remember me
+                </label>
+                <a href="/pages/forgot-password.html" style="color:#0f5c2e; font-size:0.9rem; text-decoration:none;">Forgot Password?</a>
             </div>
 
             <button type="submit" class="btn btn--primary btn--full" id="loginBtn">
-                <i class="fas fa-sign-in-alt"></i> Login
+                <span id="btnText"><i class="fas fa-sign-in-alt"></i> Login</span>
+                <span id="btnSpinner" class="loading-spinner"></span>
             </button>
         </form>
 
-        <div class="auth-footer">
+        <div class="auth-links">
             Don't have an account? <a href="/pages/register.html">Register</a>
         </div>
     </div>
-</div>
 
-<script type="module">
-    import API from '/src/js/api.js';
-
-    const ROLE_REDIRECT = {
-        'super_admin': '/pages/admin/dashboard.html',
-        'admin': '/pages/admin/dashboard.html',
-        'doctor': '/pages/doctor/dashboard.html',
-        'nurse': '/pages/nurse/dashboard.html',
-        'pharmacist': '/pages/pharmacy/dashboard.html',
-        'lab_technician': '/pages/laboratory/dashboard.html',
-        'radiologist': '/pages/radiology/dashboard.html',
-        'patient': '/pages/patient/dashboard.html'
-    };
-
-    const loginForm = document.getElementById('loginForm');
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    const loginBtn = document.getElementById('loginBtn');
-    const errorMessage = document.getElementById('errorMessage');
-    const errorText = document.getElementById('errorText');
-    const rememberMe = document.getElementById('rememberMe');
-
-    function showError(message) {
-        errorText.textContent = message;
-        errorMessage.classList.add('show');
-        setTimeout(() => errorMessage.classList.remove('show'), 5000);
-    }
-
-    function setLoading(loading) {
-        if (loading) {
-            loginBtn.disabled = true;
-            loginBtn.innerHTML = '<span class="spinner"></span> Logging in...';
-        } else {
-            loginBtn.disabled = false;
-            loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
-        }
-    }
-
-    async function handleLogin(e) {
-        e.preventDefault();
-        errorMessage.classList.remove('show');
-
-        const email = emailInput.value.trim();
-        const password = passwordInput.value.trim();
-
-        if (!email || !password) {
-            showError('Please enter your email and password');
-            return;
-        }
-
-        setLoading(true);
-
-        try {
-            const response = await API.auth.login(email, password);
-            console.log('Login response:', response);
-
-            if (response.success) {
-                if (rememberMe.checked) {
-                    localStorage.setItem('rememberMe', 'true');
-                    localStorage.setItem('savedEmail', email);
-                }
-
-                const user = API.getCurrentUser();
-                const redirect = ROLE_REDIRECT[user.role] || '/';
-                window.location.href = redirect;
-            } else {
-                throw new Error(response.message || 'Login failed');
+    <script type="module">
+        import { handleLogin } from '../src/js/auth.js';
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                loginForm.addEventListener('submit', handleLogin);
             }
-
-        } catch (error) {
-            console.error('Login error:', error);
-            showError(error.message || 'Network error. Please check your connection.');
-            setLoading(false);
-        }
-    }
-
-    loginForm.addEventListener('submit', handleLogin);
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const user = API.getCurrentUser();
-        if (user) {
-            const redirect = ROLE_REDIRECT[user.role] || '/';
-            window.location.href = redirect;
-            return;
-        }
-
-        if (localStorage.getItem('rememberMe') === 'true') {
-            rememberMe.checked = true;
-            const savedEmail = localStorage.getItem('savedEmail');
-            if (savedEmail) emailInput.value = savedEmail;
-        }
-        emailInput.focus();
-    });
-</script>
+        });
+    </script>
 </body>
 </html>
