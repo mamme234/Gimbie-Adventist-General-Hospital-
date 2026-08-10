@@ -1,43 +1,42 @@
-// server.js
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
 const helmet = require('helmet');
-const morgan = require('morgan');
+const rateLimit = require('express-rate-limit');
 const dotenv = require('dotenv');
 const path = require('path');
+const mongoose = require('mongoose');
+const connectDB = require('./config/database');
+const { seedStaff } = require('./config/scripts/seed/seedRunner');
 
 // Load environment variables
 dotenv.config();
 
 // ============================================
-// IMPORT ROUTES
+// DATABASE CONNECTION
 // ============================================
-const authRoutes = require('./routes/auth');
-const patientRoutes = require('./routes/patients');
-const doctorRoutes = require('./routes/doctors');
-const appointmentRoutes = require('./routes/appointments');
-const pharmacyRoutes = require('./routes/pharmacy');
-const laboratoryRoutes = require('./routes/laboratory');
-const billingRoutes = require('./routes/billing');
-const departmentRoutes = require('./routes/departments');
-const testimonialRoutes = require('./routes/testimonials');
-const notificationRoutes = require('./routes/notifications');
-const bedRoutes = require('./routes/beds');
-const staffRoutes = require('./routes/staff');
-const reportsRoutes = require('./routes/reports');
-// const adminRoutes = require('./routes/admin'); // Commented out - file doesn't exist
+connectDB();
 
-// ============================================
-// INITIALIZE APP
-// ============================================
 const app = express();
 
 // ============================================
-// CORS CONFIGURATION
+// TRUST PROXY - COMMENT THIS OUT FOR RENDER
+// ============================================
+// app.set('trust proxy', 1); // ← COMMENT THIS OUT
+
+// ============================================
+// SECURITY MIDDLEWARE
+// ============================================
+app.use(helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+    crossOriginEmbedderPolicy: false,
+}));
+
+// ============================================
+// CORS CONFIGURATION - UPDATED FOR YOUR VERCEL
 // ============================================
 const corsOptions = {
     origin: function (origin, callback) {
+        // Allow requests with no origin
         if (!origin) return callback(null, true);
 
         const allowedOrigins = [
@@ -69,128 +68,122 @@ const corsOptions = {
         }
     },
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-    allowedHeaders: [
-        'Content-Type',
-        'Authorization',
-        'X-Requested-With',
-        'Accept',
-        'Origin',
-        'Access-Control-Allow-Origin',
-        'Access-Control-Allow-Headers',
-        'Access-Control-Allow-Methods'
-    ],
-    maxAge: 86400
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
+    exposedHeaders: ['X-Total-Count'],
+    maxAge: 86400,
 };
 
 app.use(cors(corsOptions));
+
+// Handle preflight
 app.options('*', cors(corsOptions));
 
 // ============================================
-// EXTRA CORS HEADERS
+// RATE LIMITING - FIXED IP DETECTION
 // ============================================
-app.use((req, res, next) => {
-    const origin = req.headers.origin;
-    if (origin) {
-        res.header('Access-Control-Allow-Origin', origin);
-    }
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept, Origin');
-    
-    if (req.method === 'OPTIONS') {
-        return res.sendStatus(200);
-    }
-    next();
+const generalLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 100,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: {
+        success: false,
+        message: 'Too many requests, please try again later.',
+    },
+    keyGenerator: (req) => {
+        return req.headers['x-forwarded-for'] || req.ip || 'unknown';
+    },
 });
 
-// ============================================
-// MIDDLEWARE
-// ============================================
-app.use(helmet({
-    crossOriginResourcePolicy: { policy: "cross-origin" },
-    crossOriginOpenerPolicy: { policy: "unsafe-none" },
-}));
+const authLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 5,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: {
+        success: false,
+        message: 'Too many login attempts, please try again after 15 minutes.',
+    },
+    keyGenerator: (req) => {
+        return req.headers['x-forwarded-for'] || req.ip || 'unknown';
+    },
+});
 
-// Logging
-if (process.env.NODE_ENV === 'development') {
-    app.use(morgan('dev'));
-} else {
-    app.use(morgan('combined'));
-}
+// Apply rate limiting
+app.use('/api', generalLimiter);
+app.use('/api/auth/login', authLimiter);
+app.use('/api/auth/register', authLimiter);
+app.use('/api/auth/forgot-password', authLimiter);
+app.use('/api/auth/reset-password', authLimiter);
 
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ extended: true, limit: '50mb' }));
+// ============================================
+// BODY PARSER
+// ============================================
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// ============================================
+// STATIC FILES
+// ============================================
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // ============================================
 // REQUEST LOGGING
 // ============================================
-app.use((req, res, next) => {
-    console.log(`📨 ${req.method} ${req.url}`);
-    next();
-});
+if (process.env.NODE_ENV === 'development') {
+    app.use((req, res, next) => {
+        console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
+        next();
+    });
+}
+
+// ============================================
+// SEED STAFF ON SERVER START
+// ============================================
+(async function initStaff() {
+    try {
+        console.log('🔄 Checking staff database...');
+        await seedStaff();
+        console.log('✅ Staff seeding complete!');
+    } catch (error) {
+        console.error('❌ Staff seeding error:', error.message);
+    }
+})();
 
 // ============================================
 // API ROUTES
 // ============================================
-const API_PREFIX = '/api';
+const routes = require('./routes');
+app.use('/api', routes);
 
-// Public routes
-app.use(`${API_PREFIX}/auth`, authRoutes);
-app.use(`${API_PREFIX}/testimonials`, testimonialRoutes);
-app.use(`${API_PREFIX}/appointments`, appointmentRoutes);
-
-// Protected routes
-app.use(`${API_PREFIX}/patients`, patientRoutes);
-app.use(`${API_PREFIX}/doctors`, doctorRoutes);
-app.use(`${API_PREFIX}/pharmacy`, pharmacyRoutes);
-app.use(`${API_PREFIX}/laboratory`, laboratoryRoutes);
-app.use(`${API_PREFIX}/billing`, billingRoutes);
-app.use(`${API_PREFIX}/departments`, departmentRoutes);
-app.use(`${API_PREFIX}/notifications`, notificationRoutes);
-app.use(`${API_PREFIX}/beds`, bedRoutes);
-app.use(`${API_PREFIX}/staff`, staffRoutes);
-app.use(`${API_PREFIX}/reports`, reportsRoutes);
-// app.use(`${API_PREFIX}/admin`, adminRoutes); // Commented out - file doesn't exist
+// ============================================
+// ROOT ENDPOINT
+// ============================================
+app.get('/', (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: 'Gimbie Adventist General Hospital API',
+        version: '1.0.0',
+        status: 'Online',
+        timestamp: new Date().toISOString(),
+    });
+});
 
 // ============================================
 // HEALTH CHECK
 // ============================================
-app.get('/health', (req, res) => {
+app.get('/api/health', (req, res) => {
     res.status(200).json({
+        success: true,
         status: 'OK',
         timestamp: new Date().toISOString(),
         uptime: process.uptime(),
-        environment: process.env.NODE_ENV,
-        mongodb: mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected'
-    });
-});
-
-app.get('/api/health', (req, res) => {
-    res.status(200).json({
-        status: 'OK',
-        message: 'API is running',
-        timestamp: new Date().toISOString(),
-        cors: 'Enabled'
-    });
-});
-
-// ============================================
-// ROOT ROUTE
-// ============================================
-app.get('/', (req, res) => {
-    res.status(200).json({
-        name: 'Gimbie Adventist General Hospital API',
-        version: '1.0.0',
-        status: 'Running',
+        memory: process.memoryUsage(),
         environment: process.env.NODE_ENV || 'development',
-        endpoints: {
-            health: '/health',
-            api: '/api',
-            auth: '/api/auth',
-            appointments: '/api/appointments'
-        }
+        hospital: 'Gimbie Adventist General Hospital',
+        version: '1.0.0',
+        database: mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected',
     });
 });
 
@@ -200,81 +193,70 @@ app.get('/', (req, res) => {
 app.use((req, res) => {
     res.status(404).json({
         success: false,
-        message: `Route not found: ${req.method} ${req.url}`
+        message: `Route not found: ${req.method} ${req.originalUrl}`,
     });
 });
 
 // ============================================
-// ERROR HANDLER
+// GLOBAL ERROR HANDLER
 // ============================================
 app.use((err, req, res, next) => {
-    console.error('❌ Error:', err.message);
+    console.error('❌ ERROR:', err.message);
     
-    if (err.name === 'ValidationError') {
-        return res.status(400).json({
-            success: false,
-            message: 'Validation Error',
-            errors: Object.values(err.errors).map(e => e.message)
-        });
-    }
-
     if (err.code === 11000) {
         const field = Object.keys(err.keyPattern)[0];
         return res.status(400).json({
             success: false,
-            message: `Duplicate value for ${field}`
+            message: `Duplicate value for ${field}`,
         });
     }
 
-    if (err.name === 'JsonWebTokenError') {
-        return res.status(401).json({
+    if (err.name === 'ValidationError') {
+        const messages = Object.values(err.errors).map(e => e.message);
+        return res.status(400).json({
             success: false,
-            message: 'Invalid token. Please login again.'
+            message: 'Validation error',
+            errors: messages,
         });
     }
 
-    if (err.name === 'TokenExpiredError') {
+    if (err.name === 'JsonWebTokenError' || err.name === 'TokenExpiredError') {
         return res.status(401).json({
             success: false,
-            message: 'Token expired. Please login again.'
+            message: 'Invalid or expired token. Please login again.',
         });
     }
 
     res.status(err.status || 500).json({
         success: false,
-        message: err.message || 'Internal Server Error'
+        message: err.message || 'Internal server error',
     });
 });
-
-// ============================================
-// DATABASE CONNECTION
-// ============================================
-const connectDB = async () => {
-    try {
-        const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/gimbie_hospital');
-        console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
-    } catch (error) {
-        console.error('❌ MongoDB connection error:', error.message);
-    }
-};
 
 // ============================================
 // START SERVER
 // ============================================
 const PORT = process.env.PORT || 5000;
 
-const startServer = async () => {
-    await connectDB();
-    
-    app.listen(PORT, () => {
-        console.log('='.repeat(60));
-        console.log(`🚀 Server running on port ${PORT}`);
-        console.log(`🌐 Environment: ${process.env.NODE_ENV || 'development'}`);
-        console.log(`📡 API: http://localhost:${PORT}/api`);
-        console.log('='.repeat(60));
+const server = app.listen(PORT, () => {
+    console.log('========================================');
+    console.log('🚀 SERVER STARTED SUCCESSFULLY');
+    console.log('========================================');
+    console.log(`📍 Port: ${PORT}`);
+    console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`🔗 API URL: https://alpha-af1q.onrender.com`);
+    console.log(`❤️ Health: https://alpha-af1q.onrender.com/api/health`);
+    console.log('========================================');
+});
+
+// Graceful shutdown
+process.on('SIGTERM', () => {
+    console.log('📴 SIGTERM received. Shutting down...');
+    server.close(() => {
+        mongoose.connection.close(false, () => {
+            process.exit(0);
+        });
     });
-};
+});
 
-startServer();
-
-module.exports = { app };
+module.exports = { app, server };
