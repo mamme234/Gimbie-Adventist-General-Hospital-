@@ -6,28 +6,27 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
 const path = require('path');
-const fs = require('fs');
 
 // Load environment variables
 dotenv.config();
 
 // ============================================
-// IMPORT ROUTES
+// IMPORT ROUTES - FIXED FOR YOUR FILE NAMES
 // ============================================
-const authRoutes = require('./routes/authRoutes');
-const patientRoutes = require('./routes/patientRoutes');
-const doctorRoutes = require('./routes/doctorRoutes');
-const appointmentRoutes = require('./routes/appointmentRoutes');
-const pharmacyRoutes = require('./routes/pharmacyRoutes');
-const laboratoryRoutes = require('./routes/laboratoryRoutes');
-const billingRoutes = require('./routes/billingRoutes');
-const departmentRoutes = require('./routes/departmentRoutes');
-const testimonialRoutes = require('./routes/testimonialRoutes');
-const notificationRoutes = require('./routes/notificationRoutes');
-const bedRoutes = require('./routes/bedRoutes');
-const staffRoutes = require('./routes/staffRoutes');
-const reportsRoutes = require('./routes/reportsRoutes');
-const adminRoutes = require('./routes/adminRoutes');
+const authRoutes = require('./routes/auth');
+const patientRoutes = require('./routes/patients');
+const doctorRoutes = require('./routes/doctors');
+const appointmentRoutes = require('./routes/appointments');
+const pharmacyRoutes = require('./routes/pharmacy');
+const laboratoryRoutes = require('./routes/laboratory');
+const billingRoutes = require('./routes/billing');
+const departmentRoutes = require('./routes/departments');
+const testimonialRoutes = require('./routes/testimonials');
+const notificationRoutes = require('./routes/notifications');
+const bedRoutes = require('./routes/beds');
+const staffRoutes = require('./routes/staff');
+const reportsRoutes = require('./routes/reports');
+const adminRoutes = require('./routes/admin');
 
 // ============================================
 // INITIALIZE APP
@@ -35,48 +34,30 @@ const adminRoutes = require('./routes/adminRoutes');
 const app = express();
 
 // ============================================
-// CORS CONFIGURATION - FIXED FOR VERCEL
+// CORS CONFIGURATION
 // ============================================
 const corsOptions = {
     origin: function (origin, callback) {
-        // Allow requests with no origin (like mobile apps or curl)
         if (!origin) return callback(null, true);
 
-        // List of allowed origins
         const allowedOrigins = [
-            // Local development
             'http://localhost:3000',
             'http://localhost:5000',
             'http://127.0.0.1:3000',
             'http://127.0.0.1:5000',
-            
-            // Vercel deployments
             'https://gimbie-hospital.vercel.app',
-            'https://gimbie-adventist-general-hospital.vercel.app', // ← YOUR VERCEL URL
+            'https://gimbie-adventist-general-hospital.vercel.app',
             'https://gimbie-adventist-hospital.vercel.app',
-            
-            // Netlify deployments
             'https://gimbie-hospital.netlify.app',
-            
-            // Custom domains
             'https://gimbieadventist.com',
             'https://www.gimbieadventist.com',
-            
-            // Allow all Render.com subdomains (backend)
             /\.onrender\.com$/,
-            
-            // Allow all Vercel subdomains (for preview deployments)
             /\.vercel\.app$/,
         ];
 
-        // Check if origin is allowed
         const isAllowed = allowedOrigins.some(allowed => {
-            if (typeof allowed === 'string') {
-                return origin === allowed;
-            }
-            if (allowed instanceof RegExp) {
-                return allowed.test(origin);
-            }
+            if (typeof allowed === 'string') return origin === allowed;
+            if (allowed instanceof RegExp) return allowed.test(origin);
             return false;
         });
 
@@ -99,21 +80,16 @@ const corsOptions = {
         'Access-Control-Allow-Headers',
         'Access-Control-Allow-Methods'
     ],
-    exposedHeaders: ['Content-Range', 'X-Content-Range'],
-    maxAge: 86400 // 24 hours
+    maxAge: 86400
 };
 
-// Apply CORS middleware
 app.use(cors(corsOptions));
-
-// Handle preflight requests explicitly
 app.options('*', cors(corsOptions));
 
 // ============================================
-// ADDITIONAL CORS HEADERS (Fallback)
+// EXTRA CORS HEADERS
 // ============================================
 app.use((req, res, next) => {
-    // Set CORS headers for all responses
     const origin = req.headers.origin;
     if (origin) {
         res.header('Access-Control-Allow-Origin', origin);
@@ -122,7 +98,6 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept, Origin');
     
-    // Handle preflight requests
     if (req.method === 'OPTIONS') {
         return res.sendStatus(200);
     }
@@ -132,7 +107,6 @@ app.use((req, res, next) => {
 // ============================================
 // MIDDLEWARE
 // ============================================
-// Security headers
 app.use(helmet({
     crossOriginResourcePolicy: { policy: "cross-origin" },
     crossOriginOpenerPolicy: { policy: "unsafe-none" },
@@ -145,11 +119,8 @@ if (process.env.NODE_ENV === 'development') {
     app.use(morgan('combined'));
 }
 
-// Body parsing
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
-
-// Static files
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // ============================================
@@ -157,9 +128,6 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // ============================================
 app.use((req, res, next) => {
     console.log(`📨 ${req.method} ${req.url}`);
-    if (req.method === 'POST' || req.method === 'PUT') {
-        console.log('📦 Body:', JSON.stringify(req.body).substring(0, 200));
-    }
     next();
 });
 
@@ -195,8 +163,6 @@ app.get('/health', (req, res) => {
         timestamp: new Date().toISOString(),
         uptime: process.uptime(),
         environment: process.env.NODE_ENV,
-        memory: process.memoryUsage(),
-        version: process.version,
         mongodb: mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected'
     });
 });
@@ -206,18 +172,12 @@ app.get('/api/health', (req, res) => {
         status: 'OK',
         message: 'API is running',
         timestamp: new Date().toISOString(),
-        cors: 'Enabled',
-        allowedOrigins: [
-            'http://localhost:3000',
-            'https://gimbie-adventist-general-hospital.vercel.app',
-            '*.vercel.app',
-            '*.onrender.com'
-        ]
+        cors: 'Enabled'
     });
 });
 
 // ============================================
-// ROOT ROUTE
+= ROOT ROUTE
 // ============================================
 app.get('/', (req, res) => {
     res.status(200).json({
@@ -229,11 +189,8 @@ app.get('/', (req, res) => {
             health: '/health',
             api: '/api',
             auth: '/api/auth',
-            appointments: '/api/appointments',
-            patients: '/api/patients',
-            doctors: '/api/doctors'
-        },
-        documentation: 'https://github.com/your-repo/hospital-api'
+            appointments: '/api/appointments'
+        }
     });
 });
 
@@ -241,57 +198,34 @@ app.get('/', (req, res) => {
 // 404 HANDLER
 // ============================================
 app.use((req, res) => {
-    console.log(`❌ 404 Not Found: ${req.method} ${req.url}`);
     res.status(404).json({
         success: false,
-        message: `Route not found: ${req.method} ${req.url}`,
-        availableRoutes: [
-            '/api/auth',
-            '/api/patients',
-            '/api/doctors',
-            '/api/appointments',
-            '/api/pharmacy',
-            '/api/laboratory',
-            '/api/billing',
-            '/api/departments',
-            '/api/testimonials',
-            '/api/notifications',
-            '/api/beds',
-            '/api/staff',
-            '/api/reports',
-            '/api/admin'
-        ]
+        message: `Route not found: ${req.method} ${req.url}`
     });
 });
 
 // ============================================
-// GLOBAL ERROR HANDLER
+// ERROR HANDLER
 // ============================================
 app.use((err, req, res, next) => {
-    console.error('❌ Global error:', err.message);
-    console.error('📚 Stack:', err.stack);
-
-    // Mongoose validation error
+    console.error('❌ Error:', err.message);
+    
     if (err.name === 'ValidationError') {
-        const messages = Object.values(err.errors).map(e => e.message);
         return res.status(400).json({
             success: false,
             message: 'Validation Error',
-            errors: messages
+            errors: Object.values(err.errors).map(e => e.message)
         });
     }
 
-    // Mongoose duplicate key error
     if (err.code === 11000) {
         const field = Object.keys(err.keyPattern)[0];
         return res.status(400).json({
             success: false,
-            message: `Duplicate value for ${field}. Please use a different value.`,
-            field: field
+            message: `Duplicate value for ${field}`
         });
     }
 
-    // JWT error
     if (err.name === 'JsonWebTokenError') {
         return res.status(401).json({
             success: false,
@@ -306,19 +240,9 @@ app.use((err, req, res, next) => {
         });
     }
 
-    // CORS error
-    if (err.message && err.message.includes('CORS')) {
-        return res.status(403).json({
-            success: false,
-            message: 'CORS error: ' + err.message
-        });
-    }
-
-    // Default error
     res.status(err.status || 500).json({
         success: false,
-        message: err.message || 'Internal Server Error',
-        ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
+        message: err.message || 'Internal Server Error'
     });
 });
 
@@ -327,28 +251,10 @@ app.use((err, req, res, next) => {
 // ============================================
 const connectDB = async () => {
     try {
-        const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/gimbie_hospital', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            serverSelectionTimeoutMS: 5000,
-            socketTimeoutMS: 45000,
-        });
+        const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/gimbie_hospital');
         console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
-        console.log(`📊 Database: ${conn.connection.name}`);
-        console.log(`🔗 Connection string: ${process.env.MONGODB_URI ? 'Using environment variable' : 'Using default localhost'}`);
-        
-        // Log collections
-        try {
-            const collections = await conn.connection.db.listCollections().toArray();
-            console.log(`📁 Collections (${collections.length}):`, collections.map(c => c.name).join(', '));
-        } catch (e) {
-            console.log('⚠️ Could not list collections');
-        }
-        
     } catch (error) {
         console.error('❌ MongoDB connection error:', error.message);
-        console.log('⚠️ Continuing without database...');
-        // Don't exit process, keep running for API testing
     }
 };
 
@@ -358,68 +264,17 @@ const connectDB = async () => {
 const PORT = process.env.PORT || 5000;
 
 const startServer = async () => {
-    // Connect to database
     await connectDB();
-
-    // Start listening
-    const server = app.listen(PORT, () => {
+    
+    app.listen(PORT, () => {
         console.log('='.repeat(60));
-        console.log(`🚀 Gimbie Adventist Hospital API`);
-        console.log(`📡 Running on: http://localhost:${PORT}`);
+        console.log(`🚀 Server running on port ${PORT}`);
         console.log(`🌐 Environment: ${process.env.NODE_ENV || 'development'}`);
-        console.log(`📅 Started at: ${new Date().toISOString()}`);
+        console.log(`📡 API: http://localhost:${PORT}/api`);
         console.log('='.repeat(60));
-        console.log(`📖 Health check: http://localhost:${PORT}/health`);
-        console.log(`📖 API root: http://localhost:${PORT}/api`);
-        console.log(`📖 Auth: http://localhost:${PORT}/api/auth`);
-        console.log(`📖 Appointments: http://localhost:${PORT}/api/appointments`);
-        console.log('='.repeat(60));
-        console.log('✅ CORS enabled for:');
-        console.log('   - localhost:*');
-        console.log('   - gimbie-adventist-general-hospital.vercel.app');
-        console.log('   - *.vercel.app');
-        console.log('   - *.onrender.com');
-        console.log('='.repeat(60));
-        console.log('✅ Server is ready!');
     });
-
-    // Graceful shutdown
-    const shutdown = async () => {
-        console.log('\n🛑 Received shutdown signal');
-        server.close(async () => {
-            console.log('📡 HTTP server closed');
-            await mongoose.connection.close();
-            console.log('📊 Database connection closed');
-            process.exit(0);
-        });
-    };
-
-    process.on('SIGTERM', shutdown);
-    process.on('SIGINT', shutdown);
-
-    return server;
 };
 
-// ============================================
-// HANDLE UNCAUGHT EXCEPTIONS
-// ============================================
-process.on('uncaughtException', (error) => {
-    console.error('💥 Uncaught Exception:', error.message);
-    console.error('📚 Stack:', error.stack);
-    // Don't exit, just log
-});
-
-process.on('unhandledRejection', (reason, promise) => {
-    console.error('💥 Unhandled Rejection at:', promise);
-    console.error('📚 Reason:', reason);
-});
-
-// ============================================
-// START THE APP
-// ============================================
 startServer();
 
-// ============================================
-// EXPORT FOR TESTING
-// ============================================
-module.exports = { app, startServer };
+module.exports = { app };
