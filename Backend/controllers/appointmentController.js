@@ -7,15 +7,27 @@ const Notification = require('../models/Notification');
 const { generateAppointmentId, generatePatientId, generateNotificationId } = require('../utils/generateId');
 
 // ============================================
-// BOOK APPOINTMENT (PUBLIC)
+// BOOK APPOINTMENT (PUBLIC) - FIXED
 // ============================================
 exports.bookAppointment = async (req, res) => {
     try {
-        const { patientName, patientEmail, patientPhone, department, doctor, date, time, type, symptoms } = req.body;
+        const { 
+            patientName, 
+            patientEmail, 
+            patientPhone, 
+            department, 
+            doctor,           // Now handles doctor name or ID
+            date, 
+            time, 
+            type, 
+            symptoms 
+        } = req.body;
 
-        console.log('Booking appointment for:', patientEmail);
+        console.log('📋 Booking appointment for:', patientEmail);
+        console.log('📋 Department:', department);
+        console.log('📋 Doctor:', doctor);
 
-        // Validation
+        // ===== VALIDATION =====
         if (!patientName || !patientEmail || !patientPhone || !department || !date || !time) {
             return res.status(400).json({
                 success: false,
@@ -23,12 +35,12 @@ exports.bookAppointment = async (req, res) => {
             });
         }
 
-        // Check if patient exists
+        // ===== FIND OR CREATE PATIENT =====
         let user = await User.findOne({ email: patientEmail.toLowerCase() });
         let patient;
 
         if (!user) {
-            // Create user
+            // Create new user
             user = await User.create({
                 fullName: patientName,
                 email: patientEmail.toLowerCase(),
@@ -49,7 +61,7 @@ exports.bookAppointment = async (req, res) => {
                 status: 'Active'
             });
 
-            console.log('New patient created:', patient.patientId);
+            console.log('✅ New patient created:', patient.patientId);
         } else {
             // Check if patient profile exists
             patient = await Patient.findOne({ userId: user._id });
@@ -63,23 +75,67 @@ exports.bookAppointment = async (req, res) => {
                     registeredBy: user._id,
                     status: 'Active'
                 });
+                console.log('✅ Patient profile created for existing user');
             }
         }
 
-        // Find or create a default doctor
-        let doctorDoc = await Doctor.findOne({ specialty: department });
+        // ===== FIND OR CREATE DOCTOR =====
+        let doctorDoc = null;
+
+        // 1. Try to find by doctor ID (if provided)
+        if (doctor && doctor.match(/^[0-9a-fA-F]{24}$/)) {
+            doctorDoc = await Doctor.findById(doctor);
+        }
+
+        // 2. Try to find by doctor name
+        if (!doctorDoc && doctor) {
+            // Find a user with this name and role 'doctor'
+            const doctorUser = await User.findOne({ 
+                fullName: { $regex: doctor, $options: 'i' },
+                role: 'doctor'
+            });
+            if (doctorUser) {
+                doctorDoc = await Doctor.findOne({ userId: doctorUser._id });
+            }
+        }
+
+        // 3. Try to find by department
         if (!doctorDoc) {
+            doctorDoc = await Doctor.findOne({ 
+                department: { $regex: department, $options: 'i' },
+                isAvailable: true
+            });
+        }
+
+        // 4. Create default doctor if none exists
+        if (!doctorDoc) {
+            // Find an existing doctor user to assign
+            let doctorUser = await User.findOne({ role: 'doctor' });
+            
+            // If no doctor exists, create a default doctor user
+            if (!doctorUser) {
+                doctorUser = await User.create({
+                    fullName: `Dr. ${department} Specialist`,
+                    email: `doctor.${department.toLowerCase().replace(/\s/g, '')}@gimbiehospital.com`,
+                    password: 'Doctor123456',
+                    phone: '+251911111111',
+                    role: 'doctor',
+                    isActive: true
+                });
+                console.log('✅ Created default doctor user:', doctorUser.fullName);
+            }
+
             doctorDoc = await Doctor.create({
-                userId: user._id,
+                userId: doctorUser._id,
                 specialty: department,
                 licenseNumber: `LIC-${Date.now()}`,
                 department: department,
                 isAvailable: true
             });
-            console.log('Default doctor created for:', department);
+            console.log('✅ Created default doctor for department:', department);
         }
 
-        // Create appointment
+        // ===== CREATE APPOINTMENT =====
         const appointment = await Appointment.create({
             appointmentId: generateAppointmentId(),
             patient: patient._id,
@@ -94,9 +150,9 @@ exports.bookAppointment = async (req, res) => {
             createdBy: user._id
         });
 
-        console.log('Appointment created:', appointment.appointmentId);
+        console.log('✅ Appointment created:', appointment.appointmentId);
 
-        // Create notification
+        // ===== CREATE NOTIFICATION =====
         await Notification.create({
             notificationId: generateNotificationId(),
             recipient: user._id,
@@ -110,14 +166,23 @@ exports.bookAppointment = async (req, res) => {
         res.status(201).json({
             success: true,
             message: 'Appointment booked successfully',
-            data: appointment
+            data: {
+                appointmentId: appointment.appointmentId,
+                patientName: patient.fullName,
+                doctorName: doctorDoc.fullName || 'Doctor assigned',
+                department: department,
+                date: date,
+                time: time,
+                status: appointment.status
+            }
         });
 
     } catch (error) {
-        console.error('Book appointment error:', error);
+        console.error('❌ Book appointment error:', error);
         res.status(500).json({
             success: false,
-            message: error.message,
+            message: error.message || 'Failed to book appointment',
+            error: process.env.NODE_ENV === 'development' ? error.stack : undefined
         });
     }
 };
