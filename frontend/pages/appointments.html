@@ -20,32 +20,27 @@
             border-radius: 16px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.1);
         }
-
         .booking-container h2 {
             font-size: 1.8rem;
             font-weight: 700;
             margin-bottom: 8px;
             color: #1a1a2e;
         }
-
         .booking-container .subtitle {
             color: #4a5568;
             margin-bottom: 28px;
         }
-
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
         }
-
         .btn--full {
             width: 100%;
             padding: 14px;
             font-size: 1rem;
             border-radius: 50px;
         }
-
         .toast {
             position: fixed;
             top: 90px;
@@ -59,20 +54,16 @@
             max-width: 400px;
             animation: slideIn 0.3s ease;
         }
-
         .toast-success { background: #0f5c2e; }
         .toast-error { background: #c62828; }
-
         @keyframes slideIn {
             from { transform: translateX(100%); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
         }
-
         @keyframes slideOut {
             from { transform: translateX(0); opacity: 1; }
             to { transform: translateX(100%); opacity: 0; }
         }
-
         .loading-spinner {
             display: none;
             width: 20px;
@@ -83,22 +74,13 @@
             animation: spin 0.6s linear infinite;
             margin: 0 auto;
         }
-
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
-
         @media (max-width: 600px) {
-            .booking-container {
-                padding: 24px;
-                margin: 100px 16px 40px;
-            }
-            .form-row {
-                grid-template-columns: 1fr;
-            }
+            .booking-container { padding: 24px; margin: 100px 16px 40px; }
+            .form-row { grid-template-columns: 1fr; }
         }
-
-        /* Login required message */
         .login-required {
             background: #fff3e0;
             border: 1px solid #f57c00;
@@ -109,15 +91,11 @@
             color: #e65100;
             font-size: 0.9rem;
         }
-        .login-required a {
-            color: #0f5c2e;
-            font-weight: 600;
-        }
+        .login-required a { color: #0f5c2e; font-weight: 600; }
     </style>
 </head>
 <body>
 
-<!-- Emergency Banner -->
 <div class="emergency-banner">
     <div class="container">
         <i class="fas fa-phone-alt"></i>
@@ -126,7 +104,6 @@
     </div>
 </div>
 
-<!-- Header -->
 <header class="header" id="header">
     <div class="container header__inner">
         <div class="logo">
@@ -156,25 +133,21 @@
     </div>
 </header>
 
-<!-- Booking Form -->
 <div class="booking-container">
     <h2>Book Appointment</h2>
     <p class="subtitle">Fill in the details below to schedule your visit</p>
 
-    <!-- Login Required Message -->
     <div class="login-required" id="loginRequired">
         <i class="fas fa-exclamation-triangle"></i>
         Please <a href="/pages/login.html">login</a> to book an appointment.
     </div>
 
     <form id="bookingForm">
-        <!-- Patient Name -->
         <div class="form-group">
             <label for="patientName">Full Name</label>
             <input type="text" id="patientName" name="patientName" required placeholder="Enter your full name" />
         </div>
 
-        <!-- Email & Phone -->
         <div class="form-row">
             <div class="form-group">
                 <label for="patientEmail">Email Address</label>
@@ -186,7 +159,6 @@
             </div>
         </div>
 
-        <!-- Department -->
         <div class="form-group">
             <label for="department">Department</label>
             <select id="department" name="department" required>
@@ -208,7 +180,6 @@
             </select>
         </div>
 
-        <!-- Doctor -->
         <div class="form-group">
             <label for="doctor">Preferred Doctor (Optional)</label>
             <select id="doctor" name="doctor">
@@ -225,7 +196,6 @@
             </select>
         </div>
 
-        <!-- Date & Time -->
         <div class="form-row">
             <div class="form-group">
                 <label for="appointmentDate">Date</label>
@@ -237,7 +207,6 @@
             </div>
         </div>
 
-        <!-- Appointment Type -->
         <div class="form-group">
             <label for="appointmentType">Appointment Type</label>
             <select id="appointmentType" name="appointmentType" required>
@@ -248,13 +217,11 @@
             </select>
         </div>
 
-        <!-- Symptoms -->
         <div class="form-group">
             <label for="symptoms">Symptoms / Reason for Visit</label>
             <textarea id="symptoms" name="symptoms" placeholder="Describe your symptoms or reason for visit..."></textarea>
         </div>
 
-        <!-- Submit Button -->
         <button type="submit" class="btn btn--primary btn--full" id="submitBtn">
             <span id="btnText"><i class="fas fa-calendar-check"></i> Book Appointment</span>
             <span id="btnSpinner" class="loading-spinner"></span>
@@ -262,7 +229,6 @@
     </form>
 </div>
 
-<!-- Footer -->
 <footer class="footer">
     <div class="container">
         <div class="footer__bottom">
@@ -271,41 +237,15 @@
     </div>
 </footer>
 
-<script>
-    // ============================================
-    // COMPLETE BOOKING SCRIPT
-    // ============================================
-// pages/appointments.html
-const API_URL = 'https://alpha-af1q.onrender.com/api';
+<script type="module">
+    import API from '/src/js/api.js';
 
-    // ===== DOM ELEMENTS =====
     const bookingForm = document.getElementById('bookingForm');
     const submitBtn = document.getElementById('submitBtn');
     const btnText = document.getElementById('btnText');
     const btnSpinner = document.getElementById('btnSpinner');
     const loginRequired = document.getElementById('loginRequired');
 
-    // ===== GET USER =====
-    function getUser() {
-        try {
-            return JSON.parse(localStorage.getItem('user') || 'null');
-        } catch {
-            return null;
-        }
-    }
-
-    function getToken() {
-        return localStorage.getItem('token');
-    }
-
-    // ===== CHECK AUTH =====
-    function isLoggedIn() {
-        const token = getToken();
-        const user = getUser();
-        return !!(token && user);
-    }
-
-    // ===== SHOW TOAST =====
     function showToast(message, type = 'success') {
         const existing = document.querySelector('.toast');
         if (existing) existing.remove();
@@ -321,7 +261,6 @@ const API_URL = 'https://alpha-af1q.onrender.com/api';
         }, 4000);
     }
 
-    // ===== SET LOADING =====
     function setLoading(loading) {
         if (loading) {
             submitBtn.disabled = true;
@@ -334,9 +273,8 @@ const API_URL = 'https://alpha-af1q.onrender.com/api';
         }
     }
 
-    // ===== AUTO-FILL USER DATA =====
     function autoFillUserData() {
-        const user = getUser();
+        const user = API.getCurrentUser();
         if (user) {
             document.getElementById('patientName').value = user.fullName || '';
             document.getElementById('patientEmail').value = user.email || '';
@@ -344,7 +282,6 @@ const API_URL = 'https://alpha-af1q.onrender.com/api';
         }
     }
 
-    // ===== SET MIN DATE =====
     function setMinDate() {
         const today = new Date();
         const year = today.getFullYear();
@@ -353,12 +290,10 @@ const API_URL = 'https://alpha-af1q.onrender.com/api';
         document.getElementById('appointmentDate').min = `${year}-${month}-${day}`;
     }
 
-    // ===== BOOK APPOINTMENT =====
     async function bookAppointment(e) {
         e.preventDefault();
 
-        // Check login
-        if (!isLoggedIn()) {
+        if (!API.getToken()) {
             loginRequired.style.display = 'block';
             showToast('Please login to book an appointment', 'error');
             setTimeout(() => {
@@ -381,7 +316,6 @@ const API_URL = 'https://alpha-af1q.onrender.com/api';
             symptoms: formData.get('symptoms') || 'Not specified'
         };
 
-        // Validation
         if (!appointmentData.patientName || !appointmentData.patientEmail || 
             !appointmentData.patientPhone || !appointmentData.department || 
             !appointmentData.date || !appointmentData.time) {
@@ -392,17 +326,10 @@ const API_URL = 'https://alpha-af1q.onrender.com/api';
         setLoading(true);
 
         try {
-            const response = await fetch(`${API_URL}/appointments/book`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(appointmentData)
-            });
+            const response = await API.appointments.book(appointmentData);
+            console.log('Booking response:', response);
 
-            const data = await response.json();
-
-            if (response.ok && data.success) {
+            if (response.success) {
                 showToast('✅ Appointment booked successfully!', 'success');
                 bookingForm.reset();
                 autoFillUserData();
@@ -412,7 +339,7 @@ const API_URL = 'https://alpha-af1q.onrender.com/api';
                     window.location.href = '/pages/patient/dashboard.html';
                 }, 2000);
             } else {
-                showToast(data.message || 'Failed to book appointment', 'error');
+                showToast(response.message || 'Failed to book appointment', 'error');
                 setLoading(false);
             }
         } catch (error) {
@@ -422,23 +349,15 @@ const API_URL = 'https://alpha-af1q.onrender.com/api';
         }
     }
 
-    // ===== INIT =====
     document.addEventListener('DOMContentLoaded', function() {
-        // Check login status
-        if (!isLoggedIn()) {
+        if (!API.getToken()) {
             loginRequired.style.display = 'block';
         }
 
-        // Auto-fill user data
         autoFillUserData();
-
-        // Set min date
         setMinDate();
-
-        // Form submit
         bookingForm.addEventListener('submit', bookAppointment);
 
-        // Hamburger menu
         const hamburger = document.getElementById('hamburger');
         const nav = document.getElementById('mainNav');
         if (hamburger && nav) {
