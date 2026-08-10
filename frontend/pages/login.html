@@ -12,59 +12,42 @@
     <link rel="stylesheet" href="/src/css/style.css" />
     <link rel="stylesheet" href="/src/css/responsive.css" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e8edea 100%);
+        .auth-container {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8edea 100%);
         }
-
-        .auth-container {
-            width: 100%;
-            max-width: 420px;
-        }
-
         .auth-card {
             background: #fff;
             border-radius: 16px;
             padding: 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
         }
-
         .auth-card .logo {
             text-align: center;
             margin-bottom: 28px;
         }
-
         .auth-card .logo img {
             height: 56px;
             margin-bottom: 12px;
         }
-
         .auth-card .logo h1 {
             font-size: 1.4rem;
             font-weight: 700;
             color: #1a1a2e;
         }
-
         .auth-card .logo p {
             color: #4a5568;
             font-size: 0.9rem;
         }
-
         .form-group {
             margin-bottom: 14px;
         }
-
         .form-group label {
             display: block;
             font-weight: 500;
@@ -72,7 +55,6 @@
             font-size: 0.85rem;
             color: #1a1a2e;
         }
-
         .form-group input {
             width: 100%;
             padding: 11px 14px;
@@ -83,24 +65,113 @@
             transition: 0.2s ease;
             background: #fff;
         }
-
         .form-group input:focus {
             outline: none;
             border-color: #0f5c2e;
-            box-shadow: 0 0 0 3px rgba(15, 92, 46, 0.1);
+            box-shadow: 0 0 0 3px rgba(15,92,46,0.1);
         }
-
-        .form-group input::placeholder {
-            color: #8a8fa8;
+        .btn--full {
+            width: 100%;
+            justify-content: center;
+            padding: 13px;
+            font-size: 1rem;
+            border-radius: 50px;
         }
-
+        .btn--primary {
+            background: #0f5c2e;
+            color: #fff;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn--primary:hover {
+            background: #0a4522;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(15,92,46,0.25);
+        }
+        .btn--primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .auth-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 12px 0 18px;
+        }
+        .auth-options label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: #4a5568;
+            cursor: pointer;
+        }
+        .auth-options label input[type="checkbox"] {
+            width: 15px;
+            height: 15px;
+            accent-color: #0f5c2e;
+        }
+        .auth-options a {
+            font-size: 0.85rem;
+            color: #0f5c2e;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .auth-options a:hover {
+            text-decoration: underline;
+        }
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-bottom: 14px;
+            display: none;
+            font-size: 0.85rem;
+            align-items: center;
+            gap: 8px;
+        }
+        .error-message.show {
+            display: flex;
+        }
+        .auth-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #4a5568;
+            font-size: 0.9rem;
+        }
+        .auth-footer a {
+            color: #0f5c2e;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        .spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.6s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
         .role-selector {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 6px;
             margin-bottom: 18px;
         }
-
         .role-selector .role-btn {
             padding: 8px 4px;
             border: 2px solid #e8edea;
@@ -113,143 +184,23 @@
             font-weight: 500;
             color: #4a5568;
         }
-
         .role-selector .role-btn i {
             display: block;
             font-size: 1.2rem;
             margin-bottom: 2px;
         }
-
         .role-selector .role-btn:hover {
             border-color: #0f5c2e;
             background: #f8faf9;
         }
-
         .role-selector .role-btn.active {
             border-color: #0f5c2e;
             background: #e8f5e9;
             color: #0f5c2e;
         }
-
-        .btn--full {
-            width: 100%;
-            justify-content: center;
-            padding: 13px;
-            font-size: 1rem;
-            border-radius: 50px;
-        }
-
-        .btn--primary {
-            background: #0f5c2e;
-            color: #fff;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn--primary:hover {
-            background: #0a4522;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(15, 92, 46, 0.25);
-        }
-
-        .btn--primary:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .auth-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 12px 0 18px;
-        }
-
-        .auth-options label {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.85rem;
-            color: #4a5568;
-            cursor: pointer;
-        }
-
-        .auth-options label input[type="checkbox"] {
-            width: 15px;
-            height: 15px;
-            accent-color: #0f5c2e;
-        }
-
-        .auth-options a {
-            font-size: 0.85rem;
-            color: #0f5c2e;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .auth-options a:hover {
-            text-decoration: underline;
-        }
-
-        .error-message {
-            background: #ffebee;
-            color: #c62828;
-            padding: 10px 14px;
-            border-radius: 8px;
-            margin-bottom: 14px;
-            display: none;
-            font-size: 0.85rem;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .error-message.show {
-            display: flex;
-        }
-
-        .auth-footer {
-            text-align: center;
-            margin-top: 20px;
-            color: #4a5568;
-            font-size: 0.9rem;
-        }
-
-        .auth-footer a {
-            color: #0f5c2e;
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        .auth-footer a:hover {
-            text-decoration: underline;
-        }
-
-        .spinner {
-            display: inline-block;
-            width: 18px;
-            height: 18px;
-            border: 2px solid #fff;
-            border-radius: 50%;
-            border-top-color: transparent;
-            animation: spin 0.6s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
         @media (max-width: 480px) {
-            .auth-card {
-                padding: 24px;
-            }
-            .role-selector {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .auth-card { padding: 24px; }
+            .role-selector { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -257,41 +208,33 @@
 
 <div class="auth-container">
     <div class="auth-card">
-        <!-- Logo -->
         <div class="logo">
             <img src="/assets/images/logo.png" alt="Gimbie Adventist General Hospital" />
             <h1>Welcome Back</h1>
             <p>Login to your account</p>
         </div>
 
-        <!-- Error Message -->
         <div class="error-message" id="errorMessage">
             <i class="fas fa-exclamation-circle"></i>
             <span id="errorText">Invalid credentials</span>
         </div>
 
-        <!-- Role Selector -->
         <div class="role-selector" id="roleSelector">
             <div class="role-btn active" data-role="patient">
-                <i class="fas fa-user"></i>
-                Patient
+                <i class="fas fa-user"></i> Patient
             </div>
             <div class="role-btn" data-role="doctor">
-                <i class="fas fa-user-md"></i>
-                Doctor
+                <i class="fas fa-user-md"></i> Doctor
             </div>
             <div class="role-btn" data-role="admin">
-                <i class="fas fa-user-tie"></i>
-                Admin
+                <i class="fas fa-user-tie"></i> Admin
             </div>
             <div class="role-btn" data-role="nurse">
-                <i class="fas fa-user-nurse"></i>
-                Nurse
+                <i class="fas fa-user-nurse"></i> Nurse
             </div>
         </div>
 
-        <!-- Login Form -->
-        <form id="loginForm" novalidate>
+        <form id="loginForm">
             <div class="form-group">
                 <label for="email">Email Address</label>
                 <input type="email" id="email" name="email" required placeholder="Enter your email" autocomplete="email" />
@@ -320,217 +263,153 @@
 </div>
 
 <script>
-    (function() {
-        'use strict';
+    // ============================================
+    // LOGIN - COMPLETE WORKING CODE
+    // ============================================
 
-        // ===== DOM ELEMENTS =====
-        const loginForm = document.getElementById('loginForm');
-        const emailInput = document.getElementById('email');
-        const passwordInput = document.getElementById('password');
-        const loginBtn = document.getElementById('loginBtn');
-        const errorMessage = document.getElementById('errorMessage');
-        const errorText = document.getElementById('errorText');
-        const roleBtns = document.querySelectorAll('.role-btn');
-        const rememberMe = document.getElementById('rememberMe');
+    const API_URL = 'https://alpha-af1q.onrender.com/api';
 
-        // ===== API BASE URL =====
-        const API_URL = 'https://alpha-af1q.onrender.com/api';
+    // ===== DOM ELEMENTS =====
+    const loginForm = document.getElementById('loginForm');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const loginBtn = document.getElementById('loginBtn');
+    const errorMessage = document.getElementById('errorMessage');
+    const errorText = document.getElementById('errorText');
+    const roleBtns = document.querySelectorAll('.role-btn');
+    const rememberMe = document.getElementById('rememberMe');
 
-        // ===== STATE =====
-        let selectedRole = 'patient';
-        let isLoading = false;
+    // ===== ROLE REDIRECT MAP =====
+    const ROLE_REDIRECT = {
+        'super_admin': '/pages/admin/dashboard.html',
+        'admin': '/pages/admin/dashboard.html',
+        'doctor': '/pages/doctor/dashboard.html',
+        'nurse': '/pages/nurse/dashboard.html',
+        'pharmacist': '/pages/pharmacy/dashboard.html',
+        'lab_technician': '/pages/laboratory/dashboard.html',
+        'radiologist': '/pages/radiology/dashboard.html',
+        'patient': '/pages/patient/dashboard.html'
+    };
 
-        // ===== ROLE REDIRECT MAP =====
-        const ROLE_REDIRECT = {
-            'super_admin': '/pages/admin/dashboard.html',
-            'admin': '/pages/admin/dashboard.html',
-            'doctor': '/pages/doctor/dashboard.html',
-            'nurse': '/pages/nurse/dashboard.html',
-            'pharmacist': '/pages/pharmacy/dashboard.html',
-            'lab_technician': '/pages/laboratory/dashboard.html',
-            'radiologist': '/pages/radiology/dashboard.html',
-            'accountant': '/pages/admin/billing.html',
-            'receptionist': '/pages/admin/appointments.html',
-            'patient': '/pages/patient/dashboard.html'
-        };
-
-        // ===== CHECK IF ALREADY LOGGED IN =====
-        function checkAuth() {
-            const token = localStorage.getItem('token');
-            const user = JSON.parse(localStorage.getItem('user') || 'null');
-            
-            if (token && user) {
-                const redirect = ROLE_REDIRECT[user.role] || '/';
-                window.location.href = redirect;
-                return true;
-            }
-            return false;
-        }
-
-        // ===== SHOW ERROR =====
-        function showError(message) {
-            errorText.textContent = message;
-            errorMessage.classList.add('show');
-            setTimeout(() => {
-                errorMessage.classList.remove('show');
-            }, 5000);
-        }
-
-        // ===== HIDE ERROR =====
-        function hideError() {
+    // ===== SHOW ERROR =====
+    function showError(message) {
+        errorText.textContent = message;
+        errorMessage.classList.add('show');
+        setTimeout(() => {
             errorMessage.classList.remove('show');
+        }, 5000);
+    }
+
+    // ===== SET LOADING =====
+    function setLoading(loading) {
+        if (loading) {
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = '<span class="spinner"></span> Logging in...';
+        } else {
+            loginBtn.disabled = false;
+            loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+        }
+    }
+
+    // ===== HANDLE LOGIN =====
+    async function handleLogin(e) {
+        e.preventDefault();
+        errorMessage.classList.remove('show');
+
+        const email = emailInput.value.trim();
+        const password = passwordInput.value.trim();
+
+        if (!email || !password) {
+            showError('Please enter your email and password');
+            return;
         }
 
-        // ===== SET LOADING STATE =====
-        function setLoading(loading) {
-            isLoading = loading;
-            if (loading) {
-                loginBtn.disabled = true;
-                loginBtn.innerHTML = '<span class="spinner"></span> Logging in...';
-            } else {
-                loginBtn.disabled = false;
-                loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
-            }
-        }
+        setLoading(true);
 
-        // ===== HANDLE LOGIN =====
-        async function handleLogin(e) {
-            e.preventDefault();
-            hideError();
+        try {
+            console.log('Attempting login to:', `${API_URL}/auth/login`);
+            console.log('Email:', email);
 
-            const email = emailInput.value.trim();
-            const password = passwordInput.value.trim();
-
-            // Validation
-            if (!email) {
-                showError('Please enter your email address');
-                emailInput.focus();
-                return;
-            }
-
-            if (!password) {
-                showError('Please enter your password');
-                passwordInput.focus();
-                return;
-            }
-
-            if (password.length < 6) {
-                showError('Password must be at least 6 characters');
-                passwordInput.focus();
-                return;
-            }
-
-            setLoading(true);
-
-            try {
-                const response = await fetch(`${API_URL}/auth/login`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        email: email,
-                        password: password
-                    })
-                });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(data.message || 'Login failed');
-                }
-
-                if (data.success && data.token) {
-                    // Save token and user
-                    localStorage.setItem('token', data.token);
-                    localStorage.setItem('user', JSON.stringify(data.user));
-
-                    if (rememberMe.checked) {
-                        localStorage.setItem('rememberMe', 'true');
-                    } else {
-                        localStorage.removeItem('rememberMe');
-                    }
-
-                    // Redirect based on role
-                    const redirect = ROLE_REDIRECT[data.user.role] || '/';
-                    window.location.href = redirect;
-                } else {
-                    throw new Error(data.message || 'Invalid credentials');
-                }
-
-            } catch (error) {
-                console.error('Login error:', error);
-                showError(error.message || 'Invalid email or password. Please try again.');
-                setLoading(false);
-            }
-        }
-
-        // ===== ROLE SELECTOR =====
-        roleBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                roleBtns.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                selectedRole = this.dataset.role;
-                
-                // Clear any errors
-                hideError();
-                
-                // Clear previous credentials
-                emailInput.value = '';
-                passwordInput.value = '';
-                
-                // Focus on email
-                emailInput.focus();
+            const response = await fetch(`${API_URL}/auth/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
             });
-        });
 
-        // ===== REMEMBER ME =====
-        function loadRemembered() {
-            const remembered = localStorage.getItem('rememberMe');
-            if (remembered === 'true') {
-                rememberMe.checked = true;
-                const savedEmail = localStorage.getItem('savedEmail');
-                if (savedEmail) {
-                    emailInput.value = savedEmail;
+            const data = await response.json();
+            console.log('Login response:', data);
+
+            if (!response.ok) {
+                throw new Error(data.message || 'Login failed');
+            }
+
+            if (data.success && data.token) {
+                // Save user data
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+
+                if (rememberMe.checked) {
+                    localStorage.setItem('rememberMe', 'true');
+                    localStorage.setItem('savedEmail', email);
                 }
-            }
-        }
 
-        // ===== SAVE EMAIL IF REMEMBERED =====
-        function saveEmail() {
-            if (rememberMe.checked) {
-                localStorage.setItem('savedEmail', emailInput.value);
+                // Redirect based on role
+                const redirect = ROLE_REDIRECT[data.user.role] || '/';
+                window.location.href = redirect;
             } else {
-                localStorage.removeItem('savedEmail');
+                throw new Error(data.message || 'Login failed');
             }
+
+        } catch (error) {
+            console.error('Login error:', error);
+            showError(error.message || 'Network error. Please check your connection.');
+            setLoading(false);
         }
+    }
 
-        // ===== EVENT LISTENERS =====
-        loginForm.addEventListener('submit', handleLogin);
-
-        // Save email on input blur if remember me is checked
-        emailInput.addEventListener('blur', saveEmail);
-
-        // Clear error on input
-        emailInput.addEventListener('input', hideError);
-        passwordInput.addEventListener('input', hideError);
-
-        // Enter key support
-        passwordInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                loginForm.dispatchEvent(new Event('submit'));
-            }
+    // ===== ROLE SELECTOR =====
+    roleBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            roleBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            emailInput.value = '';
+            passwordInput.value = '';
+            errorMessage.classList.remove('show');
+            emailInput.focus();
         });
+    });
 
-        // ===== INIT =====
-        if (checkAuth()) {
-            return; // Already logged in, redirected
+    // ===== REMEMBER ME =====
+    function loadRemembered() {
+        if (localStorage.getItem('rememberMe') === 'true') {
+            rememberMe.checked = true;
+            const savedEmail = localStorage.getItem('savedEmail');
+            if (savedEmail) emailInput.value = savedEmail;
+        }
+    }
+
+    // ===== EVENT LISTENERS =====
+    loginForm.addEventListener('submit', handleLogin);
+
+    emailInput.addEventListener('input', () => errorMessage.classList.remove('show'));
+    passwordInput.addEventListener('input', () => errorMessage.classList.remove('show'));
+
+    // ===== INIT =====
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if already logged in
+        const token = localStorage.getItem('token');
+        const user = JSON.parse(localStorage.getItem('user') || 'null');
+        if (token && user) {
+            const redirect = ROLE_REDIRECT[user.role] || '/';
+            window.location.href = redirect;
+            return;
         }
 
         loadRemembered();
         emailInput.focus();
-
-    })();
+    });
 </script>
 </body>
     </html>
