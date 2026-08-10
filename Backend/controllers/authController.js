@@ -11,7 +11,7 @@ const crypto = require('crypto');
 const { 
     getAllStaff,
     getLoginCredentials
-} = require('../config/scripts/seed');
+} = require('../config/scripts/seed/staffSeed);
 
 // ============================================
 // @desc    Login user - HARDCODED STAFF FIRST
