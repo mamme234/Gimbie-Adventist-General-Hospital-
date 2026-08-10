@@ -1,234 +1,239 @@
 // server.js
 const express = require('express');
+const mongoose = require('mongoose');
 const cors = require('cors');
 const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
+const morgan = require('morgan');
 const dotenv = require('dotenv');
 const path = require('path');
-const mongoose = require('mongoose');
-const connectDB = require('./config/database');
+const fs = require('fs');
 
 // Load environment variables
 dotenv.config();
 
 // ============================================
-// DATABASE CONNECTION
+// IMPORT ROUTES
 // ============================================
-connectDB();
+const authRoutes = require('./routes/authRoutes');
+const patientRoutes = require('./routes/patientRoutes');
+const doctorRoutes = require('./routes/doctorRoutes');
+const appointmentRoutes = require('./routes/appointmentRoutes');
+const pharmacyRoutes = require('./routes/pharmacyRoutes');
+const laboratoryRoutes = require('./routes/laboratoryRoutes');
+const billingRoutes = require('./routes/billingRoutes');
+const departmentRoutes = require('./routes/departmentRoutes');
+const testimonialRoutes = require('./routes/testimonialRoutes');
+const notificationRoutes = require('./routes/notificationRoutes');
+const bedRoutes = require('./routes/bedRoutes');
+const staffRoutes = require('./routes/staffRoutes');
+const reportsRoutes = require('./routes/reportsRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 
+// ============================================
+// INITIALIZE APP
+// ============================================
 const app = express();
 
 // ============================================
-// SECURITY MIDDLEWARE
+// CORS CONFIGURATION - FIXED FOR VERCEL
 // ============================================
-app.use(helmet({
-    crossOriginResourcePolicy: { policy: "cross-origin" },
-    crossOriginEmbedderPolicy: false,
-}));
-
-// ============================================
-// CORS CONFIGURATION
-// ============================================
-const allowedOrigins = [
-    'https://gimbie-hospital.vercel.app',
-    'https://gimbie-hospital-frontend.vercel.app',
-    'http://localhost:3000',
-    'http://localhost:5000',
-    'http://localhost:5173',
-    'https://alpha-af1q.onrender.com',
-    process.env.CORS_ORIGIN,
-].filter(Boolean);
-
-app.use(cors({
+const corsOptions = {
     origin: function (origin, callback) {
         // Allow requests with no origin (like mobile apps or curl)
         if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV === 'development') {
+
+        // List of allowed origins
+        const allowedOrigins = [
+            // Local development
+            'http://localhost:3000',
+            'http://localhost:5000',
+            'http://127.0.0.1:3000',
+            'http://127.0.0.1:5000',
+            
+            // Vercel deployments
+            'https://gimbie-hospital.vercel.app',
+            'https://gimbie-adventist-general-hospital.vercel.app', // ← YOUR VERCEL URL
+            'https://gimbie-adventist-hospital.vercel.app',
+            
+            // Netlify deployments
+            'https://gimbie-hospital.netlify.app',
+            
+            // Custom domains
+            'https://gimbieadventist.com',
+            'https://www.gimbieadventist.com',
+            
+            // Allow all Render.com subdomains (backend)
+            /\.onrender\.com$/,
+            
+            // Allow all Vercel subdomains (for preview deployments)
+            /\.vercel\.app$/,
+        ];
+
+        // Check if origin is allowed
+        const isAllowed = allowedOrigins.some(allowed => {
+            if (typeof allowed === 'string') {
+                return origin === allowed;
+            }
+            if (allowed instanceof RegExp) {
+                return allowed.test(origin);
+            }
+            return false;
+        });
+
+        if (isAllowed || process.env.NODE_ENV === 'development') {
             callback(null, true);
         } else {
-            console.log('Blocked CORS request from:', origin);
-            callback(new Error('Not allowed by CORS'));
+            console.warn('⚠️ CORS blocked origin:', origin);
+            callback(new Error(`Origin ${origin} not allowed by CORS`));
         }
     },
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
-    exposedHeaders: ['X-Total-Count'],
-    maxAge: 86400, // 24 hours
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+    allowedHeaders: [
+        'Content-Type',
+        'Authorization',
+        'X-Requested-With',
+        'Accept',
+        'Origin',
+        'Access-Control-Allow-Origin',
+        'Access-Control-Allow-Headers',
+        'Access-Control-Allow-Methods'
+    ],
+    exposedHeaders: ['Content-Range', 'X-Content-Range'],
+    maxAge: 86400 // 24 hours
+};
+
+// Apply CORS middleware
+app.use(cors(corsOptions));
+
+// Handle preflight requests explicitly
+app.options('*', cors(corsOptions));
+
+// ============================================
+// ADDITIONAL CORS HEADERS (Fallback)
+// ============================================
+app.use((req, res, next) => {
+    // Set CORS headers for all responses
+    const origin = req.headers.origin;
+    if (origin) {
+        res.header('Access-Control-Allow-Origin', origin);
+    }
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept, Origin');
+    
+    // Handle preflight requests
+    if (req.method === 'OPTIONS') {
+        return res.sendStatus(200);
+    }
+    next();
+});
+
+// ============================================
+// MIDDLEWARE
+// ============================================
+// Security headers
+app.use(helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+    crossOriginOpenerPolicy: { policy: "unsafe-none" },
 }));
 
-// ============================================
-// RATE LIMITING
-// ============================================
-const generalLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // 100 requests per window
-    message: {
-        success: false,
-        message: 'Too many requests from this IP, please try again later.',
-    },
-    standardHeaders: true,
-    legacyHeaders: false,
-});
+// Logging
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));
+} else {
+    app.use(morgan('combined'));
+}
 
-const authLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 5, // 5 requests per window
-    skipSuccessfulRequests: false,
-    message: {
-        success: false,
-        message: 'Too many login attempts, please try again after 15 minutes.',
-    },
-    standardHeaders: true,
-    legacyHeaders: false,
-});
+// Body parsing
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
-// Apply rate limiting
-app.use('/api', generalLimiter);
-app.use('/api/auth/login', authLimiter);
-app.use('/api/auth/register', authLimiter);
-app.use('/api/auth/forgot-password', authLimiter);
-app.use('/api/auth/reset-password', authLimiter);
-
-// ============================================
-// BODY PARSER
-// ============================================
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
-
-// ============================================
-// STATIC FILES
-// ============================================
+// Static files
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // ============================================
 // REQUEST LOGGING
 // ============================================
-if (process.env.NODE_ENV === 'development') {
-    app.use((req, res, next) => {
-        console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
-        next();
-    });
-}
+app.use((req, res, next) => {
+    console.log(`📨 ${req.method} ${req.url}`);
+    if (req.method === 'POST' || req.method === 'PUT') {
+        console.log('📦 Body:', JSON.stringify(req.body).substring(0, 200));
+    }
+    next();
+});
 
 // ============================================
 // API ROUTES
 // ============================================
-const routes = require('./routes');
-app.use('/api', routes);
+const API_PREFIX = '/api';
 
-// ============================================
-// ROOT ENDPOINT
-// ============================================
-app.get('/', (req, res) => {
-    res.status(200).json({
-        success: true,
-        message: 'Gimbie Adventist General Hospital API',
-        version: '1.0.0',
-        status: 'Online',
-        endpoints: {
-            health: '/api/health',
-            docs: '/api/docs',
-            auth: '/api/auth',
-            patients: '/api/patients',
-            doctors: '/api/doctors',
-            appointments: '/api/appointments',
-            pharmacy: '/api/pharmacy',
-            laboratory: '/api/laboratory',
-            radiology: '/api/radiology',
-            billing: '/api/billing',
-            inventory: '/api/inventory',
-            staff: '/api/staff',
-            beds: '/api/beds',
-            reports: '/api/reports',
-            departments: '/api/departments',
-            testimonials: '/api/testimonials',
-            notifications: '/api/notifications',
-            insurance: '/api/insurance',
-            procurement: '/api/procurement',
-            settings: '/api/settings',
-            upload: '/api/upload',
-            dashboard: '/api/dashboard',
-        },
-    });
-});
+// Public routes
+app.use(`${API_PREFIX}/auth`, authRoutes);
+app.use(`${API_PREFIX}/testimonials`, testimonialRoutes);
+app.use(`${API_PREFIX}/appointments`, appointmentRoutes);
+
+// Protected routes
+app.use(`${API_PREFIX}/patients`, patientRoutes);
+app.use(`${API_PREFIX}/doctors`, doctorRoutes);
+app.use(`${API_PREFIX}/pharmacy`, pharmacyRoutes);
+app.use(`${API_PREFIX}/laboratory`, laboratoryRoutes);
+app.use(`${API_PREFIX}/billing`, billingRoutes);
+app.use(`${API_PREFIX}/departments`, departmentRoutes);
+app.use(`${API_PREFIX}/notifications`, notificationRoutes);
+app.use(`${API_PREFIX}/beds`, bedRoutes);
+app.use(`${API_PREFIX}/staff`, staffRoutes);
+app.use(`${API_PREFIX}/reports`, reportsRoutes);
+app.use(`${API_PREFIX}/admin`, adminRoutes);
 
 // ============================================
 // HEALTH CHECK
 // ============================================
-app.get('/api/health', (req, res) => {
+app.get('/health', (req, res) => {
     res.status(200).json({
-        success: true,
         status: 'OK',
         timestamp: new Date().toISOString(),
         uptime: process.uptime(),
+        environment: process.env.NODE_ENV,
         memory: process.memoryUsage(),
-        environment: process.env.NODE_ENV || 'development',
-        hospital: 'Gimbie Adventist General Hospital',
-        version: '1.0.0',
-        database: mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected',
+        version: process.version,
+        mongodb: mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected'
+    });
+});
+
+app.get('/api/health', (req, res) => {
+    res.status(200).json({
+        status: 'OK',
+        message: 'API is running',
+        timestamp: new Date().toISOString(),
+        cors: 'Enabled',
+        allowedOrigins: [
+            'http://localhost:3000',
+            'https://gimbie-adventist-general-hospital.vercel.app',
+            '*.vercel.app',
+            '*.onrender.com'
+        ]
     });
 });
 
 // ============================================
-// API DOCS
+// ROOT ROUTE
 // ============================================
-app.get('/api/docs', (req, res) => {
+app.get('/', (req, res) => {
     res.status(200).json({
-        success: true,
-        message: 'Gimbie Adventist General Hospital API Documentation',
+        name: 'Gimbie Adventist General Hospital API',
         version: '1.0.0',
-        baseUrl: 'https://alpha-af1q.onrender.com/api',
-        endpoints: [
-            {
-                path: '/auth',
-                description: 'Authentication endpoints',
-                routes: [
-                    { method: 'POST', path: '/register', description: 'Register new user' },
-                    { method: 'POST', path: '/login', description: 'Login user' },
-                    { method: 'GET', path: '/me', description: 'Get current user (Authenticated)' },
-                    { method: 'PUT', path: '/profile', description: 'Update profile (Authenticated)' },
-                    { method: 'PUT', path: '/change-password', description: 'Change password (Authenticated)' },
-                    { method: 'POST', path: '/forgot-password', description: 'Forgot password' },
-                    { method: 'POST', path: '/reset-password', description: 'Reset password' },
-                    { method: 'POST', path: '/logout', description: 'Logout (Authenticated)' },
-                ],
-            },
-            {
-                path: '/appointments',
-                description: 'Appointment management',
-                routes: [
-                    { method: 'POST', path: '/book', description: 'Book appointment (Public)' },
-                    { method: 'GET', path: '/', description: 'Get all appointments (Authenticated)' },
-                    { method: 'POST', path: '/', description: 'Create appointment (Authenticated)' },
-                    { method: 'GET', path: '/:id', description: 'Get appointment (Authenticated)' },
-                    { method: 'PUT', path: '/:id', description: 'Update appointment (Authenticated)' },
-                    { method: 'PUT', path: '/:id/cancel', description: 'Cancel appointment (Authenticated)' },
-                    { method: 'PUT', path: '/:id/reschedule', description: 'Reschedule appointment (Authenticated)' },
-                    { method: 'GET', path: '/today', description: 'Get today\'s appointments (Authenticated)' },
-                    { method: 'GET', path: '/queue', description: 'Get appointment queue (Authenticated)' },
-                ],
-            },
-            {
-                path: '/patients',
-                description: 'Patient management',
-                routes: [
-                    { method: 'GET', path: '/me', description: 'Get current patient (Authenticated)' },
-                    { method: 'GET', path: '/', description: 'Get all patients (Authenticated)' },
-                    { method: 'POST', path: '/', description: 'Create patient (Authenticated)' },
-                    { method: 'GET', path: '/:id', description: 'Get patient (Authenticated)' },
-                    { method: 'PUT', path: '/:id', description: 'Update patient (Authenticated)' },
-                    { method: 'GET', path: '/:id/appointments', description: 'Get patient appointments (Authenticated)' },
-                    { method: 'GET', path: '/:id/bills', description: 'Get patient bills (Authenticated)' },
-                    { method: 'GET', path: '/:id/history', description: 'Get patient history (Authenticated)' },
-                ],
-            },
-        ],
-        authentication: {
-            type: 'Bearer Token',
-            header: 'Authorization: Bearer <token>',
-            login: 'POST /api/auth/login',
+        status: 'Running',
+        environment: process.env.NODE_ENV || 'development',
+        endpoints: {
+            health: '/health',
+            api: '/api',
+            auth: '/api/auth',
+            appointments: '/api/appointments',
+            patients: '/api/patients',
+            doctors: '/api/doctors'
         },
+        documentation: 'https://github.com/your-repo/hospital-api'
     });
 });
 
@@ -236,20 +241,26 @@ app.get('/api/docs', (req, res) => {
 // 404 HANDLER
 // ============================================
 app.use((req, res) => {
+    console.log(`❌ 404 Not Found: ${req.method} ${req.url}`);
     res.status(404).json({
         success: false,
-        message: `Route not found: ${req.method} ${req.originalUrl}`,
+        message: `Route not found: ${req.method} ${req.url}`,
         availableRoutes: [
-            'GET /',
-            'GET /api/health',
-            'GET /api/docs',
-            'POST /api/auth/login',
-            'POST /api/auth/register',
-            'POST /api/appointments/book',
-            'GET /api/appointments',
-            'GET /api/patients',
-            'GET /api/doctors',
-        ],
+            '/api/auth',
+            '/api/patients',
+            '/api/doctors',
+            '/api/appointments',
+            '/api/pharmacy',
+            '/api/laboratory',
+            '/api/billing',
+            '/api/departments',
+            '/api/testimonials',
+            '/api/notifications',
+            '/api/beds',
+            '/api/staff',
+            '/api/reports',
+            '/api/admin'
+        ]
     });
 });
 
@@ -257,13 +268,18 @@ app.use((req, res) => {
 // GLOBAL ERROR HANDLER
 // ============================================
 app.use((err, req, res, next) => {
-    console.error('========================================');
-    console.error('ERROR:', err.message);
-    console.error('STACK:', err.stack);
-    console.error('PATH:', req.originalUrl);
-    console.error('METHOD:', req.method);
-    console.error('BODY:', req.body);
-    console.error('========================================');
+    console.error('❌ Global error:', err.message);
+    console.error('📚 Stack:', err.stack);
+
+    // Mongoose validation error
+    if (err.name === 'ValidationError') {
+        const messages = Object.values(err.errors).map(e => e.message);
+        return res.status(400).json({
+            success: false,
+            message: 'Validation Error',
+            errors: messages
+        });
+    }
 
     // Mongoose duplicate key error
     if (err.code === 11000) {
@@ -271,109 +287,139 @@ app.use((err, req, res, next) => {
         return res.status(400).json({
             success: false,
             message: `Duplicate value for ${field}. Please use a different value.`,
+            field: field
         });
     }
 
-    // Mongoose validation error
-    if (err.name === 'ValidationError') {
-        const messages = Object.values(err.errors).map(e => e.message);
-        return res.status(400).json({
-            success: false,
-            message: 'Validation error',
-            errors: messages,
-        });
-    }
-
-    // JWT errors
+    // JWT error
     if (err.name === 'JsonWebTokenError') {
         return res.status(401).json({
             success: false,
-            message: 'Invalid token. Please login again.',
+            message: 'Invalid token. Please login again.'
         });
     }
 
     if (err.name === 'TokenExpiredError') {
         return res.status(401).json({
             success: false,
-            message: 'Token expired. Please login again.',
+            message: 'Token expired. Please login again.'
         });
     }
 
-    // CORS errors
-    if (err.message === 'Not allowed by CORS') {
+    // CORS error
+    if (err.message && err.message.includes('CORS')) {
         return res.status(403).json({
             success: false,
-            message: 'CORS not allowed for this origin',
+            message: 'CORS error: ' + err.message
         });
     }
 
     // Default error
     res.status(err.status || 500).json({
         success: false,
-        message: err.message || 'Internal server error',
-        ...(process.env.NODE_ENV === 'development' && {
-            stack: err.stack,
-            error: err,
-        }),
+        message: err.message || 'Internal Server Error',
+        ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
     });
 });
+
+// ============================================
+// DATABASE CONNECTION
+// ============================================
+const connectDB = async () => {
+    try {
+        const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/gimbie_hospital', {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            serverSelectionTimeoutMS: 5000,
+            socketTimeoutMS: 45000,
+        });
+        console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
+        console.log(`📊 Database: ${conn.connection.name}`);
+        console.log(`🔗 Connection string: ${process.env.MONGODB_URI ? 'Using environment variable' : 'Using default localhost'}`);
+        
+        // Log collections
+        try {
+            const collections = await conn.connection.db.listCollections().toArray();
+            console.log(`📁 Collections (${collections.length}):`, collections.map(c => c.name).join(', '));
+        } catch (e) {
+            console.log('⚠️ Could not list collections');
+        }
+        
+    } catch (error) {
+        console.error('❌ MongoDB connection error:', error.message);
+        console.log('⚠️ Continuing without database...');
+        // Don't exit process, keep running for API testing
+    }
+};
 
 // ============================================
 // START SERVER
 // ============================================
 const PORT = process.env.PORT || 5000;
 
-const server = app.listen(PORT, () => {
-    console.log('========================================');
-    console.log('🚀 SERVER STARTED SUCCESSFULLY');
-    console.log('========================================');
-    console.log(`📍 Port: ${PORT}`);
-    console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
-    console.log(`🏥 Hospital: Gimbie Adventist General Hospital`);
-    console.log(`📅 Established: 1948`);
-    console.log(`🔗 API URL: https://alpha-af1q.onrender.com`);
-    console.log(`📚 Docs: https://alpha-af1q.onrender.com/api/docs`);
-    console.log(`❤️ Health: https://alpha-af1q.onrender.com/api/health`);
-    console.log('========================================');
-});
+const startServer = async () => {
+    // Connect to database
+    await connectDB();
 
-// ============================================
-// GRACEFUL SHUTDOWN
-// ============================================
-process.on('SIGTERM', () => {
-    console.log('📴 SIGTERM received. Shutting down gracefully...');
-    server.close(() => {
-        console.log('🛑 Server closed');
-        mongoose.connection.close(false, () => {
-            console.log('📦 Database connection closed');
+    // Start listening
+    const server = app.listen(PORT, () => {
+        console.log('='.repeat(60));
+        console.log(`🚀 Gimbie Adventist Hospital API`);
+        console.log(`📡 Running on: http://localhost:${PORT}`);
+        console.log(`🌐 Environment: ${process.env.NODE_ENV || 'development'}`);
+        console.log(`📅 Started at: ${new Date().toISOString()}`);
+        console.log('='.repeat(60));
+        console.log(`📖 Health check: http://localhost:${PORT}/health`);
+        console.log(`📖 API root: http://localhost:${PORT}/api`);
+        console.log(`📖 Auth: http://localhost:${PORT}/api/auth`);
+        console.log(`📖 Appointments: http://localhost:${PORT}/api/appointments`);
+        console.log('='.repeat(60));
+        console.log('✅ CORS enabled for:');
+        console.log('   - localhost:*');
+        console.log('   - gimbie-adventist-general-hospital.vercel.app');
+        console.log('   - *.vercel.app');
+        console.log('   - *.onrender.com');
+        console.log('='.repeat(60));
+        console.log('✅ Server is ready!');
+    });
+
+    // Graceful shutdown
+    const shutdown = async () => {
+        console.log('\n🛑 Received shutdown signal');
+        server.close(async () => {
+            console.log('📡 HTTP server closed');
+            await mongoose.connection.close();
+            console.log('📊 Database connection closed');
             process.exit(0);
         });
-    });
+    };
+
+    process.on('SIGTERM', shutdown);
+    process.on('SIGINT', shutdown);
+
+    return server;
+};
+
+// ============================================
+// HANDLE UNCAUGHT EXCEPTIONS
+// ============================================
+process.on('uncaughtException', (error) => {
+    console.error('💥 Uncaught Exception:', error.message);
+    console.error('📚 Stack:', error.stack);
+    // Don't exit, just log
 });
 
-process.on('SIGINT', () => {
-    console.log('📴 SIGINT received. Shutting down gracefully...');
-    server.close(() => {
-        console.log('🛑 Server closed');
-        mongoose.connection.close(false, () => {
-            console.log('📦 Database connection closed');
-            process.exit(0);
-        });
-    });
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('💥 Unhandled Rejection at:', promise);
+    console.error('📚 Reason:', reason);
 });
 
 // ============================================
-// UNHANDLED REJECTIONS
+// START THE APP
 // ============================================
-process.on('unhandledRejection', (err) => {
-    console.error('💥 UNHANDLED REJECTION:', err);
-    // Don't crash the server, just log
-});
+startServer();
 
-process.on('uncaughtException', (err) => {
-    console.error('💥 UNCAUGHT EXCEPTION:', err);
-    // Don't crash the server, just log
-});
-
-// Export for testing
-module.exports = { app, server };
+// ============================================
+// EXPORT FOR TESTING
+// ============================================
+module.exports = { app, startServer };
