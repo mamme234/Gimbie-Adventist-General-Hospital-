@@ -11,7 +11,7 @@ const path = require('path');
 dotenv.config();
 
 // ============================================
-// IMPORT ROUTES - FIXED FOR YOUR FILE NAMES
+// IMPORT ROUTES
 // ============================================
 const authRoutes = require('./routes/auth');
 const patientRoutes = require('./routes/patients');
@@ -177,7 +177,7 @@ app.get('/api/health', (req, res) => {
 });
 
 // ============================================
-= ROOT ROUTE
+// ROOT ROUTE
 // ============================================
 app.get('/', (req, res) => {
     res.status(200).json({
