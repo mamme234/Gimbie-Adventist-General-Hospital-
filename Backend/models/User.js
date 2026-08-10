@@ -1,3 +1,4 @@
+// Backend/models/User.js
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
@@ -62,13 +63,28 @@ const UserSchema = new mongoose.Schema({
             'Emergency',
             'Health Information',
             'Community Outreach',
+            'IT',
+            'Maintenance',
+            'Cleaning & Support',
+            'Security',
+            'Surgery',
+            'Pediatrics',
+            'Obstetrics & Gynecology',
+            'Neurology',
+            'Cardiology',
+            'Orthopedics',
+            'Ophthalmology',
+            'ENT',
+            'Dermatology',
+            'Psychiatry',
+            'Anesthesia',
+            'General Practice',
         ],
     },
     staffId: {
         type: String,
         unique: true,
         sparse: true,
-        // REMOVED: index: true
     },
     profileImage: {
         type: String,
@@ -104,9 +120,9 @@ const UserSchema = new mongoose.Schema({
     timestamps: true,
 });
 
-// ===== INDEXES - Defined once here =====
+// ===== INDEXES =====
 UserSchema.index({ email: 1 });
-UserSchema.index({ staffId: 1 }, { sparse: true }); // Only here, not in field
+UserSchema.index({ staffId: 1 }, { sparse: true });
 
 // Hash password before saving
 UserSchema.pre('save', async function (next) {
@@ -126,7 +142,7 @@ UserSchema.methods.comparePassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
 };
 
-// Generate staff ID based on role
+// Generate staff ID
 UserSchema.methods.generateStaffId = function() {
     const roleMap = {
         'super_admin': 'SUP',
@@ -146,18 +162,5 @@ UserSchema.methods.generateStaffId = function() {
     const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
     return `GAH-${prefix}-${random}`;
 };
-
-// Virtual for full name with title
-UserSchema.virtual('fullNameWithTitle').get(function() {
-    const titles = {
-        'doctor': 'Dr.',
-        'nurse': 'Nurse',
-        'pharmacist': 'Pharm.',
-        'lab_technician': 'Lab Tech',
-        'radiologist': 'Dr.',
-    };
-    const title = titles[this.role] || '';
-    return title ? `${title} ${this.fullName}` : this.fullName;
-});
 
 module.exports = mongoose.model('User', UserSchema);
