@@ -1,4 +1,4 @@
-// routes/index.js
+// routes/index.js - REMOVE THE CATCH-ALL
 const express = require('express');
 const router = express.Router();
 
@@ -95,7 +95,7 @@ router.use('/upload', uploadRoutes);
 router.use('/nursing', nursingRoutes);
 
 // ============================================
-// HEALTH CHECK (Mount at /api/health via server.js)
+// HEALTH CHECK
 // ============================================
 router.get('/health', (req, res) => {
     const mongoose = require('mongoose');
@@ -113,7 +113,7 @@ router.get('/health', (req, res) => {
 });
 
 // ============================================
-// API DOCS (Mounted at /api/docs via server.js)
+// API DOCS
 // ============================================
 router.get('/docs', (req, res) => {
     res.status(200).json({
@@ -142,6 +142,16 @@ router.get('/docs', (req, res) => {
             }
         },
         endpoints: {
+            seed: {
+                path: '/seed',
+                description: 'Seed management (Super Admin only)',
+                routes: [
+                    { method: 'GET', path: '/', description: 'Check seed status' },
+                    { method: 'POST', path: '/staff', description: 'Seed staff from config' },
+                    { method: 'GET', path: '/status', description: 'Get seed status' },
+                    { method: 'DELETE', path: '/clear?confirm=YES', description: 'Clear seed data' },
+                ],
+            },
             auth: {
                 path: '/auth',
                 description: 'Authentication endpoints',
@@ -264,38 +274,6 @@ router.get('/docs', (req, res) => {
 });
 
 // ============================================
-// 404 HANDLER FOR /API ROUTES
+// ⭐ EXPORT ROUTER - NO CATCH-ALL HERE!
 // ============================================
-router.use('*', (req, res) => {
-    res.status(404).json({
-        success: false,
-        message: `API route not found: ${req.method} ${req.originalUrl}`,
-        availableRoutes: [
-            '/auth',
-            '/patients',
-            '/doctors',
-            '/appointments',
-            '/pharmacy',
-            '/laboratory',
-            '/radiology',
-            '/billing',
-            '/departments',
-            '/testimonials',
-            '/notifications',
-            '/beds',
-            '/staff',
-            '/reports',
-            '/dashboard',
-            '/insurance',
-            '/inventory',
-            '/procurement',
-            '/settings',
-            '/upload',
-            '/nursing',
-            '/health',
-            '/docs'
-        ]
-    });
-});
-
 module.exports = router;
