@@ -111,21 +111,8 @@
     </div>
 </div>
 
-<script>
-    // ============================================
-    // LOGIN - COMPLETE WORKING CODE
-    // ============================================
-
-    const API_URL = 'https://alpha-af1q.onrender.com/api';
-
-    const loginForm = document.getElementById('loginForm');
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    const loginBtn = document.getElementById('loginBtn');
-    const errorMessage = document.getElementById('errorMessage');
-    const errorText = document.getElementById('errorText');
-    const roleBtns = document.querySelectorAll('.role-btn');
-    const rememberMe = document.getElementById('rememberMe');
+<script type="module">
+    import API from '/src/js/api.js';
 
     const ROLE_REDIRECT = {
         'super_admin': '/pages/admin/dashboard.html',
@@ -137,6 +124,14 @@
         'radiologist': '/pages/radiology/dashboard.html',
         'patient': '/pages/patient/dashboard.html'
     };
+
+    const loginForm = document.getElementById('loginForm');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const loginBtn = document.getElementById('loginBtn');
+    const errorMessage = document.getElementById('errorMessage');
+    const errorText = document.getElementById('errorText');
+    const rememberMe = document.getElementById('rememberMe');
 
     function showError(message) {
         errorText.textContent = message;
@@ -169,37 +164,20 @@
         setLoading(true);
 
         try {
-            console.log('Attempting login to:', `${API_URL}/auth/login`);
-            console.log('Email:', email);
+            const response = await API.auth.login(email, password);
+            console.log('Login response:', response);
 
-            const response = await fetch(`${API_URL}/auth/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
-            });
-
-            const data = await response.json();
-            console.log('Login response:', data);
-
-            if (!response.ok) {
-                throw new Error(data.message || 'Login failed');
-            }
-
-            if (data.success && data.token) {
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('user', JSON.stringify(data.user));
-
+            if (response.success) {
                 if (rememberMe.checked) {
                     localStorage.setItem('rememberMe', 'true');
                     localStorage.setItem('savedEmail', email);
                 }
 
-                const redirect = ROLE_REDIRECT[data.user.role] || '/';
+                const user = API.getCurrentUser();
+                const redirect = ROLE_REDIRECT[user.role] || '/';
                 window.location.href = redirect;
             } else {
-                throw new Error(data.message || 'Login failed');
+                throw new Error(response.message || 'Login failed');
             }
 
         } catch (error) {
@@ -209,23 +187,11 @@
         }
     }
 
-    roleBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            roleBtns.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            emailInput.value = '';
-            passwordInput.value = '';
-            errorMessage.classList.remove('show');
-            emailInput.focus();
-        });
-    });
-
     loginForm.addEventListener('submit', handleLogin);
 
     document.addEventListener('DOMContentLoaded', function() {
-        const token = localStorage.getItem('token');
-        const user = JSON.parse(localStorage.getItem('user') || 'null');
-        if (token && user) {
+        const user = API.getCurrentUser();
+        if (user) {
             const redirect = ROLE_REDIRECT[user.role] || '/';
             window.location.href = redirect;
             return;
