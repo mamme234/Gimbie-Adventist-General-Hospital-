@@ -24,7 +24,7 @@ exports.register = async (req, res) => {
     try {
         const { fullName, email, password, phone, role, department } = req.body;
 
-        console.log('Registration attempt for:', email);
+        console.log('📝 Registration attempt for:', email);
 
         // Check if user exists in hardcoded staff
         const hardcodedStaff = findStaffByEmail(email);
@@ -55,7 +55,7 @@ exports.register = async (req, res) => {
             isActive: true,
         });
 
-        console.log('User created:', user._id);
+        console.log('✅ User created:', user._id);
 
         // If role is patient, create patient profile
         if (user.role === 'patient') {
@@ -69,9 +69,8 @@ exports.register = async (req, res) => {
                 status: 'Active',
             });
             
-            console.log('Patient profile created:', patient.patientId);
+            console.log('✅ Patient profile created:', patient.patientId);
             
-            // Update user with patientId
             user.patientId = patient.patientId;
             await user.save();
         }
@@ -94,7 +93,7 @@ exports.register = async (req, res) => {
             },
         });
     } catch (error) {
-        console.error('Registration error:', error);
+        console.error('❌ Registration error:', error);
         res.status(500).json({
             success: false,
             message: error.message,
@@ -103,7 +102,7 @@ exports.register = async (req, res) => {
 };
 
 // ============================================
-// @desc    Login user - WITH HARDCODED STAFF SUPPORT
+// @desc    Login user - HARDCODED STAFF FIRST
 // @route   POST /api/auth/login
 // @access  Public
 // ============================================
@@ -111,7 +110,11 @@ exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        console.log('Login attempt for:', email);
+        console.log('🔐 ========================================');
+        console.log('🔐 LOGIN ATTEMPT');
+        console.log('🔐 Email:', email);
+        console.log('🔐 Password length:', password?.length || 0);
+        console.log('🔐 ========================================');
 
         // Validate email & password
         if (!email || !password) {
@@ -124,10 +127,13 @@ exports.login = async (req, res) => {
         // ============================================
         // STEP 1: CHECK HARDCODED STAFF FIRST
         // ============================================
+        console.log('🔍 Checking hardcoded staff...');
         const hardcodedStaff = validateCredentials(email, password);
+        console.log('🔍 Hardcoded staff result:', hardcodedStaff ? '✅ FOUND' : '❌ NOT FOUND');
 
         if (hardcodedStaff) {
             console.log('✅ Hardcoded staff login success:', hardcodedStaff.fullName);
+            console.log('✅ Role:', hardcodedStaff.role);
 
             // Generate JWT token
             const token = generateToken(hardcodedStaff.id, hardcodedStaff.role);
@@ -158,13 +164,15 @@ exports.login = async (req, res) => {
         // ============================================
         // STEP 2: CHECK DATABASE USERS
         // ============================================
+        console.log('🔍 Checking database users...');
         const user = await User.findOne({ email: email.toLowerCase() }).select('+password');
-        console.log('Database user found:', user ? 'Yes' : 'No');
+        console.log('🔍 Database user found:', user ? '✅ YES' : '❌ NO');
 
         if (!user) {
+            console.log('❌ No user found in database');
             return res.status(401).json({
                 success: false,
-                message: 'Invalid credentials - User not found',
+                message: 'Invalid credentials',
             });
         }
 
@@ -177,13 +185,14 @@ exports.login = async (req, res) => {
         }
 
         // Check password
+        console.log('🔍 Checking password...');
         const isPasswordMatch = await user.comparePassword(password);
-        console.log('Password match:', isPasswordMatch);
+        console.log('🔍 Password match:', isPasswordMatch ? '✅ YES' : '❌ NO');
 
         if (!isPasswordMatch) {
             return res.status(401).json({
                 success: false,
-                message: 'Invalid credentials - Wrong password',
+                message: 'Invalid credentials',
             });
         }
 
@@ -202,6 +211,8 @@ exports.login = async (req, res) => {
 
         // Generate token
         const token = generateToken(user._id, user.role);
+
+        console.log('✅ Database user login success:', user.fullName);
 
         res.status(200).json({
             success: true,
@@ -222,7 +233,7 @@ exports.login = async (req, res) => {
             },
         });
     } catch (error) {
-        console.error('Login error:', error);
+        console.error('❌ Login error:', error);
         res.status(500).json({
             success: false,
             message: error.message,
@@ -239,9 +250,7 @@ exports.getMe = async (req, res) => {
     try {
         const userId = req.user.id;
 
-        // ============================================
-        // CHECK IF IT'S HARDCODED STAFF
-        // ============================================
+        // Check if it's hardcoded staff
         const allStaff = getAllStaff();
         const hardcodedStaff = allStaff.find(s => s.id === userId);
 
@@ -256,9 +265,7 @@ exports.getMe = async (req, res) => {
             });
         }
 
-        // ============================================
-        // CHECK DATABASE USER
-        // ============================================
+        // Check database user
         const user = await User.findById(userId);
         
         if (!user) {
@@ -268,7 +275,6 @@ exports.getMe = async (req, res) => {
             });
         }
 
-        // Get patientId if patient
         let patientId = null;
         if (user.role === 'patient') {
             const patient = await Patient.findOne({ userId: user._id });
@@ -313,7 +319,6 @@ exports.updateProfile = async (req, res) => {
     try {
         const { fullName, phone, preferences } = req.body;
         
-        // Check if hardcoded staff
         const allStaff = getAllStaff();
         const hardcodedStaff = allStaff.find(s => s.id === req.user.id);
 
@@ -338,7 +343,6 @@ exports.updateProfile = async (req, res) => {
 
         await user.save();
 
-        // Update patient profile if patient
         if (user.role === 'patient') {
             const patient = await Patient.findOne({ userId: user._id });
             if (patient) {
@@ -391,7 +395,6 @@ exports.changePassword = async (req, res) => {
             });
         }
 
-        // Check if hardcoded staff
         const allStaff = getAllStaff();
         const hardcodedStaff = allStaff.find(s => s.id === req.user.id);
 
@@ -450,7 +453,6 @@ exports.forgotPassword = async (req, res) => {
             });
         }
 
-        // Check hardcoded staff first
         const hardcodedStaff = findStaffByEmail(email);
         if (hardcodedStaff) {
             return res.status(403).json({
@@ -468,13 +470,12 @@ exports.forgotPassword = async (req, res) => {
             });
         }
 
-        // Generate reset token
         const resetToken = crypto.randomBytes(20).toString('hex');
         user.resetPasswordToken = crypto
             .createHash('sha256')
             .update(resetToken)
             .digest('hex');
-        user.resetPasswordExpire = Date.now() + 10 * 60 * 1000; // 10 minutes
+        user.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
 
         await user.save();
 
@@ -483,7 +484,7 @@ exports.forgotPassword = async (req, res) => {
         res.status(200).json({
             success: true,
             message: 'Password reset link sent to email',
-            token: resetToken, // Remove in production
+            token: resetToken,
         });
     } catch (error) {
         console.error('Forgot password error:', error);
@@ -581,7 +582,6 @@ exports.verifyToken = async (req, res) => {
     try {
         const userId = req.user.id;
 
-        // Check hardcoded staff
         const allStaff = getAllStaff();
         const hardcodedStaff = allStaff.find(s => s.id === userId);
 
@@ -620,50 +620,6 @@ exports.verifyToken = async (req, res) => {
         });
     } catch (error) {
         console.error('Verify token error:', error);
-        res.status(500).json({
-            success: false,
-            message: error.message,
-        });
-    }
-};
-
-// ============================================
-// @desc    Get all hardcoded staff (Admin only)
-// @route   GET /api/auth/staff
-// @access  Private/Admin
-// ============================================
-exports.getAllHardcodedStaff = async (req, res) => {
-    try {
-        // Check if user is admin
-        const allStaff = getAllStaff();
-        const currentUser = allStaff.find(s => s.id === req.user.id);
-        
-        if (!currentUser || currentUser.role !== 'admin') {
-            return res.status(403).json({
-                success: false,
-                message: 'Access denied. Admin only.',
-            });
-        }
-
-        const staffList = allStaff.map(s => ({
-            id: s.id,
-            fullName: s.fullName,
-            email: s.email,
-            role: s.role,
-            department: s.department,
-            employeeNumber: s.employeeNumber,
-            title: s.title,
-            phone: s.phone,
-            isActive: s.isActive,
-        }));
-
-        res.status(200).json({
-            success: true,
-            data: staffList,
-            total: staffList.length,
-        });
-    } catch (error) {
-        console.error('Get staff error:', error);
         res.status(500).json({
             success: false,
             message: error.message,
