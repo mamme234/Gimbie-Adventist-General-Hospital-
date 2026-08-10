@@ -237,14 +237,9 @@
     </div>
 </div>
 
-<script>
-    // ============================================
-    // REGISTER - COMPLETE WORKING CODE
-    // ============================================
+<script type="module">
+    import API from '/src/js/api.js';
 
-    const API_URL = 'https://alpha-af1q.onrender.com/api';
-
-    // ===== DOM ELEMENTS =====
     const registerForm = document.getElementById('registerForm');
     const registerBtn = document.getElementById('registerBtn');
     const errorMessage = document.getElementById('errorMessage');
@@ -252,7 +247,6 @@
     const successMessage = document.getElementById('successMessage');
     const successText = document.getElementById('successText');
 
-    // ===== SHOW ERROR =====
     function showError(message) {
         successMessage.classList.remove('show');
         errorText.textContent = message;
@@ -260,7 +254,6 @@
         setTimeout(() => errorMessage.classList.remove('show'), 5000);
     }
 
-    // ===== SHOW SUCCESS =====
     function showSuccess(message) {
         errorMessage.classList.remove('show');
         successText.textContent = message;
@@ -268,7 +261,6 @@
         setTimeout(() => successMessage.classList.remove('show'), 5000);
     }
 
-    // ===== SET LOADING =====
     function setLoading(loading) {
         if (loading) {
             registerBtn.disabled = true;
@@ -279,7 +271,6 @@
         }
     }
 
-    // ===== HANDLE REGISTER =====
     async function handleRegister(e) {
         e.preventDefault();
         errorMessage.classList.remove('show');
@@ -292,7 +283,6 @@
         const confirmPassword = document.getElementById('confirmPassword').value;
         const role = document.getElementById('role').value;
 
-        // Validation
         if (!fullName || !email || !phone || !password || !confirmPassword) {
             showError('Please fill in all required fields');
             return;
@@ -311,31 +301,17 @@
         setLoading(true);
 
         try {
-            console.log('Attempting registration to:', `${API_URL}/auth/register`);
-            console.log('Email:', email);
-
-            const response = await fetch(`${API_URL}/auth/register`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    fullName,
-                    email,
-                    phone,
-                    password,
-                    role
-                })
+            const response = await API.auth.register({
+                fullName,
+                email,
+                phone,
+                password,
+                role
             });
 
-            const data = await response.json();
-            console.log('Register response:', data);
+            console.log('Register response:', response);
 
-            if (!response.ok) {
-                throw new Error(data.message || 'Registration failed');
-            }
-
-            if (data.success) {
+            if (response.success) {
                 showSuccess('Registration successful! Redirecting to login...');
                 registerForm.reset();
                 
@@ -343,7 +319,7 @@
                     window.location.href = '/pages/login.html';
                 }, 2000);
             } else {
-                throw new Error(data.message || 'Registration failed');
+                throw new Error(response.message || 'Registration failed');
             }
 
         } catch (error) {
@@ -353,17 +329,14 @@
         }
     }
 
-    // ===== EVENT LISTENERS =====
     registerForm.addEventListener('submit', handleRegister);
 
     document.addEventListener('DOMContentLoaded', function() {
-        // Check if already logged in
-        const token = localStorage.getItem('token');
-        const user = JSON.parse(localStorage.getItem('user') || 'null');
-        if (token && user) {
+        const user = API.getCurrentUser();
+        if (user) {
             window.location.href = '/pages/patient/dashboard.html';
         }
     });
 </script>
 </body>
-                    </html>
+    </html>
