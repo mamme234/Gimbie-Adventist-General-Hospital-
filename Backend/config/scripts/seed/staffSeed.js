@@ -2,14 +2,15 @@
  * GIMBIE ADVENTIST GENERAL HOSPITAL
  * Complete Staff Directory Seed Data
  * 
- * All staff members with:
+ * This file contains all staff members with:
  * - Full names
  * - Positions
  * - Departments
- * - Staff IDs
- * - Roles
- * - Email addresses (auto-generated)
- * - STRONG passwords (12+ characters with symbols)
+ * - Staff IDs (GAH-XXX-### format)
+ * - Roles (admin, doctor, nurse, etc.)
+ * - Email addresses
+ * - Phone numbers
+ * - STRONG PASSWORDS (12+ characters with symbols)
  */
 
 const staffData = {
@@ -60,7 +61,7 @@ const staffData = {
   ],
 
   // ============================================
-  // MEDICAL DEPARTMENT
+  // MEDICAL DEPARTMENT - ALL DOCTORS
   // ============================================
   medical: [
     {
@@ -117,6 +118,40 @@ const staffData = {
       email: 'ruth.bekele@gimbiehospital.com',
       phone: '+251 91 111 1119',
       password: 'DrRuth@OBG2026$Gimbie'
+    },
+    // ===== NEW DOCTORS ADDED =====
+    {
+      fullName: 'Dr. Fam Leong',
+      position: 'Physician',
+      department: 'Medical',
+      role: 'doctor',
+      specialty: 'General Medicine',
+      staffId: 'GAH-D001',
+      email: 'fam.leong@gimbiehospital.com',
+      phone: '+251 91 111 1185',
+      password: 'DrFam@Gimbie2026#Secure'
+    },
+    {
+      fullName: 'Dr. Gelan Yohannes',
+      position: 'Physician',
+      department: 'Medical',
+      role: 'doctor',
+      specialty: 'General Medicine',
+      staffId: 'GAH-D002',
+      email: 'gelan.yohannes@gimbiehospital.com',
+      phone: '+251 91 111 1186',
+      password: 'DrGelan@Gimbie2026#Secure'
+    },
+    {
+      fullName: 'Dr. Ebsa Gutema',
+      position: 'Medical Director / Physician',
+      department: 'Medical',
+      role: 'doctor',
+      specialty: 'General Medicine',
+      staffId: 'GAH-D003',
+      email: 'ebsa.gutema@gimbiehospital.com',
+      phone: '+251 91 111 1187',
+      password: 'DrEbsa@Gimbie2026#Secure'
     }
   ],
 
@@ -884,6 +919,9 @@ const staffIdMapping = {
   'GAH-DR-004': 'Dr. Elias Tadesse',
   'GAH-DR-005': 'Dr. Ruth Bekele',
   'GAH-DR-006': 'Dr. Samuel Girma',
+  'GAH-D001': 'Dr. Fam Leong',
+  'GAH-D002': 'Dr. Gelan Yohannes',
+  'GAH-D003': 'Dr. Ebsa Gutema',
   'GAH-NUR-001': 'Almaz Tesfaye',
   'GAH-NUR-002': 'Bethlehem Worku',
   'GAH-NUR-003': 'Hana Worku',
@@ -949,62 +987,70 @@ const staffIdMapping = {
   'GAH-SEC-004': 'Elias Worku'
 };
 
-// Export for use in seed script
+// ============================================
+// HELPER FUNCTIONS
+// ============================================
+const getAllStaff = () => {
+  const allStaff = [];
+  Object.values(staffData).forEach(department => {
+    department.forEach(staff => {
+      allStaff.push(staff);
+    });
+  });
+  return allStaff;
+};
+
+const getStaffByDepartment = (department) => {
+  const deptMap = {
+    'Administration': staffData.administration,
+    'Medical': staffData.medical,
+    'Emergency': staffData.emergency,
+    'Nursing': staffData.nursing,
+    'Maternity': staffData.maternity,
+    'Pediatrics': staffData.pediatrics,
+    'Surgery': staffData.surgery,
+    'Laboratory': staffData.laboratory,
+    'Radiology': staffData.radiology,
+    'Pharmacy': staffData.pharmacy,
+    'OPD': staffData.opd,
+    'Inpatient': staffData.inpatient,
+    'Finance': staffData.finance,
+    'HR': staffData.hr,
+    'Health Information': staffData.healthInfo,
+    'Inventory': staffData.inventory,
+    'IT': staffData.it,
+    'Maintenance': staffData.maintenance,
+    'Cleaning & Support': staffData.cleaning,
+    'Security': staffData.security
+  };
+  return deptMap[department] || [];
+};
+
+const getStaffByRole = (role) => {
+  const allStaff = [];
+  Object.values(staffData).forEach(department => {
+    department.forEach(staff => {
+      if (staff.role === role) {
+        allStaff.push(staff);
+      }
+    });
+  });
+  return allStaff;
+};
+
+const getStaffById = (staffId) => {
+  const allStaff = getAllStaff();
+  return allStaff.find(staff => staff.staffId === staffId) || null;
+};
+
+// ============================================
+// EXPORTS
+// ============================================
 module.exports = {
   staffData,
   staffIdMapping,
-  getAllStaff: () => {
-    const allStaff = [];
-    Object.values(staffData).forEach(department => {
-      department.forEach(staff => {
-        allStaff.push(staff);
-      });
-    });
-    return allStaff;
-  },
-  getStaffByDepartment: (department) => {
-    const deptMap = {
-      'Administration': staffData.administration,
-      'Medical': staffData.medical,
-      'Emergency': staffData.emergency,
-      'Nursing': staffData.nursing,
-      'Maternity': staffData.maternity,
-      'Pediatrics': staffData.pediatrics,
-      'Surgery': staffData.surgery,
-      'Laboratory': staffData.laboratory,
-      'Radiology': staffData.radiology,
-      'Pharmacy': staffData.pharmacy,
-      'OPD': staffData.opd,
-      'Inpatient': staffData.inpatient,
-      'Finance': staffData.finance,
-      'HR': staffData.hr,
-      'Health Information': staffData.healthInfo,
-      'Inventory': staffData.inventory,
-      'IT': staffData.it,
-      'Maintenance': staffData.maintenance,
-      'Cleaning & Support': staffData.cleaning,
-      'Security': staffData.security
-    };
-    return deptMap[department] || [];
-  },
-  getStaffByRole: (role) => {
-    const allStaff = [];
-    Object.values(staffData).forEach(department => {
-      department.forEach(staff => {
-        if (staff.role === role) {
-          allStaff.push(staff);
-        }
-      });
-    });
-    return allStaff;
-  },
-  getStaffById: (staffId) => {
-    const allStaff = [];
-    Object.values(staffData).forEach(department => {
-      department.forEach(staff => {
-        allStaff.push(staff);
-      });
-    });
-    return allStaff.find(staff => staff.staffId === staffId) || null;
-  }
+  getAllStaff,
+  getStaffByDepartment,
+  getStaffByRole,
+  getStaffById
 };
