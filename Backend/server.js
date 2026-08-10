@@ -35,14 +35,65 @@ app.use(helmet({
 // ============================================
 // CORS CONFIGURATION
 // ============================================
-app.use(cors({
-    origin: '*',
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (!origin) return callback(null, true);
+
+        const allowedOrigins = [
+            'http://localhost:3000',
+            'http://localhost:5000',
+            'http://127.0.0.1:3000',
+            'http://127.0.0.1:5000',
+            'https://gimbie-hospital.vercel.app',
+            'https://gimbie-adventist-general-hospital.vercel.app',
+            'https://gimbie-adventist-hospital.vercel.app',
+            'https://gimbie-hospital.netlify.app',
+            'https://gimbieadventist.com',
+            'https://www.gimbieadventist.com',
+            /\.onrender\.com$/,
+            /\.vercel\.app$/,
+        ];
+
+        const isAllowed = allowedOrigins.some(allowed => {
+            if (typeof allowed === 'string') return origin === allowed;
+            if (allowed instanceof RegExp) return allowed.test(origin);
+            return false;
+        });
+
+        if (isAllowed || process.env.NODE_ENV === 'development') {
+            callback(null, true);
+        } else {
+            console.warn('⚠️ CORS blocked origin:', origin);
+            callback(new Error(`Origin ${origin} not allowed by CORS`));
+        }
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
     exposedHeaders: ['X-Total-Count'],
     maxAge: 86400,
-}));
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
+
+// ============================================
+// ADDITIONAL CORS HEADERS (Fallback)
+// ============================================
+app.use((req, res, next) => {
+    const origin = req.headers.origin;
+    if (origin) {
+        res.header('Access-Control-Allow-Origin', origin);
+    }
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept, Origin');
+    
+    if (req.method === 'OPTIONS') {
+        return res.sendStatus(200);
+    }
+    next();
+});
 
 // ============================================
 // RATE LIMITING
@@ -124,8 +175,9 @@ if (process.env.NODE_ENV === 'development') {
 const routes = require('./routes');
 const seedRoutes = require('./routes/seed');
 
+// Mount API routes
 app.use('/api', routes);
-app.use('/api/seed', seedRoutes); // ← ADDED SEED ROUTES
+app.use('/api/seed', seedRoutes);
 
 // ============================================
 // ROOT ENDPOINT
@@ -161,142 +213,28 @@ app.get('/', (req, res) => {
             settings: '/api/settings',
             upload: '/api/upload',
             dashboard: '/api/dashboard',
+            nursing: '/api/nursing'
         },
     });
 });
 
 // ============================================
-// HEALTH CHECK
-// ============================================
-app.get('/api/health', (req, res) => {
-    res.status(200).json({
-        success: true,
-        status: 'OK',
-        timestamp: new Date().toISOString(),
-        uptime: process.uptime(),
-        memory: process.memoryUsage(),
-        environment: process.env.NODE_ENV || 'development',
-        hospital: 'Gimbie Adventist General Hospital',
-        version: '1.0.0',
-        database: mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected',
-    });
-});
-
-// ============================================
-// API DOCS
-// ============================================
-app.get('/api/docs', (req, res) => {
-    res.status(200).json({
-        success: true,
-        message: 'Gimbie Adventist General Hospital API Documentation',
-        version: '1.0.0',
-        baseUrl: 'https://alpha-af1q.onrender.com/api',
-        authentication: {
-            type: 'Bearer Token',
-            header: 'Authorization: Bearer <token>',
-            login: 'POST /api/auth/login',
-            register: 'POST /api/auth/register',
-        },
-        staffCredentials: {
-            admin: {
-                email: 'daniel.bekele@gimbiehospital.com',
-                password: 'Admin@2026#Secure$Gimbie'
-            },
-            doctor: {
-                email: 'michael.abebe@gimbiehospital.com',
-                password: 'DrMike@GP2026#Gimbie!'
-            },
-            nurse: {
-                email: 'almaz.tesfaye@gimbiehospital.com',
-                password: 'Almaz@NurseMgr2026#Gimbie'
-            }
-        },
-        endpoints: {
-            seed: {
-                path: '/seed',
-                description: 'Seed endpoints (Super Admin only)',
-                routes: [
-                    { method: 'POST', path: '/staff', description: 'Seed all staff from seed file' },
-                    { method: 'POST', path: '/department/:department', description: 'Seed staff by department' },
-                    { method: 'POST', path: '/single', description: 'Seed single staff member' },
-                    { method: 'GET', path: '/status', description: 'Check seed status' },
-                ],
-            },
-            auth: {
-                path: '/auth',
-                description: 'Authentication endpoints',
-                routes: [
-                    { method: 'POST', path: '/register', description: 'Register new user' },
-                    { method: 'POST', path: '/login', description: 'Login user' },
-                    { method: 'GET', path: '/me', description: 'Get current user (Authenticated)' },
-                    { method: 'PUT', path: '/profile', description: 'Update profile (Authenticated)' },
-                    { method: 'PUT', path: '/change-password', description: 'Change password (Authenticated)' },
-                    { method: 'POST', path: '/forgot-password', description: 'Forgot password' },
-                    { method: 'POST', path: '/reset-password', description: 'Reset password' },
-                    { method: 'POST', path: '/logout', description: 'Logout (Authenticated)' },
-                ],
-            },
-            appointments: {
-                path: '/appointments',
-                description: 'Appointment management',
-                routes: [
-                    { method: 'POST', path: '/book', description: 'Book appointment (Public)' },
-                    { method: 'GET', path: '/', description: 'Get all appointments (Authenticated)' },
-                    { method: 'POST', path: '/', description: 'Create appointment (Authenticated)' },
-                    { method: 'GET', path: '/:id', description: 'Get appointment (Authenticated)' },
-                    { method: 'PUT', path: '/:id', description: 'Update appointment (Authenticated)' },
-                    { method: 'PUT', path: '/:id/cancel', description: 'Cancel appointment (Authenticated)' },
-                    { method: 'PUT', path: '/:id/reschedule', description: 'Reschedule appointment (Authenticated)' },
-                    { method: 'GET', path: '/today', description: 'Get today\'s appointments (Authenticated)' },
-                    { method: 'GET', path: '/queue', description: 'Get appointment queue (Authenticated)' },
-                ],
-            },
-            patients: {
-                path: '/patients',
-                description: 'Patient management',
-                routes: [
-                    { method: 'GET', path: '/me', description: 'Get current patient (Authenticated)' },
-                    { method: 'GET', path: '/', description: 'Get all patients (Authenticated)' },
-                    { method: 'POST', path: '/', description: 'Create patient (Authenticated)' },
-                    { method: 'GET', path: '/:id', description: 'Get patient (Authenticated)' },
-                    { method: 'PUT', path: '/:id', description: 'Update patient (Authenticated)' },
-                    { method: 'GET', path: '/:id/appointments', description: 'Get patient appointments (Authenticated)' },
-                    { method: 'GET', path: '/:id/bills', description: 'Get patient bills (Authenticated)' },
-                    { method: 'GET', path: '/:id/history', description: 'Get patient history (Authenticated)' },
-                ],
-            },
-            doctors: {
-                path: '/doctors',
-                description: 'Doctor management',
-                routes: [
-                    { method: 'GET', path: '/', description: 'Get all doctors' },
-                    { method: 'GET', path: '/:id', description: 'Get doctor' },
-                    { method: 'GET', path: '/by-department/:department', description: 'Get doctors by department' },
-                ],
-            },
-        },
-    });
-});
-
-// ============================================
-// 404 HANDLER
+// 404 HANDLER FOR NON-API ROUTES
 // ============================================
 app.use((req, res) => {
-    res.status(404).json({
-        success: false,
-        message: `Route not found: ${req.method} ${req.originalUrl}`,
-        availableRoutes: [
-            'GET /',
-            'GET /api/health',
-            'GET /api/docs',
-            'POST /api/auth/login',
-            'POST /api/auth/register',
-            'POST /api/appointments/book',
-            'GET /api/appointments',
-            'GET /api/patients',
-            'GET /api/doctors',
-        ],
-    });
+    if (req.originalUrl.startsWith('/api')) {
+        // API routes are handled by routes/index.js
+        // This is a fallback
+        res.status(404).json({
+            success: false,
+            message: `API route not found: ${req.method} ${req.originalUrl}`,
+        });
+    } else {
+        res.status(404).json({
+            success: false,
+            message: `Route not found: ${req.method} ${req.originalUrl}`,
+        });
+    }
 });
 
 // ============================================
@@ -304,10 +242,10 @@ app.use((req, res) => {
 // ============================================
 app.use((err, req, res, next) => {
     console.error('========================================');
-    console.error('ERROR:', err.message);
-    console.error('STACK:', err.stack);
-    console.error('PATH:', req.originalUrl);
-    console.error('METHOD:', req.method);
+    console.error('❌ ERROR:', err.message);
+    console.error('📚 STACK:', err.stack);
+    console.error('📁 PATH:', req.originalUrl);
+    console.error('🔧 METHOD:', req.method);
     console.error('========================================');
 
     // Mongoose duplicate key error
@@ -344,6 +282,15 @@ app.use((err, req, res, next) => {
         });
     }
 
+    // CORS errors
+    if (err.message && err.message.includes('CORS')) {
+        return res.status(403).json({
+            success: false,
+            message: 'CORS error: ' + err.message
+        });
+    }
+
+    // Default error
     res.status(err.status || 500).json({
         success: false,
         message: err.message || 'Internal server error',
@@ -375,6 +322,15 @@ const server = app.listen(PORT, () => {
     console.log('👨‍⚕️ Staff accounts seeded with strong passwords');
     console.log('📧 Admin: daniel.bekele@gimbiehospital.com');
     console.log('🔑 Password: Admin@2026#Secure$Gimbie');
+    console.log('📧 Doctor: michael.abebe@gimbiehospital.com');
+    console.log('🔑 Password: DrMike@GP2026#Gimbie!');
+    console.log('📧 Nurse: almaz.tesfaye@gimbiehospital.com');
+    console.log('🔑 Password: Almaz@NurseMgr2026#Gimbie');
+    console.log('========================================');
+    console.log('✅ CORS enabled for:');
+    console.log('   - gimbie-adventist-general-hospital.vercel.app');
+    console.log('   - *.vercel.app');
+    console.log('   - *.onrender.com');
     console.log('========================================');
 });
 
@@ -408,10 +364,12 @@ process.on('SIGINT', () => {
 // ============================================
 process.on('unhandledRejection', (err) => {
     console.error('💥 UNHANDLED REJECTION:', err);
+    console.error('📚 Stack:', err.stack);
 });
 
 process.on('uncaughtException', (err) => {
     console.error('💥 UNCAUGHT EXCEPTION:', err);
+    console.error('📚 Stack:', err.stack);
 });
 
 module.exports = { app, server };
