@@ -15,11 +15,11 @@
 </head>
 <body>
     <div class="doctor-wrapper">
-        <aside class="doctor-sidebar" id="doctorSidebar">
+        <aside class="doctor-sidebar">
             <div class="profile-section">
-                <div class="avatar">D</div>
-                <div class="name">Dr. Name</div>
-                <div class="specialty">Specialty</div>
+                <div class="avatar" id="doctorAvatar">D</div>
+                <div class="name" id="doctorName">Dr. Name</div>
+                <div class="specialty" id="doctorSpecialty">Specialty</div>
             </div>
             <nav class="doctor-sidebar__nav">
                 <ul>
@@ -27,85 +27,105 @@
                     <li><a href="/pages/doctor/appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a></li>
                     <li><a href="/pages/doctor/patients.html"><i class="fas fa-users"></i> Patients</a></li>
                     <li><a href="/pages/doctor/consultations.html"><i class="fas fa-stethoscope"></i> Consultations</a></li>
-                    <li><a href="/pages/doctor/prescriptions.html"><i class="fas fa-prescription"></i> Prescriptions</a></li>
+                    <li><a href="/pages/doctor/prescriptions.html"><i class="fas fa-prescription-bottle"></i> Prescriptions</a></li>
                     <li><a href="/pages/doctor/lab-requests.html" class="active"><i class="fas fa-microscope"></i> Lab Requests</a></li>
                     <li><a href="/pages/doctor/profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                    <li class="logout-li">
+                        <a href="#" id="sidebarLogoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </li>
                 </ul>
             </nav>
         </aside>
 
         <main class="doctor-main">
             <div class="doctor-topbar">
-                <div class="admin-topbar__title">
+                <div class="doctor-topbar__title">
                     <h1>Lab Requests</h1>
-                    <p>Request laboratory tests</p>
+                    <p>Request laboratory tests for patients</p>
+                </div>
+                <div class="doctor-topbar__actions">
+                    <div class="user-profile" id="userProfile">
+                        <div class="avatar" id="doctorAvatarSmall">D</div>
+                        <span class="name" id="userName">Doctor</span>
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                        <div class="user-dropdown" id="userDropdown">
+                            <a href="/pages/doctor/profile.html"><i class="fas fa-user"></i> Profile</a>
+                            <a href="/pages/doctor/appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a>
+                            <hr />
+                            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div style="background: #fff; padding: 24px; border-radius: var(--radius); box-shadow: var(--shadow);">
-                <h3 style="margin-bottom: 16px;">New Lab Request</h3>
+            <!-- Lab Request Form -->
+            <div class="lab-request-form">
+                <h3>New Lab Request</h3>
                 <form id="labRequestForm">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                        <div class="form-group">
-                            <label>Patient</label>
-                            <select required>
-                                <option value="">Select Patient</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Test Name</label>
-                            <input type="text" placeholder="Enter test name" required />
-                        </div>
+                    <div class="form-group">
+                        <label>Patient</label>
+                        <select id="patientSelect" required>
+                            <option value="">Select Patient</option>
+                        </select>
                     </div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+                    <div class="form-group">
+                        <label>Test Name</label>
+                        <input type="text" id="testName" placeholder="Enter test name" required />
+                    </div>
+                    <div class="form-row">
                         <div class="form-group">
                             <label>Category</label>
-                            <select required>
+                            <select id="testCategory" required>
                                 <option value="">Select Category</option>
                                 <option value="Hematology">Hematology</option>
                                 <option value="Biochemistry">Biochemistry</option>
                                 <option value="Microbiology">Microbiology</option>
                                 <option value="Serology">Serology</option>
                                 <option value="Urinalysis">Urinalysis</option>
+                                <option value="Immunology">Immunology</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Sample Type</label>
-                            <select required>
+                            <select id="sampleType" required>
                                 <option value="">Select Sample Type</option>
                                 <option value="Blood">Blood</option>
                                 <option value="Urine">Urine</option>
                                 <option value="Stool">Stool</option>
                                 <option value="CSF">CSF</option>
                                 <option value="Sputum">Sputum</option>
+                                <option value="Tissue">Tissue</option>
                             </select>
                         </div>
+                    </div>
+                    <div class="form-row">
                         <div class="form-group">
                             <label>Priority</label>
-                            <select>
+                            <select id="priority">
                                 <option value="Routine">Routine</option>
                                 <option value="Urgent">Urgent</option>
                                 <option value="Emergency">Emergency</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Clinical Notes</label>
-                        <textarea rows="2" placeholder="Enter clinical notes..."></textarea>
+                        <div class="form-group">
+                            <label>Clinical Notes</label>
+                            <input type="text" id="clinicalNotes" placeholder="Clinical notes..." />
+                        </div>
                     </div>
                     <button type="submit" class="btn btn--primary">Submit Lab Request</button>
                 </form>
             </div>
+
+            <!-- Lab Requests List -->
+            <div class="lab-requests-list">
+                <h3>Recent Lab Requests</h3>
+                <div id="labRequestsList">
+                    <!-- Loaded from JS -->
+                </div>
+            </div>
         </main>
     </div>
 
-    <script type="module">
-        import { createLabRequest } from '/src/js/doctor.js';
-        document.getElementById('labRequestForm')?.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = new FormData(e.target);
-            await createLabRequest(Object.fromEntries(formData));
-        });
-    </script>
+    <script type="module" src="/src/js/doctor.js"></script>
 </body>
-                          </html>
+                                                               </html>
