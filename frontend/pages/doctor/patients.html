@@ -15,11 +15,11 @@
 </head>
 <body>
     <div class="doctor-wrapper">
-        <aside class="doctor-sidebar" id="doctorSidebar">
+        <aside class="doctor-sidebar">
             <div class="profile-section">
-                <div class="avatar">D</div>
-                <div class="name">Dr. Name</div>
-                <div class="specialty">Specialty</div>
+                <div class="avatar" id="doctorAvatar">D</div>
+                <div class="name" id="doctorName">Dr. Name</div>
+                <div class="specialty" id="doctorSpecialty">Specialty</div>
             </div>
             <nav class="doctor-sidebar__nav">
                 <ul>
@@ -27,30 +27,50 @@
                     <li><a href="/pages/doctor/appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a></li>
                     <li><a href="/pages/doctor/patients.html" class="active"><i class="fas fa-users"></i> Patients</a></li>
                     <li><a href="/pages/doctor/consultations.html"><i class="fas fa-stethoscope"></i> Consultations</a></li>
-                    <li><a href="/pages/doctor/prescriptions.html"><i class="fas fa-prescription"></i> Prescriptions</a></li>
+                    <li><a href="/pages/doctor/prescriptions.html"><i class="fas fa-prescription-bottle"></i> Prescriptions</a></li>
                     <li><a href="/pages/doctor/lab-requests.html"><i class="fas fa-microscope"></i> Lab Requests</a></li>
                     <li><a href="/pages/doctor/profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                    <li class="logout-li">
+                        <a href="#" id="sidebarLogoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </li>
                 </ul>
             </nav>
         </aside>
 
         <main class="doctor-main">
             <div class="doctor-topbar">
-                <div class="admin-topbar__title">
+                <div class="doctor-topbar__title">
                     <h1>My Patients</h1>
-                    <p>View your assigned patients</p>
+                    <p>View and manage your patients</p>
+                </div>
+                <div class="doctor-topbar__actions">
+                    <div class="user-profile" id="userProfile">
+                        <div class="avatar" id="doctorAvatarSmall">D</div>
+                        <span class="name" id="userName">Doctor</span>
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                        <div class="user-dropdown" id="userDropdown">
+                            <a href="/pages/doctor/profile.html"><i class="fas fa-user"></i> Profile</a>
+                            <a href="/pages/doctor/appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a>
+                            <hr />
+                            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="doctor-patients" id="patientsList">
+            <!-- Search -->
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search patients..." />
+                <button class="btn btn--primary" onclick="searchPatients()"><i class="fas fa-search"></i> Search</button>
+            </div>
+
+            <!-- Patients List -->
+            <div id="patientsList">
                 <!-- Loaded from JS -->
             </div>
         </main>
     </div>
 
-    <script type="module">
-        import { loadDoctorPatients } from '/src/js/doctor.js';
-        document.addEventListener('DOMContentLoaded', () => loadDoctorPatients());
-    </script>
+    <script type="module" src="/src/js/doctor.js"></script>
 </body>
 </html>
