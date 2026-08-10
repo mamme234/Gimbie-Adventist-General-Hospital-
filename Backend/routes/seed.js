@@ -13,7 +13,7 @@ const {
     getStaffByRole, 
     getStaffById,
     getLoginCredentials
-} = require('../config/scripts/seed');
+} = require('../config/scripts/seed/staffSeed');
 
 // ============================================
 // @route   GET /api/seed
