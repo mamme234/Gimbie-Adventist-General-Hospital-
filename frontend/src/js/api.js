@@ -1,11 +1,16 @@
 /**
  * Gimbie Adventist General Hospital - API Client
- * Handles all API calls to the backend
+ * Complete API integration for all endpoints
  */
 
+// ============================================
+// API BASE URL - FIXED FOR RENDER
+// ============================================
 const API_BASE_URL = 'https://alpha-af1q.onrender.com/api';
 
-// ===== TOKEN MANAGEMENT =====
+// ============================================
+// TOKEN MANAGEMENT
+// ============================================
 const getToken = () => localStorage.getItem('token');
 const setToken = (token) => {
     if (token) {
@@ -16,8 +21,12 @@ const setToken = (token) => {
 };
 
 const getCurrentUser = () => {
-    const user = localStorage.getItem('user');
-    return user ? JSON.parse(user) : null;
+    try {
+        const user = localStorage.getItem('user');
+        return user ? JSON.parse(user) : null;
+    } catch {
+        return null;
+    }
 };
 
 const setCurrentUser = (user) => {
@@ -28,7 +37,9 @@ const setCurrentUser = (user) => {
     }
 };
 
-// ===== API REQUEST HELPER =====
+// ============================================
+// API REQUEST HELPER
+// ============================================
 const apiRequest = async (endpoint, options = {}) => {
     const url = `${API_BASE_URL}${endpoint}`;
     const token = getToken();
@@ -62,7 +73,9 @@ const apiRequest = async (endpoint, options = {}) => {
     }
 };
 
-// ===== AUTH API =====
+// ============================================
+// AUTH API
+// ============================================
 const authAPI = {
     register: async (userData) => {
         return apiRequest('/auth/register', {
@@ -124,8 +137,14 @@ const authAPI = {
     },
 };
 
-// ===== PATIENT API =====
+// ============================================
+// PATIENT API
+// ============================================
 const patientAPI = {
+    getMe: async () => {
+        return apiRequest('/patients/me');
+    },
+
     getAll: async (params = {}) => {
         const query = new URLSearchParams(params).toString();
         return apiRequest(`/patients?${query}`);
@@ -174,9 +193,15 @@ const patientAPI = {
     getLabResults: async (id) => {
         return apiRequest(`/patients/${id}/lab-results`);
     },
+
+    getRadiology: async (id) => {
+        return apiRequest(`/patients/${id}/radiology`);
+    },
 };
 
-// ===== DOCTOR API =====
+// ============================================
+// DOCTOR API
+// ============================================
 const doctorAPI = {
     getAll: async (params = {}) => {
         const query = new URLSearchParams(params).toString();
@@ -189,6 +214,26 @@ const doctorAPI = {
 
     getByDepartment: async (department) => {
         return apiRequest(`/doctors/by-department/${department}`);
+    },
+
+    create: async (data) => {
+        return apiRequest('/doctors', {
+            method: 'POST',
+            body: JSON.stringify(data),
+        });
+    },
+
+    update: async (id, data) => {
+        return apiRequest(`/doctors/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify(data),
+        });
+    },
+
+    delete: async (id) => {
+        return apiRequest(`/doctors/${id}`, {
+            method: 'DELETE',
+        });
     },
 
     getAppointments: async (id, params = {}) => {
@@ -212,8 +257,17 @@ const doctorAPI = {
     },
 };
 
-// ===== APPOINTMENT API =====
+// ============================================
+// APPOINTMENT API
+// ============================================
 const appointmentAPI = {
+    book: async (data) => {
+        return apiRequest('/appointments/book', {
+            method: 'POST',
+            body: JSON.stringify(data),
+        });
+    },
+
     getAll: async (params = {}) => {
         const query = new URLSearchParams(params).toString();
         return apiRequest(`/appointments?${query}`);
@@ -260,12 +314,14 @@ const appointmentAPI = {
         return apiRequest(`/appointments/queue?${query}`);
     },
 
-    getDoctorAvailability: async (doctorId, date) => {
-        return apiRequest(`/appointments/availability/${doctorId}?date=${date}`);
+    getPatientAppointments: async (patientId) => {
+        return apiRequest(`/appointments/patient/${patientId}`);
     },
 };
 
-// ===== PHARMACY API =====
+// ============================================
+// PHARMACY API
+// ============================================
 const pharmacyAPI = {
     getAll: async (params = {}) => {
         const query = new URLSearchParams(params).toString();
@@ -319,7 +375,9 @@ const pharmacyAPI = {
     },
 };
 
-// ===== LABORATORY API =====
+// ============================================
+// LABORATORY API
+// ============================================
 const laboratoryAPI = {
     getAll: async (params = {}) => {
         const query = new URLSearchParams(params).toString();
@@ -365,7 +423,9 @@ const laboratoryAPI = {
     },
 };
 
-// ===== BILLING API =====
+// ============================================
+// BILLING API
+// ============================================
 const billingAPI = {
     getAll: async (params = {}) => {
         const query = new URLSearchParams(params).toString();
@@ -404,30 +464,26 @@ const billingAPI = {
     },
 };
 
-// ===== DEPARTMENT API =====
+// ============================================
+// DEPARTMENT API
+// ============================================
 const departmentAPI = {
     getAll: async () => {
         return apiRequest('/departments');
-    },
-
-    get: async (id) => {
-        return apiRequest(`/departments/${id}`);
     },
 
     getActive: async () => {
         return apiRequest('/departments/active');
     },
 
-    getStaff: async (id) => {
-        return apiRequest(`/departments/${id}/staff`);
-    },
-
-    getServices: async (id) => {
-        return apiRequest(`/departments/${id}/services`);
+    get: async (id) => {
+        return apiRequest(`/departments/${id}`);
     },
 };
 
-// ===== TESTIMONIAL API =====
+// ============================================
+// TESTIMONIAL API
+// ============================================
 const testimonialAPI = {
     getAll: async () => {
         return apiRequest('/testimonials');
@@ -449,7 +505,9 @@ const testimonialAPI = {
     },
 };
 
-// ===== NOTIFICATION API =====
+// ============================================
+// NOTIFICATION API
+// ============================================
 const notificationAPI = {
     getAll: async (params = {}) => {
         const query = new URLSearchParams(params).toString();
@@ -479,7 +537,9 @@ const notificationAPI = {
     },
 };
 
-// ===== BED API =====
+// ============================================
+// BED API
+// ============================================
 const bedAPI = {
     getAll: async (params = {}) => {
         const query = new URLSearchParams(params).toString();
@@ -512,7 +572,9 @@ const bedAPI = {
     },
 };
 
-// ===== STAFF API =====
+// ============================================
+// STAFF API
+// ============================================
 const staffAPI = {
     getAll: async (params = {}) => {
         const query = new URLSearchParams(params).toString();
@@ -528,7 +590,9 @@ const staffAPI = {
     },
 };
 
-// ===== REPORTS API =====
+// ============================================
+// REPORTS API
+// ============================================
 const reportsAPI = {
     getPatientStats: async () => {
         return apiRequest('/reports/patients');
@@ -565,7 +629,9 @@ const reportsAPI = {
     },
 };
 
-// ===== EXPORT ALL =====
+// ============================================
+// EXPORT ALL
+// ============================================
 const API = {
     auth: authAPI,
     patients: patientAPI,
@@ -586,5 +652,7 @@ const API = {
     setCurrentUser,
 };
 
-export default API;
+// Make API globally available
 window.API = API;
+
+export default API;
