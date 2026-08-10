@@ -5,7 +5,6 @@ const StaffSchema = new mongoose.Schema({
         type: String,
         unique: true,
         required: true,
-        // REMOVED: index: true
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -33,6 +32,7 @@ const StaffSchema = new mongoose.Schema({
     startDate: {
         type: Date,
         required: true,
+        default: Date.now,
     },
     endDate: Date,
     salary: {
@@ -93,28 +93,10 @@ const StaffSchema = new mongoose.Schema({
     timestamps: true,
 });
 
-// ===== INDEXES - Defined once here =====
+// ===== INDEXES =====
 StaffSchema.index({ staffId: 1 });
 StaffSchema.index({ department: 1 });
 StaffSchema.index({ position: 1 });
 StaffSchema.index({ status: 1 });
-
-// Static method to get staff by department
-StaffSchema.statics.getByDepartment = function(department) {
-    return this.find({ department, status: 'Active' }).populate('user');
-};
-
-// Static method to get staff by position
-StaffSchema.statics.getByPosition = function(position) {
-    return this.find({ position, status: 'Active' }).populate('user');
-};
-
-// Virtual for years of service
-StaffSchema.virtual('yearsOfService').get(function() {
-    if (!this.startDate) return 0;
-    const now = new Date();
-    const diff = now - this.startDate;
-    return Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
-});
 
 module.exports = mongoose.model('Staff', StaffSchema);
