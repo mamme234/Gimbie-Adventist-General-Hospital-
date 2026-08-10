@@ -119,7 +119,6 @@ const staffData = {
       phone: '+251 91 111 1119',
       password: 'DrRuth@OBG2026$Gimbie'
     },
-    // ===== NEW DOCTORS ADDED =====
     {
       fullName: 'Dr. Fam Leong',
       position: 'Physician',
@@ -1043,6 +1042,18 @@ const getStaffById = (staffId) => {
   return allStaff.find(staff => staff.staffId === staffId) || null;
 };
 
+const getLoginCredentials = () => {
+  const allStaff = getAllStaff();
+  return allStaff.map(staff => ({
+    fullName: staff.fullName,
+    email: staff.email,
+    password: staff.password,
+    role: staff.role,
+    department: staff.department,
+    staffId: staff.staffId
+  }));
+};
+
 // ============================================
 // EXPORTS
 // ============================================
@@ -1052,5 +1063,6 @@ module.exports = {
   getAllStaff,
   getStaffByDepartment,
   getStaffByRole,
-  getStaffById
+  getStaffById,
+  getLoginCredentials
 };
