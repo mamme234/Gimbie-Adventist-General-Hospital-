@@ -15,11 +15,11 @@
 </head>
 <body>
     <div class="doctor-wrapper">
-        <aside class="doctor-sidebar" id="doctorSidebar">
+        <aside class="doctor-sidebar">
             <div class="profile-section">
-                <div class="avatar">D</div>
-                <div class="name">Dr. Name</div>
-                <div class="specialty">Specialty</div>
+                <div class="avatar" id="doctorAvatar">D</div>
+                <div class="name" id="doctorName">Dr. Name</div>
+                <div class="specialty" id="doctorSpecialty">Specialty</div>
             </div>
             <nav class="doctor-sidebar__nav">
                 <ul>
@@ -27,50 +27,68 @@
                     <li><a href="/pages/doctor/appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a></li>
                     <li><a href="/pages/doctor/patients.html"><i class="fas fa-users"></i> Patients</a></li>
                     <li><a href="/pages/doctor/consultations.html" class="active"><i class="fas fa-stethoscope"></i> Consultations</a></li>
-                    <li><a href="/pages/doctor/prescriptions.html"><i class="fas fa-prescription"></i> Prescriptions</a></li>
+                    <li><a href="/pages/doctor/prescriptions.html"><i class="fas fa-prescription-bottle"></i> Prescriptions</a></li>
                     <li><a href="/pages/doctor/lab-requests.html"><i class="fas fa-microscope"></i> Lab Requests</a></li>
                     <li><a href="/pages/doctor/profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                    <li class="logout-li">
+                        <a href="#" id="sidebarLogoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </li>
                 </ul>
             </nav>
         </aside>
 
         <main class="doctor-main">
             <div class="doctor-topbar">
-                <div class="admin-topbar__title">
+                <div class="doctor-topbar__title">
                     <h1>Consultations</h1>
-                    <p>Start a new consultation</p>
+                    <p>Conduct patient consultations</p>
+                </div>
+                <div class="doctor-topbar__actions">
+                    <div class="user-profile" id="userProfile">
+                        <div class="avatar" id="doctorAvatarSmall">D</div>
+                        <span class="name" id="userName">Doctor</span>
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                        <div class="user-dropdown" id="userDropdown">
+                            <a href="/pages/doctor/profile.html"><i class="fas fa-user"></i> Profile</a>
+                            <a href="/pages/doctor/appointments.html"><i class="fas fa-calendar-check"></i> Appointments</a>
+                            <hr />
+                            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Consultation Form -->
-            <div style="background: #fff; padding: 24px; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 24px;">
-                <h3 style="margin-bottom: 16px;">New Consultation</h3>
+            <div class="consultation-form">
+                <h3>New Consultation</h3>
                 <form id="consultationForm">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                        <div class="form-group">
-                            <label>Patient</label>
-                            <select required>
-                                <option value="">Select Patient</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Appointment</label>
-                            <select required>
-                                <option value="">Select Appointment</option>
-                            </select>
-                        </div>
+                    <div class="form-group">
+                        <label>Patient</label>
+                        <select id="patientSelect" required>
+                            <option value="">Select Patient</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Appointment</label>
+                        <select id="appointmentSelect" required>
+                            <option value="">Select Appointment</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Symptoms</label>
-                        <textarea rows="3" placeholder="Describe symptoms..."></textarea>
+                        <textarea id="symptoms" rows="3" placeholder="Describe symptoms..."></textarea>
                     </div>
                     <div class="form-group">
                         <label>Diagnosis</label>
-                        <textarea rows="3" placeholder="Enter diagnosis..."></textarea>
+                        <textarea id="diagnosis" rows="3" placeholder="Enter diagnosis..."></textarea>
                     </div>
                     <div class="form-group">
                         <label>Treatment Plan</label>
-                        <textarea rows="3" placeholder="Enter treatment plan..."></textarea>
+                        <textarea id="treatment" rows="3" placeholder="Enter treatment plan..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Notes</label>
+                        <textarea id="notes" rows="2" placeholder="Additional notes..."></textarea>
                     </div>
                     <button type="submit" class="btn btn--primary">Save Consultation</button>
                 </form>
@@ -78,13 +96,6 @@
         </main>
     </div>
 
-    <script type="module">
-        import { saveConsultation } from '/src/js/doctor.js';
-        document.getElementById('consultationForm')?.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = new FormData(e.target);
-            await saveConsultation(Object.fromEntries(formData));
-        });
-    </script>
+    <script type="module" src="/src/js/doctor.js"></script>
 </body>
-</html>
+    </html>
