@@ -26,7 +26,7 @@ const notificationRoutes = require('./routes/notifications');
 const bedRoutes = require('./routes/beds');
 const staffRoutes = require('./routes/staff');
 const reportsRoutes = require('./routes/reports');
-const adminRoutes = require('./routes/admin');
+// const adminRoutes = require('./routes/admin'); // Commented out - file doesn't exist
 
 // ============================================
 // INITIALIZE APP
@@ -152,7 +152,7 @@ app.use(`${API_PREFIX}/notifications`, notificationRoutes);
 app.use(`${API_PREFIX}/beds`, bedRoutes);
 app.use(`${API_PREFIX}/staff`, staffRoutes);
 app.use(`${API_PREFIX}/reports`, reportsRoutes);
-app.use(`${API_PREFIX}/admin`, adminRoutes);
+// app.use(`${API_PREFIX}/admin`, adminRoutes); // Commented out - file doesn't exist
 
 // ============================================
 // HEALTH CHECK
