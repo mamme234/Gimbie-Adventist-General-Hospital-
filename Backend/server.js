@@ -157,8 +157,6 @@ if (process.env.NODE_ENV === 'development') {
 // ============================================
 // SEED STAFF ON SERVER START
 // ============================================
-// This will run once when the server starts
-// It will NOT overwrite existing accounts
 (async function initStaff() {
     try {
         console.log('🔄 Checking staff database...');
@@ -170,14 +168,16 @@ if (process.env.NODE_ENV === 'development') {
 })();
 
 // ============================================
-// API ROUTES
+// API ROUTES - MOUNT SEED FIRST
 // ============================================
 const routes = require('./routes');
 const seedRoutes = require('./routes/seed');
 
-// Mount API routes
-app.use('/api', routes);
+// ⭐ MOUNT SEED ROUTES FIRST (BEFORE catch-all)
 app.use('/api/seed', seedRoutes);
+
+// ⭐ THEN MOUNT MAIN ROUTES
+app.use('/api', routes);
 
 // ============================================
 // ROOT ENDPOINT
@@ -223,13 +223,39 @@ app.get('/', (req, res) => {
 // ============================================
 app.use((req, res) => {
     if (req.originalUrl.startsWith('/api')) {
-        // API routes are handled by routes/index.js
-        // This is a fallback
+        // API routes - return JSON
         res.status(404).json({
             success: false,
             message: `API route not found: ${req.method} ${req.originalUrl}`,
+            availableRoutes: [
+                '/auth',
+                '/patients',
+                '/doctors',
+                '/appointments',
+                '/pharmacy',
+                '/laboratory',
+                '/radiology',
+                '/billing',
+                '/departments',
+                '/testimonials',
+                '/notifications',
+                '/beds',
+                '/staff',
+                '/reports',
+                '/dashboard',
+                '/insurance',
+                '/inventory',
+                '/procurement',
+                '/settings',
+                '/upload',
+                '/nursing',
+                '/health',
+                '/docs',
+                '/seed'
+            ]
         });
     } else {
+        // Non-API routes
         res.status(404).json({
             success: false,
             message: `Route not found: ${req.method} ${req.originalUrl}`,
