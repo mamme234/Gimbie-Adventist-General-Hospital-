@@ -11,16 +11,176 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="/src/css/style.css" />
     <link rel="stylesheet" href="/src/css/responsive.css" />
+    <style>
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8edea 100%);
+        }
+        .auth-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 440px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        .auth-card .logo {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .auth-card .logo img {
+            height: 56px;
+            margin-bottom: 12px;
+        }
+        .auth-card .logo h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+        .auth-card .logo p {
+            color: #4a5568;
+            font-size: 0.9rem;
+        }
+        .form-group {
+            margin-bottom: 14px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 4px;
+            font-size: 0.85rem;
+            color: #1a1a2e;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: 0.2s ease;
+            background: #fff;
+        }
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #0f5c2e;
+            box-shadow: 0 0 0 3px rgba(15,92,46,0.1);
+        }
+        .btn--full {
+            width: 100%;
+            justify-content: center;
+            padding: 13px;
+            font-size: 1rem;
+            border-radius: 50px;
+        }
+        .btn--primary {
+            background: #0f5c2e;
+            color: #fff;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn--primary:hover {
+            background: #0a4522;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(15,92,46,0.25);
+        }
+        .btn--primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-bottom: 14px;
+            display: none;
+            font-size: 0.85rem;
+            align-items: center;
+            gap: 8px;
+        }
+        .error-message.show {
+            display: flex;
+        }
+        .success-message {
+            background: #e8f5e9;
+            color: #0f5c2e;
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-bottom: 14px;
+            display: none;
+            font-size: 0.85rem;
+            align-items: center;
+            gap: 8px;
+        }
+        .success-message.show {
+            display: flex;
+        }
+        .auth-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #4a5568;
+            font-size: 0.9rem;
+        }
+        .auth-footer a {
+            color: #0f5c2e;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        .spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.6s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        @media (max-width: 480px) {
+            .auth-card { padding: 24px; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
-<body style="background: var(--bg-light);">
+<body>
 
-<!-- ===== REGISTER CONTAINER ===== -->
-<div class="auth-container" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 20px;">
-    <div class="auth-card" style="background: #fff; border-radius: var(--radius-lg); padding: 48px; max-width: 480px; width: 100%; box-shadow: var(--shadow-hover);">
-        <div style="text-align: center; margin-bottom: 32px;">
-            <img src="/assets/images/logo.png" alt="Gimbie Adventist General Hospital" style="height: 60px; margin-bottom: 16px;" />
-            <h1 style="font-size: 1.5rem; font-weight: 700;">Create Account</h1>
-            <p style="color: var(--text-secondary);">Register for patient portal access</p>
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="logo">
+            <img src="/assets/images/logo.png" alt="Gimbie Adventist General Hospital" />
+            <h1>Create Account</h1>
+            <p>Register for patient portal access</p>
+        </div>
+
+        <div class="error-message" id="errorMessage">
+            <i class="fas fa-exclamation-circle"></i>
+            <span id="errorText">Registration failed</span>
+        </div>
+
+        <div class="success-message" id="successMessage">
+            <i class="fas fa-check-circle"></i>
+            <span id="successText">Registration successful!</span>
         </div>
 
         <form id="registerForm">
@@ -28,31 +188,182 @@
                 <label for="fullName">Full Name</label>
                 <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name" />
             </div>
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" required placeholder="Enter your email" />
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email" />
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number" />
+                </div>
             </div>
-            <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number" />
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Min 6 characters" />
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm password" />
+                </div>
             </div>
+
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required placeholder="Create a password (min 6 characters)" />
+                <label for="role">Role</label>
+                <select id="role" name="role">
+                    <option value="patient">Patient</option>
+                    <option value="doctor">Doctor</option>
+                    <option value="nurse">Nurse</option>
+                    <option value="pharmacist">Pharmacist</option>
+                    <option value="lab_technician">Lab Technician</option>
+                    <option value="radiologist">Radiologist</option>
+                    <option value="accountant">Accountant</option>
+                    <option value="receptionist">Receptionist</option>
+                    <option value="admin">Admin</option>
+                </select>
             </div>
-            <div class="form-group">
-                <label for="confirmPassword">Confirm Password</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password" />
-            </div>
-            <button type="submit" class="btn btn--primary btn--full" style="padding: 14px;">Create Account</button>
+
+            <button type="submit" class="btn btn--primary btn--full" id="registerBtn">
+                <i class="fas fa-user-plus"></i> Register
+            </button>
         </form>
 
-        <div style="text-align: center; margin-top: 24px; color: var(--text-secondary);">
-            Already have an account? <a href="/pages/login.html" style="color: var(--primary); font-weight: 600;">Login</a>
+        <div class="auth-footer">
+            Already have an account? <a href="/pages/login.html">Login</a>
         </div>
     </div>
 </div>
 
-<script type="module" src="/src/js/auth.js"></script>
+<script>
+    // ============================================
+    // REGISTER - COMPLETE WORKING CODE
+    // ============================================
+
+    const API_URL = 'https://alpha-af1q.onrender.com/api';
+
+    // ===== DOM ELEMENTS =====
+    const registerForm = document.getElementById('registerForm');
+    const registerBtn = document.getElementById('registerBtn');
+    const errorMessage = document.getElementById('errorMessage');
+    const errorText = document.getElementById('errorText');
+    const successMessage = document.getElementById('successMessage');
+    const successText = document.getElementById('successText');
+
+    // ===== SHOW ERROR =====
+    function showError(message) {
+        successMessage.classList.remove('show');
+        errorText.textContent = message;
+        errorMessage.classList.add('show');
+        setTimeout(() => errorMessage.classList.remove('show'), 5000);
+    }
+
+    // ===== SHOW SUCCESS =====
+    function showSuccess(message) {
+        errorMessage.classList.remove('show');
+        successText.textContent = message;
+        successMessage.classList.add('show');
+        setTimeout(() => successMessage.classList.remove('show'), 5000);
+    }
+
+    // ===== SET LOADING =====
+    function setLoading(loading) {
+        if (loading) {
+            registerBtn.disabled = true;
+            registerBtn.innerHTML = '<span class="spinner"></span> Registering...';
+        } else {
+            registerBtn.disabled = false;
+            registerBtn.innerHTML = '<i class="fas fa-user-plus"></i> Register';
+        }
+    }
+
+    // ===== HANDLE REGISTER =====
+    async function handleRegister(e) {
+        e.preventDefault();
+        errorMessage.classList.remove('show');
+        successMessage.classList.remove('show');
+
+        const fullName = document.getElementById('fullName').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const role = document.getElementById('role').value;
+
+        // Validation
+        if (!fullName || !email || !phone || !password || !confirmPassword) {
+            showError('Please fill in all required fields');
+            return;
+        }
+
+        if (password.length < 6) {
+            showError('Password must be at least 6 characters');
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            showError('Passwords do not match');
+            return;
+        }
+
+        setLoading(true);
+
+        try {
+            console.log('Attempting registration to:', `${API_URL}/auth/register`);
+            console.log('Email:', email);
+
+            const response = await fetch(`${API_URL}/auth/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    fullName,
+                    email,
+                    phone,
+                    password,
+                    role
+                })
+            });
+
+            const data = await response.json();
+            console.log('Register response:', data);
+
+            if (!response.ok) {
+                throw new Error(data.message || 'Registration failed');
+            }
+
+            if (data.success) {
+                showSuccess('Registration successful! Redirecting to login...');
+                registerForm.reset();
+                
+                setTimeout(() => {
+                    window.location.href = '/pages/login.html';
+                }, 2000);
+            } else {
+                throw new Error(data.message || 'Registration failed');
+            }
+
+        } catch (error) {
+            console.error('Register error:', error);
+            showError(error.message || 'Network error. Please check your connection.');
+            setLoading(false);
+        }
+    }
+
+    // ===== EVENT LISTENERS =====
+    registerForm.addEventListener('submit', handleRegister);
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if already logged in
+        const token = localStorage.getItem('token');
+        const user = JSON.parse(localStorage.getItem('user') || 'null');
+        if (token && user) {
+            window.location.href = '/pages/patient/dashboard.html';
+        }
+    });
+</script>
 </body>
-</html>
+                    </html>
