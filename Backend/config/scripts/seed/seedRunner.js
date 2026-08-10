@@ -1,13 +1,9 @@
-/**
- * Staff Seed Runner
- * This script seeds all staff members into the database
- * It checks if users already exist before creating them
- */
+// Backend/config/scripts/seed/seedRunner.js
 
 const User = require('../../../models/User');
 const Doctor = require('../../../models/Doctor');
 const Staff = require('../../../models/Staff');
-const { staffData, getAllStaff } = require('./staffSeed');
+const { getAllStaff } = require('./staffSeed');
 const bcrypt = require('bcryptjs');
 
 const seedStaff = async () => {
@@ -34,26 +30,43 @@ const seedStaff = async () => {
                 const salt = await bcrypt.genSalt(10);
                 const hashedPassword = await bcrypt.hash(staff.password, salt);
 
-                // Create User
+                // Create User - FIX: Map department to valid enum
+                let department = staff.department;
+                
+                // Map department names to valid enum values
+                const departmentMap = {
+                    'Obstetrics & Gynecology': 'Obstetrics & Gynecology',
+                    'IT': 'IT',
+                    'Maintenance': 'Maintenance',
+                    'Cleaning & Support': 'Cleaning & Support',
+                    'Security': 'Security',
+                    'General Practice': 'General Practice',
+                    'Internal Medicine': 'Medical',
+                };
+                
+                if (departmentMap[department]) {
+                    department = departmentMap[department];
+                }
+
                 const user = await User.create({
                     fullName: staff.fullName,
                     email: staff.email,
                     password: hashedPassword,
                     phone: staff.phone,
                     role: staff.role,
-                    department: staff.department,
+                    department: department,
                     staffId: staff.staffId,
                     isActive: true,
                 });
 
                 console.log(`✅ Created user: ${staff.fullName} (${staff.role})`);
 
-                // Create Staff record
+                // Create Staff record - FIX: Remove employeeNumber
                 await Staff.create({
                     staffId: staff.staffId,
                     user: user._id,
                     position: staff.position,
-                    department: staff.department,
+                    department: department,
                     employmentType: 'Full-time',
                     startDate: new Date(),
                     status: 'Active',
@@ -63,13 +76,13 @@ const seedStaff = async () => {
                 if (staff.role === 'doctor' && staff.specialty) {
                     await Doctor.create({
                         userId: user._id,
-                        specialty: staff.specialty,
+                        specialty: staff.specialty || department,
                         licenseNumber: `LIC-${staff.staffId}`,
-                        department: staff.department,
+                        department: department,
                         isAvailable: true,
                         experience: 5,
                     });
-                    console.log(`✅ Created doctor profile: ${staff.fullName} (${staff.specialty})`);
+                    console.log(`✅ Created doctor profile: ${staff.fullName} (${staff.specialty || department})`);
                 }
 
                 created++;
@@ -88,14 +101,11 @@ const seedStaff = async () => {
         console.log(`❌ Errors: ${errors}`);
         console.log('========================================');
         
-        // Log sample credentials
         console.log('👨‍⚕️ SAMPLE CREDENTIALS:');
         console.log('📧 Admin: daniel.bekele@gimbiehospital.com');
         console.log('🔑 Password: Admin@2026#Secure$Gimbie');
         console.log('📧 Doctor: michael.abebe@gimbiehospital.com');
         console.log('🔑 Password: DrMike@GP2026#Gimbie!');
-        console.log('📧 Nurse: almaz.tesfaye@gimbiehospital.com');
-        console.log('🔑 Password: Almaz@NurseMgr2026#Gimbie');
         console.log('========================================');
 
         return { created, skipped, errors };
