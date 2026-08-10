@@ -1,32 +1,15 @@
+// routes/auth.js
 const express = require('express');
 const router = express.Router();
-const { protect, authorize } = require('../middleware/auth');
-const {
-    register,
-    login,
-    getMe,
-    updateProfile,
-    changePassword,
-    forgotPassword,
-    resetPassword,
-    logout,
-    verifyToken,
-} = require('../controllers/authController');
+const { login, register, getMe, getCredentials } = require('../controllers/authController');
+const { protect } = require('../middleware/auth');
 
 // Public routes
-router.post('/register', register);
 router.post('/login', login);
-router.post('/forgot-password', forgotPassword);
-router.post('/reset-password', resetPassword);
+router.post('/register', register);
+router.get('/credentials', getCredentials); // ← ADD THIS
 
 // Protected routes
 router.get('/me', protect, getMe);
-router.get('/verify', protect, verifyToken);
-router.put('/profile', protect, updateProfile);
-router.put('/change-password', protect, changePassword);
-router.post('/logout', protect, logout);
-
-// Admin only routes
-router.post('/admin/register', protect, authorize('super_admin', 'admin'), register);
 
 module.exports = router;
